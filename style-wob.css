@@ -1,1 +1,11 @@
-# stub css
+body {
+	background-color: #3D3D3D;
+	color: white;
+}
+a {
+	color: #91A2ED
+}
+div#content {
+    max-width: 65em;
+    margin: auto;
+}
