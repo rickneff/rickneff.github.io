@@ -5,10 +5,6 @@
 
 * TODO YZ@
 
-#+BEGIN_COMMENT
-  CSP more high-level TAI interaction.
-#+END_COMMENT
-
   \ldquo{}Isn\rsquo{}t it interesting how languages either facilitate or impede
   communication?\rdquo Til asked, just as Ila and Abu entered his den. Ila replied,
   without missing a beat, \ldquo{}I know programming languages facilitate communication
@@ -39,8 +35,8 @@
   In essence, applying these rules is how different strings of words (phrases,
   sentences) are generated. Deliberately, or even ignorantly violating these
   rules leads to confusion and failed communication. Because the grammatical
-  rules of English are so complex, ambiguity and misunderstanding lurk beneath
-  the surface. 
+  rules of English are so complex, ambiguity and misunderstanding frequently
+  lurk beneath the surface.
 
   Take what you said earlier, Ila. "I know programming languages facilitate X".
   (I'm abbreviating.) One sentence, or two?
@@ -58,14 +54,13 @@
   not mistaken.
 
   This caused both Ila and Abu to glance at each other in surprise. Til, til
-  now, had never brought up religion in any of their discussions to date. Ila
-  and Abu had certainly broached the subject, on more than one occasion, when it
-  was just the two of them, meeting to work on homework assignments, or just
-  waiting for Til. Ila thought Abu, a Mormon, hopelessly deluded. Abu thought
-  Ila, an evangelical Christian, a prospective Mormon, if she could only get
-  past her myopia! Now to hear Til bring this up was a tantalizing turn, and
-  mildly amusing to all three of them when Ila and Abu said in unison, John
-  13:34.
+  now, had never brought up religion in any of their discussions. Ila and Abu
+  had certainly broached the subject, on more than one occasion, when it was
+  just the two of them, meeting to work on homework assignments, or just waiting
+  for Til. Ila thought Abu, a Mormon, hopelessly deluded. Abu thought Ila, an
+  evangelical Christian, a prospective Mormon, if she could only get past her
+  myopia! Now to hear Til bring this up was a tantalizing turn, and mildly
+  amusing to all three of them when Ila and Abu said in unison, John 13:34.
 
   Yes, well, very good, said Til, a little taken aback. I see you both know your
   Bible. If they think, thought Til, that this is leading into a religious
@@ -91,18 +86,19 @@
 
   So, said Ila, are you saying word order causes communication problems?
 
-  Well, have you ever tried to make sense of some kinds of poetry? said Abu.
-  Poets are notorious for scrambling word order to fit some rhyme or meter
-  scheme. Quoth the raven instead of The raven said.
+  Hmmm, said Abu. Have you ever tried to make sense of some kinds of poetry?
+  Poets are always scrambling word order to fit some rhyme or meter scheme.
+  Quoth the raven instead of The raven said.
 
   But perfectly correct, said Til. Saying The raven quoth is not grammatical,
   by the very special rule attached to that very archaic word.
 
-  Not so much word order as word choice. Remember I started talking about the
-  misuse of English to obfuscate? Jar.gon is the imp here. And we are all guilty
-  of listening to that imp and using jargon to erect barriers in the guise of
-  facilitators. We may justify ourselves in this indulgence because of the
-  benefits --- and there *are* benefits --- but do we ever consider the costs?
+  So, not so much word order as word choice. Remember I started talking about
+  the misuse of English to obfuscate? Jargon is the imp here. And we are all
+  guilty of listening to that imp and using jargon to erect barriers in the
+  guise of facilitators. We may justify ourselves in this indulgence because of
+  the benefits --- and there *are* benefits --- but do we ever consider the
+  costs?
 
   Jargon is meant to impede understanding by outsiders of what insiders are
   saying. Hiding the meaning of a communication from the uninitiated.
@@ -122,8 +118,9 @@
   a very obscure "feature" of the C++ language.
 
   You have no doubt heard the stories about when a business consultant, tongue
-  firmly in cheek, randomly chooses three words from three different lists to
-  create for client consumption impressive-sounding, content-free phrases, like
+  firmly in cheek --- or not --- randomly chooses three words from three
+  different lists to create for client consideration impressive-sounding,
+  content-free phrases, like
 
   customer value trajectory, or stratified business intelligence, or hypercubic
   mission criticality.
@@ -156,35 +153,24 @@
   said, "The more I think about language, the more it amazes me that people ever
   understand each other." What amazes me about mathematicians, who are people
   too, is that they are such poor writers --- when writing mathematics, at
-  least. Math writing is notorious for its lack of clarity, despite its claim of
-  delivering unadulterated truth. (Donald Knuth has a great example of the
-  contrast.)
+  least. I alluded to this a few minutes ago. Math writing is notorious for its
+  lack of clarity, despite its claim of delivering unadulterated truth. (Donald
+  Knuth has a great example of the contrast. Endnote, take from Celebrate
+  Clarity document.)
 
-  Have Abu and/or Ila interject some comment here.
+** TODO Have Abu and/or Ila interject some comment here.
 
   While obviously mathematical in nature, indeed, *discrete* mathematical, let's
   narrow our problems focus to problems in computer science.
 
-  Til: Computer scientists, especially theoretical computer scientists, like to
-  cast problems into the common mold of languages. They do this for technical
-  reasons more properly delved into in a course on computational theory. But
-  here is a favorite example: Is 23 prime? This is a decision problem whose
-  answer is yes, as verified by simply trying to divide 23 by 2 and 3, and
-  failing on both counts, of course. But this computation can also be performed
-  as a search for the string "23" in the set of strings that starts ["2" "3" "5"
-  "7" "11" "13" "17" "19 "23" ...]. This set of strings as a language is called
-  PRIMES. Does PRIMES also contain the string "23232323232323232323"? In other
-  words, is 23232323232323232323 prime? The answer is no --- it's a composite
-  number with seven prime factors --- including 23 --- but the computational
-  solution to that set membership determination problem is significantly harder
-  than the one for 23. It's not a simple search in a static list. While many
-  lists of primes exist, no one creates huge lists with every prime in it up to
-  some huge limit. True, programs exist that can do that, using some variation
-  of the classic Sieve of Eratosthenes, which goes *way* back, showing how old
-  this problem is. But the point is, to solve a language membership problem you
-  need computational strategies and tactics and resources. We are modeling
-  computation in terms of machinery that can input a string, and output a yes or
-  no --- in the language, or not.
+  Computer scientists, especially theoretical computer scientists, like to cast
+  problems into the common mold of languages. They do this for technical reasons,
+  more thoroughly delved into in a course on computational theory. But here is a
+  simple, favorite example: Is 23 prime? This is a decision problem whose answer
+  is yes, as verified by simply trying to divide 23 by 2 and 3, and failing on
+  both counts, of course. This decision could *also* be made by sequentially
+  searching for and finding the string "23" in the set of strings ["2" "3" "5"
+  "7" "11" "13" "17" "19 "23" ...]. 
 
 #+BEGIN_SRC emacs-lisp
   (format "%S" (number-to-string 23))
@@ -192,6 +178,121 @@
 
 #+RESULTS:
 : "23"
+
+#+BEGIN_SRC emacs-lisp :results raw
+  (format "%S" (member (number-to-string 23)
+                       (map 'list 'number-to-string [2 3 5 7 11 13 17 19 23])))
+#+END_SRC
+
+#+RESULTS:
+("23")
+
+  This set of strings is a language, and if you allow that the ... stands for an
+  infinity of bigger and bigger strings of this rather well-known kind, it is
+  the language of PRIMES. It is given the name PRIMES, at any rate. So, does
+  PRIMES contain the string "23232323232323232323"? is another way to ask, is
+  23232323232323232323 prime? The answer is no --- it's a composite number with
+  seven prime factors --- including 23 --- but the computational solution to
+  that set membership determination problem is significantly harder than the one
+  for 23. It's not done by simply searching in a static list. While many lists
+  of primes exist, no one creates lists with every prime in it up to some huge
+  limit. True, programs exist that can do that, using some variation of the
+  classic Sieve of Eratosthenes, which goes *way* back, showing how old this
+  problem is. But the point is, to solve a language membership problem you need
+  computational strategies and tactics and resources. Simply put, we can model
+  computation most generally in terms of machinery that can input a string, and
+  output a yes or a no --- in the language, or not.
+
+  Ila said, But not every problem has a yes-or-no answer, and Abu agreed,
+  offering "Like sorting, which I understand to be a typical problem for
+  computers."
+
+  Ah, my young friends, Til chuckled. It so happens you are right, but computer
+  scientists are clever people, and they have figured out a way to model a very
+  large number of problems *as* decision problems, or as a series of decision
+  problems. Your very example of sorting, Abu, is one of the easiest.
+
+  How so?, said Abu, exchanging a puzzled look with Ila.
+
+  Look at a simple example. Sorting =(13 2 26)= in ascending order is a matter
+  of answering three questions: is 13 less than 2 (no, so swap them), is 2 less
+  than 26 (yes, so don't swap them), and, is 13 less than 26? (No, so leave them
+  where they are as well). The result: =(2 13 26)=.
+
+#+BEGIN_SRC emacs-lisp :results raw
+  (let* ((unsorted '(13 2 26))
+         (a (nth 0 unsorted))
+         (b (nth 1 unsorted))
+         (c (nth 2 unsorted)))
+    (if (< a b)
+        (if (< a c)
+            (if (< b c)
+                (list a b c)
+              (list a c b))
+          (list c a b))
+      (if (< b c)
+          (if (< a c)
+              (list b a c)
+            (list b c a))
+        (list c b a))))
+#+END_SRC
+
+#+RESULTS:
+(2 13 26)
+
+  Ila was still puzzled. "How does that relate to a set membership decision problem?"
+  Abu grinned his big, I think I know grin, and said: Let me try to answer that.
+  Til said, Go ahead! as Ila gritted her teeth. She thought she knew how now too.
+
+  In the realm of integers, I can take the /language/ ["1" "2" "3" "4" "5" "6"
+  ...] and split it up into subsets like so:
+
+  less-than-2: ["1"]
+
+  less-than-3: ["1" "2"]
+
+  less-than-4: ["1" "2" "3"]
+
+  and so on, as many as I like. Then for the question if a < b, just ask is a in
+  the subset less-than-b?
+
+  Ila frowned. But isn't that a way, way inefficient way to compare two numbers?
+  Til said, Yes, it is, but if we're not concerned with efficiency, it certainly
+  works to take that approach.
+
+  But consider a big advantage of treating numbers as strings of digits. When
+  the numbers get big, as you know, we need special procedures if we want to do
+  arithmetic with them. Let's lump the relational operations with the arithmetic
+  ones, and ask, how would one answer a simple =a < b= question, given:
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (setq a-as-string "361070123498760381765950923497698325576139879587987251757151" 
+        b-as-string "36107058266725245759262937693558834387849309867353286761847615132153745")
+#+END_SRC
+ 
+#+BEGIN_SRC emacs-lisp :results raw
+  (< (length a-as-string) (length b-as-string))   
+#+END_SRC
+
+#+RESULTS:
+t
+
+  That's easy! b is bigger, because it has more digits, said Ila. Right, said
+  Abu. At least, as long as the first dozen digits of b are not zeros! Ila
+  nodded agreement. And even if the strings were the same length, a
+  digit-by-digit comparison would soon reveal the answer. Abu quickly added, So,
+  banning leading zeros in these strings-of-digits, lexicographical ordering
+  comes to mind as a convenient way to sort them, one that can answer all
+  relative size questions. Am I right?
+
+  Ila said, Of course you are, smarty pants. But why the jargony
+  *lexicographical*? Isn't there a better word than that?
+
+  Abu said, I don't remember where I saw that, and no, I don't know of an
+  another, easier way to say what it means. What, technically speaking, *does*
+  it mean, Til?
+
+  \ldquo{}You\rsquo{}re about to find out!\rdquo Til smiled, as he padded them some exercises.
 
 * TODO Flesh Out
   Modeling computation, state diagrams as graphs, solving a math problem to get
@@ -674,21 +775,21 @@
    tell what's what (where N = Non-Terminal, t = terminal, LHS = Left-Hand Side,
    RHS = Right-Hand Side).
 
-   | Language               | Type | Restrictions on Grammar Productions         |
-   |------------------------+------+---------------------------------------------|
-   | Regular                |    3 | Left-linear or Right-linear                 |
-   |                        |      | (each RHS must be either like t or \lambda, |
-   |                        |      | or all like Nt, or all like tN).            |
-   |                        |      |                                             |
-   | Context Free           |    2 | Each LHS must have only one Non-Terminal.   |
-   |                        |      |                                             |
-   | Context Sensitive      |    1 | LHS may have more than one Non-Terminal,    |
-   |                        |      | but the length of the LHS must be           |
-   |                        |      | at most the length of the RHS               |
-   |                        |      | (except for \lambda productions).           |
-   |                        |      |                                             |
-   | Recursively Enumerable |    0 | No restrictions                             |
-   |                        |      | (length of LHS may exceed length of RHS).   |
+   | Language               | Type | Restrictions on Grammar Productions       |
+   |------------------------+------+-------------------------------------------|
+   | Regular                |    3 | Left-linear or Right-linear               |
+   |                        |      | (each RHS must be either like t or \lambda,     |
+   |                        |      | or all like Nt, or all like tN).          |
+   |                        |      |                                           |
+   | Context Free           |    2 | Each LHS must have only one Non-Terminal. |
+   |                        |      |                                           |
+   | Context Sensitive      |    1 | LHS may have more than one Non-Terminal,  |
+   |                        |      | but the length of the LHS must be         |
+   |                        |      | at most the length of the RHS             |
+   |                        |      | (except for \lambda productions).               |
+   |                        |      |                                           |
+   | Recursively Enumerable |    0 | No restrictions                           |
+   |                        |      | (length of LHS may exceed length of RHS). |
 
 ** Classification Exercises
 
