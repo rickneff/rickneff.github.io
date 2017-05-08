@@ -1,0 +1,364 @@
+#+TITLE:  CTL
+#+AUTHOR: Rick Neff
+#+EMAIL:  rick.neff@gmail.com
+#+LANGUAGE:  en
+#+OPTIONS:   H:4 num:t toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+STARTUP:   showeverything
+
+* Consolidated TODO List
+
+** Immediate
+*** DONE Grade Lucky's Late Work
+    CLOSED: [2016-12-19 Mon 08:27]
+
+*** DONE Answer Ryan Walker's email
+    CLOSED: [2016-12-19 Mon 10:28]
+
+    I'm sorry that I didn't email sooner. Life really got in the way. I stopped
+    going to class because I realized that there was just no way I could get
+    caught up. My biggest mistake was not getting help sooner. But I did read
+    the textbook and assignments. Through most of the semester I felt lost
+    though. I would read the text book, but then when we took quizzes in class I
+    felt like they were not entirely about what we read. And I wasn't sure how I
+    was supposed to learn lisp when there were no basic explanations, examples,
+    or definitions in the book. There was plenty of code, but I would stare at
+    it wondering what it all meant. I'm sure there may have been some part of
+    the book I missed, but I never felt like I ever had an understanding of
+    lisp. And like I said, it really was my fault for not getting help sooner in
+    the semester from you or a tutor.
+
+    I hope this explains better my situation. But you are a good teacher and I'm
+    sorry I wasn't a good student.
+
+    Ryan,
+
+    I'm sorry this semester didn't go as you had hoped at the beginning. But I
+    appreciate the feedback. I'm always trying to improve the course --- when
+    you take it again it will be a different course!
+
+    Have a Merry Christmas!
+
+    Brother Neff
+
+*** DONE Grade Wellesley's 1st Exploration
+    CLOSED: [2016-12-17 Sat 21:49]
+
+*** DONE Grade Cameron Fife's 3rd Exercises
+    CLOSED: [2016-12-18 Sun 07:30]
+**** DONE and then answer his email.
+     CLOSED: [2016-12-19 Mon 10:19]
+
+*** DONE Grade Benjamin Clark's 1st Exploration
+    CLOSED: [2016-12-18 Sun 07:15]
+
+*** DONE Grade Joseph Koetting's 3rd Exercises
+    CLOSED: [2016-12-14 Wed 14:29]
+
+*** DONE Grade Ian Petty's 1st Exploration
+    CLOSED: [2016-12-18 Sun 06:55]
+
+*** DONE Grade Zac's 1st Exploration (latest)
+    CLOSED: [2016-12-18 Sun 06:41]
+
+*** DONE Grade DM2 3rd Exploration
+
+*** DONE Meet with Shane Thompson to debrief
+    CLOSED: [2016-12-07 Wed 10:43] SCHEDULED: <2016-12-07 Wed 10:00 AM>
+
+*** DONE Write LoR for Tom Waldron
+
+*** TODO Incorporate This Graph Somewhere
+    (From Ian Petty --- 2016/11/22 email)
+   [[http://unifiedpoptheory.com/lexical-differences-among-european-languages-visualized-in-a-graph/][Lexical differences among European languages visualized in a graph]] 
+
+*** DONE Track AIAMA Book
+    CLOSED: [2016-12-14 Wed 14:23]
+    Lent to Adam Cameron on 2016/11/22, he returned it.
+
+*** TODO Answer Paul Mason's email better
+    (After regrading def/exn/1st-exploration.org)
+
+*** DONE Answer Blake Taylor's latest email                          :mentee:
+    CLOSED: [2016-11-18 Fri 13:56]
+
+*** DONE Answer Seth Snare's letter
+    Propose letting my DM4 students critique his formula.
+
+*** TODO Check out the Pomodoro time management technique
+
+    [[https://en.wikipedia.org/wiki/Pomodoro_Technique]]
+
+*** DONE Create 5th Exercises Key
+    CLOSED: [2016-11-18 Fri 14:54]
+    for masters/abc/exs
+
+*** DONE Add counting/probability question
+    to abc 7th Quiz.
+
+    What is the probability that a randomly chosen 3-digit number
+    unambiguously designates a date (month number plus day number
+    paired without punctuation)? E.g., 111 is ambiguous, it could mean
+    January 11th (month 1, day 11) or November 1st (month 11, day
+    1). Don't count numbers with zeros in the second or third position
+    (why not the first position?) as ambiguous, given the rule that
+    days are never written with a leading zero. E.g., 101 can only
+    mean October 1st, not January 1st. Eliminate from the event space
+    any invalid numbers, e.g. 345, as neither 3/45 nor 34/5 is a valid
+    date.
+
+*** DONE Fix see-grades.org
+    Per Landon's email.
+
+*** DONE Check out pandoc
+
+*** DONE Add odd-even question (like men/women)
+    to def 7th quiz.
+
+    Give a combinatorial argument that the number of ways to choose
+    two numbers from the consecutive numbers 1 through 2n is n squared
+    plus 2 times (n choose 2).
+
+*** DONE Send Lee Barney
+    [[https://www.amazon.com/gp/search?index%3Dbooks&linkCode%3Dqs&keywords%3D9780618562121][Link to Count Down from Amazon]]
+    the race for beautiful solutions at the International Mathematical Olympiad
+    [[file:~/goo/oldcopy/cs237/x/Creativity.pdf]]
+
+*** DONE Email 71 and 72
+    CLOSED: [2016-10-20 Thu 18:41]
+
+    If you look you'll also see an updated version of the book, which
+    thanks to some sharp-eyed students (you know who you are) is much
+    less typo-strewn than before!
+
+*** DONE Order Tickets for Anda Union
+    DEADLINE: <2016-10-17 Mon>
+
+*** DONE Finish Signing Up
+    [[https://cloud.digitalocean.com/welcome?utm_source%3Demail_confirmation][https://cloud.digitalocean.com/welcome?utm_source=email_confirmation]]
+
+*** DONE Finalize List of Conference Talks
+
+    - O How Great the Plan of Our God!
+    President Dieter F. Uchtdorf
+    - The Soul’s Sincere Desire
+    Carol F. McConkie
+    - Am I Good Enough? Will I Make It?
+    Elder J. Devn Cornish
+    - “Abide in My Love”
+    Elder D. Todd Christofferson
+    - Emissaries to the Church
+    Elder Jeffrey R. Holland
+    - Principles and Promises
+    President Thomas S. Monson
+    - Joy and Spiritual Survival
+    President Russell M. Nelson
+    - Gratitude on the Sabbath Day
+    President Henry B. Eyring
+    - “If Ye Had Known Me”
+    Elder David A. Bednar
+    - Serve
+    Elder Carl B. Cook
+    - No Greater Joy Than to Know That They Know
+    Elder K. Brett Nattress
+    - Repentance: A Joyful Choice
+    Elder Dale G. Renlund
+    - Approaching the Throne of God with Confidence
+    Jörg Klebingat
+
+*** TODO Finish ghi/exs/5th-exercises-key.org
+
+*** DONE Email Lee Barney
+    Give him a link to the book.
+
+*** DONE Give Likhith a bonus
+    CLOSED: [2016-12-19 Mon 08:36]
+    See email: Thanks for your keen eye! I have fixed the legitimate
+    typos, but the spacing issues you pointed out only show up when
+    you export to HTML and then copy and paste that into Word.
+
+*** DONE Give Joseph Koetting a bonus
+    CLOSED: [2016-12-19 Mon 08:36]
+    See my reply to his email:
+
+    I wish I could claim I deliberately misspelled 'dynamic' as
+    'dymanic' there, but that would be wrong!  Good catch --- your
+    careful proofreader's eye is much appreciated, and shall be
+    rewarded in a time to come!
+    Thanks, signed.
+
+*** DONE Give Tyler Brown a bonus point
+    CLOSED: [2016-12-19 Mon 08:36]
+    for finding the missing 'a' in the 6th Question in the 4th
+    Exercises.
+
+*** DONE Mark Jordan Kaze present on 10/11
+    (He was about 15 minutes late.)
+
+*** DONE Meet with Landon Mecham
+    CLOSED: [2016-09-23 Fri 12:50] SCHEDULED: <2016-09-23 Fri 12:00 PM>
+
+*** DONE Meet with Mike Nielson
+    CLOSED: [2016-09-22 Thu 16:29] SCHEDULED: <2016-09-22 Thu 10:30 AM>
+
+*** DONE Move chair from Biddulph to STC
+    CLOSED: [2016-09-23 Fri 12:50]
+
+*** DONE Lend book to Ryan Nielsen
+    CLOSED: [2016-09-23 Fri 12:50]
+    How Mathematicians Think
+    Actually, ordered it from Amazon and had it shipped to Ryan
+
+** Personal
+
+*** TODO Education for Real Life
+    [[http://emp.byui.edu/WRAYD/pb/read/Ed%2520for%2520Life.htm][http://emp.byui.edu/WRAYD/pb/read/Ed%20for%20Life.htm]]
+
+*** DONE Email Rachel Felt
+    CLOSED: [2016-09-17 Sat 11:24]
+
+*** DONE Ice Cream to Lance Hymas for his and Talon's birthday 9/13
+    CLOSED: [2016-09-13 Tue 19:06]
+
+*** DONE Set up Ross Baron and Kevin Cook
+    CLOSED: [2016-09-13 Tue 19:07]
+    - Ross David Baron (rdb ??????????)
+    - Kevin Michael Cook (kmc 5323587108)
+
+*** DONE Make eye appointment
+    208-359-1880
+
+*** TODO Find Chart of MF Maria
+
+*** DONE Download Head First Java Beatbox code
+    CLOSED: [2016-09-13 Tue 17:05]
+
+*** TODO Coordinate with Ryon and Rachel
+
+** Home
+
+*** DONE Call Mitch Grover
+    CLOSED: [2016-09-10 Sat 12:32]
+
+    About invoices/paperwork for windows (Alpine Windows?)
+    208-356-0812
+
+    He said he looked but couldn't find anything.
+
+*** DONE Check into insulation for the garage
+
+    Advanced Insulation recommended by BMC 208-716-0757 Talked to someone on
+    9/26/2016 who quoted $0.50/square ft. for 8 inches blown in.
+
+** Work
+
+*** TODO Check into org-journal
+
+    [[http://beatpanic.berlin/render-org-journal-documents-with-sphinx-theme-and-spacemacs.html]]
+
+*** TODO Decide How Much to Give Wellness Attempters
+    E.g., this blog [[http://nullprogram.com/blog/2015/10/30/][RSA Signatures in Elisp]] reveals a lot about the calc package.
+
+*** TODO Look at BoxCar 2D
+    Website doing Genetic Algorithm simulation suggested by Chris Benedict
+
+*** TODO Fix 5th Question on 6th Exercises
+    [[file:masters/abc/exs/6th-exercises.org]]
+    to have "the string =ELM=?"
+
+*** TODO Check out more org-mode goodies
+    [[https://news.ycombinator.com/item?id=11311465]]
+
+*** DONE Find Systems Book
+    Recommended by Lee Barney:
+    Self-Modifying Systems in Biology ... By _______ Kampis
+
+*** DONE Fix initial condition
+    on the 2nd Question of the 9th Quiz in Algorithms
+    (masters/ghi/qaf/9th-quiz.org)
+
+*** TODO Check out Babun
+    [[http://babun.github.io]]
+
+*** DONE Investigate missing [jac jsv mrn] from 72
+    CLOSED: [2016-09-16 Fri 09:12]
+
+    - [X] jac and jsv dropped 72
+    - [X] mrn was not initially created.
+
+*** DONE Dropped 71: Adam Fletcher, Ryan Gewondjan, Trevor Larson
+
+*** DONE Add 467335217 | Michael Reed Nielson to 72
+    CLOSED: [2016-09-16 Fri 13:52]
+
+*** DONE Email graphics code to Dane Christensen
+    chr11031@byui.edu
+    Actually, emailed him a link to the public github repo cs312.
+
+*** DONE Tell Haru about Career Fair in Boise at end of October
+    CLOSED: [2016-09-10 Sat 12:31]
+    And encourage him to go the the one in Provo September 29-30.
+
+** TODO Email Mckay Visser
+    How to execute C++ code in an org mode source block.
+    See the attached for an example:
+    ~/mebewiyo/F16/masters/abc/exs/3rd-exercises.org
+    See also
+    http://orgmode.org/worg/org-contrib/babel/languages/ob-doc-C.html
+
+** DONE Move The Chair
+   CLOSED: [2016-09-23 Fri 07:00]
+   Put it in adjunct office STC 330J.
+   (Got Jason, Ehren and Kelly to help.)
+
+*** DONE Change Deepness to use the calc package rather than bigint
+    Stretch challenge of doing 100 billion without using the bigint or
+    calc package.
+
+*** TODO Code up Seth Snare's Prime Number Calculator
+
+**** TODO Perhaps have DM3 or DM4 students analyze it
+
+**** DONE Answer Seth's mail
+     CLOSED: [2016-12-19 Tue 13:30]
+
+*** DONE Update masters/abc/schedule.org up to Day 4.1
+**** DONE Quizzes up to 3rd.
+**** DONE Exercises up to and including 3rd.
+
+*** TODO Update masters/def/schedule.org up to Day 4.1
+**** TODO Day 2.4 Finish STOS Episode Transcript Search
+    - Discuss [[file:cof/star-trek-logic.org][Star Trek Logic]]
+
+*** TODO Record Quote Somewhere
+
+    Remember there's no such thing as a small act of kindness. Every act creates
+    a ripple with no logical end." Scott Adams - author of the comic "Dilbert"
+
+*** DONE Send email re updated files
+    - cof/lisp-loop-lambda-closure.org
+    - exn/deepness.org
+    - exs/0th-exercises.org
+    - exs/2nd-exercises.org
+    - exs/3rd-exercises.org
+    - qaf/3rd-quiz.org
+    - schedule.org
+
+*** TODO Send email re updated files
+
+Subject: Updated Course Files Now Available
+Please use the src command to update your repos. If you first open a shell and
+
+cd ~/.emacs.d/private/local/dmleat; git pull
+
+before you start Spacemacs, then you won't have to be visiting a file to send-receive-changes.
+
+new file: cof/introduction-to-logic.org
+new file: cof/notes-on-problems-versus-exercises.org
+modified: exs/0th-exercises.org
+modified: exs/2nd-exercises.org
+modified: exs/3rd-exercises.org
+modified: exs/4th-exercises.org
+modified: qaf/2nd-quiz.org
+modified: qaf/3rd-quiz.org
+modified: qaf/4th-quiz.org
+modified: schedule.org

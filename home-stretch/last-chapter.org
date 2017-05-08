@@ -1,0 +1,761 @@
+#+TITLE: Last Chapter
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+STARTUP: showeverything entitiespretty
+
+* TODO YZ@
+
+#+BEGIN_COMMENT
+  CSP more high-level TAI interaction.
+#+END_COMMENT
+
+  \ldquo{}Isn\rsquo{}t it interesting how languages either facilitate or impede
+  communication?\rdquo Til asked, just as Ila and Abu entered his den. Ila replied,
+  without missing a beat, \ldquo{}I know programming languages facilitate communication
+  with computers, but I don\rsquo{}t see the impediment part\rdquo{}. \ldquo{}I do,\rdquo said Abu. Not
+  knowing any programming languages, except a little lisp, I suppose, impedes my
+  communication with you when you're talking programming. Yes, but ignorance on
+  your part is not the fault of the languages, said Ila. So, Til, did you mean
+  ignorance of languages is the impediment?
+
+  Not necessarily. Sometimes a perfectly natural and known language like English
+  is used, or I should say misused, to obfuscate rather than communicate --- to
+  hide rather than reveal meaning. I'll come back to this point later.
+
+  So the question, what is a language, with its obvious answer, a language is
+  something humans use to communicate, is too general in one sense, and too
+  specific in another.
+
+  As we'll see, languages can be generalized to an arbitrary set of strings, but
+  made more specific by /how/ that set is defined. Phrase-Structure Grammars ---
+  PSGs --- are the tools (rules) used to define which strings are valid members
+  of the language associated with that PSG. Now let me be clear what that
+  association is. It is that PSGs /generate/ languages, and so of course,
+  languages are /generated/ (built) by PSGs.
+
+  In English (or any natural, human language) you follow the rules when you
+  adhere to the grammar. A main component of a formally defined grammar is the
+  set of productions --- the rules that /produce/ valid members of the language.
+  In essence, applying these rules is how different strings of words (phrases,
+  sentences) are generated. Deliberately, or even ignorantly violating these
+  rules leads to confusion and failed communication. Because the grammatical
+  rules of English are so complex, ambiguity and misunderstanding lurk beneath
+  the surface. 
+
+  Take what you said earlier, Ila. "I know programming languages facilitate X".
+  (I'm abbreviating.) One sentence, or two?
+
+  I know programming. Languages facilitate X.
+
+  Abu said, it seems pretty clear from the context that it's one sentence. Ila
+  said, I agree. I don't see the problem.
+
+  It's NOT a problem --- for you. Missing the context, and minus the fluidity
+  and rapidity with which you uttered that ONE sentence, however, it could be
+  misconstrued --- legally but erroneously parsed --- into two.
+
+  Take this imperative statement: Love One Another. A Christian maxim, if I'm
+  not mistaken.
+
+  This caused both Ila and Abu to glance at each other in surprise. Til, til
+  now, had never brought up religion in any of their discussions to date. Ila
+  and Abu had certainly broached the subject, on more than one occasion, when it
+  was just the two of them, meeting to work on homework assignments, or just
+  waiting for Til. Ila thought Abu, a Mormon, hopelessly deluded. Abu thought
+  Ila, an evangelical Christian, a prospective Mormon, if she could only get
+  past her myopia! Now to hear Til bring this up was a tantalizing turn, and
+  mildly amusing to all three of them when Ila and Abu said in unison, John
+  13:34.
+
+  Yes, well, very good, said Til, a little taken aback. I see you both know your
+  Bible. If they think, thought Til, that this is leading into a religious
+  discussion, they will be disappointed. Not that he was opposed to hearing
+  their religious opinions, just not right now. (When, then? asked a nagging
+  voice in his head. He ignored it. But God was still to be the subject of a
+  sentence.)
+
+  This is not the simplest English grammatical construction. Simpler would be
+  God Loves You, which is in Subject-Verb-Object order, very common in English.
+  You could make sense of each of the other five permutations, but only by
+  giving a lot of context.
+
+  Love Another One. 
+
+  One Love Another.
+
+  One Another Love.
+
+  Another Love One.
+
+  Another One Love.
+
+  So, said Ila, are you saying word order causes communication problems?
+
+  Well, have you ever tried to make sense of some kinds of poetry? said Abu.
+  Poets are notorious for scrambling word order to fit some rhyme or meter
+  scheme. Quoth the raven instead of The raven said.
+
+  But perfectly correct, said Til. Saying The raven quoth is not grammatical,
+  by the very special rule attached to that very archaic word.
+
+  Not so much word order as word choice. Remember I started talking about the
+  misuse of English to obfuscate? Jar.gon is the imp here. And we are all guilty
+  of listening to that imp and using jargon to erect barriers in the guise of
+  facilitators. We may justify ourselves in this indulgence because of the
+  benefits --- and there *are* benefits --- but do we ever consider the costs?
+
+  Jargon is meant to impede understanding by outsiders of what insiders are
+  saying. Hiding the meaning of a communication from the uninitiated.
+
+  For example, what does partial template specialization mean? And what is the
+  cardinality of the power set?
+
+  I can tell you the answer to your second question, but I have no clue about
+  the first, said Ila.
+
+  Abu said, I agree, but regarding the second question, do you think it better
+  to put it more simply, like, how many subsets does a set of size *n* have?
+
+  I do, said Til. Math is a language that desperately needs less jargon, more
+  clarity. And not to keep you in suspense, well, not to keep you from the
+  adventure of discovery with a little hint, partial template specialization is
+  a very obscure "feature" of the C++ language.
+
+  You have no doubt heard the stories about when a business consultant, tongue
+  firmly in cheek, randomly chooses three words from three different lists to
+  create for client consumption impressive-sounding, content-free phrases, like
+
+  customer value trajectory, or stratified business intelligence, or hypercubic
+  mission criticality.
+
+  Wow, did you just make those up? wondered Abu, silently. Ila said, I get that
+  kind of jargon all the time from the consultants my company hires. It's all
+  nonsense, if you ask me.
+
+  But not all of it is intentional, said Til. Let me put it this way.
+  Proclivities, what a nice word! Many people have proclivities, inclinations,
+  predispositions to use more words, or bigger words, or "shinier" words than
+  necessary to get what they want. Flattery is replete with this abuse of
+  language.
+
+  Abu rose to the challenge: Your mellifluous speech shows a penchant for
+  pulchritudinous word marshalling.
+
+  Marshmallowing, you mean, chimed in Ila. Sicky sweet, with no nutritional
+  value!
+
+  So you agree it's a problem! winked Til. Both Abu and Ila nodded and chuckled.
+
+  Well, it's not one we're going to solve today, he said. So let's go back to
+  talking about problems in mathematics. Mathematical language, unlike natural
+  language, is precise and unambiguous. Equations --- tautologies --- always
+  true. Never a doubt. Pure syntax without the clouding confusion of semantics.
+
+  That's the official story. Now let me qualify that a bit. One of the, if not
+  *the* most brilliant mathematical logicians of all time, Kurt G\ouml{}del, once
+  said, "The more I think about language, the more it amazes me that people ever
+  understand each other." What amazes me about mathematicians, who are people
+  too, is that they are such poor writers --- when writing mathematics, at
+  least. Math writing is notorious for its lack of clarity, despite its claim of
+  delivering unadulterated truth. (Donald Knuth has a great example of the
+  contrast.)
+
+  Have Abu and/or Ila interject some comment here.
+
+  While obviously mathematical in nature, indeed, *discrete* mathematical, let's
+  narrow our problems focus to problems in computer science.
+
+  Til: Computer scientists, especially theoretical computer scientists, like to
+  cast problems into the common mold of languages. They do this for technical
+  reasons more properly delved into in a course on computational theory. But
+  here is a favorite example: Is 23 prime? This is a decision problem whose
+  answer is yes, as verified by simply trying to divide 23 by 2 and 3, and
+  failing on both counts, of course. But this computation can also be performed
+  as a search for the string "23" in the set of strings that starts ["2" "3" "5"
+  "7" "11" "13" "17" "19 "23" ...]. This set of strings as a language is called
+  PRIMES. Does PRIMES also contain the string "23232323232323232323"? In other
+  words, is 23232323232323232323 prime? The answer is no --- it's a composite
+  number with seven prime factors --- including 23 --- but the computational
+  solution to that set membership determination problem is significantly harder
+  than the one for 23. It's not a simple search in a static list. While many
+  lists of primes exist, no one creates huge lists with every prime in it up to
+  some huge limit. True, programs exist that can do that, using some variation
+  of the classic Sieve of Eratosthenes, which goes *way* back, showing how old
+  this problem is. But the point is, to solve a language membership problem you
+  need computational strategies and tactics and resources. We are modeling
+  computation in terms of machinery that can input a string, and output a yes or
+  no --- in the language, or not.
+
+#+BEGIN_SRC emacs-lisp
+  (format "%S" (number-to-string 23))
+#+END_SRC
+
+#+RESULTS:
+: "23"
+
+* TODO Flesh Out
+  Modeling computation, state diagrams as graphs, solving a math problem to get
+  clues to Til's unknown whereabouts.
+
+  Include a description of formal system from Incompleteness: The Proof and
+  Paradox of Kurt G\ouml{}del, by Rebecca Goldstein, on page 86. See also page 110,
+  where G\ouml{}del is quoted as saying, "The more I think about language, the more it
+  amazes me that people ever understand each other." Also page 112, at the top.
+
+  (Til knows where he is, but has no way to communicate his location in a desert
+  where he went to seek solitude. Something he has a compelling need to do from
+  time to time, much to his wife's chagrin. His tracer (note: GPS) signal is
+  encrypted, in a very eccentric way. This way may have something to do with the
+  puzzle he gave Abu and Ila, namely to find the connection between Edgar Allan
+  Poe and the phrase "Notice cousin Felipe".)
+  
+** ZCF 
+
+   CSP definitions, examples, VTOs.
+
+** ILO  
+
+   CSP a discussion of the Chomsky Hierarchy.
+
+* The Burning Question
+
+  What is a language?
+
+** The Obvious Answer
+
+   Something humans use to communicate, either by speaking or writing.
+
+** Formal Definitions
+
+   In theoretical computer science, a language is no more and no less than some
+   subset of a set of all strings over some alphabet.
+
+*** Alphabet
+   
+    Any non-empty, finite set (typically abbreviated \Sigma).
+
+*** Symbols
+
+    The members or elements of an *alphabet*.
+
+*** String over an Alphabet
+
+    A finite *sequence* of *symbols* from a given *alphabet*.
+
+    Usually written side-by-side without commas. E.g., abab rather than {a, b, a, b}.
+    
+*** Length
+
+    The number of *symbols* contained in a *string*.
+
+    \vert{}w\vert denotes the length of w.
+    
+*** Empty String
+
+    A *string* that has a *length* of zero. (Abbreviated \lambda or \epsilon.)
+   
+*** Concatenation
+
+    The process of appending the *symbols* of one string to the end of another
+    *string*, in the same order.
+
+*** Lexicographic Ordering
+    
+    A method of ordering *strings* that sorts them first by *length* (with
+    shorter *strings* coming first) and then by predefined order of the
+    *symbols* as given in association with a particular *alphabet*.
+
+* The Other Burning Question
+
+  What is a grammar?
+  
+** Formal Definition
+
+   A *Phrase-Structure Grammar* is a four-tuple:
+
+   G = (V, T, S, P) where
+
+   - V is a set of Variables (Non-Terminals)
+   - T is a set of Terminals (V \cap T = \emptyset)
+   - S is the Start variable (S \in V)
+   - P is a finite set of Productions (Rules), each one mapping a Variable to
+     a string of Variables and Terminals.
+
+** A Familiar Example
+
+   Here's a Phrase-Structure Grammar for a (tiny) subset of the English language:
+
+   V = [SENTENCE NOUN-PHRASE VERB-PHRASE ARTICLE ADJECTIVE NOUN VERB ADVERB]
+
+   T = [the sleepy happy tortoise hare passes runs quickly slowly]
+
+*** Rules for the Grammar
+
+    P = [
+    SENTENCE \rightarrow NOUN-PHRASE VERB-PHRASE NOUN-PHRASE
+    SENTENCE \rightarrow NOUN-PHRASE VERB-PHRASE
+    NOUN-PHRASE \rightarrow ARTICLE ADJECTIVE NOUN
+    NOUN-PHRASE \rightarrow ARTICLE NOUN
+    VERB-PHRASE \rightarrow VERB-PHRASE ADVERB
+    VERB-PHRASE \rightarrow VERB
+    ARTICLE \rightarrow the \vert \lambda
+    ADJECTIVE \rightarrow sleepy \vert happy
+    NOUN \rightarrow tortoise \vert hare
+    VERB \rightarrow passes \vert runs
+    ADVERB \rightarrow slowly \vert quickly
+    ]
+
+* Derivation
+
+  The process of producing a sequence of terminals from the Start Variable by
+  replacing variables one at a time by applying some Rule is called /Derivation/.
+
+** Example
+
+   | SENTENCE | \rightarrow | NOUN-PHRASE VERB-PHRASE            |
+   |          | \rightarrow | ARTICLE ADJECTIVE NOUN VERB-PHRASE |
+   |          | \rightarrow | ARTICLE ADJECTIVE NOUN VERB        |
+   |          | \rightarrow | the ADJECTIVE NOUN VERB            |
+   |          | \rightarrow | the happy NOUN VERB                |
+   |          | \rightarrow | the happy hare VERB                |
+   |          | \rightarrow | the happy hare runs                |
+ 
+** Exercises
+
+   Using the above example as a guide, produce derivations for each of the
+   following sentences:
+
+*** TODO 1
+    the sleepy tortoise runs slowly
+
+*** TODO 2
+    the happy tortoise passes quickly
+
+*** TODO 3
+    the happy tortoise passes the sleepy hare
+
+** Sample Code
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (setq es ""
+        productions
+        '((SENTENCE NOUN-PHRASE VERB-PHRASE NOUN-PHRASE)
+          (SENTENCE NOUN-PHRASE VERB-PHRASE)
+          (NOUN-PHRASE ARTICLE ADJECTIVE NOUN)
+          (NOUN-PHRASE ARTICLE NOUN)
+          (VERB-PHRASE VERB-PHRASE ADVERB)
+          (VERB-PHRASE VERB)
+          (ARTICLE the es)
+          (ADJECTIVE sleepy happy)
+          (NOUN tortoise hare)
+          (VERB passes runs)
+          (ADVERB slowly quickly))
+        reverse-productions (reverse productions))
+
+  (defun non-terminals-remain (derivation)
+    (and (listp derivation)
+         (let* ((before (mapcar 'symbol-name derivation))
+                (after (mapcar 'upcase before)))
+           (intersection before after :test 'string=))))
+
+  (defun derive (LHS)
+    (let* ((rules (if (zerop (random 2)) productions reverse-productions))
+           (RHS (cdr (assoc LHS rules))))
+      (if (null RHS)
+          (list LHS)
+        (if (non-terminals-remain RHS)
+            RHS
+          (list (nth (random (length RHS)) RHS))))))
+
+  (defun transform-terminal (terminal)
+    (or (and (boundp terminal) (symbol-value terminal))
+        (symbol-name terminal)))
+
+  (defun find-derivation (start-symbol)
+    (let ((derivation (list start-symbol)))
+      (while (non-terminals-remain derivation)
+        (setq derivation (apply 'append (mapcar 'derive derivation))))
+      (mapconcat 'transform-terminal derivation " ")))
+#+END_SRC 
+
+#+BEGIN_SRC emacs-lisp
+  (find-derivation 'SENTENCE)
+#+END_SRC
+
+#+RESULTS:
+: the happy hare passes the happy tortoise
+
+** Question
+
+   With these rules is there a derivation for this?
+
+   =the sleepy happy hare runs=
+
+*** Answer
+
+    No.
+
+**** So how would you fix that?
+
+     Add a *loopy* rule!
+ 
+     ADJECTIVE \rightarrow ADJECTIVE ADJECTIVE \vert \lambda
+
+* A Challenge
+
+  What rules would you need to change or add to generate this sentence?
+
+  =the quick brown fox jumps over the lazy dog=
+
+** TODO Answer
+
+   ADJECTIVE \rightarrow sleepy \vert happy \vert quick \vert brown \vert lazy
+
+   PREPOSITION \rightarrow of \vert from \vert by \vert on \vert in \vert over \vert \dots
+
+   PREPOSITIONAL-PHRASE \rightarrow PREPOSITION NOUN-PHRASE
+
+   VERB-PHRASE \rightarrow VERB PREPOSITIONAL-PHRASE
+
+#+BEGIN_SRC emacs-lisp
+  (setq parsed [S [NP [ART the] [ADJ [ADJ quick] [ADJ brown]] [N
+        fox]] [VP [V jumps] [PP [P over] [NP [ART the] [ADJ lazy]
+        [N dog]]]]])
+  (kill-new (format "%s" parsed))
+#+END_SRC
+
+*** Visualize Derivation
+
+    The derivation of a valid syntactic "sentence" can be visualized as the
+    process of building a *syntax tree* (AKA a *parse tree*).
+
+    See http://www.ironcreek.net/phpsyntaxtree/.
+
+* A Harder Challenge
+
+  Go back to the original Grammar.
+
+  Replace these three rules:
+
+  ADJECTIVE \rightarrow Buffalo
+
+  NOUN \rightarrow buffalo
+
+  VERB \rightarrow buffalo
+
+  With these new rules, is there a derivation for this "sentence"?!
+
+** This is a sentence?!
+   Buffalo buffalo Buffalo buffalo buffalo buffalo Buffalo buffalo
+
+*** Meaning Explained
+  (The) Buffalo buffalo (that) Buffalo buffalo (often) buffalo (in turn) buffalo
+  (other) Buffalo buffalo.
+
+* Fancy Nouns
+ 
+  Fancy nouns are *nested* nouns, for example "the strange bagels that the
+  purple cow without horns gobbled" --- which could be rephrased as "the purple
+  cow without horns gobbled the strange bagels. But it's these bagels I want to
+  focus on."
+
+  So, a nested noun is a nested noun followed by a relative pronoun (e.g.,
+  /that/) followed by a verb followed by a nested noun,
+
+  OR,
+
+  it's a nested noun followed by a relative pronoun followed by a nested noun
+  followed by a verb,
+
+  OR,
+
+  it's a nested noun followed by a preposition followed by a nested noun,
+
+  OR,
+
+  it's just an article followed by any number of adjectives followed by a plain
+  old (non-nested) noun!
+
+* Nested Nouns
+ 
+  NESTED-NOUN \rightarrow NESTED-NOUN RELATIVE-PRONOUN VERB NESTED-NOUN
+
+  NESTED-NOUN \rightarrow NESTED-NOUN RELATIVE-PRONOUN NESTED-NOUN VERB
+
+  NESTED-NOUN \rightarrow PREPOSITION NESTED-NOUN
+
+  NESTED-NOUN \rightarrow ARTICLE NOUN-PHRASE
+
+  NOUN-PHRASE \rightarrow ADJECTIVE NOUN-PHRASE
+
+  NOUN-PHRASE \rightarrow NESTED-NOUN
+
+  NOUN-PHRASE \rightarrow NOUN
+ 
+  ARTICLE \rightarrow a \vert an \vert the \vert \lambda
+
+  RELATIVE-PRONOUN \rightarrow that \vert \lambda
+
+  PREPOSITION \rightarrow of \vert from \vert by \vert \dots
+
+** Now It's Possible
+
+   Let NN = NESTED-NOUN, RP = RELATIVE-PRONOUN, es = \lambda (the empty string).
+
+#+BEGIN_SRC emacs-lisp
+  (setq parsed [S [NP [NN [NN [ART es] [NP [ADJ Buffalo] [NP [N
+        buffalo]]]] [RP es] [NN [NP [ADJ Buffalo] [NP [N buffalo]]]][V
+        buffalo]]] [VP [V buffalo]] [NP [ADJ Buffalo] [NP [N buffalo]]]])
+
+  (kill-new (format "%s" parsed))
+#+END_SRC
+
+* What is the Context?
+
+  The grammar for English is "Context Free". By way of contrast, here's an
+  example of productions in a NON-Context-Free grammar:
+
+  aAd \rightarrow aacd
+
+  aAe \rightarrow acae
+
+  Note that A's expansion is different when it's surrounded by a and d than when
+  it's surrounded by a and e. We say A's interpretation has context
+  "sensitivity".
+
+* Regular Languages
+ 
+  A language is /regular/ *iff* some /regular expression/ describes it.
+
+  Regular expressions use the so-called regular operations (\cup, \circ, and \star) to
+  build regular languages.
+
+  R is a *regular expression* (*re*) if R is any of
+
+  - a for some a \in \Sigma
+  - \lambda
+  - \emptyset
+  - R_1 \cup R_2, where R_1 and R_2 are *re*'s
+  - R_1 \circ R_2, where R_1 and R_2 are *re*'s
+  - R^{\star}, where R is an *re*
+ 
+  Some shorthand:
+
+  - a \equiv {a}
+  - \lambda \equiv {\lambda}
+  - R^{+} \equiv R \circ R^\star
+  - R^{+} \cup \lambda \equiv R^{\star}
+  - R^k \equiv R \circ R \circ R \circ \dots \circ R (k times)
+
+  Note: R \circ R is usually written without the \circ, i.e., RR.
+
+* Forward Exercises
+
+  What language is generated by a given grammar?
+
+   Let V = {S, A, B} and T = {a, b}. Find the language generated by the
+   grammar (V, T, S, P) when the set P of productions consists of each of the
+   following:
+
+*** 1
+
+    S \rightarrow AB
+
+    A \rightarrow ab
+
+    B \rightarrow bb
+
+*** 2
+
+    S \rightarrow AB
+
+    S \rightarrow aA
+
+    A \rightarrow a
+
+    B \rightarrow ba
+
+*** 3
+
+    S \rightarrow AB
+
+    S \rightarrow AA
+
+    A \rightarrow aB
+
+    A \rightarrow ab
+
+    B \rightarrow b
+
+*** 4
+
+    S \rightarrow AA
+
+    S \rightarrow B
+
+    A \rightarrow aaA
+
+    A \rightarrow aa
+
+    B \rightarrow bB
+
+    B \rightarrow b
+
+*** 5
+
+    S \rightarrow AB
+
+    A \rightarrow aAb
+
+    B \rightarrow bBa
+
+    A \rightarrow \lambda
+
+    B \rightarrow \lambda
+#+BEGIN_SRC emacs-lisp
+  (setq es ""
+        productions
+        '((S A B)
+          (A a A b)
+          (B b B a)
+          (A es)
+          (B es))
+        reverse-productions (reverse productions))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (find-derivation 'S)
+#+END_SRC
+
+* Reverse Exercises
+
+  What grammar generates a given language?
+
+*** 1
+
+    Construct a PSG to generate {ab^{2n} \vert n \ge 0}.
+
+*** 2
+
+    Construct a PSG to generate {a^{n}b^{2n}^{} \vert n \ge 0}.
+
+*** 3
+
+    Construct a PSG to generate {a^n b^m a^n \vert m \ge 0 and n \ge 0}.
+
+* The Chomsky Hierarchy
+
+  Noam Chomsky is a linguist who first proposed the language classification
+  scheme that now bears his name.
+
+: Universal Set of All Languages (the superset of Types 0-3)
+:   +------------------------------------------------------+
+:   |   Type 0 Recursively Enumerable Languages            |
+:   |   +----------------------------------------------+   |
+:   |   |    Type 1 Context Sensitive Languages        |   |
+:   |   |    +-------------------------------------+   |   |
+:   |   |    |   Type 2 Context Free Languages     |   |   |
+:   |   |    |   +-----------------------------+   |   |   |
+:   |   |    |   |  Type 3 Regular Languages   |   |   |   |
+:   |   |    |   |                             |   |   |   |
+:   |   |    |   |                             |   |   |   |
+:   |   |    |   +-----------------------------+   |   |   |
+:   |   |    |                                     |   |   |
+:   |   |    +-------------------------------------+   |   |
+:   |   |                                              |   |
+:   |   +----------------------------------------------+   |
+:   |                                                      |
+:   +------------------------------------------------------+
+
+** A Tabular Taxonomy
+
+   The following table aligns the notions of language types with the types of
+   grammars that can generate those languages. The restrictions on productions
+   tell what's what (where N = Non-Terminal, t = terminal, LHS = Left-Hand Side,
+   RHS = Right-Hand Side).
+
+   | Language               | Type | Restrictions on Grammar Productions         |
+   |------------------------+------+---------------------------------------------|
+   | Regular                |    3 | Left-linear or Right-linear                 |
+   |                        |      | (each RHS must be either like t or \lambda, |
+   |                        |      | or all like Nt, or all like tN).            |
+   |                        |      |                                             |
+   | Context Free           |    2 | Each LHS must have only one Non-Terminal.   |
+   |                        |      |                                             |
+   | Context Sensitive      |    1 | LHS may have more than one Non-Terminal,    |
+   |                        |      | but the length of the LHS must be           |
+   |                        |      | at most the length of the RHS               |
+   |                        |      | (except for \lambda productions).           |
+   |                        |      |                                             |
+   | Recursively Enumerable |    0 | No restrictions                             |
+   |                        |      | (length of LHS may exceed length of RHS).   |
+
+** Classification Exercises
+
+   Can you distinguish grammar types?
+
+   Let V = {S, A, B, a, b}, T = {a, b}, and G = (V, T, S, P) (P
+   to be given later). Determine whether G
+
+   - is a type 0 grammar but not a type 1 grammar, or
+   - is a type 1 grammar but not a type 2 grammar, or
+   - is a type 2 grammar but not a type 3 grammar, or 
+   - is a type 3 grammar,
+
+   when P, the set of productions, is one of the following:
+
+*** 1
+
+    S \rightarrow aAB 
+
+    A \rightarrow Bb
+
+    B \rightarrow \lambda
+
+*** 2
+
+    S \rightarrow aA
+
+    A \rightarrow a
+
+    A \rightarrow b
+
+*** 3
+
+    S \rightarrow ABa
+
+    AB \rightarrow a
+
+*** 4
+
+    S \rightarrow ABA
+
+    A \rightarrow aB
+
+    B \rightarrow ab
+
+*** 5
+
+    S \rightarrow aA
+
+    aA \rightarrow B
+
+    B \rightarrow aA
+
+    A \rightarrow b
+
+*** 6
+
+    S \rightarrow bA
+
+    A \rightarrow b
+
+    S \rightarrow \lambda
+
+*** 7
+
+    S \rightarrow AB
+
+    B \rightarrow aAb
+
+    aAb \rightarrow b
