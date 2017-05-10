@@ -6,23 +6,24 @@
 * TODO YZ@
 
   \ldquo{}Isn\rsquo{}t it interesting how languages either facilitate or impede
-  communication?\rdquo Til asked, just as Ila and Abu entered his den. Ila replied,
+  communication?\rdquo asked Til, just as Ila and Abu entered his den. Ila replied,
   without missing a beat, \ldquo{}I know programming languages facilitate communication
   with computers, but I don\rsquo{}t see the impediment part\rdquo{}. \ldquo{}I do,\rdquo said Abu. Not
   knowing any programming languages, except a little lisp, I suppose, impedes my
-  communication with you when you're talking programming. Yes, but ignorance on
+  communication with you when you\rsquo{}re talking programming. Yes, but ignorance on
   your part is not the fault of the languages, said Ila. So, Til, did you mean
   ignorance of languages is the impediment?
 
-  Not necessarily. Sometimes a perfectly natural and known language like English
-  is used, or I should say misused, to obfuscate rather than communicate --- to
-  hide rather than reveal meaning. I'll come back to this point later.
+  No, not necessarily. Sometimes a perfectly natural and known language like
+  English is used, or I should say /misused/, to obfuscate rather than
+  communicate --- to hide rather than reveal meaning. I\rsquo{}ll come back to this
+  point later.
 
   So the question, what is a language, with its obvious answer, a language is
   something humans use to communicate, is too general in one sense, and too
   specific in another.
 
-  As we'll see, languages can be generalized to an arbitrary set of strings, but
+  As we\rsquo{}ll see, languages can be generalized to an arbitrary set of strings, but
   made more specific by /how/ that set is defined. Phrase-Structure Grammars ---
   PSGs --- are the tools (rules) used to define which strings are valid members
   of the language associated with that PSG. Now let me be clear what that
@@ -39,28 +40,28 @@
   lurk beneath the surface.
 
   Take what you said earlier, Ila. "I know programming languages facilitate X".
-  (I'm abbreviating.) One sentence, or two?
+  (I\rsquo{}m abbreviating.) One sentence, or two?
 
   I know programming. Languages facilitate X.
 
-  Abu said, it seems pretty clear from the context that it's one sentence. Ila
-  said, I agree. I don't see the problem.
+  Abu said, it seems pretty clear from the context that it\rsquo{}s one sentence. Ila
+  said, I agree. I don\rsquo{}t see the problem.
 
-  It's NOT a problem --- for you. Missing the context, and minus the fluidity
+  It\rsquo{}s NOT a problem --- for you. Missing the context, and minus the fluidity
   and rapidity with which you uttered that ONE sentence, however, it could be
   misconstrued --- legally but erroneously parsed --- into two.
 
-  Take this imperative statement: Love One Another. A Christian maxim, if I'm
+  Take this imperative statement: Love One Another. A Christian maxim, if I\rsquo{}m
   not mistaken.
 
-  This caused both Ila and Abu to glance at each other in surprise. Til, til
-  now, had never brought up religion in any of their discussions. Ila and Abu
-  had certainly broached the subject, on more than one occasion, when it was
-  just the two of them, meeting to work on homework assignments, or just waiting
-  for Til. Ila thought Abu, a Mormon, hopelessly deluded. Abu thought Ila, an
-  evangelical Christian, a prospective Mormon, if she could only get past her
-  myopia! Now to hear Til bring this up was a tantalizing turn, and mildly
-  amusing to all three of them when Ila and Abu said in unison, John 13:34.
+  Ila and Abu glanced at each other in surprise. Til, til now, had never brought
+  up religion in any of their discussions, whereas *they* had certainly broached
+  the subject, on more than one occasion, when it was just the two of them,
+  meeting to work on homework assignments, or just waiting for Til. Ila thought
+  Abu, a Mormon, hopelessly deluded. Abu thought Ila, an evangelical Christian,
+  a prospective Mormon, if she could only get past her myopia! Now to hear Til
+  bring this up was a tantalizing turn, and mildly amusing to all three of them
+  when Ila and Abu said in unison, John 13:34.
 
   Yes, well, very good, said Til, a little taken aback. I see you both know your
   Bible. If they think, thought Til, that this is leading into a religious
@@ -88,13 +89,21 @@
 
   Hmmm, said Abu. Have you ever tried to make sense of some kinds of poetry?
   Poets are always scrambling word order to fit some rhyme or meter scheme.
-  Quoth the raven instead of The raven said.
+  Like in a poem by Wordsworth that I just read:
 
-  But perfectly correct, said Til. Saying The raven quoth is not grammatical,
-  by the very special rule attached to that very archaic word.
+#+BEGIN_QUOTE
+  Bliss was it in that dawn to be alive.
+  But to be young was very Heaven!
+#+END_QUOTE
+
+** TODO Add endnote with reference
+
+  Said Til, Or from a more familiar poem: Quoth the raven instead of The raven
+  said. Still perfectly correct. In fact, saying The raven quoth is *not*
+  grammatical, by the very special rule attached to that very archaic word.
 
   So, not so much word order as word choice. Remember I started talking about
-  the misuse of English to obfuscate? Jargon is the imp here. And we are all
+  the misuse of English to obfuscate? *Jargon* is the imp here. And we are all
   guilty of listening to that imp and using jargon to erect barriers in the
   guise of facilitators. We may justify ourselves in this indulgence because of
   the benefits --- and there *are* benefits --- but do we ever consider the
@@ -109,7 +118,7 @@
   I can tell you the answer to your second question, but I have no clue about
   the first, said Ila.
 
-  Abu said, I agree, but regarding the second question, do you think it better
+  Abu said, I agree, but regarding the second question, do you think it\rsquo{}s better
   to put it more simply, like, how many subsets does a set of size *n* have?
 
   I do, said Til. Math is a language that desperately needs less jargon, more
@@ -125,8 +134,8 @@
   customer value trajectory, or stratified business intelligence, or hypercubic
   mission criticality.
 
-  Wow, did you just make those up? wondered Abu, silently. Ila said, I get that
-  kind of jargon all the time from the consultants my company hires. It's all
+  Wow, did you just make those up? wondered Abu, silently. Ila said, I hear that
+  kind of jargon all the time from the consultants my company hires. It\rsquo{}s all
   nonsense, if you ask me.
 
   But not all of it is intentional, said Til. Let me put it this way.
@@ -141,14 +150,14 @@
   Marshmallowing, you mean, chimed in Ila. Sicky sweet, with no nutritional
   value!
 
-  So you agree it's a problem! winked Til. Both Abu and Ila nodded and chuckled.
+  So you agree it\rsquo{}s a problem! winked Til. Both Abu and Ila nodded and chuckled.
 
-  Well, it's not one we're going to solve today, he said. So let's go back to
+  Well, it\rsquo{}s not one we\rsquo{}re going to solve today, he said. So let\rsquo{}s go back to
   talking about problems in mathematics. Mathematical language, unlike natural
   language, is precise and unambiguous. Equations --- tautologies --- always
   true. Never a doubt. Pure syntax without the clouding confusion of semantics.
 
-  That's the official story. Now let me qualify that a bit. One of the, if not
+  That\rsquo{}s the official story. Now let me qualify that a bit. One of the, if not
   *the* most brilliant mathematical logicians of all time, Kurt G\ouml{}del, once
   said, "The more I think about language, the more it amazes me that people ever
   understand each other." What amazes me about mathematicians, who are people
@@ -158,19 +167,47 @@
   Knuth has a great example of the contrast. Endnote, take from Celebrate
   Clarity document.)
 
-** TODO Have Abu and/or Ila interject some comment here.
+  Think about what you know about the language of logic. It had something of a
+  learning curve when you first encountered it, right? Formal logic is a
+  formidable but foundational system of thought, a way to give /precision/ to
+  thought and reasoning, that can nonetheless trip up the unwary. Since I
+  mentioned Kurt G\ouml{}del earlier, let me give you a description of formal systems,
+  or at least, the /rules/ of formal systems, from the book /Incompleteness: The
+  Proof and Paradox of Kurt G\ouml{}del/, by Rebecca Goldstein:
 
-  While obviously mathematical in nature, indeed, *discrete* mathematical, let's
+*** TODO Put in the endnote
+     on page 86.
+
+  This passage pauses while expressing the point of view that \ldquo{}mathematics is
+  merely syntactic;\rdquo
+
+#+BEGIN_QUOTE
+  its truth derives from the rules of formal systems, which are of three basic
+  sorts: the rules that specify what the symbols of the system are (its
+  \ldquo{}alphabet\rdquo); the rules that specify how the symbols can be put together into
+  what are called well-formed formulas, standardly abbreviated \ldquo{}wff,\rdquo and
+  pronounced \ldquo{}woof\rdquo; and the rules of inference that specify which wffs can be
+  derived from which.
+#+END_QUOTE
+
+** TODO Have Abu and/or Ila interject some comment here.
+   Relate wffs to what they have seen before. And what they will see hereafter.
+
+  While obviously mathematical in nature, indeed, *discrete* mathematical, let\rsquo{}s
   narrow our problems focus to problems in computer science.
 
   Computer scientists, especially theoretical computer scientists, like to cast
   problems into the common mold of languages. They do this for technical reasons,
   more thoroughly delved into in a course on computational theory. But here is a
   simple, favorite example: Is 23 prime? This is a decision problem whose answer
-  is yes, as verified by simply trying to divide 23 by 2 and 3, and failing on
+  is yes, easily verified by simply trying to divide 23 by 2 and 3, and failing on
   both counts, of course. This decision could *also* be made by sequentially
   searching for and finding the string "23" in the set of strings ["2" "3" "5"
   "7" "11" "13" "17" "19 "23" ...]. 
+
+** TODO Interject an Exercise
+   Why do we not need to do trial division of 23 by 5, 7, 11, etc., to clinch
+   its primeness?
 
 #+BEGIN_SRC emacs-lisp
   (format "%S" (number-to-string 23))
@@ -187,21 +224,21 @@
 #+RESULTS:
 ("23")
 
-  This set of strings is a language, and if you allow that the ... stands for an
-  infinity of bigger and bigger strings of this rather well-known kind, it is
+  This set of strings is a language, and if you allow that the \ldquo{}...\rdquo stands for
+  an infinity of bigger and bigger strings of this rather well-known kind, it is
   the language of PRIMES. It is given the name PRIMES, at any rate. So, does
   PRIMES contain the string "23232323232323232323"? is another way to ask, is
-  23232323232323232323 prime? The answer is no --- it's a composite number with
+  23232323232323232323 prime? The answer is no --- it\rsquo{}s a composite number with
   seven prime factors --- including 23 --- but the computational solution to
   that set membership determination problem is significantly harder than the one
-  for 23. It's not done by simply searching in a static list. While many lists
+  for 23. It\rsquo{}s not done by simply searching in a static list. While many lists
   of primes exist, no one creates lists with every prime in it up to some huge
   limit. True, programs exist that can do that, using some variation of the
   classic Sieve of Eratosthenes, which goes *way* back, showing how old this
   problem is. But the point is, to solve a language membership problem you need
-  computational strategies and tactics and resources. Simply put, we can model
-  computation most generally in terms of machinery that can input a string, and
-  output a yes or a no --- in the language, or not.
+  computational strategies and tactics and resources. Simply put, we can /model
+  computation/ most generally in terms of machinery that can input a string, and
+  output a \ldquo{}yes\rdquo or a \ldquo{}no\rdquo --- \ldquo{}in the language\rdquo, or \ldquo{}not\rdquo.
 
   Ila said, But not every problem has a yes-or-no answer, and Abu agreed,
   offering "Like sorting, which I understand to be a typical problem for
@@ -216,7 +253,7 @@
 
   Look at a simple example. Sorting =(13 2 26)= in ascending order is a matter
   of answering three questions: is 13 less than 2 (no, so swap them), is 2 less
-  than 26 (yes, so don't swap them), and, is 13 less than 26? (No, so leave them
+  than 26 (yes, so don\rsquo{}t swap them), and, is 13 less than 26 (yes, so leave them
   where they are as well). The result: =(2 13 26)=.
 
 #+BEGIN_SRC emacs-lisp :results raw
@@ -253,16 +290,16 @@
 
   less-than-4: ["1" "2" "3"]
 
-  and so on, as many as I like. Then for the question if a < b, just ask is a in
-  the subset less-than-b?
+  and so on, as many as I like. Then for the question, is a < b, just ask is a
+  in the subset less-than-b?
 
-  Ila frowned. But isn't that a way, way inefficient way to compare two numbers?
-  Til said, Yes, it is, but if we're not concerned with efficiency, it certainly
-  works to take that approach.
+  Ila frowned. But isn\rsquo{}t that a way, way inefficient way to compare two numbers?
+  Til said, Yes, it is, but if we\rsquo{}re not concerned with efficiency, that
+  approach certainly works.
 
-  But consider a big advantage of treating numbers as strings of digits. When
-  the numbers get big, as you know, we need special procedures if we want to do
-  arithmetic with them. Let's lump the relational operations with the arithmetic
+  But consider a big advantage of treating numbers as strings of digits. As you
+  know, when the numbers get big we need special procedures if we want to do
+  arithmetic with them. Let\rsquo{}s lump the relational operations with the arithmetic
   ones, and ask, how would one answer a simple =a < b= question, given:
 
 #+BEGIN_SRC emacs-lisp :results silent
@@ -277,59 +314,39 @@
 #+RESULTS:
 t
 
-  That's easy! b is bigger, because it has more digits, said Ila. Right, said
+  That\rsquo{}s easy! b is bigger, because it has more digits, said Ila. Right, said
   Abu. At least, as long as the first dozen digits of b are not zeros! Ila
   nodded agreement. And even if the strings were the same length, a
   digit-by-digit comparison would soon reveal the answer. Abu quickly added, So,
-  banning leading zeros in these strings-of-digits, lexicographical ordering
+  banning leading zeros in these strings-of-digits, /lexicographical/ ordering
   comes to mind as a convenient way to sort them, one that can answer all
   relative size questions. Am I right?
 
-  Ila said, Of course you are, smarty pants. But why the jargony
-  *lexicographical*? Isn't there a better word than that?
+  Til nodded while Ila thought, Of course you are, smarty pants, then said, But
+  why the jargony *lexicographical*? Isn\rsquo{}t there a better word than that?
 
-  Abu said, I don't remember where I saw that, and no, I don't know of an
+  Abu said, I don\rsquo{}t remember where I saw that, and no, I don\rsquo{}t know of an
   another, easier way to say what it means. What, technically speaking, *does*
   it mean, Til?
 
   \ldquo{}You\rsquo{}re about to find out!\rdquo Til smiled, as he padded them some exercises.
 
 * TODO Flesh Out
-  Modeling computation, state diagrams as graphs, solving a math problem to get
-  clues to Til's unknown whereabouts.
+  Include examples of state diagrams as graphs, and derivations as abstract
+  syntax trees. Simple models of finite-state automata. An example of a 1-bit
+  computer (with two states).
 
-  Include a description of formal system from Incompleteness: The Proof and
-  Paradox of Kurt G\ouml{}del, by Rebecca Goldstein, on page 86. See also page 110,
-  where G\ouml{}del is quoted as saying, "The more I think about language, the more it
-  amazes me that people ever understand each other." Also page 112, at the top.
-
-  (Til knows where he is, but has no way to communicate his location in a desert
-  where he went to seek solitude. Something he has a compelling need to do from
-  time to time, much to his wife's chagrin. His tracer (note: GPS) signal is
-  encrypted, in a very eccentric way. This way may have something to do with the
-  puzzle he gave Abu and Ila, namely to find the connection between Edgar Allan
-  Poe and the phrase "Notice cousin Felipe".)
-  
+  From the book /Incompleteness: The Proof and Paradox of Kurt G\ouml{}del/, by
+  Rebecca Goldstein, it is on page 110, where G\ouml{}del is quoted as saying, "The
+  more I think about language, the more it amazes me that people ever understand
+  each other." See also page 112, at the top.
+ 
 ** ZCF 
 
-   CSP definitions, examples, VTOs.
-
-** ILO  
-
-   CSP a discussion of the Chomsky Hierarchy.
-
-* The Burning Question
-
-  What is a language?
-
-** The Obvious Answer
-
-   Something humans use to communicate, either by speaking or writing.
-
-** Formal Definitions
-
-   In theoretical computer science, a language is no more and no less than some
-   subset of a set of all strings over some alphabet.
+   In normal usage, a language is something we use to communicate, in speaking
+   or writing. In theoretical computer science, a language is no more and no
+   less than some subset of a set of all strings over some alphabet. Formal
+   definitions follow:
 
 *** Alphabet
    
@@ -366,17 +383,17 @@ t
     shorter *strings* coming first) and then by predefined order of the
     *symbols* as given in association with a particular *alphabet*.
 
-* The Other Burning Question
+** Grammar 
 
   What is a grammar?
   
 ** Formal Definition
 
-   A *Phrase-Structure Grammar* is a four-tuple:
+   A *Phrase-Structure Grammar* (PSG) is a four-tuple:
 
    G = (V, T, S, P) where
 
-   - V is a set of Variables (Non-Terminals)
+   - V is a set of Variables (Nonterminals)
    - T is a set of Terminals (V \cap T = \emptyset)
    - S is the Start variable (S \in V)
    - P is a finite set of Productions (Rules), each one mapping a Variable to
@@ -384,58 +401,56 @@ t
 
 ** A Familiar Example
 
-   Here's a Phrase-Structure Grammar for a (tiny) subset of the English language:
+   Consider this PSG for a (super small) subset of the English language:
 
    V = [SENTENCE NOUN-PHRASE VERB-PHRASE ARTICLE ADJECTIVE NOUN VERB ADVERB]
 
-   T = [the sleepy happy tortoise hare passes runs quickly slowly]
+   T = [the hungry sleepy cat dog chases runs quickly slowly]
 
 *** Rules for the Grammar
 
-    P = [
-    SENTENCE \rightarrow NOUN-PHRASE VERB-PHRASE NOUN-PHRASE
-    SENTENCE \rightarrow NOUN-PHRASE VERB-PHRASE
-    NOUN-PHRASE \rightarrow ARTICLE ADJECTIVE NOUN
-    NOUN-PHRASE \rightarrow ARTICLE NOUN
-    VERB-PHRASE \rightarrow VERB-PHRASE ADVERB
-    VERB-PHRASE \rightarrow VERB
-    ARTICLE \rightarrow the \vert \lambda
-    ADJECTIVE \rightarrow sleepy \vert happy
-    NOUN \rightarrow tortoise \vert hare
-    VERB \rightarrow passes \vert runs
-    ADVERB \rightarrow slowly \vert quickly
-    ]
+    | P = [ |             |   |                                     |
+    |       | SENTENCE    | \rightarrow | NOUN-PHRASE VERB-PHRASE NOUN-PHRASE |
+    |       | SENTENCE    | \rightarrow | NOUN-PHRASE VERB-PHRASE             |
+    |       | NOUN-PHRASE | \rightarrow | ARTICLE ADJECTIVE NOUN              |
+    |       | NOUN-PHRASE | \rightarrow | ARTICLE NOUN                        |
+    |       | VERB-PHRASE | \rightarrow | VERB-PHRASE ADVERB                  |
+    |       | VERB-PHRASE | \rightarrow | VERB                                |
+    |       | ARTICLE     | \rightarrow | the \vert \lambda                             |
+    |       | ADJECTIVE   | \rightarrow | hungry \vert sleepy                     |
+    |       | NOUN        | \rightarrow | cat \vert dog                           |
+    |       | VERB        | \rightarrow | chases \vert runs                       |
+    |       | ADVERB      | \rightarrow | slowly \vert quickly                    |
+    | ]     |             |   |                                     |
 
-* Derivation
+*** Derivation
 
   The process of producing a sequence of terminals from the Start Variable by
   replacing variables one at a time by applying some Rule is called /Derivation/.
 
-** Example
+**** Example Derivation
 
    | SENTENCE | \rightarrow | NOUN-PHRASE VERB-PHRASE            |
    |          | \rightarrow | ARTICLE ADJECTIVE NOUN VERB-PHRASE |
    |          | \rightarrow | ARTICLE ADJECTIVE NOUN VERB        |
    |          | \rightarrow | the ADJECTIVE NOUN VERB            |
-   |          | \rightarrow | the happy NOUN VERB                |
-   |          | \rightarrow | the happy hare VERB                |
-   |          | \rightarrow | the happy hare runs                |
+   |          | \rightarrow | the sleepy NOUN VERB               |
+   |          | \rightarrow | the sleepy dog VERB                |
+   |          | \rightarrow | the sleepy dog runs                |
  
-** Exercises
-
-   Using the above example as a guide, produce derivations for each of the
+   Using the above example as a guide, find derivations for each of the
    following sentences:
 
-*** TODO 1
-    the sleepy tortoise runs slowly
+**** 1
+    the hungry cat runs slowly
 
-*** TODO 2
-    the happy tortoise passes quickly
+**** 2
+    the sleepy cat chases quickly
 
-*** TODO 3
-    the happy tortoise passes the sleepy hare
+**** 3
+    the sleepy cat chases the hungry dog
 
-** Sample Code
+*** Sample Code
 
 #+BEGIN_SRC emacs-lisp :results silent
   (setq es ""
@@ -447,13 +462,13 @@ t
           (VERB-PHRASE VERB-PHRASE ADVERB)
           (VERB-PHRASE VERB)
           (ARTICLE the es)
-          (ADJECTIVE sleepy happy)
-          (NOUN tortoise hare)
-          (VERB passes runs)
+          (ADJECTIVE hungry sleepy)
+          (NOUN cat dog)
+          (VERB chases runs)
           (ADVERB slowly quickly))
         reverse-productions (reverse productions))
 
-  (defun non-terminals-remain (derivation)
+  (defun nonterminals-remain (derivation)
     (and (listp derivation)
          (let* ((before (mapcar 'symbol-name derivation))
                 (after (mapcar 'upcase before)))
@@ -464,7 +479,7 @@ t
            (RHS (cdr (assoc LHS rules))))
       (if (null RHS)
           (list LHS)
-        (if (non-terminals-remain RHS)
+        (if (nonterminals-remain RHS)
             RHS
           (list (nth (random (length RHS)) RHS))))))
 
@@ -474,7 +489,7 @@ t
 
   (defun find-derivation (start-symbol)
     (let ((derivation (list start-symbol)))
-      (while (non-terminals-remain derivation)
+      (while (nonterminals-remain derivation)
         (setq derivation (apply 'append (mapcar 'derive derivation))))
       (mapconcat 'transform-terminal derivation " ")))
 #+END_SRC 
@@ -484,13 +499,24 @@ t
 #+END_SRC
 
 #+RESULTS:
-: the happy hare passes the happy tortoise
+: the cat chases  hungry dog
+
+#+RESULTSg:
+: the dog chases quickly quickly quickly
+
+#+RESULTSg:
+: the sleepy dog chases the sleepy cat
+
+** Question
+
+   How many different sentences can repeated evaluations of =(find-derivation
+   'SENTENCE)= find?
 
 ** Question
 
    With these rules is there a derivation for this?
 
-   =the sleepy happy hare runs=
+   =the hungry sleepy dog runs=
 
 *** Answer
 
@@ -510,7 +536,7 @@ t
 
 ** TODO Answer
 
-   ADJECTIVE \rightarrow sleepy \vert happy \vert quick \vert brown \vert lazy
+   ADJECTIVE \rightarrow hungry \vert sleepy \vert quick \vert brown \vert lazy
 
    PREPOSITION \rightarrow of \vert from \vert by \vert on \vert in \vert over \vert \dots
 
@@ -554,27 +580,27 @@ t
   (other) Buffalo buffalo.
 
 * Fancy Nouns
- 
-  Fancy nouns are *nested* nouns, for example "the strange bagels that the
-  purple cow without horns gobbled" --- which could be rephrased as "the purple
-  cow without horns gobbled the strange bagels. But it's these bagels I want to
-  focus on."
+
+  Fancy nouns are *nested* nouns, for example "the fresh brownies that the
+  little rascals without permission devoured" --- which could be rephrased as
+  "the little rascals without permission devoured the fresh brownies, and it\rsquo{}s
+  these brownies I want to focus on."
 
   So, a nested noun is a nested noun followed by a relative pronoun (e.g.,
   /that/) followed by a verb followed by a nested noun,
 
   OR,
 
-  it's a nested noun followed by a relative pronoun followed by a nested noun
+  it\rsquo{}s a nested noun followed by a relative pronoun followed by a nested noun
   followed by a verb,
 
   OR,
 
-  it's a nested noun followed by a preposition followed by a nested noun,
+  it\rsquo{}s a nested noun followed by a preposition followed by a nested noun,
 
   OR,
 
-  it's just an article followed by any number of adjectives followed by a plain
+  it\rsquo{}s just an article followed by any number of adjectives followed by a plain
   old (non-nested) noun!
 
 * Nested Nouns
@@ -599,7 +625,7 @@ t
 
   PREPOSITION \rightarrow of \vert from \vert by \vert \dots
 
-** Now It's Possible
+** Now It\rsquo{}s Possible
 
    Let NN = NESTED-NOUN, RP = RELATIVE-PRONOUN, es = \lambda (the empty string).
 
@@ -613,42 +639,46 @@ t
 
 * What is the Context?
 
-  The grammar for English is "Context Free". By way of contrast, here's an
-  example of productions in a NON-Context-Free grammar:
+  The grammar for English is "Context Free". By way of contrast, here\rsquo{}s an
+  example of two productions in a NON-Context-Free grammar:
 
-  aAd \rightarrow aacd
+  aAc \rightarrow aabc
 
-  aAe \rightarrow acae
+  aAd \rightarrow abad
 
-  Note that A's expansion is different when it's surrounded by a and d than when
-  it's surrounded by a and e. We say A's interpretation has context
-  "sensitivity".
+  Note that A\rsquo{}s expansion is different when it\rsquo{}s surrounded by a and c than when
+  it\rsquo{}s surrounded by a and d. We say A\rsquo{}s interpretation has context
+  "sensitivity". A Grammar/Language with this feature is called
+  Context-Sensitive.
 
 * Regular Languages
- 
-  A language is /regular/ *iff* some /regular expression/ describes it.
 
-  Regular expressions use the so-called regular operations (\cup, \circ, and \star) to
-  build regular languages.
+  Moving down to the simplest type, a language is /regular/ *iff* some /regular
+  expression/ describes it.
 
-  R is a *regular expression* (*re*) if R is any of
+  Regular expressions use the so-called regular operations (\cup, \circ, and \star) ---
+  (union, concatenation, and star) --- to build regular languages. Here is a
+  recursive definition:
 
-  - a for some a \in \Sigma
-  - \lambda
+  R is a *regular expression* (an *re* for short) if R is any of
+
   - \emptyset
-  - R_1 \cup R_2, where R_1 and R_2 are *re*'s
-  - R_1 \circ R_2, where R_1 and R_2 are *re*'s
+  - {\lambda}
+  - {a} for some a \in \Sigma
+  - R_1 \cup R_2, where R_1 and R_2 are *re*\rsquo{}s
+  - R_1 \circ R_2, where R_1 and R_2 are *re*\rsquo{}s
   - R^{\star}, where R is an *re*
  
   Some shorthand:
 
-  - a \equiv {a}
-  - \lambda \equiv {\lambda}
-  - R^{+} \equiv R \circ R^\star
-  - R^{+} \cup \lambda \equiv R^{\star}
+  - a \equiv \{a\}
+  - \lambda \equiv \{\lambda\}
+  - R^{\plus} \equiv R \circ R^{\star}
+  - R^{\star} \equiv R^{\plus} \cup \lambda
   - R^k \equiv R \circ R \circ R \circ \dots \circ R (k times)
 
-  Note: R \circ R is usually written without the \circ, i.e., RR.
+  Note: R \circ R is usually written without the \circ, i.e., RR. In this way \circ is
+  analogous to the multiplication operator.
 
 * Forward Exercises
 
@@ -713,6 +743,7 @@ t
     A \rightarrow \lambda
 
     B \rightarrow \lambda
+
 #+BEGIN_SRC emacs-lisp
   (setq es ""
         productions
@@ -728,26 +759,28 @@ t
   (find-derivation 'S)
 #+END_SRC
 
-* Reverse Exercises
+** Reverse Exercises
 
   What grammar generates a given language?
 
 *** 1
 
-    Construct a PSG to generate {ab^{2n} \vert n \ge 0}.
+    Construct a PSG to generate {0^{2n}1 \vert n \ge 0}.
 
 *** 2
 
-    Construct a PSG to generate {a^{n}b^{2n}^{} \vert n \ge 0}.
+    Construct a PSG to generate {0^{n}1^{2n} \vert n \ge 0}.
 
 *** 3
 
-    Construct a PSG to generate {a^n b^m a^n \vert m \ge 0 and n \ge 0}.
+    Construct a PSG to generate {0^n 1^m 0^n \vert m \ge 0 and n \ge 0}.
 
-* The Chomsky Hierarchy
+** ILO  
 
-  Noam Chomsky is a linguist who first proposed the language classification
-  scheme that now bears his name.
+   Noam Chomsky is a linguist who first proposed the hierarchical language
+   classification scheme that now bears his name.
+
+*** The Chomsky Hierarchy
 
 : Universal Set of All Languages (the superset of Types 0-3)
 :   +------------------------------------------------------+
@@ -768,35 +801,37 @@ t
 :   |                                                      |
 :   +------------------------------------------------------+
 
-** A Tabular Taxonomy
+*** A Tabular Taxonomy
 
-   The following table aligns the notions of language types with the types of
+   The following table maps the notions of language classes with the types of
    grammars that can generate those languages. The restrictions on productions
-   tell what's what (where N = Non-Terminal, t = terminal, LHS = Left-Hand Side,
-   RHS = Right-Hand Side).
+   distinguish what\rsquo{}s what (where N = Nonterminal, tl = terminal, LHS =
+   Left-Hand Side, RHS = Right-Hand Side).
 
-   | Language               | Type | Restrictions on Grammar Productions       |
+   | Language Class         | Type | Restrictions on Grammar Productions       |
    |------------------------+------+-------------------------------------------|
    | Regular                |    3 | Left-linear or Right-linear               |
-   |                        |      | (each RHS must be either like t or \lambda,     |
-   |                        |      | or all like Nt, or all like tN).          |
+   |                        |      | (each RHS must be either a tl or \lambda,       |
+   |                        |      | or have a single Nonterminal and be       |
+   |                        |      | all like Ntl, or all like tlN).           |
    |                        |      |                                           |
-   | Context Free           |    2 | Each LHS must have only one Non-Terminal. |
+   | Context Free           |    2 | Each LHS must have only one Nonterminal.  |
    |                        |      |                                           |
-   | Context Sensitive      |    1 | LHS may have more than one Non-Terminal,  |
+   | Context Sensitive      |    1 | LHS may have more than one Nonterminal,   |
    |                        |      | but the length of the LHS must be         |
    |                        |      | at most the length of the RHS             |
-   |                        |      | (except for \lambda productions).               |
+   |                        |      | (except for S \rarr \lambda productions).           |
    |                        |      |                                           |
    | Recursively Enumerable |    0 | No restrictions                           |
    |                        |      | (length of LHS may exceed length of RHS). |
 
-** Classification Exercises
+*** TODO Redo These Classification Exercises
 
    Can you distinguish grammar types?
 
-   Let V = {S, A, B, a, b}, T = {a, b}, and G = (V, T, S, P) (P
-   to be given later). Determine whether G
+   Let V = {S, A, B}, T = {a, b}, and G = (V, T, S, P) (P to be given later).
+
+   Determine whether G
 
    - is a type 0 grammar but not a type 1 grammar, or
    - is a type 1 grammar but not a type 2 grammar, or
@@ -805,7 +840,7 @@ t
 
    when P, the set of productions, is one of the following:
 
-*** 1
+**** 1
 
     S \rightarrow aAB 
 
@@ -813,7 +848,7 @@ t
 
     B \rightarrow \lambda
 
-*** 2
+**** 2
 
     S \rightarrow aA
 
@@ -821,13 +856,13 @@ t
 
     A \rightarrow b
 
-*** 3
+**** 3
 
     S \rightarrow ABa
 
     AB \rightarrow a
 
-*** 4
+**** 4
 
     S \rightarrow ABA
 
@@ -835,7 +870,7 @@ t
 
     B \rightarrow ab
 
-*** 5
+**** 5
 
     S \rightarrow aA
 
@@ -845,7 +880,7 @@ t
 
     A \rightarrow b
 
-*** 6
+**** 6
 
     S \rightarrow bA
 
@@ -853,10 +888,27 @@ t
 
     S \rightarrow \lambda
 
-*** 7
+**** 7
 
     S \rightarrow AB
 
     B \rightarrow aAb
 
     aAb \rightarrow b
+
+* TODO For an Epilogue
+
+  Solving a math problem to get clues to Til\rsquo{}s unknown whereabouts is a fitting
+  conclusion, while also foreshadowing further adventures/installments of TIA
+  interaction.
+
+  Til has gone missing for two weeks. He knows where he is, but has no way to
+  communicate his location in the desert where he went to seek solitude.
+  Something he feels compelled to do from time to time, much to his wife\rsquo{}s
+  chagrin. This time he is in some kind of trouble, trapped without means to get
+  out on his own.
+
+  The problem is, his tracer (read GPS) signal is encrypted, in a very eccentric
+  way. This way may have something to do with the final exercise/problem/puzzle
+  he gave Abu and Ila, namely to find the connection between Edgar Allan Poe and
+  the phrase "Notice cousin Felipe".
