@@ -27,11 +27,11 @@
   in another.\rdquo
 
   As you\rsquo{}ll see, languages can be generalized to a set of strings, but made more
-  specific by /how/ that set is defined. Phrase-Structure Grammars --- PSGs ---
-  are the tools (rules) used to define which strings are valid members of the
-  language associated with that PSG. Now let me be clear what that association
-  is. It is that PSGs /generate/ languages, and so of course, languages are
-  /generated/ (built) by PSGs.
+  specific by /how/ that set is defined. What are called Phrase-Structure
+  Grammars --- PSGs --- are the tools (rules) used to define which strings are
+  valid members of the language associated with that PSG. Now let me be clear
+  what that association is. It is that PSGs /generate/ languages, and so of
+  course, languages are /generated/ (built) by PSGs.
 
   In English (or any natural, human language) you follow the rules when you
   adhere to the grammar. A main component of a formally defined grammar is the
@@ -150,10 +150,10 @@
   nonsense, if you ask me.
 
   But not all of it is so obviously bad, said Til. Let me put it this way.
-  Proclivities, what a nice word! Many people have proclivities, inclinations,
-  predispositions to use more words, or bigger words, or *shinier* words than
-  necessary to get what they want. Flattery is replete with this abuse of
-  language.
+  Proclivities --- what a nice word! Many people have proclivities,
+  inclinations, predispositions to use more words, or bigger words, or *shinier*
+  words than necessary to get what they want, or what they think they want.
+  Flattery is replete with this abuse of language.
 
   Abu rose to the challenge: Your mellifluous speech shows a penchant for
   pulchritudinous word marshalling.
@@ -173,18 +173,61 @@
   said, "The more I think about language, the more it amazes me that people ever
   understand each other." What amazes me about mathematicians, who are people
   too, is that they are such poor writers --- when writing mathematics, at
-  least. I alluded to this a few minutes ago. Math writing is notorious for its
+  least. I alluded to this a little bit ago. Math writing is notorious for its
   lack of clarity, despite its claim of delivering unadulterated truth. (Donald
   Knuth has a great example of the contrast. Endnote, take from Celebrate
   Clarity document.)
 
-  Think about what you know about the language of logic. It had something of a
-  learning curve when you first encountered it, right? Formal logic is a
-  formidable but foundational system of thought, a way to give /precision/ to
-  thought and reasoning, that can nonetheless trip up the unwary. Since I just
-  mentioned Kurt G\ouml{}del, let me give you a description of formal systems, or at
-  least, the /rules/ of formal systems, from the book /Incompleteness: The Proof
-  and Paradox of Kurt G\ouml{}del/, by Rebecca Goldstein:
+  Abu, excitement bubbling, said: I like this quote from one of the books you
+  recommended that I just started reading. The authors say
+
+#+BEGIN_QUOTE
+  What we present may not resemble math, because we avoid the cryptic equations,
+  formulas, and graphs that many people have come to know and fear as
+  mathematics. Indeed, those symbols are the memorable icons of an
+  often-forbidding foreign language of mathematical jargon, but it\rsquo{}s not the
+  only language of mathematics and it does not reside at the center of the
+  subject. The deepest and richest realms of mathematics are often devoid of the
+  cryptic symbols that have baffled students through the generations. Ideas ---
+  intriguing, surprising, fascinating, and beautiful --- are truly at the heart
+  of mathematics.
+#+END_QUOTE
+
+   (Endnote, /Coincidences, Chaos, and All That Math Jazz --- Making Light of
+   Weighty Ideas/ by Edward B. Burger and Michael Starbird, page viii.)
+
+  Ila said, I have a quote, too, along these lines. May I share it? Til nodded,
+  and Abu winced --- was Ila jabbing him for plunging ahead without asking?
+
+  It\rsquo{}s also from one of your recommended books. The author is a Nobel laureate
+  physicist:
+
+#+BEGIN_QUOTE
+  To many people who are not physicists, modern physics seems to have left the
+  solid world of understandable here-and-now to enter a weird realm of
+  uncertainties and strange, ephemeral particles that have whimsical names and
+  dubious existence. What has actually happened is that physics has gone far
+  beyond the point where ordinary, everyday experiences can provide a kind of
+  human analogy to the things that the physicists are studying. It is a problem
+  of language. The vocabulary and syntax of human language evolved to describe
+  the workings of the everyday world, the world we can see, hear, touch, taste
+  and smell. Words were simply not intended to describe things unimaginably
+  great or incredibly small, far beyond the range of our unaided senses, where
+  the rules of the game are changed. The true language of physics is
+  mathematics.
+#+END_QUOTE
+
+  (Endnote, /Interactions: A Journey Through the Mind of a Particle Physicist
+  and the Matter of This World/, by Sheldon L. Glashow, page 47.)
+
+  Til: Excellent! But more on these ideas later. Think about what you know about
+  the language of logic. It had something of a learning curve when you first
+  encountered it, right? Formal logic is a formidable but foundational system of
+  thought, a way to give /precision/ to thought and reasoning, that can
+  nonetheless trip up the uninitiated. Since I just mentioned Kurt G\ouml{}del, let me
+  give you a description of formal systems, or at least, the /rules/ of formal
+  systems, from the book /Incompleteness: The Proof and Paradox of Kurt G\ouml{}del/,
+  by Rebecca Goldstein:
 
 *** TODO Put in the endnote
      on page 86.
@@ -203,35 +246,18 @@
 
 ** TODO Have Abu and/or Ila interject some comment here.
    Relate wffs to what they have seen before. And what they will see hereafter.
-
-*** TODO Find the right place to have Abu comment
-    I like this quote from one of the books you recommended that I just started
-    reading. The authors say
-
-#+BEGIN_QUOTE
-  What we present may not resemble math, because we avoid the cryptic equations,
-  formulas, and graphs that many people have come to know and fear as
-  mathematics. Indeed, those symbols are the memorable icons of an
-  often-forbidding foreign language of mathematical jargon, but it\rsquo{}s not the
-  only language of mathematics and it does not reside at the center of the
-  subject. The deepest and richest realms of mathematics are often devoid of the
-  cryptic symbols that have baffled students through the generations. Ideas ---
-  intriguing, surprising, fascinating, and beautiful --- are truly at the heart
-  of mathematics.
-#+END_QUOTE
-
-   (Endnote, /Coincidences, Chaos, and All That Math Jazz --- Making Light of
-   Weighty Ideas/ by Edward B. Burger and Michael Starbird.
-
 ** TODO Talk about another problem of language
-   Its sequentiality. A problem (bug? feature?) of language is the problem of
-   linearity --- or sequentiality --- words must be written out or spoken and
-   then read or heard in sequence, over time, instead of just apprehended \ldquo{}all
-   at once\rdquo --- /in toto/.
+   Til: We don\rsquo{}t stop to consider this very often, but another problem (bug?
+   feature?) of language is the problem of linearity --- or sequentiality ---
+   words must be written out or spoken and then read or heard in sequence, over
+   time, instead of just apprehended \ldquo{}all at once\rdquo --- /in toto/. What would our
+   communication be like if we could do that?
 
-   
-  While obviously mathematical in nature, indeed, *discrete* mathematical, let\rsquo{}s
-  narrow our problems focus to problems in computer science.
+  Abu and Ila seemed deep in thought, grappling with that idea, which Til was
+  happy about, but knew that they didn\rsquo{}t have time to discuss it --- not today.
+  Rather reluctantly, he interrupted their reverie and said, While obviously
+  mathematical in nature, indeed, *discrete* mathematical, let\rsquo{}s narrow our
+  problems focus to problems in computer science.
 
   Computer scientists, especially those into theoretical computer science, like
   to cast problems into the common mold of languages. They do this for technical
@@ -320,17 +346,20 @@
   Abu grinned his big, I think I know grin, and said: Let me try to answer that.
   Til said, Go ahead! as Ila clenched her teeth. She thought she knew how now too.
 
-  In the realm of integers, I can take the /language/ ["1" "2" "3" "4" "5" "6"
-  ...] and split it up into subsets like so:
+  In the realm of numbers, I can take the /language/ 
 
-  less-than-2: ["1"]
+  ["1" "2" "3" "4" "5" "6" \dots]
 
-  less-than-3: ["1" "2"]
+  and split it up into subsets like so:
 
-  less-than-4: ["1" "2" "3"]
+  Less-than-2: ["1"]
+
+  Less-than-3: ["1" "2"]
+
+  Less-than-4: ["1" "2" "3"]
 
   and so on, as many as I like. Then for the question, is a < b, just ask is a
-  in the subset less-than-b?
+  in the subset Less-than-b?
 
   Ila frowned. But isn\rsquo{}t that a way, way inefficient way to compare two numbers?
   Til said, Yes, it is, but if we\rsquo{}re not concerned with efficiency, that
@@ -373,7 +402,7 @@ t
 
                     -~-~-~-~-~-
 
-*** ZCF 
+*** TODO ZCF 
 
    In normal usage, a language is something we use to communicate, in speaking
    or writing. In theoretical computer science, a language is no more and no
@@ -383,8 +412,8 @@ t
 :VTO:
     An *alphabet* is any non-empty, finite set (typically abbreviated \Sigma).
 
-    Not letters, *symbols* are what the members or elements of an *alphabet* are
-    called.
+    Not letters, *symbols* are what the members or elements of a generic
+    *alphabet* are called.
 
     A *string* is a finite *sequence* of *symbols* from a given *alphabet*.
 
@@ -405,6 +434,9 @@ t
     *string*, in the same order, is called *concatenation*.
 :END:
 
+  There is an operation in almost all programming languages to perform string
+  concatenation, e.g.:
+
 #+BEGIN_SRC emacs-lisp
   (concat "ABC" "XYZ")
 #+END_SRC
@@ -422,8 +454,8 @@ t
   In *lexicographical ordering* the *string* =baa= would come before =abab=
   because it is shorter by one symbol.
 
-  In *dictionary ordering* lengths are ignored, so the *string* =abab= would
-  come before =baa=, because =a= comes before =b= in the *alphabet*.
+  In plain old *dictionary ordering* lengths are ignored, so the *string* =abab=
+  would come before =baa=, because =a= comes before =b= in the *alphabet*.
   
   Why this length consideration is essential will become clear when the \star
   operation is discussed below.
@@ -446,7 +478,7 @@ t
 
    - N is a set of Nonterminals (also called Variables)
    - T is a set of Terminals (N \cap T = \emptyset)
-   - S is the Start variable (S \in N)
+   - S is the Start Nonterminal (S \in N)
    - P is a finite set of Productions (Rules), each one mapping a Nonterminal to
      a string of Nonterminals and Terminals.
 :END:
@@ -477,29 +509,30 @@ t
    |       | ADVERB      | \rightarrow | slowly \vert quickly                    |
    | ]     |             |   |                                     |
 
-
 :VTO:
   The process (called *derivation*) of producing a sequence of terminals from
   the Start Nonterminal by replacing Nonterminals one at a time by applying some
   Rule is an iterative process illustrated below with two random components:
 :END:
   
-  In the following sample code, productions are represented as an alist of
-  symbols. The =car= is the symbol to the left of the arrow of a production, the
-  =cdr= captures the symbols to the right of the arrow. The productions alist is
-  reversed and stored as well --- which alist to use at any step is the first
-  choice that is randomly decided. Nonterminals are unbound symbols. Terminals
-  are bound symbols whose values are their string names. Which terminal to
-  use when only terminals are options (e.g., in the =ARTICLE=, =ADJECTIVE=,
-  =NOUN=, =VERB= and =ADVERB= rules) is the second choice that is randomly
-  decided.
+  In the following sample PSG-implementing code, productions are represented as
+  an alist of symbols. For each alist choice-list, the =car= is the symbol to
+  the left of the arrow of a production, and the =cdr= captures the symbols to
+  the right of the arrow, abbreviated LHS for left-hand-side, and RHS for
+  right-hand-side. The productions alist is reversed and stored as well. Which
+  alist (forward or reverse) to use at any step is the first choice that is
+  randomly decided. Nonterminals are unbound symbols. Terminals are bound
+  symbols whose values are either =t= or a string that differs from the symbol\rsquo{}s
+  string name (e.g., =es= abbreviating \ldquo{}empty string\rdquo). Which terminal to use
+  when only terminals are options (e.g., in the =ARTICLE=, =ADJECTIVE=, =NOUN=,
+  =VERB= and =ADVERB= rules) is the second choice that is randomly decided.
 
 #+BEGIN_SRC emacs-lisp :results silent
-  (setq the "the" es ""
-        hungry "hungry" sleepy "sleepy"
-        cat "cat" dog "dog"
-        chases "chases" runs "runs"
-        slowly "slowly" quickly "quickly"
+  (setq the t es ""
+        hungry t sleepy t 
+        cat t dog t 
+        chases t runs t 
+        slowly t quickly t
         productions
         '((SENTENCE NOUN-PHRASE VERB-PHRASE NOUN-PHRASE)
           (SENTENCE NOUN-PHRASE VERB-PHRASE)
@@ -517,6 +550,7 @@ t
   (defun is-terminal (sym)
     (and (symbolp sym) (boundp sym)))
 
+;;; TODO could this be done with a lexical closure for random and random-hw-index?
   (setq random-hw-index -1 random-hw-indices [1 1 0 0 0 1 1 1 1 1 1 1 1 1 1])
   (defun random-hw (ignore) (elt random-hw-indices (incf random-hw-index))) 
 
@@ -533,7 +567,9 @@ t
           (list (nth (random-hw (length RHS)) RHS))))))
 
   (defun transform-terminal (terminal)
-    (or (and (boundp terminal) (symbol-value terminal))
+    (or (and (boundp terminal)
+             (stringp (symbol-value terminal))
+             (symbol-value terminal))
         (symbol-name terminal)))
 
   (defun find-derivation (start-symbol)
@@ -543,8 +579,8 @@ t
       (mapconcat 'transform-terminal derivation " ")))
 #+END_SRC 
 
-   The following derivation would be the results if the sequence of calls to
-   =random= returned [1 1 0 0 0 1 1 1 1 1 1 1 1 1 1]:
+   The following derivation would result if the sequence of calls to =random=
+   returned [1 1 0 0 0 1 1 1 1 1 1 1 1 1 1]:
 
    | SENTENCE | \rightarrow | NOUN-PHRASE VERB-PHRASE         |
    |          | \rightarrow | ARTICLE NOUN VERB-PHRASE        |
@@ -561,18 +597,6 @@ t
 
 #+RESULTS:
 : the dog runs quickly
-
-#+RESULTS0:
-: the cat runs
-
-#+RESULTS1:
-: the cat chases  hungry dog
-
-#+RESULTS2:
-: the dog chases quickly quickly quickly
-
-#+RESULTS3:
-: the sleepy dog chases the sleepy cat
 
    Using the above example as a guide, produce derivations for each of the
    following sentences, and verify it by giving the return sequence of calls to
@@ -591,8 +615,8 @@ t
    :END:
 
 :EXERCISE:
-   Combinatorially speaking, how many different sentences can be found by repeated
-   evaluations of =(find-derivation 'SENTENCE)=?
+   Combinatorially speaking, how many different sentences can be derived by
+   repeated evaluations of =(find-derivation 'SENTENCE)=?
 :END:
 
 *** Expanding the Power 
@@ -624,28 +648,102 @@ t
 
    VERB-PHRASE \rightarrow VERB PREPOSITIONAL-PHRASE
 
+*** Visualize Derivation
+
+    The derivation of a syntactically valid structured phrase from the top down
+    can be visualized as the reverse of the process of building, from the bottom
+    up, i.e., from leaves to root, a *syntax tree* (AKA a *parse tree*).
+
+    For example, a valid sentence forms the leaves:
+
+:   the hungry dog chases the sleepy cat
+
+    Each terminal is given a parent, and as an alternate representation, each
+    parent-child is rendered in tree form as a two-element list. Abbreviating
+    ADJECTIVE as ADJ, ADVERB as ADV, ARTICLE as ART, NOUN as N, and VERB as V:
+
+:   ART  ADJ    N    V    ART  ADJ    N
+:    |    |     |    |     |    |     |
+:   the hungry dog chases the sleepy cat
+:
+:  ((ART the) (ADJ hungry) (N dog) (V chases) (ART the) (ADJ sleepy) (N cat))
+
+   Continuing on up the tree, we are also building a nested alist (albeit with
+   repeated keys). Abbreviating NOUN-PHRASE as NP, and VERB-PHRASE as VP:
+
+:     NOUN-PHRASE VERB-PHRASE NOUN-PHRASE
+:      /  |    \     |       /  |    \
+:   ART  ADJ    N    V    ART  ADJ    N
+:    |    |     |    |     |    |     |
+:   the hungry dog chases the sleepy cat
+:
+:  ((NP (ART the) (ADJ hungry) (N dog)) (VP (V chases)) (NP (ART the) (ADJ sleepy) (N cat)))
+
+   Finishing with SENTENCE (abbrev. S) being the root of the tree, with the list
+   form consing S on the front:
+
+:                   SENTENCE
+:                  /   |    \
+:                 /    |     \
+:                /     |      \
+:     NOUN-PHRASE VERB-PHRASE NOUN-PHRASE
+:      /  |    \     |       /  |    \
+:   ART  ADJ    N    V    ART  ADJ    N
+:    |    |     |    |     |    |     |
+:   the hungry dog chases the sleepy cat
+:
+:  (S (NP (ART the) (ADJ hungry) (N dog)) (VP (V chases)) (NP (ART the) (ADJ sleepy) (N cat)))
+
+   See http://www.ironcreek.net/phpsyntaxtree/ for help with this process. (To
+   use this tool, you must change the list-tree representation into nested
+   vectors, rendering the phrase into what they call labelled bracket notation.)
+
+#+BEGIN_SRC emacs-lisp
+  (setq parsed [S [NP [ART the] [ADJ hungry] [N dog]] [VP [V
+        chases]] [NP [ART the] [ADJ sleepy] [N cat]]])
+  (kill-new (format "%s" parsed))
+#+END_SRC
+
+[[file:simple-phrase.png][Visualize the hungry dog chasing the sleepy cat]]
+
+:EXERCISE:
+   Using the syntax-tree tool, build a parse tree for =the quick brown fox jumps
+   over the lazy dog=.
+
+:ANSWER:
 #+BEGIN_SRC emacs-lisp
   (setq parsed [S [NP [ART the] [ADJ [ADJ quick] [ADJ brown]] [N
         fox]] [VP [V jumps] [PP [P over] [NP [ART the] [ADJ lazy]
         [N dog]]]]])
   (kill-new (format "%s" parsed))
 #+END_SRC
+:END:
+:END:
 
-*** Visualize Derivation
+   Build parse trees for the valid phrases:
 
-    The derivation of a syntactically valid structured phrase can be visualized
-    as the reverse of the process of building, from the bottom up, i.e., leaves
-    to root, a *syntax tree* (AKA a *parse tree*).
+     :EXERCISE:
+     the cat runs
+     :END:
 
-    See http://www.ironcreek.net/phpsyntaxtree/.
+     :EXERCISE:
+     the cat chases the hungry dog
+     :END:
 
-**** TODO Include exercises to build parse trees for valid phrases.
+     :EXERCISE:
+     the dog chases quickly quickly quickly
+     :END:
+
+     :EXERCISE:
+     the sleepy dog chases the sleepy cat
+     :END:
 
 *** TODO A Grammar for Well-formed S-expressions
 
   The basis for this grammar is a /skeleton/ for matching opening and closing
-  parentheses, which has a recursive rule for enclosing in parentheses, and one for
-  stretching out the length of the string:
+  parentheses, which has a recursive rule for enclosing in parentheses, and one
+  for expanding the length of the string (plus a third for terminating the
+  recursion):
 
   1. SKEL \rarr OP SKEL CP
   2. SKEL \rarr SKEL SKEL
@@ -664,8 +762,8 @@ t
   |      | \rarr | ( ( \lambda ) ) \lambda           |
   |      | \rarr | ( ( ) )               |
 
-  But a simple choice between forward and reverse productions fails, because of
-  the /three/ possible expansions for SKEL.
+  But now a simple binary choice between forward and reverse productions fails,
+  because of the /three/ possible expansions for SKEL.
 
 #+BEGIN_SRC emacs-lisp :results silent
   (setq es "" open "(" close ")"
@@ -776,87 +874,125 @@ t
   aAd \rightarrow abad
 
   Note that A\rsquo{}s expansion is different when it\rsquo{}s surrounded by a and c than when
-  it\rsquo{}s surrounded by a and d. We say A\rsquo{}s interpretation has context
-  "sensitivity". A Grammar/Language with this feature is called
-  Context-Sensitive.
+  it\rsquo{}s surrounded by a and d. That means A\rsquo{}s expansion has context
+  \ldquo{}sensitivity\rdquo. A Grammar/Language with this feature is called
+  *Context-Sensitive*.
 
 *** Regular Languages
 
-  Moving down to the simplest type, a language is /regular/ if it can be built
-  from its alphabet using the so-called /regular operations/ --- \cup (union), \circ
-  (concatenation), and \star (star Endnote Kleene-star). How these work can be
-  crudely illustrated using a type of graph (or /pseudograph/, as loops are allowed):
+  Moving down to the simplest type, a language is *Regular* if it can be
+  assembled from its alphabet using the so-called /regular operations/ --- \cup
+  (union), \circ (concatenation), and \star (star Endnote Kleene-star). How these work
+  can be crudely illustrated using a type of graph (or /pseudograph/, as loops
+  are allowed) that could be taken for a \ldquo{}weighted\rdquo (actually just link-labeled)
+  *directed* graph.
 
-  Union: 0 \cup 1 \rarr make a node with a link to another node for each /disjunct/ (0
-  or 1) --- so either path may be taken:
+  Union: 0 \cup 1 --- we make a node with a link to another node for each
+  /disjunct/ (0 or 1) --- so either path may be taken from the leftmost node.
 
 :      ()
-:     /
+:     ^
 :   0/
 : ()
 :   1\
-:     \
+:     v
 :     ()
 
-  Concatenation: 0 \circ 1 (or just 01) \rarr make a start node and a node for each
-  symbol and a link for each /conjunct/ (0 and 1) /in sequence/:
+  Concatenation: 0 \circ 1 (or just 01) --- we make a starting node and two other
+  nodes (one for each symbol) and a link for each /conjunct/ (0 and 1) /in
+  sequence/:
 
 : ()--0-->()--1-->()
 
-  Star: 0^{\star} \rarr make a node with a loop labeled with the symbol being \ldquo{}starred\rdquo.
+  Star: 0^{\star} --- we make a node with a loop-link labeled with the symbol being
+  \ldquo{}starred\rdquo.
 
 :      0
 :    /   \
 :    \   /
 :     v /
-:     ()
+:     ( )
 
-  How these separate operations compose into one graph can get quite
+  How these separate operations compose into one graph can get somewhat
   complicated, but the most important rule is:
 
   /Every node must have an outgoing link for each symbol in the alphabet./
 
-  Note that nodes can be split or merged (shared) and become a simpler graph
-  modeling the same language.
+  A complicating feature of these operators is that they can be applied to more
+  than just one symbol, e.g., (0 \cup 1)^{\star}, which means any number of
+  repetitions (including zero) of a 0 or a 1, mixed and matched arbitrarily,
+  which --- take this on faith if necessary --- eventually yields all possible
+  strings over the alphabet [0 1] (AKA *bitstrings*).
 
-  For example:
+  Mitigating some of the complexity, nodes can be split or merged (shared) and
+  thus yield a simpler graph modeling the same language. For example:
 
 :      0              1
 :    /   \          /   \
 :    \   /          \   /
 :     v /            v /
-:     ()-----1------>(())
+:     ( )----1------>( )
 :      ^              |
 :      |_____0________|
 
   This graph models the language of all bitstrings that end in 1, or as the
-  regular language described thus: (0 \cup 1)^{\star}1
+  regular language described thus:
+
+  (0 \cup 1)^{\star}1
 
   The node corresponding to the \star has been split in two, one loop labeled 0 and
-  the other labeled 1, while the link for the 0 for the \cup is shared with the
-  loop/link for the \star.
+  the other labeled 1, while the link for the 0 in the \cup is shared with the
+  loop-link for the \star. Tracing different paths starting from the leftmost node
+  and ending at the rightmost node, traversing links more than once being
+  allowed, it is possible to generate the entire language --- every bitstring
+  that ends in 1. The method is to concatenate onto a growing string (initially
+  empty) a 0 as a link labeled 0 is traversed, and a 1 as a link labeled 1 is
+  traversed. So, labeling the two nodes L and R, the path L-R yields 1, the path
+  L-R-L-R yields 101, the path L-R-L-L-R-R yields 10011, and so forth.
 
   Regular grammars generate regular languages, and so are amenable to this kind
   of graph modeling. In this representation of grammar as graph, nodes
-  correspond to the Nonterminals, and links between nodes are the terminals. In
-  the so-called *state diagram* terminology, the nodes are called states and the
-  links are called transitions,
+  correspond to the Nonterminals, and links between nodes are the terminals,
+  similar to how links and nodes worked in the above examples. But now let\rsquo{}s
+  shift our focus and change the way we traverse these graphs. Instead of
+  tracing paths to see what strings can be generated, we present some string to
+  the graph and ask the *string* to try to trace its way through the graph.
 
-*** TODO Insert simple one or two-state example.
+  In so doing, we turn our graphs into machines, called *state machines*
+  (Endnote: or *finite-state machines* or *finite-state automata* (*automaton*
+  singular)). The static picture of the graph is called a *state diagram*,
+  (Endnote: or *state-transition diagram*) the nodes are called states and the
+  links are called transitions. So let\rsquo{}s revisit what happens with these
+  machines from our new point of view, as we take on the persona of the machine
+  (not the string, implied at the end of the previous paragraph to be the
+  focus).
 
-  By convention, the start node or state, corresponding to the grammar\rsquo{}s Start
-  symbol, is the node named =S= or with some symbol(s) followed by one or more
-  trailing 0s (e.g., s0, s00, etc.). (Endnote: More conventionally, in
-  these \ldquo{}state diagrams\rdquo{}, the start state is identified by an incoming arrow
-  pointing to it (but coming from nowhere).)
+  By convention, the start node or state (corresponding to the grammar\rsquo{}s Start
+  symbol) is the node named =S= or with some symbol followed by one or more
+  trailing 0s (e.g., s0, s00, etc.). (Endnote: More conventionally, the start
+  state is identified by an incoming arrow pointing to it (but coming from
+  nowhere). Or, in another form of ornamentation, a triangle pointing to it is
+  sometimes used to mark the start state.)
 
 : -->(s0)
+
+  When we (the machine) are \ldquo{}turned on\rdquo we come up \ldquo{}in\rdquo our start state. We then
+  start reading symbols, one by one, from our \ldquo{}input\rdquo --- the string being
+  presented for our consideration --- and we move to other states according as
+  the current symbol directs us to make one transition or another (the one
+  labeled with that symbol). We do two things when making a transition:
+
+  1. Update our current state to be the one at the other end of the transition
+     link.
+  2. \ldquo{}Consume\rdquo our currently read symbol and turn our attention to the next
+     symbol in the input.
 
   Sample state transition on a 0.
 
 : (s1)---0--->(s2)
  
-  Sample state transition on both 0 and 1 inputs.
+  Sample state transition on both 0 and 1 inputs. This is shorthand notation for
+  two transitions, one for 0 and the other for 1.
 
 : (s1)---0,1--->(s2)
  
@@ -865,20 +1001,24 @@ t
 
 : ((s4))
 
-  An accept state serves as a language membership detector. If a candidate input
-  string is exhausted (entirely absorbed by the transitions from state to state)
-  at the exact time an accept state is reached, the string is accepted as part
-  of the language. A string exhausted in a non-accepting state is rejected ---
-  it is NOT part of the language. If a machine accepts all strings that belong
-  to the language, and rejects all those that do NOT belong to the language,
-  then the machine is said to \ldquo{}recognize\rdquo the language.
+  Shedding our machine persona, we look at it once again as an actor, or an
+  agent making decisions. Accept states serve as language membership detectors.
+  If a candidate input string is exhausted (entirely consumed by the transitions
+  from state to state) at the exact time an accept state is reached, the string
+  is accepted as part of the language. A string exhausted in a non-accepting
+  state is rejected --- it is NOT part of the language. If a machine accepts *all*
+  strings that belong to a specific language, and rejects *all* those that do NOT
+  belong to the language, then the machine is said to \ldquo{}recognize\rdquo the language.
 
   For example, the machine below recognizes the language [01 011 0111]:
  
 : (S)--0-->(A)--1-->((B))--1-->((C))--1-->((D))
 
-  More correctly (create endnote: to be a valid deterministic finite automaton),
-  there should be transitions on each input character out of each state, thus:
+  More correctly (remembering our important rule above) (Endnote: this rule must
+  be adhered to for the machine to be a valid *deterministic* finite automaton
+  (DFA). The rule can be relaxed when we turn to the related *nondeterministic*
+  finite automata (NFA).), there should be transitions on each input character
+  out of each state, thus:
 
 : (S)--0-->(A)--1-->((B))--1-->((C))--1-->((D))
 :  |        |         |          |          |
@@ -893,7 +1033,9 @@ t
 :                   \0,1/
 :                    ---
 
-   This machine realizes the 7-rule PSG below:
+   This machine realizes the 7-rule PSG below (only P is given, the other three
+   components are inferable):
+
    1. S \rarr 0A
    2. A \rarr 1B
    3. B \rarr 1C
@@ -902,11 +1044,12 @@ t
    6. C \rarr \lambda
    7. D \rarr \lambda
 
-**** Recursive rules create loops
+   Recursive rules create loops, just like the \star operation. For example, the
+   rule:
 
-      For example, the rule:
+   A \rarr 0A
 
-      A \rarr 0A
+   yields
 
 :      0
 :    /   \
@@ -914,28 +1057,40 @@ t
 :     v /
 :    (A)
 
-      At node A, leave on a 0 and go back to A, as if the 0 in the rule were
-      pulled to the left to label the arrow, and the A on the right were moved
-      over and merged with the A on the left.
+   At node A, leave on a 0 and go back to A, as if the 0 in the rule were pulled
+   to the left to label the arrow, and the A on the right were moved over and
+   merged with the A on the left.
 
-      For another example, the grammar:
-      1. S \rarr 1A
-      2. A \rarr 0A
-      3. A \rarr 1A
-      4. A \rarr \lambda
+   For another example, the grammar:
 
-         is represented thus:
+   1. S \rarr 1A
+   2. A \rarr 0A
+   3. A \rarr 1A
+   4. A \rarr \lambda
+
+   is represented thus:
 
 :          0,1
 :         /   \
 :         \   /
 :          v /
-: (S)--1-->(A)
+: (S)--1-->((A))
 
-*** A 4-State Example
+  This is almost like the (0 \cup 1)^{\star}1 machine, except it recognizes all
+  bitstrings that /start/ with 1: 1(0 \cup 1)^{\star}
 
-    This machine recognizes the language of all strings over [0 1] (i.e., all
-    /bitstrings/) whose /second-to-last/ bit is a 0:
+:EXERCISE:
+  Add a state and the necessary transitions to make this a valid state machine.
+:END:
+
+:EXERCISE:
+  Compare/contrast this machine with the one for (0 \cup 1)^{\star}1 shown above. 
+:END:
+
+***** A 4-State Example
+
+    This machine recognizes the language of all bitstrings whose
+    /second-to-last/ bit is a 0:
 
 :    1
 :  /   \
@@ -957,30 +1112,54 @@ t
 :              /   \
 :              \   /
 :                0
- 
 
-*** A Modeling Example
-  A simple machine can be built to model the three-production grammar:
+:EXERCISE:
+  The three-production grammar
 
   1. S \rarr A1
   2. A \rarr A0
   3. A \rarr \lambda
   
-  This grammar generates the simple language consisting of any number of zeros
-  (including zero zeros) followed by a single 1.
-  
-  The graph below (besides being a pseudograph, because of the loop) is a
-  \ldquo{}weighted\rdquo (actually just link-labeled) directed graph with two nodes and two
-  links.
+  generates the simple language consisting of any number of 0\rsquo{}s (including zero
+  0\rsquo{}s) followed by a single 1.
 
+  Build a simple two-state machine to model it. 
+
+  :ANSWER:
 :     _0_
 :    /   \
 :    \   /
 :     v /
 :     (S)---1--->((F))
+  :END:
+:END:
+
+:EXERCISE:
+  The following machine recognizes which language?
+
+:   0
+: /   \
+: \   /
+:  v /
+:  (S)
+:  ^ \
+: /   \
+: \   /
+:   1
+
+  :ANSWER:
+  The empty language \emptyset. With no accept states, no string can be accepted --- all
+  are rejected.
+  :END:
+:END:
 
 *** DONE Draw state diagram for this simple 1-bit computer
     CLOSED: [2017-05-13 Sat 13:27]
+     The language recognizers we have been examining are not the only
+     interpretation we can give these kinds of state machines. You may have seen
+     others in a course on digital logic and circuits. Here follows one of the
+     simplest possible examples.
+
      Consider a 1-bit computer controlling some lights in a room equipped with
      motion sensors. The lights are either off or on. The state of the lights
      can thus be remembered with just 1 bit of memory --- 0 for off and 1 for
@@ -1123,17 +1302,18 @@ t
 
   What grammar generates a given language?
 
-*** 1
 
-    Construct a PSG to generate {0^{2n }1 \vert n \ge 0}.
+  :EXERCISE:
+  Construct a PSG to generate {0^{2n }1 \vert n \ge 0}.
+  :END:
 
-*** 2
+  :EXERCISE:
+  Construct a PSG to generate {0^{n }1^{2n} \vert n \ge 0}.
+  :END:
 
-    Construct a PSG to generate {0^{n }1^{2n} \vert n \ge 0}.
-
-*** 3
-
-    Construct a PSG to generate {0^n 1^m 0^n \vert m \ge 0 and n \ge 0}.
+  :EXERCISE:
+  Construct a PSG to generate {0^n 1^m 0^n \vert m \ge 0 and n \ge 0}.
+  :END:
 
 *** ILO  
 
@@ -1185,9 +1365,11 @@ t
    |                        |      | or have a single Nonterminal and be       |
    |                        |      | all like Ntl, or all like tlN).           |
 
-**** TODO Redo These Classification Exercises
+**** DONE Redo These Classification Exercises
+     CLOSED: [2017-05-17 Wed 16:34]
 
-   Can you distinguish grammar types?
+   In the following exercises you must classify/distinguish the four grammar
+   types.
 
    Let N = [S A B], T = [a b], and G = [N T S P] (P to be given later).
 
@@ -1200,7 +1382,7 @@ t
 
    when P, the set of productions, is one of the following:
 
-**** 1
+**** 1 
 
 :EXERCISE:
     S \rightarrow 0AB 
@@ -1208,6 +1390,11 @@ t
     A \rightarrow B1
 
     B \rightarrow \lambda
+
+:ANSWER:
+    2 but not 3. The first production disqualifies it from being 3, being
+    neither Left-linear nor Right-linear.
+:END:
 :END:
 
 **** 2
@@ -1215,9 +1402,13 @@ t
 :EXERCISE:
     S \rightarrow 0A
 
-    A \rightarrow 0
+    A \rightarrow 1B
 
-    A \rightarrow 1
+    B \rightarrow 1
+
+:ANSWER:
+    This is a type 3, Right-linear grammar.
+:END:
 :END:
 
 **** 3
@@ -1225,17 +1416,25 @@ t
 :EXERCISE:
     S \rightarrow AB0
 
-    AB \rightarrow 0
+    AB \rightarrow 10
+    
+    :ANSWER:
+    Type 1 but not type 2. Second production violates the Type 2 restriction.
+    :END:
 :END:
 
 **** 4
 
 :EXERCISE:
-    S \rightarrow ABA
+    S \rightarrow BAB
 
-    A \rightarrow 0B
+    A \rightarrow 0A
 
     B \rightarrow 01
+
+    :ANSWER:
+    2 but not 3. First production is neither Left- nor Right-linear.
+    :END:
 :END:
 
 **** 5
@@ -1248,27 +1447,24 @@ t
     B \rightarrow 0A
 
     A \rightarrow 1
+
+    0 but not 1. Second production disqualifies it from being 1.
 :END:
 
 **** 6
 
 :EXERCISE:
-    S \rightarrow 1A
+    S \rightarrow A0
 
-    A \rightarrow 1
+    A \rightarrow 0
 
     S \rightarrow \lambda
+
+    :ANSWER:
+    Type 3, Left-linear.
+    :END:
 :END:
 
-**** 7
-
-:EXERCISE:
-    S \rightarrow AB
-
-    B \rightarrow 0A1
-
-    0A1 \rightarrow 1
-:END:
 
 * )
 
@@ -1296,11 +1492,11 @@ t
   | 86 | 87 | 88 | 89 | 90 | 91 | 92 |
   | 93 | 94 | 95 | 96 | 97 | 98 | 99 |
 
-  We take these results and then manually sieve them --- filtering out all
-  nonprimes --- by crossing out every other number (after 2 --- so 4, 6, 8, etc.
-  are crossed out), which excludes the multiples of 2, every third number (after
-  3), which drops the multiples of 3, every fifth number (after 5) to filter out
-  the multiples of 5, etc. Note that some numbers (e.g., the multiples of 6) get
+  We take these integers and manually sieve them --- filtering out all nonprimes
+  --- by crossing out every other number (after 2 --- so 4, 6, 8, etc. are
+  crossed out), which excludes the multiples of 2, every third number (after 3),
+  which drops the multiples of 3, every fifth number (after 5) to filter out the
+  multiples of 5, etc. Note that some numbers (e.g., the multiples of 6) get
   crossed out twice --- once for the multiples-of-2 sieving, once for the
   multiples-of-3 sieving --- and this is an acceptable redundancy, as it avoids
   the continual use of a conditional that says only cross a number out if it is
