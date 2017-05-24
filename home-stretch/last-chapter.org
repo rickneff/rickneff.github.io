@@ -2,10 +2,40 @@
 #+AUTHOR: Rick Neff
 #+EMAIL: rick.neff@gmail.com
 #+LANGUAGE: en
-#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: H:4 num:t toc:t \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t ':nil d:nil
 #+STARTUP: showeverything entitiespretty
 
-** TODO Add Drawers in which to stuff mostly finished paragraphs
+** TODO Add Drawers in which to stuff mostly finished paragraphs   :noexport:
+** TODO Add this exercise somewhere                                :noexport:
+:EXERCISE:
+   The operation called *dehydration* takes a word and deletes all letters in it
+   from H to O. What is the original (rehydrated) text of this dehydrated sequence
+   of words?
+
+   TE TE AS CE TE WARUS SAID T TA OF AY TGS F SES AD SPS AD SEAG WAX F CABBAGES
+   AD KGS AD WY TE SEA S BG T AD WETER PGS AVE WGS
+  
+   :ANSWER:
+   THE TIME HAS COME THE WALRUS SAID TO TALK OF MANY THINGS OF SHOES AND SHIPS
+   AND SEALING WAX OF CABBAGES AND KINGS AND WHY THE SEA IS BOILING HOT AND
+   WHETHER PIGS HAVE WINGS
+   :END:
+:END:
+
+** TODO Also this one                                              :noexport:
+:EXERCISE:
+   What English word has the smallest vowel-to-consonant ratio? For example, the
+   v2c ratios of the words in the previous sentence are 1/3, 2/5, 1/3, 1/2, 1/2,
+   1/3, 2/3, 1/1, 1/2, and 3/2. No clear winner. Count =y= as a vowel, even when
+   it is the first letter of a word.
+
+   :ANSWER:
+   The word strengths has a 1/8 v2c ratio.
+   :END:
+:END:
+
+* THR
+
 ** TODO YZ@
 
   \ldquo{}Isn\rsquo{}t it interesting how languages either facilitate or impede
@@ -26,166 +56,160 @@
   something used to communicate, is too general in one sense, and too specific
   in another.\rdquo
 
-  As you\rsquo{}ll see, languages can be generalized to a set of strings, but made more
+  \ldquo{}As you\rsquo{}ll see, languages can be generalized to a set of strings, but made more
   specific by /how/ that set is defined. What are called Phrase-Structure
   Grammars --- PSGs --- are the tools (rules) used to define which strings are
   valid members of the language associated with that PSG. Now let me be clear
   what that association is. It is that PSGs /generate/ languages, and so of
-  course, languages are /generated/ (built) by PSGs.
+  course, languages are /generated/ (built) by PSGs.\rdquo
 
-  In English (or any natural, human language) you follow the rules when you
+  \ldquo{}In English (or any natural, human language) you follow the rules when you
   adhere to the grammar. A main component of a formally defined grammar is the
   set of productions --- the rules that /produce/ valid strings in the language.
   In essence, applying these rules is how different strings of words (phrases,
   sentences) are generated. Deliberately, or even ignorantly violating these
   rules leads to confusion and failed communication. Because the grammatical
   rules of English are so complex, ambiguity and misunderstanding frequently
-  lurk beneath the surface.
+  lurk beneath the surface.\rdquo
 
-  Take what you said earlier, Ila. "I know programming languages facilitate X".
-  (I\rsquo{}m abbreviating.) One sentence, or two?
+  \ldquo{}Take what you said earlier, Ila. \lsquo{}I know programming languages facilitate X.\rsquo
+  (I\rsquo{}m abbreviating.) One sentence, or two?\rdquo
 
   I know programming. Languages facilitate X.
 
-  Abu said, it seems pretty clear from the context that it\rsquo{}s one sentence. Ila
-  said, I agree. I don\rsquo{}t see the problem.
+  Abu said, \ldquo{}It seems pretty clear from the context that it\rsquo{}s one sentence.\rdquo Ila
+  said, \ldquo{}I agree. I don\rsquo{}t see the problem.\rdquo
 
-  It\rsquo{}s NOT a problem --- for you. Missing the context, and minus the fluidity
-  and rapidity with which you uttered that ONE sentence, however, it could be
-  misconstrued --- legally but erroneously parsed --- into two.
+  \ldquo{}It\rsquo{}s NOT a problem --- for you. Missing the context, and minus the fluidity
+  and rapidity with which you uttered that *one* sentence, however, it could be
+  misconstrued --- legally but erroneously parsed --- into two.\rdquo
 
-  Take this imperative statement: Love One Another. A Christian maxim, if I\rsquo{}m
-  not mistaken.
+  Til cleared his throat and went on. \ldquo{}Take this imperative statement: /Love One
+  Another./ A Christian maxim, if I\rsquo{}m not mistaken.\rdquo
 
-  Ila and Abu glanced at each other in surprise. Til, til now, had never brought
-  up religion in any of their discussions, whereas *they* had certainly broached
-  the subject, on more than one occasion, when it was just the two of them,
-  meeting to work on homework assignments, or just waiting for Til. Ila thought
-  Abu, a Mormon, hopelessly deluded. Abu thought Ila, an evangelical Christian,
-  a prospective Mormon, if she could only get past her myopia! Now to hear Til
-  bring this up was a tantalizing turn, and mildly amusing to all three of them
-  when Ila and Abu said in unison, John 13:34.
+  Ila and Abu glanced at each other in surprise. Til, \lsquo{}til now, had never
+  brought up religion in any of their discussions, whereas *they* had certainly
+  broached the subject, on more than one occasion, when it was just the two of
+  them, meeting to work on homework assignments, or just waiting for Til. Ila
+  thought Abu, a Mormon, hopelessly deluded. Abu thought Ila, an evangelical
+  Christian, a prospective Mormon, if she could only get past her myopia! Now to
+  hear Til bring this up was a tantalizing turn, and mildly amusing to all three
+  of them when Ila and Abu said in unison, \ldquo{}John 13:34!\rdquo
 
-  Yes, well, very good, said Til, a little taken aback. I see you both know your
-  Bible. If they think, thought Til, that this is leading into a religious
+  \ldquo{}Yes, well, very good,\rdquo said Til, with raised eyebrows. \ldquo{}I see you both know
+  your Bible.\rdquo If they think, thought Til, that this is leading into a religious
   discussion, they will be disappointed. Not that he was opposed to hearing
   their religious opinions, just not right now. (When, then? asked a nagging
   voice in his head. He ignored it. But God was still to be the subject of a
   sentence.)
 
-  This is not the simplest English grammatical construction. Simpler would be
-  God Loves You, which is in Subject-Verb-Object order, very common in English.
+  \ldquo{}This is not the simplest English grammatical construction. Simpler would be
+  \lsquo{}God Loves You,\rsquo which is in Subject-Verb-Object order, very common in English.
   You could make sense of each of the other five permutations, but only by
-  giving a lot of context.
+  giving a lot of context:\rdquo
 
-  Love Another One. 
+  1. Love Another One.
+  2. One Love Another.
+  3. One Another Love.
+  4. Another Love One.
+  5. Another One Love.
 
-  One Love Another.
+  \ldquo{}So,\rdquo said Ila, \ldquo{}are you saying word order causes communication problems?\rdquo
 
-  One Another Love.
-
-  Another Love One.
-
-  Another One Love.
-
-  So, said Ila, are you saying word order causes communication problems?
-
-  Hmmm, said Abu. Have you ever tried to make sense of some kinds of poetry?
-  Poets are always scrambling word order to fit some rhyme or meter scheme.
-  Like in a poem by Wordsworth that I just read:
+  \ldquo{}Here\rsquo{}s a thought,\rdquo said Abu. \ldquo{}Have you ever tried to make sense of some kinds
+  of poetry? Poets are always scrambling word order to fit some rhyme or meter
+  scheme. Like in [[a poem by Wordsworth][a poem by Wordsworth]] that I just read:\rdquo
 
 #+BEGIN_QUOTE
   Bliss was it in that dawn to be alive.
   But to be young was very Heaven!
 #+END_QUOTE
 
-*** TODO Add endnote with reference to this poem by Wordsworth
+  Said Til, \ldquo{}Or from a more familiar poem: \lsquo{}Quoth the raven\rsquo instead of \lsquo{}The raven
+  said.\rsquo Still perfectly correct. In fact, saying \lsquo{}The raven quoth\rsquo is *not*
+  grammatical, by the very special rule attached to that very archaic word.\rdquo
 
-  Said Til, Or from a more familiar poem: Quoth the raven instead of The raven
-  said. Still perfectly correct. In fact, saying The raven quoth is *not*
-  grammatical, by the very special rule attached to that very archaic word.
-
-  So, not so much word order as word choice. Remember I started talking about
+  \ldquo{}So, not so much word order as word choice. Remember I started talking about
   the misuse of English to obfuscate? *Jargon* is the apposite word here. This
-  misuse of language encompasses erecting barriers in the guise of facilitators.
-  We justify ourselves in this activity because of the benefits --- and there
-  *are* benefits --- but do we ever weigh them against the costs?
+  misuse of language erects barriers in the guise of facilitators. We justify
+  ourselves in this activity because of the benefits --- and there *are*
+  benefits --- but do we ever weigh them against the costs?\rdquo
 
-  Benefit-wise, jargon saves time and space by compressing information that
+  \ldquo{}Benefit-wise, jargon saves time and space by compressing information that
   needs sharing, but somewhat-intangible-cost-wise that very efficiency impedes
   understanding by outsiders of what insiders are saying. Hiding meaning from
   the uninitiated is such a powerful urge, and human vanity is an imp that eggs
-  us on.
+  us on.\rdquo
 
-  For example, what does partial template specialization mean? And what is the
-  cardinality of the power set?
+  \ldquo{}For example, what does partial template specialization mean? And what is the
+  cardinality of the power set?\rdquo
 
-  I can tell you the answer to your second question, but I have no clue about
-  the first, said Ila.
+  Said Ila, \ldquo{}I can tell you the answer to your second question, but I have no
+  clue about the first.\rdquo
 
-  Abu said, I agree, but regarding the second question, do you think it\rsquo{}s better
-  to put it more simply, like, how many subsets does a set of size *n* have?
+  Said Abu, \ldquo{}I agree, but regarding your second question, do you think it\rsquo{}s
+  better to put it more simply, like, how many subsets does a set of size *n*
+  have?\rdquo
 
-  I do, said Til. Math is a language that desperately needs less jargon, more
+  \ldquo{}I do,\rdquo said Til. \ldquo{}Math is a language that desperately needs less jargon, more
   clarity. And not to keep you in suspense, well, not to keep you from the
-  adventure of discovery with a little hint, partial template specialization is
-  a very obscure quote-unquote feature of the C++ language.
+  adventure of discovery, either, so for a little hint, partial template
+  specialization is a very obscure quote-unquote feature of the C++ language.\rdquo
 
-  Ila said, I'll check it out, but just from the sound of it I'm glad C++ is not
-  the language my company uses! Abu added, Me too! Ila said, You run a nursery,
-  what are you talking about? Well, said Abu, we just hired a programmer to help
-  us manage our inventory and production. Til interrupted, Let's talk about the
-  programming language choice issue later.
+  Ila said, \ldquo{}I'll check it out, but just from the sound of it I'm glad C++ is
+  not the language my company uses!\rdquo Abu added, \ldquo{}Me too!\rdquo Ila said, \ldquo{}You run a
+  nursery, what are you talking about?\rdquo \ldquo{}Well,\rdquo said Abu, \ldquo{}we just hired a
+  programmer to help us manage our inventory and production.\rdquo Til interrupted,
+  \ldquo{}Let's talk about the programming language choice issue later.\rdquo
 
-  But speaking of business, you have no doubt heard the stories about when a
+  \ldquo{}But speaking of business, you\rsquo{}ve no doubt heard the stories about when a
   business consultant, tongue firmly in cheek --- or not --- randomly chooses
   three words from three different lists to create for client consideration
   impressive-sounding, meaningless phrases, like
 
   customer value trajectory, or stratified business intelligence, or hypercubic
-  mission criticality.
+  mission criticality.\rdquo
 
-  Wow, did you just make those up? wondered Abu, silently. Ila said, I hear that
-  stuff all the time from the consultants my company hires. It\rsquo{}s worse than
-  nonsense, if you ask me.
+  \ldquo{}Wow, did you just make those up?\rdquo wondered Abu, silently. Ila said, \ldquo{}I hear
+  that stuff all the time from the consultants my company hires. It\rsquo{}s worse than
+  nonsense, if you ask me.\rdquo
 
-  But not all of it is so obviously bad, said Til. Let me put it this way.
+  \ldquo{}But not all of it is so obviously bad,\rdquo said Til. \ldquo{}Let me put it this way.
   Proclivities --- what a nice word! Many people have proclivities,
   inclinations, predispositions to use more words, or bigger words, or *shinier*
   words than necessary to get what they want, or what they think they want.
-  Flattery is replete with this abuse of language.
+  Flattery is replete with this abuse of language.\rdquo
 
-  Abu rose to the challenge: Your mellifluous speech shows a penchant for
-  pulchritudinous word marshalling.
+  Abu rose to the challenge: \ldquo{}Your mellifluous speech shows a penchant for
+  pulchritudinous word marshalling.\rdquo
 
-  \ldquo{}/Marshmallowing/, you mean\rdquo, puffed Ila. \ldquo{}Sicky sweet, with no nutritional
+  Ila snorted. \ldquo{}You mean /marshmallowing/ --- sicky sweet, with no nutritional
   value!\rdquo
 
-  So you agree it\rsquo{}s a problem! winked Til. Both Abu and Ila nodded and chuckled.
+  \ldquo{}So you agree it\rsquo{}s a problem!\rdquo winked Til. Both Abu and Ila nodded and
+  chuckled.
 
-  Well, it\rsquo{}s not one we\rsquo{}re going to solve today, he said. So let\rsquo{}s go back to
+  \ldquo{}Well, it\rsquo{}s not one we\rsquo{}re going to solve today,\rdquo he said. \ldquo{}So let\rsquo{}s go back to
   talking about problems in mathematics. Mathematical language, unlike natural
   language, is precise and unambiguous. Equations --- tautologies --- always
-  true. Never a doubt. Pure syntax without the clouding confusion of semantics.
+  true. Never a doubt. Pure syntax without the clouding confusion of semantics.\rdquo
 
-  That\rsquo{}s the official story. Now let me qualify that a bit. One of the, if not
+  \ldquo{}That\rsquo{}s the official story. Now let me qualify that a bit. One of the, if not
   *the* most brilliant mathematical logicians of all time, Kurt G\ouml{}del, once
-  said, "The more I think about language, the more it amazes me that people ever
-  understand each other." What amazes me about mathematicians, who are people
+  said, \lsquo{}[[The more I think about language]], the more it amazes me that people ever
+  understand each other.\rsquo What amazes me about mathematicians, who are people
   too, is that they are such poor writers --- when writing mathematics, at
-  least. I alluded to this a little bit ago. Math writing is notorious for its
-  lack of clarity, despite its claim of delivering unadulterated truth. (Donald
-  Knuth has a great example of the contrast. Endnote, take from Celebrate
-  Clarity document.)
+  least. I alluded to this a little bit ago. [[Math writing is notorious]] for its
+  lack of clarity, despite its claim of delivering unadulterated truth.\rdquo 
 
-  Abu, excitement bubbling, said: I like this quote from one of the books you
-  recommended that I just started reading. The authors say
+  His excitement bubbling, Abu said, \ldquo{}I like this quote from one of the books you
+  recommended that I just started reading. The authors say \dots\rdquo
 
 #+BEGIN_QUOTE
   What we present may not resemble math, because we avoid the cryptic equations,
   formulas, and graphs that many people have come to know and fear as
   mathematics. Indeed, those symbols are the memorable icons of an
-  often-forbidding foreign language of mathematical jargon, but it\rsquo{}s not the
+  often-forbidding [[foreign language of mathematical jargon][foreign language of mathematical jargon]], but it\rsquo{}s not the
   only language of mathematics and it does not reside at the center of the
   subject. The deepest and richest realms of mathematics are often devoid of the
   cryptic symbols that have baffled students through the generations. Ideas ---
@@ -193,14 +217,11 @@
   of mathematics.
 #+END_QUOTE
 
-   (Endnote, /Coincidences, Chaos, and All That Math Jazz --- Making Light of
-   Weighty Ideas/ by Edward B. Burger and Michael Starbird, page viii.)
-
-  Ila said, I have a quote, too, along these lines. May I share it? Til nodded,
+  Ila said, \ldquo{}I have a quote, too, along these lines. May I share it?\rdquo Til nodded,
   and Abu winced --- was Ila jabbing him for plunging ahead without asking?
 
-  It\rsquo{}s also from one of your recommended books. The author is a Nobel laureate
-  physicist:
+  \ldquo{}It\rsquo{}s also from one of your recommended books. The author is a Nobel laureate
+  physicist:\rdquo
 
 #+BEGIN_QUOTE
   To many people who are not physicists, modern physics seems to have left the
@@ -209,7 +230,7 @@
   dubious existence. What has actually happened is that physics has gone far
   beyond the point where ordinary, everyday experiences can provide a kind of
   human analogy to the things that the physicists are studying. It is a problem
-  of language. The vocabulary and syntax of human language evolved to describe
+  of language. The [[vocabulary and syntax of human language]] evolved to describe
   the workings of the everyday world, the world we can see, hear, touch, taste
   and smell. Words were simply not intended to describe things unimaginably
   great or incredibly small, far beyond the range of our unaided senses, where
@@ -217,23 +238,16 @@
   mathematics.
 #+END_QUOTE
 
-  (Endnote, /Interactions: A Journey Through the Mind of a Particle Physicist
-  and the Matter of This World/, by Sheldon L. Glashow, page 47.)
+  Said Til: \ldquo{}Excellent! But more on these ideas later. Think about what you know
+  about the language of logic. It had something of a learning curve when you
+  first encountered it, right? Formal logic is a formidable but foundational
+  system of thought, a way to give /precision/ to thought and reasoning, that
+  can nonetheless trip up the uninitiated. Since I just mentioned Kurt G\ouml{}del,
+  let me give you [[a description of formal systems]], or at least, the /rules/ of
+  formal systems, from a book written about him.
 
-  Til: Excellent! But more on these ideas later. Think about what you know about
-  the language of logic. It had something of a learning curve when you first
-  encountered it, right? Formal logic is a formidable but foundational system of
-  thought, a way to give /precision/ to thought and reasoning, that can
-  nonetheless trip up the uninitiated. Since I just mentioned Kurt G\ouml{}del, let me
-  give you a description of formal systems, or at least, the /rules/ of formal
-  systems, from the book /Incompleteness: The Proof and Paradox of Kurt G\ouml{}del/,
-  by Rebecca Goldstein:
-
-*** TODO Put in the endnote
-     on page 86.
-
-  This passage pauses while expressing the point of view that \ldquo{}mathematics is
-  merely syntactic;\rdquo
+  \ldquo{}This passage pauses while expressing the point of view that \lsquo{}mathematics is
+  merely syntactic;\rsquo\rdquo
 
 #+BEGIN_QUOTE
   its truth derives from the rules of formal systems, which are of three basic
@@ -244,29 +258,51 @@
   derived from which.
 #+END_QUOTE
 
-** TODO Have Abu and/or Ila interject some comment here.
-   Relate wffs to what they have seen before. And what they will see hereafter.
-** TODO Talk about another problem of language
-   Til: We don\rsquo{}t stop to consider this very often, but another problem (bug?
-   feature?) of language is the problem of linearity --- or sequentiality ---
-   words must be written out or spoken and then read or heard in sequence, over
-   time, instead of just apprehended \ldquo{}all at once\rdquo --- /in toto/. What would our
-   communication be like if we could do that?
+  Said Abu, \ldquo{}I recall some of the rules we learned for the wffs of propositional
+  logic, like \lsquo{}p \rarr (q \vee r)\rsquo is one but \lsquo\rarr p (\vee q r)\rsquo is not.\rdquo
 
-  Abu and Ila seemed deep in thought, grappling with that idea, which Til was
-  happy about, but knew that they didn\rsquo{}t have time to discuss it --- not today.
-  Rather reluctantly, he interrupted their reverie and said, While obviously
-  mathematical in nature, indeed, *discrete* mathematical, let\rsquo{}s narrow our
-  problems focus to problems in computer science.
+  Said Ila, \ldquo{}Unless you put parentheses around the whole thing and call it
+  lisp!\rdquo
 
-  Computer scientists, especially those into theoretical computer science, like
-  to cast problems into the common mold of languages. They do this for technical
+  Said Til, \ldquo{}Right! You would have to scramble the symbols even more, like \lsquo{}p q ) \vee (r
+  \rarr\rsquo to really unwffify it!\rdquo
+
+  Said Abu, \ldquo{}So like the shuffling you did with the Christian maxim, as you called
+  it, would you say you unwffified that phrase five different ways?\rdquo
+
+  Said Til, \ldquo{}The rules of English grammar are many and varied, and sometimes
+  downright mysterious, so I will leave that question for you to answer!
+  However, a wff like \lsquo{}he went to the store\rsquo is quite obviously NOT well formed
+  as \lsquo{}to he store the went\rsquo.\rdquo
+
+  Said Ila, \ldquo{}So the rules we learned for composing propositions --- there were only
+  four of them, right?\rdquo
+
+  Said Til, \ldquo{}Yes. But that simple grammar did not take into account parentheses
+  for grouping, so it was incomplete. But we will fix that later. There\rsquo{}s one
+  more thing I want to mention about human communication before shifting our
+  focus a bit. We don\rsquo{}t stop to consider this very often, but another problem
+  (bug? feature?) of language is the problem of linearity --- or sequentiality
+  --- the sentences as \lsquo{}beads on a string\rsquo analogy developed by Steven Pinker
+  (endnote reference) --- words must be written out or spoken and then read or
+  heard in sequence, over time, instead of just apprehended \lsquo{}all at once\rsquo ---
+  /in toto/. What would our communication be like if we could do that?\rdquo
+
+  Abu and Ila looked deep in thought, grappling with that idea, which pleased
+  Til, but he also knew that they didn\rsquo{}t have time to discuss it --- not today.
+  Rather reluctantly, he interrupted their reverie and said, \ldquo{}Hold those
+  thoughts, and we\rsquo{}ll dissect them later. For now, other problems await our
+  attention. While obviously mathematical in nature, indeed, *discrete*
+  mathematical, problems in computer science are the ones we will focus on.\rdquo
+
+  \ldquo{}Computer scientists, especially those into theoretical computer science, like
+  to cast problems in the common mold of languages. They do this for technical
   reasons, more thoroughly delved into in a course on computational theory. But
   here is a simple, favorite example: Is 23 prime? This is a decision problem
   whose answer is yes, easily verified by simply trying to divide 23 by 2 and 3,
   and failing on both counts, of course. This decision could *also* be made by
   sequentially searching for and finding the string "23" in the set of strings
-  ["2" "3" "5" "7" "11" "13" "17" "19 "23" ...].
+  ["2" "3" "5" "7" "11" "13" "17" "19 "23" ...].\rdquo
 
 ** TODO Interject an Exercise
    Why do we not need to also do trial division of 23 by 5, 7, 11, etc., to
@@ -287,39 +323,41 @@
 #+RESULTS:
 ("23")
 
-  This set of strings is a language, and if you allow that the \ldquo{}...\rdquo stands for
-  an infinity of bigger and bigger strings of this rather well-known kind, it is
-  the language of PRIMES. It is given the name PRIMES, at any rate. So, does
-  PRIMES contain the string "23232323232323232323"? is another way to ask, is
-  23232323232323232323 prime? The answer is no --- it\rsquo{}s a composite number with
-  seven prime factors --- including 23 --- but the computational solution to
-  that set membership determination problem is significantly harder than the one
-  for 23. It\rsquo{}s not done by simply searching in a static list. While many lists
-  of primes exist, no one creates lists with every prime in it up to some huge
-  limit. True, programs exist that can do that, using some variation of the
-  classic Sieve of Eratosthenes, which goes *way* back, showing how old this
-  problem is. But the point is, to solve a language membership problem you need
-  computational strategies and tactics and resources. Simply put, we can /model
-  computation/ most generally in terms of machinery that can input a string, and
-  output a \ldquo{}yes\rdquo or a \ldquo{}no\rdquo --- \ldquo{}in the language\rdquo, or \ldquo{}not\rdquo.
+  Til went on. \ldquo{}This set of strings is a language, and if you allow that the
+  \lsquo{}...\rsquo stands for an infinity of bigger and bigger strings of this rather
+  well-known kind, it is the language of PRIMES. It is given the name PRIMES, at
+  any rate. So, does PRIMES contain the string "23232323232323232323"? is
+  another way to ask, is 23232323232323232323 prime? The answer is no --- it\rsquo{}s a
+  composite number with seven prime factors --- including 23 --- but the
+  computational solution to that set membership determination problem is
+  significantly harder than the one for 23. It\rsquo{}s not done by simply searching in
+  a static list. While many lists of primes exist, no one creates lists with
+  every prime in it up to some huge limit. True, programs exist that can do
+  that, using some variation of the classic Sieve of Eratosthenes, which goes
+  *way* back, showing how old this problem is. But the point is, to solve a
+  language membership problem you need computational strategies and tactics and
+  resources. Simply put, we can /model computation/ most generally in terms of
+  machinery that can input a string, and output a \lsquo{}yes\rsquo or a \lsquo{}no\rsquo --- \lsquo{}in the
+  language\rsquo, or \lsquo{}not\rsquo.\rdquo
 
 *** TODO Add endnote on Sieve of Eratosthenes (see below)
 
-  Ila said, But not every problem has a yes-or-no answer, and Abu agreed,
-  offering "Like sorting, which I understand to be a typical problem for
-  computers."
+  Ila said, \ldquo{}But not every problem has a yes-or-no answer!\rdquo and Abu agreed,
+  offering \ldquo{}Like sorting, which I understand to be a typical problem for
+  computers.\rdquo
 
-  Ah, my young friends, Til chuckled. It so happens you are right, but computer
-  scientists are clever people, and they have figured out a way to model a very
-  large number of problems *as* decision problems, or as a series of decision
-  problems. Your very example of sorting, Abu, is one of the easiest.
+  \ldquo{}Ah, my young friends,\rdquo Til chuckled. \ldquo{}It so happens you are right, but
+  computer scientists are clever people, and they have figured out a way to
+  model a very large number of problems *as* decision problems, or as a series
+  of decision problems. Your very example of sorting, Abu, is one of the
+  easiest.\rdquo
 
-  How so?, said Abu, exchanging a puzzled look with Ila.
+  \ldquo{}How so?\rdquo said Abu, exchanging a puzzled look with Ila.
 
-  Look at a simple example. Sorting =(13 2 26)= in ascending order is a matter
-  of answering three yes-or-no questions: is 13 less than 2 (no, so swap them),
-  is 2 less than 26 (yes, so don\rsquo{}t swap them), and, is 13 less than 26 (yes, so
-  leave them where they are as well). The result: =(2 13 26)=.
+  \ldquo{}Look at a simple example,\rdquo Til said. \ldquo{}Sorting =(13 2 26)= in ascending order
+  is a matter of answering three yes-or-no questions: is 13 less than 2 (no, so
+  swap them), is 2 less than 26 (yes, so don\rsquo{}t swap them), and, is 13 less than
+  26 (yes, so leave them where they are as well). The result: =(2 13 26)=.\rdquo
 
 #+BEGIN_SRC emacs-lisp :results raw
   (let* ((unsorted '(13 2 26))
@@ -342,11 +380,12 @@
 #+RESULTS:
 (2 13 26)
 
-  Ila was still puzzled. "How does that relate to a set membership decision problem?"
-  Abu grinned his big, I think I know grin, and said: Let me try to answer that.
-  Til said, Go ahead! as Ila clenched her teeth. She thought she knew how now too.
+  Ila was still puzzled. \ldquo{}How does that relate to a set membership decision
+  problem?\rdquo Abu grinned his big, I-think-I-know grin, and said: \ldquo{}Let me try to
+  answer that.\rdquo Til said, \ldquo{}Go ahead!\rdquo as Ila clenched her teeth. She thought she
+  knew how now too.
 
-  In the realm of numbers, I can take the /language/ 
+  \ldquo{}In the realm of numbers, I can take the /language/ 
 
   ["1" "2" "3" "4" "5" "6" \dots]
 
@@ -358,44 +397,43 @@
 
   Less-than-4: ["1" "2" "3"]
 
-  and so on, as many as I like. Then for the question, is a < b, just ask is a
-  in the subset Less-than-b?
+  and so on, as many as I like. Then for the question, is =a= less than =b=,
+  just ask is =a= in the subset Less-than-b?\rdquo
 
-  Ila frowned. But isn\rsquo{}t that a way, way inefficient way to compare two numbers?
-  Til said, Yes, it is, but if we\rsquo{}re not concerned with efficiency, that
-  approach certainly works.
+  Ila frowned. \ldquo{}But isn\rsquo{}t that a way, way inefficient way to compare two
+  numbers?\rdquo Til said, \ldquo{}Yes, it is, but if we\rsquo{}re not concerned with efficiency,
+  that approach certainly works.\rdquo
 
-  But consider a big advantage of treating numbers as strings of digits. As you
+  \ldquo{}But consider a big advantage of treating numbers as strings of digits. As you
   know, when the numbers get big we need special procedures if we want to do
   arithmetic with them. Let\rsquo{}s lump the relational operations with the arithmetic
-  ones, and ask, how would one answer a simple =a < b= question, given:
+  ones, and ask, how would one answer a simple =a < b= question, given:\rdquo
 
-#+BEGIN_SRC emacs-lisp :results silent
+#+BEGIN_SRC emacs-lisp
   (setq a-as-string "361070123498760381765950923497698325576139879587987251757151" 
-        b-as-string "36107058266725245759262937693558834387849309867353286761847615132153745")
-#+END_SRC
- 
-#+BEGIN_SRC emacs-lisp :results raw
-  (< (length a-as-string) (length b-as-string))   
+        b-as-string "36107058266725245759262937693558834387849309867353286761847615132153745"
+        is-a-less-than-b (if (< (length a-as-string) (length b-as-string)) "Yes, a < b." "No, a is not < b."))
 #+END_SRC
 
 #+RESULTS:
-t
+: Yes, a < b.
 
-  That\rsquo{}s easy! b is bigger, because it has more digits, said Ila. Right, said
-  Abu. At least, as long as the first dozen digits of b are not zeros! Ila
-  nodded agreement. And even if the strings were the same length, a
-  digit-by-digit comparison would soon reveal the answer. Abu quickly added, So,
-  banning leading zeros in these strings-of-digits, /lexicographical/ ordering
-  comes to mind as a convenient way to sort them, one that can answer all
-  relative size questions. Am I right?
+  \ldquo{}That\rsquo{}s easy! =b= is bigger, because it has more digits,\rdquo said Ila. \ldquo{}Right,\rdquo
+  said Abu. \ldquo{}At least, as long as the first dozen digits of =b= are not zeros!\rdquo
+  Ila nodded agreement, \ldquo{}And even if the strings were the same length, a
+  digit-by-digit comparison would soon reveal the answer.\rdquo Abu quickly added,
+  \ldquo{}So, banning leading zeros in these strings-of-digits, /lexicographical/
+  ordering comes to mind as a convenient way to sort them, one that can answer
+  all relative size questions. Am I right?\rdquo
 
-  Til nodded while Ila thought, Of course you are, smarty pants, then said, But
+  Til nodded while Ila thought, Of course you are, smarty pants, then said, \ldquo{}But
   why the jargony *lexicographical*? Isn\rsquo{}t there a better word than that?
+  \lsquo{}Lexicon\rsquo is just another word for \lsquo{}dictionary\rsquo, so why not, sort in
+  /dictionary/ order?\rdquo
 
-  Abu said, I don\rsquo{}t remember where I saw that, and no, I don\rsquo{}t know of an
-  another, easier way to say what it means. What, technically speaking, *does*
-  it mean, Til?
+  Abu said, \ldquo{}You mean use a shorter word? I don\rsquo{}t remember where I saw
+  lexicographical, and no, I don\rsquo{}t know if there\rsquo{}s an another, more ordinary way
+  to say what it means. Technically speaking, what *does* it mean, Til?\rdquo
 
   \ldquo{}You\rsquo{}re about to find out!\rdquo Til said, as he flashed them his mischievous
   smile.
@@ -451,21 +489,13 @@ t
   longer ones) and /then/ by the predefined (*dictionary*) order of the *symbols*
   as given in association with the *strings*\rsquo *alphabet*.
 
-  In *lexicographical ordering* the *string* =baa= would come before =abab=
-  because it is shorter by one symbol.
-
-  In plain old *dictionary ordering* lengths are ignored, so the *string* =abab=
-  would come before =baa=, because =a= comes before =b= in the *alphabet*.
+  For instance, in *lexicographical ordering* the *string* =baa= would come
+  before =abab= because it is shorter by one symbol. In plain old *dictionary
+  ordering* lengths are ignored, so the *string* =abab= would come before =baa=,
+  because =a= comes before =b= in the *alphabet*.
   
   Why this length consideration is essential will become clear when the \star
   operation is discussed below.
-:END:
-
-:FLESH-OUT:
-  - examples of state diagrams as graphs
-  - derivations as abstract syntax trees.
-  - simple models of finite-state automata (like a 1-bit computer (with two
-    states)).
 :END:
 
   To reiterate, a *language* is a subset of a set of *strings*. But which ones?
@@ -495,6 +525,12 @@ t
    In the rules for this PSG, note that the vertical bar (\vert) means OR, e.g., the
    NOUN rule produces either =cat= or =dog= (exclusive-OR):
 
+   Notice too that the terminals are just concrete words, the Nonterminals more
+   abstract word /types/ (e.g. NOUN) normally used to talk /about/ and classify
+   words. For the English language (as for any natural language) these terminal
+   words form the set of *symbols* comprising the *alphabet* in the sense
+   defined above.
+
    | P = [ |             |   |                                     |
    |       | SENTENCE    | \rightarrow | NOUN-PHRASE VERB-PHRASE NOUN-PHRASE |
    |       | SENTENCE    | \rightarrow | NOUN-PHRASE VERB-PHRASE             |
@@ -512,14 +548,14 @@ t
 :VTO:
   The process (called *derivation*) of producing a sequence of terminals from
   the Start Nonterminal by replacing Nonterminals one at a time by applying some
-  Rule is an iterative process illustrated below with two random components:
+  Rule is an iterative procedure illustrated below with two random components:
 :END:
   
   In the following sample PSG-implementing code, productions are represented as
   an alist of symbols. For each alist choice-list, the =car= is the symbol to
   the left of the arrow of a production, and the =cdr= captures the symbols to
   the right of the arrow, abbreviated LHS for left-hand-side, and RHS for
-  right-hand-side. The productions alist is reversed and stored as well. Which
+  right-hand-side. The =productions= alist is reversed and stored as well. Which
   alist (forward or reverse) to use at any step is the first choice that is
   randomly decided. Nonterminals are unbound symbols. Terminals are bound
   symbols whose values are either =t= or a string that differs from the symbol\rsquo{}s
@@ -528,17 +564,14 @@ t
   =VERB= and =ADVERB= rules) is the second choice that is randomly decided.
 
 #+BEGIN_SRC emacs-lisp :results silent
-  (setq the t es ""
-        hungry t sleepy t 
-        cat t dog t 
-        chases t runs t 
-        slowly t quickly t
+  (setq the t es "" hungry t sleepy t cat t dog t 
+        chases t runs t slowly t quickly t
         productions
         '((SENTENCE NOUN-PHRASE VERB-PHRASE NOUN-PHRASE)
           (SENTENCE NOUN-PHRASE VERB-PHRASE)
           (NOUN-PHRASE ARTICLE ADJECTIVE NOUN)
           (NOUN-PHRASE ARTICLE NOUN)
-          (VERB-PHRASE VERB-PHRASE ADVERB)
+          (VERB-PHRASE VERB ADVERB)
           (VERB-PHRASE VERB)
           (ARTICLE the es)
           (ADJECTIVE hungry sleepy)
@@ -551,7 +584,7 @@ t
     (and (symbolp sym) (boundp sym)))
 
 ;;; TODO could this be done with a lexical closure for random and random-hw-index?
-  (setq random-hw-index -1 random-hw-indices [1 1 0 0 0 1 1 1 1 1 1 1 1 1 1])
+  (setq random-hw-index -1 random-hw-indices [1 1 0 0 0 1 1 1 1 1 1])
   (defun random-hw (ignore) (elt random-hw-indices (incf random-hw-index))) 
 
   (defun nonterminals-remain (derivation)
@@ -580,16 +613,15 @@ t
 #+END_SRC 
 
    The following derivation would result if the sequence of calls to =random=
-   returned [1 1 0 0 0 1 1 1 1 1 1 1 1 1 1]:
+   returned [1 1 0 0 0 1 1 1 1 1 1]:
 
-   | SENTENCE | \rightarrow | NOUN-PHRASE VERB-PHRASE         |
-   |          | \rightarrow | ARTICLE NOUN VERB-PHRASE        |
-   |          | \rarr | ARTICLE NOUN VERB-PHRASE ADVERB |
-   |          | \rarr | ARTICLE NOUN VERB ADVERB        |
-   |          | \rightarrow | the NOUN VERB ADVERB            |
-   |          | \rightarrow | the dog VERB ADVERB             |
-   |          | \rightarrow | the dog runs ADVERB             |
-   |          | \rarr | the dog runs quickly            |
+   | SENTENCE | \rightarrow | NOUN-PHRASE VERB-PHRASE  |
+   |          | \rightarrow | ARTICLE NOUN VERB-PHRASE |
+   |          | \rarr | ARTICLE NOUN VERB ADVERB |
+   |          | \rightarrow | the NOUN VERB ADVERB     |
+   |          | \rightarrow | the dog VERB ADVERB      |
+   |          | \rightarrow | the dog runs ADVERB      |
+   |          | \rarr | the dog runs quickly     |
 
 #+BEGIN_SRC emacs-lisp
   (find-derivation 'SENTENCE)
@@ -639,6 +671,9 @@ t
   =the quick brown fox jumps over the lazy dog=
 
 *** TODO Answer
+
+   Add all of these (except the first, use it to replace the non-recursive
+   ADJECTIVE rule):
 
    ADJECTIVE \rightarrow hungry \vert sleepy \vert quick \vert brown \vert lazy
 
@@ -710,14 +745,14 @@ t
    Using the syntax-tree tool, build a parse tree for =the quick brown fox jumps
    over the lazy dog=.
 
-:ANSWER:
+  :ANSWER:
 #+BEGIN_SRC emacs-lisp
   (setq parsed [S [NP [ART the] [ADJ [ADJ quick] [ADJ brown]] [N
         fox]] [VP [V jumps] [PP [P over] [NP [ART the] [ADJ lazy]
         [N dog]]]]])
   (kill-new (format "%s" parsed))
 #+END_SRC
-:END:
+  :END:
 :END:
 
    Build parse trees for the valid phrases:
@@ -731,19 +766,23 @@ t
      :END:
 
      :EXERCISE:
-     the dog chases quickly quickly quickly
+     the dog runs quickly
      :END:
 
      :EXERCISE:
-     the sleepy dog chases the sleepy cat
+     the sleepy dog chases quickly the hungry cat
      :END:
+
+    #+ATTR_HTML: :alt subgraphs :title Subgraphs
+    [[https://firstthreeodds.org/images/subgraphs.png][https://firstthreeodds.org/images/subgraphs.png]]
+
 
 *** TODO A Grammar for Well-formed S-expressions
 
-  The basis for this grammar is a /skeleton/ for matching opening and closing
-  parentheses, which has a recursive rule for enclosing in parentheses, and one
-  for expanding the length of the string (plus a third for terminating the
-  recursion):
+  The basis for this next grammar is a /skeleton/ for matching opening and
+  closing parentheses, which has a recursive rule for enclosing in parentheses,
+  and one for expanding the length of the string (plus a third for terminating
+  the recursion):
 
   1. SKEL \rarr OP SKEL CP
   2. SKEL \rarr SKEL SKEL
@@ -763,7 +802,7 @@ t
   |      | \rarr | ( ( ) )               |
 
   But now a simple binary choice between forward and reverse productions fails,
-  because of the /three/ possible expansions for SKEL.
+  because of the /three/ possible derivations for SKEL.
 
 #+BEGIN_SRC emacs-lisp :results silent
   (setq es "" open "(" close ")"
@@ -781,7 +820,11 @@ t
 
 #+RESULTS:
 
-* TODO Save a Harder Challenge for DM2
+:EXERCISE:
+ Solve the problem in the code with finding a derivation starting with SKEL.
+:END:
+
+* TODO Save a Harder Challenge for DM2                             :noexport:
 
   Go back to the original Grammar.
 
@@ -802,7 +845,7 @@ t
   (The) Buffalo buffalo (that) Buffalo buffalo (often) buffalo (in turn) buffalo
   (other) Buffalo buffalo.
 
-* TODO Save Fancy Nouns for DM2
+* TODO Save Fancy Nouns for DM2                                    :noexport:
 
   Fancy nouns are *nested* nouns, for example "the fresh brownies that the
   little rascals without permission devoured" --- which could be rephrased as
@@ -826,7 +869,7 @@ t
   it\rsquo{}s just an article followed by any number of adjectives followed by a plain
   old (non-nested) noun!
 
-* Nested Nouns
+* TODO Save Nested Nouns for DM2                                   :noexport:
  
   NESTED-NOUN \rightarrow NESTED-NOUN RELATIVE-PRONOUN VERB NESTED-NOUN
 
@@ -916,7 +959,7 @@ t
   How these separate operations compose into one graph can get somewhat
   complicated, but the most important rule is:
 
-  /Every node must have an outgoing link for each symbol in the alphabet./
+  /Every node must have one outgoing link for each symbol in the alphabet./
 
   A complicating feature of these operators is that they can be applied to more
   than just one symbol, e.g., (0 \cup 1)^{\star}, which means any number of
@@ -1004,11 +1047,12 @@ t
   Shedding our machine persona, we look at it once again as an actor, or an
   agent making decisions. Accept states serve as language membership detectors.
   If a candidate input string is exhausted (entirely consumed by the transitions
-  from state to state) at the exact time an accept state is reached, the string
-  is accepted as part of the language. A string exhausted in a non-accepting
-  state is rejected --- it is NOT part of the language. If a machine accepts *all*
-  strings that belong to a specific language, and rejects *all* those that do NOT
-  belong to the language, then the machine is said to \ldquo{}recognize\rdquo the language.
+  from state to state) at the exact transition an accept state is reached, the
+  string is accepted as part of the language. A string exhausted in a
+  non-accepting state is rejected --- it is *not* part of the language. If a
+  machine accepts *all* strings that belong to a specific language, and rejects
+  *all* those that do *not* belong to the language, then the machine is said to
+  *recognize* the language. 
 
   For example, the machine below recognizes the language [01 011 0111]:
  
@@ -1365,8 +1409,7 @@ t
    |                        |      | or have a single Nonterminal and be       |
    |                        |      | all like Ntl, or all like tlN).           |
 
-**** DONE Redo These Classification Exercises
-     CLOSED: [2017-05-17 Wed 16:34]
+**** TODO Save These Classification Exercises for DM2
 
    In the following exercises you must classify/distinguish the four grammar
    types.
@@ -1467,6 +1510,57 @@ t
 
 
 * )
+
+ <<a poem by Wordsworth>>
+ - a poem by Wordsworth :: [[https://www.poetryfoundation.org/poems-and-poets/poems/detail/45518][The French Revolution as It Appeared to Enthusiasts at Its Commencement]]
+
+<<The more I think about language>>
+ - The more I think about language :: As reported in the book /Incompleteness:
+      The Proof and Paradox of Kurt G\ouml{}del/, by Rebecca Goldstein, page 110. See
+      link to book below.
+
+ <<Math writing is notorious>>
+ - Math writing is notorious :: Adapted from a document on Mathematical Writing
+      by Donald E. Knuth, Tracy Larrabee, and Paul M. Roberts, based on a course
+      given at Stanford University, here\rsquo{}s an example of bad math writing:
+
+      If L^{+}(P, N_{0}) is the set of functions f : P \rarr N_{0} with the property that
+
+      \exists_{n_{0} \in N} \forall_{p \in P} p \ge n_{0} \rArr f(p) = 0
+
+      then there exists a bijection N_1 \rarr L^{+} (P, N_{0}) such that if n \rarr f then  
+
+      n = \prod_{p \in P} p^{f(p)}.
+
+      Here P is the prime numbers, and N_{1} = N_{0} \setminus {0}.
+
+      Here is Donald Knuth, writing with *clarity* what the above is trying to
+      say:
+
+      According to the Fundamental Theorem of Arithmetic, each positive integer
+      u can be expressed in the form 
+
+      u = 2^a 3^b 5^c 7^d 11^e \dots
+
+      where *all* primes in increasing order are in the product, where the
+      exponents a, b, c, d, e, \dots are uniquely determined nonnegative integers,
+      and where all but a finite number of the exponents are zero.
+
+ <<foreign language of mathematical jargon>>
+ - foreign language of mathematical jargon :: From the book /Coincidences,
+      Chaos, and All That Math Jazz --- Making Light of Weighty Ideas/ by Edward
+      B. Burger and Michael Starbird, page viii:
+      [[https://www.amazon.com/Coincidences-Chaos-That-Math-Jazz/dp/0393329313]]
+
+ <<vocabulary and syntax of human language>>
+ - vocabulary and syntax of human language :: From the book /Interactions: A
+      Journey Through the Mind of a Particle Physicist and the Matter of This
+      World/, by Sheldon L. Glashow, page 47:
+      [[https://www.amazon.com/Interactions-Journey-Through-Particle-Physicist/dp/0446513156]]
+
+ <<a description of formal systems>>
+ - a description of formal systems :: From the book /Incompleteness: The Proof and Paradox of Kurt G\ouml{}del/, by Rebecca Goldstein, page 86:
+
 
 ** TODO Remove this heading once endnotes are in place
   Endnote about Sieve of Eratosthenes (delving deeper into PRIMES):
@@ -1573,6 +1667,8 @@ t
   that negation once done.
 
 #+BEGIN_SRC emacs-lisp
+  (require 'calc-misc) ;; for math-posp
+
   (defun negate-multiple (n m)
     (if (and (/= n m) (zerop (mod n m)))
         (if (< n 0) n (- n))
@@ -1710,11 +1806,11 @@ t
   more I think about language, the more it amazes me that people ever understand
   each other." See also page 112, at the top.
 
-** TODO For an Epilogue
+** TODO Develop Ideas For an Epilogue, or Other Episodic Installments
 
-  Solving a math problem to get clues to Til\rsquo{}s unknown whereabouts is a fitting
-  conclusion, while also foreshadowing further adventures/installments of TIA
-  interaction.
+  Solving a math problem to get clues to Til\rsquo{}s unknown whereabouts would be a
+  fitting conclusion, while also foreshadowing further interaction and learning
+  adventures of Til, Ila and Abu.
 
   Til has gone missing for two weeks. He knows where he is, but has no way to
   communicate his location in the desert where he went to seek solitude.

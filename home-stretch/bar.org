@@ -1,0 +1,523 @@
+#+TITLE: Last Chapter
+#+AUTHOR: Rick Neff
+#+EMAIL: rick.neff@gmail.com
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:t toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t ':t
+#+STARTUP: showeverything entitiespretty
+
+   "Are these exported as smart quotes"?
+
+#+BEGIN_SRC emacs-lisp
+  (let* ((all (number-sequence 1 199))
+         (all-odds (delete-if 'evenp all))
+         (all-floored-square-roots (mapcar (lambda (n) (floor (sqrt n))) all-odds)))
+    all-floored-square-roots)
+#+END_SRC
+
+#+RESULTS:
+| 1 | 1 | 2 | 2 | 3 | 3 | 3 | 3 | 4 | 4 | 4 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 6 | 6 | 6 | 6 | 6 | 6 | 7 | 7 | 7 | 7 | 7 | 7 | 7 | 7 | 8 | 8 | 8 | 8 | 8 | 8 | 8 | 8 | 9 | 9 | 9 | 9 | 9 | 9 | 9 | 9 | 9 | 9 | 10 | 10 | 10 | 10 | 10 | 10 | 10 | 10 | 10 | 10 | 11 | 11 | 11 | 11 | 11 | 11 | 11 | 11 | 11 | 11 | 11 | 11 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 13 | 13 | 13 | 13 | 13 | 13 | 13 | 13 | 13 | 13 | 13 | 13 | 13 | 13 | 14 | 14 |
+
+
+#+BEGIN_SRC emacs-lisp
+  (require 'calc-comb)
+
+  (defun bernoulli-probability (n k p q)
+    (* (calcFunc-choose n k) (expt p k) (expt q (- n k))))
+
+  (let* ((p 0.00016)
+         (q (- 1 p))
+         (n 100))
+    (loop for k from 0 to 10
+          collect (list k (bernoulli-probability n k p q))))
+#+END_SRC
+
+#+RESULTS:
+|  0 |     0.9841260602387347 |
+|  1 |    0.01574853672969651 |
+|  2 | 0.00012474837063849854 |
+|  3 |  6.521224901356408e-07 |
+|  4 |  2.530640164152551e-09 |
+|  5 |   7.77537064357961e-12 |
+|  6 | 1.9700757751641943e-14 |
+|  7 | 4.2335258867803827e-17 |
+|  8 |  7.875618248331248e-20 |
+|  9 | 1.2883072471088258e-22 |
+| 10 | 1.8760755238742706e-25 |
+
+#+BEGIN_SRC dot :file fig-three-state-union.png
+  digraph {
+
+    rankdir="LR";
+    size="4,3";
+
+    node [shape=circle];
+
+    Q0 [label=""];
+    Q1 [label=""];
+    Q2 [label=""];
+
+    Q0 -> Q1 [label=0];
+    Q0 -> Q2 [label=1];
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-three-state-union.png]]
+
+#+BEGIN_SRC dot :file fig-two-state-concatenation.png
+  digraph {
+
+    rankdir="LR";
+    size="4,1";
+
+    node [shape=circle]; 
+    Q0 [label=""];
+    Q1 [label=""];
+    Q2 [label=""];
+
+    Q0 -> Q1 [label=0];
+    Q1 -> Q2 [label=1];
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-two-state-concatenation.png]]
+
+#+BEGIN_SRC dot :file fig-one-state-star.png
+  digraph {
+
+    rankdir="LR";
+    size="2,2";
+
+    node [shape=circle];
+    Q0 [label=""]
+
+    Q0 -> Q0 [label=0];
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-one-state-star.png]]
+
+#+BEGIN_SRC dot :file fig-bitstrings-ending-in-one.png
+  digraph {
+
+    rankdir="LR";
+    size="3,2";
+
+    node [shape=circle];
+    Q0 [label=""];
+    Q1 [label=""];
+
+    Q0 -> Q0 [label=0];
+    Q0 -> Q1 [label=1];
+    Q1 -> Q1 [label=1];
+    Q1 -> Q0 [label=0];
+  }
+#+END_SRC
+
+
+#+BEGIN_SRC dot :file fig-start-state.png
+  digraph {
+    rankdir="LR";
+    size="2,2";
+
+    node [shape=none]; start;
+    node [shape=circle]; S0;
+    start [label=""]; 
+    start -> S0;
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-start-state.png]]
+
+#+BEGIN_SRC dot :file fig-state-transition-on-a-0.png
+  digraph {
+    rankdir="LR";
+    size="4,2";
+
+    node [shape=circle];
+    S1-> S2 [label="0"];
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-state-transition-on-a-0.png]]
+
+#+BEGIN_SRC dot :file fig-state-transition-on-both-0-and-1.png
+  digraph {
+    rankdir="LR";
+    size="4,2";
+
+    node [shape=circle];
+    S1 -> S2 [label="0,1"];
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-state-transition-on-both-0-and-1.png]]
+
+#+BEGIN_SRC dot :file fig-final-state.png
+  digraph {
+    rankdir="LR";
+    size="2,2";
+
+    node [shape=doublecircle]; S4;
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-final-state.png]]
+
+#+BEGIN_SRC dot :file fig-three-string-language.png
+  digraph {
+    rankdir="LR";
+    size="5,1";
+
+    node [shape=circle]; S A;
+    node [shape=doublecircle]; B C D;
+
+    S -> A [label=0];
+    A -> B [label=1];
+    B -> C [label=1];
+    C -> D [label=1];
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-three-string-language.png]]
+
+#+BEGIN_SRC dot :file fig-three-string-language-complete.png
+  digraph {
+    size="5,3";
+
+    node [shape=circle]; S A R;
+    node [shape=doublecircle]; B C D;
+
+    S -> A [label=0];
+    A -> B [label=1];
+    B -> C [label=1];
+    C -> D [label=1];
+    S -> R [label=1];
+    A -> R [label=0];
+    B -> R [label=0];
+    C -> R [label=0];
+    D -> R [label="0,1"];
+    R -> R [label="0,1"];
+    { rank=same; S A B C D }
+    { rank=same; R }
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-three-string-language-complete.png]]
+
+#+BEGIN_SRC dot :file fig-A-yields-0A.png
+  digraph {
+
+    rankdir="LR";
+    size="2,2";
+
+    node [shape=circle];
+
+    A -> A [label=0];
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-A-yields-0A.png]]
+
+#+BEGIN_SRC dot :file fig-bitstrings-starting-with-one.png
+  digraph {
+
+    rankdir="LR";
+    size="2,2";
+
+    node [shape=circle]; S;
+    node [shape=doublecircle]; A;
+
+    S -> A [label=1];
+    A -> A [label="0,1"];
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-bitstrings-starting-with-one.png]]
+
+
+:    1
+:  /   \
+:  \   /
+:   v /
+:  (s0)---0--->(s1)
+:    ^         ^/|
+:    |        // |
+:    |       //  |
+:    |      //   |
+:    1     01    0
+:    |    //     |
+:    |   //      | 
+:    |  //       |
+:    | //        |
+:    |/v         v 
+: ((s2))<--1--((s3))
+:               ^ \
+:              /   \
+:              \   /
+:                0
+
+#+BEGIN_SRC dot :file fig-second-to-last-is-0.png 
+  digraph {
+    size="3,5";
+
+    node [shape=circle]; S0 S1;
+    node [shape=doublecircle]; S2 S3;
+
+    S0 -> S0 [label=1 headport=n tailport=n];
+    S0 -> S1 [label=0];
+    S1 -> S2 [label=1];
+    S1 -> S3 [label=0];
+    S2 -> S0 [label=1];
+    S2 -> S1 [label=0];
+    S3 -> S2 [label=1];
+    S3 -> S3 [label=0 headport=s tailport=s];
+    { rank=same; S0 S1 }
+    { rank=same; S2 S3 }
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-second-to-last-is-0.png]]
+
+
+:  /\         /\
+: NO \       / MO 
+:  \ /       \ /
+:   v         v
+: (OFF)--MO->(ON)
+:   ^         |
+:   |         |
+:   +----NO---+
+#+BEGIN_SRC dot :file fig-one-bit-computer.png
+  digraph {
+    rankdir="LR";
+    size="5,3";
+
+    node [shape=circle];
+
+    S0 [label=OFF];
+    S1 [label=ON];
+
+    S0 -> S0 [label="NO-MOTION"];
+    S0 -> S1 [label="MOTION"];
+    S1 -> S1 [label="MOTION"];
+    S1 -> S0 [label="NO-MOTION"];
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-one-bit-computer.png]]
+
+#+BEGIN_SRC dot :file fig-chomsky-hierarchy.png
+#digraph G { bgcolor="purple:pink" label="agraph" fontcolor="white"
+# subgraph cluster1 {fillcolor="blue:cyan" label="acluster" fontcolor="white" style="filled" gradientangle="270"
+#	node [shape=box fillcolor="red:yellow" style="filled" gradientangle=90]
+#	anode;
+#}
+# 
+  digraph Chomsky { label="Universal Set of All Languages (the superset of Types 0-3)"
+    subgraph cluster1 { label="Type 0 Recursively Enumerable Languages"
+       subgraph cluster2 { label="Type 1 Context Sensitive Languages"
+         subgraph cluster3 { label="Type 2 Context Free Languages"
+           node [shape=box] innermost [label="Type 3 Regular Languages"];
+      }
+    }
+  }
+}
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-chomsky-hierarchy.png]]
+
+#+BEGIN_SRC dot :file fig-leaves-of-the-parse-tree.png
+  graph leaves {
+    rankdir="LR";
+    size="6,1";
+
+    node [shape=ellipse];
+
+    a [label=the];
+    b [label=hungry];
+    c [label=dog];
+    d [label=chases];
+    e [label=the];
+    f [label=sleepy];
+    g [label=cat];
+
+    a -- b [style=invis];
+    b -- c [style=invis];
+    c -- d [style=invis];
+    d -- e [style=invis];
+    e -- f [style=invis];
+    f -- g [style=invis];
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-leaves-of-the-parse-tree.png]]
+
+:  (the hungry dog chases the sleepy cat)
+
+#+BEGIN_SRC dot :file fig-leaves-and-parents-of-the-parse-tree.png
+  graph leavesandparents {
+    size="6,3";
+
+    node [shape=box];
+
+    pa [label=ART];
+    pb [label=ADJ];
+    pc [label=N];
+    pd [label=V];
+    pe [label=ART];
+    pf [label=ADJ];
+    pg [label=N];
+
+    a [shape=ellipse label=the];
+    b [shape=ellipse label=hungry];
+    c [shape=ellipse label=dog];
+    d [shape=ellipse label=chases];
+    e [shape=ellipse label=the];
+    f [shape=ellipse label=sleepy];
+    g [shape=ellipse label=cat];
+
+    pa -- a;
+    pb -- b;
+    pc -- c;
+    pd -- d;
+    pe -- e;
+    pf -- f;
+    pg -- g;
+
+    a -- b [style=invis];
+    b -- c [style=invis];
+    c -- d [style=invis];
+    d -- e [style=invis];
+    e -- f [style=invis];
+    f -- g [style=invis];
+    { rank=same; pa pb pc pd pe pf pg }
+    { rank=same; a b c d e f g }
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-leaves-and-parents-of-the-parse-tree.png]]
+
+:  ((ART the) (ADJ hungry) (N dog) (V chases) (ART the) (ADJ sleepy) (N cat))
+
+#+BEGIN_SRC dot :file fig-almost-complete-parse-tree.png
+  graph almostcomplete {
+    size="6,4";
+
+    node [shape=box];
+
+    np1 [label="NOUN-PHRASE"];
+    vp  [label="VERB-PHRASE"];
+    np2 [label="NOUN-PHRASE"];
+
+    pa [label=ART];
+    pb [label=ADJ];
+    pc [label=N];
+    pd [label=V];
+    pe [label=ART];
+    pf [label=ADJ];
+    pg [label=N];
+
+    a [shape=ellipse label=the];
+    b [shape=ellipse label=hungry];
+    c [shape=ellipse label=dog];
+    d [shape=ellipse label=chases];
+    e [shape=ellipse label=the];
+    f [shape=ellipse label=sleepy];
+    g [shape=ellipse label=cat];
+
+    np1 -- pa -- a;
+    np1 -- pb -- b;
+    np1 -- pc -- c; 
+    vp -- pd -- d;
+    np2 -- pe -- e;
+    np2 -- pf -- f;
+    np2 -- pg -- g; 
+
+    a -- b [style=invis];
+    b -- c [style=invis];
+    c -- d [style=invis];
+    d -- e [style=invis];
+    e -- f [style=invis];
+    f -- g [style=invis];
+    { rank=same; np1 vp np2 }
+    { rank=same; pa pb pc pd pe pf pg }
+    { rank=same; a b c d e f g }
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-almost-complete-parse-tree.png]]
+
+:  ((NP (ART the) (ADJ hungry) (N dog)) (VP (V chases)) (NP (ART the) (ADJ sleepy) (N cat)))
+
+#+BEGIN_SRC dot :file fig-complete-parse-tree.png
+  graph complete {
+    size="6,5";
+
+    node [shape=box];
+
+    S   [label="SENTENCE"];
+    np1 [label="NOUN-PHRASE"];
+    vp  [label="VERB-PHRASE"];
+    np2 [label="NOUN-PHRASE"];
+
+    pa [label=ART];
+    pb [label=ADJ];
+    pc [label=N];
+    pd [label=V];
+    pe [label=ART];
+    pf [label=ADJ];
+    pg [label=N];
+
+    a [shape=ellipse label=the];
+    b [shape=ellipse label=hungry];
+    c [shape=ellipse label=dog];
+    d [shape=ellipse label=chases];
+    e [shape=ellipse label=the];
+    f [shape=ellipse label=sleepy];
+    g [shape=ellipse label=cat];
+
+    S -- np1;
+    S -- vp;
+    S -- np2;
+    
+    np1 -- pa -- a;
+    np1 -- pb -- b;
+    np1 -- pc -- c; 
+    vp -- pd -- d;
+    np2 -- pe -- e;
+    np2 -- pf -- f;
+    np2 -- pg -- g; 
+
+    a -- b [style=invis];
+    b -- c [style=invis];
+    c -- d [style=invis];
+    d -- e [style=invis];
+    e -- f [style=invis];
+    f -- g [style=invis];
+    { rank=same; np1 vp np2 }
+    { rank=same; pa pb pc pd pe pf pg }
+    { rank=same; a b c d e f g }
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-complete-parse-tree.png]]
+
+:  (S (NP (ART the) (ADJ hungry) (N dog)) (VP (V chases)) (NP (ART the) (ADJ sleepy) (N cat)))
