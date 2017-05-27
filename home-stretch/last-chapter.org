@@ -4,6 +4,7 @@
 #+LANGUAGE: en
 #+OPTIONS: H:4 num:nil toc:t \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t ':nil d:t
 #+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-readtheorg.setup
 
 * TODO Add this exercise somewhere                                :noexport:
 :EXERCISE:
@@ -33,13 +34,31 @@
    :END:
 :END:
 
-* TODO Check out the settings in these files                       :noexport:
+* TODO Check out the following files/items                         :noexport:
   [[http://julienchastang.com/dotemacs.html]]
   [[http://orgmode.org/worg/org-contrib/org-drill.html]]
-
+  Follow this link to execute =(org-agenda)=: [[elisp:org-agenda][Org Agenda]]
+  Learned from org-mode talk by Harry Schwartz:   
+#+BEGIN_SRC emacs-lisp
+  (org-babel-load-file "configuration.org")
+#+END_SRC
+** TODO Look at Getting Things Done book (GTD)
+*** Look at Jeff Atwood (Trash Your TODO List)
+*** ownCloud (like a DropBox/Google Drive replacemet)
+*** Org Capture Templates
+*** ABook integrates with Mutt (Org Contacts -- or bbdb)
+*** Package org2blog (org document to Wordpress)
+*** Package org-publish 
+*** ox-twbs (Org export Twitter Bootstrap)
+*** ox-gfm (Github Flavored Markdown)
+*** org-drill (flash cards)
+*** Orgzly (on Android)
+*** Drafts (on iOS)
+*** entr (generalized iNotify tool)
+*** Recognize the arguments in [[https://www.youtube.com/watch?v=QM1iUe6IofM][OOP is Bad]] by Brian Will
 * THR
 
-** TODO YZ@
+** YZ@
 
   \ldquo{}Isn\rsquo{}t it interesting how languages either facilitate or impede
   communication?\rdquo asked Til, just as Ila and Abu entered his den. Ila replied,
@@ -123,10 +142,10 @@
   of poetry? Poets are always scrambling word order to fit some rhyme or meter
   scheme. Like in [[a poem by Wordsworth][a poem by Wordsworth]] that I just read:\rdquo
 
-#+BEGIN_QUOTE
+#+BEGIN_VERSE
   Bliss was it in that dawn to be alive.
   But to be young was very Heaven!
-#+END_QUOTE
+#+END_VERSE
 
   Said Til, \ldquo{}Or from a more familiar poem: \lsquo{}Quoth the raven\rsquo instead of \lsquo{}The raven
   said.\rsquo Still perfectly correct. In fact, saying \lsquo{}The raven quoth\rsquo is *not*
@@ -419,7 +438,7 @@
 
 #+BEGIN_SRC emacs-lisp
   (setq a-as-string "361070123498760381765950923497698325576139879587987251757151" 
-        b-as-string "36107058266725245759262937693558834387849309867353286761847615132153745"
+        b-as-string "36107058266725245759262937693558834387849309867353286761847615132"
         is-a-less-than-b (if (< (length a-as-string) (length b-as-string))
                              "Yes, a < b."
                            "No, a is not < b."))
@@ -428,7 +447,7 @@
 : Yes, a < b.
 
   \ldquo{}That\rsquo{}s easy! =b= is bigger, because it has more digits,\rdquo said Ila. \ldquo{}Right,\rdquo
-  said Abu. \ldquo{}At least, as long as the first dozen digits of =b= are not zeros!\rdquo
+  said Abu. \ldquo{}At least, as long as the first five digits of =b= are not zeros!\rdquo
   Ila nodded agreement, \ldquo{}And even if the strings were the same length, a
   digit-by-digit comparison would soon reveal the answer.\rdquo Abu quickly added,
   \ldquo{}So, banning leading zeros in these strings-of-digits, /lexicographical/
@@ -448,36 +467,31 @@
   smile.
 
                     -~-~-~-~-~-
+*** ZCF 
 
    In normal usage, a language is something we use to communicate, in speaking
    or writing. In theoretical computer science, a language is no more and no
    less than some subset of a set of all strings over some alphabet. Related
    formal definitions follow:
 
-:VTO:
+#+begin_note
     An *alphabet* is any non-empty, finite set (typically abbreviated \Sigma).
 
     Not letters, *symbols* are what the members or elements of a generic
-    *alphabet* are called.
+    alphabet are called.
 
-    A *string* is a finite *sequence* of *symbols* from a given *alphabet*.
-
-    These are usually written as symbols placed side-by-side without adornments
-    of brackets or braces, commas or spaces --- so abab rather than {a, b, a, b}
-    or [a b a b]. They are thus like lisp symbols, whose names are lisp strings,
-    which are sequences of characters, which are integers. They differ from lisp
-    symbols by accommodating more alphabets. For example, 123 is a *string* over
-    the alphabet [0 1 2 3 4 5 6 7 8 9] --- in lisp it would be a number.
-
-    The *length* of a *string* is the number of *symbols* contained in the *string*.
-
-    \vert{}w\vert denotes the *length* of w, in another overloading of vertical bars.
-    
-    The *empty* string is a *string* that has a *length* of zero. (Abbreviated \lambda or \epsilon.)
+    A *string* is a finite sequence of symbols from a given alphabet. These are
+    usually written as symbols placed [[side-by-side without adornments][side-by-side without adornments]] of
+    brackets or braces, commas or spaces --- so abab rather than {a, b, a, b} or
+    [a b a b].
+ 
+    The *length* of a string is the number of symbols contained in the string.
+    \vert{}w\vert denotes the length of w, in another overloading of vertical bars. The
+    *empty* string (abbreviated \lambda or \epsilon) is a string that has a length of zero.
    
-    The process of appending the *symbols* of one string to the end of another
-    *string*, in the same order, is called *concatenation*.
-:END:
+    The process of appending the symbols of one string to the end of another
+    string, in the same order, is called *concatenation*.
+#+end_note
 
   There is an operation in almost all programming languages to perform string
   concatenation, e.g.:
@@ -488,39 +502,39 @@
 
 : "ABCXYZ"
 
-:VTO:
-  A method of ordering *strings* called *lexicographic ordering* differs from
+#+begin_note
+  A method of listing strings called *lexicographic ordering* differs from
   so-called *dictionary ordering* in one essential way. The former method sorts
-  *strings* /first/ by increasing *length* (so shorter *strings* come before
-  longer ones) and /then/ by the predefined (*dictionary*) order of the *symbols*
-  as given in association with the *strings*\rsquo *alphabet*.
+  strings /first/ by increasing length (so shorter strings come before longer
+  ones) and /then/ by the predefined (dictionary) order of the symbols as given
+  in association with the strings\rsquo alphabet.
+#+end_note
 
-  For instance, in *lexicographical ordering* the *string* =baa= would come
-  before =abab= because it is shorter by one symbol. In plain old *dictionary
-  ordering* lengths are ignored, so the *string* =abab= would come before =baa=,
-  because =a= comes before =b= in the *alphabet*.
-  
+  For instance, in lexicographical ordering the string =baa= would come
+  before =abab= because it is shorter by one symbol. In plain old dictionary
+  ordering lengths are ignored, so the string =abab= would come before =baa=,
+  because =a= comes before =b= in the alphabet.
+
   Why this length-considering ordering is preferred will become clear when the \star
   operation is discussed below.
-:END:
 
-  To reiterate, a *language* is a subset of a set of *strings*. But which ones?
-  That\rsquo{}s where *grammars* come into play.
+  To reiterate, a language is a subset of a set of strings. But which ones?
+  That\rsquo{}s where grammars come into play.
 
-:VTO:
+#+begin_note
    A *Phrase-Structure Grammar* (PSG) is a four-tuple:
 
-   G = [N T S P] where
+   =[N T S P]= where
 
-   - N is a set of Nonterminals (also called Variables)
-   - T is a set of Terminals (N \cap T = \emptyset)
-   - S is the Start Nonterminal (S \in N)
-   - P is a finite set of Productions (Rules), each one mapping a Nonterminal to
-     a string of Nonterminals and Terminals.
-:END:
+   - =N= is a set of *Nonterminals* (also called *Variables*)
+   - =T= is a set of *Terminals* (=N= \cap =T= = \emptyset)
+   - =S= is the *Start* Nonterminal (=S= \in =N=)
+   - =P= is a finite set of *Productions* (AKA *Rules*), each one mapping a
+     Nonterminal to a string of Nonterminals and Terminals.
+#+end_note
 
-   To start with something familiar, here is a sample PSG [N T S P] for a (super
-   small) subset of the English language:
+   To start with something familiar, here is a sample PSG\rsquo{}s =[N T S P]= for a
+   (super small) subset of the English language:
 
 :  N = [SENTENCE NOUN-PHRASE VERB-PHRASE ARTICLE ADJECTIVE NOUN VERB ADVERB]
 :
@@ -534,8 +548,8 @@
    Notice too that the terminals are just concrete words, the Nonterminals more
    abstract word /types/ (e.g. NOUN) normally used to talk /about/ and classify
    words. For the English language (as for any natural language) these terminal
-   words form the set of *symbols* comprising the *alphabet* in the sense
-   defined above.
+   words form the set of symbols comprising the alphabet in the sense defined
+   above.
 
    | P = [ |             |   |                                     |
    |       | SENTENCE    | \rightarrow | NOUN-PHRASE VERB-PHRASE NOUN-PHRASE |
@@ -551,23 +565,27 @@
    |       | ADVERB      | \rightarrow | slowly \vert quickly                    |
    | ]     |             |   |                                     |
 
-:VTO:
-  The process (called *derivation*) of producing a sequence of terminals from
-  the Start Nonterminal by replacing Nonterminals one at a time by applying some
-  Rule is an iterative procedure illustrated below with two random components:
-:END:
-  
-  In the following sample PSG-implementing code, productions are represented as
-  an alist of symbols. For each alist choice-list, the =car= is the symbol to
-  the left of the arrow of a production, and the =cdr= captures the symbols to
-  the right of the arrow, abbreviated LHS for left-hand-side, and RHS for
-  right-hand-side. The =productions= alist is reversed and stored as well. Which
-  alist (forward or reverse) to use at any step is the first choice that is
-  randomly decided. Nonterminals are unbound symbols. Terminals are bound
-  symbols whose values are either =t= or a string that differs from the symbol\rsquo{}s
-  string name (e.g., =es= abbreviating \ldquo{}empty string\rdquo). Which terminal to use
-  when only terminals are options (e.g., in the =ARTICLE=, =ADJECTIVE=, =NOUN=,
-  =VERB= and =ADVERB= rules) is the second choice that is randomly decided.
+#+begin_note
+  The process of producing a sequence of terminals from the Start Nonterminal by
+  replacing Nonterminals one at a time by applying some rule is called
+  *derivation*. We apply a single rule and *derive* one string =R= from another
+  string =L= if the rule has =L= on the left of its arrow and =R= on the right
+  thereof.
+#+end_note
+ 
+  Derivation is thus an iterative process, illustrated with two random
+  components in the following sample PSG-implementing code. Here, productions
+  are represented as an alist of symbols. For each alist choice-list, the =car=
+  is the symbol to the left of the arrow of a production, and the =cdr= captures
+  the symbols to the right of the arrow, abbreviated LHS for left-hand-side, and
+  RHS for right-hand-side. The =productions= alist is reversed and stored as
+  well. Which alist (forward or reverse) to use at any step is the first choice
+  that is randomly decided. Nonterminals are unbound symbols. Terminals are
+  bound symbols whose values are either =t= or a string that differs from the
+  symbol\rsquo{}s string name (e.g., =es= abbreviating \ldquo{}empty string\rdquo). Which terminal
+  to use when only terminals are options (e.g., in the =ARTICLE=, =ADJECTIVE=,
+  =NOUN=, =VERB= and =ADVERB= rules) is the second choice that is randomly
+  decided.
 
 #+BEGIN_SRC emacs-lisp :results silent
   (setq the t es "" hungry t sleepy t cat t dog t 
@@ -615,7 +633,7 @@
 #+END_SRC 
 
    The following derivation would result if the sequence of calls to =random=
-   returned [1 1 0 0 0 1 1 1 1 1 1]:
+   returned =[1 1 0 0 0 1 1 1 1 1 1]=:
 
    | SENTENCE | \rightarrow | NOUN-PHRASE VERB-PHRASE  |
    |          | \rightarrow | ARTICLE NOUN VERB-PHRASE |
@@ -629,7 +647,6 @@
   (find-derivation 'SENTENCE)
 #+END_SRC
 
-#+RESULTS:
 : the dog runs quickly
 
    Using the above example as a guide, produce derivations for each of the
@@ -680,17 +697,19 @@
 
    VERB-PHRASE \rightarrow VERB PREPOSITIONAL-PHRASE
 
+#+begin_note
    The derivation of a syntactically valid structured phrase from the top down
    can be visualized as the reverse of the process of building, from the bottom
    up, i.e., from leaves to root, a *syntax tree* (AKA a *parse tree*).
+#+end_note
 
    For example, a valid sentence forms the leaves:
 
-#+BEGIN_SRC dot :file img/fig-leaves-of-the-parse-tree.png
+#+BEGIN_SRC dot :file img/fig-leaves-of-the-parse-tree.png :results output :exports results :eval no-export
   graph leaves {
-    rankdir="LR";
-    size="6,1";
+    size="6,3";
 
+    node [shape=none label=""] pa;
     node [shape=ellipse];
 
     a [label=the];
@@ -701,23 +720,25 @@
     f [label=sleepy];
     g [label=cat];
 
+    pa -- a [style=invis];
     a -- b [style=invis];
     b -- c [style=invis];
     c -- d [style=invis];
     d -- e [style=invis];
     e -- f [style=invis];
     f -- g [style=invis];
+    { rank=same; a b c d e f g }
   }
 #+END_SRC
 
-#+ATTR_HTML: :alt leaves :title Leaves
+#+RESULTS:
 [[file:img/fig-leaves-of-the-parse-tree.png]]
 
     Each terminal is given a parent, and as an alternate representation, each
     parent-child is rendered in tree form as a two-element list. Abbreviating
     ADJECTIVE as ADJ, ADVERB as ADV, ARTICLE as ART, NOUN as N, and VERB as V:
 
-#+BEGIN_SRC dot :file img/fig-leaves-and-parents-of-the-parse-tree.png
+#+BEGIN_SRC dot :file img/fig-leaves-and-parents-of-the-parse-tree.png :exports results :eval no-export
   graph leavesandparents {
     size="6,3";
 
@@ -766,7 +787,7 @@
    Continuing on up the tree, we are also building a nested alist (albeit with
    repeated keys). Abbreviating NOUN-PHRASE as NP, and VERB-PHRASE as VP:
 
-#+BEGIN_SRC dot :file img/fig-almost-complete-parse-tree.png
+#+BEGIN_SRC dot :file img/fig-almost-complete-parse-tree.png :exports results :eval no-export
   graph almostcomplete {
     size="6,4";
 
@@ -820,7 +841,7 @@
    Finishing with SENTENCE (abbrev. S) being the root of the tree, with the list
    form consing S on the front:
 
-#+BEGIN_SRC dot :file img/fig-complete-parse-tree.png
+#+BEGIN_SRC dot :file img/fig-complete-parse-tree.png :exports results :eval no-export
   graph complete {
     size="6,5";
 
@@ -886,7 +907,7 @@
   (kill-new (format "%s" parsed))
 #+END_SRC
 
-  [[file:simple-phrase.png][Visualize the hungry dog chasing the sleepy cat]]
+  [[file:simple-phrase.png][Visualize the hungry dog chasing the sleepy cat]].
 
 :EXERCISE:
    Using the syntax-tree tool, build a parse tree for =the quick brown fox jumps
@@ -1045,12 +1066,12 @@
   (kill-new (format "%s" parsed))
 #+END_SRC
 
-*** TODO ZCF 
 
-  VTO: The grammar for [[English was long thought to be][English was long thought to be]] *context free*. The simple
-  subset-of-English grammar we have been exploring is certainly context free. By
-  way of contrast, here\rsquo{}s an example of two productions in a NON-context-free
-  grammar:
+#+begin_note
+  The grammar for [[English was long thought to be][English was long thought to be]] *context free*. The simple
+  subset-of-English grammar we have been exploring is certainly not constrained
+  by context. By way of contrast, here\rsquo{}s an example of two productions in a
+  NON-context-free grammar:
 
   aAc \rightarrow aabc
 
@@ -1061,12 +1082,13 @@
   \ldquo{}sensitivity\rdquo. A grammar/language with this feature is called *context
   sensitive*.
 
-  VTO: Moving down to the simplest type, a language is *regular* if it can be
+  Moving down to the simplest type, a language is *regular* if it can be
   generated from its alphabet using the three *regular operations*:
 
   1. \cup (union)
-  2. \circ (concatenation)
+  2. $\circ$ (concatenation)
   3. \star ([[Kleene star][Kleene star]] or just star)
+#+end_note
 
   How these work can be crudely illustrated using a type of graph (or
   /pseudograph/, as loops are allowed) that could be taken for a \ldquo{}weighted\rdquo
@@ -1076,7 +1098,7 @@
              /disjunct/ (0 or 1) --- so either path may be taken from the
              leftmost node.
 
-#+BEGIN_SRC dot :file img/fig-three-state-union.png
+#+BEGIN_SRC dot :file img/fig-three-state-union.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1096,11 +1118,11 @@
 #+RESULTS:
 [[file:img/fig-three-state-union.png]]
 
-  - Concatenation :: 0 \circ 1 (or just 01) --- we make a starting node and two
+  - Concatenation :: 0 $\circ{}$ 1 (or just 01) --- we make a starting node and two
                      other nodes (one for each symbol) and a link for each
                      /conjunct/ (0 and 1) /in sequence/:
 
-#+BEGIN_SRC dot :file img/fig-two-state-concatenation.png
+#+BEGIN_SRC dot :file img/fig-two-state-concatenation.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1122,7 +1144,7 @@
   - Star :: 0^{\star} --- we make a node with a loop-link labeled with the symbol
             being \ldquo{}starred\rdquo.
 
-#+BEGIN_SRC dot :file img/fig-one-state-star.png
+#+BEGIN_SRC dot :file img/fig-one-state-star.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1142,7 +1164,9 @@
   complicated, we will forgo a complete description of the procedures and rules,
   but for the record, the most important rule for these graph compositions is:
 
+#+begin_important
   /Every node must have one outgoing link for each symbol in the alphabet./
+#+end_important
 
   A complicating feature of these operators is that they can be applied to more
   than just one symbol, e.g., (0 \cup 1)^{\star}, which means any number of
@@ -1155,7 +1179,7 @@
   models the language of all bitstrings that end in 1; equivalently, the regular
   language (0 \cup 1)^{\star}1:
 
-#+BEGIN_SRC dot :file img/fig-bitstrings-ending-in-one.png
+#+BEGIN_SRC dot :file img/fig-bitstrings-ending-in-one.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1205,15 +1229,11 @@
   symbol) is the node named =S= or with some symbol followed by one or more
   trailing 0s (e.g., s0, s00, etc.).
  
-#+BEGIN_SRC dot :file img/fig-start-state.png
+#+BEGIN_SRC dot :file img/fig-start-state.png :exports results :eval no-export
   digraph {
-    rankdir="LR";
-    size="2,2";
+    size="1,1";
 
-    node [shape=none]; start;
-    node [shape=circle]; S0;
-    start [label=""]; 
-    start -> S0;
+    node [shape=circle]; S;
   }
 #+END_SRC
 
@@ -1233,7 +1253,7 @@
 
   Sample state transition on a 0:
 
-#+BEGIN_SRC dot :file img/fig-state-transition-on-a-0.png
+#+BEGIN_SRC dot :file img/fig-state-transition-on-a-0.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="4,2";
@@ -1249,7 +1269,7 @@
   Sample state transition on both 0 and 1 inputs. This is shorthand notation for
   two transitions, one for 0 and the other for 1:
 
-#+BEGIN_SRC dot :file img/fig-state-transition-on-both-0-and-1.png
+#+BEGIN_SRC dot :file img/fig-state-transition-on-both-0-and-1.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="4,2";
@@ -1265,7 +1285,7 @@
   A double circle identifies an \ldquo{}accept\rdquo state. There can be more than one of
   these:
 
-#+BEGIN_SRC dot :file img/fig-final-state.png
+#+BEGIN_SRC dot :file img/fig-final-state.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="2,2";
@@ -1277,7 +1297,8 @@
 #+RESULTS:
 [[file:img/fig-final-state.png]]
 
-  VTO: Shedding our machine persona, we look at it once again as an actor, or an
+#+begin_note
+  Shedding our machine persona, we look at it once again as an actor, or an
   agent making decisions. Accept states serve as language membership detectors.
   If a candidate input string is exhausted (entirely consumed by the transitions
   from state to state) at the exact transition an accept state is reached, the
@@ -1286,10 +1307,11 @@
   machine accepts *all* strings that belong to a specific language, and rejects
   *all* those that do *not* belong to the language, then the machine is said to
   *recognize* the language.
+#+end_note
 
-  For example, the machine below recognizes the language [01 011 0111]:
+  For example, the machine below recognizes the language =[01 011 0111]=:
  
-#+BEGIN_SRC dot :file img/fig-three-string-language.png
+#+BEGIN_SRC dot :file img/fig-three-string-language.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="5,1";
@@ -1310,7 +1332,7 @@
   More correctly (remembering our [[important rule][important rule]] above), there should be
   transitions on each input character out of each state, thus:
 
-#+BEGIN_SRC dot :file img/fig-three-string-language-complete.png
+#+BEGIN_SRC dot :file img/fig-three-string-language-complete.png :exports results :eval no-export
   digraph {
     size="5,3";
 
@@ -1353,7 +1375,7 @@
 
    yields
 
-#+BEGIN_SRC dot :file img/fig-A-yields-0A.png
+#+BEGIN_SRC dot :file img/fig-A-yields-0A.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1381,7 +1403,7 @@
 
    is represented thus:
 
-#+BEGIN_SRC dot :file img/fig-bitstrings-starting-with-one.png
+#+BEGIN_SRC dot :file img/fig-bitstrings-starting-with-one.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1399,7 +1421,7 @@
 [[file:img/fig-bitstrings-starting-with-one.png]]
 
    This is almost like the (0 \cup 1)^{\star}1 machine, except it recognizes all
-   bitstrings that /start/ with 1: 1(0 \cup 1)^{\star}
+   bitstrings that /start/ with a one: 1(0 \cup 1)^{\star}
 
 :EXERCISE:
   Add a state and the necessary transitions to make this a valid state machine.
@@ -1412,7 +1434,7 @@
    This machine recognizes the language of all bitstrings whose /second-to-last/
    bit is a 0:
 
-#+BEGIN_SRC dot :file img/fig-second-to-last-is-0.png 
+#+BEGIN_SRC dot :file img/fig-second-to-last-is-0.png :exports results :eval no-export
   digraph {
     size="3,5";
 
@@ -1447,32 +1469,34 @@
 
   Build a simple two-state machine to model it. 
 
-  :ANSWER:
-:     _0_
-:    /   \
-:    \   /
-:     v /
-:     (S)---1--->((F))
-  :END:
+# ANSWER
+#     _0_
+#    /   \
+#    \   /
+#     v /
+#     (S)---1--->((F))
 :END:
 
 :EXERCISE:
   The following machine recognizes which language?
 
-:   0
-: /   \
-: \   /
-:  v /
-:  (S)
-:  ^ \
-: /   \
-: \   /
-:   1
+#+BEGIN_SRC dot :file img/fig-single-state-with-01-transitions.png :exports results :eval no-export
+  digraph {
+    size="1,2";
 
-  :ANSWER:
-  The empty language \emptyset. With no accept states, no string can be accepted --- all
-  are rejected.
-  :END:
+    node [shape=circle]; S;
+
+    S -> S [label=0 headport=n tailport=n];
+    S -> S [label=1 headport=s tailport=s];
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:img/fig-single-state-with-01-transitions.png]]
+
+# ANSWER
+# The empty language \emptyset. With no accept states, no string can be accepted --- all
+# are rejected.
 :END:
 
   The language recognizers we have been examining are not the only
@@ -1494,7 +1518,7 @@
   the input NO-MOTION is triggered. This input causes it to move to the OFF
   state, which turns the lights off.
 
-#+BEGIN_SRC dot :file img/fig-one-bit-computer.png
+#+BEGIN_SRC dot :file img/fig-one-bit-computer.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="5,3";
@@ -1513,8 +1537,6 @@
 
 #+RESULTS:
 [[file:img/fig-one-bit-computer.png]]
-
-**** From Language to Grammar and Back Again 
 
   What language is generated by a given grammar?
 
@@ -1616,9 +1638,8 @@
    Noam Chomsky is a linguist who first proposed the hierarchical language
    classification scheme that now bears his name.
 
-   - The Chomsky Hierarchy ::
-#+BEGIN_SRC ditaa :file img/chomsky-hierarchy.png
-Universal Set of All Languages (the superset of Types 0 through 3)
+   - The Chomsky Hierarchy in the Universal Set of All Languages (the superset of Types 0 through 3) ::
+#+BEGIN_SRC ditaa :file img/fig-chomsky-hierarchy.png :exports results :eval no-export
     /------------------------------------------------------\
     |   Type 0 Recursively Enumerable Languages            |
     |   /----------------------------------------------\   |
@@ -1639,7 +1660,7 @@ Universal Set of All Languages (the superset of Types 0 through 3)
 #+END_SRC
 
 #+RESULTS:
-[[file:img/chomsky-hierarchy.png]]
+[[file:img/fig-chomsky-hierarchy.png]]
 
    - A Tabular Taxonomy :: The following table maps the notions of language
         classes with the types of grammars that can generate those languages.
@@ -1980,7 +2001,7 @@ Universal Set of All Languages (the superset of Types 0 through 3)
         (if (< n 0) n (- n))
       n))
 
-  (let* ((all (number-sequence 2 99))
+  (let* ((all (number-sequence 2 25))
          (all-minus-multiples-of-2
           (mapcar (lambda (n) (negate-multiple n 2))
                   all))
@@ -1989,20 +2010,17 @@ Universal Set of All Languages (the superset of Types 0 through 3)
                   all-minus-multiples-of-2))
          (all-minus-multiples-of-2-and-3-and-5
           (mapcar (lambda (n) (negate-multiple n 5))
-                  all-minus-multiples-of-2-and-3))
-         (all-minus-multiples-of-2-and-3-and-5-and-7
-          (mapcar (lambda (n) (negate-multiple n 7))
-                  all-minus-multiples-of-2-and-3-and-5)))
-    (list all-minus-multiples-of-2 all-minus-multiples-of-2-and-3
-          all-minus-multiples-of-2-and-3-and-5 all-minus-multiples-of-2-and-3-and-5-and-7
-          (remove-if-not 'math-posp all-minus-multiples-of-2-and-3-and-5-and-7)))
+                  all-minus-multiples-of-2-and-3)))
+    (list all-minus-multiples-of-2 
+          all-minus-multiples-of-2-and-3
+          all-minus-multiples-of-2-and-3-and-5
+          (remove-if-not 'math-posp all-minus-multiples-of-2-and-3-and-5)))
 #+END_SRC
 
-  | 2 | 3 | -4 | 5 | -6 |  7 | -8 |  9 | -10 | 11 | -12 | 13 | -14 |  15 | -16 | 17 | -18 | 19 | -20 |  21 | -22 | 23 | -24 |  25 | -26 |  27 | -28 | 29 | -30 | 31 | -32 |  33 | -34 |  35 | -36 | 37 | -38 |  39 | -40 | 41 | -42 | 43 | -44 |  45 | -46 | 47 | -48 |  49 | -50 |  51 | -52 | 53 | -54 |  55 | -56 |  57 | -58 | 59 | -60 | 61 | -62 |  63 | -64 |  65 | -66 | 67 | -68 |  69 | -70 | 71 | -72 | 73 | -74 |  75 | -76 |  77 | -78 | 79 | -80 |  81 | -82 | 83 | -84 |  85 | -86 |  87 | -88 | 89 | -90 |  91 | -92 |  93 | -94 |  95 | -96 | 97 | -98 |  99 |
-  | 2 | 3 | -4 | 5 | -6 |  7 | -8 | -9 | -10 | 11 | -12 | 13 | -14 | -15 | -16 | 17 | -18 | 19 | -20 | -21 | -22 | 23 | -24 |  25 | -26 | -27 | -28 | 29 | -30 | 31 | -32 | -33 | -34 |  35 | -36 | 37 | -38 | -39 | -40 | 41 | -42 | 43 | -44 | -45 | -46 | 47 | -48 |  49 | -50 | -51 | -52 | 53 | -54 |  55 | -56 | -57 | -58 | 59 | -60 | 61 | -62 | -63 | -64 |  65 | -66 | 67 | -68 | -69 | -70 | 71 | -72 | 73 | -74 | -75 | -76 |  77 | -78 | 79 | -80 | -81 | -82 | 83 | -84 |  85 | -86 | -87 | -88 | 89 | -90 |  91 | -92 | -93 | -94 |  95 | -96 | 97 | -98 | -99 |
-  | 2 | 3 | -4 | 5 | -6 |  7 | -8 | -9 | -10 | 11 | -12 | 13 | -14 | -15 | -16 | 17 | -18 | 19 | -20 | -21 | -22 | 23 | -24 | -25 | -26 | -27 | -28 | 29 | -30 | 31 | -32 | -33 | -34 | -35 | -36 | 37 | -38 | -39 | -40 | 41 | -42 | 43 | -44 | -45 | -46 | 47 | -48 |  49 | -50 | -51 | -52 | 53 | -54 | -55 | -56 | -57 | -58 | 59 | -60 | 61 | -62 | -63 | -64 | -65 | -66 | 67 | -68 | -69 | -70 | 71 | -72 | 73 | -74 | -75 | -76 |  77 | -78 | 79 | -80 | -81 | -82 | 83 | -84 | -85 | -86 | -87 | -88 | 89 | -90 |  91 | -92 | -93 | -94 | -95 | -96 | 97 | -98 | -99 |
-  | 2 | 3 | -4 | 5 | -6 |  7 | -8 | -9 | -10 | 11 | -12 | 13 | -14 | -15 | -16 | 17 | -18 | 19 | -20 | -21 | -22 | 23 | -24 | -25 | -26 | -27 | -28 | 29 | -30 | 31 | -32 | -33 | -34 | -35 | -36 | 37 | -38 | -39 | -40 | 41 | -42 | 43 | -44 | -45 | -46 | 47 | -48 | -49 | -50 | -51 | -52 | 53 | -54 | -55 | -56 | -57 | -58 | 59 | -60 | 61 | -62 | -63 | -64 | -65 | -66 | 67 | -68 | -69 | -70 | 71 | -72 | 73 | -74 | -75 | -76 | -77 | -78 | 79 | -80 | -81 | -82 | 83 | -84 | -85 | -86 | -87 | -88 | 89 | -90 | -91 | -92 | -93 | -94 | -95 | -96 | 97 | -98 | -99 |
-  | 2 | 3 |  5 | 7 | 11 | 13 | 17 | 19 |  23 | 29 |  31 | 37 |  41 |  43 |  47 | 53 |  59 | 61 |  67 |  71 |  73 | 79 |  83 |  89 |  97 |     |     |    |     |    |     |     |     |     |     |    |     |     |     |    |     |    |     |     |     |    |     |     |     |     |     |    |     |     |     |     |     |    |     |    |     |     |     |     |     |    |     |     |     |    |     |    |     |     |     |     |     |    |     |     |     |    |     |     |     |     |     |    |     |     |     |     |     |     |     |    |     |     |
+| 2 | 3 | -4 | 5 | -6 |  7 | -8 |  9 | -10 | 11 | -12 | 13 | -14 |  15 | -16 | 17 | -18 | 19 | -20 |  21 | -22 | 23 | -24 |  25 |
+| 2 | 3 | -4 | 5 | -6 |  7 | -8 | -9 | -10 | 11 | -12 | 13 | -14 | -15 | -16 | 17 | -18 | 19 | -20 | -21 | -22 | 23 | -24 |  25 |
+| 2 | 3 | -4 | 5 | -6 |  7 | -8 | -9 | -10 | 11 | -12 | 13 | -14 | -15 | -16 | 17 | -18 | 19 | -20 | -21 | -22 | 23 | -24 | -25 |
+| 2 | 3 |  5 | 7 | 11 | 13 | 17 | 19 |  23 |    |     |    |     |     |     |    |     |    |     |     |     |    |     |     |
 
   This final sieve operates stage by stage (recording a copy of each stage for
   later inspection) using a recursive deletion of nonprimes, starting with a
@@ -2091,6 +2109,13 @@ Universal Set of All Languages (the superset of Types 0 through 3)
   |  3 |  5 |  7 | 11 | 13 | 17 | 19 | 23 | 29 | 31 | 37 | 41 | 43 | 47 | 53 | 59 | 61 | 67 | 71 | 73 | 79 | 83 | 89 | 97 |    |
   |  2 |  3 |  5 |  7 | 11 | 13 | 17 | 19 | 23 | 29 | 31 | 37 | 41 | 43 | 47 | 53 | 59 | 61 | 67 | 71 | 73 | 79 | 83 | 89 | 97 |
 
+  <<side-by-side without adornments>>
+  - side-by-side without adornments :: They are thus like lisp symbols, whose
+       names are lisp strings, which are sequences of characters, which are
+       integers. They differ from lisp symbols by accommodating more alphabets.
+       For example, =123= is a string over the alphabet =[0 1 2 3 4 5 6 7 8 9]=
+       --- in lisp it would be a number.
+
   <<English was long thought to be>>
   - English was long thought to be :: Context Free.
        But see [[https://www.jstor.org/stable/4178381][English Is Not a Context-Free Language]], James Higginbotham,
@@ -2131,4 +2156,17 @@ Universal Set of All Languages (the superset of Types 0 through 3)
        an incoming arrow pointing to it (but coming from nowhere). Or, in
        another form of ornamentation, a triangle pointing to it is sometimes
        used to mark the start state.
+ 
+#+BEGIN_SRC dot :file img/fig-start-state-with-incoming-arrow.png :exports results :eval no-export
+  digraph {
+    rankdir="LR";
+    size="2,2";
 
+    node [shape=none label=""]; start;
+    node [shape=circle label=""]; S0;
+    start -> S0;
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:img/fig-start-state-with-incoming-arrow.png]]
