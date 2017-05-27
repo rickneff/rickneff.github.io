@@ -40,7 +40,7 @@
   Follow this link to execute =(org-agenda)=: [[elisp:org-agenda][Org Agenda]]
   Learned from org-mode talk by Harry Schwartz:   
 #+BEGIN_SRC emacs-lisp
-  (org-babel-load-file "configuration.org")
+(org-babel-load-file "configuration.org")
 #+END_SRC
 ** TODO Look at Getting Things Done book (GTD)
 *** Look at Jeff Atwood (Trash Your TODO List)
@@ -56,6 +56,117 @@
 *** Drafts (on iOS)
 *** entr (generalized iNotify tool)
 *** Recognize the arguments in [[https://www.youtube.com/watch?v=QM1iUe6IofM][OOP is Bad]] by Brian Will
+* TODO Incorporate for DM2 Exploration in More Depth               :noexport:
+  After the SKEL grammar is introduced and exercised:
+*** TODO Save a Harder Challenge for DM2
+
+  Go back to the original Grammar.
+
+  Replace these three rules:
+
+  ADJECTIVE \rightarrow Buffalo
+
+  NOUN \rightarrow buffalo
+
+  VERB \rightarrow buffalo
+
+  With these new rules, is there a derivation for this "sentence"?!
+
+**** This is a sentence?!
+     Buffalo buffalo Buffalo buffalo buffalo buffalo Buffalo buffalo
+
+**** Meaning Explained
+     (The) Buffalo buffalo (that) Buffalo buffalo (often) buffalo (in turn)
+     buffalo (other) Buffalo buffalo.
+
+*** TODO Save Fancy Nouns for DM2
+
+  Fancy nouns are *nested* nouns, for example "the fresh brownies that the
+  little rascals without permission devoured" --- which could be rephrased as
+  "the little rascals without permission devoured the fresh brownies, and it\rsquo{}s
+  these brownies I want to focus on."
+
+  So, a nested noun is a nested noun followed by a relative pronoun (e.g.,
+  /that/) followed by a verb followed by a nested noun,
+
+  OR,
+
+  it\rsquo{}s a nested noun followed by a relative pronoun followed by a nested noun
+  followed by a verb,
+
+  OR,
+
+  it\rsquo{}s a nested noun followed by a preposition followed by a nested noun,
+
+  OR,
+
+  it\rsquo{}s just an article followed by any number of adjectives followed by a plain
+  old (non-nested) noun!
+
+*** TODO Save Nested Nouns for DM2
+ 
+    NESTED-NOUN \rightarrow NESTED-NOUN RELATIVE-PRONOUN VERB NESTED-NOUN
+
+    NESTED-NOUN \rightarrow NESTED-NOUN RELATIVE-PRONOUN NESTED-NOUN VERB
+
+    NESTED-NOUN \rightarrow PREPOSITION NESTED-NOUN
+
+    NESTED-NOUN \rightarrow ARTICLE NOUN-PHRASE
+
+    NOUN-PHRASE \rightarrow ADJECTIVE NOUN-PHRASE
+
+    NOUN-PHRASE \rightarrow NESTED-NOUN
+
+    NOUN-PHRASE \rightarrow NOUN
+ 
+    ARTICLE \rightarrow a \vert an \vert the \vert \lambda
+
+    RELATIVE-PRONOUN \rightarrow that \vert \lambda
+
+    PREPOSITION \rightarrow of \vert from \vert by \vert \dots
+
+**** Now It\rsquo{}s Possible
+
+     Let NN = NESTED-NOUN, RP = RELATIVE-PRONOUN, es = \lambda (the empty string).
+
+#+BEGIN_SRC emacs-lisp
+  (setq parsed [S [NP [NN [NN [ART es] [NP [ADJ Buffalo] [NP [N
+        buffalo]]]] [RP es] [NN [NP [ADJ Buffalo] [NP [N buffalo]]]][V
+        buffalo]]] [VP [V buffalo]] [NP [ADJ Buffalo] [NP [N buffalo]]]])
+
+  (kill-new (format "%s" parsed))
+#+END_SRC
+
+
+*** TODO Save for DM2 this more detailed description/definition
+   A language is /regular/ *iff* some /regular expression/ describes it.
+
+   Regular expressions use the so-called regular operations (\cup, \circ, and \star) ---
+   (union, concatenation, and star) --- to build regular languages. Here is a
+   recursive definition:
+
+  R is a *regular expression* (an *re* for short) if R is any of
+
+  - \emptyset
+  - {\lambda}
+  - {a} for some a \in \Sigma
+  - R_1 \cup R_2, where R_1 and R_2 are *re*\rsquo{}s
+  - R_1 \circ R_2, where R_1 and R_2 are *re*\rsquo{}s
+  - R^{\star}, where R is an *re*
+ 
+  Some shorthand:
+
+  - a \equiv \{a\}
+  - \lambda \equiv \{\lambda\}
+  - R^{\plus} \equiv R \circ R^{\star}
+  - R^{\star} \equiv R^{\plus} \cup \lambda
+  - R^k \equiv R \circ R \circ R \circ \dots \circ R (k times)
+
+  Note: R \circ R is usually written without the \circ, i.e., RR. In this way \circ is
+  analogous to the multiplication operator.
+
+**** TODO Give some examples of *re*'s
+
 * THR
 
 ** YZ@
@@ -102,15 +213,15 @@
   Abu said, \ldquo{}It seems pretty clear from the context that it\rsquo{}s one sentence.\rdquo Ila
   said, \ldquo{}I agree. I don\rsquo{}t see the problem.\rdquo
 
-  \ldquo{}It\rsquo{}s *not* a problem --- for you. Missing the context, and minus the fluidity
-  and rapidity with which you uttered that *one* sentence, however, it could be
+  \ldquo{}It\rsquo{}s /not/ a problem --- for you. Missing the context, and minus the fluidity
+  and rapidity with which you uttered that /one/ sentence, however, it could be
   misconstrued --- legally but erroneously parsed --- into two.\rdquo
 
   Til cleared his throat and went on. \ldquo{}Take this imperative statement: /Love One
   Another./ A Christian maxim, if I\rsquo{}m not mistaken.\rdquo
 
   Ila and Abu glanced at each other in surprise. Til, \lsquo{}til now, had never
-  brought up religion in any of their discussions, whereas *they* had certainly
+  brought up religion in any of their discussions, whereas /they/ had certainly
   broached the subject, on more than one occasion, when it was just the two of
   them, meeting to work on homework assignments, or just waiting for Til. Ila
   thought Abu, a Mormon, hopelessly deluded. Abu thought Ila, an evangelical
@@ -148,13 +259,13 @@
 #+END_VERSE
 
   Said Til, \ldquo{}Or from a more familiar poem: \lsquo{}Quoth the raven\rsquo instead of \lsquo{}The raven
-  said.\rsquo Still perfectly correct. In fact, saying \lsquo{}The raven quoth\rsquo is *not*
+  said.\rsquo Still perfectly correct. In fact, saying \lsquo{}The raven quoth\rsquo is /not/
   grammatical, by the very special rule attached to that very archaic word.\rdquo
 
   \ldquo{}So, not so much word order as word choice. Remember I started talking about
   the misuse of English to obfuscate? *Jargon* is the apposite word here. This
   misuse of language erects barriers in the guise of facilitators. We justify
-  ourselves in this activity because of the benefits --- and there *are*
+  ourselves in this activity because of the benefits --- and there /are/
   benefits --- but do we ever weigh them against the costs?\rdquo
 
   \ldquo{}Benefit-wise, jargon saves time and space by compressing information that
@@ -198,7 +309,7 @@
 
   \ldquo{}But not all of it is so obviously bad,\rdquo said Til. \ldquo{}Let me put it this way.
   Proclivities --- what a nice word! Many people have proclivities,
-  inclinations, predispositions to use more words, or bigger words, or *shinier*
+  inclinations, predispositions to use more words, or bigger words, or /shinier/
   words than necessary to get what they want, or what they think they want.
   Flattery is replete with this abuse of language.\rdquo
 
@@ -217,7 +328,7 @@
   true. Never a doubt. Pure syntax without the clouding confusion of semantics.\rdquo
 
   \ldquo{}That\rsquo{}s the official story. Now let me qualify that a bit. Kurt G\ouml{}del, one of
-  the, if not *the* most brilliant mathematical logicians of all time, once
+  the, if not /the/ most brilliant mathematical logicians of all time, once
   said:
 
 #+BEGIN_QUOTE
@@ -300,7 +411,7 @@
 
   Said Til, \ldquo{}The rules of English grammar are many and varied, and sometimes
   downright mysterious, so I will leave that question for you to answer!
-  However, a wff like \lsquo{}he went to the store\rsquo is quite obviously *not* well
+  However, a wff like \lsquo{}he went to the store\rsquo is quite obviously /not/ well
   formed as \lsquo{}to he store the went\rsquo.\rdquo
 
   Said Ila, \ldquo{}So the rules we learned for composing propositions --- there were only
@@ -320,7 +431,7 @@
   Til, but he also knew that they didn\rsquo{}t have time to discuss it --- not today.
   Rather reluctantly, he interrupted their reverie and said, \ldquo{}Hold those
   thoughts, and we\rsquo{}ll dissect them later. For now, other problems await our
-  attention. While obviously mathematical in nature, indeed, *discrete*
+  attention. While obviously mathematical in nature, indeed, /discrete/
   mathematical, problems in computer science are the ones we will focus on.\rdquo
 
   \ldquo{}Computer scientists, especially those into theoretical computer science, like
@@ -328,7 +439,7 @@
   reasons, more thoroughly delved into in a course on computational theory. But
   here is a simple, favorite example: Is 23 prime? This is a decision problem
   whose answer is yes, easily verified by [[simply trying to divide 23 by 2 and 3][simply trying to divide 23 by 2 and 3]],
-  and failing on both counts, of course. This decision could *also* be made by
+  and failing on both counts, of course. This decision could /also/ be made by
   sequentially searching for and finding the string 
 
 : "23"
@@ -354,8 +465,8 @@
 
   Til went on. \ldquo{}This set of strings is a language, and if you allow that the
   \lsquo{}...\rsquo stands for an infinity of bigger and bigger strings of this rather
-  well-known kind, it is the language of PRIMES. It is given the name PRIMES, at
-  any rate. So, does PRIMES contain the string "23232323232323232323"? is
+  well-known kind, it is the language of PRIMES. It is given the /name/ PRIMES,
+  at any rate. So, does PRIMES contain the string "23232323232323232323"? is
   another way to ask, is 23232323232323232323 prime? The answer is no --- it\rsquo{}s a
   composite number with seven prime factors --- including 23 --- but the
   computational solution to that set membership determination problem is
@@ -363,7 +474,7 @@
   a static list. While many lists of primes exist, no one creates lists with
   every prime in it up to some huge limit. True, programs exist that can do
   that, using some variation of the classic [[Sieve of Eratosthenes][Sieve of Eratosthenes]], which goes
-  *way* back, showing how old this problem is. But the point is, to solve a
+  /way/ back, showing how old this problem is. But the point is, to solve a
   language membership problem you need computational strategies and tactics and
   resources. Simply put, we can /model computation/ most generally in terms of
   machinery that can input a string, and output a \lsquo{}yes\rsquo or a \lsquo{}no\rsquo --- \lsquo{}in the
@@ -375,7 +486,7 @@
 
   \ldquo{}Ah, my young friends,\rdquo Til chuckled. \ldquo{}It so happens you are right, but
   computer scientists are clever people, and they have figured out a way to
-  model a very large number of problems *as* decision problems, or as a series
+  model a very large number of problems /as/ decision problems, or as a /series/
   of decision problems. Your very example of sorting, Abu, is one of the
   easiest.\rdquo
 
@@ -450,18 +561,18 @@
   said Abu. \ldquo{}At least, as long as the first five digits of =b= are not zeros!\rdquo
   Ila nodded agreement, \ldquo{}And even if the strings were the same length, a
   digit-by-digit comparison would soon reveal the answer.\rdquo Abu quickly added,
-  \ldquo{}So, banning leading zeros in these strings-of-digits, /lexicographical/
+  \ldquo{}So, banning leading zeros in these strings of digits, /lexicographical/
   ordering comes to mind as a convenient way to sort them, one that can answer
   all relative size questions. Am I right?\rdquo
 
-  Til nodded while Ila thought, Of course you are, smarty pants, then said, \ldquo{}But
-  why the jargony *lexicographical*? Isn\rsquo{}t there a better word than that?
-  \lsquo{}Lexicon\rsquo is just another word for \lsquo{}dictionary\rsquo, so why not just say \lsquo{}sort in
-  /dictionary/ order\rsquo{}?\rdquo
+  Til nodded, almost imperceptibly, while Ila thought /Of course you are, smarty
+  pants/, and then said, \ldquo{}But why the jargony *lexicographical*? Isn\rsquo{}t there a
+  better word than that? \lsquo{}Lexicon\rsquo is just another word for \lsquo{}dictionary\rsquo, so why
+  not just say sort in /dictionary/ or even /alphabetical/ order?\rdquo
 
   Abu said, \ldquo{}You mean use a shorter word? I don\rsquo{}t remember where I saw
   lexicographical, and no, I don\rsquo{}t know if there\rsquo{}s an another, less jargony way
-  to say what it means. Technically speaking, what *does* it mean, Til?\rdquo
+  to say what it means. Technically speaking, what /does/ it mean, Til?\rdquo
 
   \ldquo{}You\rsquo{}re about to find out!\rdquo Til said, as he flashed them his mischievous
   smile.
@@ -482,8 +593,8 @@
 
     A *string* is a finite sequence of symbols from a given alphabet. These are
     usually written as symbols placed [[side-by-side without adornments][side-by-side without adornments]] of
-    brackets or braces, commas or spaces --- so abab rather than {a, b, a, b} or
-    [a b a b].
+    brackets or braces, commas or spaces --- so =abab= rather than ={a, b, a,
+    b}= or =[a b a b]=.
  
     The *length* of a string is the number of symbols contained in the string.
     \vert{}w\vert denotes the length of w, in another overloading of vertical bars. The
@@ -632,8 +743,8 @@
       (mapconcat 'transform-terminal derivation " ")))
 #+END_SRC 
 
-   The following derivation would result if the sequence of calls to =random=
-   returned =[1 1 0 0 0 1 1 1 1 1 1]=:
+   The following derivation would result if the sequence of values returned from
+   calls to =random= were =[1 1 0 0 0 1 1 1 1 1 1]=:
 
    | SENTENCE | \rightarrow | NOUN-PHRASE VERB-PHRASE  |
    |          | \rightarrow | ARTICLE NOUN VERB-PHRASE |
@@ -650,8 +761,10 @@
 : the dog runs quickly
 
    Using the above example as a guide, produce derivations for each of the
-   following sentences, and verify it by giving the return sequence of calls to
-   =random=.
+   following sentences, and verify it by giving the sequence of values returned
+   from calls to =random= and using that to /advise/ the =random= function:
+
+**** TODO Show how to advise random
 
 :EXERCISE:
     the sleepy cat runs slowly
@@ -686,8 +799,8 @@
 
    =the quick brown fox jumps over the lazy dog=
 
-   The answer is to add all of these except the first --- use it to replace the
-   non-recursive ADJECTIVE rule:
+   The answer is to /add/ all of the following except the first --- use it to
+   /replace/ the non-recursive ADJECTIVE rule:
 
    ADJECTIVE \rightarrow hungry \vert sleepy \vert quick \vert brown \vert lazy
 
@@ -705,7 +818,7 @@
 
    For example, a valid sentence forms the leaves:
 
-#+BEGIN_SRC dot :file img/fig-leaves-of-the-parse-tree.png :results output :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-leaves-of-the-parse-tree.png :results output :exports results :eval no-export
   graph leaves {
     size="6,3";
 
@@ -732,13 +845,13 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-leaves-of-the-parse-tree.png]]
+[[file:../img/fig-leaves-of-the-parse-tree.png]]
 
     Each terminal is given a parent, and as an alternate representation, each
     parent-child is rendered in tree form as a two-element list. Abbreviating
     ADJECTIVE as ADJ, ADVERB as ADV, ARTICLE as ART, NOUN as N, and VERB as V:
 
-#+BEGIN_SRC dot :file img/fig-leaves-and-parents-of-the-parse-tree.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-leaves-and-parents-of-the-parse-tree.png :exports results :eval no-export
   graph leavesandparents {
     size="6,3";
 
@@ -780,14 +893,14 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-leaves-and-parents-of-the-parse-tree.png]]
+[[file:../img/fig-leaves-and-parents-of-the-parse-tree.png]]
 
 :  ((ART the) (ADJ hungry) (N dog) (V chases) (ART the) (ADJ sleepy) (N cat))
 
    Continuing on up the tree, we are also building a nested alist (albeit with
    repeated keys). Abbreviating NOUN-PHRASE as NP, and VERB-PHRASE as VP:
 
-#+BEGIN_SRC dot :file img/fig-almost-complete-parse-tree.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-almost-complete-parse-tree.png :exports results :eval no-export
   graph almostcomplete {
     size="6,4";
 
@@ -834,14 +947,14 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-almost-complete-parse-tree.png]]
+[[file:../img/fig-almost-complete-parse-tree.png]]
 
 :  ((NP (ART the) (ADJ hungry) (N dog)) (VP (V chases)) (NP (ART the) (ADJ sleepy) (N cat)))
 
    Finishing with SENTENCE (abbrev. S) being the root of the tree, with the list
    form consing S on the front:
 
-#+BEGIN_SRC dot :file img/fig-complete-parse-tree.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-complete-parse-tree.png :exports results :eval no-export
   graph complete {
     size="6,5";
 
@@ -893,7 +1006,7 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-complete-parse-tree.png]]
+[[file:../img/fig-complete-parse-tree.png]]
 
 :  (S (NP (ART the) (ADJ hungry) (N dog)) (VP (V chases)) (NP (ART the) (ADJ sleepy) (N cat)))
 
@@ -953,16 +1066,18 @@
   4. OP \rarr (
   5. CP \rarr )
 
-  | SKEL | \rarr | SKEL SKEL             |
-  |      | \rarr | OP SKEL CP SKEL       |
-  |      | \rarr | OP OP SKEL CP CP SKEL |
-  |      | \rarr | OP OP \lambda CP CP SKEL    |
-  |      | \rarr | OP OP \lambda CP CP \lambda       |
-  |      | \rarr | ( OP \lambda CP CP \lambda        |
-  |      | \rarr | ( ( \lambda CP CP \lambda         |
-  |      | \rarr | ( ( \lambda ) CP \lambda          |
-  |      | \rarr | ( ( \lambda ) ) \lambda           |
-  |      | \rarr | ( ( ) )               |
+  | Start | \rarr | Next                  |    By Applying Rule |
+  |-------+---+-----------------------+---------------------|
+  | SKEL  | \rarr | SKEL SKEL             |                   2 |
+  |       | \rarr | OP SKEL CP SKEL       |                   1 |
+  |       | \rarr | OP OP SKEL CP CP SKEL |                   1 |
+  |       | \rarr | OP OP \lambda CP CP SKEL    |                   3 |
+  |       | \rarr | OP OP \lambda CP CP \lambda       |                   3 |
+  |       | \rarr | ( OP \lambda CP CP \lambda        |                   4 |
+  |       | \rarr | ( ( \lambda CP CP \lambda         |                   4 |
+  |       | \rarr | ( ( \lambda ) CP \lambda          |                   5 |
+  |       | \rarr | ( ( \lambda ) ) \lambda           |                   5 |
+  |       | \rarr | ( ( ) )               | Remove Invisible \lambda{}s |
 
   But now a simple binary choice between forward and reverse productions fails,
   because of the /three/ possible derivations for SKEL.
@@ -986,86 +1101,6 @@
 :EXERCISE:
  Solve the problem in the code with finding a derivation starting with SKEL.
 :END:
-
-*** TODO Save a Harder Challenge for DM2                           :noexport:
-
-  Go back to the original Grammar.
-
-  Replace these three rules:
-
-  ADJECTIVE \rightarrow Buffalo
-
-  NOUN \rightarrow buffalo
-
-  VERB \rightarrow buffalo
-
-  With these new rules, is there a derivation for this "sentence"?!
-
-**** This is a sentence?!
-     Buffalo buffalo Buffalo buffalo buffalo buffalo Buffalo buffalo
-
-**** Meaning Explained
-     (The) Buffalo buffalo (that) Buffalo buffalo (often) buffalo (in turn)
-     buffalo (other) Buffalo buffalo.
-
-*** TODO Save Fancy Nouns for DM2                                  :noexport:
-
-  Fancy nouns are *nested* nouns, for example "the fresh brownies that the
-  little rascals without permission devoured" --- which could be rephrased as
-  "the little rascals without permission devoured the fresh brownies, and it\rsquo{}s
-  these brownies I want to focus on."
-
-  So, a nested noun is a nested noun followed by a relative pronoun (e.g.,
-  /that/) followed by a verb followed by a nested noun,
-
-  OR,
-
-  it\rsquo{}s a nested noun followed by a relative pronoun followed by a nested noun
-  followed by a verb,
-
-  OR,
-
-  it\rsquo{}s a nested noun followed by a preposition followed by a nested noun,
-
-  OR,
-
-  it\rsquo{}s just an article followed by any number of adjectives followed by a plain
-  old (non-nested) noun!
-
-*** TODO Save Nested Nouns for DM2                                 :noexport:
- 
-    NESTED-NOUN \rightarrow NESTED-NOUN RELATIVE-PRONOUN VERB NESTED-NOUN
-
-    NESTED-NOUN \rightarrow NESTED-NOUN RELATIVE-PRONOUN NESTED-NOUN VERB
-
-    NESTED-NOUN \rightarrow PREPOSITION NESTED-NOUN
-
-    NESTED-NOUN \rightarrow ARTICLE NOUN-PHRASE
-
-    NOUN-PHRASE \rightarrow ADJECTIVE NOUN-PHRASE
-
-    NOUN-PHRASE \rightarrow NESTED-NOUN
-
-    NOUN-PHRASE \rightarrow NOUN
- 
-    ARTICLE \rightarrow a \vert an \vert the \vert \lambda
-
-    RELATIVE-PRONOUN \rightarrow that \vert \lambda
-
-    PREPOSITION \rightarrow of \vert from \vert by \vert \dots
-
-**** Now It\rsquo{}s Possible
-
-     Let NN = NESTED-NOUN, RP = RELATIVE-PRONOUN, es = \lambda (the empty string).
-
-#+BEGIN_SRC emacs-lisp
-  (setq parsed [S [NP [NN [NN [ART es] [NP [ADJ Buffalo] [NP [N
-        buffalo]]]] [RP es] [NN [NP [ADJ Buffalo] [NP [N buffalo]]]][V
-        buffalo]]] [VP [V buffalo]] [NP [ADJ Buffalo] [NP [N buffalo]]]])
-
-  (kill-new (format "%s" parsed))
-#+END_SRC
-
 
 #+begin_note
   The grammar for [[English was long thought to be][English was long thought to be]] *context free*. The simple
@@ -1098,7 +1133,7 @@
              /disjunct/ (0 or 1) --- so either path may be taken from the
              leftmost node.
 
-#+BEGIN_SRC dot :file img/fig-three-state-union.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-three-state-union.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1116,13 +1151,13 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-three-state-union.png]]
+[[file:../img/fig-three-state-union.png]]
 
   - Concatenation :: 0 $\circ{}$ 1 (or just 01) --- we make a starting node and two
                      other nodes (one for each symbol) and a link for each
                      /conjunct/ (0 and 1) /in sequence/:
 
-#+BEGIN_SRC dot :file img/fig-two-state-concatenation.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-two-state-concatenation.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1139,12 +1174,12 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-two-state-concatenation.png]]
+[[file:../img/fig-two-state-concatenation.png]]
 
   - Star :: 0^{\star} --- we make a node with a loop-link labeled with the symbol
             being \ldquo{}starred\rdquo.
 
-#+BEGIN_SRC dot :file img/fig-one-state-star.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-one-state-star.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1158,7 +1193,7 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-one-state-star.png]]
+[[file:../img/fig-one-state-star.png]]
 
   As how these separate operations compose into one graph can get somewhat
   complicated, we will forgo a complete description of the procedures and rules,
@@ -1179,7 +1214,7 @@
   models the language of all bitstrings that end in 1; equivalently, the regular
   language (0 \cup 1)^{\star}1:
 
-#+BEGIN_SRC dot :file img/fig-bitstrings-ending-in-one.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-bitstrings-ending-in-one.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1197,7 +1232,7 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-bitstrings-ending-in-one.png]]
+[[file:../img/fig-bitstrings-ending-in-one.png]]
 
   The node corresponding to the \star has been split in two, one loop labeled 0 and
   the other labeled 1, while the link for the 0 in the \cup is shared with the
@@ -1229,7 +1264,7 @@
   symbol) is the node named =S= or with some symbol followed by one or more
   trailing 0s (e.g., s0, s00, etc.).
  
-#+BEGIN_SRC dot :file img/fig-start-state.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-start-state.png :exports results :eval no-export
   digraph {
     size="1,1";
 
@@ -1238,7 +1273,7 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-start-state.png]]
+[[file:../img/fig-start-state.png]]
 
   When we (the machine) are \ldquo{}turned on\rdquo we come up \ldquo{}in\rdquo our start state. We then
   start reading symbols, one by one, from our \ldquo{}input\rdquo --- the string being
@@ -1253,7 +1288,7 @@
 
   Sample state transition on a 0:
 
-#+BEGIN_SRC dot :file img/fig-state-transition-on-a-0.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-state-transition-on-a-0.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="4,2";
@@ -1264,12 +1299,12 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-state-transition-on-a-0.png]]
+[[file:../img/fig-state-transition-on-a-0.png]]
 
   Sample state transition on both 0 and 1 inputs. This is shorthand notation for
   two transitions, one for 0 and the other for 1:
 
-#+BEGIN_SRC dot :file img/fig-state-transition-on-both-0-and-1.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-state-transition-on-both-0-and-1.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="4,2";
@@ -1280,12 +1315,12 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-state-transition-on-both-0-and-1.png]]
+[[file:../img/fig-state-transition-on-both-0-and-1.png]]
 
   A double circle identifies an \ldquo{}accept\rdquo state. There can be more than one of
   these:
 
-#+BEGIN_SRC dot :file img/fig-final-state.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-final-state.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="2,2";
@@ -1295,23 +1330,24 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-final-state.png]]
+[[file:../img/fig-final-state.png]]
+
+  Shedding our machine persona, we look at it once again as an actor, or an
+  agent making decisions.
 
 #+begin_note
-  Shedding our machine persona, we look at it once again as an actor, or an
-  agent making decisions. Accept states serve as language membership detectors.
-  If a candidate input string is exhausted (entirely consumed by the transitions
-  from state to state) at the exact transition an accept state is reached, the
-  string is accepted as part of the language. A string exhausted in a
-  non-accepting state is rejected --- it is *not* part of the language. If a
-  machine accepts *all* strings that belong to a specific language, and rejects
-  *all* those that do *not* belong to the language, then the machine is said to
-  *recognize* the language.
+  Accept states serve as language membership detectors. If a candidate input
+  string is exhausted (entirely consumed by the transitions from state to state)
+  at the exact transition an accept state is reached, the string is accepted as
+  part of the language. A string exhausted in a non-accepting state is rejected
+  --- it is /not/ part of the language. If a machine accepts /all/ strings that
+  belong to a specific language, and rejects /all/ those that do /not/ belong to
+  the language, then the machine is said to *recognize* the language.
 #+end_note
 
   For example, the machine below recognizes the language =[01 011 0111]=:
  
-#+BEGIN_SRC dot :file img/fig-three-string-language.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-three-string-language.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="5,1";
@@ -1327,12 +1363,12 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-three-string-language.png]]
+[[file:../img/fig-three-string-language.png]]
 
   More correctly (remembering our [[important rule][important rule]] above), there should be
-  transitions on each input character out of each state, thus:
+  transitions for each input symbol out of each state, thus:
 
-#+BEGIN_SRC dot :file img/fig-three-string-language-complete.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-three-string-language-complete.png :exports results :eval no-export
   digraph {
     size="5,3";
 
@@ -1355,10 +1391,10 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-three-string-language-complete.png]]
+[[file:../img/fig-three-string-language-complete.png]]
 
-   This machine realizes the 7-rule PSG below (only P is given, the other three
-   components are inferable):
+   The 6-state machine above realizes the 7-rule PSG below (only the rules are
+   given, the other three components are inferable):
 
    1. S \rarr 0A
    2. A \rarr 1B
@@ -1375,7 +1411,7 @@
 
    yields
 
-#+BEGIN_SRC dot :file img/fig-A-yields-0A.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-A-yields-0A.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1388,11 +1424,12 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-A-yields-0A.png]]
+[[file:../img/fig-A-yields-0A.png]]
 
    At node A, leave on a 0 and go back to A, as if the 0 in the rule were pulled
    to the left to label the arrow, and the A on the right were moved over and
-   merged with the A on the left.
+   merged with the A on the left, in the process bending the arrow around into a
+   loop.
 
    For another example, the grammar:
 
@@ -1403,7 +1440,7 @@
 
    is represented thus:
 
-#+BEGIN_SRC dot :file img/fig-bitstrings-starting-with-one.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-bitstrings-starting-with-one.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1418,9 +1455,9 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-bitstrings-starting-with-one.png]]
+[[file:../img/fig-bitstrings-starting-with-one.png]]
 
-   This is almost like the (0 \cup 1)^{\star}1 machine, except it recognizes all
+   This is similar to the (0 \cup 1)^{\star}1 machine, except it recognizes all
    bitstrings that /start/ with a one: 1(0 \cup 1)^{\star}
 
 :EXERCISE:
@@ -1428,13 +1465,13 @@
 :END:
 
 :EXERCISE:
-  Compare/contrast this machine with the one for (0 \cup 1)^{\star}1 shown above. 
+  Compare/contrast the 1(0 \cup 1)^{\star} machine with the (0 \cup 1)^{\star}1 machine. 
 :END:
 
-   This machine recognizes the language of all bitstrings whose /second-to-last/
-   bit is a 0:
+   This next machine recognizes the language of all bitstrings whose
+   /second-to-last/ bit is a 0:
 
-#+BEGIN_SRC dot :file img/fig-second-to-last-is-0.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-second-to-last-is-0.png :exports results :eval no-export
   digraph {
     size="3,5";
 
@@ -1455,7 +1492,7 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-second-to-last-is-0.png]]
+[[file:../img/fig-second-to-last-is-0.png]]
 
 :EXERCISE:
   The three-production grammar
@@ -1480,7 +1517,7 @@
 :EXERCISE:
   The following machine recognizes which language?
 
-#+BEGIN_SRC dot :file img/fig-single-state-with-01-transitions.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-single-state-with-01-transitions.png :exports results :eval no-export
   digraph {
     size="1,2";
 
@@ -1492,7 +1529,7 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-single-state-with-01-transitions.png]]
+[[file:../img/fig-single-state-with-01-transitions.png]]
 
 # ANSWER
 # The empty language \emptyset. With no accept states, no string can be accepted --- all
@@ -1513,12 +1550,12 @@
   The lights are initially off, so the computer starts in the OFF state. In this
   state, only the MOTION input causes it to move to the ON state, which causes
   the lights to go on. In the ON state, a MOTION input causes it to remain in
-  the ON state (the lights stay on), and also resets the no-motion timer. With
-  the timer reset, after a certain time elapses (with no further MOTION inputs)
-  the input NO-MOTION is triggered. This input causes it to move to the OFF
-  state, which turns the lights off.
+  the ON state (the lights stay on), and also resets the timer. After a
+  configured time duration passes with no intervening MOTION inputs, the timer
+  elapses, triggering the TIMER-ELAPSED input. This input causes it to move to
+  the OFF state, which turns the lights off.
 
-#+BEGIN_SRC dot :file img/fig-one-bit-computer.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-one-bit-computer.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="5,3";
@@ -1528,21 +1565,20 @@
     S0 [label=OFF];
     S1 [label=ON];
 
-    S0 -> S0 [label="NO-MOTION"];
     S0 -> S1 [label="MOTION"];
     S1 -> S1 [label="MOTION"];
-    S1 -> S0 [label="NO-MOTION"];
+    S1 -> S0 [label="TIMER-ELAPSED"];
   }
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-one-bit-computer.png]]
+[[file:../img/fig-one-bit-computer.png]]
 
   What language is generated by a given grammar?
 
-  Let V = [S A B] and T = [0 1]. Find the language generated by each grammar
+  Let N = [S A B] and T = [0 1]. Find the language generated by each grammar
 
-  [V T S P]
+  [N T S P]
 
   when the set P of productions consists of each of the following:
 
@@ -1638,8 +1674,8 @@
    Noam Chomsky is a linguist who first proposed the hierarchical language
    classification scheme that now bears his name.
 
-   - The Chomsky Hierarchy in the Universal Set of All Languages (the superset of Types 0 through 3) ::
-#+BEGIN_SRC ditaa :file img/fig-chomsky-hierarchy.png :exports results :eval no-export
+   - The Chomsky Hierarchy in the Universal Set of All Languages (the superset of Types 0-3) ::
+#+BEGIN_SRC ditaa :file ../img/fig-chomsky-hierarchy.png :exports results :eval no-export
     /------------------------------------------------------\
     |   Type 0 Recursively Enumerable Languages            |
     |   /----------------------------------------------\   |
@@ -1660,7 +1696,7 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-chomsky-hierarchy.png]]
+[[file:../img/fig-chomsky-hierarchy.png]]
 
    - A Tabular Taxonomy :: The following table maps the notions of language
         classes with the types of grammars that can generate those languages.
@@ -1774,36 +1810,6 @@
 :ANSWER:
   Type 3, Left-linear.
 :END:
-
-** TODO Save for DM2 this more detailed description/definition     :noexport:
-   A language is /regular/ *iff* some /regular expression/ describes it.
-
-   Regular expressions use the so-called regular operations (\cup, \circ, and \star) ---
-   (union, concatenation, and star) --- to build regular languages. Here is a
-   recursive definition:
-
-  R is a *regular expression* (an *re* for short) if R is any of
-
-  - \emptyset
-  - {\lambda}
-  - {a} for some a \in \Sigma
-  - R_1 \cup R_2, where R_1 and R_2 are *re*\rsquo{}s
-  - R_1 \circ R_2, where R_1 and R_2 are *re*\rsquo{}s
-  - R^{\star}, where R is an *re*
- 
-  Some shorthand:
-
-  - a \equiv \{a\}
-  - \lambda \equiv \{\lambda\}
-  - R^{\plus} \equiv R \circ R^{\star}
-  - R^{\star} \equiv R^{\plus} \cup \lambda
-  - R^k \equiv R \circ R \circ R \circ \dots \circ R (k times)
-
-  Note: R \circ R is usually written without the \circ, i.e., RR. In this way \circ is
-  analogous to the multiplication operator.
-
-** TODO Give some examples of *re*'s                               :noexport:
-   Like 01^{\star} ; 0(0 \cup 1)^{\star} 
 
 ** TODO Develop Ideas For an Epilogue, or Other Episodic Installments
 
@@ -2157,7 +2163,7 @@
        another form of ornamentation, a triangle pointing to it is sometimes
        used to mark the start state.
  
-#+BEGIN_SRC dot :file img/fig-start-state-with-incoming-arrow.png :exports results :eval no-export
+#+BEGIN_SRC dot :file ../img/fig-start-state-with-incoming-arrow.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="2,2";
@@ -2169,4 +2175,4 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:img/fig-start-state-with-incoming-arrow.png]]
+[[file:../img/fig-start-state-with-incoming-arrow.png]]
