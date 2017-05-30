@@ -1,40 +1,61 @@
 #+TITLE: Last Chapter
 #+AUTHOR: Rick Neff
-#+EMAIL: rick.neff@gmail.com
+#+EMAIL: NeffR@byui.edu
+#+DATE: 27 May 2017
 #+LANGUAGE: en
-#+OPTIONS: H:4 num:nil toc:t \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t ':nil d:t
+#+OPTIONS: H:5 num:nil toc:t \n:t @:t ::t |:t ^:t *:t TeX:t LaTeX:t ':nil d:nil
+#+OPTIONS: html-postamble:t
 #+STARTUP: showeverything entitiespretty
-#+SETUPFILE: theme-readtheorg.setup
+#+SETUPFILE: theme-bigblow.setup
 
-* TODO Add this exercise somewhere                                :noexport:
-:EXERCISE:
+* TODO Add this exercise somewhere                                 :noexport:
+#+begin_warning
    The operation called *dehydration* takes a word and deletes all letters in it
    from H to O. What is the original (rehydrated) text of this dehydrated sequence
    of words?
 
    TE TE AS CE TE WARUS SAID T TA OF AY TGS F SES AD SPS AD SEAG WAX F CABBAGES
    AD KGS AD WY TE SEA S BG T AD WETER PGS AVE WGS
-  
-   :ANSWER:
+#+end_warning
+
+:ANSWER:
    THE TIME HAS COME THE WALRUS SAID TO TALK OF MANY THINGS OF SHOES AND SHIPS
    AND SEALING WAX OF CABBAGES AND KINGS AND WHY THE SEA IS BOILING HOT AND
    WHETHER PIGS HAVE WINGS
-   :END:
 :END:
-
-* TODO Also this one                                              :noexport:
-:EXERCISE:
+* TODO Also this one                                               :noexport:
+#+begin_warning
    What English word has the smallest vowel-to-consonant ratio? For example, the
    v2c ratios of the words in the previous sentence are 1/3, 2/5, 1/3, 1/2, 1/2,
    1/3, 2/3, 1/1, 1/2, and 3/2. No clear winner. Count =y= as a vowel, even when
    it is the first letter of a word.
+#+end_warning
 
-   :ANSWER:
+:ANSWER:
    The word strengths has a 1/8 v2c ratio.
-   :END:
 :END:
-
+* TODO Add this number theory exercise                             :noexport:
+#+begin_warning
+  Pick a number (a positive integer). Form the product of that number, one more
+  than that number, and one more than twice that number. Repeat for several
+  different numbers. There is a pattern to these products. What is it?
+#+end_warning
+:ANSWER:
+  | k | k + 1 | 2k + 1 | Product | Product/6 | Sum of Squares      |
+  |---+-------+--------+---------+-----------+---------------------|
+  | 1 |     2 |      3 |       6 |         1 | 1                   |
+  | 2 |     3 |      5 |      30 |         5 | 1 + 4               |
+  | 3 |     4 |      7 |      84 |        14 | 1 + 4 + 9           |
+  | 4 |     5 |      9 |     180 |        30 | 1 + 4 + 9 + 16      |
+  | 5 |     6 |     11 |     330 |        55 | 1 + 4 + 9 + 16 + 25 |
+:END:
 * TODO Check out the following files/items                         :noexport:
+  [[https://books.google.com/books?id=K33lkZQ2_woC&pg=PA102&lpg=PA102&dq=beads+on+a+string+analogy&source=bl&ots=fxjjAMB4dx&sig=PVDq8a7MgHWe5blgoEsl_hgJXDQ&hl=en&sa=X&ved=0ahUKEwiw1aGgoonUAhXEQpQKHX4nDWsQ6AEIOzAD#v=onepage&q=beads%2520on%2520a%2520string%2520analogy&f=false]]
+  [[https://www.johndcook.com/blog/2016/06/15/ascii-art-diagrams-in-emacs-org-mode/]]
+  [[https://owncloud.org/]]
+  [[http://entrproject.org/]]
+  [[http://asciiflow.com/#0B8vxMR5vIBaBVFdxTEoxeTVFMmc]]
+  [[https://monodraw.helftone.com/]]
   [[http://julienchastang.com/dotemacs.html]]
   [[http://orgmode.org/worg/org-contrib/org-drill.html]]
   Follow this link to execute =(org-agenda)=: [[elisp:org-agenda][Org Agenda]]
@@ -129,7 +150,7 @@
 
      Let NN = NESTED-NOUN, RP = RELATIVE-PRONOUN, es = \lambda (the empty string).
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :eval no-export
   (setq parsed [S [NP [NN [NN [ART es] [NP [ADJ Buffalo] [NP [N
         buffalo]]]] [RP es] [NN [NP [ADJ Buffalo] [NP [N buffalo]]]][V
         buffalo]]] [VP [V buffalo]] [NP [ADJ Buffalo] [NP [N buffalo]]]])
@@ -137,8 +158,7 @@
   (kill-new (format "%s" parsed))
 #+END_SRC
 
-
-*** TODO Save for DM2 this more detailed description/definition
+*** TODO Save this more detailed description/definition for DM2
    A language is /regular/ *iff* some /regular expression/ describes it.
 
    Regular expressions use the so-called regular operations (\cup, \circ, and \star) ---
@@ -166,9 +186,118 @@
   analogous to the multiplication operator.
 
 **** TODO Give some examples of *re*'s
+*** TODO Save These Tabular Taxonomy Classification Exercises for DM2
 
+   In the following exercises you must classify/distinguish the four grammar
+   types.
+
+   Let N = [S A B], T = [a b], and G = [N T S P] (P to be given later).
+
+   Determine whether G
+
+   - is a type 0 grammar but not a type 1 grammar, or
+   - is a type 1 grammar but not a type 2 grammar, or
+   - is a type 2 grammar but not a type 3 grammar, or 
+   - is a type 3 grammar,
+
+   when P, the set of productions, is one of the following:
+
+#+begin_warning
+    S \rightarrow 0AB 
+
+    A \rightarrow B1
+
+    B \rightarrow \lambda
+#+end_warning
+
+:ANSWER:
+  2 but not 3. The first production disqualifies it from being 3, being
+  neither Left-linear nor Right-linear.
+:END:
+
+#+begin_warning
+    S \rightarrow 0A
+
+    A \rightarrow 1B
+
+    B \rightarrow 1
+#+end_warning
+
+:ANSWER:
+  This is a type 3, Right-linear grammar.
+:END:
+
+#+begin_warning
+    S \rightarrow AB0
+
+    AB \rightarrow 10
+#+end_warning
+
+:ANSWER:
+  Type 1 but not type 2. Second production violates the Type 2 restriction.
+:END:
+
+#+begin_warning
+    S \rightarrow BAB
+
+    A \rightarrow 0A
+
+    B \rightarrow 01
+#+end_warning
+
+:ANSWER:
+  2 but not 3. First production is neither Left- nor Right-linear.
+:END:
+
+#+begin_warning
+    S \rightarrow 0A
+
+    0A \rightarrow B
+
+    B \rightarrow 0A
+
+    A \rightarrow 1
+#+end_warning
+
+:ANSWER:
+  0 but not 1. Second production disqualifies it from being 1.
+:END:
+
+#+begin_warning
+    S \rightarrow A0
+
+    A \rightarrow 0
+
+    S \rightarrow \lambda
+
+#+end_warning
+
+:ANSWER:
+  Type 3, Left-linear.
+:END:
+
+
+* (
+  Groucho Marx once quipped, \ldquo{}Outside of a dog, a book is a man\rsquo{}s best
+  friend. Inside of a dog, it\rsquo{}s too dark to read.\rdquo 
+* ONE
+
+  [[He awoke with a start][He awoke with a start]]. What time was it? ... Did his alarm not go off? ... No,
+  it was 3:45, he just woke up too early. He lay there, mind racing, trying to
+  figure out what had woken him up.
+
+** ABC  
+** DEF
+** GHI
+* TWO
+  \ldquo{}So, what is the connection between probability and counting?\rdquo asked Til.
+
+** JKL
+** MNO
+** PQR
 * THR
-
+** STU
+** VWX
 ** YZ@
 
   \ldquo{}Isn\rsquo{}t it interesting how languages either facilitate or impede
@@ -213,7 +342,7 @@
   Abu said, \ldquo{}It seems pretty clear from the context that it\rsquo{}s one sentence.\rdquo Ila
   said, \ldquo{}I agree. I don\rsquo{}t see the problem.\rdquo
 
-  \ldquo{}It\rsquo{}s /not/ a problem --- for you. Missing the context, and minus the fluidity
+  \ldquo{}It\rsquo{}s /not/ a problem --- for /you/. Missing the context, and minus the fluidity
   and rapidity with which you uttered that /one/ sentence, however, it could be
   misconstrued --- legally but erroneously parsed --- into two.\rdquo
 
@@ -291,7 +420,7 @@
 
   Ila said, \ldquo{}I'll check it out, but just from the sound of it I'm glad C++ is
   not the language my company uses!\rdquo Abu added, \ldquo{}Me too!\rdquo Ila said, \ldquo{}You run a
-  nursery, what are you talking about?\rdquo \ldquo{}Well,\rdquo said Abu, \ldquo{}we just hired a
+  nursery, what are you talking about?\rdquo \ldquo{}Hey!\rdquo said Abu, \ldquo{}we just hired a
   programmer to help us manage our inventory and production.\rdquo Til interrupted,
   \ldquo{}Let's talk about the programming language choice issue later.\rdquo
 
@@ -300,8 +429,8 @@
   three words from three different lists to create for client consideration
   impressive-sounding, meaningless phrases, like
 
-  customer value trajectory, or stratified business intelligence, or hypercubic
-  mission criticality.\rdquo
+  /customer value trajectory/, or /stratified business intelligence/, or
+  /hypercubic mission criticality/.\rdquo
 
   \ldquo{}Wow, did you just make those up?\rdquo wondered Abu, silently. Ila said, \ldquo{}I hear
   that stuff all the time from the consultants my company hires. It\rsquo{}s worse than
@@ -331,10 +460,10 @@
   the, if not /the/ most brilliant mathematical logicians of all time, once
   said:
 
-#+BEGIN_QUOTE
+#+BEGIN_VERSE
   The more I [[think about language][think about language]], the more it amazes me that people ever
   understand each other.
-#+END_QUOTE
+#+END_VERSE
 
   \ldquo{}What amazes me about mathematicians, who are people too, is that they are
   such poor writers --- when writing mathematics, at least. I alluded to this a
@@ -344,7 +473,7 @@
   His excitement bubbling, Abu said, \ldquo{}I like this quote from one of the books you
   recommended that I just started reading. The authors say \dots\rdquo
 
-#+BEGIN_QUOTE
+#+BEGIN_VERSE
   What we present may not resemble math, because we avoid the cryptic equations,
   formulas, and graphs that many people have come to know and fear as
   mathematics. Indeed, those symbols are the memorable icons of an
@@ -354,7 +483,7 @@
   cryptic symbols that have baffled students through the generations. Ideas ---
   intriguing, surprising, fascinating, and beautiful --- are truly at the heart
   of mathematics.
-#+END_QUOTE
+#+END_VERSE
 
   Ila said, \ldquo{}I have a quote, too, along these lines. May I share it?\rdquo Til nodded,
   and Abu winced --- was Ila jabbing him for plunging ahead without asking?
@@ -362,7 +491,7 @@
   \ldquo{}It\rsquo{}s also from one of your recommended books. The author is a Nobel laureate
   physicist:\rdquo
 
-#+BEGIN_QUOTE
+#+BEGIN_VERSE
   To many people who are not physicists, modern physics seems to have left the
   solid world of understandable here-and-now to enter a weird realm of
   uncertainties and strange, ephemeral particles that have whimsical names and
@@ -375,7 +504,7 @@
   great or incredibly small, far beyond the range of our unaided senses, where
   the rules of the game are changed. The true language of physics is
   mathematics.
-#+END_QUOTE
+#+END_VERSE
 
   Said Til: \ldquo{}Excellent! But more on these ideas later. Think about what you know
   about the language of logic. It had something of a learning curve when you
@@ -388,14 +517,14 @@
   \ldquo{}This passage pauses while expressing the point of view that \lsquo{}mathematics is
   merely syntactic;\rsquo\rdquo
 
-#+BEGIN_QUOTE
+#+BEGIN_VERSE
   its truth derives from the rules of formal systems, which are of three basic
   sorts: the rules that specify what the symbols of the system are (its
   \ldquo{}alphabet\rdquo); the rules that specify how the symbols can be put together into
   what are called well-formed formulas, standardly abbreviated \ldquo{}wff,\rdquo and
   pronounced \ldquo{}woof\rdquo; and the rules of inference that specify which wffs can be
   derived from which.
-#+END_QUOTE
+#+END_VERSE
 
   Said Abu, \ldquo{}I recall some of the rules we learned for the wffs of propositional
   logic, like \lsquo{}p \rarr (q \vee r)\rsquo is one but \lsquo\rarr p (\vee q r)\rsquo is not.\rdquo
@@ -403,8 +532,8 @@
   Said Ila, \ldquo{}Unless you put parentheses around the whole thing and call it
   lisp!\rdquo
 
-  Said Til, \ldquo{}Right! You would have to scramble the symbols even more, like \lsquo{}p q ) \vee (r
-  \rarr\rsquo to really unwffify it!\rdquo
+  Said Til, \ldquo{}Right! You would have to scramble the symbols even more, 
+  like \lsquo{}p q ) \vee (r \rarr\rsquo to really unwffify it!\rdquo
 
   Said Abu, \ldquo{}So like the shuffling you did with the Christian maxim, as you called
   it, would you say you unwffified that phrase five different ways?\rdquo
@@ -450,15 +579,16 @@
 
   of strings.\rdquo{}
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :eval no-export
   (format "%S" (number-to-string 23))
 #+END_SRC
 
 : "23"
 
-#+BEGIN_SRC emacs-lisp :results raw
-  (format "%S" (member (number-to-string 23)
-                       (map 'list 'number-to-string [2 3 5 7 11 13 17 19 23])))
+#+BEGIN_SRC emacs-lisp :results raw :eval no-export
+  (format "%S"
+          (member (number-to-string 23)
+                  (mapcar 'number-to-string [2 3 5 7 11 13 17 19 23])))
 #+END_SRC
 
 : ("23")
@@ -498,7 +628,7 @@
   (yes, so don\rsquo{}t swap them), and, is 13 less than 26 (yes, so leave them where
   they are as well). The result: =(2 13 26)=.\rdquo
 
-#+BEGIN_SRC emacs-lisp :results raw
+#+BEGIN_SRC emacs-lisp :results raw :eval no-export
   (let* ((unsorted '(13 2 26))
          (a (nth 0 unsorted))
          (b (nth 1 unsorted))
@@ -523,11 +653,11 @@
   answer that.\rdquo Til said, \ldquo{}Go ahead!\rdquo as Ila clenched her teeth. She thought she
   knew how now too.
 
-  \ldquo{}In the realm of numbers, I can take the /language/ 
+  \ldquo{}Suppose I take the /language/ of numbers
 
 : ["1" "2" "3" "4" "5" "6" ...]
 
-  and split it up into subsets like so:
+  and slice it into overlapping subsets like so:
 
 : Less-than-2: ["1"]
 :
@@ -535,8 +665,8 @@
 :
 : Less-than-4: ["1" "2" "3"]
 
-  and so on, as many as I like. Then for the question, is =a= less than =b=,
-  just ask is =a= in the subset =Less-than-b=?\rdquo
+  and so on, as many as I like. Then to answer the question, is =a= less than
+  =b=, I just ask is =a= in the subset =Less-than-b=?\rdquo
 
   Ila frowned. \ldquo{}But isn\rsquo{}t that a way, way inefficient way to compare two
   numbers?\rdquo Til said, \ldquo{}Yes, it is, but if we\rsquo{}re not concerned with efficiency,
@@ -547,7 +677,7 @@
   arithmetic with them. Let\rsquo{}s lump the relational operations with the arithmetic
   ones, and ask, how would one answer a simple =a < b= question, given:\rdquo
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :eval no-export
   (setq a-as-string "361070123498760381765950923497698325576139879587987251757151" 
         b-as-string "36107058266725245759262937693558834387849309867353286761847615132"
         is-a-less-than-b (if (< (length a-as-string) (length b-as-string))
@@ -577,7 +707,6 @@
   \ldquo{}You\rsquo{}re about to find out!\rdquo Til said, as he flashed them his mischievous
   smile.
 
-                    -~-~-~-~-~-
 *** ZCF 
 
    In normal usage, a language is something we use to communicate, in speaking
@@ -591,10 +720,7 @@
     Not letters, *symbols* are what the members or elements of a generic
     alphabet are called.
 
-    A *string* is a finite sequence of symbols from a given alphabet. These are
-    usually written as symbols placed [[side-by-side without adornments][side-by-side without adornments]] of
-    brackets or braces, commas or spaces --- so =abab= rather than ={a, b, a,
-    b}= or =[a b a b]=.
+    A *string* is a finite sequence of symbols from a given alphabet.
  
     The *length* of a string is the number of symbols contained in the string.
     \vert{}w\vert denotes the length of w, in another overloading of vertical bars. The
@@ -604,10 +730,16 @@
     string, in the same order, is called *concatenation*.
 #+end_note
 
-  There is an operation in almost all programming languages to perform string
-  concatenation, e.g.:
+  When the symbols in an alphabet all have length one, strings are usually
+  written as symbols placed [[side-by-side without adornments][side-by-side without adornments]] of brackets or
+  braces, commas or spaces --- so =abab= rather than ={a, b, a, b}= or =[a b a
+  b]=. 
 
-#+BEGIN_SRC emacs-lisp :results output
+  Also, in almost all programming languages strings are surrounded by single- or
+  double-quotes, and these languages have at least one operation to perform
+  string concatenation, e.g.:
+
+#+BEGIN_SRC emacs-lisp :results output :eval no-export
   (print (concat "ABC" "XYZ"))
 #+END_SRC
 
@@ -640,8 +772,8 @@
    - =N= is a set of *Nonterminals* (also called *Variables*)
    - =T= is a set of *Terminals* (=N= \cap =T= = \emptyset)
    - =S= is the *Start* Nonterminal (=S= \in =N=)
-   - =P= is a finite set of *Productions* (AKA *Rules*), each one mapping a
-     Nonterminal to a string of Nonterminals and Terminals.
+   - =P= is a finite set of *Productions* (AKA *Rules*), each one mapping
+     Nonterminals to sequences of Nonterminals and Terminals.
 #+end_note
 
    To start with something familiar, here is a sample PSG\rsquo{}s =[N T S P]= for a
@@ -653,10 +785,11 @@
 :
 :  T = [the hungry sleepy cat dog chases runs quickly slowly]
 
-   In the rules for this PSG, note that the vertical bar (\vert) means OR, e.g., the
-   NOUN rule produces either =cat= or =dog= (exclusive-OR):
+   The rules for this PSG are in the table below, in which note that the
+   vertical bar (\vert) means OR, e.g., the NOUN rule produces either =cat= or =dog=
+   (exclusive-OR):
 
-   Notice too that the terminals are just concrete words, the Nonterminals more
+   Note too that the terminals are just concrete words, the Nonterminals more
    abstract word /types/ (e.g. NOUN) normally used to talk /about/ and classify
    words. For the English language (as for any natural language) these terminal
    words form the set of symbols comprising the alphabet in the sense defined
@@ -667,7 +800,7 @@
    |       | SENTENCE    | \rightarrow | NOUN-PHRASE VERB-PHRASE             |
    |       | NOUN-PHRASE | \rightarrow | ARTICLE ADJECTIVE NOUN              |
    |       | NOUN-PHRASE | \rightarrow | ARTICLE NOUN                        |
-   |       | VERB-PHRASE | \rightarrow | VERB-PHRASE ADVERB                  |
+   |       | VERB-PHRASE | \rightarrow | VERB ADVERB                         |
    |       | VERB-PHRASE | \rightarrow | VERB                                |
    |       | ARTICLE     | \rightarrow | the \vert \lambda                             |
    |       | ADJECTIVE   | \rightarrow | hungry \vert sleepy                     |
@@ -698,7 +831,7 @@
   =NOUN=, =VERB= and =ADVERB= rules) is the second choice that is randomly
   decided.
 
-#+BEGIN_SRC emacs-lisp :results silent
+#+BEGIN_SRC emacs-lisp :results silent :eval no-export
   (setq the t es "" hungry t sleepy t cat t dog t 
         chases t runs t slowly t quickly t
         productions
@@ -754,61 +887,73 @@
    |          | \rightarrow | the dog runs ADVERB      |
    |          | \rarr | the dog runs quickly     |
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :eval no-export
   (find-derivation 'SENTENCE)
 #+END_SRC
 
 : the dog runs quickly
 
-   Using the above example as a guide, produce derivations for each of the
-   following sentences, and verify it by giving the sequence of values returned
-   from calls to =random= and using that to /advise/ the =random= function:
+   Using the above example as a guide, exercise your knowledge to produce
+   derivations for several sentences, and verify each by giving the
+   sequence of values returned from calls to =random= and using that to
+   /override/ the =random= function:
 
-**** TODO Show how to advise random
+**** TODO Finish showing how to override random
+#+BEGIN_SRC emacs-lisp :results silent :eval no-export
+  (add-function :override
+                (symbol-function 'random)
+                (lambda (&rest args)
+                  (string-to-number
+                   (read-from-minibuffer
+                    (format "Enter random value less than %d: " (car args)))))
+                '((name . interactive-random)))
+#+END_SRC
 
-:EXERCISE:
-    the sleepy cat runs slowly
-:END:
+#+BEGIN_SRC emacs-lisp :results silent :eval no-export
+  (remove-function (symbol-function 'random) 'interactive-random)
+#+END_SRC
 
-:EXERCISE:
-    the hungry dog runs quickly
-:END:
+   Abbreviate the above-described exercise /derive-verify/.
 
-:EXERCISE:
-    the hungry dog chases the sleepy cat
-:END:
+#+begin_warning
+   - FHJ :: Derive-verify =the sleepy cat runs slowly=.
+#+end_warning
 
-:EXERCISE:
-   Combinatorially speaking, how many different sentences can be derived by
-   repeated evaluations of =(find-derivation 'SENTENCE)=?
-:END:
+   [[http://localhost/app/answer/fhj][Answer]]
+
+#+begin_warning
+   - XCI :: Derive-verify =the hungry dog runs quickly=.
+#+end_warning
+
+   [[http://localhost/app/answer/xci][Answer]]
+
+#+begin_warning
+   - UVY :: Derive-verify =the hungry dog chases the sleepy cat=.
+#+end_warning
+
+   [[http://localhost/app/answer/uvy][Answer]]
+
+#+begin_warning
+   - MJE :: Combinatorially speaking, how many different sentences can be
+            derived by repeated evaluations of =(find-derivation 'SENTENCE)=?
+#+end_warning
+
+   [[http://localhost/app/answer/mje][Answer]]
+
+**** Questions and Answers
 
    With this simple grammar is there a derivation for the following sentence?
 
    =the hungry sleepy dog runs=
 
-   The answer is no. Adjectives do not follow other adjectives with the simple
-   rule that ADJECTIVE produces either one terminal adjective (hungry) or the
-   other (sleepy). English allows multiple adjectives, but it needs a more
-   sophisticated rule, a \ldquo{}loopy\rdquo rule, i.e., a /recursive/ rule:
- 
-   ADJECTIVE \rightarrow ADJECTIVE ADJECTIVE \vert \lambda
-
-   Moving towards more sophistication, what rules would you need to change or
-   add to generate this sentence?
+   Moving towards more sophistication, what rules would we need to change or add
+   to generate this sentence?
 
    =the quick brown fox jumps over the lazy dog=
 
-   The answer is to /add/ all of the following except the first --- use it to
-   /replace/ the non-recursive ADJECTIVE rule:
+   Give these questions some thought before looking at [[the answers in the endnote][the answers in the endnote]].
 
-   ADJECTIVE \rightarrow hungry \vert sleepy \vert quick \vert brown \vert lazy
-
-   PREPOSITION \rightarrow of \vert from \vert by \vert on \vert in \vert over \vert \dots
-
-   PREPOSITIONAL-PHRASE \rightarrow PREPOSITION NOUN-PHRASE
-
-   VERB-PHRASE \rightarrow VERB PREPOSITIONAL-PHRASE
+**** Topsy-Turvy
 
 #+begin_note
    The derivation of a syntactically valid structured phrase from the top down
@@ -816,7 +961,7 @@
    up, i.e., from leaves to root, a *syntax tree* (AKA a *parse tree*).
 #+end_note
 
-   For example, a valid sentence forms the leaves:
+   For example, a valid sentence forms the leaves of a parse tree:
 
 #+BEGIN_SRC dot :file ../img/fig-leaves-of-the-parse-tree.png :results output :exports results :eval no-export
   graph leaves {
@@ -895,7 +1040,8 @@
 #+RESULTS:
 [[file:../img/fig-leaves-and-parents-of-the-parse-tree.png]]
 
-:  ((ART the) (ADJ hungry) (N dog) (V chases) (ART the) (ADJ sleepy) (N cat))
+: ((ART the) (ADJ hungry) (N dog) (V chases) 
+:  (ART the) (ADJ sleepy) (N cat))
 
    Continuing on up the tree, we are also building a nested alist (albeit with
    repeated keys). Abbreviating NOUN-PHRASE as NP, and VERB-PHRASE as VP:
@@ -949,7 +1095,8 @@
 #+RESULTS:
 [[file:../img/fig-almost-complete-parse-tree.png]]
 
-:  ((NP (ART the) (ADJ hungry) (N dog)) (VP (V chases)) (NP (ART the) (ADJ sleepy) (N cat)))
+: ((NP (ART the) (ADJ hungry) (N dog)) (VP (V chases))
+:  (NP (ART the) (ADJ sleepy) (N cat)))
 
    Finishing with SENTENCE (abbrev. S) being the root of the tree, with the list
    form consing S on the front:
@@ -1008,27 +1155,31 @@
 #+RESULTS:
 [[file:../img/fig-complete-parse-tree.png]]
 
-:  (S (NP (ART the) (ADJ hungry) (N dog)) (VP (V chases)) (NP (ART the) (ADJ sleepy) (N cat)))
+:  (S (NP (ART the) (ADJ hungry) (N dog))
+:     (VP (V chases))
+:     (NP (ART the) (ADJ sleepy) (N cat)))
 
-   See http://www.ironcreek.net/phpsyntaxtree/ for help with this process. (To
+   See http://www.ironcreek.net/phpsyntaxtree/ for help with this process. To
    use this tool, you must change the list-tree representation into nested
-   vectors, rendering the phrase into what they call labelled bracket notation.)
+   vectors, rendering the phrase into what they call labelled bracket notation,
+   as follows:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :eval no-export
   (setq parsed [S [NP [ART the] [ADJ hungry] [N dog]] [VP [V
         chases]] [NP [ART the] [ADJ sleepy] [N cat]]])
   (kill-new (format "%s" parsed))
 #+END_SRC
 
-  [[file:simple-phrase.png][Visualize the hungry dog chasing the sleepy cat]].
+  Click on this link to [[file:simple-phrase.png][visualize the hungry dog chasing the sleepy cat]] as
+  generated by this tool.
 
-:EXERCISE:
+#+begin_warning
    Using the syntax-tree tool, build a parse tree for =the quick brown fox jumps
    over the lazy dog=.
-:END:
+#+end_warning
 
 :ANSWER:
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :eval no-export
   (setq parsed [S [NP [ART the] [ADJ [ADJ quick] [ADJ brown]] [N
         fox]] [VP [V jumps] [PP [P over] [NP [ART the] [ADJ lazy]
         [N dog]]]]])
@@ -1036,25 +1187,23 @@
 #+END_SRC
 :END:
 
-   Build parse trees for the valid phrases:
+#+begin_warning
+   Build a parse tree for =the cat runs=.
+#+end_warning
 
-     :EXERCISE:
-     the cat runs
-     :END:
+#+begin_warning
+   Build a parse tree for =the cat chases the hungry dog=.
+#+end_warning     
 
-     :EXERCISE:
-     the cat chases the hungry dog
-     :END:
+#+begin_warning
+   Build a parse tree for =the dog runs quickly=.
+#+end_warning
 
-     :EXERCISE:
-     the dog runs quickly
-     :END:
+#+begin_warning
+   Build a parse tree for =the sleepy dog chases quickly the hungry cat=.
+#+end_warning
 
-     :EXERCISE:
-     the sleepy dog chases quickly the hungry cat
-     :END:
-
-  Let us examine a simple grammar in the programming languages direction, to
+  We next examine a simple grammar in the programming languages direction, to
   produce, say, well-formed S-expressions. The basis for this grammar is a
   /skeleton/ for matching opening and closing parentheses, which has a recursive
   rule for enclosing in parentheses, and one for expanding the length of the
@@ -1066,7 +1215,7 @@
   4. OP \rarr (
   5. CP \rarr )
 
-  | Start | \rarr | Next                  |    By Applying Rule |
+  | Start | \rarr | Next Derivation Step  |    By Applying Rule |
   |-------+---+-----------------------+---------------------|
   | SKEL  | \rarr | SKEL SKEL             |                   2 |
   |       | \rarr | OP SKEL CP SKEL       |                   1 |
@@ -1082,7 +1231,7 @@
   But now a simple binary choice between forward and reverse productions fails,
   because of the /three/ possible derivations for SKEL.
 
-#+BEGIN_SRC emacs-lisp :results silent
+#+BEGIN_SRC emacs-lisp :results silent :eval no-export
   (setq es "" open "(" close ")"
         productions
         '((SKEL OP SKEL CP)
@@ -1092,21 +1241,20 @@
         reverse-productions (reverse productions))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
-  (problem find-derivation 'SKEL) 
+#+BEGIN_SRC emacs-lisp :results raw :eval no-export
+  (find-derivation 'SKEL) 
 #+END_SRC
 
-#+RESULTS:
+: ( (  ) )
 
-:EXERCISE:
- Solve the problem in the code with finding a derivation starting with SKEL.
-:END:
-
-#+begin_note
   The grammar for [[English was long thought to be][English was long thought to be]] *context free*. The simple
   subset-of-English grammar we have been exploring is certainly not constrained
-  by context. By way of contrast, here\rsquo{}s an example of two productions in a
-  NON-context-free grammar:
+  by context.
+ 
+#+begin_note
+  A grammar is *context free* if every production has exactly one Nonterminal to
+  the left of its arrow. By way of contrast, here\rsquo{}s an example of two
+  productions in a NON-context-free grammar:
 
   aAc \rightarrow aabc
 
@@ -1116,13 +1264,15 @@
   it\rsquo{}s surrounded by a and d. That means A\rsquo{}s expansion has context
   \ldquo{}sensitivity\rdquo. A grammar/language with this feature is called *context
   sensitive*.
+#+end_note
 
+#+begin_note
   Moving down to the simplest type, a language is *regular* if it can be
   generated from its alphabet using the three *regular operations*:
 
   1. \cup (union)
   2. $\circ$ (concatenation)
-  3. \star ([[Kleene star][Kleene star]] or just star)
+  3. \star (star) 
 #+end_note
 
   How these work can be crudely illustrated using a type of graph (or
@@ -1150,7 +1300,8 @@
   }
 #+END_SRC
 
-#+RESULTS:
+#+CAPTION: Three Nodes and Two Links
+#+ATTR_HTML: :alt Three Nodes and Two Links :title Union Graph :halign left
 [[file:../img/fig-three-state-union.png]]
 
   - Concatenation :: 0 $\circ{}$ 1 (or just 01) --- we make a starting node and two
@@ -1173,11 +1324,12 @@
   }
 #+END_SRC
 
-#+RESULTS:
+#+CAPTION: Three Nodes and Two Links In a Row
+#+ATTR_HTML: :alt Three Nodes and Two Links In a Row :title Concatenation Graph :halign left
 [[file:../img/fig-two-state-concatenation.png]]
 
   - Star :: 0^{\star} --- we make a node with a loop-link labeled with the symbol
-            being \ldquo{}starred\rdquo.
+            preceding the star (AKA [[Kleene star][Kleene star]]).
 
 #+BEGIN_SRC dot :file ../img/fig-one-state-star.png :exports results :eval no-export
   digraph {
@@ -1192,7 +1344,8 @@
   }
 #+END_SRC
 
-#+RESULTS:
+#+CAPTION: One Node and a Loop-Link 
+#+ATTR_HTML: :alt One Node and a Loop-Link :title Star Graph :halign left
 [[file:../img/fig-one-state-star.png]]
 
   As how these separate operations compose into one graph can get somewhat
@@ -1231,7 +1384,7 @@
   }
 #+END_SRC
 
-#+RESULTS:
+#+CAPTION: Ending in One
 [[file:../img/fig-bitstrings-ending-in-one.png]]
 
   The node corresponding to the \star has been split in two, one loop labeled 0 and
@@ -1251,14 +1404,13 @@
   similar to how links and nodes worked in the above examples. But now let\rsquo{}s
   shift our focus and change the way we traverse these graphs. Instead of
   tracing paths to see what strings can be generated, we present some string to
-  the graph and ask the *string* to try to trace its way through the graph.
+  the graph and ask /it/ to try to thread the string through it.
 
   In so doing, we turn our graphs into machines, called [[state machines][state machines]]. The
   static picture of the graph is called a [[state diagram][state diagram]], the nodes are called
-  states and the links are called transitions. So let\rsquo{}s revisit what happens
-  with these machines from our new point of view, as we take on the persona of
-  the machine (not the string, implied at the end of the previous paragraph to
-  be the focus).
+  /states/ and the links are called /transitions/. So let\rsquo{}s revisit string
+  processing from our new point of view, as we take on the persona of the
+  machine.
 
   By convention, the [[start node or state][start node or state]] (corresponding to the grammar\rsquo{}s Start
   symbol) is the node named =S= or with some symbol followed by one or more
@@ -1272,8 +1424,9 @@
   }
 #+END_SRC
 
-#+RESULTS:
-[[file:../img/fig-start-state.png]]
+#+CAPTION: Start State
+#+ATTR_HTML: :alt Start State :title Start State :align left
+[[file:../img/fig-start-state.png]] 
 
   When we (the machine) are \ldquo{}turned on\rdquo we come up \ldquo{}in\rdquo our start state. We then
   start reading symbols, one by one, from our \ldquo{}input\rdquo --- the string being
@@ -1298,7 +1451,8 @@
   }
 #+END_SRC
 
-#+RESULTS:
+#+CAPTION: Single State-to-State Transition
+#+ATTR_HTML: :alt Single State Transition :title Single State Transition :align left
 [[file:../img/fig-state-transition-on-a-0.png]]
 
   Sample state transition on both 0 and 1 inputs. This is shorthand notation for
@@ -1314,7 +1468,8 @@
   }
 #+END_SRC
 
-#+RESULTS:
+#+CAPTION: Double State-to-State Transition
+#+ATTR_HTML: :alt Double State Transition :title Double State Transition :align left
 [[file:../img/fig-state-transition-on-both-0-and-1.png]]
 
   A double circle identifies an \ldquo{}accept\rdquo state. There can be more than one of
@@ -1329,7 +1484,8 @@
   }
 #+END_SRC
 
-#+RESULTS:
+#+CAPTION: Accept State
+#+ATTR_HTML: :alt Accept State :title Accept State :align left
 [[file:../img/fig-final-state.png]]
 
   Shedding our machine persona, we look at it once again as an actor, or an
@@ -1345,7 +1501,8 @@
   the language, then the machine is said to *recognize* the language.
 #+end_note
 
-  For example, the machine below recognizes the language =[01 011 0111]=:
+  For example, the machine below recognizes the language entirely consisting of
+  the three strings =[01 011 0111]=:
  
 #+BEGIN_SRC dot :file ../img/fig-three-string-language.png :exports results :eval no-export
   digraph {
@@ -1362,7 +1519,8 @@
   }
 #+END_SRC
 
-#+RESULTS:
+#+CAPTION: Three String Machine
+#+ATTR_HTML: :alt Three String Machine :title Three String Machine :halign left
 [[file:../img/fig-three-string-language.png]]
 
   More correctly (remembering our [[important rule][important rule]] above), there should be
@@ -1390,7 +1548,8 @@
   }
 #+END_SRC
 
-#+RESULTS:
+#+CAPTION: Complete Machine
+#+ATTR_HTML: :alt Complete Three String Machine :title Complete Three String Machine :halign left
 [[file:../img/fig-three-string-language-complete.png]]
 
    The 6-state machine above realizes the 7-rule PSG below (only the rules are
@@ -1423,7 +1582,8 @@
   }
 #+END_SRC
 
-#+RESULTS:
+#+CAPTION: A Yields 0A
+#+ATTR_HTML: :alt A Yields 0A :title A Yields 0A :align center
 [[file:../img/fig-A-yields-0A.png]]
 
    At node A, leave on a 0 and go back to A, as if the 0 in the rule were pulled
@@ -1454,19 +1614,20 @@
   }
 #+END_SRC
 
-#+RESULTS:
+#+CAPTION: Starting With One
+#+ATTR_HTML: :alt Starting With One :title Starting With One :halign left
 [[file:../img/fig-bitstrings-starting-with-one.png]]
 
    This is similar to the (0 \cup 1)^{\star}1 machine, except it recognizes all
    bitstrings that /start/ with a one: 1(0 \cup 1)^{\star}
 
-:EXERCISE:
-  Add a state and the necessary transitions to make this a valid state machine.
-:END:
+#+begin_warning
+   Add a state and the necessary transitions to make this a valid state machine.
+#+end_warning
 
-:EXERCISE:
-  Compare/contrast the 1(0 \cup 1)^{\star} machine with the (0 \cup 1)^{\star}1 machine. 
-:END:
+#+begin_warning
+   Compare/contrast the 1(0 \cup 1)^{\star} machine with the (0 \cup 1)^{\star}1 machine. 
+#+end_warning
 
    This next machine recognizes the language of all bitstrings whose
    /second-to-last/ bit is a 0:
@@ -1494,7 +1655,7 @@
 #+RESULTS:
 [[file:../img/fig-second-to-last-is-0.png]]
 
-:EXERCISE:
+#+begin_warning
   The three-production grammar
 
   1. S \rarr A1
@@ -1512,9 +1673,9 @@
 #    \   /
 #     v /
 #     (S)---1--->((F))
-:END:
+#+end_warning
 
-:EXERCISE:
+#+begin_warning
   The following machine recognizes which language?
 
 #+BEGIN_SRC dot :file ../img/fig-single-state-with-01-transitions.png :exports results :eval no-export
@@ -1534,7 +1695,7 @@
 # ANSWER
 # The empty language \emptyset. With no accept states, no string can be accepted --- all
 # are rejected.
-:END:
+#+end_warning
 
   The language recognizers we have been examining are not the only
   interpretation we can give these kinds of state machines. You may have seen
@@ -1582,15 +1743,15 @@
 
   when the set P of productions consists of each of the following:
 
-:EXERCISE:
+#+begin_warning
     S \rightarrow AB
 
     A \rightarrow 01
 
     B \rightarrow 11
-:END:
+#+end_warning
 
-:EXERCISE:
+#+begin_warning
     S \rightarrow AB
 
     S \rightarrow 0A
@@ -1598,9 +1759,9 @@
     A \rightarrow 0
 
     B \rightarrow 10
-:END:
+#+end_warning
 
-:EXERCISE:
+#+begin_warning
     S \rightarrow AB
 
     S \rightarrow AA
@@ -1610,9 +1771,9 @@
     A \rightarrow 01
 
     B \rightarrow 1
-:END:
+#+end_warning
 
-:EXERCISE:
+#+begin_warning
     S \rightarrow AA
 
     S \rightarrow B
@@ -1624,9 +1785,9 @@
     B \rightarrow 1B
 
     B \rightarrow 1
-:END:
+#+end_warning
 
-:EXERCISE:
+#+begin_warning
     S \rightarrow AB
 
     A \rightarrow 0A1
@@ -1636,9 +1797,9 @@
     A \rightarrow \lambda
 
     B \rightarrow \lambda
-:END:
+#+end_warning
 
-#+BEGIN_SRC emacs-lisp :results silent
+#+BEGIN_SRC emacs-lisp :results silent :eval no-export
   (setq es "" a "0" b "1"
         productions
         '((S A B)
@@ -1649,7 +1810,7 @@
         reverse-productions (reverse productions))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :eval no-export
   (find-derivation 'S)
 #+END_SRC
 
@@ -1657,17 +1818,17 @@
 
   What grammar generates a given language?
 
-  :EXERCISE:
+#+begin_warning
   Construct a PSG to generate {0^{2n }1 \vert n \ge 0}.
-  :END:
+#+end_warning
 
-  :EXERCISE:
+#+begin_warning
   Construct a PSG to generate {0^{n }1^{2n} \vert n \ge 0}.
-  :END:
+#+end_warning
 
-  :EXERCISE:
+#+begin_warning
   Construct a PSG to generate {0^n 1^m 0^n \vert m \ge 0 and n \ge 0}.
-  :END:
+#+end_warning
 
 *** ILO  
 
@@ -1720,97 +1881,6 @@
    |                        |      | (each RHS must be either a tl or \lambda,       |
    |                        |      | or have a single Nonterminal and be       |
    |                        |      | all like Ntl, or all like tlN).           |
-
-**** TODO Save These Classification Exercises for DM2              :noexport:
-
-   In the following exercises you must classify/distinguish the four grammar
-   types.
-
-   Let N = [S A B], T = [a b], and G = [N T S P] (P to be given later).
-
-   Determine whether G
-
-   - is a type 0 grammar but not a type 1 grammar, or
-   - is a type 1 grammar but not a type 2 grammar, or
-   - is a type 2 grammar but not a type 3 grammar, or 
-   - is a type 3 grammar,
-
-   when P, the set of productions, is one of the following:
-
-:EXERCISE:
-    S \rightarrow 0AB 
-
-    A \rightarrow B1
-
-    B \rightarrow \lambda
-:END:
-
-:ANSWER:
-  2 but not 3. The first production disqualifies it from being 3, being
-  neither Left-linear nor Right-linear.
-:END:
-
-:EXERCISE:
-    S \rightarrow 0A
-
-    A \rightarrow 1B
-
-    B \rightarrow 1
-:END:
-
-:ANSWER:
-  This is a type 3, Right-linear grammar.
-:END:
-
-:EXERCISE:
-    S \rightarrow AB0
-
-    AB \rightarrow 10
-:END:
-
-:ANSWER:
-  Type 1 but not type 2. Second production violates the Type 2 restriction.
-:END:
-
-:EXERCISE:
-    S \rightarrow BAB
-
-    A \rightarrow 0A
-
-    B \rightarrow 01
-:END:
-
-:ANSWER:
-  2 but not 3. First production is neither Left- nor Right-linear.
-:END:
-
-:EXERCISE:
-    S \rightarrow 0A
-
-    0A \rightarrow B
-
-    B \rightarrow 0A
-
-    A \rightarrow 1
-:END:
-
-:ANSWER:
-  0 but not 1. Second production disqualifies it from being 1.
-:END:
-
-:EXERCISE:
-    S \rightarrow A0
-
-    A \rightarrow 0
-
-    S \rightarrow \lambda
-
-:END:
-
-:ANSWER:
-  Type 3, Left-linear.
-:END:
-
 ** TODO Develop Ideas For an Epilogue, or Other Episodic Installments
 
   Solving a math problem to get clues to Til\rsquo{}s unknown whereabouts would be a
@@ -1830,6 +1900,10 @@
 
 * )
 
+  <<He awoke with a start>>
+  - He awoke with a start :: This character is my surrogate. Pedagogically
+       speaking, my using his voice is a ...
+ 
   <<a poem by Wordsworth>>
   - a poem by Wordsworth :: [[https://www.poetryfoundation.org/poems-and-poets/poems/detail/45518][The French Revolution as It Appeared to Enthusiasts at Its Commencement]]
 
@@ -1898,7 +1972,7 @@
   - Sieve of Eratosthenes :: Using some elisp code to augment paper-and-pencil
        investigation:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :eval no-export
   (loop for n from 2 to 97 by 7
         collect (loop for i from 0 below 7
                       collect (+ i n)))
@@ -1995,11 +2069,11 @@
   | +86+ | +87+ | +88+ |   89 | +90+ | +91+ | +92+ |
   | +93+ | +94+ | +95+ | +96+ |   97 | +98+ | +99+ |
 
-  Now to do with code what we just did manually. We cross out a number by
-  negating it (making it negative) and must use a conditional to avoid undoing
-  that negation once done.
+  Now to do with code what we just did manually (but only up to 25). We cross
+  out a number by negating it (making it negative) and must use a conditional to
+  avoid undoing that negation once done.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :eval no-export
   (require 'calc-misc) ;; for math-posp
 
   (defun negate-multiple (n m)
@@ -2033,7 +2107,7 @@
   complete number sequence from 2 to some limit. Not the most efficient sieve,
   but passable.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :eval no-export
   (require 'cl)
 
   (setq stages nil)
@@ -2050,13 +2124,13 @@
     (delete-nonprimes (number-sequence 2 limit))) 
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :eval no-export
   (sieve-of-Eratosthenes 99) 
 #+END_SRC
 
  | 2 | 3 | 5 | 7 | 11 | 13 | 17 | 19 | 23 | 29 | 31 | 37 | 41 | 43 | 47 | 53 | 59 | 61 | 67 | 71 | 73 | 79 | 83 | 89 | 97 |
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :eval no-export
   stages 
 #+END_SRC
 
@@ -2116,11 +2190,31 @@
   |  2 |  3 |  5 |  7 | 11 | 13 | 17 | 19 | 23 | 29 | 31 | 37 | 41 | 43 | 47 | 53 | 59 | 61 | 67 | 71 | 73 | 79 | 83 | 89 | 97 |
 
   <<side-by-side without adornments>>
-  - side-by-side without adornments :: They are thus like lisp symbols, whose
+  - side-by-side without adornments :: Strings are thus like lisp symbols, whose
        names are lisp strings, which are sequences of characters, which are
        integers. They differ from lisp symbols by accommodating more alphabets.
        For example, =123= is a string over the alphabet =[0 1 2 3 4 5 6 7 8 9]=
        --- in lisp it would be a number.
+
+  <<the answers in the endnote>>
+  - the answers in the endnote :: The answer to the first question is no.
+       Adjectives do not follow other adjectives with the simple rule that
+       ADJECTIVE produces either one terminal adjective (hungry) or the other
+       (sleepy). English allows multiple adjectives, but it needs a more
+       sophisticated rule, a \ldquo{}loopy\rdquo rule, i.e., a /recursive/ rule:
+ 
+       ADJECTIVE \rightarrow ADJECTIVE ADJECTIVE \vert \lambda
+
+       The answer to the second question is to /add/ all of the following except
+       the first --- use it to /replace/ the non-recursive ADJECTIVE rule:
+
+       ADJECTIVE \rightarrow hungry \vert sleepy \vert quick \vert brown \vert lazy
+
+       PREPOSITION \rightarrow of \vert from \vert by \vert on \vert in \vert over \vert \dots
+
+       PREPOSITIONAL-PHRASE \rightarrow PREPOSITION NOUN-PHRASE
+
+       VERB-PHRASE \rightarrow VERB PREPOSITIONAL-PHRASE
 
   <<English was long thought to be>>
   - English was long thought to be :: Context Free.
@@ -2128,25 +2222,33 @@
        Linguistic Inquiry Vol. 15, No. 2 (Spring, 1984), pages 225-234.
 
   <<Kleene star>>
-  - Kleene star :: Named after [[https://en.wikipedia.org/wiki/Stephen_Cole_Kleene][Stephen Cole Kleene]], who is the mathematician who
-                   defined this powerful operation on either a set of symbols or
-                   a set of strings. The article referenced defines V^{\star}
-                   \ldquo{}as the set of finite-length strings that can be generated by
-                   concatenating arbitrary elements of V, allowing the use of
-                   the same element multiple times.\rdquo
+  - Kleene star :: Named after [[https://en.wikipedia.org/wiki/Stephen_Cole_Kleene][Stephen Cole Kleene]], the mathematician who
+                   defined this powerful operation to work on either a set of
+                   symbols or a set of strings. The article referenced defines
+                   V^{\star} \ldquo{}as the set of finite-length strings that can
+                   be generated by concatenating arbitrary elements of V,
+                   allowing the use of the same element multiple times.\rdquo
 
   <<take this on faith if necessary>>
-  - take this on faith if necessary :: For illustration\rsquo{}s sake, and analogous to
-       the set of all bitstrings, take the alphabet =[a b]=, where the Kleene
-       star produces the following set: =["" "a" "b" "aa" "ab" "ba" "bb" "aaa"
-       "aab" "aba" "abb" "baa" "bab" "bba" "bbb" "aaaa" ...]=. Note that if we
-       used standard dictionary order to list this set, it would start like =[""
-       "a" "aa" "aaa" "aaaa" ...]= and never get to ="b"=, etc. That is why the
-       length-considering lexicographic way is preferred.
+  - take this on faith if necessary ::
+       For illustration\rsquo{}s sake, and analogous to the set of all bitstrings, take
+       the alphabet =[a b]=, where the Kleene star produces the following set:
+
+:      ["" "a" "b"
+:       "aa" "ab" "ba" "bb"
+:       "aaa" "aab" "aba" "abb"
+:       "baa" "bab" "bba" "bbb"
+:       "aaaa" ...]
+
+       Note that if we used standard dictionary order to list this set, it would
+       start like =["" "a" "aa" "aaa" "aaaa" ...]= and never get to ="b"=, etc.
+
+       That is why the length-considering lexicographic way is preferred.
 
   <<state machines>>
   - state machines :: Or *finite-state machines* or *finite-state automata*
-                      (*automaton* singular)). 
+                      (*automaton* singular)). (We will avoid *infinite*-state
+                      automata like the plague!)
 
   <<state diagram>>
   - state diagram :: Or *state-transition diagram*.
@@ -2174,5 +2276,7 @@
   }
 #+END_SRC
 
-#+RESULTS:
+#+CAPTION: Start State With Incoming Arrow
+#+ATTR_HTML: :alt Start State with Arrow :title Start State with Arrow :align left
 [[file:../img/fig-start-state-with-incoming-arrow.png]]
+
