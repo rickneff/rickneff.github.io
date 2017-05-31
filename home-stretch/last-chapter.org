@@ -1,13 +1,13 @@
-#+TITLE: Last Chapter
+[[elisp:query-replace][.]]
+#+TITLE: Last Chapter (click on the THR tab)
 #+AUTHOR: Rick Neff
 #+EMAIL: NeffR@byui.edu
-#+DATE: 27 May 2017
+#+DATE: 30 May 2017
 #+LANGUAGE: en
 #+OPTIONS: H:5 num:nil toc:t \n:t @:t ::t |:t ^:t *:t TeX:t LaTeX:t ':nil d:nil
 #+OPTIONS: html-postamble:t
 #+STARTUP: showeverything entitiespretty
 #+SETUPFILE: theme-bigblow.setup
-
 * TODO Add this exercise somewhere                                 :noexport:
 #+begin_warning
    The operation called *dehydration* takes a word and deletes all letters in it
@@ -281,7 +281,9 @@
   Groucho Marx once quipped, \ldquo{}Outside of a dog, a book is a man\rsquo{}s best
   friend. Inside of a dog, it\rsquo{}s too dark to read.\rdquo 
 * ONE
-
+  :PROPERTIES:
+  :CUSTOM_ID: ONE
+  :END:
   [[He awoke with a start][He awoke with a start]]. What time was it? ... Did his alarm not go off? ... No,
   it was 3:45, he just woke up too early. He lay there, mind racing, trying to
   figure out what had woken him up.
@@ -299,7 +301,9 @@
 ** STU
 ** VWX
 ** YZ@
-
+   :PROPERTIES:
+   :CUSTOM_ID: YZ@
+   :END:
   \ldquo{}Isn\rsquo{}t it interesting how languages either facilitate or impede
   communication?\rdquo asked Til, just as Ila and Abu entered his den. Ila replied,
   without missing a beat, \ldquo{}I know programming languages facilitate communication
@@ -372,11 +376,16 @@
 
   1. Love Another One.
   2. One Love Another.
+
   3. One Another Love.
   4. Another Love One.
   5. Another One Love.
 
   \ldquo{}So,\rdquo said Ila, \ldquo{}are you saying word order causes communication problems?\rdquo
+*** YZA
+  :PROPERTIES:
+  :CUSTOM_ID: YZA
+  :END:
 
   \ldquo{}Here\rsquo{}s a thought,\rdquo said Abu. \ldquo{}Have you ever tried to make sense of some kinds
   of poetry? Poets are always scrambling word order to fit some rhyme or meter
@@ -455,7 +464,10 @@
   talking about problems in mathematics. Mathematical language, unlike natural
   language, is precise and unambiguous. Equations --- tautologies --- always
   true. Never a doubt. Pure syntax without the clouding confusion of semantics.\rdquo
-
+*** YZB
+    :PROPERTIES:
+  :CUSTOM_ID: YZB
+  :END:
   \ldquo{}That\rsquo{}s the official story. Now let me qualify that a bit. Kurt G\ouml{}del, one of
   the, if not /the/ most brilliant mathematical logicians of all time, once
   said:
@@ -464,7 +476,6 @@
   The more I [[think about language][think about language]], the more it amazes me that people ever
   understand each other.
 #+END_VERSE
-
   \ldquo{}What amazes me about mathematicians, who are people too, is that they are
   such poor writers --- when writing mathematics, at least. I alluded to this a
   little bit ago. [[Math writing is notorious][Math writing is notorious]] for its lack of clarity, despite its
@@ -484,7 +495,10 @@
   intriguing, surprising, fascinating, and beautiful --- are truly at the heart
   of mathematics.
 #+END_VERSE
-
+*** YZC
+    :PROPERTIES:
+    :CUSTOM_ID: YZC
+    :END:
   Ila said, \ldquo{}I have a quote, too, along these lines. May I share it?\rdquo Til nodded,
   and Abu winced --- was Ila jabbing him for plunging ahead without asking?
 
@@ -505,7 +519,10 @@
   the rules of the game are changed. The true language of physics is
   mathematics.
 #+END_VERSE
-
+*** YZD
+    :PROPERTIES:
+    :CUSTOM_ID: YZD
+    :END:
   Said Til: \ldquo{}Excellent! But more on these ideas later. Think about what you know
   about the language of logic. It had something of a learning curve when you
   first encountered it, right? Formal logic is a formidable but foundational
@@ -545,7 +562,10 @@
 
   Said Ila, \ldquo{}So the rules we learned for composing propositions --- there were only
   four of them, right?\rdquo
-
+*** YZE
+    :PROPERTIES:
+    :CUSTOM_ID: YZE
+    :END:
   Said Til, \ldquo{}Yes. But that simple grammar did not take into account parentheses
   for grouping, so it was incomplete. But we will fix that later. There\rsquo{}s one
   more thing I want to mention about human communication before shifting our
@@ -562,7 +582,10 @@
   thoughts, and we\rsquo{}ll dissect them later. For now, other problems await our
   attention. While obviously mathematical in nature, indeed, /discrete/
   mathematical, problems in computer science are the ones we will focus on.\rdquo
-
+*** YZF
+    :PROPERTIES:
+    :CUSTOM_ID: YZF
+    :END:
   \ldquo{}Computer scientists, especially those into theoretical computer science, like
   to cast problems in the common mold of languages. They do this for technical
   reasons, more thoroughly delved into in a course on computational theory. But
@@ -592,7 +615,10 @@
 #+END_SRC
 
 : ("23")
-
+*** YZG
+    :PROPERTIES:
+    :CUSTOM_ID: YZG
+    :END:
   Til went on. \ldquo{}This set of strings is a language, and if you allow that the
   \lsquo{}...\rsquo stands for an infinity of bigger and bigger strings of this rather
   well-known kind, it is the language of PRIMES. It is given the /name/ PRIMES,
@@ -707,8 +733,10 @@
   \ldquo{}You\rsquo{}re about to find out!\rdquo Til said, as he flashed them his mischievous
   smile.
 
-*** ZCF 
-
+*** YZH
+    :PROPERTIES:
+    :CUSTOM_ID: YZH
+    :END:
    In normal usage, a language is something we use to communicate, in speaking
    or writing. In theoretical computer science, a language is no more and no
    less than some subset of a set of all strings over some alphabet. Related
@@ -759,7 +787,7 @@
   because =a= comes before =b= in the alphabet.
 
   Why this length-considering ordering is preferred will become clear when the \star
-  operation is discussed below.
+  (star) operation is discussed below.
 
   To reiterate, a language is a subset of a set of strings. But which ones?
   That\rsquo{}s where grammars come into play.
@@ -898,7 +926,7 @@
    sequence of values returned from calls to =random= and using that to
    /override/ the =random= function:
 
-**** TODO Finish showing how to override random
+**** TODO Finish showing how to override the =random= function
 #+BEGIN_SRC emacs-lisp :results silent :eval no-export
   (add-function :override
                 (symbol-function 'random)
@@ -909,39 +937,35 @@
                 '((name . interactive-random)))
 #+END_SRC
 
+  Execute the following to undo the override:
+
 #+BEGIN_SRC emacs-lisp :results silent :eval no-export
   (remove-function (symbol-function 'random) 'interactive-random)
 #+END_SRC
-
-   Abbreviate the above-described exercise /derive-verify/.
-
+**** BAO
+   Abbreviate the above-described exercise /derive-verify/. Click on the links
+   so named (or otherwise named) below for answers.
+**** BCD
 #+begin_warning
-   - FHJ :: Derive-verify =the sleepy cat runs slowly=.
+   [[http://firstthreeodds.org/answer/bcd][Derive-verify]] =the sleepy cat runs slowly=.
 #+end_warning
-
-   [[http://localhost/app/answer/fhj][Answer]]
-
+**** NCO 
 #+begin_warning
-   - XCI :: Derive-verify =the hungry dog runs quickly=.
+   [[http://firstthreeodds.org/answer/nco][Derive-verify]] =the hungry dog runs quickly=.
 #+end_warning
-
-   [[http://localhost/app/answer/xci][Answer]]
-
+**** PDQ 
 #+begin_warning
-   - UVY :: Derive-verify =the hungry dog chases the sleepy cat=.
+   [[http://firstthreeodds.org/answer/pdq][Derive-verify]] =the hungry dog chases the sleepy cat=.
 #+end_warning
-
-   [[http://localhost/app/answer/uvy][Answer]]
-
+**** NTC 
 #+begin_warning
-   - MJE :: Combinatorially speaking, how many different sentences can be
-            derived by repeated evaluations of =(find-derivation 'SENTENCE)=?
+   Combinatorially speaking, [[http://firstthreeodds.org/answer/ntc][how many different sentences]] can be derived by
+   repeated evaluations of =(find-derivation 'SENTENCE)=?
 #+end_warning
-
-   [[http://localhost/app/answer/mje][Answer]]
-
 **** Questions and Answers
-
+     :PROPERTIES:
+     :CUSTOM_ID: YZHQA
+     :END:
    With this simple grammar is there a derivation for the following sentence?
 
    =the hungry sleepy dog runs=
@@ -953,7 +977,10 @@
 
    Give these questions some thought before looking at [[the answers in the endnote][the answers in the endnote]].
 
-**** Topsy-Turvy
+*** YZI
+    :PROPERTIES:
+    :CUSTOM_ID: YZI
+    :END:
 
 #+begin_note
    The derivation of a syntactically valid structured phrase from the top down
@@ -963,7 +990,7 @@
 
    For example, a valid sentence forms the leaves of a parse tree:
 
-#+BEGIN_SRC dot :file ../img/fig-leaves-of-the-parse-tree.png :results output :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-leaves-of-the-parse-tree.png :results output :exports results :eval no-export
   graph leaves {
     size="6,3";
 
@@ -990,13 +1017,13 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:../img/fig-leaves-of-the-parse-tree.png]]
+[[file:img/fig-leaves-of-the-parse-tree.png]]
 
     Each terminal is given a parent, and as an alternate representation, each
     parent-child is rendered in tree form as a two-element list. Abbreviating
     ADJECTIVE as ADJ, ADVERB as ADV, ARTICLE as ART, NOUN as N, and VERB as V:
 
-#+BEGIN_SRC dot :file ../img/fig-leaves-and-parents-of-the-parse-tree.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-leaves-and-parents-of-the-parse-tree.png :exports results :eval no-export
   graph leavesandparents {
     size="6,3";
 
@@ -1038,7 +1065,7 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:../img/fig-leaves-and-parents-of-the-parse-tree.png]]
+[[file:img/fig-leaves-and-parents-of-the-parse-tree.png]]
 
 : ((ART the) (ADJ hungry) (N dog) (V chases) 
 :  (ART the) (ADJ sleepy) (N cat))
@@ -1046,7 +1073,7 @@
    Continuing on up the tree, we are also building a nested alist (albeit with
    repeated keys). Abbreviating NOUN-PHRASE as NP, and VERB-PHRASE as VP:
 
-#+BEGIN_SRC dot :file ../img/fig-almost-complete-parse-tree.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-almost-complete-parse-tree.png :exports results :eval no-export
   graph almostcomplete {
     size="6,4";
 
@@ -1093,7 +1120,7 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:../img/fig-almost-complete-parse-tree.png]]
+[[file:img/fig-almost-complete-parse-tree.png]]
 
 : ((NP (ART the) (ADJ hungry) (N dog)) (VP (V chases))
 :  (NP (ART the) (ADJ sleepy) (N cat)))
@@ -1101,7 +1128,7 @@
    Finishing with SENTENCE (abbrev. S) being the root of the tree, with the list
    form consing S on the front:
 
-#+BEGIN_SRC dot :file ../img/fig-complete-parse-tree.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-complete-parse-tree.png :exports results :eval no-export
   graph complete {
     size="6,5";
 
@@ -1153,7 +1180,7 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:../img/fig-complete-parse-tree.png]]
+[[file:img/fig-complete-parse-tree.png]]
 
 :  (S (NP (ART the) (ADJ hungry) (N dog))
 :     (VP (V chases))
@@ -1172,37 +1199,59 @@
 
   Click on this link to [[file:simple-phrase.png][visualize the hungry dog chasing the sleepy cat]] as
   generated by this tool.
-
+**** PTW 
 #+begin_warning
-   Using the syntax-tree tool, build a parse tree for =the quick brown fox jumps
+   Using the syntax-tree tool, [[http://firstthreeodds.org/answer/ptw][build a parse tree]] for =the quick brown fox jumps
    over the lazy dog=.
 #+end_warning
-
-:ANSWER:
+**** TODO PTW-Answer                                               :noexport:
 #+BEGIN_SRC emacs-lisp :eval no-export
   (setq parsed [S [NP [ART the] [ADJ [ADJ quick] [ADJ brown]] [N
         fox]] [VP [V jumps] [PP [P over] [NP [ART the] [ADJ lazy]
         [N dog]]]]])
   (kill-new (format "%s" parsed))
 #+END_SRC
-:END:
-
+**** NTM
 #+begin_warning
-   Build a parse tree for =the cat runs=.
+   [[http://firstthreeodds.org/answer/ntm][Build a parse tree]] for =the cat runs=.
 #+end_warning
-
+**** TODO NTM-Answer                                               :noexport:
+#+BEGIN_SRC emacs-lisp :eval no-export
+  (setq parsed [S [NP [ART the] [N cat] [VP [V runs]]]])
+  (kill-new (format "%s" parsed))
+#+END_SRC
+**** BMI
 #+begin_warning
-   Build a parse tree for =the cat chases the hungry dog=.
+   [[http://firstthreeodds.org/answer/bmi][Build a parse tree]] for =the cat chases the hungry dog=.
 #+end_warning     
-
+**** TODO BMI-Answer                                               :noexport:
+#+BEGIN_SRC emacs-lisp :eval no-export
+  (setq parsed [])
+  (kill-new (format "%s" parsed))
+#+END_SRC
+**** NES
 #+begin_warning
-   Build a parse tree for =the dog runs quickly=.
+   [[http://firstthreeodds.org/answer/nes][Build a parse tree]] for =the dog runs quickly=.
 #+end_warning
-
+**** NES-Answer                                                    :noexport:
+#+BEGIN_SRC emacs-lisp :eval no-export
+  (setq parsed [])
+  (kill-new (format "%s" parsed))
+#+END_SRC
+**** NRC
 #+begin_warning
-   Build a parse tree for =the sleepy dog chases quickly the hungry cat=.
+   [[http://firstthreeodds.org/answer/nrc][Build a parse tree]] for =the sleepy dog chases quickly the hungry cat=.
 #+end_warning
+**** TODO NRC-Answer                                               :noexport:
+#+BEGIN_SRC emacs-lisp :eval no-export
+  (setq parsed [])
+  (kill-new (format "%s" parsed))
+#+END_SRC
 
+*** YZJ
+    :PROPERTIES:
+    :CUSTOM_ID: YZJ
+    :END:
   We next examine a simple grammar in the programming languages direction, to
   produce, say, well-formed S-expressions. The basis for this grammar is a
   /skeleton/ for matching opening and closing parentheses, which has a recursive
@@ -1247,7 +1296,7 @@
 
 : ( (  ) )
 
-  The grammar for [[English was long thought to be][English was long thought to be]] *context free*. The simple
+  The grammar for English was [[long thought to be context free][long thought to be context free]]. The simple
   subset-of-English grammar we have been exploring is certainly not constrained
   by context.
  
@@ -1283,7 +1332,7 @@
              /disjunct/ (0 or 1) --- so either path may be taken from the
              leftmost node.
 
-#+BEGIN_SRC dot :file ../img/fig-three-state-union.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-three-state-union.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1302,13 +1351,13 @@
 
 #+CAPTION: Three Nodes and Two Links
 #+ATTR_HTML: :alt Three Nodes and Two Links :title Union Graph :halign left
-[[file:../img/fig-three-state-union.png]]
+[[file:img/fig-three-state-union.png]]
 
   - Concatenation :: 0 $\circ{}$ 1 (or just 01) --- we make a starting node and two
                      other nodes (one for each symbol) and a link for each
                      /conjunct/ (0 and 1) /in sequence/:
 
-#+BEGIN_SRC dot :file ../img/fig-two-state-concatenation.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-two-state-concatenation.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1326,12 +1375,12 @@
 
 #+CAPTION: Three Nodes and Two Links In a Row
 #+ATTR_HTML: :alt Three Nodes and Two Links In a Row :title Concatenation Graph :halign left
-[[file:../img/fig-two-state-concatenation.png]]
+[[file:img/fig-two-state-concatenation.png]]
 
   - Star :: 0^{\star} --- we make a node with a loop-link labeled with the symbol
-            preceding the star (AKA [[Kleene star][Kleene star]]).
+            preceding the star.
 
-#+BEGIN_SRC dot :file ../img/fig-one-state-star.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-one-state-star.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1346,7 +1395,7 @@
 
 #+CAPTION: One Node and a Loop-Link 
 #+ATTR_HTML: :alt One Node and a Loop-Link :title Star Graph :halign left
-[[file:../img/fig-one-state-star.png]]
+[[file:img/fig-one-state-star.png]]
 
   As how these separate operations compose into one graph can get somewhat
   complicated, we will forgo a complete description of the procedures and rules,
@@ -1356,18 +1405,22 @@
   /Every node must have one outgoing link for each symbol in the alphabet./
 #+end_important
 
+*** YZK
+    :PROPERTIES:
+    :CUSTOM_ID: YZK
+    :END:
   A complicating feature of these operators is that they can be applied to more
-  than just one symbol, e.g., (0 \cup 1)^{\star}, which means any number of
-  repetitions (including zero) of a 0 or a 1, mixed and matched arbitrarily,
-  which --- [[take this on faith if necessary][take this on faith if necessary]] --- eventually yields all possible
-  strings over the alphabet =[0 1]= (AKA *bitstrings*).
+  than just one symbol, e.g., (0 \cup 1)^{\star}, the star (AKA [[Kleene star][Kleene star]]) operator
+  yielding any number of repetitions (including zero) of a 0 or a 1, mixed and
+  matched arbitrarily, which --- [[take this on faith if necessary][take this on faith if necessary]] --- eventually
+  yields all possible strings over the alphabet =[0 1]= (AKA *bitstrings*).
 
   Mitigating some of the complexity, nodes can be split or merged (shared) and
   thus yield a simpler graph modeling the same language. For example, this graph
   models the language of all bitstrings that end in 1; equivalently, the regular
   language (0 \cup 1)^{\star}1:
 
-#+BEGIN_SRC dot :file ../img/fig-bitstrings-ending-in-one.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-bitstrings-ending-in-one.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1385,7 +1438,7 @@
 #+END_SRC
 
 #+CAPTION: Ending in One
-[[file:../img/fig-bitstrings-ending-in-one.png]]
+[[file:img/fig-bitstrings-ending-in-one.png]]
 
   The node corresponding to the \star has been split in two, one loop labeled 0 and
   the other labeled 1, while the link for the 0 in the \cup is shared with the
@@ -1397,7 +1450,10 @@
   traversed. So, labeling the two nodes =L= and =R=, the path =L-R= yields =1=,
   the path =L-R-L-R= yields =101=, the path =L-R-L-L-R-R= yields =10011=, and so
   forth.
-
+*** YZL
+    :PROPERTIES:
+    :CUSTOM_ID: YZL
+    :END:
   Regular grammars generate regular languages, and so are amenable to this kind
   of graph modeling. In this representation of grammar as graph, nodes
   correspond to the Nonterminals, and links between nodes are the terminals,
@@ -1416,7 +1472,7 @@
   symbol) is the node named =S= or with some symbol followed by one or more
   trailing 0s (e.g., s0, s00, etc.).
  
-#+BEGIN_SRC dot :file ../img/fig-start-state.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-start-state.png :exports results :eval no-export
   digraph {
     size="1,1";
 
@@ -1426,7 +1482,7 @@
 
 #+CAPTION: Start State
 #+ATTR_HTML: :alt Start State :title Start State :align left
-[[file:../img/fig-start-state.png]] 
+[[file:img/fig-start-state.png]] 
 
   When we (the machine) are \ldquo{}turned on\rdquo we come up \ldquo{}in\rdquo our start state. We then
   start reading symbols, one by one, from our \ldquo{}input\rdquo --- the string being
@@ -1441,7 +1497,7 @@
 
   Sample state transition on a 0:
 
-#+BEGIN_SRC dot :file ../img/fig-state-transition-on-a-0.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-state-transition-on-a-0.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="4,2";
@@ -1453,12 +1509,12 @@
 
 #+CAPTION: Single State-to-State Transition
 #+ATTR_HTML: :alt Single State Transition :title Single State Transition :align left
-[[file:../img/fig-state-transition-on-a-0.png]]
+[[file:img/fig-state-transition-on-a-0.png]]
 
   Sample state transition on both 0 and 1 inputs. This is shorthand notation for
   two transitions, one for 0 and the other for 1:
 
-#+BEGIN_SRC dot :file ../img/fig-state-transition-on-both-0-and-1.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-state-transition-on-both-0-and-1.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="4,2";
@@ -1470,12 +1526,12 @@
 
 #+CAPTION: Double State-to-State Transition
 #+ATTR_HTML: :alt Double State Transition :title Double State Transition :align left
-[[file:../img/fig-state-transition-on-both-0-and-1.png]]
+[[file:img/fig-state-transition-on-both-0-and-1.png]]
 
   A double circle identifies an \ldquo{}accept\rdquo state. There can be more than one of
   these:
 
-#+BEGIN_SRC dot :file ../img/fig-final-state.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-final-state.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="2,2";
@@ -1486,7 +1542,7 @@
 
 #+CAPTION: Accept State
 #+ATTR_HTML: :alt Accept State :title Accept State :align left
-[[file:../img/fig-final-state.png]]
+[[file:img/fig-final-state.png]]
 
   Shedding our machine persona, we look at it once again as an actor, or an
   agent making decisions.
@@ -1501,10 +1557,14 @@
   the language, then the machine is said to *recognize* the language.
 #+end_note
 
+*** YZM
+    :PROPERTIES:
+    :CUSTOM_ID: YZM
+    :END:
   For example, the machine below recognizes the language entirely consisting of
   the three strings =[01 011 0111]=:
  
-#+BEGIN_SRC dot :file ../img/fig-three-string-language.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-three-string-language.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="5,1";
@@ -1521,12 +1581,12 @@
 
 #+CAPTION: Three String Machine
 #+ATTR_HTML: :alt Three String Machine :title Three String Machine :halign left
-[[file:../img/fig-three-string-language.png]]
+[[file:img/fig-three-string-language.png]]
 
   More correctly (remembering our [[important rule][important rule]] above), there should be
   transitions for each input symbol out of each state, thus:
 
-#+BEGIN_SRC dot :file ../img/fig-three-string-language-complete.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-three-string-language-complete.png :exports results :eval no-export
   digraph {
     size="5,3";
 
@@ -1550,7 +1610,7 @@
 
 #+CAPTION: Complete Machine
 #+ATTR_HTML: :alt Complete Three String Machine :title Complete Three String Machine :halign left
-[[file:../img/fig-three-string-language-complete.png]]
+[[file:img/fig-three-string-language-complete.png]]
 
    The 6-state machine above realizes the 7-rule PSG below (only the rules are
    given, the other three components are inferable):
@@ -1570,7 +1630,7 @@
 
    yields
 
-#+BEGIN_SRC dot :file ../img/fig-A-yields-0A.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-A-yields-0A.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1584,7 +1644,7 @@
 
 #+CAPTION: A Yields 0A
 #+ATTR_HTML: :alt A Yields 0A :title A Yields 0A :align center
-[[file:../img/fig-A-yields-0A.png]]
+[[file:img/fig-A-yields-0A.png]]
 
    At node A, leave on a 0 and go back to A, as if the 0 in the rule were pulled
    to the left to label the arrow, and the A on the right were moved over and
@@ -1600,7 +1660,7 @@
 
    is represented thus:
 
-#+BEGIN_SRC dot :file ../img/fig-bitstrings-starting-with-one.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-bitstrings-starting-with-one.png :exports results :eval no-export
   digraph {
 
     rankdir="LR";
@@ -1616,23 +1676,30 @@
 
 #+CAPTION: Starting With One
 #+ATTR_HTML: :alt Starting With One :title Starting With One :halign left
-[[file:../img/fig-bitstrings-starting-with-one.png]]
+[[file:img/fig-bitstrings-starting-with-one.png]]
 
    This is similar to the (0 \cup 1)^{\star}1 machine, except it recognizes all
    bitstrings that /start/ with a one: 1(0 \cup 1)^{\star}
-
+**** BRE
 #+begin_warning
-   Add a state and the necessary transitions to make this a valid state machine.
+   [[http://firstthreeodds.org/answer/bre][Add a state and the necessary transitions]] to make this a valid state machine.
 #+end_warning
-
+**** TODO BRE-Answer                                               :noexport:
+     Coming soon.
+**** PQR
 #+begin_warning
-   Compare/contrast the 1(0 \cup 1)^{\star} machine with the (0 \cup 1)^{\star}1 machine. 
+   [[http://firstthreeodds.org/answer/pqr][Compare/contrast]] the 1(0 \cup 1)^{\star} machine with the (0 \cup 1)^{\star}1 machine. 
 #+end_warning
-
+**** TODO PQR-Answer                                               :noexport:
+     Coming soon.
+*** YZN
+    :PROPERTIES:
+    :CUSTOM_ID: YZN
+    :END:
    This next machine recognizes the language of all bitstrings whose
    /second-to-last/ bit is a 0:
 
-#+BEGIN_SRC dot :file ../img/fig-second-to-last-is-0.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-second-to-last-is-0.png :exports results :eval no-export
   digraph {
     size="3,5";
 
@@ -1653,8 +1720,8 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:../img/fig-second-to-last-is-0.png]]
-
+[[file:img/fig-second-to-last-is-0.png]]
+**** NGP
 #+begin_warning
   The three-production grammar
 
@@ -1665,20 +1732,19 @@
   generates the simple language consisting of any number of 0\rsquo{}s (including zero
   0\rsquo{}s) followed by a single 1.
 
-  Build a simple two-state machine to model it. 
-
-# ANSWER
-#     _0_
-#    /   \
-#    \   /
-#     v /
-#     (S)---1--->((F))
+  [[http://firstthreeodds.org/answer/ngp][Build a simple two-state machine]] to model it. 
 #+end_warning
-
+**** TODO NGP-Answer                                               :noexport:
+:     _0_
+:    /   \
+:    \   /
+:     v /
+:     (S)---1--->((F))
+**** PIQ 
 #+begin_warning
-  The following machine recognizes which language?
+  The following machine [[http://firstthreeodds.org/answer/piq][recognizes which language]]?
 
-#+BEGIN_SRC dot :file ../img/fig-single-state-with-01-transitions.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-single-state-with-01-transitions.png :exports results :eval no-export
   digraph {
     size="1,2";
 
@@ -1690,13 +1756,15 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:../img/fig-single-state-with-01-transitions.png]]
-
-# ANSWER
-# The empty language \emptyset. With no accept states, no string can be accepted --- all
-# are rejected.
+[[file:img/fig-single-state-with-01-transitions.png]]
 #+end_warning
-
+**** TODO PIQ-Answer                                               :noexport:
+     The empty language \emptyset. With no accept states, no string can be accepted ---
+     all are rejected.
+*** YZO
+    :PROPERTIES:
+    :CUSTOM_ID: YZO
+    :END:
   The language recognizers we have been examining are not the only
   interpretation we can give these kinds of state machines. You may have seen
   others in a course on digital logic and circuits. Here follows one of the
@@ -1716,7 +1784,7 @@
   elapses, triggering the TIMER-ELAPSED input. This input causes it to move to
   the OFF state, which turns the lights off.
 
-#+BEGIN_SRC dot :file ../img/fig-one-bit-computer.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-one-bit-computer.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="5,3";
@@ -1733,25 +1801,35 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:../img/fig-one-bit-computer.png]]
+[[file:img/fig-one-bit-computer.png]]
 
-  What language is generated by a given grammar?
+*** YZP
+    :PROPERTIES:
+    :CUSTOM_ID: YZP
+    :END:
+  We next exercise our knowledge to answer two related questions:
+  1. What grammar generates a given language?
+  2. What language is generated by a given grammar?
 
-  Let N = [S A B] and T = [0 1]. Find the language generated by each grammar
-
-  [N T S P]
-
-  when the set P of productions consists of each of the following:
-
+  Try the second question first. Let =N= = =[S A B]= and =T= = =[0 1]=.
+  Find the language generated by each grammar =[N T S P]=
+  when the set =P= of productions
+**** PRK
 #+begin_warning
+    [[http://firstthreeodds.org/answer/prk][consists of]]:
+
     S \rightarrow AB
 
     A \rightarrow 01
 
     B \rightarrow 11
 #+end_warning
-
+**** TODO PRK-Answer                                               :noexport:
+     Coming soon.
+**** NIO
 #+begin_warning
+    [[http://firstthreeodds.org/answer/nio][consists of]]:
+
     S \rightarrow AB
 
     S \rightarrow 0A
@@ -1760,8 +1838,12 @@
 
     B \rightarrow 10
 #+end_warning
-
+**** TODO NIO-Answer                                               :noexport:
+     Coming soon.
+**** PFA
 #+begin_warning
+    [[http://firstthreeodds.org/answer/pfa][consists of]]:
+
     S \rightarrow AB
 
     S \rightarrow AA
@@ -1772,8 +1854,12 @@
 
     B \rightarrow 1
 #+end_warning
-
+**** TODO PFA-Answer                                               :noexport:
+     Coming soon.
+**** BGT
 #+begin_warning
+    [[http://firstthreeodds.org/answer/bgt][consists of]]:
+
     S \rightarrow AA
 
     S \rightarrow B
@@ -1786,8 +1872,12 @@
 
     B \rightarrow 1
 #+end_warning
-
+**** TODO BGT-Answer                                               :noexport:
+     Coming soon.
+**** NGI
 #+begin_warning
+    [[http://firstthreeodds.org/answer/ngi][consists of]]:
+
     S \rightarrow AB
 
     A \rightarrow 0A1
@@ -1798,6 +1888,11 @@
 
     B \rightarrow \lambda
 #+end_warning
+**** TODO NGI-Answer                                               :noexport:
+     Coming soon.
+**** NLR
+#+begin_warning
+  [[http://firstthreeodds.org/answer/nlr][What language is generated]] by the grammar described by this code?
 
 #+BEGIN_SRC emacs-lisp :results silent :eval no-export
   (setq es "" a "0" b "1"
@@ -1815,28 +1910,37 @@
 #+END_SRC
 
 : 0 0  1 1 1 1  0 0
-
-  What grammar generates a given language?
-
-#+begin_warning
-  Construct a PSG to generate {0^{2n }1 \vert n \ge 0}.
 #+end_warning
-
+**** TODO NLR-Answer                                               :noexport:
+     Coming soon.
+**** BSP
 #+begin_warning
-  Construct a PSG to generate {0^{n }1^{2n} \vert n \ge 0}.
+  [[http://firstthreeodds.org/answer/bsp][Construct a PSG]] to generate {0^{2n }1 \vert n \ge 0}.
 #+end_warning
-
+**** TODO BSP-Answer                                               :noexport:
+     Coming soon.
+**** NBO
 #+begin_warning
-  Construct a PSG to generate {0^n 1^m 0^n \vert m \ge 0 and n \ge 0}.
+  [[http://firstthreeodds.org/answer/nbo][Construct a PSG]] to generate {0^{n }1^{2n} \vert n \ge 0}.
 #+end_warning
-
-*** ILO  
+**** TODO NBO-Answer                                               :noexport:
+     Coming soon.
+**** PBI
+#+begin_warning
+  [[http://firstthreeodds.org/answer/pbi][Construct a PSG]] to generate {0^n 1^m 0^n \vert m \ge 0 and n \ge 0}.
+#+end_warning
+**** TODO PBI-Answer                                               :noexport:
+     Coming soon.
+*** YZQ 
+    :PROPERTIES:
+    :CUSTOM_ID: YZQ
+    :END:
 
    Noam Chomsky is a linguist who first proposed the hierarchical language
    classification scheme that now bears his name.
 
    - The Chomsky Hierarchy in the Universal Set of All Languages (the superset of Types 0-3) ::
-#+BEGIN_SRC ditaa :file ../img/fig-chomsky-hierarchy.png :exports results :eval no-export
+#+BEGIN_SRC ditaa :file img/fig-chomsky-hierarchy.png :exports results :eval no-export
     /------------------------------------------------------\
     |   Type 0 Recursively Enumerable Languages            |
     |   /----------------------------------------------\   |
@@ -1857,7 +1961,7 @@
 #+END_SRC
 
 #+RESULTS:
-[[file:../img/fig-chomsky-hierarchy.png]]
+[[file:img/fig-chomsky-hierarchy.png]]
 
    - A Tabular Taxonomy :: The following table maps the notions of language
         classes with the types of grammars that can generate those languages.
@@ -1901,19 +2005,19 @@
 * )
 
   <<He awoke with a start>>
-  - He awoke with a start :: This character is my surrogate. Pedagogically
+  - [[#ONE][He awoke with a start]] :: This character is my surrogate. Pedagogically
        speaking, my using his voice is a ...
  
   <<a poem by Wordsworth>>
-  - a poem by Wordsworth :: [[https://www.poetryfoundation.org/poems-and-poets/poems/detail/45518][The French Revolution as It Appeared to Enthusiasts at Its Commencement]]
+  - [[#YZA][a poem by Wordsworth]] :: [[https://www.poetryfoundation.org/poems-and-poets/poems/detail/45518][The French Revolution as It Appeared to Enthusiasts at Its Commencement]]
 
   <<think about language>>
-  - think about language :: As reported in the book /Incompleteness: The Proof
+  - [[#YZB][think about language]] :: As reported in the book /Incompleteness: The Proof
        and Paradox of Kurt G\ouml{}del/, by Rebecca Goldstein, page 110. See also page
        112, at the top. See link to book below.
 
   <<Math writing is notorious>>
-  - Math writing is notorious :: Adapted from a document on [[http://jmlr.csail.mit.edu/reviewing-papers/knuth_mathematical_writing.pdf][Mathematical Writing]]
+  - [[#YZB][Math writing is notorious]] :: Adapted from a document on [[http://jmlr.csail.mit.edu/reviewing-papers/knuth_mathematical_writing.pdf][Mathematical Writing]]
        by Donald E. Knuth, Tracy Larrabee, and Paul M. Roberts, based on a course
        given at Stanford University, here\rsquo{}s an example of bad math writing:
 
@@ -1940,24 +2044,24 @@
        and where all but a finite number of the exponents are zero.
 
   <<foreign language of mathematical jargon>>
-  - foreign language of mathematical jargon :: From the book /Coincidences,
+  - [[#YZB][foreign language of mathematical jargon]] :: From the book /Coincidences,
        Chaos, and All That Math Jazz --- Making Light of Weighty Ideas/ by Edward
        B. Burger and Michael Starbird, page viii:
        [[https://www.amazon.com/Coincidences-Chaos-That-Math-Jazz/dp/0393329313]]
 
   <<vocabulary and syntax of human language>>
-  - vocabulary and syntax of human language :: From the book /Interactions: A/
+  - [[#YZC][vocabulary and syntax of human language]] :: From the book /Interactions: A/
        /Journey Through the Mind of a Particle Physicist and the Matter of This
        World/, by Sheldon L. Glashow, page 47:
        [[https://www.amazon.com/Interactions-Journey-Through-Particle-Physicist/dp/0446513156]]
 
   <<a description of formal systems>>
-  - a description of formal systems :: From the book /Incompleteness: The Proof
+  - [[#YZD][a description of formal systems]] :: From the book /Incompleteness: The Proof
        and Paradox of Kurt G\ouml{}del/, by Rebecca Goldstein, page 86:
        [[https://www.amazon.com/Incompleteness-Proof-Paradox-G%25C3%25B6del-Discoveries/dp/0393327604]]
 
   <<beads on a string>>
-  - beads on a string :: Found in the book /The Stuff of Thought: Language as a
+  - [[#YZE][beads on a string]] :: Found in the book /The Stuff of Thought: Language as a
        Window into Human Nature/ by Steven Pinker:
        [[https://www.amazon.com/Stuff-Thought-Language-Window-Nature/dp/0143114247]]
 
@@ -1965,11 +2069,11 @@
        being made up of genes (the beads).
 
   <<simply trying to divide 23 by 2 and 3>>
-  - simply trying to divide 23 by 2 and 3 :: Why do we not need to also do trial
+  - [[#YZF][simply trying to divide 23 by 2 and 3]] :: Why do we not need to also do trial
        division of 23 by 5, 7, 11, etc., to clinch its primeness?
 
   <<Sieve of Eratosthenes>>
-  - Sieve of Eratosthenes :: Using some elisp code to augment paper-and-pencil
+  - [[#YZG][Sieve of Eratosthenes]] :: Using some elisp code to augment paper-and-pencil
        investigation:
 
 #+BEGIN_SRC emacs-lisp :eval no-export
@@ -2190,14 +2294,14 @@
   |  2 |  3 |  5 |  7 | 11 | 13 | 17 | 19 | 23 | 29 | 31 | 37 | 41 | 43 | 47 | 53 | 59 | 61 | 67 | 71 | 73 | 79 | 83 | 89 | 97 |
 
   <<side-by-side without adornments>>
-  - side-by-side without adornments :: Strings are thus like lisp symbols, whose
+  - [[#YZH][side-by-side without adornments]] :: Strings are thus like lisp symbols, whose
        names are lisp strings, which are sequences of characters, which are
        integers. They differ from lisp symbols by accommodating more alphabets.
        For example, =123= is a string over the alphabet =[0 1 2 3 4 5 6 7 8 9]=
        --- in lisp it would be a number.
 
   <<the answers in the endnote>>
-  - the answers in the endnote :: The answer to the first question is no.
+  - [[#YZHQA][the answers in the endnote]] :: The answer to the first question is no.
        Adjectives do not follow other adjectives with the simple rule that
        ADJECTIVE produces either one terminal adjective (hungry) or the other
        (sleepy). English allows multiple adjectives, but it needs a more
@@ -2216,13 +2320,13 @@
 
        VERB-PHRASE \rightarrow VERB PREPOSITIONAL-PHRASE
 
-  <<English was long thought to be>>
-  - English was long thought to be :: Context Free.
-       But see [[https://www.jstor.org/stable/4178381][English Is Not a Context-Free Language]], James Higginbotham,
+  <<long thought to be context free>>
+  - [[#YZJ][long thought to be context free]] :: But a clever argument shows that it is
+       not. See [[https://www.jstor.org/stable/4178381][English Is Not a Context-Free Language]], James Higginbotham,
        Linguistic Inquiry Vol. 15, No. 2 (Spring, 1984), pages 225-234.
 
   <<Kleene star>>
-  - Kleene star :: Named after [[https://en.wikipedia.org/wiki/Stephen_Cole_Kleene][Stephen Cole Kleene]], the mathematician who
+  - [[#YZK][Kleene star]] :: Named after [[https://en.wikipedia.org/wiki/Stephen_Cole_Kleene][Stephen Cole Kleene]], the mathematician who
                    defined this powerful operation to work on either a set of
                    symbols or a set of strings. The article referenced defines
                    V^{\star} \ldquo{}as the set of finite-length strings that can
@@ -2230,7 +2334,7 @@
                    allowing the use of the same element multiple times.\rdquo
 
   <<take this on faith if necessary>>
-  - take this on faith if necessary ::
+  - [[#YZK][take this on faith if necessary]] ::
        For illustration\rsquo{}s sake, and analogous to the set of all bitstrings, take
        the alphabet =[a b]=, where the Kleene star produces the following set:
 
@@ -2246,26 +2350,20 @@
        That is why the length-considering lexicographic way is preferred.
 
   <<state machines>>
-  - state machines :: Or *finite-state machines* or *finite-state automata*
+  - [[#YZL][state machines]] :: Or *finite-state machines* or *finite-state automata*
                       (*automaton* singular)). (We will avoid *infinite*-state
                       automata like the plague!)
 
   <<state diagram>>
-  - state diagram :: Or *state-transition diagram*.
-
-  <<important rule>>
-  - important rule :: This rule must be adhered to for the machine to be a valid
-                      *deterministic* finite automaton (DFA). The rule can be
-                      relaxed when we are ready to explore the related
-                      *nondeterministic* finite automata (NFA).
+  - [[#YZL][state diagram]] :: Or *state-transition diagram*.
 
   <<start node or state>>
-  - start node or state :: More conventionally, the start state is identified by
+  - [[#YZL][start node or state]] :: More conventionally, the start state is identified by
        an incoming arrow pointing to it (but coming from nowhere). Or, in
        another form of ornamentation, a triangle pointing to it is sometimes
        used to mark the start state.
  
-#+BEGIN_SRC dot :file ../img/fig-start-state-with-incoming-arrow.png :exports results :eval no-export
+#+BEGIN_SRC dot :file img/fig-start-state-with-incoming-arrow.png :exports results :eval no-export
   digraph {
     rankdir="LR";
     size="2,2";
@@ -2278,5 +2376,10 @@
 
 #+CAPTION: Start State With Incoming Arrow
 #+ATTR_HTML: :alt Start State with Arrow :title Start State with Arrow :align left
-[[file:../img/fig-start-state-with-incoming-arrow.png]]
+[[file:img/fig-start-state-with-incoming-arrow.png]]
 
+  <<important rule>>
+  - [[#YZM][important rule]] :: This rule must be adhered to for the machine to be a valid
+                      *deterministic* finite automaton (DFA). The rule can be
+                      relaxed when we are ready to explore the related
+                      *nondeterministic* finite automata (NFA).
