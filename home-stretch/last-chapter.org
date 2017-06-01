@@ -1,5 +1,5 @@
 [[elisp:query-replace][.]]
-#+TITLE: Last Chapter (click on the THR tab)
+#+TITLE: Last Chapter
 #+AUTHOR: Rick Neff
 #+EMAIL: NeffR@byui.edu
 #+DATE: 30 May 2017
