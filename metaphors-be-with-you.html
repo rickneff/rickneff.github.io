@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-08-26 Sat 19:13 -->
+<!-- 2017-08-26 Sat 22:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Metaphors Be With You</title>
@@ -882,7 +882,7 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#org84b6508">BCD</a></li>
 <li><a href="#org7de158d">BCF</a></li>
-<li><a href="#orgb559b38">CDF</a></li>
+<li><a href="#org8182f81">CDF</a></li>
 <li><a href="#org8ea6a27">BDF</a></li>
 <li><a href="#KSC">KSC</a></li>
 </ul>
@@ -972,7 +972,7 @@ for the JavaScript code in this tag.
 
 
 <div class="figure">
-<p><a href="./img/tineless.png" target="_blank"><img src="./img/tinelessTN.png" alt="cover image" title="What is the meaning of this?!" /></a>
+<p><a href="img/tineless.png" target="_blank"><img src="img/tinelessTN.png" alt="cover image" title="What is the meaning of this?!" /></a>
 </p>
 </div>
 
@@ -1013,23 +1013,30 @@ week. Please make sure your name is in your workbook
 it <i>is</i> a .org file!</dd>
 </dl>
  <form id="file-form" enctype="multipart/form-data" action="submit" method="post">
-  <div id="messages"></div>
-  <input id="file-to-upload" type="file" name="fileUploaded"/>
-  <button type="submit" id="upload-button">Turn It In</button>
+  <div style="width: 100%; overflow: hidden;">
+   <div style="width: 180px; float: left;">
+    <input id="file-to-upload" type="file" name="fileUploaded"/>
+   </div>
+   <div style="width: 150px; float: left;">
+    <button type="submit" id="upload-button">Turn It In</button>
+   </div>
+   <div style="margin-left: 0px;" id="file-upload-message">
+   </div>
+  </div>
  </form>
  <script type="text/javascript">
   var form = document.getElementById('file-form');
-  var messages = document.getElementById('messages');
-  var noFileChosenText = '<p>No file chosen. Please choose a file.</p>';
-  var messagesDefaultText = '<br /><br />';
+  var message = document.getElementById('file-upload-message');
+  var noFileChosenText = 'No file chosen. Please choose a file.';
+  var messageDefaultText = '';
   var uploadButtonDefaultText = 'Turn It In';
   var fileToUpload = document.getElementById('file-to-upload');
   var uploadButton = document.getElementById('upload-button');
-  messages.innerHTML = messagesDefaultText;
+  message.innerHTML = messageDefaultText;
   uploadButton.innerHTML = uploadButtonDefaultText;
   function resetMessages()
   {
-     messages.innerHTML = messagesDefaultText;
+     message.innerHTML = messageDefaultText;
   }
   form.onsubmit = function(event) {
     event.preventDefault();
@@ -1037,11 +1044,9 @@ it <i>is</i> a .org file!</dd>
     var files = fileToUpload.files;
     if (files.length === 1) {
       if (files[0].size > 4194304) {
-         messages.innerHTML = '<br />' + 
-                              'File too big! (' + 
+         message.innerHTML = 'File too big! (' + 
                               files[0].size + 
-                              ' > 4194304 (4MB) max.)' +
-                              '<br />';
+                             ' > 4194304 (4MB) max.)';
          setTimeout('resetMessages()', 5000);
       } else {
        // Update button text.
@@ -1059,14 +1064,10 @@ it <i>is</i> a .org file!</dd>
           uploadButton.innerHTML = uploadButtonDefaultText;
           if (xhr.status === 200) {
              // File was successfully uploaded.
-             messages.innerHTML = '<br />' + 
-                                  xhr.responseText +
-                                  '<br />';
+             message.innerHTML = xhr.responseText;
           } else {
-             messages.innerHTML = '<br />' + 
-                                  'An error occurred! (' +
-                                  xhr.status + ')' +
-                                  '<br />';
+             message.innerHTML = 'An error occurred! (' +
+                                 xhr.status + ')';
           }
           setTimeout('resetMessages()', 5000);
        }
@@ -1075,7 +1076,7 @@ it <i>is</i> a .org file!</dd>
        return false;
       }
     } else {
-       messages.innerHTML = noFileChosenText;
+       message.innerHTML = noFileChosenText;
        setTimeout('resetMessages()', 2000);
     }
   }
@@ -1258,8 +1259,8 @@ and when understood leads to starry-eyed wonder, end teaser.
 </div>
 </div>
 </div>
-<div id="outline-container-org8d23456" class="outline-4">
-<h4 id="CDF"><a id="org8d23456"></a>CDF</h4>
+<div id="outline-container-orgdfc0ed3" class="outline-4">
+<h4 id="CDF"><a id="orgdfc0ed3"></a>CDF</h4>
 <div class="outline-text-4" id="text-CDF">
 <p>
 Last double: finishing off and rounding out this relatively small set of
@@ -1672,6 +1673,7 @@ know <a href="#orgf501c7d">the price of knowledge</a> he would exact of them.
 <h5 id="orgfcebe89">CRC</h5>
 <div class="outline-text-5" id="text-orgfcebe89">
 <div class="note">
+<p>
 <img src="img/desert.jpg" alt="desert image" title="What is this doing here?!" />
 This is the first of many exercises/problems/puzzles to come, always signified
 by this type of yellow-background box. In every exercise box there will be a
@@ -24353,9 +24355,9 @@ green triangle &#x2014; BCD, BCF or CDF.&rdquo;
 </div>
 </div>
 
-<div id="outline-container-orgb559b38" class="outline-5">
-<h5 id="orgb559b38">CDF</h5>
-<div class="outline-text-5" id="text-orgb559b38">
+<div id="outline-container-org8182f81" class="outline-5">
+<h5 id="org8182f81">CDF</h5>
+<div class="outline-text-5" id="text-org8182f81">
 
 <div class="figure">
 <p><img src="img/fig-complete-k6-4.png" alt="Green Triangle =CDF=" title="Green Triangle =CDF=" />
