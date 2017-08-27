@@ -1,0 +1,599 @@
+#+TITLE: Elisp Mini Primer 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+STARTUP: showeverything entitiespretty
+
+  At certain points in this primer you will be asked to \ldquo{}Predict Verify Ponder\rdquo
+  (PVP as a TLA). That means to predict what will happen *before* you carry out
+  some instruction, then *verify* your prediction, and *ponder* why you were or
+  were not surprised by the results.
+
+* Get Introduced to Emacs Lisp
+
+  elisp for short --- a programming language that grows on you. The basics of
+  elisp are the same as those of other programming languages:
+
+  - types
+  - variables
+  - assignments
+  - conditionals
+  - functions
+
+  This will be a whirlwind tour through these basic constructs. You might be
+  interested in comparing this to another introductory tutorial found here:
+  [[https://learnxinyminutes.com/docs/elisp/]]
+
+  Another one you might get some traction from is:
+  http://steve-yegge.blogspot.com/2008/01/emergency-elisp.html
+
+  Among other things this one will teach you some basics of loops, a topic
+  conspicuously absent from the list above.
+
+* Learn About Source Code Blocks and Keyboard Macros
+
+  In org-mode, a source code block is delimited by \ldquo{}begin\rdquo and \ldquo{}end\rdquo source
+  markers, with the language of the code that will go in the block identified by
+  name, like so:
+
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
+  Entering that every time you want it is unnecessary. Here\rsquo{}s a shortcut:
+
+  Enter \lsquo{}<s\rsquo{} then hit the tab key to expand it, then type \lsquo{}emacs-lisp\rsquo{} (without
+  the quotes). Try it. Move the cursor to two lines below, just after the s, and
+  press TAB.
+
+<s
+
+  Another even better way to save typing is to define a \ldquo{}keyboard macro\rdquo by
+  typing (in normal vim state)
+
+  q q
+
+  which will display \ldquo{}Defining kbd macro...\rdquo in the mini (one-line) window at
+  the bottom of the Spacemacs frame.
+
+  Next type i to enter the insert state where you can then \ldquo{}capture\rdquo any number
+  of keystrokes. When you\rsquo{}ve captured everything you want, hit ESC to leave the
+  insert state, then end the macro definition by typing
+
+  q
+
+  which will display \ldquo{}Keyboard macro defined\rdquo to signal it is done.
+
+  With the cursor positioned on a blank line below, type the characters:
+
+  q q i < s TAB e m a c s - l i s p ESC q
+
+  Now execute the macro you just defined by moving to a blank line and typing
+  C-x e (which is bound to the built-in function =execute-kbd-macro=).
+
+* Learn a Notational Convention
+
+  You just saw, perhaps for the first time, equals signs surrounding something
+  (=execute-kbd-macro=). This tells org-mode to render it as monospaced text
+  when \ldquo{}exporting\rdquo (more on which later). This form of \ldquo{}bracketing\rdquo is useful
+  for identifying names/symbols/things defined in elisp.
+
+* Learn How to Evaluate Atomic elisp Expressions
+
+  In this task you will learn just *one of MANY* ways to evaluate elisp
+  expressions. IYI to learn about some other ways, read the article at this
+  link: [[https://www.masteringemacs.org/article/evaluating-elisp-emacs]]
+
+  The main elisp type (and how lisp in general got its name --- LISt Processing)
+  is a (singly-linked) list. In a stroke of genius, the inventor of lisp, John
+  McCarthy, saw that this \ldquo{}molecular\rdquo structure could represent *both* code
+  *and* data. The beauty of this ingenious representation is that /data/ can
+  represent /code/ *and* vice versa.
+
+  Other data types include these \ldquo{}indivisible atoms\rdquo:
+
+  - numbers
+  - strings
+  - characters
+  - t
+  - nil
+
+  All of the above \ldquo{}self-evaluate\rdquo (evaluate to themselves). Try numbers first.
+  Numbers are denoted (in one of many \ldquo{}readings\rdquo) as a contiguous string of zero
+  or more digits 0-9 followed (optionally) by one period then (optionally) more
+  digits.
+
+  See what happens when you execute the ESB (elisp source block) macro, (C-x e),
+  assuming you defined it, and then type
+
+  j i SPC SPC 1 2 3 ESC , ,
+
+  Go ahead and do that here.
+
+#+RESULTS:
+: 123
+
+  The above \lsquo{}#+RESULTS:\rsquo{} marker followed by the results of evaluating 123 is
+  what you should expect. Try it on the next four blocks. *RESIST* the urge to
+  blithely evaluate the block via \ldquo{}comma comma\rdquo (which as you\rsquo{}ve seen, is a
+  context-sensitive command). Try to predict what the results will be *before*
+  you evaluate the block, which will reveal whether or not your prediction was
+  right. This is a specific instance of the generic PVP exercise mentioned at
+  the top of this file.
+
+#+BEGIN_SRC emacs-lisp
+ 3.14159
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  42
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  42.
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  .42
+#+END_SRC
+
+  If you did it, you had to answer the \ldquo{}are-you-sure\rdquo question four times. Why
+  this prompt? Evaluating numbers is a pretty benign activity, but that\rsquo{}s not
+  true of evaluating some lisp code, which potentially can do bad things. Hence
+  the safeguard confirmation prompt. But that gets tedious after a while. You
+  can disable this prompt by setting a special controlling flag variable to nil.
+
+  SPC SPC set-variable
+
+  prompts for the variable name (org-confirm-babel-evaluate) and then the value
+  (enter nil). Do that now. (More on setting variable values later.)
+
+  Strings are sequential \ldquo{}strings\rdquo of characters surrounded by double quotes:
+
+#+BEGIN_SRC emacs-lisp
+  "Dog bites man --- not news."
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  "Man bites dog --- news!"
+#+END_SRC
+
+  Did you notice the missing quotes in the results? That\rsquo{}s intentional. It\rsquo{}s
+  still a string, just displayed without quotes. To preserve them in this
+  interaction style requires a little more work, as will be shown below.
+
+  Characters (whose syntax requires a preceding question mark to flag them as
+  such) evaluate to a number (their ASCII code equivalent):
+
+#+BEGIN_SRC emacs-lisp
+  ?H
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ?a
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ?+
+#+END_SRC
+
+  Finally, the special symbols =t= (true) and =nil= (false) self-evaluate:
+
+#+BEGIN_SRC emacs-lisp
+  t
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  nil
+#+END_SRC
+
+  Note that nil is not displayed here. Note too that =nil= does double duty. It
+  represents the Boolean false *and* the empty list, which is useful in certain
+  contexts.
+
+* Learn How to Evaluate Molecular elisp Expressions
+
+  Lisp can have lists (nested to any depth), which are called \ldquo{}forms\rdquo or
+  \ldquo{}symbolic expressions\rdquo or \ldquo{}s-expressions\rdquo or \ldquo{}sexps\rdquo. You\rsquo{}ll see a few
+  instances of \ldquo{}sexp\rdquo in elisp function names, but as that particular
+  abbreviation leaves much to be desired (it\rsquo{}s not easily pronounced, for one
+  thing) call them eles (EEE-luhs, short for /evaluatable lisp expressions/).
+  Every element of a list *except the first* is evaluated before the list itself
+  is. Why not the first? The first element of a list is instead used as an
+  identifier of a function to be invoked. Here\rsquo{}s an example of the \lsquo{}+\rsquo{} function
+  (note that in lisp, even standard arithmetic operators are functions):
+
+#+BEGIN_SRC emacs-lisp
+  (+ 1 2 3)
+#+END_SRC
+
+  You may have noticed that *prefix* ordering is the elisp way, which just means
+  that operators get listed first, then come the operands (what operators
+  operate on, also called arguments). This is very cool -- the more familiar
+  *infix* ordering is *NOT* so cool!
+
+#+BEGIN_SRC emacs-lisp
+  (1 + 2 + 3)
+#+END_SRC
+
+  Getting a message like \lsquo{}Invalid function: 1\rsquo{} is something you want to avoid!
+
+  Still, if you insist, emacs has an infix-supporting calculator that is built
+  in. Or rather, you must first summon it like a genie via the \ldquo{}require\rdquo
+  mechanism.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'calc)
+  (calc-eval "1 + 2 + 3")
+#+END_SRC
+
+  A nested list, if well-formed, forms a more complex ele:
+
+#+BEGIN_SRC emacs-lisp
+  (* 3 (+ 1 3 5))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (+ 1 2 3 (* 4 5))
+#+END_SRC
+
+  What does well-formed mean? Well, here\rsquo{}s an example of bad form, *not* well-formed:
+
+#+BEGIN_SRC emacs-lisp
+  ) 1 2 3 + (* 4 5)(
+#+END_SRC
+
+  Note that evaluating that code block produced no output, because the input was
+  not well-formed. By the way, if you ever get thrown into the debugger (into a
+  buffer named *Backtrace*), typing q will get you out. Trying to evaluate the
+  unevaluatable in other interactions styles will likely put you in.
+
+* Create and Render Lists
+
+  The =list= function is your friend:
+
+#+BEGIN_SRC emacs-lisp
+  (list 1 3 5)
+#+END_SRC
+
+  Note that lists are rendered in org-mode as tables, with vertical bars
+  separating the list elements. This is a nifty feature! But one way to suppress
+  that behavior is to \ldquo{}format\rdquo the list as a string. (The =format= function\rsquo{}s
+  first argument is a \lsquo{}directive\rsquo{} (a string with a very idiosyncratic syntax)
+  that tells it what to do with the rest of the arguments.)
+
+#+BEGIN_SRC emacs-lisp
+  (format "%s" (list 1 2 3))
+#+END_SRC
+
+  \ldquo{}Quote\rdquo a list to suppress evaluation of its first element.
+
+#+BEGIN_SRC emacs-lisp
+  (format "%s" '(1 2 3))
+#+END_SRC
+
+  Alternatively,
+
+#+BEGIN_SRC emacs-lisp
+  (format "%s" (quote (1 2 3)))
+#+END_SRC
+
+  Use =format= with a capital S directive to keep the quotes when inserting the
+  results of evaluating strings:
+
+#+BEGIN_SRC emacs-lisp
+  (format "%S" "abc")
+#+END_SRC
+
+* Compare Vectors and Lists
+
+  Related to lists are vectors, which unlike lists, self-evaluate (like most
+  atoms):
+
+#+BEGIN_SRC emacs-lisp
+  [A B C]
+#+END_SRC
+
+  Try this:
+
+#+BEGIN_SRC emacs-lisp
+  (elt [A B C] 0)
+#+END_SRC
+
+  And this:
+
+#+BEGIN_SRC emacs-lisp
+  (elt [A B C] 2)
+#+END_SRC
+
+  And this:
+
+#+BEGIN_SRC emacs-lisp
+  (elt [A B C] 3)
+#+END_SRC
+
+  Oops! The function =elt=, by the way, is short for /element/.
+
+  The string "abc" is composed of three characters, ?a, ?b, and ?c.
+
+#+BEGIN_SRC emacs-lisp
+  ?a
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ?A
+#+END_SRC
+
+  The =elt= function works on strings as well as vectors, and the =vector=
+  function creates, what? 
+
+#+BEGIN_SRC emacs-lisp
+  (vector (elt "ABC" 0) (elt "abc" 1) (elt "XyZ" 2))
+#+END_SRC
+
+* Learn How to Append Lists and Vectors
+
+#+BEGIN_SRC emacs-lisp
+  (append '(a b c) '(0 1 2))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (append '(0 1 2) '("red" "green" "blue"))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (append '(a b c) '("red" "green" "blue"))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (append [a vector of symbols] '(0 1 2))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (append [a b c] nil)
+#+END_SRC
+
+  Apparently, this last one serves to convert a vector into a list!
+
+* Learn About if
+
+  In other languages it\rsquo{}s traditional to call Boolean types true and false,
+  where =true= and =false= are two of the language\rsquo{}s reserved keywords. This can
+  be emulated in elisp, which will introduce one of many \ldquo{}conditional\rdquo
+  constructs:
+
+#+BEGIN_SRC emacs-lisp
+  (if t 'true 'false)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (if nil 'true 'false)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (if (< 1 3)
+      "if-preceding-ele-is-true-evaluate-this-ele"
+    "else-this-ele")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (if (< 5 3)
+      "if-preceding-ele-is-true-evaluate-this-ele"
+    "else-this-ele")
+#+END_SRC
+
+  You\rsquo{}ll see more of this later. This is a \ldquo{}special form\rdquo, not a normal
+  function, because only two of its three arguments are evaluated.
+
+* Learn About Variables and Assignment
+
+  Now, as defined in the built-in elisp documentation, a \ldquo{}variable\rdquo is a name
+  used in a program to stand for a value.
+
+  How are variables defined in lisp? Here\rsquo{}s one way:
+
+#+BEGIN_SRC emacs-lisp
+  (defvar abc 123)
+#+END_SRC
+
+  The value of that ele is as you might not expect the symbol being defvar\rsquo{}ed
+  rather than the value it\rsquo{}s initialized with.
+
+  A variable can be said to be embodied in a =symbol=. However, lisp symbols are
+  actually structures that can do much, much more than just name variables and
+  store values.
+
+  Symbols are not the same as strings (although their *names* are strings), so
+  note the difference.
+
+#+BEGIN_SRC emacs-lisp
+  "xyz"
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  xyz
+#+END_SRC
+
+  Symbol's value as variable is void: xyz
+
+  Thus we see that symbols do *NOT* self-evaluate. But you can make it so they
+  self-evaluate by prefixing them with a colon, essentially turning them into
+  /keywords/, which are meant to stand for themselves and not hold some value.
+  For example:
+
+#+BEGIN_SRC emacs-lisp
+  (format "The value of abc is %d" abc)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  abc
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (format "The value of :xyz is %s" :xyz)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  :xyz
+#+END_SRC
+
+  That\rsquo{}s all well and good, but how do you \ldquo{}assign\rdquo a new value to variables?
+  The =setq= *special form* stands for \ldquo{}set quoted\rdquo, and is a convenient
+  alternative to using the =set= *function* to make assignments of values to
+  variables:
+
+#+BEGIN_SRC emacs-lisp
+  (setq abc 789)
+#+END_SRC
+
+  which is equivalent to:
+
+#+BEGIN_SRC emacs-lisp
+  (set (quote abc) 789)
+#+END_SRC
+
+  which is equivalent to:
+
+#+BEGIN_SRC emacs-lisp
+  (set 'abc 789)
+#+END_SRC
+
+  In lisp, types are dynamic, not static like in many other programming
+  languages. That means that variables do not have types, values do.
+
+  The value type of the variable =abc= was initially a number, but it could just
+  as well be changed by assignment later in its life to be a list of numbers:
+
+#+BEGIN_SRC emacs-lisp
+  (setq abc '(1 2 3 4 5 6 7 8 9))
+#+END_SRC
+
+  Note the value of the =setq= ele is the value being set, in this case, a list.
+  The value is *NOT* the symbol being set (remember =defvar=?)
+
+#+BEGIN_SRC emacs-lisp
+  abc
+#+END_SRC
+
+  Since you assigned =abc= the list one through nine as its value, you can pass
+  this list around as a unit by its neat symbol handle. It\rsquo{}s not really an
+  atomic unit, but you can think of it as one.
+
+  But how do you get to the elements of this non-atomic collection?
+
+  It so happens that =elt= works on lists as well as vectors and strings!
+
+#+BEGIN_SRC emacs-lisp
+  (elt abc 0)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (elt abc 2)
+#+END_SRC
+
+  But the following accessor functions work *only* on lists:
+
+#+BEGIN_SRC emacs-lisp
+  (first abc)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (second abc)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (third abc)
+#+END_SRC
+
+  How far do you think this progression goes? PVP please!
+
+  Using numbers instead of words is more convenient. To get the \ldquo{}nth\rdquo element of
+  a list:
+
+#+BEGIN_SRC emacs-lisp
+  (nth 0 abc)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (nth 8 abc)
+#+END_SRC
+
+  Note the swapping of the order of the arguments from the =elt= way.
+
+  It\rsquo{}s easy to get the first thing, how about the rest of the list (everything
+  *but* the first thing)?
+
+#+BEGIN_SRC emacs-lisp
+  (rest abc)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (rest (rest abc))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (rest (rest (rest abc)))
+#+END_SRC
+
+* Learn About Functions
+
+#+BEGIN_SRC emacs-lisp
+  (defun my-function (number)
+     (list number (* number number)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (list (my-function 1) (my-function 2) (my-function 3))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (defun function-name (arguments-to-function)
+     "Optional documentation string."
+     (if arguments-to-function
+         (list 'body 'forms (list 'to 'evaluate))))
+#+END_SRC
+
+  Can you predict the value \ldquo{}returned\rdquo by calling the above function with =t= as
+  its (only) argument? 
+
+#+BEGIN_SRC emacs-lisp
+  (function-name t)
+#+END_SRC
+
+  How about with =nil=?
+
+#+BEGIN_SRC emacs-lisp
+  (function-name nil)
+#+END_SRC
+
+  Nada. Which means =nil= was the value.
+
+  The built-in function called =rot13= is a fun one. See if you can predict the
+  result of evaluating this ele:
+
+#+BEGIN_SRC emacs-lisp
+  (rot13 "zvpxrl@znfgrevatrznpf.bet")
+#+END_SRC
+
+  How about this?!
+
+#+BEGIN_SRC emacs-lisp
+  (rot13 (rot13 "zvpxrl@znfgrevatrznpf.bet"))
+#+END_SRC
+
+  As in most other languages, in elisp functions can call themselves recursively:
+
+#+BEGIN_SRC emacs-lisp
+  (defun frobulate (x)
+     (if x (append (frobulate (rest x)) (list (first x)))))
+#+END_SRC
+
+  PVP --- and then propose a more descriptive name for this function:
+
+#+BEGIN_SRC emacs-lisp
+  (frobulate '(1 2 3 4 5 6 7))
+#+END_SRC
+
+* Read and Heed a Scripture
+
+  Liken [[https://www.lds.org/scriptures/ot/isa/28?lang%3Deng#10][Isaiah 28:10]] to yourself, take a break and pause to absorb what you\rsquo{}ve
+  learned!
