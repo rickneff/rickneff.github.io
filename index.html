@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-01-03 Tue 17:27 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Book</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="root" />
+<!-- 2017-09-12 Tue 14:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Welcome to first three odds dot org</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Rick Neff" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -53,13 +53,97 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -92,17 +176,26 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet"
-                         href="style00.css"
-                         type="text/css"/>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/bigblow/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/bigblow/css/bigblow.css"/>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/bigblow/css/hideshow.css"/>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/jquery.localscroll-min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/jquery.zclip.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/bigblow.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/hideshow.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -146,18 +239,408 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">The Book</h1>
+<h1 class="title">Welcome to first three odds dot org</h1>
+
+<div id="outline-container-org56ac3d5" class="outline-2">
+<h2 id="org56ac3d5">Book</h2>
+<div class="outline-text-2" id="text-org56ac3d5">
+<div class="info">
 <p>
-<a href="mebewiyo-bow.html">Latest Version Black on White</a>
+<a href="http://firstthreeodds.org/mebewiyo/book/latest">Latest version of &ldquo;Metaphors Be With You &#x2026;&rdquo;</a>
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-orge53b369" class="outline-2">
+<h2 id="orge53b369">Course</h2>
+<div class="outline-text-2" id="text-orge53b369">
+<div class="info">
+<p>
+This is the Fall 2017 version of <b>Discrete Mathematics I</b> &#x2014; AKA DM1 &#x2014; AKA CS 237.
+</p>
+
+</div>
+</div>
+<div id="outline-container-org77a397e" class="outline-3">
+<h3 id="org77a397e">Syllabus</h3>
+<div class="outline-text-3" id="text-org77a397e">
+</div><div id="outline-container-org6bf35f7" class="outline-4">
+<h4 id="org6bf35f7">Catalog Description</h4>
+<div class="outline-text-4" id="text-org6bf35f7">
+<p>
+What this course is about: <i>Mathematics for computer science.</i>
 </p>
 
 <p>
-<a href="mebewiyo-wob.html">Latest Version White on Black</a>
+This course introduces the mathematical topics needed to provide a
+solid theoretical foundation for computer science. The following
+topics will be <i>lightly</i> covered:
 </p>
+
+<ul class="org-ul">
+<li>Sets and Logic</li>
+<li>Functions and Relations</li>
+<li>Combinatorics and Probability</li>
+<li>Number Theory and Practice</li>
+<li>Trees and Graphs</li>
+<li>Languages and Grammars</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8b80225" class="outline-4">
+<h4 id="org8b80225">Objectives</h4>
+<div class="outline-text-4" id="text-org8b80225">
+<ul class="org-ul">
+<li>Master the basic terminology and operations of sets and logic,
+functions and relations, combinatorics and probability, number
+theory and practice, trees and graphs, and languages and grammars.</li>
+<li>Demonstrate logical reasoning through solving problems.</li>
+<li>Learn basic functional programming by way of lisp, reading and
+writing lisp code.</li>
+<li>Interpret the meaning of mathematical statements in the context of
+real-world applications.</li>
+<li>Think like a mathematician by making good connections.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd4fa5c8" class="outline-4">
+<h4 id="orgd4fa5c8">Prerequisite</h4>
+<div class="outline-text-4" id="text-orgd4fa5c8">
+<p>
+You must have successfully completed the following course:
+</p>
+
+<ul class="org-ul">
+<li>CS 165 Object-Oriented Software Development</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga49a113" class="outline-4">
+<h4 id="orga49a113">Required Text</h4>
+<div class="outline-text-4" id="text-orga49a113">
+<p>
+<a href="https://rickneff.github.io/metaphors-be-with-you.html"><i>Metaphors Be With You: A Tireless Work on Play on Words</i></a>
+</p>
+
+<p>
+<b>Online only &#x2014; no print edition.</b>
+</p>
+</div>
+</div>
+<div id="outline-container-org99e97a9" class="outline-4">
+<h4 id="org99e97a9">Requirements</h4>
+<div class="outline-text-4" id="text-org99e97a9">
+<p>
+You are required to&#x2026;
+</p>
+<ul class="org-ul">
+<li>attend class, as attendance and participation factor heavily into your
+grade.</li>
+<li>read assigned portions of the course materials, and come to class
+prepared to discuss and deepen your understanding of selected topics.</li>
+<li>keep a learning journal (your <i>workbook</i>) where you will put your answers to
+homework assignments, and a brief report on what you are learning.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org26d0754" class="outline-4">
+<h4 id="org26d0754">Assignments</h4>
+<div class="outline-text-4" id="text-org26d0754">
+<p>
+Homework assignments are of three types: Exercises, Problems, and Puzzles.
+</p>
+</div>
+
+<div id="outline-container-orgdd0296c" class="outline-5">
+<h5 id="orgdd0296c">Exercises</h5>
+<div class="outline-text-5" id="text-orgdd0296c">
+<p>
+Exercises are individual and group learning activities that will require
+either a small amount of preparation before class, or participation during
+class, or both. Although time will be given during class, some time outside
+of class may also be required.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2f7f40a" class="outline-5">
+<h5 id="org2f7f40a">Problems</h5>
+<div class="outline-text-5" id="text-org2f7f40a">
+<p>
+Problems are weightier, more challenging assignments that invite you to
+explore in more depth certain topics in discrete mathematics, as well as
+increase your lisp/functional programming prowess.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8491f12" class="outline-5">
+<h5 id="org8491f12">Puzzles</h5>
+<div class="outline-text-5" id="text-org8491f12">
+<p>
+Puzzles are like problems, only with another added measure of difficulty that
+will require even more ingenuity, deep thought and persistent effort to
+solve. Think &ldquo;Puzzle Room&rdquo; &#x2014; where you must solve a problem in order to
+escape from a room. But the hints are more obscure, and in fact the statement
+of the problem may be obscure, indirect or encoded somehow.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc9ceaf7" class="outline-4">
+<h4 id="orgc9ceaf7">Grading</h4>
+<div class="outline-text-4" id="text-orgc9ceaf7">
+<p>
+At the beginning of the semester you will choose the grade you want to strive
+for, and each week you will justify whether your learning is in line with that
+grade. Please acquaint yourself with the <a href="http://www.byui.edu/student-records/grades/grading-system">BYU-Idaho Grading System</a> to aid you
+in your self-assessment.
+</p>
+</div>
+
+<div id="outline-container-org646e9df" class="outline-5">
+<h5 id="org646e9df">Grade Category Weighting</h5>
+<div class="outline-text-5" id="text-org646e9df">
+<ul class="org-ul">
+<li>Attendance and Participation: 30%
+<ul class="org-ul">
+<li>Each unexcused absence will incur a 5% penalty. If you are absent six
+times you will fail the class.</li>
+<li>You must bring a laptop or other Internet-connectable (and tools ready)
+device to each class meeting.</li>
+</ul></li>
+<li>Workbook: 70%</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6c88c2a" class="outline-3">
+<h3 id="org6c88c2a">Schedule</h3>
+<div class="outline-text-3" id="text-org6c88c2a">
+<p>
+Reading <i>the book</i> is a regular activity you are tasked with. There are three
+main sections and essentially three months (12 full weeks) in the semester.
+That&rsquo;s one main section per month, or about one subsection every week. You are
+welcome to read ahead (but don&rsquo;t get behind) and work
+exercises/problems/puzzles at your own pace, but answer keys will be revealed
+only after the &ldquo;due date/time&rdquo; (typically Saturdays at 6:00 pm) has passed.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2bf4487" class="outline-2">
+<h2 id="org2bf4487">Tools</h2>
+<div class="outline-text-2" id="text-org2bf4487">
+<p>
+Any <i>Computer Professional</i>, no matter what specialty area he or she focuses
+on (science, engineering, technology, math), needs a good set of tools. The
+two main tool platforms are Windows and Mac. If you prefer Linux (or some
+other similar platform), you probably do <i>not</i> need any help provisioning your
+professional toolbox. Otherwise, select your preference and read on. Note that
+the tools you will need are few, but <b>powerful</b>! Note too that you <i>must have</i>
+a steady, reliable Internet connection (use the BYUI WiFi, <i>not</i> BYUI Visitor)
+to be successful.
+</p>
+</div>
+<div id="outline-container-orgcf37b6a" class="outline-3">
+<h3 id="orgcf37b6a">Windows</h3>
+<div class="outline-text-3" id="text-orgcf37b6a">
+<p>
+64-bit only. If you do not have 64-bit Windows, please get it!
+</p>
+</div>
+<div id="outline-container-orga41901a" class="outline-4">
+<h4 id="orga41901a">Git</h4>
+<div class="outline-text-4" id="text-orga41901a">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Install Git for Windows:
+<a href="https://github.com/git-for-windows/git/releases/download/v2.14.1.windows.1/Git-2.14.1-64-bit.exe">https://github.com/git-for-windows/git/releases/download/v2.14.1.windows.1/Git-2.14.1-64-bit.exe</a>
+Or less directly, if you want to have a fuller experience, start at:
+<a href="https://git-for-windows.github.io/">https://git-for-windows.github.io/</a>
+<img src="images/git-download-windows.png" alt="git-download-windows.png" /></li>
+<li class="off"><code>[&#xa0;]</code> Run the installer and click Next (something like 8 times) to accept the
+defaults and then click Install.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgee9d3df" class="outline-4">
+<h4 id="orgee9d3df">Emacs</h4>
+<div class="outline-text-4" id="text-orgee9d3df">
+</div><div id="outline-container-org345e6fb" class="outline-5">
+<h5 id="org345e6fb">Set HOME Environment Variable</h5>
+<div class="outline-text-5" id="text-org345e6fb">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Bring up the Windows Command Shell (cmd.exe) by typing <code>Windows R</code> to
+open the Run dialog and entering <code>cmd</code>.</li>
+<li class="off"><code>[&#xa0;]</code> Enter the following command (replacing <i>uname</i> with your username first):</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">setx HOME <span style="color: #2aa198;">"C:\Users\uname"</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Close this Command window.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org475ead3" class="outline-5">
+<h5 id="org475ead3">Get 7-zip</h5>
+<div class="outline-text-5" id="text-org475ead3">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Download the 7-zip installer executable at <a href="http://www.7-zip.org/a/7z1701-x64.exe">http://www.7-zip.org/a/7z1701-x64.exe</a></li>
+<li class="off"><code>[&#xa0;]</code> Accept the default where to install.</li>
+<li class="off"><code>[&#xa0;]</code> Close the installer.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org76de97b" class="outline-5">
+<h5 id="org76de97b">Use 7-zip</h5>
+<div class="outline-text-5" id="text-org76de97b">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Download the file from <a href="https://sourceforge.net/projects/emacsbinw64/files/latest/download">https://sourceforge.net/projects/emacsbinw64/files/latest/download</a></li>
+<li class="off"><code>[&#xa0;]</code> This will land the installation file <code>emacs-w64-25.2-O2-with-modules.7z</code> in your Downloads.</li>
+<li class="off"><code>[&#xa0;]</code> Open it using 7-zip, and extract it somewhere easy to find (like your
+HOME directory). It should look something like this:</li>
+</ul>
+
+<div class="figure">
+<p><img src="images/extract-emacs.png" alt="extract-emacs.png" />
+</p>
+</div>
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Find the <code>runemacs</code> executable and make a shortcut to it, but <b>DO NOT RUN IT YET</b>!</li>
+</ul>
+
+<div class="figure">
+<p><img src="images/find-runemacs.png" alt="find-runemacs.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org1d5d2dd" class="outline-4">
+<h4 id="org1d5d2dd">Spacemacs</h4>
+<div class="outline-text-4" id="text-org1d5d2dd">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Visit the home page and browse around: <a href="http://www.spacemacs.org/">http://www.spacemacs.org/</a></li>
+<li class="off"><code>[&#xa0;]</code> Bring up the <code>bash</code> command shell (came with Git) by typing <code>Windows R</code>
+to open the Run dialog and entering <code>bash</code>.</li>
+<li class="off"><code>[&#xa0;]</code> Enter the following command in the bash window. Save typing by copying
+it to your clipboard from the box below or from the Spacemacs home page, as
+shown in the following screenshot.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="images/install-spacemacs.png" alt="install-spacemacs.png" />
+</p>
+</div>
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Be patient, it will take a few seconds to clone this large repository to
+your computer.</li>
+<li class="off"><code>[&#xa0;]</code> Now to configure Spacemacs, enter this command in the same bash window:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">git clone https://github.com/rickneff/firstthreeodds ~/.spacemacs.d
+</pre>
+</div>
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Start up Emacs (use your shortcut) and the Spacemacs installation
+process will begin.</li>
+<li class="off"><code>[&#xa0;]</code> Be patient, it&rsquo;s downloading and installing a LOT of stuff!</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org1c63aba" class="outline-3">
+<h3 id="org1c63aba">Mac</h3>
+<div class="outline-text-3" id="text-org1c63aba">
+</div><div id="outline-container-org69db113" class="outline-4">
+<h4 id="org69db113">Git</h4>
+<div class="outline-text-4" id="text-org69db113">
+<p>
+  Git may already be installed on your Mac, but if not, when you type a <code>git</code>
+  command in a Terminal window (see below) you will see something like the
+  following:
+<img src="images/install-git-1.png" alt="install-git-1.png" />
+<img src="images/install-git-2.png" alt="install-git-2.png" />
+The dialog boxes in between:
+<img src="images/install-git-3.png" alt="install-git-3.png" />
+<img src="images/install-git-4.png" alt="install-git-4.png" />
+<img src="images/install-git-5.png" alt="install-git-5.png" />
+<img src="images/install-git-6.png" alt="install-git-6.png" />
+</p>
+</div>
+</div>
+<div id="outline-container-org6bf69a0" class="outline-4">
+<h4 id="org6bf69a0">Emacs</h4>
+<div class="outline-text-4" id="text-org6bf69a0">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Get the installer here: <a href="https://emacsformacosx.com/emacs-builds/Emacs-25.2-universal.dmg">https://emacsformacosx.com/emacs-builds/Emacs-25.2-universal.dmg</a></li>
+<li class="off"><code>[&#xa0;]</code> Install Emacs -&#x2014; but <b>DO NOT RUN IT YET</b>! The installation will start
+when you drag the Emacs icon to the Applications folder, as shown in the
+following screenshots:</li>
+</ul>
+<p>
+<img src="images/install-emacs-mac-1.png" alt="install-emacs-mac-1.png" />
+<img src="images/install-emacs-mac-2.png" alt="install-emacs-mac-2.png" />
+</p>
+</div>
+</div>
+<div id="outline-container-org59a2380" class="outline-4">
+<h4 id="org59a2380">Spacemacs</h4>
+<div class="outline-text-4" id="text-org59a2380">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Visit the home page and browse around: <a href="http://www.spacemacs.org/">http://www.spacemacs.org/</a></li>
+<li class="off"><code>[&#xa0;]</code> Type <code>Command Space</code> to bring up the <i>Spotlight Search</i> box and enter
+<code>terminal</code> to open a Terminal window.</li>
+<li class="off"><code>[&#xa0;]</code> Enter the following command in the Terminal window. Save typing by copying
+it to your clipboard from the box below or from the Spacemacs home page, as
+shown in the following screenshot.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="images/install-spacemacs-in-terminal-window.png" alt="install-spacemacs-in-terminal-window.png" />
+</p>
+</div>
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Be patient, it will take a few seconds to clone this large repository to
+your computer.</li>
+<li class="off"><code>[&#xa0;]</code> Now to configure Spacemacs, enter this command in the same Terminal window:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">git clone https://github.com/rickneff/firstthreeodds ~/.spacemacs.d
+</pre>
+</div>
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Start up Emacs (use the Spotlight Search box) and the Spacemacs
+installation process will begin.</li>
+<li class="off"><code>[&#xa0;]</code> Be patient, it&rsquo;s downloading and installing a LOT of stuff!</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Rick Neff</p>
-<p class="date">Created: 2017-01-03 Tue 17:27</p>
+<p class="date">Created: 2017-09-12 Tue 14:08</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
