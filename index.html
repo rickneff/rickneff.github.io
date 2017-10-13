@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-01-03 Tue 17:27 -->
-<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Book</title>
-<meta  name="generator" content="Org-mode" />
-<meta  name="author" content="root" />
+<!-- 2017-10-03 Tue 20:01 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Welcome to first three odds dot org</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Rick Neff" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -53,13 +53,97 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  pre.src-sh:before    { content: 'sh'; }
-  pre.src-bash:before  { content: 'sh'; }
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-R:before     { content: 'R'; }
-  pre.src-perl:before  { content: 'Perl'; }
-  pre.src-java:before  { content: 'Java'; }
-  pre.src-sql:before   { content: 'SQL'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
@@ -92,17 +176,26 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet"
-                         href="style00.css"
-                         type="text/css"/>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/bigblow/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/bigblow/css/bigblow.css"/>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/bigblow/css/hideshow.css"/>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/jquery.localscroll-min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/jquery.zclip.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/bigblow.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/hideshow.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -146,18 +239,920 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">The Book</h1>
+<h1 class="title">Welcome to first three odds dot org</h1>
+
+<div id="outline-container-orgbe3820c" class="outline-2">
+<h2 id="orgbe3820c">Book</h2>
+<div class="outline-text-2" id="text-orgbe3820c">
+<div class="info">
 <p>
-<a href="mebewiyo-bow.html">Latest Version Black on White</a>
+<a href="http://firstthreeodds.org/mebewiyo/book/latest">Latest version of &ldquo;Metaphors Be With You &#x2026;&rdquo;</a>
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-orgd02c5dc" class="outline-2">
+<h2 id="orgd02c5dc">Course</h2>
+<div class="outline-text-2" id="text-orgd02c5dc">
+<div class="info">
+<p>
+This is the Fall 2017 version of <b>Discrete Mathematics I</b> &#x2014; AKA DM1 &#x2014; AKA CS 237.
+</p>
+
+</div>
+</div>
+<div id="outline-container-org12a56cb" class="outline-3">
+<h3 id="org12a56cb">Syllabus</h3>
+<div class="outline-text-3" id="text-org12a56cb">
+</div><div id="outline-container-orgff3f523" class="outline-4">
+<h4 id="orgff3f523">Catalog Description</h4>
+<div class="outline-text-4" id="text-orgff3f523">
+<p>
+What this course is about: <i>Mathematics for computer science.</i>
 </p>
 
 <p>
-<a href="mebewiyo-wob.html">Latest Version White on Black</a>
+This course introduces the mathematical topics needed to provide a
+solid theoretical foundation for computer science. The following
+topics will be <i>lightly</i> covered:
 </p>
+
+<ul class="org-ul">
+<li>Sets and Logic</li>
+<li>Functions and Relations</li>
+<li>Combinatorics and Probability</li>
+<li>Number Theory and Practice</li>
+<li>Trees and Graphs</li>
+<li>Languages and Grammars</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8f84e36" class="outline-4">
+<h4 id="org8f84e36">Objectives</h4>
+<div class="outline-text-4" id="text-org8f84e36">
+<ol class="org-ol">
+<li>Know the basic terminology and operations of sets and logic,
+functions and relations, combinatorics and probability, number
+theory and practice, trees and graphs, and languages and grammars.</li>
+<li>Demonstrate logical reasoning through solving problems.</li>
+<li>Interpret the meaning of mathematical statements in the context of
+real-world applications.</li>
+<li>Think like a mathematician by making good connections.</li>
+<li>Learn basic functional programming by way of lisp, reading and
+writing lisp code.</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org5ab9378" class="outline-4">
+<h4 id="org5ab9378">Prerequisite</h4>
+<div class="outline-text-4" id="text-org5ab9378">
+<p>
+You must have successfully completed the following course:
+</p>
+
+<ul class="org-ul">
+<li>CS 165 Object-Oriented Software Development</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7419c68" class="outline-4">
+<h4 id="org7419c68">Required Text</h4>
+<div class="outline-text-4" id="text-org7419c68">
+<p>
+<a href="https://rickneff.github.io/metaphors-be-with-you.html"><i>Metaphors Be With You: A Tireless Work on Play on Words</i></a>
+</p>
+
+<p>
+<b>Online only &#x2014; no print edition.</b>
+</p>
+</div>
+</div>
+<div id="outline-container-org5a88b73" class="outline-4">
+<h4 id="org5a88b73">Requirements</h4>
+<div class="outline-text-4" id="text-org5a88b73">
+<p>
+You are required to&#x2026;
+</p>
+<ul class="org-ul">
+<li>attend class, as attendance and participation factor heavily into your
+grade.</li>
+<li>read assigned portions of the course materials, and come to class
+prepared to discuss and deepen your understanding of selected topics.</li>
+<li>keep a learning journal (your <i>workbook</i>) where you will put your answers to
+homework assignments, and a brief report on what you are learning.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf3af6d4" class="outline-4">
+<h4 id="orgf3af6d4">Assignments</h4>
+<div class="outline-text-4" id="text-orgf3af6d4">
+<p>
+Homework assignments are of three types: Exercises, Problems, and Puzzles.
+</p>
+</div>
+
+<div id="outline-container-orga86d5fc" class="outline-5">
+<h5 id="orga86d5fc">Exercises</h5>
+<div class="outline-text-5" id="text-orga86d5fc">
+<p>
+Exercises are individual and group learning activities that will require
+either a small amount of preparation before class, or participation during
+class, or both. Although time will be given during class, some time outside
+of class may also be required.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5f9299a" class="outline-5">
+<h5 id="org5f9299a">Problems</h5>
+<div class="outline-text-5" id="text-org5f9299a">
+<p>
+Problems are weightier, more challenging assignments that invite you to
+explore in more depth certain topics in discrete mathematics, as well as
+increase your lisp/functional programming prowess.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge4e8598" class="outline-5">
+<h5 id="orge4e8598">Puzzles</h5>
+<div class="outline-text-5" id="text-orge4e8598">
+<p>
+Puzzles are like problems, only with another added measure of difficulty that
+will require even more ingenuity, deep thought and persistent effort to
+solve. Think &ldquo;Puzzle Room&rdquo; &#x2014; where you must solve a problem in order to
+escape from a room. But the hints are more obscure, and in fact the statement
+of the problem may be obscure, indirect or encoded somehow.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org26bdf99" class="outline-4">
+<h4 id="org26bdf99">Grading</h4>
+<div class="outline-text-4" id="text-org26bdf99">
+<p>
+At the beginning of the semester you will choose the grade you want to strive
+for, and each week you will justify whether your learning is in line with that
+grade. Please acquaint yourself with the <a href="http://www.byui.edu/student-records/grades/grading-system">BYU-Idaho Grading System</a> to aid you
+in your self-assessment.
+</p>
+</div>
+
+<div id="outline-container-orgca10ef6" class="outline-5">
+<h5 id="orgca10ef6">Grade Category Weighting</h5>
+<div class="outline-text-5" id="text-orgca10ef6">
+<ul class="org-ul">
+<li>Attendance and Participation: 30%
+<ul class="org-ul">
+<li>Each unexcused absence will incur a 5% penalty. If you are absent six
+times you will fail the class.</li>
+<li>You must bring a laptop or other Internet-connectable (and tools ready)
+device to each class meeting.</li>
+</ul></li>
+<li>Workbook: 70%</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org80486af" class="outline-3">
+<h3 id="org80486af">Schedule</h3>
+<div class="outline-text-3" id="text-org80486af">
+<p>
+Reading <i>the book</i> is a regular activity you are tasked with. There are three
+main sections and essentially three months (12 full weeks) in the semester.
+That&rsquo;s one main section per month, or about one subsection every week. You are
+welcome to read ahead (but don&rsquo;t get behind) and work
+exercises/problems/puzzles at your own pace, but answer keys will be revealed
+only after the &ldquo;due date/time&rdquo; (typically Saturdays at 6:00 pm) has passed.
+</p>
+
+<p>
+Here&rsquo;s a more detailed schedule:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Week</th>
+<th scope="col" class="org-left">Reading</th>
+<th scope="col" class="org-left">Exercises/Problems/Puzzles (EPP)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">00</td>
+<td class="org-left">&lt;ABC</td>
+<td class="org-left">CRC DGZ CHJ DOK UJF</td>
+</tr>
+
+<tr>
+<td class="org-right">01</td>
+<td class="org-left">ABC</td>
+<td class="org-left">OQP USV UCA ODS UGX OGR UWM OPZ UOX OTX UOT OIM UIN OJL UCG</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">OIO UIJ OQT UTQ OYU UOH OZD UZM OOY UFZ OKJ UVH OJM ULQ OTD</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">UJU OLH UWY OBW USL OYP UBV OKQ UKF OKL UEZ OYW UEF OUB UQY</td>
+</tr>
+
+<tr>
+<td class="org-right">02</td>
+<td class="org-left">DEF</td>
+<td class="org-left">TBD WDK TDR WDT TEH WFC TEJ WFK TER WGP TEU WGW TFV WJS TGE</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">WKC THP WKM TIW WNW TKG WOV TME WQW TMZ WRA TNL WRD TNQ WRP</td>
+</tr>
+
+<tr>
+<td class="org-right">03</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">TOJ WRU TOL WZO TOU WYH TLI WPI TSD WTM TTV WUZ WZM TUK WVQ</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">TUQ WVU TUW WWD TVL WWR TWN WWS TXG WZG TKH WUE</td>
+</tr>
+
+<tr>
+<td class="org-right">04</td>
+<td class="org-left">GHI</td>
+<td class="org-left">EBQ MGX ECI MHB ECT MKJ EFE MKL EFS MLB EJE MLU EJK MMC EJU</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">MNE EKQ MON</td>
+</tr>
+
+<tr>
+<td class="org-right">05</td>
+<td class="org-left">JKL</td>
+<td class="org-left">QAM REX QCV RFC QCZ RFF QDM RGL QEB RGM QFK RHB QGK RVB QGT</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">RJV QIQ RLH QKA RNC QKT RNM QOS ROP QRQ ROX</td>
+</tr>
+
+<tr>
+<td class="org-right">06</td>
+<td class="org-left">MNO</td>
+<td class="org-left">FAB ISM FBH ITT FDK IVO FDZ IWC FJH IWK FJY IXT FMD IYJ FOJ</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">IZL FOY VAO FQI VAR FQL VAY FQW VCR FRM VEM FUA VFJ FVF VGU</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">FVH VGX FXI VIB FYR VIW</td>
+</tr>
+
+<tr>
+<td class="org-right">07</td>
+<td class="org-left">PQR</td>
+<td class="org-left">GMQ JPZ GMY JQA GRZ JYA</td>
+</tr>
+
+<tr>
+<td class="org-right">08</td>
+<td class="org-left">PQR</td>
+<td class="org-left">GXF XAJ GYI XFO GYN XGG</td>
+</tr>
+
+<tr>
+<td class="org-right">09</td>
+<td class="org-left">STU</td>
+<td class="org-left">LDA SQI LJP SUF LNR YGT LDO YCF</td>
+</tr>
+
+<tr>
+<td class="org-right">10</td>
+<td class="org-left">STU</td>
+<td class="org-left">LUM YZU LTI YDQ LND YTR LGO YIV</td>
+</tr>
+
+<tr>
+<td class="org-right">11</td>
+<td class="org-left">VWX</td>
+<td class="org-left">HST KDB HTC ABR KWD HRR KEO HMO HIJ KLE HAB KOV HBT AGA KNF</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Upcatching and Thanksgiving</td>
+</tr>
+
+<tr>
+<td class="org-right">12</td>
+<td class="org-left">VWX</td>
+<td class="org-left">HJS HAX KHQ HKE KBB HRL AGD HSG KHO ANA HLX KSI HTR KSQ HBE KSC</td>
+</tr>
+
+<tr>
+<td class="org-right">13</td>
+<td class="org-left">YZ@</td>
+<td class="org-left">BAO NCO PDQ NTC PTW NTM PMV NES BRZ BRE NGP BRQ PIQ PRK NIO</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">YZ@</td>
+<td class="org-left">PFA BGT NGI NLR BSP NBO PBI BJO NKY BMI</td>
+</tr>
+
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Upcatching and Finalstaking (in your other classes &#x2014; not this one!)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org599b004" class="outline-2">
+<h2 id="org599b004">Tools</h2>
+<div class="outline-text-2" id="text-org599b004">
+<p>
+Regarding tools in general, here&rsquo;s a thought by Howard Rheingold from his
+book, <i>They Have A Word For It</i>:
+</p>
+
+<blockquote>
+<p>
+If you examine the beliefs of any master craftsman, you will discover a
+certain reverence for tools as worthy friends. The world-renowned Japanese
+temple carpenters, for example, spend much more time sharpening a tool than
+they spend making the cuts. The spirit of fine Japanese carpentry dictates
+that the planning and contemplation of a construction project should take
+much longer than the execution; in some cases, the carpenter lives on the site
+of a house or temple for at least a year, paying attention to the geography
+and the light, sharpening his tools, visualizing each cut, each piece of
+joinery, in his head, over and over again.
+</p>
+</blockquote>
+
+<p>
+Any <i>Computer Professional</i>, no matter what specialty area he or she focuses
+on (science, engineering, technology, math), needs a good set of tools. The
+two main tool platforms are Windows and Mac. If you prefer Linux (or some
+other similar platform), you probably do <i>not</i> need any help provisioning your
+professional toolbox. Otherwise, select your preference and read on. Note that
+the tools you will need are few, but <b>powerful</b>! Note too that you <i>must have</i>
+a steady, reliable Internet connection (use the BYUI WiFi, <i>not</i> BYUI Visitor)
+to be successful.
+</p>
+</div>
+<div id="outline-container-org89bad6e" class="outline-3">
+<h3 id="org89bad6e">Windows</h3>
+<div class="outline-text-3" id="text-org89bad6e">
+<p>
+64-bit only. If you do not have 64-bit Windows, please get it!
+</p>
+</div>
+<div id="outline-container-org136f8fb" class="outline-4">
+<h4 id="org136f8fb">Git</h4>
+<div class="outline-text-4" id="text-org136f8fb">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Install Git for Windows:
+<a href="https://github.com/git-for-windows/git/releases/download/v2.14.1.windows.1/Git-2.14.1-64-bit.exe">https://github.com/git-for-windows/git/releases/download/v2.14.1.windows.1/Git-2.14.1-64-bit.exe</a>
+Or less directly, if you want to have a fuller experience, start at:
+<a href="https://git-for-windows.github.io/">https://git-for-windows.github.io/</a>
+<img src="images/git-download-windows.png" alt="git-download-windows.png" /></li>
+<li class="off"><code>[&#xa0;]</code> Run the installer and click Next (something like 8 times) to accept the
+defaults and then click Install.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org75dbb31" class="outline-4">
+<h4 id="org75dbb31">Emacs</h4>
+<div class="outline-text-4" id="text-org75dbb31">
+</div><div id="outline-container-org088c75f" class="outline-5">
+<h5 id="org088c75f">Set HOME Environment Variable</h5>
+<div class="outline-text-5" id="text-org088c75f">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Bring up the Windows Command Shell (cmd.exe) by pressing the &ldquo;Windows&rdquo;
+key (the one with the Windows logo on it) and, while holding that key down,
+typing <code>R</code> to open the <code>Run</code> dialog and entering <code>cmd</code>.</li>
+<li class="off"><code>[&#xa0;]</code> Enter the following command (replacing <i>uname</i> with your username first):</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">setx HOME <span style="color: #2aa198;">"C:\Users\uname"</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Close this Command window.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge3d8f66" class="outline-5">
+<h5 id="orge3d8f66">Get 7-zip</h5>
+<div class="outline-text-5" id="text-orge3d8f66">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Download the 7-zip installer executable at <a href="http://www.7-zip.org/a/7z1701-x64.exe">http://www.7-zip.org/a/7z1701-x64.exe</a></li>
+<li class="off"><code>[&#xa0;]</code> Accept the default where to install.</li>
+<li class="off"><code>[&#xa0;]</code> Close the installer.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org261edd3" class="outline-5">
+<h5 id="org261edd3">Use 7-zip</h5>
+<div class="outline-text-5" id="text-org261edd3">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Download the file from <a href="https://sourceforge.net/projects/emacsbinw64/files/latest/download">https://sourceforge.net/projects/emacsbinw64/files/latest/download</a></li>
+<li class="off"><code>[&#xa0;]</code> This will land the installation file <code>emacs-w64-25.2-O2-with-modules.7z</code> in your Downloads.</li>
+<li class="off"><code>[&#xa0;]</code> Open it using 7-zip, and extract it somewhere easy to find (like your
+HOME directory). It should look something like this:</li>
+</ul>
+
+<div class="figure">
+<p><img src="images/extract-emacs.png" alt="extract-emacs.png" />
+</p>
+</div>
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Find the <code>runemacs</code> executable and make a shortcut to it, but <b>DO NOT RUN IT YET</b>!</li>
+</ul>
+
+<div class="figure">
+<p><img src="images/find-runemacs.png" alt="find-runemacs.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org1f413ca" class="outline-4">
+<h4 id="org1f413ca">Spacemacs</h4>
+<div class="outline-text-4" id="text-org1f413ca">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Visit the home page and browse around: <a href="http://www.spacemacs.org/">http://www.spacemacs.org/</a></li>
+<li class="off"><code>[&#xa0;]</code> Bring up the <code>bash</code> command shell (that came with Git) by pressing the
+&ldquo;Windows&rdquo; key (the one with the Windows logo on it) and, while holding that
+key down, typing <code>R</code> to open the <code>Run</code> dialog and entering <code>bash</code>.</li>
+<li class="off"><code>[&#xa0;]</code> Enter the following command in the <code>bash</code> window. Save typing by copying
+it to your clipboard from the box below or from the Spacemacs home page, as
+shown in the following screenshot.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="images/install-spacemacs.png" alt="install-spacemacs.png" />
+</p>
+</div>
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Be patient, it will take a few seconds to clone this large repository to
+your computer.</li>
+<li class="off"><code>[&#xa0;]</code> Now to configure Spacemacs, enter this command in the same bash window:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">git clone https://github.com/rickneff/firstthreeodds ~/.spacemacs.d
+</pre>
+</div>
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Start up Emacs (use your shortcut) and the Spacemacs installation
+process will begin.</li>
+<li class="off"><code>[&#xa0;]</code> Be patient, it&rsquo;s downloading and installing a LOT of stuff!</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdaaf319" class="outline-3">
+<h3 id="orgdaaf319">Mac</h3>
+<div class="outline-text-3" id="text-orgdaaf319">
+</div><div id="outline-container-org77c11ff" class="outline-4">
+<h4 id="org77c11ff">Git</h4>
+<div class="outline-text-4" id="text-org77c11ff">
+<p>
+  Git may already be installed on your Mac, but if not, when you type a <code>git</code>
+  command in a Terminal window (see below) you will see something like the
+  following:
+<img src="images/install-git-1.png" alt="install-git-1.png" />
+<img src="images/install-git-2.png" alt="install-git-2.png" />
+The dialog boxes in between:
+<img src="images/install-git-3.png" alt="install-git-3.png" />
+<img src="images/install-git-4.png" alt="install-git-4.png" />
+<img src="images/install-git-5.png" alt="install-git-5.png" />
+<img src="images/install-git-6.png" alt="install-git-6.png" />
+</p>
+</div>
+</div>
+<div id="outline-container-orgf4bc170" class="outline-4">
+<h4 id="orgf4bc170">Emacs</h4>
+<div class="outline-text-4" id="text-orgf4bc170">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Get the installer here: <a href="https://emacsformacosx.com/emacs-builds/Emacs-25.2-universal.dmg">https://emacsformacosx.com/emacs-builds/Emacs-25.2-universal.dmg</a></li>
+<li class="off"><code>[&#xa0;]</code> Install Emacs -&#x2014; but <b>DO NOT RUN IT YET</b>! The installation will start
+when you drag the Emacs icon to the Applications folder, as shown in the
+following screenshots:</li>
+</ul>
+<p>
+<img src="images/install-emacs-mac-1.png" alt="install-emacs-mac-1.png" />
+<img src="images/install-emacs-mac-2.png" alt="install-emacs-mac-2.png" />
+</p>
+</div>
+</div>
+<div id="outline-container-orgcdf4e7f" class="outline-4">
+<h4 id="orgcdf4e7f">Spacemacs</h4>
+<div class="outline-text-4" id="text-orgcdf4e7f">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Visit the home page and browse around: <a href="http://www.spacemacs.org/">http://www.spacemacs.org/</a></li>
+<li class="off"><code>[&#xa0;]</code> Type <code>Command Space</code> to bring up the <i>Spotlight Search</i> box and enter
+<code>terminal</code> to open a Terminal window.</li>
+<li class="off"><code>[&#xa0;]</code> Enter the following command in the Terminal window. Save typing by copying
+it to your clipboard from the box below or from the Spacemacs home page, as
+shown in the following screenshot.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="images/install-spacemacs-in-terminal-window.png" alt="install-spacemacs-in-terminal-window.png" />
+</p>
+</div>
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Be patient, it will take a few seconds to clone this large repository to
+your computer.</li>
+<li class="off"><code>[&#xa0;]</code> Now to configure Spacemacs, enter this command in the same Terminal window:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">git clone https://github.com/rickneff/firstthreeodds ~/.spacemacs.d
+</pre>
+</div>
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Start up Emacs (use the Spotlight Search box) and the Spacemacs
+installation process will begin.</li>
+<li class="off"><code>[&#xa0;]</code> Be patient, it&rsquo;s downloading and installing a LOT of stuff!</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org07e2632" class="outline-3">
+<h3 id="org07e2632">Both</h3>
+<div class="outline-text-3" id="text-org07e2632">
+<dl class="org-dl">
+<dt>Truth Table Generator</dt><dd><a href="https://firstthreeodds.org/javatools/TruthTableVUE.jar">Click here if you know how to use java jar files</a></dd>
+</dl>
+</div>
+</div>
+</div>
+<div id="outline-container-org1d28851" class="outline-2">
+<h2 id="org1d28851">Helps</h2>
+<div class="outline-text-2" id="text-org1d28851">
+</div><div id="outline-container-orga96446c" class="outline-3">
+<h3 id="orga96446c"><span class="todo TODO">TODO</span> Choose Your Track</h3>
+<div class="outline-text-3" id="text-orga96446c">
+<p>
+The Course Objectives in the Syllabus have been numbered (so no longer just a
+bulleted list) and re-ordered (the old 3rd (&ldquo;Learn lisp&rdquo;) objective is now the
+last one in the list).
+</p>
+
+<p>
+When choosing which grade you are striving for, bear in mind the distinctions
+described in the <a href="http://www.byui.edu/student-records/grades/grading-system">BYU-Idaho Grading System</a>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Track</th>
+<th scope="col" class="org-left">Striving for an A Grade</th>
+<th scope="col" class="org-left">Striving for a B Grade</th>
+<th scope="col" class="org-left">Striving for a C Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">A</td>
+<td class="org-left">Excellent Mastery of all</td>
+<td class="org-left">Excellent Mastery of all objectives,</td>
+<td class="org-left">Excellent Mastery of all</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">objectives.</td>
+<td class="org-left">except in the 5th objective substitute</td>
+<td class="org-left">but the last (5th) objective</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">for lisp any functional language, or</td>
+<td class="org-left">(So no lisp requirement ---</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">language with lambdas (C++11, Java 8,</td>
+<td class="org-left">skip any EPP that asks for an</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">JavaScript, Python, &#x2026;).</td>
+<td class="org-left">elisp solution.)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">B</td>
+<td class="org-left">Not Applicable</td>
+<td class="org-left">Good Mastery of all but the last (5th)</td>
+<td class="org-left">Good Mastery of all but the</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">objective. (No lisp (or other functional</td>
+<td class="org-left">last two objectives. (So no</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">language) required &#x2014; solve the programming</td>
+<td class="org-left">attempt to make good connections</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">problems in the procedural/object-oriented</td>
+<td class="org-left">is required, and only the</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">language of your choice.)</td>
+<td class="org-left">problems not involving lisp.)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">C</td>
+<td class="org-left">Not Applicable</td>
+<td class="org-left">Not Applicable</td>
+<td class="org-left">Mastery of all but the last two</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">objectives. (So no attempt to</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">make good connections is required,</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">and only the problems not</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">involving lisp.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org0988c00" class="outline-3">
+<h3 id="org0988c00"><span class="todo TODO">TODO</span> Read the FAQs</h3>
+<div class="outline-text-3" id="text-org0988c00">
+<p>
+Frequently Asked Questions (and their Answers):
+</p>
+
+<dl class="org-dl">
+<dt>Q1</dt><dd>I get an error when I try to submit my workbook. Can I just email it
+to you?</dd>
+<dt>A1</dt><dd>No. The probable reason for the error is using the static
+rickneff.github.io hosted version of the book. (It will say &ldquo;An error
+occurred! (405)&rdquo;.) Always use the dynamic firstthreeodds.org hosted
+version to turn in your work. (If you do it and go to do it again
+without Choosing a File again (because it already shows the name of
+the file you previously chose), first reload the page (or flush your
+browser&rsquo;s cache), otherwise the work you think you&rsquo;re turning in may
+not be what actually gets turned in.)</dd>
+
+<dt>Q2</dt><dd>The workload for this 2-credit class seems excessive. What should I
+do?</dd>
+<dt>A2</dt><dd>Ponder the reasons you are taking this class. Are you striving to
+learn discrete math? Just here for the grade? Do you see yourself as a
+good reader, with good reading comprehension skills? Recall the
+problem (different than the EPP variety) I mentioned in my 9/19/2017
+email? Reading and understanding takes time &#x2014; is the time you spend
+doing this productive?</dd>
+
+<dt>Q3</dt><dd>Okay, so I&rsquo;m not the most skilled reader. It takes me a long time to
+read and digest things, especially when there are so many links to
+other things to read (and from them to still others). What do I do,
+settle for a poor grade? Drop the class?</dd>
+<dt>A3</dt><dd>You are responsible for your learning. I as your teacher take
+seriously my role as and <a href="http://emp.byui.edu/neffr/myphilosophyofteaching.html">responsibility for being a helper, a
+facilitator of your learning</a> &#x2014; but I can&rsquo;t make it happen. You can
+compensate for not (yet) being a skilled reader and problem solver,
+however.</dd>
+
+<dt>Q4</dt><dd>How?</dd>
+<dt>A4</dt><dd>Be inquisitive. Be <b>very</b> inquisitive! Ask questions, not just of me,
+but of your classmates. Share light and knowledge you gain on your own
+(or through talking with me or Brother Williams) freely, and
+appropriately with your peers!</dd>
+
+<dt>Q5</dt><dd>Are we required to study in groups? I&rsquo;m not a big fan of group
+work/think.</dd>
+<dt>A5</dt><dd>What does the BYU-I Learning Model say about &ldquo;Teach One Another&rdquo;? Are
+you a non-fan because of past experience, where you were let down by
+members of your group? Were you assigned this group, or was it
+self-selected?</dd>
+
+<dt>Q6</dt><dd>Yes, and it was assigned. Are you suggesting I should choose my own
+group to study with?</dd>
+<dt>A6</dt><dd>Yes, most assuredly and emphatically <b>YES</b>!</dd>
+
+<dt>Q7</dt><dd>What do you mean by appropriately sharing with my peers?</dd>
+<dt>A7</dt><dd>Good sharing and collaboration is a &ldquo;me lift thee and thee lift me,
+and we both ascend together&rdquo; phenomenon. Bad sharing/collaboration is
+copying someone else&rsquo;s work and submitting it as your own, to get
+&ldquo;credit&rdquo; for doing some assigned task, while not getting the
+understanding doing the task was meant to give you.</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-orge3b67eb" class="outline-3">
+<h3 id="orge3b67eb"><span class="todo TODO">TODO</span> Glean What You Can From Guides and Cheat Sheets For Beginners</h3>
+<div class="outline-text-3" id="text-orge3b67eb">
+<p>
+<a href="https://ontologicalblog.com/2016/10/14/an-absolute-beginners-guide-to-spacemacs-for-academic-writing/">https://ontologicalblog.com/2016/10/14/an-absolute-beginners-guide-to-spacemacs-for-academic-writing/</a>
+</p>
+
+<p>
+<a href="https://ontologicalblog.files.wordpress.com/2016/12/spacemacs_cheat_sheet_1-22.pdf">https://ontologicalblog.files.wordpress.com/2016/12/spacemacs_cheat_sheet_1-22.pdf</a>
+</p>
+
+<p>
+<a href="https://simpletutorials.com/c/3036/Spacemacs+%28Vim+mode%29+Cheatsheet">https://simpletutorials.com/c/3036/Spacemacs+(Vim+mode)+Cheatsheet</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb852a61" class="outline-3">
+<h3 id="orgb852a61"><span class="todo TODO">TODO</span> Download a Sample Workbook</h3>
+<div class="outline-text-3" id="text-orgb852a61">
+<p>
+<a href="workbook.org">workbook.org</a>
+</p>
+
+<p>
+It&rsquo;s the start of one, at any rate. Clicking on the link will download the
+file. Please replace my name and email address with yours before proceeding.
+</p>
+
+<p>
+Note that you are <i>not</i> required to organize it in the way suggested. It just
+shows one way of many to do it.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf0fda4e" class="outline-3">
+<h3 id="orgf0fda4e"><span class="todo TODO">TODO</span> Get Answers to Assignment for Week 00</h3>
+<div class="outline-text-3" id="text-orgf0fda4e">
+<p>
+Valid keys are simple transformations of your I-Number.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Identifier</th>
+<th scope="col" class="org-left">The key for which is your I-Number &#x2026;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">CRC</td>
+<td class="org-left">plus 195040</td>
+</tr>
+
+<tr>
+<td class="org-left">DGZ</td>
+<td class="org-left">minus 195060</td>
+</tr>
+
+<tr>
+<td class="org-left">CHJ</td>
+<td class="org-left">times 195086</td>
+</tr>
+
+<tr>
+<td class="org-left">DOK</td>
+<td class="org-left">plus 195018 (if your I-Number is even)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">minus 195018 (if your I-Number is odd)</td>
+</tr>
+
+<tr>
+<td class="org-left">UJF</td>
+<td class="org-left">minus 195165 (if your I-Number is odd)</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">plus 195165 (if your I-Number is even)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Rick Neff</p>
-<p class="date">Created: 2017-01-03 Tue 17:27</p>
+<p class="date">Created: 2017-10-03 Tue 20:01</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
