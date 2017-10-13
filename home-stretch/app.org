@@ -1,0 +1,134 @@
+#+PROPERTY: tangle yes
+
+* Initialization code
+
+Import packages, associate content types and
+parsing functions, and set global constants.
+
+#+BEGIN_SRC emacs-lisp
+(eval-when-compile
+  (require 'cl))
+
+(require 'simple-httpd)
+
+(setq actions '(("multipart/form-data" parse-file)
+				("application/x-www-form-urlencoded" parse-query)))
+
+(setq max-len 4194304)  ;; 4,194,304 = 4MB
+#+END_SRC
+
+#+RESULTS:
+: 4194304
+
+
+
+* Process POST content
+
+#+BEGIN_SRC emacs-lisp
+(defun parse-content (args)
+  (let* ((type (car (split-string (cadr (assoc "Content-Type" (second args))) ";")))
+		 (content (cadr (assoc "Content" (second args))))
+		 (f (cadr (assoc type actions)))
+		 )
+	(funcall f content)
+    )
+  )
+#+END_SRC
+
+
+* Parse query string formatted POST content
+
+#+BEGIN_SRC emacs-lisp
+(defun parse-query (content)
+  (mapcar (lambda (l) (split-string l "=")) (split-string content "&"))
+  )
+#+END_SRC
+
+
+* Parse file POST content
+
+#+BEGIN_SRC emacs-lisp
+(defun parse-file (content)
+  (let* ((boundary (substring (car (split-string content "\n" 1)) 0 -1))
+		 (sep (split-string (second (split-string content boundary)) "\r\n\r\n"))
+		 (header (mapcar (lambda (h) (split-string h ": ")) (split-string (car sep) "\r\n")))
+		 (file-data (cadr sep))
+		 (disp (split-string (cadr (assoc "Content-Disposition" header)) "; " 1))
+		 (format (car disp))
+		 (meta (mapcar (lambda (l) (split-string l "=")) (cdr disp)))
+		 (content-type (assoc "Content-Type" header))
+		 )
+	(append (list (list "Content-Disposition" format))
+			meta
+			(list content-type)
+			(list (list "file-data" file-data))
+			)
+	)
+  )
+#+END_SRC
+
+
+* Compare file size to global constant
+
+#+BEGIN_SRC emacs-lisp
+(defun file-too-large (content)
+	(> (length (cadr (assoc "file-data" content))) max-len)
+  )
+#+END_SRC
+
+
+* Generate a unique temporary file name
+
+#+BEGIN_SRC emacs-lisp
+(defun get-temp-filename ()
+;; !!! This probably needs to append a path to the filename (app.py uses /tmp/uploads/uploaded) !!!
+  (concat "/tmp/uploads/uploaded"
+		  (format-time-string "%Y%m%d%H%M%S")
+		  (format "%s" (+ (random 9) 1)) ".txt")
+  )
+#+END_SRC
+
+
+* Save the file data
+
+Saves the file data to a temporary file
+
+#+BEGIN_SRC emacs-lisp
+(defun save-file (content)
+  (let ((filename (get-temp-filename))
+		)
+	(write-region (cadr (assoc "file-data" content)) 0 (get-temp-filename))
+	filename
+	)
+  )
+#+END_SRC
+
+
+* Template POST file handling servlet
+
+#+BEGIN_SRC emacs-lisp
+(defun httpd/submit-file-post (proc path &rest args)
+  (let* ((content (parse-content args))
+		 )
+
+	(cond ((eq (assoc "file-data" content) nil)
+		   (httpd-error proc 400 "No file uploaded")
+		   )
+		  ((file-too-large content)
+		   (httpd-error proc 400 "File too large")
+		   )
+
+		  ;; Replace the default action with the request handler
+		  (t  ;; Default action
+		   (with-httpd-buffer proc "text/plain"
+							  (insert (format "%s\n" (assoc "User-Agent" (second args))))
+							  (insert (format "%s --- %s\n" path (assoc "Content-Length" (second args))))
+							  (insert (format "file length: %i\n" (length (cadr(assoc "file-data" content)))))
+							  (insert (format "content: %s\n" content))
+							  (insert (format "%s\n" (get-temp-filename)))
+							  )
+		   )
+      )
+	)
+  )
+#+END_SRC
