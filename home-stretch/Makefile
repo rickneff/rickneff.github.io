@@ -1,5 +1,5 @@
-#EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs
-EMACS=emacs
+EMACS=/Applications/Emacs.app/Contents/MacOS/Emacs
+#EMACS=emacs
 
 all: app.el html.el
 

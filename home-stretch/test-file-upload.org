@@ -1,4 +1,4 @@
-#+TITLE: Test File Upload 
+#+TITLE: Test File Upload
 #+AUTHOR: Rick Neff
 #+EMAIL: NeffR@byui.edu
 #+DATE: 19 September 2017
@@ -80,11 +80,11 @@
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp :tangle servlets.el
-    (require 'simple-httpd)
+  (require 'simple-httpd)
 
-    (setq httpd-port 80
-          httpd-root "~/rickneff.github.io/home-stretch"
-          httpd-listings nil)
+  (setq httpd-port 8080
+        httpd-root "~/rickneff.github.io/home-stretch"
+        httpd-listings nil)
 
   (defun parse-file (content)
     (let* ((boundary (substring (car (split-string content "\n" 1)) 0 -1))
@@ -100,17 +100,24 @@
               meta
               (list content-type)
               (list (list "file-data" file-data))
-              (list (list "sep" sep))
+              (list (list "boundary" boundary))
               )
       )
     )
 
   (defun httpd/file (proc path &rest args)
+    (shell-command "touch foo.foo.bar")
     (let* ((content (parse-content args)))
-      (cond ((null (assoc "file-data" content)) 
+      (cond ((null (assoc "file-data" content))
              (http-error proc 400 "No file uploaded"))
             (t ;; (save-file content)
-             (write-region (format "%S" (cadr (assoc "sep" content))) 0 "~/rickneff.github.io/home-stretch/tmp.txt") 
+             (write-region (format "%S" (cadr (assoc "boundary" content))) 0 "~/rickneff.github.io/home-stretch/tmp.txt")
              (with-httpd-buffer proc "text/plain"
                                 (insert (format "File accepted.\n\n")))))))
 #+END_SRC
+
+#+BEGIN_SRC sh
+  curl -k -F fileUploaded=@bar.org http://localhost:8080/file/upload
+#+END_SRC
+
+#+RESULTS:
