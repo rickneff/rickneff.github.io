@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-11-16 Thu 14:35 -->
+<!-- 2017-12-28 Thu 18:56 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Welcome to first three odds dot org</title>
+<title>Index</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Rick Neff" />
 <style type="text/css">
@@ -68,6 +68,7 @@
   pre.src-fortran:before { content: 'Fortran'; }
   pre.src-gnuplot:before { content: 'gnuplot'; }
   pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
   pre.src-js:before { content: 'Javascript'; }
   pre.src-latex:before { content: 'LaTeX'; }
@@ -190,6 +191,52 @@
 <script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/bigblow.js"></script>
 <script type="text/javascript" src="https://www.pirilampo.org/styles/bigblow/js/hideshow.js"></script>
 <script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript">document.helps = [];</script>
+<script type="text/javascript">
+function draw(levels) {
+var c = document.getElementById("btree");
+var w = c.width;
+var h = c.height;
+var ctx = c.getContext("2d");
+var repeat_delay = 3000;
+var teardown_delay = 1000;
+var level_delay = 500;
+var margins = 10;
+// If h_frac is changed, slope will need to be adjusted to
+// prevent overlap.  I might fix this in the future.
+var h_frac = 2;
+var slope = ((h - margins * 2) / 2) / (w - margins * 2);
+ctx.clearRect(0, 0, w, h);
+// This goes in here so that above variables will be in scope
+function lines(dist, loc, depth, delay=0) {
+function render_lines(dist, loc) {
+ctx.beginPath();
+ctx.moveTo(loc[0], loc[1]);
+ctx.lineTo(loc[0] + dist, loc[1] + slope * -dist);
+ctx.moveTo(loc[0], loc[1]);
+ctx.lineTo(loc[0] + dist, loc[1] + slope * dist);
+ctx.stroke();
+}
+setTimeout(render_lines, delay, dist, loc);
+setTimeout(function (x) {ctx.clearRect(x, 0, w, h)},
+level_delay * levels * 2 + teardown_delay - delay,
+loc[0]);
+depth--;
+if (depth) {
+lines((dist / h_frac) * (h_frac - 1),
+[loc[0] + dist, loc[1] + slope * -dist],
+depth,
+delay + level_delay);
+lines((dist / h_frac) * (h_frac - 1),
+[loc[0] + dist, loc[1] + slope *  dist],
+depth,
+delay + level_delay);
+}
+}
+lines((w - margins * 2) / h_frac, [margins, h/2], levels);
+setTimeout(draw, repeat_delay + teardown_delay + levels * level_delay * 2, levels);
+}
+</script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -239,43 +286,45 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">Welcome to first three odds dot org</h1>
+<h1 class="title">Index</h1>
 
-<div id="outline-container-org1d004c4" class="outline-2">
-<h2 id="org1d004c4">Book</h2>
-<div class="outline-text-2" id="text-org1d004c4">
+<div id="outline-container-org38b25c2" class="outline-2">
+<h2 id="org38b25c2">Book</h2>
+<div class="outline-text-2" id="text-org38b25c2">
 <div class="info">
 <p>
-<a href="http://firstthreeodds.org/mebewiyo/book/latest">Latest version of &ldquo;Metaphors Be With You &#x2026;&rdquo;</a>
+<a href="metaphors-be-with-you.html">Latest version of &ldquo;Metaphors Be With You &#x2026;&rdquo;</a>
 </p>
 
 </div>
 </div>
 </div>
-<div id="outline-container-orge9b7f37" class="outline-2">
-<h2 id="orge9b7f37">Course</h2>
-<div class="outline-text-2" id="text-orge9b7f37">
+<div id="outline-container-org43deaf1" class="outline-2">
+<h2 id="org43deaf1">Course</h2>
+<div class="outline-text-2" id="text-org43deaf1">
 <div class="info">
 <p>
-This is the Fall 2017 version of <b>Discrete Mathematics I</b> &#x2014; AKA DM1 &#x2014; AKA CS 237.
+This is the Winter 2018 version of <b>Discrete Mathematics I</b> &#x2014; AKA DM1 &#x2014;
+AKA CS 237.
 </p>
 
 </div>
 </div>
-<div id="outline-container-org2cfcbf9" class="outline-3">
-<h3 id="org2cfcbf9">Syllabus</h3>
-<div class="outline-text-3" id="text-org2cfcbf9">
-</div><div id="outline-container-org2bb5191" class="outline-4">
-<h4 id="org2bb5191">Catalog Description</h4>
-<div class="outline-text-4" id="text-org2bb5191">
+<div id="outline-container-org71b308d" class="outline-3">
+<h3 id="org71b308d">Syllabus</h3>
+<div class="outline-text-3" id="text-org71b308d">
+</div>
+<div id="outline-container-org2ecda54" class="outline-4">
+<h4 id="org2ecda54">Catalog Description</h4>
+<div class="outline-text-4" id="text-org2ecda54">
 <p>
 What this course is about: <i>Mathematics for computer science.</i>
 </p>
 
 <p>
-This course introduces the mathematical topics needed to provide a
-solid theoretical foundation for computer science. The following
-topics will be <i>lightly</i> covered:
+This course introduces the mathematical topics needed to provide a solid
+theoretical foundation for computer science. The following topics will be
+<i>lightly</i> covered:
 </p>
 
 <ul class="org-ul">
@@ -289,25 +338,25 @@ topics will be <i>lightly</i> covered:
 </div>
 </div>
 
-<div id="outline-container-org063d7a5" class="outline-4">
-<h4 id="org063d7a5">Objectives</h4>
-<div class="outline-text-4" id="text-org063d7a5">
+<div id="outline-container-org2a3a5c7" class="outline-4">
+<h4 id="org2a3a5c7">Objectives</h4>
+<div class="outline-text-4" id="text-org2a3a5c7">
 <ol class="org-ol">
-<li>Know the basic terminology and operations of sets and logic,
-functions and relations, combinatorics and probability, number
-theory and practice, trees and graphs, and languages and grammars.</li>
+<li>Know the basic terminology and operations of sets and logic, functions and
+relations, combinatorics and probability, number theory and practice, trees
+and graphs, and languages and grammars.</li>
 <li>Demonstrate logical reasoning through solving problems.</li>
 <li>Interpret the meaning of mathematical statements in the context of
 real-world applications.</li>
 <li>Think like a mathematician by making good connections.</li>
-<li>Learn basic functional programming by way of lisp, reading and
-writing lisp code.</li>
+<li>Learn basic functional programming by way of lisp, reading and writing lisp
+code.</li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org7067816" class="outline-4">
-<h4 id="org7067816">Prerequisite</h4>
-<div class="outline-text-4" id="text-org7067816">
+<div id="outline-container-orge8dae62" class="outline-4">
+<h4 id="orge8dae62">Prerequisite</h4>
+<div class="outline-text-4" id="text-orge8dae62">
 <p>
 You must have successfully completed the following course:
 </p>
@@ -318,11 +367,11 @@ You must have successfully completed the following course:
 </div>
 </div>
 
-<div id="outline-container-orgb7eb3ad" class="outline-4">
-<h4 id="orgb7eb3ad">Required Text</h4>
-<div class="outline-text-4" id="text-orgb7eb3ad">
+<div id="outline-container-orge7f431e" class="outline-4">
+<h4 id="orge7f431e">Required Text</h4>
+<div class="outline-text-4" id="text-orge7f431e">
 <p>
-<a href="https://rickneff.github.io/metaphors-be-with-you.html"><i>Metaphors Be With You: A Tireless Work on Play on Words</i></a>
+<a href="metaphors-be-with-you.html"><i>Metaphors Be With You: A Tireless Work on Play on Words</i></a>
 </p>
 
 <p>
@@ -330,34 +379,54 @@ You must have successfully completed the following course:
 </p>
 </div>
 </div>
-<div id="outline-container-org151c602" class="outline-4">
-<h4 id="org151c602">Requirements</h4>
-<div class="outline-text-4" id="text-org151c602">
+<div id="outline-container-org95f93d9" class="outline-4">
+<h4 id="org95f93d9">Requirements</h4>
+<div class="outline-text-4" id="text-org95f93d9">
 <p>
 You are required to&#x2026;
 </p>
+
 <ul class="org-ul">
 <li>attend class, as attendance and participation factor heavily into your
 grade.</li>
-<li>read assigned portions of the course materials, and come to class
-prepared to discuss and deepen your understanding of selected topics.</li>
-<li>keep a learning journal (your <i>workbook</i>) where you will put your answers to
-homework assignments, and a brief report on what you are learning.</li>
+<li>read assigned portions of the course materials <b>before</b> the class meeting
+when they will be discussed.</li>
+<li>take &ldquo;prepare&rdquo; in-class quizzes.</li>
+<li>do &ldquo;teach one another&rdquo; in-class exercises.</li>
+<li>do weekly &ldquo;ponder and prove&rdquo; assignments to deepen your understanding of
+selected topics.</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org52114dd" class="outline-4">
-<h4 id="org52114dd">Assignments</h4>
-<div class="outline-text-4" id="text-org52114dd">
+<div id="outline-container-org224bf25" class="outline-4">
+<h4 id="org224bf25">Assessments</h4>
+<div class="outline-text-4" id="text-org224bf25">
+<p>
+There will be weekly &ldquo;preparation assessment&rdquo; quizzes that you will take
+before or during class. These will be on any current or previously discussed
+course content, to encourage steady knowledge accumulation and retention.
+</p>
+
+<p>
+In-class exercises are described below, but the importance of the &ldquo;teach one
+another&rdquo; component cannot be overstated. This is one reason attendance is
+mandatory.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgeca3381" class="outline-4">
+<h4 id="orgeca3381">Assignments</h4>
+<div class="outline-text-4" id="text-orgeca3381">
 <p>
 Homework assignments are of three types: Exercises, Problems, and Puzzles.
 </p>
 </div>
 
-<div id="outline-container-org8893f05" class="outline-5">
-<h5 id="org8893f05">Exercises</h5>
-<div class="outline-text-5" id="text-org8893f05">
+<div id="outline-container-orgd0bf6ac" class="outline-5">
+<h5 id="orgd0bf6ac">Exercises</h5>
+<div class="outline-text-5" id="text-orgd0bf6ac">
 <p>
 Exercises are individual and group learning activities that will require
 either a small amount of preparation before class, or participation during
@@ -367,9 +436,9 @@ of class may also be required.
 </div>
 </div>
 
-<div id="outline-container-orgef3adeb" class="outline-5">
-<h5 id="orgef3adeb">Problems</h5>
-<div class="outline-text-5" id="text-orgef3adeb">
+<div id="outline-container-orgc6a5110" class="outline-5">
+<h5 id="orgc6a5110">Problems</h5>
+<div class="outline-text-5" id="text-orgc6a5110">
 <p>
 Problems are weightier, more challenging assignments that invite you to
 explore in more depth certain topics in discrete mathematics, as well as
@@ -378,9 +447,9 @@ increase your lisp/functional programming prowess.
 </div>
 </div>
 
-<div id="outline-container-orgd7a5577" class="outline-5">
-<h5 id="orgd7a5577">Puzzles</h5>
-<div class="outline-text-5" id="text-orgd7a5577">
+<div id="outline-container-orgb825b6c" class="outline-5">
+<h5 id="orgb825b6c">Puzzles</h5>
+<div class="outline-text-5" id="text-orgb825b6c">
 <p>
 Puzzles are like problems, only with another added measure of difficulty that
 will require even more ingenuity, deep thought and persistent effort to
@@ -392,49 +461,67 @@ of the problem may be obscure, indirect or encoded somehow.
 </div>
 </div>
 
-<div id="outline-container-org18e81e3" class="outline-4">
-<h4 id="org18e81e3">Grading</h4>
-<div class="outline-text-4" id="text-org18e81e3">
-<p>
-At the beginning of the semester you will choose the grade you want to strive
-for, and each week you will justify whether your learning is in line with that
-grade. Please acquaint yourself with the <a href="http://www.byui.edu/student-records/grades/grading-system">BYU-Idaho Grading System</a> to aid you
-in your self-assessment.
-</p>
+<div id="outline-container-org626653f" class="outline-4">
+<h4 id="org626653f">Grading</h4>
+<div class="outline-text-4" id="text-org626653f">
 </div>
-
-<div id="outline-container-orgd5bd68a" class="outline-5">
-<h5 id="orgd5bd68a">Grade Category Weighting</h5>
-<div class="outline-text-5" id="text-orgd5bd68a">
+<div id="outline-container-orgb479f48" class="outline-5">
+<h5 id="orgb479f48">Grade Category Weighting</h5>
+<div class="outline-text-5" id="text-orgb479f48">
 <ul class="org-ul">
-<li>Attendance and Participation: 30%
+<li>Prepare and Teach Exercises+: 30%
 <ul class="org-ul">
+<li>This includes Attendance and Participation.</li>
 <li>Each unexcused absence will incur a 5% penalty. If you are absent six
 times you will fail the class.</li>
-<li>You must bring a laptop or other Internet-connectable (and tools ready)
+<li>If you are tardy (which means coming in after the prayer has begun) three
+times, that counts as one absence.</li>
+<li>You must bring a laptop or other Internet-connectable (and tools-ready)
 device to each class meeting.</li>
 </ul></li>
-<li>Workbook: 70%</li>
+<li>Ponder and Prove Assignments: 70%</li>
 </ul>
 </div>
 </div>
+
+<div id="outline-container-org4ccb881" class="outline-5">
+<h5 id="org4ccb881">Grade Calculating</h5>
+<div class="outline-text-5" id="text-org4ccb881">
+<p>
+Your weighted percentage will determine your final grade in a reasonably
+standard way, as computed in a to-be-revealed way.
+</p>
 </div>
 </div>
 
-<div id="outline-container-orga3a858b" class="outline-3">
-<h3 id="orga3a858b">Schedule</h3>
-<div class="outline-text-3" id="text-orga3a858b">
+<div id="outline-container-orga3296d6" class="outline-5">
+<h5 id="orga3296d6">Late Policy</h5>
+<div class="outline-text-5" id="text-orga3296d6">
 <p>
-Reading <i>the book</i> is a regular activity you are tasked with. There are three
+Work is due as stated in the schedule. Late work is accepted <b>only if</b> the
+reason is extraordinary, and acceptance is reached through private and
+prolonged negotiation. And you must come talk to me in person &#x2014; NOT by
+email, nor any other means of communication.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org35f9862" class="outline-3">
+<h3 id="org35f9862">Schedule</h3>
+<div class="outline-text-3" id="text-org35f9862">
+<p>
+Reading the book is a regular activity you are tasked with. There are three
 main sections and essentially three months (12 full weeks) in the semester.
 That&rsquo;s one main section per month, or about one subsection every week. You are
-welcome to read ahead (but don&rsquo;t get behind) and work
-exercises/problems/puzzles at your own pace, but answer keys will be revealed
-only after the &ldquo;due date/time&rdquo; (typically Saturdays at 6:00 pm) has passed.
+welcome to read ahead and work exercises/problems/puzzles at your own pace,
+but don&rsquo;t get behind!
 </p>
 
 <p>
-Here&rsquo;s a more detailed schedule:
+More details will be available in each week&rsquo;s course files, but here&rsquo;s an
+outline:
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -451,14 +538,14 @@ Here&rsquo;s a more detailed schedule:
 <tr>
 <th scope="col" class="org-right">Week</th>
 <th scope="col" class="org-left">Reading</th>
-<th scope="col" class="org-left">Exercises/Problems/Puzzles (EPP)</th>
+<th scope="col" class="org-left">Exercises/Problems/Puzzles (EPPs)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="org-right">00</td>
 <td class="org-left">&lt;ABC</td>
-<td class="org-left">CRC DGZ CHJ DOK UJF</td>
+<td class="org-left">CRC DGZ CHJ DOK CJF DZB</td>
 </tr>
 
 <tr>
@@ -493,7 +580,7 @@ Here&rsquo;s a more detailed schedule:
 
 <tr>
 <td class="org-right">03</td>
-<td class="org-left">&#xa0;</td>
+<td class="org-left">DEF</td>
 <td class="org-left">TOJ WRU TOL WZO TOU WYH TLI WPI TSD WTM TTV WUZ WZM TUK WVQ</td>
 </tr>
 
@@ -570,12 +657,6 @@ Here&rsquo;s a more detailed schedule:
 </tr>
 
 <tr>
-<td class="org-right">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">Upcatching and Thanksgiving</td>
-</tr>
-
-<tr>
 <td class="org-right">11</td>
 <td class="org-left">VWX</td>
 <td class="org-left">HST KDB HTC ABR KWD HRR KEO HMO HIJ KLE HAB KOV HBT AGA KNF</td>
@@ -598,21 +679,15 @@ Here&rsquo;s a more detailed schedule:
 <td class="org-left">YZ@</td>
 <td class="org-left">PFA BGT NGI NLR BSP NBO PBI BJO NKY BMI</td>
 </tr>
-
-<tr>
-<td class="org-right">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">Upcatching and Finalstaking (in your other classes &#x2014; not this one!)</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org1d44a99" class="outline-2">
-<h2 id="org1d44a99">Tools</h2>
-<div class="outline-text-2" id="text-org1d44a99">
+<div id="outline-container-org27a21f0" class="outline-2">
+<h2 id="org27a21f0">Tools</h2>
+<div class="outline-text-2" id="text-org27a21f0">
 <p>
 Regarding tools in general, here&rsquo;s a thought by Howard Rheingold from his
 book, <i>They Have A Word For It</i>:
@@ -643,19 +718,19 @@ a steady, reliable Internet connection (use the BYUI WiFi, <i>not</i> BYUI Visit
 to be successful.
 </p>
 </div>
-<div id="outline-container-org4fa756b" class="outline-3">
-<h3 id="org4fa756b">Windows</h3>
-<div class="outline-text-3" id="text-org4fa756b">
+<div id="outline-container-org7926e74" class="outline-3">
+<h3 id="org7926e74">Windows</h3>
+<div class="outline-text-3" id="text-org7926e74">
 <p>
 64-bit only. If you do not have 64-bit Windows, please get it!
 </p>
 </div>
-<div id="outline-container-orgf011a8a" class="outline-4">
-<h4 id="orgf011a8a">Git</h4>
-<div class="outline-text-4" id="text-orgf011a8a">
+<div id="outline-container-org79938e6" class="outline-4">
+<h4 id="org79938e6">Git</h4>
+<div class="outline-text-4" id="text-org79938e6">
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> Install Git for Windows:
-<a href="https://github.com/git-for-windows/git/releases/download/v2.14.1.windows.1/Git-2.14.1-64-bit.exe">https://github.com/git-for-windows/git/releases/download/v2.14.1.windows.1/Git-2.14.1-64-bit.exe</a>
+<a href="https://github.com/git-for-windows/git/releases/download/v2.15.1.windows.2/Git-2.15.1.2-64-bit.exe">https://github.com/git-for-windows/git/releases/download/v2.15.1.windows.2/Git-2.15.1.2-64-bit.exe</a>
 Or less directly, if you want to have a fuller experience, start at:
 <a href="https://git-for-windows.github.io/">https://git-for-windows.github.io/</a>
 <img src="images/git-download-windows.png" alt="git-download-windows.png" /></li>
@@ -664,30 +739,42 @@ defaults and then click Install.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc108864" class="outline-4">
-<h4 id="orgc108864">Emacs</h4>
-<div class="outline-text-4" id="text-orgc108864">
-</div><div id="outline-container-orgf0bae11" class="outline-5">
-<h5 id="orgf0bae11">Set HOME Environment Variable</h5>
-<div class="outline-text-5" id="text-orgf0bae11">
+<div id="outline-container-org0e1a5dd" class="outline-4">
+<h4 id="org0e1a5dd">Emacs</h4>
+<div class="outline-text-4" id="text-org0e1a5dd">
+</div>
+<div id="outline-container-org9de8f19" class="outline-5">
+<h5 id="org9de8f19">Set HOME Environment Variable</h5>
+<div class="outline-text-5" id="text-org9de8f19">
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> Bring up the Windows Command Shell (cmd.exe) by pressing the &ldquo;Windows&rdquo;
 key (the one with the Windows logo on it) and, while holding that key down,
 typing <code>R</code> to open the <code>Run</code> dialog and entering <code>cmd</code>.</li>
-<li class="off"><code>[&#xa0;]</code> Enter the following command (replacing <i>uname</i> with your username first):</li>
+<li class="off"><code>[&#xa0;]</code> Enter the following command:</li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-sh">setx HOME <span style="color: #2aa198;">"C:\Users\uname"</span>
+<pre class="src src-sh">setx HOME %USERPROFILE%
 </pre>
 </div>
 <ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> Close this Command window.</li>
+<li class="off"><code>[&#xa0;]</code> Enter the following command, and make sure it doesn&rsquo;t change the
+directory you were connected to when you first opened this Command window
+(which usually is something like <code>C:\Users\uname</code> where <code>uname</code> is your
+user name).</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #268bd2;">cd</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Leave this Command window open, as you will need it for the Spacemacs
+installation steps (below).</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org290fa50" class="outline-5">
-<h5 id="org290fa50">Get 7-zip</h5>
-<div class="outline-text-5" id="text-org290fa50">
+<div id="outline-container-org18846d1" class="outline-5">
+<h5 id="org18846d1">Get 7-zip</h5>
+<div class="outline-text-5" id="text-org18846d1">
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> Download the 7-zip installer executable at <a href="http://www.7-zip.org/a/7z1701-x64.exe">http://www.7-zip.org/a/7z1701-x64.exe</a></li>
 <li class="off"><code>[&#xa0;]</code> Accept the default where to install.</li>
@@ -695,12 +782,12 @@ typing <code>R</code> to open the <code>Run</code> dialog and entering <code>cmd
 </ul>
 </div>
 </div>
-<div id="outline-container-org6865c2e" class="outline-5">
-<h5 id="org6865c2e">Use 7-zip</h5>
-<div class="outline-text-5" id="text-org6865c2e">
+<div id="outline-container-org94e6b19" class="outline-5">
+<h5 id="org94e6b19">Use 7-zip</h5>
+<div class="outline-text-5" id="text-org94e6b19">
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> Download the file from <a href="https://sourceforge.net/projects/emacsbinw64/files/latest/download">https://sourceforge.net/projects/emacsbinw64/files/latest/download</a></li>
-<li class="off"><code>[&#xa0;]</code> This will land the installation file <code>emacs-w64-25.2-O2-with-modules.7z</code> in your Downloads.</li>
+<li class="off"><code>[&#xa0;]</code> This will land the installation file <code>emacs-w64-25.3-O2-with-modules.7z</code> in your Downloads.</li>
 <li class="off"><code>[&#xa0;]</code> Open it using 7-zip, and extract it somewhere easy to find (like your
 HOME directory). It should look something like this:</li>
 </ul>
@@ -720,20 +807,18 @@ HOME directory). It should look something like this:</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org6bb26e3" class="outline-4">
-<h4 id="org6bb26e3">Spacemacs</h4>
-<div class="outline-text-4" id="text-org6bb26e3">
+<div id="outline-container-orgcbf2019" class="outline-4">
+<h4 id="orgcbf2019">Spacemacs</h4>
+<div class="outline-text-4" id="text-orgcbf2019">
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> Visit the home page and browse around: <a href="http://www.spacemacs.org/">http://www.spacemacs.org/</a></li>
-<li class="off"><code>[&#xa0;]</code> Bring up the <code>bash</code> command shell (that came with Git) by pressing the
-&ldquo;Windows&rdquo; key (the one with the Windows logo on it) and, while holding that
-key down, typing <code>R</code> to open the <code>Run</code> dialog and entering <code>bash</code>.</li>
-<li class="off"><code>[&#xa0;]</code> Enter the following command in the <code>bash</code> window. Save typing by copying
-it to your clipboard from the box below or from the Spacemacs home page, as
-shown in the following screenshot.</li>
+<li class="off"><code>[&#xa0;]</code> Enter the following command in the Command window, which you should have
+left opened (if not, see above for how to bring it back). Save typing by
+copying it to your clipboard from the box below or from the Spacemacs home
+page, <b>BUT NOT EXACTLY</b> as shown in the following screenshot.</li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-sh">git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+<pre class="src src-sh">git clone https://github.com/syl20bnr/spacemacs .emacs.d
 </pre>
 </div>
 
@@ -741,13 +826,18 @@ shown in the following screenshot.</li>
 <p><img src="images/install-spacemacs.png" alt="install-spacemacs.png" />
 </p>
 </div>
+
+<p>
+<b>NOTE THE DIFFERENCE.</b> If you copied this command from the Spacemacs home
+page, remove the <b>~/</b> before hitting Enter.
+</p>
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> Be patient, it will take a few seconds to clone this large repository to
 your computer.</li>
-<li class="off"><code>[&#xa0;]</code> Now to configure Spacemacs, enter this command in the same bash window:</li>
+<li class="off"><code>[&#xa0;]</code> Now to configure Spacemacs, enter this command in the same Command window:</li>
 </ul>
 <div class="org-src-container">
-<pre class="src src-sh">git clone https://github.com/rickneff/firstthreeodds ~/.spacemacs.d
+<pre class="src src-sh">git clone https://github.com/rickneff/firstthreeodds .spacemacs.d
 </pre>
 </div>
 <ul class="org-ul">
@@ -758,16 +848,25 @@ process will begin.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org7df39ff" class="outline-3">
-<h3 id="org7df39ff">Mac</h3>
-<div class="outline-text-3" id="text-org7df39ff">
-</div><div id="outline-container-org970978a" class="outline-4">
-<h4 id="org970978a">Git</h4>
-<div class="outline-text-4" id="text-org970978a">
+<div id="outline-container-orgcaf0a02" class="outline-3">
+<h3 id="orgcaf0a02">Mac</h3>
+<div class="outline-text-3" id="text-orgcaf0a02">
+</div>
+<div id="outline-container-org3735e8c" class="outline-4">
+<h4 id="org3735e8c">Git</h4>
+<div class="outline-text-4" id="text-org3735e8c">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> <p>
+Type <code>Command Space</code> to bring up the <i>Spotlight Search</i> box and enter
+<code>terminal</code> to open a Terminal window.
+</p>
+
 <p>
-  Git may already be installed on your Mac, but if not, when you type a <code>git</code>
-  command in a Terminal window (see below) you will see something like the
-  following:
+Git may already be installed on your Mac, but if not, when you type a <code>git</code>
+command in the Terminal window you will see something like the following:
+</p></li>
+</ul>
+<p>
 <img src="images/install-git-1.png" alt="install-git-1.png" />
 <img src="images/install-git-2.png" alt="install-git-2.png" />
 The dialog boxes in between:
@@ -778,9 +877,9 @@ The dialog boxes in between:
 </p>
 </div>
 </div>
-<div id="outline-container-org97538d0" class="outline-4">
-<h4 id="org97538d0">Emacs</h4>
-<div class="outline-text-4" id="text-org97538d0">
+<div id="outline-container-orgbbd379f" class="outline-4">
+<h4 id="orgbbd379f">Emacs</h4>
+<div class="outline-text-4" id="text-orgbbd379f">
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> Get the installer here: <a href="https://emacsformacosx.com/emacs-builds/Emacs-25.2-universal.dmg">https://emacsformacosx.com/emacs-builds/Emacs-25.2-universal.dmg</a></li>
 <li class="off"><code>[&#xa0;]</code> Install Emacs -&#x2014; but <b>DO NOT RUN IT YET</b>! The installation will start
@@ -793,13 +892,12 @@ following screenshots:</li>
 </p>
 </div>
 </div>
-<div id="outline-container-org465de33" class="outline-4">
-<h4 id="org465de33">Spacemacs</h4>
-<div class="outline-text-4" id="text-org465de33">
+<div id="outline-container-org0e34758" class="outline-4">
+<h4 id="org0e34758">Spacemacs</h4>
+<div class="outline-text-4" id="text-org0e34758">
 <ul class="org-ul">
 <li class="off"><code>[&#xa0;]</code> Visit the home page and browse around: <a href="http://www.spacemacs.org/">http://www.spacemacs.org/</a></li>
-<li class="off"><code>[&#xa0;]</code> Type <code>Command Space</code> to bring up the <i>Spotlight Search</i> box and enter
-<code>terminal</code> to open a Terminal window.</li>
+<li class="off"><code>[&#xa0;]</code> Open or select a Terminal window.</li>
 <li class="off"><code>[&#xa0;]</code> Enter the following command in the Terminal window. Save typing by copying
 it to your clipboard from the box below or from the Spacemacs home page, as
 shown in the following screenshot.</li>
@@ -830,191 +928,37 @@ installation process will begin.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org15eef26" class="outline-3">
-<h3 id="org15eef26">Both</h3>
-<div class="outline-text-3" id="text-org15eef26">
-<dl class="org-dl">
-<dt>Truth Table Generator</dt><dd><a href="https://firstthreeodds.org/javatools/TruthTableVUE.jar">Click here if you know how to use java jar files</a></dd>
-</dl>
 </div>
+<div id="outline-container-orgdf97d42" class="outline-2">
+<h2 id="orgdf97d42">Helps</h2>
+<div class="outline-text-2" id="text-orgdf97d42">
 </div>
-</div>
-<div id="outline-container-org3f13adc" class="outline-2">
-<h2 id="org3f13adc">Helps</h2>
-<div class="outline-text-2" id="text-org3f13adc">
-</div><div id="outline-container-org22b479b" class="outline-3">
-<h3 id="org22b479b"><span class="todo TODO">TODO</span> Choose Your Track</h3>
-<div class="outline-text-3" id="text-org22b479b">
-<p>
-The Course Objectives in the Syllabus have been numbered (so no longer just a
-bulleted list) and re-ordered (the old 3rd (&ldquo;Learn lisp&rdquo;) objective is now the
-last one in the list).
-</p>
-
-<p>
-When choosing which grade you are striving for, bear in mind the distinctions
-described in the <a href="http://www.byui.edu/student-records/grades/grading-system">BYU-Idaho Grading System</a>.
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Track</th>
-<th scope="col" class="org-left">Striving for an A Grade</th>
-<th scope="col" class="org-left">Striving for a B Grade</th>
-<th scope="col" class="org-left">Striving for a C Grade</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">A</td>
-<td class="org-left">Excellent Mastery of all</td>
-<td class="org-left">Excellent Mastery of all objectives,</td>
-<td class="org-left">Excellent Mastery of all</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">objectives.</td>
-<td class="org-left">except in the 5th objective substitute</td>
-<td class="org-left">but the last (5th) objective</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">for lisp any functional language, or</td>
-<td class="org-left">(So no lisp requirement ---</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">language with lambdas (C++11, Java 8,</td>
-<td class="org-left">skip any EPP that asks for an</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">JavaScript, Python, &#x2026;).</td>
-<td class="org-left">elisp solution.)</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="org-left">B</td>
-<td class="org-left">Not Applicable</td>
-<td class="org-left">Good Mastery of all but the last (5th)</td>
-<td class="org-left">Good Mastery of all but the</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">objective. (No lisp (or other functional</td>
-<td class="org-left">last two objectives. (So no</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">language) required &#x2014; solve the programming</td>
-<td class="org-left">attempt to make good connections</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">problems in the procedural/object-oriented</td>
-<td class="org-left">is required, and only the</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">language of your choice.)</td>
-<td class="org-left">problems not involving lisp.)</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="org-left">C</td>
-<td class="org-left">Not Applicable</td>
-<td class="org-left">Not Applicable</td>
-<td class="org-left">Mastery of all but the last two</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">objectives. (So no attempt to</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">make good connections is required,</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">and only the problems not</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">involving lisp.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-
-<div id="outline-container-orgf6ad99c" class="outline-3">
-<h3 id="orgf6ad99c"><span class="todo TODO">TODO</span> Read the FAQs</h3>
-<div class="outline-text-3" id="text-orgf6ad99c">
+<div id="outline-container-org3d5afff" class="outline-3">
+<h3 id="org3d5afff"><span class="todo TODO">TODO</span> Read the FAQs</h3>
+<div class="outline-text-3" id="text-org3d5afff">
 <p>
 Frequently Asked Questions (and their Answers):
 </p>
 
 <dl class="org-dl">
-<dt>Q1</dt><dd>I get an error when I try to submit my workbook. Can I just email it
-to you?</dd>
-<dt>A1</dt><dd>No. The probable reason for the error is using the static
-rickneff.github.io hosted version of the book. (It will say &ldquo;An error
-occurred! (405)&rdquo;.) Always use the dynamic firstthreeodds.org hosted
-version to turn in your work. (If you do it and go to do it again
-without Choosing a File again (because it already shows the name of
-the file you previously chose), first reload the page (or flush your
-browser&rsquo;s cache), otherwise the work you think you&rsquo;re turning in may
-not be what actually gets turned in.)</dd>
+<dt>Q1</dt><dd>Why can&rsquo;t I find this course on I-Learn?</dd>
+<dt>A1</dt><dd>This course is not on I-Learn. The course content, and your personal
+dropbox and gradebook are all served by GitHub.</dd>
 
 <dt>Q2</dt><dd>The workload for this 2-credit class seems excessive. What should I
 do?</dd>
 <dt>A2</dt><dd>Ponder the reasons you are taking this class. Are you striving to
 learn discrete math? Just here for the grade? Do you see yourself as a
-good reader, with good reading comprehension skills? Recall the
-problem (different than the EPP variety) I mentioned in my 9/19/2017
-email? Reading and understanding takes time &#x2014; is the time you spend
-doing this productive?</dd>
+good reader, with good reading comprehension skills? A pitfall some of
+you will encounter is attempting the Exercises/Problems/Puzzles (EPPs
+for short) without good comprehension of the concepts you are asked to
+explore by way of these EPPs. Many exercises should take a few
+seconds, or a few minutes, maybe up to an hour or more for some of the
+problems (OQP for example) &#x2014; <b>if you are grasping</b> what you are
+reading! If you read a sentence or a paragraph or a section, and then
+think to yourself, I have no idea what what I just read means &#x2014;
+that&rsquo;s a different kind of problem. Reading and understanding take
+time &#x2014; is the time you spend doing this productive?</dd>
 
 <dt>Q3</dt><dd>Okay, so I&rsquo;m not the most skilled reader. It takes me a long time to
 read and digest things, especially when there are so many links to
@@ -1029,8 +973,8 @@ however.</dd>
 <dt>Q4</dt><dd>How?</dd>
 <dt>A4</dt><dd>Be inquisitive. Be <b>very</b> inquisitive! Ask questions, not just of me,
 but of your classmates. Share light and knowledge you gain on your own
-(or through talking with me or Brother Williams) freely, and
-appropriately with your peers!</dd>
+(or through talking with me or my TAs) freely, and appropriately with
+your peers!</dd>
 
 <dt>Q5</dt><dd>Are we required to study in groups? I&rsquo;m not a big fan of group
 work/think.</dd>
@@ -1049,12 +993,17 @@ and we both ascend together&rdquo; phenomenon. Bad sharing/collaboration is
 copying someone else&rsquo;s work and submitting it as your own, to get
 &ldquo;credit&rdquo; for doing some assigned task, while not getting the
 understanding doing the task was meant to give you.</dd>
+
+<dt>Q8</dt><dd>Are there any tutors for this class?</dd>
+<dt>A8</dt><dd>Yes, but not through the Tutoring Center. They will be introduced to
+you soon.</dd>
 </dl>
 </div>
 </div>
-<div id="outline-container-orgd506727" class="outline-3">
-<h3 id="orgd506727"><span class="todo TODO">TODO</span> Glean What You Can From Guides and Cheat Sheets For Beginners</h3>
-<div class="outline-text-3" id="text-orgd506727">
+
+<div id="outline-container-org0f9610c" class="outline-3">
+<h3 id="org0f9610c"><span class="todo TODO">TODO</span> Glean What You Can From Guides and Cheat Sheets For Beginners</h3>
+<div class="outline-text-3" id="text-org0f9610c">
 <p>
 <a href="https://ontologicalblog.com/2016/10/14/an-absolute-beginners-guide-to-spacemacs-for-academic-writing/">https://ontologicalblog.com/2016/10/14/an-absolute-beginners-guide-to-spacemacs-for-academic-writing/</a>
 </p>
@@ -1068,91 +1017,11 @@ understanding doing the task was meant to give you.</dd>
 </p>
 </div>
 </div>
-
-<div id="outline-container-org918b0d6" class="outline-3">
-<h3 id="org918b0d6"><span class="todo TODO">TODO</span> Download a Sample Workbook</h3>
-<div class="outline-text-3" id="text-org918b0d6">
-<p>
-<a href="workbook.org">workbook.org</a>
-</p>
-
-<p>
-It&rsquo;s the start of one, at any rate. Clicking on the link will download the
-file. Please replace my name and email address with yours before proceeding.
-</p>
-
-<p>
-Note that you are <i>not</i> required to organize it in the way suggested. It just
-shows one way of many to do it.
-</p>
-</div>
-</div>
-
-<div id="outline-container-org41910a1" class="outline-3">
-<h3 id="org41910a1"><span class="todo TODO">TODO</span> Get Answers to Assignment for Week 00</h3>
-<div class="outline-text-3" id="text-org41910a1">
-<p>
-Valid keys are simple transformations of your I-Number.
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Identifier</th>
-<th scope="col" class="org-left">The key for which is your I-Number &#x2026;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">CRC</td>
-<td class="org-left">plus 195040</td>
-</tr>
-
-<tr>
-<td class="org-left">DGZ</td>
-<td class="org-left">minus 195060</td>
-</tr>
-
-<tr>
-<td class="org-left">CHJ</td>
-<td class="org-left">times 195086</td>
-</tr>
-
-<tr>
-<td class="org-left">DOK</td>
-<td class="org-left">plus 195018 (if your I-Number is even)</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">minus 195018 (if your I-Number is odd)</td>
-</tr>
-
-<tr>
-<td class="org-left">UJF</td>
-<td class="org-left">minus 195165 (if your I-Number is odd)</td>
-</tr>
-
-<tr>
-<td class="org-left">&#xa0;</td>
-<td class="org-left">plus 195165 (if your I-Number is even)</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Rick Neff</p>
-<p class="date">Created: 2017-11-16 Thu 14:35</p>
+<p class="date">Created: 2017-12-28 Thu 18:56</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
