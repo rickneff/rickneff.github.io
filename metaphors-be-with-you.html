@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-12-28 Thu 11:38 -->
+<!-- 2018-01-27 Sat 12:27 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Metaphors Be With You</title>
@@ -701,11 +701,6 @@ for the JavaScript code in this tag.
 <li><a href="#orgdcda691">VEM</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#org0626c54">Results</a></li>
-<li><a href="#orgcf30cee">Differences</a>
-<ul>
 <li><a href="#MNX">MNX</a>
 <ul>
 <li><a href="#orgaebf143">FUA</a></li>
@@ -933,7 +928,7 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#org84b6508">BCD</a></li>
 <li><a href="#org7de158d">BCF</a></li>
-<li><a href="#orgc166f19">CDF</a></li>
+<li><a href="#org8d321c7">CDF</a></li>
 <li><a href="#org8ea6a27">BDF</a></li>
 <li><a href="#KSC">KSC</a></li>
 </ul>
@@ -1236,8 +1231,8 @@ and when understood leads to starry-eyed wonder, end teaser.
 </div>
 </div>
 
-<div id="outline-container-org577f757" class="outline-4">
-<h4 id="CDF"><a id="org577f757"></a>CDF</h4>
+<div id="outline-container-orgc166f19" class="outline-4">
+<h4 id="CDF"><a id="orgc166f19"></a>CDF</h4>
 <div class="outline-text-4" id="text-CDF">
 <p>
 Last double: finishing off and rounding out this relatively small set of
@@ -1677,7 +1672,7 @@ sequence of words?
 </p>
 
 <p>
-TE TE AS CE TE WARUS SAD T TA OF AY TGS F SES AD SPS AD SEAG WAX F CABBAGES
+TE TE AS CE TE WARUS SAD T TA F AY TGS F SES AD SPS AD SEAG WAX F CABBAGES
 AD KGS AD WY TE SEA S BG T AD WETER PGS AVE WGS
 </p>
 <div></div>
@@ -2668,7 +2663,7 @@ not-further-expandable:
 </p>
 
 <p>
-<code>p and q or not r</code>
+<code>p and q or not r</code>.
 </p>
 
 <p>
@@ -2706,7 +2701,7 @@ yields
 </p>
 
 <p>
-<code>true and (false or not true)</code>
+<code>true and (false or not true)</code>.
 </p>
 
 <p>
@@ -3802,7 +3797,6 @@ Justify where \(p = x \in A, q = x \in B, r = x \in C\):
 </tr>
 </tbody>
 </table>
-
 <div></div>
 
 </div>
@@ -3948,7 +3942,7 @@ relationship within a Universal set U:
 
 
 <div class="figure">
-<p><img src="img/fig-set-subset-conditional.png" alt="fig-set-subset-conditional.png" />
+<p><img src="file:///Users/rneff/tmp/fig-set-subset-conditional.png" alt="fig-set-subset-conditional.png" />
 </p>
 </div>
 
@@ -4437,7 +4431,6 @@ Use DeMorgan&rsquo;s Laws to find the negations of the propositions:
 <p>
 Show that \((p \leftrightarrow q) \wedge (p \leftrightarrow r)\) and \(p \leftrightarrow (q \wedge r)\) are logically equivalent.
 </p>
-
 <div></div>
 
 </div>
@@ -14154,136 +14147,8 @@ Compare the faster of <code>gcdi</code> and <code>gcd</code> with this recursive
 <div></div>
 
 </div>
-<p>
-:ANSWER:
-  Verifying the correctness of the iterative implementation of Euclid&rsquo;s algorithm:
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #262626;">(</span>= <span style="color: #077707;">(</span>gcdi <span style="color: #259ea2;">12586269025</span> <span style="color: #259ea2;">7778742049</span><span style="color: #077707;">)</span> <span style="color: #077707;">(</span>gcd <span style="color: #259ea2;">12586269025</span> <span style="color: #259ea2;">7778742049</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span>
-</pre>
-</div>
-
-<p>
-Comparing the <code>gcdi</code> function with the built-in <code>gcd</code> function.
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">defun</span> <span style="color: #2c53ca;">test-gcdi</span> <span style="color: #077707;">()</span>
-  <span style="color: #077707;">(</span><span style="color: #2020cc; font-weight: bold;">let</span> <span style="color: #ab9c3a;">(</span>start end delta<span style="color: #ab9c3a;">)</span>
-    <span style="color: #ab9c3a;">(</span>setq start <span style="color: #358d8d;">(</span>float-time<span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span>
-    <span style="color: #ab9c3a;">(</span>loop repeat <span style="color: #259ea2;">1000000</span> do <span style="color: #358d8d;">(</span>gcdi <span style="color: #259ea2;">12586269025</span> <span style="color: #259ea2;">7778742049</span><span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span>
-    <span style="color: #ab9c3a;">(</span>setq end <span style="color: #358d8d;">(</span>float-time<span style="color: #358d8d;">)</span>
-          delta <span style="color: #358d8d;">(</span>- end start<span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span>
-    <span style="color: #ab9c3a;">(</span>format <span style="color: #fa5151;">"%2.2f seconds."</span> delta<span style="color: #ab9c3a;">)</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span>
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #262626;">(</span>test-gcdi<span style="color: #262626;">)</span>
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">defun</span> <span style="color: #2c53ca;">test-gcd</span> <span style="color: #077707;">()</span>
-  <span style="color: #077707;">(</span><span style="color: #2020cc; font-weight: bold;">let</span> <span style="color: #ab9c3a;">(</span>start end delta<span style="color: #ab9c3a;">)</span>
-    <span style="color: #ab9c3a;">(</span>setq start <span style="color: #358d8d;">(</span>float-time<span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span>
-    <span style="color: #ab9c3a;">(</span>loop repeat <span style="color: #259ea2;">1000000</span> do <span style="color: #358d8d;">(</span>gcd <span style="color: #259ea2;">12586269025</span> <span style="color: #259ea2;">7778742049</span><span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span>
-    <span style="color: #ab9c3a;">(</span>setq end <span style="color: #358d8d;">(</span>float-time<span style="color: #358d8d;">)</span>
-          delta <span style="color: #358d8d;">(</span>- end start<span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span>
-    <span style="color: #ab9c3a;">(</span>format <span style="color: #fa5151;">"%2.2f seconds."</span> delta<span style="color: #ab9c3a;">)</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span>
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #262626;">(</span>test-gcd<span style="color: #262626;">)</span>
-</pre>
-</div>
-
-<p>
-The built-in version is almost an order of magnitude faster.
-</p>
-
-<p>
-Comparing with the recursive version:
-</p>
-<div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">defun</span> <span style="color: #2c53ca;">test-gcdr</span> <span style="color: #077707;">()</span>
-  <span style="color: #077707;">(</span><span style="color: #2020cc; font-weight: bold;">let</span> <span style="color: #ab9c3a;">(</span>start end delta<span style="color: #ab9c3a;">)</span>
-    <span style="color: #ab9c3a;">(</span>setq start <span style="color: #358d8d;">(</span>float-time<span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span>
-    <span style="color: #ab9c3a;">(</span>loop repeat <span style="color: #259ea2;">1000000</span> do <span style="color: #358d8d;">(</span>gcdr <span style="color: #259ea2;">12586269025</span> <span style="color: #259ea2;">7778742049</span><span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span>
-    <span style="color: #ab9c3a;">(</span>setq end <span style="color: #358d8d;">(</span>float-time<span style="color: #358d8d;">)</span>
-          delta <span style="color: #358d8d;">(</span>- end start<span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span>
-    <span style="color: #ab9c3a;">(</span>format <span style="color: #fa5151;">"%2.2f seconds."</span> delta<span style="color: #ab9c3a;">)</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span>
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-emacs-lisp"><span style="color: #262626;">(</span>test-gcdr<span style="color: #262626;">)</span>
-</pre>
 </div>
 </div>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org0626c54" class="outline-3">
-<h3 id="org0626c54">Results</h3>
-<div class="outline-text-3" id="text-org0626c54">
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-right" />
-
-<col  class="org-left" />
-
-<col  class="org-right" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">function</th>
-<th scope="col" class="org-right">iterations</th>
-<th scope="col" class="org-left">time</th>
-<th scope="col" class="org-right">rank</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">gcd</td>
-<td class="org-right">1000000</td>
-<td class="org-left">2.36 sec</td>
-<td class="org-right">1</td>
-</tr>
-
-<tr>
-<td class="org-left">gcdr</td>
-<td class="org-right">1000000</td>
-<td class="org-left">11.38 sec</td>
-<td class="org-right">2</td>
-</tr>
-
-<tr>
-<td class="org-left">gcdi</td>
-<td class="org-right">1000000</td>
-<td class="org-left">14.23 sec</td>
-<td class="org-right">3</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-
-<div id="outline-container-orgcf30cee" class="outline-3">
-<h3 id="orgcf30cee">Differences</h3>
-<div class="outline-text-3" id="text-orgcf30cee">
-<p>
-The <code>gcd</code> and <code>gcdi</code> functions also differ in arity:
-</p>
-<ul class="org-ul">
-<li><code>gcd</code> is polyadic &#x2014; it takes any number of (including zero) arguments.</li>
-<li><code>gcdi</code> is biadic, or binary &#x2014; it takes exactly two arguments.</li>
-</ul>
 </div>
 
 <div id="outline-container-orgde84140" class="outline-4">
@@ -23659,9 +23524,9 @@ green triangle &#x2014; BCD, BCF or CDF.&rdquo;
 </div>
 </div>
 
-<div id="outline-container-orgc166f19" class="outline-5">
-<h5 id="orgc166f19">CDF</h5>
-<div class="outline-text-5" id="text-orgc166f19">
+<div id="outline-container-org8d321c7" class="outline-5">
+<h5 id="org8d321c7">CDF</h5>
+<div class="outline-text-5" id="text-org8d321c7">
 
 <div class="figure">
 <p><img src="img/fig-complete-k6-4.png" alt="Green Triangle =CDF=" title="Green Triangle =CDF=" />
