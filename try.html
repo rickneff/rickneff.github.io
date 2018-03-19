@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Try</title>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/reveal.js/3.0.0/css/theme/moon.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/reveal.js/3.0.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Try</h1><p class="date">Created: 2018-03-19 Mon 10:57</p>
+</section>
+
+<section>
+<section id="slide-org648fb16">
+<h2 id="org648fb16">Introduction</h2>
+<p>
+This is a sample presentation of a setup and workflow.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org82e84a5">
+<h2 id="org82e84a5">Steps to Success</h2>
+<div class="outline-text-2" id="text-org82e84a5">
+</div>
+</section>
+<section id="slide-org0fe1335">
+<h3 id="org0fe1335">Try</h3>
+<ul>
+<li><a href="(org-sbe%20generic-setup)">Generic Setup</a></li>
+<li><a href="(org-sbe%20specific-setup)">Specific Setup</a></li>
+<li><a href="(org-sbe%20initialize-variables)">Initialize Variables</a></li>
+<li><a href="(insert-dance-table-to-fill-out)">Insert Dance Table To Fill Out</a></li>
+
+</ul>
+<table id="org68dd575" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-right">1</th>
+<th scope="col" class="org-right">2</th>
+<th scope="col" class="org-right">3</th>
+<th scope="col" class="org-right">4</th>
+<th scope="col" class="org-right">5</th>
+<th scope="col" class="org-right">6</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">A</td>
+<td class="org-right">127</td>
+<td class="org-right">539</td>
+<td class="org-right">837</td>
+<td class="org-right">796</td>
+<td class="org-right">455</td>
+<td class="org-right">603</td>
+</tr>
+
+<tr>
+<td class="org-left">B</td>
+<td class="org-right">539</td>
+<td class="org-right">837</td>
+<td class="org-right">455</td>
+<td class="org-right">796</td>
+<td class="org-right">603</td>
+<td class="org-right">127</td>
+</tr>
+
+<tr>
+<td class="org-left">C</td>
+<td class="org-right">455</td>
+<td class="org-right">603</td>
+<td class="org-right">127</td>
+<td class="org-right">837</td>
+<td class="org-right">796</td>
+<td class="org-right">539</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<a href="(set-dance-table)">Set Dance Table (when ready)</a>
+</p>
+
+</section>
+<section id="slide-org84d7da2">
+<h3 id="org84d7da2">Try Harder</h3>
+<div class="org-src-container">
+
+<pre  class="src src-elisp"><span style="color: #262626;">(</span>build-random-dance-table<span style="color: #262626;">)</span>
+</pre>
+</div>
+
+</section>
+<section id="slide-org2a1b637">
+<h3 id="org2a1b637">Try Smarter</h3>
+<ul>
+<li><a href="(insert-dance-table-to-compute-with)">Insert Dance Table To Compute With</a></li>
+
+</ul>
+<table id="org7f00b07" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">127</td>
+<td class="org-right">1</td>
+<td class="org-right">6</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-right">455</td>
+<td class="org-right">5</td>
+<td class="org-right">3</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">539</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-right">6</td>
+</tr>
+
+<tr>
+<td class="org-right">603</td>
+<td class="org-right">6</td>
+<td class="org-right">5</td>
+<td class="org-right">2</td>
+</tr>
+
+<tr>
+<td class="org-right">796</td>
+<td class="org-right">4</td>
+<td class="org-right">4</td>
+<td class="org-right">5</td>
+</tr>
+
+<tr>
+<td class="org-right">837</td>
+<td class="org-right">3</td>
+<td class="org-right">2</td>
+<td class="org-right">4</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-org1820089">
+<h2 id="org1820089">Conclusion</h2>
+<div class="outline-text-2" id="text-org1820089">
+</div>
+</section>
+<section id="slide-org59297bd">
+<h3 id="org59297bd">Said Yoda to Luke</h3>
+<p>
+Try not! Do or do not. There is no try.
+</p>
+</section>
+<section id="slide-orgfae9664">
+<h3 id="orgfae9664">Do Good</h3>
+<p>
+The ultimate formula for success!
+</p>
+
+<p>
+<a href="(call-interactively 'org-reveal-export-to-html-and-browse)">Reveal to Browser</a>
+</p>
+
+<p>
+<a href="(publish-results)">Publish Results</a>
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/head.min.js"></script>
+<script src="https://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>
