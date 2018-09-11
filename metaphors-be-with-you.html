@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-05-02 Wed 16:38 -->
+<!-- 2018-09-11 Tue 08:09 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Metaphors Be With You</title>
@@ -753,6 +753,10 @@ for the JavaScript code in this tag.
 <li><a href="#org84dde1a">GYI</a></li>
 </ul>
 </li>
+<li><a href="#orgc809732">Rephrase</a></li>
+<li><a href="#orgd681834">Approach</a></li>
+<li><a href="#org2315837">Solution</a></li>
+<li><a href="#org78e6542">Proof</a></li>
 <li><a href="#PQW">PQW</a>
 <ul>
 <li><a href="#org43759bb">XFO</a></li>
@@ -850,6 +854,7 @@ for the JavaScript code in this tag.
 <li><a href="#VWF">VWF</a>
 <ul>
 <li><a href="#orgd40301e">HTC</a></li>
+<li><a href="#org670b522">KPS</a></li>
 <li><a href="#orgc1ec7b7">ABR</a></li>
 </ul>
 </li>
@@ -929,7 +934,7 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#org49a4aad">BCD</a></li>
 <li><a href="#org7274b04">BCF</a></li>
-<li><a href="#org0f75341">CDF</a></li>
+<li><a href="#org432bbbc">CDF</a></li>
 <li><a href="#orgd5a7e9a">BDF</a></li>
 <li><a href="#KSC">KSC</a></li>
 </ul>
@@ -1231,8 +1236,8 @@ and when understood leads to starry-eyed wonder, end teaser.
 </div>
 </div>
 
-<div id="outline-container-org6aa19ef" class="outline-4">
-<h4 id="CDF"><a id="org6aa19ef"></a>CDF</h4>
+<div id="outline-container-org56c64af" class="outline-4">
+<h4 id="CDF"><a id="org56c64af"></a>CDF</h4>
 <div class="outline-text-4" id="text-CDF">
 <p>
 Last double: finishing off and rounding out this relatively small set of
@@ -1686,9 +1691,13 @@ AD GS AD WY TE SEA S BG T AD WETER PGS AVE WGS
 <div class="outline-text-5" id="text-org2c32cb7">
 <div class="note">
 <p>
-What English word has the smallest vowel-consonant-ratio (VCR)? For example,
-the VCRs of the words (including the TLA) in the previous sentence are 1/3,
-2/5, 1/3, 1/2, 1/2, 1/3, 2/3, 1/2, 3/2, and 0/3.
+Let \(n / 0\) be infinity, for any positive integer <i>n</i>.
+</p>
+
+<p>
+What English word has the largest <i>finite</i> consonant-vowel-ratio (CVR)? For
+example, the CVRs of the words (including the TLA) in the previous sentence
+are 3:1, 5:2, 3:1, 2:1, 2:1, 5:2, 1:1, 2:1, 3:2, 2:3, and infinity (3:0).
 </p>
 <div></div>
 
@@ -3898,8 +3907,8 @@ saying: <i>a</i> &le; <i>b</i> &and; <i>b</i> &le; <i>a</i> &rarr; <i>a</i> = <i
 analogy that is helpful is to see the subset relation as a
 &ldquo;less-than-or-equal-to&rdquo; relation, which mirrors the similarity of the symbols,
 so \(\mathsf{A} \subseteq \mathsf{B} \Leftrightarrow \mathsf{a} \le \mathsf{b}\). Not just
-analogously, but in actuality thus it is if <i>a</i> denotes the <i>size</i> (number of
-elements of) <i>A</i>, written as <i>a</i> = &vert; <i>A</i> &vert; (note the overloaded use of the
+analogously, but in actuality thus it is if <i>a</i> denotes the <i>size of</i> (number
+of elements in) <i>A</i>, written as <i>a</i> = &vert; <i>A</i> &vert; (note the overloaded use of the
 vertical bars), and ditto for <i>b</i> = &vert; <i>B</i> &vert;.
 </p>
 </div>
@@ -4224,7 +4233,7 @@ Construct a truth table for (p &rarr; q) &rarr; (q &rarr; r) &rarr; (r &rarr; s)
 <div class="outline-text-5" id="text-orgf3fff1d">
 <div class="note">
 <p>
-Construct a truth table for (p &or; q) &and; (&not; p &or; r) &rarr; (q v r).
+Construct a truth table for (p &or; q) &and; (&not; p &or; r) &rarr; (q &or; r).
 </p>
 
 <div></div>
@@ -4372,7 +4381,7 @@ true, \(\mathbf{0}\) = false:
 <ol class="org-ol">
 <li>\(p \land \mathbf{1} \equiv p\) (idempotence)</li>
 <li>\(p \lor \mathbf{0} \equiv p\) (idempotence)</li>
-<li>\(\lnot \lnot p \equiv p\) (double negation)</li>
+<li>\(\neg \neg p \equiv p\) (double negation)</li>
 <li>\(p \land \mathbf{0} \equiv \mathbf{0}\) (absorption)</li>
 <li>\(p \lor \mathbf{1} \equiv \mathbf{1}\) (absorption)</li>
 </ol>
@@ -4784,10 +4793,17 @@ sympathetic.
 </p>
 
 <p>
-&ldquo;I mostly get the logical connectives, which why we don&rsquo;t just call them
+&ldquo;I mostly get the logical connectives, but why we don&rsquo;t just call them
 operators is what I don&rsquo;t get. They&rsquo;re the same as the logical operators in
-JavaScript, and &#x2026;&rdquo; Abu interrupted Ila&rsquo;s rant. &ldquo;What&rsquo;s JavaScript?&rdquo;, he
-asked. &ldquo;It&rsquo;s a programming language &#x2014; the one I mostly program in. Anyway,
+JavaScript, and using a different word &#x2026;&rdquo;
+</p>
+
+<p>
+Abu interrupted Ila&rsquo;s rant. &ldquo;What&rsquo;s JavaScript?&rdquo;, he asked.
+</p>
+
+<p>
+&ldquo;It&rsquo;s a programming language &#x2014; the one I mostly program in. Anyway,
 what I also don&rsquo;t get is the conditional operator. It just seems illogical
 that it&rsquo;s defined the way it is. How did Til put it?&rdquo;
 </p>
@@ -4879,22 +4895,45 @@ do you think he was going to explain it some more?&rdquo;
 </p>
 
 <p>
-&ldquo;He will if we ask, but I don&rsquo;t want to ask him &#x2014; will you?&rdquo; said Ila. &ldquo;No
-problem,&rdquo; said Abu. &ldquo;I don&rsquo;t mind appearing ignorant, because appearances
-aren&rsquo;t deceiving in my case &#x2014; I really AM ignorant!&rdquo; &ldquo;Well, I hate asking
-dumb questions,&rdquo; said Ila. &ldquo;Never been a problem for me,&rdquo; said Abu with a slow
-exhalation.
+&ldquo;He will if we ask, but I don&rsquo;t want to ask him &#x2014; will you?&rdquo; said Ila.
+</p>
+
+<p>
+&ldquo;No problem,&rdquo; said Abu. &ldquo;I don&rsquo;t mind appearing ignorant, because appearances
+aren&rsquo;t deceiving in my case &#x2014; I really <i>am</i> ignorant!&rdquo;
+</p>
+
+<p>
+&ldquo;Well, I hate asking dumb questions,&rdquo; said Ila.
+</p>
+
+<p>
+&ldquo;Never been a problem for me,&rdquo; said Abu with a slow exhalation.
 </p>
 
 <p>
 Ila voiced her other main complaint. &ldquo;And I&rsquo;m still floored that he said, go
-learn lisp, it will do you good.&rdquo; Abu nodded. &ldquo;I agree that seems like a lot
-to ask, but I&rsquo;m enjoying the challenge. Lisp is cool!&rdquo; Ila sighed. &ldquo;It
-certainly lives up to its name: Lots of Irritatingly Silly Parentheses, and if
-you ask me, it&rsquo;s just confusing.&rdquo; Abu smiled. &ldquo;I found this <a href="#orgc92acf0">xkcd comic that
-compares lisp</a> to a Jedi&rsquo;s lightsaber. See, I <i>got</i> the Star Wars reference.
-And by the way, just to show you what planet I&rsquo;m from, I went and watched
-Aladdin. So let&rsquo;s see, Chewbacca is Abu to Han Solo&rsquo;s Aladdin, right!&rdquo;
+learn lisp, it will do you good!&rdquo;
+</p>
+
+<p>
+Abu nodded. &ldquo;I agree that seems like a lot to ask, but I&rsquo;m enjoying the
+challenge. Lisp is cool!&rdquo;
+</p>
+
+<p>
+Ila sighed. &ldquo;It certainly lives up to its name: Lots of Irritatingly Silly
+Parentheses, and if you ask me, it&rsquo;s just confusing.&rdquo;
+</p>
+
+<p>
+Abu smiled. &ldquo;I found this <a href="#orgc92acf0">xkcd comic that compares lisp</a> to a Jedi&rsquo;s
+lightsaber. See, I <i>got</i> the Star Wars reference. And by the way, just to show
+you what planet I&rsquo;m from, I went and watched Aladdin. So let&rsquo;s see, Chewbacca
+is Abu to Han Solo&rsquo;s Aladdin, right!&rdquo;
+</p>
+
+<p>
 &ldquo;Hardly,&rdquo; said Ila. &ldquo;So you saw the movie and you still want us to call you
 Abu?!&rdquo;
 </p>
@@ -4998,9 +5037,12 @@ form!&rdquo;
 </p>
 
 <p>
-Now it was Abu&rsquo;s turn to be puzzled. He said, &ldquo;Wait, why nil?&rdquo; Ila rushed on,
-&ldquo;It just means that your program can be self-contained, with <b>nil</b> extra
-environment necessary to run. Just let it go, let it run!&rdquo;
+Now it was Abu&rsquo;s turn to be puzzled. He said, &ldquo;Wait, why nil?&rdquo; 
+</p>
+
+<p>
+Ila rushed on, &ldquo;It just means that your program can be self-contained, with
+<b>nil</b> extra environment needed to run. Just let it go, let it run!&rdquo;
 </p>
 </div>
 </div>
@@ -6262,35 +6304,42 @@ For example, the inverse of 4x is &frac14; x, and the inverse of x<sup>2</sup> i
 <div class="info">
 <p>
 The <b>composition</b> of two functions \(f\) and \(g\), denoted \(f \circ g\), is the
-operation of applying \(g\) to the result of applying \(f\) to something. That is,
-\((f \circ g)(x)\) is \(g(f(x))\). To form the composition of (to compose) \(f\) and
-\(g\), they must be <b>composable</b> (be compatible), meaning the codomain of \(f\)
-must be the same as (or a subset of) the domain of \(g\).
+operation of applying \(f\) to the result of applying \(g\) to something. That is,
+\((f \circ g)(x)\) is \(f(g(x))\). To form the composition of (to compose) \(f\) and
+\(g\), they must be <b>composable</b> (be compatible), meaning the codomain of \(g\)
+must be the same as (or a subset of) the domain of \(f\). To <a href="https://en.wikipedia.org/wiki/Function_composition">quote Wikipedia</a>:
 </p>
+<blockquote>
+<p>
+Intuitively, composing two functions is a chaining process in which the output
+of the inner function becomes the input of the outer function.
+</p>
+</blockquote>
 
 </div>
 <p>
-Lisp functions <code>f</code> and <code>g</code> compose by passing as the argument of <code>g</code> the
-result of calling <code>f</code>, i.e., <code>(g (f x))</code>.
+Lisp functions <code>f</code> and <code>g</code> compose by passing as the argument of <code>f</code>, the
+outer function, the result of calling <code>g</code>, the inner function, i.e., <code>(f (g
+  x))</code>.
 </p>
 
 <p>
 Note that \((f \circ g)(x)\) is not the same as \((g \circ f)(x)\) (composition is not
-commutative). If \(f(x) = x^2\) and \(g(x) = 3x + 1\), then \((f \circ g) = 3(x^2) + 1 = 3x^2 +
-  1\), whereas \((g \circ f)(x) = (3x + 1)^2 = 9x^2 + 6x + 1\). As in:
+commutative). If \(f(x) = x^2\) and \(g(x) = 3x + 1\), then \((f \circ g) = (3x + 1)^2 =
+  9x^2 + 6x + 1\), whereas \((g \circ f)(x) = 3(x^2) + 1 = 3x^2 + 1\). As in:
 </p>
 
 <div class="org-src-container">
 <pre class="src src-emacs-lisp"><span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">defun</span> <span style="color: #2c53ca;">f</span> <span style="color: #077707;">(</span>x<span style="color: #077707;">)</span> <span style="color: #077707;">(</span>* x x<span style="color: #077707;">)</span><span style="color: #262626;">)</span>
-<span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">defun</span> <span style="color: #2c53ca;">g</span> <span style="color: #077707;">(</span>x<span style="color: #077707;">)</span> <span style="color: #077707;">(</span>+ <span style="color: #259ea2;">1</span> <span style="color: #ab9c3a;">(</span>* <span style="color: #259ea2;">3</span> x<span style="color: #ab9c3a;">)</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span>
-<span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">defun</span> <span style="color: #2c53ca;">fog</span> <span style="color: #077707;">(</span>x<span style="color: #077707;">)</span> <span style="color: #077707;">(</span>g <span style="color: #ab9c3a;">(</span>f x<span style="color: #ab9c3a;">)</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span>
-<span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">defun</span> <span style="color: #2c53ca;">gof</span> <span style="color: #077707;">(</span>x<span style="color: #077707;">)</span> <span style="color: #077707;">(</span>f <span style="color: #ab9c3a;">(</span>g x<span style="color: #ab9c3a;">)</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span>
+<span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">defun</span> <span style="color: #2c53ca;">g</span> <span style="color: #077707;">(</span>x<span style="color: #077707;">)</span> <span style="color: #077707;">(</span>+ <span style="color: #ab9c3a;">(</span>* <span style="color: #259ea2;">3</span> x<span style="color: #ab9c3a;">)</span> <span style="color: #259ea2;">1</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span>
+<span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">defun</span> <span style="color: #2c53ca;">fog</span> <span style="color: #077707;">(</span>x<span style="color: #077707;">)</span> <span style="color: #077707;">(</span>f <span style="color: #ab9c3a;">(</span>g x<span style="color: #ab9c3a;">)</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span> <span style="color: #008b45;">; </span><span style="color: #008b45;">fog is f after g</span>
+<span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">defun</span> <span style="color: #2c53ca;">gof</span> <span style="color: #077707;">(</span>x<span style="color: #077707;">)</span> <span style="color: #077707;">(</span>g <span style="color: #ab9c3a;">(</span>f x<span style="color: #ab9c3a;">)</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span> <span style="color: #008b45;">; </span><span style="color: #008b45;">gof is g after f</span>
 <span style="color: #262626;">(</span>list <span style="color: #077707;">(</span>f <span style="color: #259ea2;">2</span><span style="color: #077707;">)</span> <span style="color: #077707;">(</span>g <span style="color: #259ea2;">2</span><span style="color: #077707;">)</span> <span style="color: #077707;">(</span>fog <span style="color: #259ea2;">2</span><span style="color: #077707;">)</span> <span style="color: #077707;">(</span>gof <span style="color: #259ea2;">2</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span>
 </pre>
 </div>
 
 <pre class="example">
-(4 7 13 49)
+(4 7 49 13)
 
 </pre>
 </div>
@@ -8208,8 +8257,8 @@ connectives.
 <ol class="org-ol">
 <li>No teacher has taught every class.</li>
 <li>Every teacher has taught every class.</li>
+<li>Every teacher has taught some class.</li>
 <li>At least two teachers have taught a class.</li>
-<li>No teacher has taught every class.</li>
 </ol>
 
 <div></div>
@@ -9254,15 +9303,67 @@ small relations over the set A = [1 2 3 4]:
 
 <p>
 Using the definitions and logic, we argue for the correctness of these
-classifications (see if you agree before reading the arguments):
+classifications. See if you agree <b>before</b> reading the explanations of why
+these four relations have or lack the four properties:
 </p>
 
-<ul class="org-ul">
-<li>R<sub>1</sub> is not reflexive, but is symmetric, antisymmetric and transitive.</li>
-<li>R<sub>2</sub> is not reflexive, not symmetric, not antisymmetric and not transitive.</li>
-<li>R<sub>3</sub> is not reflexive, not symmetric, antisymmetric and not transitive.</li>
-<li>R<sub>4</sub> is not reflexive, not symmetric, antisymmetric and transitive.</li>
-</ul>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Relation</th>
+<th scope="col" class="org-left">Reflexive?</th>
+<th scope="col" class="org-left">Symmetric?</th>
+<th scope="col" class="org-left">Antisymmetric?</th>
+<th scope="col" class="org-left">Transitive?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">R<sub>1</sub></td>
+<td class="org-left">No</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+
+<tr>
+<td class="org-left">R<sub>2</sub></td>
+<td class="org-left">No</td>
+<td class="org-left">No</td>
+<td class="org-left">No</td>
+<td class="org-left">No</td>
+</tr>
+
+<tr>
+<td class="org-left">R<sub>3</sub></td>
+<td class="org-left">No</td>
+<td class="org-left">No</td>
+<td class="org-left">Yes</td>
+<td class="org-left">No</td>
+</tr>
+
+<tr>
+<td class="org-left">R<sub>4</sub></td>
+<td class="org-left">No</td>
+<td class="org-left">No</td>
+<td class="org-left">Yes</td>
+<td class="org-left">Yes</td>
+</tr>
+</tbody>
+</table>
 
 <p>
 R<sub>1</sub> is not reflexive because it is missing (2 2), (3 3) and (4 4). It is
@@ -9302,7 +9403,7 @@ xRz can never be false!
 </p>
 
 <p>
-Note that symmetric and antisymmetric are not mutually exclusive properties.
+Note that symmetry and antisymmetry are <i>not</i> mutually exclusive properties.
 They can either both be absent, both be present, or one absent and the other
 present.
 </p>
@@ -9657,7 +9758,7 @@ Address, C = City, D = State, and E = Zip. The following table shows three
 </table>
 
 <p>
-The table form is a natural one, even for a &ldquo;database&rdquo; this tiny.
+The table form is a natural one, even for this tiny of a database.
 </p>
 
 <p>
@@ -10573,9 +10674,9 @@ time is still just mod-24, whereas &ldquo;normal&rdquo; am/pm time is mod-12. So
 
 <p>
 75 hours in the future is 3 days (75 / 24 = 3) + 3 hours (75 % 24 = 3 as well)
-away. To know what the clock will say then if now is 4:00, add 4 to 75 and
-reduce modulo 24. (75 + 4 = 79, 79 % 24 = 7). It will say 7:00. Or just add 3
-(hours) to 4 (:00) to get 7 (:00).
+away. To know what time the clock will display in 75 hours, if the time now is
+4:00, add 4 to 75 and reduce modulo 24. (75 + 4 = 79, 79 % 24 = 7). It will
+display 7:00. Or just add 3 (hours) to 4 (:00) to get 7 (:00).
 </p>
 
 <p>
@@ -11677,8 +11778,8 @@ C(9, 3) = \(\frac{9!}{(9 - 3)! 3!} = \frac{9!}{6!3!} = \frac{362880}{720 \cdot
 
 <p>
 This <a href="#org889e6c7">recurrence relation</a> is normally defined for nonnegative \(n\) and \(k\) (\(0 \le
-  k \le n\)), and to be implemented as a recursive function of two parameters needs
-some &ldquo;escape hatch&rdquo; base cases. Here they are:
+  k \le n\)), and to implement it as a recursive function of two parameters we need
+to supply some &ldquo;escape hatch&rdquo; base cases. Here they are:
 </p>
 
 <p>
@@ -12292,9 +12393,9 @@ is ever composite:&rdquo;
 </ul>
 
 <p>
-&ldquo;All of these, 3, 7, 31, 211, 2311, &#x2026; are prime,&rdquo; said Ila. &ldquo;Abu, &ldquo;Well,
-actually, look at the very next one in the sequence.&rdquo; said Abu. &ldquo;2 &sdot; 3 &sdot; 5 &sdot; 7
-&sdot; 11 &sdot; 13 + 1 = 30031, which is 59 (prime) &sdot; 509 (also prime), if I calculate
+&ldquo;All of these, 3, 7, 31, 211, 2311, &#x2026; are prime,&rdquo; said Ila. &ldquo;Well, actually,
+look at the very next one in the sequence,&rdquo; said Abu. &ldquo;2 &sdot; 3 &sdot; 5 &sdot; 7 &sdot; 11 &sdot;
+13 + 1 = 30031, which is 59 (prime) &sdot; 509 (also prime), if I calculate
 correctly.&rdquo;
 </p>
 
@@ -12389,7 +12490,7 @@ in par &ldquo;ticalar&rdquo; (<code>(concat (minus "vertical bar" "verb"))</code
 the same thing are: <i>b</i> possesses the property <b>divisibility-by-a</b>, <i>b</i> <b>is
 divisible by</b> <i>a</i>, <i>a</i> is a <b>factor</b> of <i>b</i>, <i>b</i> is a <b>multiple</b> of <i>a</i>, or \(\exists\)
 <i>c</i> such that <i>c &sdot; a = b</i>. In this existence claim, <i>c</i> is the multiple of <i>a</i>
-that equals <i>b</i>. The negation of <i>a</i> &vert; <i>b</i> is written <i>a</i> \(\not \vert\) <i>b</i>.
+that equals <i>b</i>. The negation of <i>a</i> &vert; <i>b</i> is written <i>a</i> \(\not\vert\) <i>b</i>.
 </p>
 
 </div>
@@ -15284,7 +15385,7 @@ So ab = 35 &sdot; 42 = 1470, and indeed 3 &vert; 1470 because 3 &sdot; 490 = 147
 <p>
 If 3 &vert; 35 were the case, we would be done; but it&rsquo;s not, so we must show the
 other alternative, 3 | 42. (We only need to show one or the other.) But the
-fact that 3 \(\not \vert\) 35 means 35 and 3 are coprime, because a prime&rsquo;s only
+fact that 3 \(\not\vert\) 35 means 35 and 3 are coprime, because a prime&rsquo;s only
 divisors are itself and 1. Hence by B&eacute;zout&rsquo;s Theorem we know that 35x + 3y = 1
 for some x and y. Thus, multiplying each side of that equation by b = 42 we
 get that 35(42)x + 3(42)y = 1470x + 3(42)y = 42.
@@ -17145,10 +17246,89 @@ Find the connection.
 <div></div>
 
 </div>
+<p>
+:ANSWER:
+</p>
 </div>
 </div>
 </div>
+<div id="outline-container-orgc809732" class="outline-4">
+<h4 id="orgc809732">Rephrase</h4>
+<div class="outline-text-4" id="text-orgc809732">
+<p>
+Find the relationship between eight triples of small numbers and the
+product of 3, 5 and 7 (the first three odd primes) and 16 (2<sup>4</sup>, the fourth
+power of two).
+</p>
+</div>
+</div>
+<div id="outline-container-orgd681834" class="outline-4">
+<h4 id="orgd681834">Approach</h4>
+<div class="outline-text-4" id="text-orgd681834">
+<p>
+First, disambiguate: is the connection to be made from the 8 triples to a
+single number (the product (* 3 5 7 16) &rarr; 1680) or to two numbers (the
+product (* 3 5 7) &rarr; 105 and 16)? Following the hint, since the Chinese
+Remainder Theorem is involved, go with the first possibility. Find the
+simultaneous solutions to 8 systems of congruences, e.g.:
+</p>
 
+<p>
+X &equiv;<sub>3</sub> 2
+</p>
+
+<p>
+X &equiv;<sub>5</sub> 4
+</p>
+
+<p>
+X &equiv;<sub>7</sub> 4
+</p>
+
+<p>
+for the 8th triple. These eight numbers must have something to do with 16.
+If unable to see an obvious connection, seek further light and knowledge.
+</p>
+</div>
+</div>
+<div id="outline-container-org2315837" class="outline-4">
+<h4 id="org2315837">Solution</h4>
+<div class="outline-text-4" id="text-org2315837">
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">setq</span> triples <span style="color: #077707;">[</span><span style="color: #ab9c3a;">[</span><span style="color: #259ea2;">1</span> <span style="color: #259ea2;">1</span> <span style="color: #259ea2;">3</span><span style="color: #ab9c3a;">]</span> <span style="color: #ab9c3a;">[</span><span style="color: #259ea2;">1</span> <span style="color: #259ea2;">1</span> <span style="color: #259ea2;">4</span><span style="color: #ab9c3a;">]</span> <span style="color: #ab9c3a;">[</span><span style="color: #259ea2;">1</span> <span style="color: #259ea2;">4</span> <span style="color: #259ea2;">3</span><span style="color: #ab9c3a;">]</span> <span style="color: #ab9c3a;">[</span><span style="color: #259ea2;">1</span> <span style="color: #259ea2;">4</span> <span style="color: #259ea2;">4</span><span style="color: #ab9c3a;">]</span> <span style="color: #ab9c3a;">[</span><span style="color: #259ea2;">2</span> <span style="color: #259ea2;">1</span> <span style="color: #259ea2;">3</span><span style="color: #ab9c3a;">]</span> <span style="color: #ab9c3a;">[</span><span style="color: #259ea2;">2</span> <span style="color: #259ea2;">1</span> <span style="color: #259ea2;">4</span><span style="color: #ab9c3a;">]</span> <span style="color: #ab9c3a;">[</span><span style="color: #259ea2;">2</span> <span style="color: #259ea2;">4</span> <span style="color: #259ea2;">3</span><span style="color: #ab9c3a;">]</span> <span style="color: #ab9c3a;">[</span><span style="color: #259ea2;">2</span> <span style="color: #259ea2;">4</span> <span style="color: #259ea2;">4</span><span style="color: #ab9c3a;">]</span><span style="color: #077707;">]</span>
+      m-list <span style="color: #077707;">(</span>number-sequence <span style="color: #259ea2;">3</span> <span style="color: #259ea2;">7</span> <span style="color: #259ea2;">2</span><span style="color: #077707;">)</span>
+      results <span style="color: #077707;">(</span>mapcar* <span style="color: #ab9c3a;">(</span><span style="color: #2020cc; font-weight: bold;">lambda</span> <span style="color: #358d8d;">(</span>triple<span style="color: #358d8d;">)</span> <span style="color: #358d8d;">(</span>apply 'crt-solve <span style="color: #1c9e28;">(</span>mapcar* 'cons triple m-list<span style="color: #1c9e28;">)</span><span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span>
+                         triples<span style="color: #077707;">)</span>
+      residues <span style="color: #077707;">(</span>sort results '&lt;<span style="color: #077707;">)</span><span style="color: #262626;">)</span>
+</pre>
+</div>
+<p>
+(4 11 31 46 59 74 94 101)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">setq</span> the-product-of-the-first-three-odd-primes <span style="color: #077707;">(</span>apply '* m-list<span style="color: #077707;">)</span>
+      the-connection-to-the-fourth-power-of-two
+      <span style="color: #077707;">(</span>mapcar
+       <span style="color: #ab9c3a;">(</span><span style="color: #2020cc; font-weight: bold;">lambda</span> <span style="color: #358d8d;">(</span>n<span style="color: #358d8d;">)</span>
+         <span style="color: #358d8d;">(</span>mod <span style="color: #1c9e28;">(</span>* n n<span style="color: #1c9e28;">)</span> the-product-of-the-first-three-odd-primes<span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span>
+       residues<span style="color: #077707;">)</span><span style="color: #262626;">)</span>
+</pre>
+</div>
+<p>
+(16 16 16 16 16 16 16 16)
+</p>
+</div>
+</div>
+<div id="outline-container-org78e6542" class="outline-4">
+<h4 id="org78e6542">Proof</h4>
+<div class="outline-text-4" id="text-org78e6542">
+<p>
+The fact that 16 is a <i>quadratic residue</i> modulo 105 is abundantly clear,
+once the definition of quadratic residue is found (seek and ye shall find)!
+</p>
+</div>
+</div>
 <div id="outline-container-org6d5207f" class="outline-4">
 <h4 id="PQW"><a id="org6d5207f"></a>PQW</h4>
 <div class="outline-text-4" id="text-PQW">
@@ -20299,12 +20479,12 @@ co-author a paper, or co-star in a movie, or something.&rdquo;
 
 <p>
 Ila said, &ldquo;And it was a social activity that sparked the idea of graphs in the
-first place. I love this story about none other than Euler, who came to the
-aid of the people of K&ouml;nigsberg, who enjoyed long Sunday walks across the
-bridges in their city. <a href="#org09dbd9a">Seven bridges</a> to be exact, four of which crossed the
-river running through the city to land on an island in the river, two others
-crossed to land on an adjacent island, and one connecting the two islands. Here&rsquo;s
-a picture:&rdquo;
+first place. I love this story about none other than Euler. He came up with the
+answer to a a question the people of K&ouml;nigsberg wondered about as they enjoyed
+long Sunday walks across the bridges in their city. <a href="#org09dbd9a">Seven bridges</a> to be exact,
+four of which crossed the river running through the city to land on an island
+in the river, two others crossed to land on an adjacent island, and the seventh
+one connected the two islands. Here&rsquo;s a picture:&rdquo;
 </p>
 </div>
 </div>
@@ -20735,6 +20915,21 @@ tournament he was in?
 </p>
 <p><span class="figure-number">Figure 62: </span>Directed Graph</p>
 </div>
+
+<div></div>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-org670b522" class="outline-5">
+<h5 id="org670b522">KPS</h5>
+<div class="outline-text-5" id="text-org670b522">
+<div class="note">
+<p>
+Do some research and figure out where graphs are used in your major, and describe
+how a knowledge of graph theory can be beneficial to you in the future.
+</p>
 
 <div></div>
 
@@ -22064,11 +22259,11 @@ Examples of each follow:
 
 <p>
 A graph can be represented solely as a list of its links, from which a list of
-its nodes can be extracted as long there are no isolated (degree 0) nodes. For
-example, here is a small graph with 11 nodes, all connected to at least three
-others, and with its 27 links shown as two hex-digits, each digit identifying
-one node of the two in the link. In drawing the graph we replace A with 10 and
-B with 11.
+its nodes can be extracted as long as there are no isolated (degree 0) nodes.
+For example, here is a small graph with 11 nodes, all connected to at least
+three others, and with its 27 links shown as two hex-digits, each digit
+identifying one node of the two in the link. In drawing the graph we replace A
+with 10 and B with 11.
 </p>
 
 <pre class="example">
@@ -23518,9 +23713,9 @@ green triangle &#x2014; BCD, BCF or CDF.&rdquo;
 </div>
 </div>
 
-<div id="outline-container-org0f75341" class="outline-5">
-<h5 id="org0f75341">CDF</h5>
-<div class="outline-text-5" id="text-org0f75341">
+<div id="outline-container-org432bbbc" class="outline-5">
+<h5 id="org432bbbc">CDF</h5>
+<div class="outline-text-5" id="text-org432bbbc">
 
 <div class="figure">
 <p><img src="img/fig-complete-k6-4.png" alt="Green Triangle =CDF=" title="Green Triangle =CDF=" />
@@ -23785,7 +23980,7 @@ impressive-sounding, meaningless phrases, like
 </p>
 
 <p>
-&ldquo;Wow, did you just make those up?&rdquo; wondered Abu, silently. Ila said, &ldquo;I hear
+&ldquo;Wow, did you just make those up?!&rdquo; said Abu. He was in awe. Ila said, &ldquo;I hear
 that stuff all the time from the consultants my company hires. It&rsquo;s worse than
 nonsense, if you ask me.&rdquo;
 </p>
@@ -23949,7 +24144,7 @@ unwffified that phrase five different ways?&rdquo;
 Said Til, &ldquo;The rules of English grammar are many and varied, and sometimes
 downright mysterious, so I will leave that question for you to answer!
 However, a wff like &lsquo;he went to the store&rsquo; is quite obviously <i>not</i> well
-formed as &lsquo;to he store the went&rsquo;.&rdquo;
+formed when you scramble it to be &lsquo;to he store the went&rsquo;.&rdquo;
 </p>
 
 <p>
@@ -24181,8 +24376,8 @@ all relative size questions. Am I right?&rdquo;
 </p>
 
 <p>
-Til nodded, almost imperceptibly, while Ila thought <i>Of course you are, smarty
-pants</i>, and then said, &ldquo;But why the jargony <b>lexicographical</b>? Isn&rsquo;t there a
+Til nodded, almost imperceptibly. (Ila thought, Of course you are, smarty
+pants.) Then Ila said, &ldquo;But why the jargony <b>lexicographical</b>? Isn&rsquo;t there a
 better word than that? &lsquo;Lexicon&rsquo; is just another word for &lsquo;dictionary&rsquo;, so why
 not just say sort in <i>dictionary</i> or even <i>alphabetical</i> order?&rdquo;
 </p>
@@ -24263,21 +24458,22 @@ string concatenation, which in lisp you have already seen:
 
 <div class="info">
 <p>
-A method of listing strings called <b>lexicographic ordering</b> differs from
-so-called <b>dictionary ordering</b> in one essential way. The former method sorts
-strings <i>first</i> by increasing length (so shorter strings come before longer
-ones) and <i>then</i> by the predefined (dictionary) order of the symbols as given
-in association with the strings&rsquo; alphabet.
+A method of listing strings called <b>numeric ordering</b> differs from so-called
+<b>dictionary</b> (or <b>lexicographical</b>) <b>ordering</b> in one essential way. Numeric
+ordering sorts strings <i>first</i> by increasing length (so shorter strings come
+before longer ones) and <i>then</i> by the predefined (dictionary or
+lexicographical) order of the symbols as given in association with the
+strings&rsquo; alphabet.
 </p>
 
 </div>
 
 <p>
-For instance, in lexicographical ordering the string <code>baa</code> would come before
-<code>abab</code> because it is shorter by one symbol. In plain old dictionary ordering
-lengths are ignored, so the string <code>abab</code> would come before <code>baa</code>, because in
-the alphabet, <code>a</code> (the first symbol of <code>abab</code>) comes before <code>b</code> (the first
-symbol of <code>baa</code>).
+For instance, in numberic ordering the string <code>baa</code> would come before <code>abab</code>
+because it is shorter by one symbol. In plain old dictionary ordering lengths
+are ignored, so the string <code>abab</code> would come before <code>baa</code>, because in the
+alphabet, <code>a</code> (the first symbol of <code>abab</code>) comes before <code>b</code> (the first symbol
+of <code>baa</code>).
 </p>
 
 <p>
@@ -32331,12 +32527,13 @@ the alphabet <code>[a b]</code>, where the Kleene star produces the following se
 </pre>
 
 <p>
-Note that if we used standard dictionary order to list this set, it would
-start like <code>["" "a" "aa" "aaa" "aaaa" ...]</code> and never get to <code>"b"</code>, etc.
+Note that if we used standard dictionary ordering to list this set, it
+would start like <code>["" "a" "aa" "aaa" "aaaa" ...]</code> and never get to <code>"b"</code>,
+etc.
 </p>
 
 <p>
-That is why the length-considering lexicographic way is preferred.
+That is why the length-considering numeric ordering is preferred.
 </p>
 
 <p>
@@ -32440,7 +32637,7 @@ function submitRequest(keybox) {
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Rick Neff (<a href="mailto:NeffR@byui.edu">NeffR@byui.edu</a>)</p>
-<p class="date">Date: 2 May 2018</p>
+<p class="date">Date: 11 September 2018</p>
 <p class="creator"><a href="https://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="https://orgmode.org">Org</a> mode 9.1.9)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

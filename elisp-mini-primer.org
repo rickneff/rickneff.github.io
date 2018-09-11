@@ -83,9 +83,10 @@
   digits.
 
   See what happens when you evaluate the elisp-source-block-inserter function,
-  as you did above, (C-x C-e right under the =(el)=), and then type
+  as you did above, (C-x C-e right under the =(el)=), make sure you are in the
+  insert state (vertical bar cursor), and then type the six keys
 
-  i 1 2 3 ESC , ,
+  1 2 3 ESC , ,
 
   Go ahead and do that here:
 (el)
@@ -566,19 +567,4 @@
 * Read and Heed a Scripture
   Liken [[https://www.lds.org/languages/eng/content/scriptures/ot/isa/28.10#9][Isaiah 28:10]] to yourself, take a break and pause to absorb what you\rsquo{}ve
   learned!
-* One More Thing
-  For your consideration, profit and learning:
-#+BEGIN_SRC elisp :results silent
-  (defun turn-it-in ()
-    "A Potentially Useful Function --- PUF to TLA it."
-    (save-buffer)
-    (forward-line 1)
-    (insert (shell-command-to-string
-             (concat "git add "
-                     (file-name-nondirectory (buffer-file-name))
-                     " && git commit -m '"
-                     (read-from-minibuffer "Enter commit message: " "Turn it in.")
-                     "' && git push origin master"))))
-#+END_SRC
 
-[[elisp:(turn-it-in)][Turn It In]]
