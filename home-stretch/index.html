@@ -1,0 +1,69 @@
+<form id="file-form" enctype="multipart/form-data" action="submit" method="post">
+  <div style="width: 100%; overflow: hidden;">
+   <div style="width: 180px; float: left;">
+    <input id="file-to-upload" type="file" name="fileUploaded"/>
+   </div>
+   <div style="width: 150px; float: left;">
+    <button type="submit" id="upload-button">Turn It In</button>
+   </div>
+   <div style="margin-left: 0px;" id="file-upload-message">
+   </div>
+  </div>
+ </form>
+ <script type="text/javascript">
+  var form = document.getElementById('file-form');
+  var message = document.getElementById('file-upload-message');
+  var noFileChosenText = 'No file chosen. Please choose a file.';
+  var messageDefaultText = '';
+  var uploadButtonDefaultText = 'Turn It In';
+  var fileToUpload = document.getElementById('file-to-upload');
+  var uploadButton = document.getElementById('upload-button');
+  message.innerHTML = messageDefaultText;
+  uploadButton.innerHTML = uploadButtonDefaultText;
+  function resetMessages()
+  {
+     message.innerHTML = messageDefaultText;
+  }
+  form.onsubmit = function(event) {
+    event.preventDefault();
+    // Get the selected files from the input.
+    var files = fileToUpload.files;
+    if (files.length === 1) {
+      if (files[0].size > 4194304) {
+         message.innerHTML = 'File too big! (' +
+                              files[0].size +
+                             ' > 4194304 (4MB) max.)';
+         setTimeout('resetMessages()', 5000);
+      } else {
+       // Update button text.
+       uploadButton.innerHTML = 'Uploading...';
+       // Create a new FormData object.
+       var formData = new FormData();
+       // Append to FormData object.
+       formData.append('fileUploaded', files[0], files[0].name);
+       // Set up the request.
+       var xhr = new XMLHttpRequest();
+       // Open the connection.
+       xhr.open('POST', '/file/upload', true);
+       // Set up a handler for when the request finishes.
+       xhr.onload = function () {
+          uploadButton.innerHTML = uploadButtonDefaultText;
+          if (xhr.status === 200) {
+             // File was successfully uploaded.
+             message.innerHTML = xhr.responseText;
+          } else {
+             message.innerHTML = 'An error occurred! (' +
+                                 xhr.status + ')';
+          }
+          setTimeout('resetMessages()', 5000);
+       }
+       // Send the Data.
+       xhr.send(formData);
+       return false;
+      }
+    } else {
+       message.innerHTML = noFileChosenText;
+       setTimeout('resetMessages()', 2000);
+    }
+  }
+</script>
