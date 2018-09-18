@@ -1,0 +1,98 @@
+#+TITLE: DM1 Assignment 01.3
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+[[elisp:(org-clock-report%201)][Insert/Update Clock Summary Report]]
+* Exercises
+** TODO CRC
+#+begin_note
+  #+ATTR_HTML: :alt desert image :title What is this doing here?!
+  [[file:../img/desert.jpg]]
+
+  This is the first of many exercises/problems/puzzles to come, always displayed
+  in this type of yellow-background box.
+
+  Propose a connection between discrete mathematics and the image above.
+  (This is a \ldquo{}free association\rdquo exercise --- there is no right answer.)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO DGZ
+#+begin_note
+  The operation called /dehydration/ takes a word and deletes all letters in it
+  from H to O. What is the original (rehydrated) text of this dehydrated
+  sequence of words?
+
+  TE TE AS CE TE WARUS SAD T TA OF AY TGS F SES AD SPS AD SEAG WAX F CABBAGES
+  AD GS AD WY TE SEA S BG T AD WETER PGS AVE WGS
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Problems
+** TODO CHJ
+#+begin_note
+  Let $n / 0$ be infinity, for any positive integer /n/.
+
+  What English word has the largest /finite/ consonant-vowel-ratio (CVR)? For
+  example, the CVRs of the words (including the TLA) in the previous sentence
+  are 3:1, 5:2, 3:1, 2:1, 2:1, 5:2, 1:1, 2:1, 3:2, 2:3, and infinity (3:0).
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO DZB
+#+begin_note
+  In the figure below, the innermost circle has radius 1. It is circumscribed by
+  an equilateral triangle, which is circumscribed by a circle, which is
+  circumscribed by a square, which is circumscribed by yet another circle, and
+  so forth.
+
+  [[file:../img/circumscribed-polygons-and-circles.png][file:../img/circumscribed-polygons-and-circles.png]]
+
+  What is the radius of the outermost circle?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Puzzles
+** TODO DOK
+#+begin_note
+  Pick a number (a positive integer). Form the product of that number, one more
+  than that number, and one more than twice that number. Repeat for several
+  different numbers. There is a pattern to these products. What is it?
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+** TODO CJF
+#+begin_note
+   Numbers and words. Cycles and patterns.
+
+   Do you think mathematicians discover or invent patterns? While pondering that
+   question, consider what [[https://en.wikipedia.org/wiki/G._H._Hardy][G. H. Hardy]] famously wrote: /A mathematician, like a
+   painter or a poet, is a maker of patterns. If his patterns are more permanent/
+   /than theirs, it is because they are made with ideas/. What do you think he
+   meant by that?
+
+   Here\rsquo{}s a puzzle superficially just involving a 6-digit number and a 6-letter
+   \ldquo{}word\rdquo. What does
+
+   654321
+
+   have to do with
+
+   CLAHCK
+
+   other than they both follow the \ldquo{}length 6\rdquo pattern?
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
