@@ -1,0 +1,43 @@
+#+TITLE: DM2 Assignment 01.4 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything
+#+SETUPFILE: theme-bigblow.setup
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+[[elisp:(org-clock-report%201)][Insert/Update Clock Summary Report]]
+* TODO What is it about these four words?
+  Which of the words below is least like the others? (The difference has nothing
+  to do with vowels, consonants or syllables.)
+
+  ADMIT    PARADE 
+  HONOR    SAVAGE
+
+* TODO What about these numbers?
+
+   Can you discern the pattern in these numbers? 
+
+   If so, to follow the pattern by what non-zero number would you replace 0?
+
+#+BEGIN_SRC elisp
+  [2 3 2 2 5 2 0 7 2 2 2 3 3]
+#+END_SRC
+
+* TODO Answer a What Question and a Why Question
+
+  What is the cardinality of the /Power Set/ of a set of size n? Why?
+
+* TODO Answer a Fuzzy Question
+
+  Investigate and report on some application of *fuzzy sets* and *fuzzy logic*.
+
+* TODO Answer a Hash Question
+  From your increased understanding following your reading of the first four
+  pages of the [[http://matt.might.net/papers/liang2014godel.pdf][Fast Flow Analysis with G\ouml{}del Hashes]] paper, compute the hash as
+  shown in class for a few sets and subsets of your devising.
+
+  What observations can you make?
+
+  (We will be reading and revisiting this paper throughout the semester as we
+  learn more, so hang in there!)
