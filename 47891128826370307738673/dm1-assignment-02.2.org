@@ -1,0 +1,813 @@
+#+TITLE: ABC Sets and Logic
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+[[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
+[[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
+* Exercises
+** TODO UCA
+#+begin_note
+  Start your exercise warmup by thinking up three examples and three
+  non-examples of propositions. Make them pithy.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO ODS
+#+begin_note
+  Which of the following sentences are propositions? For each proposition, give
+  its truth value (true or false).
+  1. 2 + 2 = 4.
+  2. 2 + 1 = 4.
+  3. Toronto is the capital of Germany.
+  4. Read these questions carefully.
+  5. x + y + z = q.
+  6. What time is it?
+  7. 2x + 3 = 9.
+  8. Simon says jump.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UGX
+#+begin_note
+  Put the proposition \ldquo{} /v/ is a member of the set of English alphabet
+  consonants\rdquo in symbolic logic terms, using /C/ as the name of the set of
+  consonants.
+:HINT:
+  - Hint :: This is very straightforward. Three symbols are all that are called
+            for.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OGR
+#+begin_note
+  Which of the following are simple (not compound) propositions?
+
+  1. Weeks are shorter than months.
+  2. Days are longer than hours and minutes.
+  3. Hours are longer than minutes and seconds are shorter than minutes.
+  4. People can fly or pigs can sing.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UWM
+#+begin_note
+  Express in English the negation of each of these propositions:
+
+  1. Two plus two equals four.
+  2. Two plus one is less than four.
+  3. Toronto is the capital of Germany.
+  4. A total eclipse happens infrequently.
+  5. Special measures must be taken to deal with the current situation.
+:HINT:
+  Do /not/ just prefix each proposition with \lsquo{}It is not the case that\rsquo.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OPZ
+#+begin_note
+  Let /p/ and /q/ be the propositions:
+
+  /p/: I studied.
+
+  /q/: I got an F on the test.
+
+  Express each of the propositions below as an English sentence:
+  1. \not /p/
+  2. /p/ \lor /q/
+  3. /p/ \land /q/
+  4. \not /p/ \land \not /q/
+  5. \not /p/ \lor /q/
+  6. \not (/p/ \lor /q/)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UOX
+#+begin_note
+  What other special forms besides =if= does elisp have for doing conditionals?
+  Why are they called \ldquo{}special\rdquo?
+:HINT:
+  - Hint :: You can find at least six.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OTX
+#+begin_note
+  Determine whether these sentences use an inclusive or, or an exclusive or:
+  1. A side of fries or chips comes with your sandwich.
+  2. A high school diploma or a GED are needed for this position.
+  3. To get your license, you must provide your social security card or birth certificate.
+  4. We accept Mastercard or Visa credit cards.
+  5. You can cash in your tickets or exchange them for a prize.
+  6. Take it or leave it.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UOT
+#+begin_note
+  Return to the task of comparing the two expressions:
+
+  1. =p and (q or not r)=
+  2. =(p and q) or not r=
+
+  Build a truth table of expression 2 and compare it with the truth table of
+  expression 1 given just above.
+:HINT:
+  - Hint :: The two truth tables differ in two places.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UIN
+#+begin_note
+  What is the set difference between the set of letters in the English alphabet
+  and the set of letters in the Hawaiian alphabet?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OJL
+#+begin_note
+  Justify where $p = x \in A, q = x \in B, r = x \in C$:
+
+  | Set | As Union of   | Logic \equiv Set Operation Description                                             |
+  |-----+---------------+-------------------------------------------------------------------------------|
+  | A   | 4 \cup 5 \cup 7 \cup 6 | $(p \land \neg q \land \neg r) \lor (p \land \neg q \land r) \lor (p \land q \land r) \lor (p \land q \land \neg r)$ |
+  | B   | 2 \cup 3 \cup 7 \cup 6 | $(\neg p \land q \land \neg r) \lor (\neg p \land q \land r) \lor (p \land q \land r) \lor (p \land q \land \neg r)$ |
+  | C   | 1 \cup 3 \cup 5 \cup 7 | $(\neg p \land \neg q \land r) \lor (\neg p \land q \land r) \lor (p \land \neg q \land r) \lor (p \land q \land r)$ |
+:HINT:
+  - Hint :: The exercise could be more explicitly stated as: Provide
+            justification for the equivalence of the logical and set operation
+            description (columns 3 and 2) for each set (column 1) in the table.
+            So, use wording like \ldquo{}Set A is justified as the union of numbered
+            regions 4, 5, 7 and 6, because \dots\rdquo.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UCG
+#+begin_note
+  Let set *A* = =[verve vim vigor]=, set *B* = =[butter vinegar pepper vigor]=.
+  For each of the following set operations, give its resulting members (as a
+  vector of symbols):
+
+  1. The set of words that are in A *or* B; call this set *C*.
+  2. The set of words that are in A *and* B; call this set *D*.
+  3. The subset of set *C* of words that start with \lsquo{}v\rsquo.
+  4. The subset of set *C* of words that end with \lsquo{}r\rsquo.
+  5. The subset of set *C* of words that start with \lsquo{}v\rsquo and end with \lsquo{}r\rsquo.
+  6. The subset of set *D* of words that have six letters.
+:HINT:
+  - Hint :: This is also very straightforward. But see if you can write some
+            elisp code to help you find the answers!
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OQT
+#+begin_note
+  Let /p/ and /q/ be the propositions:
+
+  /p/: I studied.
+
+  /q/: I got an A on the test.
+
+  Express each of the propositions below as an English sentence:
+  1. /p/ \rarr /q/
+  2. \not /p/ \lor \not /q/
+  3. \not /p/ \rarr (p \lor q)
+  4. \not /p/ \rarr \not /q/
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UTQ
+#+begin_note
+  Let /p/ and /q/ be the propositions:
+
+  /p/: You applied for admission at BYU-Idaho.
+
+  /q/: You were accepted.
+
+  Express these sentences as propositions using logical connectives.
+  1. You applied for admission at BYU-Idaho and were accepted.
+  2. You did not apply for admission at BYU-Idaho but were still accepted.
+  3. You applied for admission at BYU-Idaho but were not accepted.
+  4. Either you did not apply for admission at BYU-Idaho and didn\rsquo{}t get accepted
+     or you did apply and got accepted.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UJU
+#+begin_note
+  Use truth tables to verify the /commutative/ laws.
+  1. $p \vee q \equiv q \vee p$
+  2. $p \wedge q \equiv q \wedge p$
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OLH
+#+begin_note
+  Use truth tables to verify the associative laws.
+  1. $(p \vee q) \vee r \equiv p \vee (q \vee r)$
+  2. $(p \wedge q) \wedge r \equiv p \wedge (q \wedge r)$
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UWY
+#+begin_note
+  Use truth tables to verify the distributive laws.
+  1. $p \wedge (q \lor r) \equiv (p \wedge q) \lor (p \wedge r)$.
+  2. $p \vee (q \wedge r) \equiv (p \vee q) \wedge (p \vee r)$.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OBW
+#+begin_note
+  Use truth tables to verify De Morgan\rsquo{}s laws:
+  1. $\neg (p \vee q) \equiv \neg p \wedge \neg q$
+  2. $\neg (p \wedge q) \equiv \neg p \vee \neg q$
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO USL
+#+begin_note
+  Use truth tables to verify some miscellaneous laws, letting $\mathbf{1}$ =
+  true, $\mathbf{0}$ = false:
+  1. $p \land \mathbf{1} \equiv p$ (idempotence)
+  2. $p \lor \mathbf{0} \equiv p$ (idempotence)
+  3. $\neg \neg p \equiv p$ (double negation)
+  4. $p \land \mathbf{0} \equiv \mathbf{0}$ (absorption)
+  5. $p \lor \mathbf{1} \equiv \mathbf{1}$ (absorption)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OYP
+#+begin_note
+  Match the following set identities with their counterparts in the
+  miscellaneous logic laws:
+
+  1. A \cap U = A
+  2. A \cup U = U.
+  3. A \cup \empty = A.
+  4. A \cap \empty = \empty.
+  5. $\overline{\overline{\mathsf{A}}} = \mathsf{A}$.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UBV
+#+begin_note
+  Use DeMorgan's Laws to find the negations of the propositions:
+  1. Winning the first round is necessary for winning the trophy.
+  2. Winning the tournament is sufficient for winning the trophy.
+  3. I am powerful and successful.
+  4. You can pass or fail this test.
+  5. Getting an A on the final exam is necessary and sufficient for passing this class.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Problems
+  Note: * means optional. If it\rsquo{}s not starred, it\rsquo{}s required.
+** TODO OIM *
+#+begin_note
+  What is the correlation between the first three columns and the last three
+  columns in this table?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OIO *
+#+begin_note
+  Here is a \ldquo{}setq chain\rdquo illustrating subset size compared to superset size:
+
+#+BEGIN_SRC emacs-lisp
+  (setq A [s i z e]
+        a 4
+        B [b i g g e r i n s i z e]
+        b 12
+        A-is-a-subset-of-B t
+        a-is-less-than-or-equal-to-b t)
+#+END_SRC
+
+  Write or find built-in functions so that you can revise this chain of
+  assignments to avoid the literals 4, 12 and =t=, instead replacing
+  them with function calls.
+:HINT:
+  - Hint :: Here again, the elisp mini-primer is your friend.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UIJ
+#+begin_note
+  The following Venn diagram numbers three regions of a set B with a subset A
+  relationship within a Universal set U:
+
+#+BEGIN_SRC ditaa :file img/fig-set-subset-conditional.png :cmdline -S :export :eval no-export
+  U                       1
+    +-------------------+
+    | B               2 |
+    |   +-----------+   |
+    |   | A       3 |   |
+    |   |           |   |
+    |   |           |   |
+    |   +-----------+   |
+    |                   |
+    +-------------------+
+#+END_SRC
+
+#+RESULTS:
+[[file:../img/fig-set-subset-conditional.png]]
+
+  Make a connection between the logical conditional operator (\rightarrow) and the
+  /definition/ of a subset. Refer to the three numbered regions in your answer.
+:HINT:
+  - Hint :: Making this connection means: 1) express the logical conditional
+            operator in terms of the definition of subset, or 2) express subset
+            in terms of the definition of the logical conditional operator,
+            whichever makes the most sense to you. Express either (or both) in
+            terms of the three numbered regions.
+
+  - More Emphatically :: Making this connection will help you understand why the
+       conditional operator works the way it does. To answer fully, you /must/
+       give the definition of a subset, and you /must/ refer to the three
+       numbered regions in the Venn diagram.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OYU
+#+begin_note
+   There are many different ways in English to put the same conditional statement,
+   \lsquo{}if p then q\rsquo{}. Here are four:
+   - omit the \lsquo{}then\rsquo :: if p, q
+   - reversed :: q if p
+   - \lsquo{}whenever\rsquo means \lsquo{}if\rsquo :: whenever p, q (or q whenever p)
+   - p \rarr q :: (pronounced) p only if q.
+
+   Find at least four other ways.
+:HINT:
+ - Hint :: Some have to do with conditions being necessary (necessity) versus
+           sufficient (sufficiency).
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UOH
+#+begin_note
+  Let /p/ and /q/ be the propositions:
+
+  /p/: You applied for admission at BYU-Idaho.
+
+  /q/: You were accepted.
+
+  Express these sentences as propositions using logical connectives:
+  1. Your applying for admission at BYU-Idaho is necessary for your being
+     accepted.
+  2. Your being accepted is a sufficient condition for your applying for
+     admission at BYU-Idaho.
+  3. Your applying for admission at BYU-Idaho is necessary and sufficient for
+     your being accepted.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OZD *
+#+begin_note
+  Determine whether these conditional statements are true or false:
+  1. If 2 + 2 = 4, then pigs can fly.
+  2. If 2 + 7 = 5, then Elvis Presley is still alive.
+  3. If pigs can fly, then dogs can\rsquo{}t fly.
+  4. If dogs have four legs, then ostriches have two legs.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UZM
+#+begin_note
+  Determine whether these biconditionals are true or false:
+  1. 2 + 1 = 3 if and only if 1 + 2 = 3.
+  2. 1 + 2 = 3 if and only if 3 + 1 = 6.
+  3. 1 + 3 = 2 if and only if the earth is flat.
+  4. 1 < 2 if and only if 2 < 3.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OOY *
+#+begin_note
+  Write each of these sentences as \lsquo{}if p, then q\rsquo statements:
+  1. It is necessary to sign up to win the contest.
+  2. I get a cold whenever I go outside.
+  3. It is sufficient to be an A student to receive the scholarship.
+  4. As long as you leave now, you will get there on time.
+  5. I\rsquo{}ll get half off if I act now.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OKJ *
+   See Puzzle UFZ below.
+#+begin_note
+  Write the converse, inverse, and contrapositive of each of these statements:
+  1. If it rains today, we won\rsquo{}t go to the park.
+  2. If you do your homework, I\rsquo{}ll give you a pat on the back.
+  3. Whenever I babysit, I get sick.
+  4. Every time there is a quiz, I go to class.
+  5. I wake up late when I stay up past my bedtime.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UVH
+#+begin_note
+  Construct a truth table for each  of these propositions:
+  1. $\mathsf{p} \rightarrow \mathsf{q}$
+  2. $\mathsf{p} \oplus \mathsf{q}$
+  3. $\mathsf{p} \rightarrow \lnot \mathsf{q}$
+  4. $\neg \mathsf{p} \rightarrow \mathsf{q}$
+  5. $\mathsf{p} \wedge \neg \mathsf{q}$
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OJM *
+#+begin_note
+  Construct a truth table for each  of these propositions:
+  1. $\mathsf{p} \rightarrow (\neg \mathsf{p})$
+  2. $\mathsf{p} \leftrightarrow \mathsf{q}$
+  3. $\mathsf{p} \leftrightarrow (\neg \mathsf{p})$
+  4. $\mathsf{p} \land \mathsf{p}$
+  5. $\mathsf{p} \lor \mathsf{p}$
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO ULQ *
+#+begin_note
+  Construct a truth table for (p \rarr q) \rarr (q \rarr r) \rarr (r \rarr s).
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OTD
+#+begin_note
+  Construct a truth table for (p \lor q) \land (\not p \lor r) \rightarrow (q \lor r).
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OKQ *
+#+begin_note
+  Show that $(p \leftrightarrow q) \wedge (p \leftrightarrow r)$ and $p \leftrightarrow (q \wedge r)$ are logically equivalent.
+:HINT:
+  - Hint :: Use a truth table to show instead why these two propositions are
+            /not/ logically equivalent.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UKF
+#+begin_note
+  Show that $\neg(p \leftrightarrow q)$ and $p \leftrightarrow \neg q$ are logically equivalent.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OKL
+#+begin_note
+  Determine if $(p \vee q) \wedge (\neg p \vee r) \rightarrow (q \vee r)$ is a tautology.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UEZ
+#+begin_note
+  Find a compound proposition involving the propositional variables /p/, /q/, and /r/
+  that is true when /p/ and /q/ are true and /r/ is false, but is false otherwise.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OYW *
+#+begin_note
+#+BEGIN_SRC elisp :results silent
+  (defun --> (p q)
+    "Conditional: p only if q"
+    (or (not p) q))
+
+  (defun <--> (p q)
+    "Biconditional: p if and only if q"
+    (and (--> p q) (--> q p)))
+
+  (defun valid-connective (op)
+    (or (eq op 'and) (eq op 'or) (eq op 'xor)
+        (eq op '-->) (eq op '<-->)))
+#+END_SRC
+
+  The =prop-eval= function evaluates propositions that are based on vectors of
+  symbols, prompting the user for their truth values, combining them two-by-two
+  with the valid connectives, and minimally formatting the output. It even
+  checks for errors!
+
+#+BEGIN_SRC elisp :results silent
+  (defun prop-eval (prop)
+    (unless (and (vectorp prop)
+                 (= 3 (length prop))
+                 (valid-connective (elt prop 1)))
+      (error "bad parameters"))
+    (let* ((op (elt prop 1))
+           (l (eval (elt prop 0)))
+           (r (eval (elt prop 2)))
+           (lval (y-or-n-p (mapconcat 'symbol-name l " ")))
+           (rval (y-or-n-p (mapconcat 'symbol-name r " ")))
+           (result (eval (list op lval rval))))
+      (list l (list lval) op r (list rval) 'yields result)))
+#+END_SRC
+
+  Try it with a couple of compound propositions:
+
+#+BEGIN_SRC elisp :results raw
+  (let* ((p [It is raining])
+         (q [The grass is wet])
+         (p-and-q [p and q]))
+    (prop-eval p-and-q))
+#+END_SRC
+
+: ([It is raining] (t) and [The grass is wet] (t) yields t)
+
+#+BEGIN_SRC elisp :results raw
+  (let* ((p [It is raining])
+         (q [The grass is wet])
+         (p-onlyif-q [p --> q]))
+    (prop-eval p-onlyif-q))
+#+END_SRC
+
+: ([It is raining] (t) --> [The grass is wet] (nil) yields nil)
+
+  You try it with the other three connectives.
+#+END_SRC
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UEF *
+#+begin_note
+  Study this fancier version of =prop-eval= (and supporting cast). Note that
+  this code only works for simple propositions consisting of three symbols --- l
+  op r, to abbreviate. How would you make it handle more complex propositions?
+
+#+BEGIN_SRC elisp :results silent
+  (defun stringify (prop)
+    (let* ((str (mapconcat 'symbol-name prop " ")))
+      (downcase (substring str 0 (- (length str) 1)))))
+
+  (defun fancier-prompt (str)
+    (let* ((prompt (concat "Is it the case that " str "? "))
+           (answer (y-or-n-p-with-timeout prompt 5 t)))
+      (princ (format "Given %s is %s\n" str (if answer 'true: 'false:)))
+      answer))
+
+  (defun fancier-output (result l op r)
+    (princ (format "It is %s that %s %s %s.\n"
+                   (if result 'true 'false)
+                   l op r)))
+
+  (defun prop-eval (prop)
+    (unless (and (vectorp prop)
+                 (= 3 (length prop))
+                 (valid-connective (elt prop 1)))
+      (error "bad parameters"))
+    (let* ((op (elt prop 1))
+           (l (eval (elt prop 0)))
+           (r (eval (elt prop 2)))
+           (lstr (stringify l))
+           (rstr (stringify r))
+           (lval (fancier-prompt lstr))
+           (rval (fancier-prompt rstr))
+           (result (eval (list op lval rval))))
+      (fancier-output result lstr op rstr)))
+#+END_SRC
+
+  Note the periods to close sentences properly and allow =stringify= to do its
+  job better:
+
+#+BEGIN_SRC elisp :results output
+  (let* ((p [It is raining.])
+         (q [The grass is wet.])
+         (p-onlyif-q [p --> q]))
+    (prop-eval p-onlyif-q))
+#+END_SRC
+
+: Given it is raining is true:
+: Given the grass is wet is true:
+: It is true that it is raining --> the grass is wet.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO OUB
+#+begin_note
+  Implement the reverse conditional function (=<--=).
+
+  Find two shorter ways to correctly implement the biconditional function (=<-->=).
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO UQY *
+#+begin_note
+  This is an exercise in implementing logic gate Boolean functions to generate
+  truth tables of compound Boolean functions.
+
+  Specifically, your task is to implement the =not1=, =or2= and =and2=
+  functions, *arithmetically* (i.e., do /not/ use any conditional logic --- =if=
+  or =cond= or the like). Use *only* the operators +, -, and *. The inputs to
+  these three functions will be zeros or ones only. You\rsquo{}ll know you got it right
+  when you only get =t= from evaluating the final three code blocks.
+
+#+BEGIN_SRC elisp :results silent
+  (defun not1 (x)
+    ;; implement me
+  )
+
+  (defun and2 (x y)
+    ;; implement me
+  )
+
+  (defun or2 (x y)
+    ;; implement me
+  )
+#+END_SRC
+
+#+BEGIN_SRC elisp :results silent
+  (defun truth-table-row-inputs (i)
+    (elt [[0 0 0] [0 0 1] [0 1 0] [0 1 1]
+          [1 0 0] [1 0 1] [1 1 0] [1 1 1]] i))
+
+  (defun truth-table-row-with-output (i func)
+    (let* ((inputs (append (truth-table-row-inputs i) nil))
+           (output (apply func inputs)))
+      (apply 'vector (append inputs (list output)))))
+
+  (defun f1 (p q r)
+    (or2 (and2 p q) (not1 r)))
+
+  (defun f2 (p q r)
+    (and2 p (or2 q (not1 r))))
+
+  (defun f3 (p q r)
+    (or2 p (and2 q r)))
+
+  (defun generate-truth-table-for (func)
+    (vector (truth-table-row-with-output 0 func)
+            (truth-table-row-with-output 1 func)
+            (truth-table-row-with-output 2 func)
+            (truth-table-row-with-output 3 func)
+            (truth-table-row-with-output 4 func)
+            (truth-table-row-with-output 5 func)
+            (truth-table-row-with-output 6 func)
+            (truth-table-row-with-output 7 func)))
+#+END_SRC
+
+#+BEGIN_SRC elisp :results silent
+   (equal (generate-truth-table-for 'f1)
+          [[0 0 0 1]
+           [0 0 1 0]
+           [0 1 0 1]
+           [0 1 1 0]
+           [1 0 0 1]
+           [1 0 1 0]
+           [1 1 0 1]
+           [1 1 1 1]])
+#+END_SRC
+
+#+BEGIN_SRC elisp :results silent
+   (equal (generate-truth-table-for 'f2)
+          [[0 0 0 0]
+           [0 0 1 0]
+           [0 1 0 0]
+           [0 1 1 0]
+           [1 0 0 1]
+           [1 0 1 0]
+           [1 1 0 1]
+           [1 1 1 1]])
+#+END_SRC
+
+#+BEGIN_SRC elisp :results silent
+   (equal (generate-truth-table-for 'f3)
+          [[0 0 0 0]
+           [0 0 1 0]
+           [0 1 0 0]
+           [0 1 1 1]
+           [1 0 0 1]
+           [1 0 1 1]
+           [1 1 0 1]
+           [1 1 1 1]])
+#+END_SRC
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Puzzles
+** TODO OQP
+#+begin_note
+  The way to deal with lisp expressions is to look for lists, and when found,
+  evaluate them. Finding them is easy --- lisp code consists of lists, and lists
+  of lists nested to many levels. Evaluating a list entails evaluating each of
+  its elements, except the first, which is treated differently. For now, think
+  of the first element as an operator that operates on the values of the rest of
+  the elements. These values are called the operands. So =(+ 1 2 3 4)= adds
+  together operands 1, 2, 3, and 4 to produce 10. Note the economy of this
+  /prefix/ notation, as it\rsquo{}s called: only one mention of the =+= sign is needed.
+  The more familiar /infix/ notation requires redundant =+= signs, as in
+  =1+2+3+4=.
+
+  Now is the time to overcome inertia and gain some momentum with elisp. Find at
+  [[file:elisp-mini-primer.org][this link a mini-primer]] and work through it in emacs.
+:HINT:
+  - Hint :: You will be well served to work through this mini-primer carefully
+            and thoroughly. So much to come depends on your grasping the basics!
+:END:
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+    Not applicable.
+** TODO USV
+#+begin_note
+  Or pyrire jvgu ahzoref. Svaq n jnl gb vafreg vagb gurfr gra yvarf gur sbhe
+  fgnaqneq zngu bcrengbef (+, -, \gvzrf, \qvi), be ! (snpgbevny), be \enqvp (fdhner ebbg),
+  naq cneragurfrf sbe tebhcvat, gb znxr gra qvssrerag rkcerffvbaf gung rnpu
+  rinyhngr gb 6. Sbe rknzcyr: \enqvp4 + \enqvp4 + \enqvp4 = 6.
+  | 0 |   | 0 |   | 0 |   | = | 6 |
+  |   |   |   |   |   |   |   |   |
+  | 1 |   | 1 |   | 1 |   | = | 6 |
+  |   |   |   |   |   |   |   |   |
+  | 2 |   | 2 |   | 2 |   | = | 6 |
+  |   |   |   |   |   |   |   |   |
+  | 3 |   | 3 |   | 3 |   | = | 6 |
+  |   |   |   |   |   |   |   |   |
+  | 4 |   | 4 |   | 4 |   | = | 6 |
+  |   |   |   |   |   |   |   |   |
+  | 5 |   | 5 |   | 5 |   | = | 6 |
+  |   |   |   |   |   |   |   |   |
+  | 6 |   | 6 |   | 6 |   | = | 6 |
+  |   |   |   |   |   |   |   |   |
+  | 7 |   | 7 |   | 7 |   | = | 6 |
+  |   |   |   |   |   |   |   |   |
+  | 8 |   | 8 |   | 8 |   | = | 6 |
+  |   |   |   |   |   |   |   |   |
+  | 9 |   | 9 |   | 9 |   | = | 6 |
+  |   |   |   |   |   |   |   |   |
+:HINT:
+  - Hint :: The puzzle is first of all to figure out what this exercise/problem
+            is asking. Did you work all the way through the Elisp Mini Primer
+            (see OQP)?
+:END:
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+    Verify with code calculations.
+** TODO UFZ
+#+begin_note
+  Investigate the variations of conditional statements known as the /converse/,
+  the /inverse/ and the /contrapositive/.
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+    Not applicable.
