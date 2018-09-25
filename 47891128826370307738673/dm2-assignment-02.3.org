@@ -2,7 +2,7 @@
 #+LANGUAGE: en
 #+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
 #+OPTIONS: html-postamble:nil
-#+STARTUP: showeverything prettyentities
+#+STARTUP: showeverything entitiespretty
 #+SETUPFILE: theme-bigblow.setup
 
 [[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
