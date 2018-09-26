@@ -1,0 +1,39 @@
+#+TITLE: DM2 Assignment 02.3
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+[[elisp:(org-clock-report%201)][Insert/Update Clock Summary Report]]
+* TODO Review Set Intersections and Unions
+  Let /A/ = =[0 2 4 6 8 10]=,
+      /B/ = =[0 1 2 3 4 5 6]=, and
+      /C/ = =[4 5 6 7 8 9 10]=.
+
+  Find
+  1. \(A \cap B \cap C\)
+  2. \(A \cup B \cup C\)
+  3. \((A \cup B) \cap C\)
+  4. \((A \cap B) \cup C\)
+  5. (A \cup (B \cap C))
+
+* TODO Review the Symmetric Difference of Sets
+  Find the *symmetric difference* (\(A \oplus B\)) (which, recall, is
+  the set containing those elements in either /A/ or /B/, but not in
+  both /A/ and /B/ --- i.e., \(A \oplus B = (A - B) \cup (B - A)\)) of
+  /A/ = =[1 3 5]= and /B/ = =[1 2 3]=.
+
+* TODO Review DeMorgan\rsquo{}s Laws
+  DeMorgan's laws for sets involve set intersection, set union, and set
+  complementation. Find what elisp functions exist to help explore these laws,
+  and do some experiments with them.
+
+* TODO Review the Cartesian Products of Sets
+  Let A = [a b c], B = [x y], and C = [0 1]. Find
+
+  1. A \times B \times C
+  2. C \times B \times A
+  3. C \times A \times B
+  4. B \times B \times B
