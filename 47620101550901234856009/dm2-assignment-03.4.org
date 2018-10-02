@@ -1,0 +1,249 @@
+#+TITLE: DM2 Assignment 03.4
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+[[elisp:(org-clock-report%201)][Insert/Update Clock Summary Report]]
+* TODO Study this Function and its Partial Implementation in C++
+#+BEGIN_EXAMPLE
+   The function f : Z+  x  Z+ --> Z+, where f(m, n) = [(m + n - 2)(m + n - 1)/2] + m,
+   is one-to-one and onto.
+
+   A little experimentation with this function shows the pattern.
+
+   f(1,1) =  1   f(2,1) =  3   f(3,1) =  6   f(4,1) = 10   f(5,1) = 15
+
+   f(1,2) =  2   f(2,2) =  5   f(3,2) =  9   f(4,2) = 14   f(5,2) = 20
+
+   f(1,3) =  4   f(2,3) =  8   f(3,3) = 13   f(4,3) = 19   f(5,3) = 26
+
+   f(1,4) =  7   f(2,4) = 12   f(3,4) = 18   f(4,4) = 25
+
+   f(1,5) = 11   f(2,5) = 17   f(3,5) = 24
+
+   f(1,6) = 16   f(2,6) = 23
+
+   f(1,7) = 22
+
+   It should be clear that the range of values this function takes on
+   for a fixed value of m + n, say m + n = x, is
+
+   (x - 2)(x - 1)                (x - 2)(x - 1)
+   --------------  + 1  through  -------------- + (x - 1)
+          2                             2
+
+   since m can assume the values 1, 2, 3,...,(x - 1) under these
+   conditions, and the first term in the formula is a fixed positive
+   integer when m + n is fixed.
+
+   To show that this function is one-to-one and onto, we merely need
+   to show that the range of values for x + 1 picks up precisely
+   where the range of values for x left off, i.e., that
+
+   f(x - 1, 1) + 1 = f(1, x)
+
+                     (x - 2)(x - 1)
+   f(x - 1, 1) + 1 = -------------- + (x - 1) + 1
+                            2
+
+                     x^2 - x + 2    (x - 1)x
+                   = -----------  = --------  + 1  = f(1, x)
+                         2             2
+#+END_EXAMPLE
+
+#+BEGIN_SRC C++ :results output :var global_y=23
+  #include <cmath>
+  #include <cstdlib>
+  #include <iostream>
+  using namespace std;
+
+  int f(int m, int n)
+  {
+     int x = m + n;
+     return (((x - 2) * (x - 1) / 2) + m);
+  }
+
+  void invert(int y, int& m, int& n)
+  {
+     int x = 0; // what should this assignment to x really be? 
+     m = y - ((x-1)*(x-2)/2);
+     n = x - m;
+  }
+
+  int main(int argc, char* argv[])
+  {
+     int y = (argc > 1) ? atoi(argv[1]) : global_y;
+
+     int m = 0;
+     int n = 0;
+     invert(y, m, n);
+     // check answer
+     if (y == f(m, n))
+     {
+     cout << "m = " << m << ", n = " << n << endl;
+     }
+     return 0;
+  }
+#+END_SRC
+
+  If correctly implemented, the output will be:
+#+RESULTS:
+: m = 2, n = 6
+
+* TODO Probe Deeply Into A Number-Theoretic Conjecture
+
+  Let us define two infinite sets of positive integers, /A/ and /B/, to be
+  generated based on two real numbers. The first is \( x = \sqrt{2} \), so \( A
+  = \{\lfloor x \rfloor, \lfloor 2x \rfloor, \lfloor 3x \rfloor, \lfloor 4x
+  \rfloor, \ldots \} \), more succinctly written as \( \{\lfloor nx \rfloor : n
+  \in \mathbf{Z^{+}}\} \). /B/ is similarly defined, except with \( 2 + \sqrt{2}
+  \) being the real number /x/. So in words, /A/ is the set of all floored
+  positive integer multiples of the square root of two. /B/ is the set of all
+  floored positive integer multiples of two plus the square root of two.
+
+  You must grasp the meaning of this definition and demonstrate that you have
+  achieved a solid understanding of it. To help achieve and explore that
+  understanding, write an elisp program to calculate the two sets /A/ and /B/.
+  As you examine your results, be on the lookout for any patterns, and formulate
+  some kind of conjecture about these results. State your conjecture clearly and
+  unambiguously, then try to /verify/ your conjecture for as many positive
+  integers as you can.
+
+  In the supplied sample code is an elisp program (=3x+1conjecture.el=) that
+  verifies the so-called /3x + 1 conjecture/ for a given positive integer. When
+  you examine this code, note the use of the calc package and how it enables
+  working with /very large/ numbers.
+
+* Sample Code
+
+#+BEGIN_SRC elisp :results silent :tangle 3x+1conjecture.el
+  (require 'calc)
+
+  (defmath is-odd (num)
+    (= (logand num 1) 1))
+
+  (defmath 3x+1 (num)
+    (if (is-odd num)
+        (1+ (* 3 num))
+      (/ num 2)))
+
+  (defmath transform-3x+1 (num)
+    (while (> num 1)
+      (setq num (3x+1 num)))
+    num)
+
+  (defun test-3x+1-conjecture (max-num)
+    (loop for n from 2 to max-num
+          unless (= 1 (calcFunc-transform-3x+1 n))
+          collect n))
+
+  (defmacro measure-time (&rest body)
+    "Measure and return the running time of the code in body."
+    (declare (indent defun))
+    (let ((start (make-symbol "start")))
+      `(let ((,start (float-time)))
+         ,@body
+         (- (float-time) ,start))))
+#+END_SRC
+
+#+BEGIN_SRC elisp
+  (require 'calc-math)
+  (calcFunc-is-odd (math-read-number "3589723987598273598723958729385792875982735982759871"))
+#+END_SRC
+
+#+BEGIN_SRC elisp
+  (vector (measure-time (setq results (test-3x+1-conjecture 1000000))) results)
+#+END_SRC
+
+* Expectations
+  *How to Earn Your Grade*
+
+  1. Supply the correct missing expression in the assignment of /x/ in the
+     /invert/ function.
+  2. Get the supplied 3x+1conjecture.el code to “tangle” 
+     (see [[http://orgmode.org/guide/Working-With-Source-Code.html]]).
+  3. Learn how to run emacs in \ldquo{}batch mode\rdquo. 
+  4. Load the supplied code and run it in batch mode.
+  5. Report on how long it took to run the =test-3x+1-conjecture= function.
+  6. Formulate the set-theoretic conjecture in \ldquo{}set proposition\rdquo form.
+     Be sure to state your conjecture *clearly* and *unambiguously* (using
+     no more than 20 symbols).
+  7. Show that you grasp the meaning of and demonstrate that you have
+     achieved a solid understanding of this conjecture.
+  8. Using your experience with the /calc-math/ package, write elisp code
+     to /verify/ the set-theoretic conjecture. This requires attacking
+     the problem using /integers/ --- *not* /reals/.
+  9. With a time/computation budget of 24 hours (in a row), report on
+     how many 13-digit numbers (in the trillions) you can verify.
+  10. Do the \ldquo{}What Is True?\rdquo self-assessment.
+* What Is True?
+  This is a tool that allows you to quantify how engaged (interested,
+  focused, enthusiastic) you feel you were while doing this assignment.
+
+  Use this scale to score your agreement with the assertions in the function below
+  that uses a string as the first element, and a number 0-5 as the second element
+  of each vector in this vector of vectors:
+
+  | 5 | = | complete or total agreement   |
+  | 4 | = | not quite total agreement     |
+  | 3 | = | middling agreement            |
+  | 2 | = | some agreement                |
+  | 1 | = | piddling agreement            |
+  | 0 | = | none, no agreement whatsoever |
+
+#+BEGIN_SRC elisp :results silent :tangle yes
+    (defun what-is-true-about-my-engagement-with-dm2-assignment-03.4 ()
+      (vector
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; What is true of my experience in general?                              ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    ["I had fun." 0]
+    ["I collaborated with one or more classmates." 0]
+    ["I learned something new." 0]
+    ["I achieved something meaningful, or something I can build upon at a later time." 0]
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; What is true of my report on what I learned?                            ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    ["I reported on how I attacked and solved the problem of the invert function." 0]
+    ["I reported on how many 13-digit numbers I was able to verify." 0]
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; What is true about the correctness and completeness of my code?         ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    ["It is verified by showing no output except that which would report a failure to satisfy a correct conjecture." 0]
+    ["It uses bigpos arithmetic via the 'calc' package." 0]
+    ["It does NOT use any floating-point arithmetic." 0]
+    ["It can correctly keep running for 24 consecutive hours without running out of memory." 0]
+    ["It can correctly keep running under emacs in batch mode in the background, as discussed in class." 0]
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; What is true about the elegance of my code?                             ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    ["It has some by virtue of its correctness, as first and foremost, an elegant solution is a correct solution." 0]
+    ["It increases by means of helper functions that increase cohesion, and decrease complexity." 0]
+    ["It increases by having no unnecessary, redundant functionality." 0]
+    ["It increases by using data types/structures as efficiently as possible." 0]
+    ["My code has only function definitions (defuns) in it, NO function calls or other expressions." 0]
+    ["The last function in my code is my 'main' test driver function defined as discussed in class." 0]
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; What is true of the depth of my engagement with this assignment?        ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    ["I found and grasped a clear, unambiguous statement of the set-theoretic conjecture." 0]
+    ["I succeeded in verifying this conjecture for many, many 13-digit integers." 0]
+    ["I went deeper by seeking for an approach to a proof." 0]
+    ["I went deeper by getting close, but not quite to the end." 0]
+    ["I went deeper by getting all the way to the end, and clinching the proof." 0]
+    ["I went still deeper by exploring AND reporting on possible applications of the ideas I discovered." 0]
+  ))
+#+END_SRC

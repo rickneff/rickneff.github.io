@@ -1,0 +1,581 @@
+#+TITLE: DEF Functions I
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+[[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
+[[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
+* Exercises
+** TODO TDR
+#+begin_note
+  Find the =setf= way of doing the equivalent of =fset=.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WDT
+#+begin_note
+  PVP the result of evaluating the following (paying special attention to the
+  more-than-syntactic difference between the \lsquo{}starless\rsquo{} form of =let= and the
+  \lsquo{}star-suffixed\rsquo{} form):
+
+#+BEGIN_SRC emacs-lisp
+  (let ((a 1) (b 2) (c 3)) (+ a b c))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (let ((a 1) (b 2) (c 3)) (+ a b c d))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (let ((a 1) (b 2) (c 3)) [+ a b c d])
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (let ((a 1) (b 2) (c 3) (+ 4)) (+ a b c +))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (makunbound 'a)
+  (let ((a 1) (b 2) (c 3) (d (+ a 4))) (+ a b c d))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (let* ((a 1) (b 2) (c 3) (d (+ a 4))) (+ a b c d))
+#+END_SRC
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TEJ
+#+begin_note
+  A function-as-association between elements of a domain and elements of a
+  codomain, for \ldquo{}small\rdquo domains and codomains, inspired so-called \ldquo{}association
+  lists\rdquo (or alists) and the =assoc= (and associated) functions.
+
+  =(assoc KEY LIST)= returns non-nil if KEY is \ldquo{}equal\rdquo to the first element of
+  an element of LIST. The value is actually the first element of LIST whose
+  first element equals KEY.
+
+  For example, here is a function that uses an alist to look up the RGB values
+  of a given color name:
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun lookup-rgb (color-name)
+    (rest (assoc color-name
+                 '(("red" 255 0 0) ("green" 0 255 0) ("blue" 0 0 255)))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :results raw
+  (lookup-rgb "blue")
+#+END_SRC
+
+: (0 0 255)
+
+  What if the color name is not in the alist?
+
+#+BEGIN_SRC emacs-lisp :results raw
+  (lookup-rgb "grue")
+#+END_SRC
+
+: nil
+
+  There are several variations of =assoc=. Find and give examples of using them.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WFK
+#+begin_note
+  In the function-as-map context, here is another interpretation:
+
+  A \ldquo{}map\rdquo type (AKA associative array, AKA hashtable) is found in many
+  languages. For example, C++:
+#+BEGIN_SRC C++ :results output
+  #include <iostream>
+  #include <map>
+  using namespace std;
+
+  int main() {
+     map<string, string> mymap;
+
+     mymap["one"] = "red";
+     mymap["two"] = "blue";
+     mymap["three"] = "green";
+
+     for (auto const &ent1 : mymap) {
+        cout << ent1.first << " : " << ent1.second << endl;
+     }
+  }
+#+END_SRC
+
+: one : red
+: three : green
+: two : blue
+
+  And python:
+#+BEGIN_SRC python :results output
+  mymap = {}
+
+  mymap["one"] = "red"
+  mymap["two"] = "blue"
+  mymap["three"] = "green"
+
+  if __name__ == "__main__":
+          for key in mymap.keys():
+                  print key + " : " + str(mymap[key])
+#+END_SRC
+
+: three : green
+: two : blue
+: one : red
+
+  And of course elisp:
+#+BEGIN_SRC emacs-lisp :results output
+  (let* ((mymap (make-hash-table :test 'equal)))
+    (puthash "one" "red" mymap)
+    (puthash "two" "blue" mymap)
+    (puthash "three" "green" mymap)
+    (pp (list (gethash "one" mymap)
+              (gethash "two" mymap)
+              (gethash "three" mymap)))
+    (maphash (lambda (key value) (princ (format "%s : %s\n" key value))) mymap))
+#+END_SRC
+
+: ("red" "blue" "green")
+: one : red
+: two : blue
+: three : green
+
+  What happens if you omit the =:test 'equal= parameters to the
+  =make-hash-table= call?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TER
+#+begin_note
+  This exercise explores /looping/ versus /mapping/.
+
+  What does the =morphify= function defined below do? Think about it, then PVP
+  the result of the call to it that follows.
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun morphify (fun lst)
+    (loop for item in lst
+          collect (funcall fun item)))
+#+END_SRC
+
+  Note the quotes:
+
+#+BEGIN_SRC emacs-lisp :results raw
+  (morphify (quote downcase) (quote ("THIS" "IS" "TOO" "LOUD")))
+#+END_SRC
+
+  The =morphify= function is essentially a /mapping/ function, which means it
+  takes a passed-in function (=fun=) and a passed-in list (=lst=), and /maps fun
+  over lst/, i.e., the results of calling the function =fun= on each element of
+  the list =lst= are collected into a new list, which is returned.
+
+  This shows one way (iteratively) a /map/ function could be implemented.
+  Another way is /recursively/, as in:
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun morphifyr (fun lst)
+    (if (null lst)
+        nil
+      (append (list (funcall fun (first lst))) (morphifyr fun (rest lst)))))
+#+END_SRC
+
+  Explain how this version of =morphify= works.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TGE
+#+begin_note
+  Note the difference if -13 is used instead of 13 below:
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun compute-floor-the-hard-way (dividend divisor)
+    (- (/ dividend (float divisor)) (/ (mod dividend divisor) (float divisor))))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :results raw
+  (let* ((number (/ 13 4.0))
+         (floor1 (floor number))
+         (floor2 (compute-floor-the-hard-way 13 4.0)))
+    (list number floor1 floor2))
+#+END_SRC
+
+: (3.25 3 3.0)
+
+  Is the hard way correct?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO THP
+#+begin_note
+  Graph the floor and ceiling functions f(x) = \lfloor{}x\rfloor and f(x) = \lceil{}x\rceil for real
+  number values of x in the interval [-5.0 .. 5.0].
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WKM
+#+begin_note
+  Which of these statements about floor and ceiling are correct, for any real
+  number $x$ and any integers $n$ and $m$?
+  1. $x - 1 < \lfloor{}x\rfloor \le x \le \lceil{}x\rceil < x + 1$.
+  2. $\lfloor{}-x\rfloor = -\lceil{}x\rceil$.
+  3. $\lceil{}-x\rceil = -\lfloor{}x\rfloor$.
+  4. $\lfloor{}x + n\rfloor = \lfloor{}x\rfloor + n$.
+  5. $\lceil{}x + n\rceil = \lceil{}x\rceil + n$.
+  6. $\lfloor{}\frac{n}{2}\rfloor + \lceil{}\frac{n}{2}\rceil = n$.
+  7. $\lfloor{}\frac{n}{2}\rfloor + \lfloor{}\frac{n + 1}{2}\rfloor = n$.
+  8. $\lceil{}\frac{n}{2}\rceil + \lceil{}\frac{n + 1}{2}\rceil = n$.
+  9. $\lfloor{}\frac{n + m}{2}\rfloor + \lceil{}\frac{n - m + 1}{2}\rceil = n$ (for any $m$, not just $m =
+     0$ as in statement 7).
+  10. $\lceil{}\frac{n + m}{2}\rceil + \lceil{}\frac{n - m + 1}{2}\rceil = n$ (for any $m$, not just $m =
+      0$ as in statement 8).
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TIW
+#+begin_note
+  Define the function \ldquo{}round to nearest integer\rdquo using the floor and ceiling
+  functions, together with the \ldquo{}Iverson bracket\rdquo function. (A number whose
+  fractional part is less than one-half should be rounded down, otherwise up.)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TKG
+#+begin_note
+  Explore the inverse of =assoc= via the functions =rassoc= and associates.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WOV
+#+begin_note
+  Identify the formula or rule that generates the terms of each sequence:
+  1. =[7 14 21 28 35 42 49 56 63 70 ...]=
+  2. =[7 11 15 19 23 27 31 35 39 43 ...]=
+  3. =[3 4 6 9 13 18 24 31 39 48 ...]=
+  4. =[1 10 11 100 101 110 111 1000 1001 1010 ...]=
+  5. =[1 1 2 3 5 8 13 21 34 55 ...]=
+  6. =[7 22 11 34 17 52 26 13 40 20 ...]=
+  7. =[2 1 3 4 7 11 18 29 47 76 ...]=
+  8. =[6 12 24 48 96 192 384 768 1536 3072 ...]=
+  9. =[6 18 54 162 486 1458 4374 13122 39366 118098 ...]=
+  10. =[2 3 5 7 11 13 17 19 23 29 ...]=
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WQW
+#+begin_note
+  Classify the following lisp functions according as each is or is not a predicate:
+  | Predicate? | Yes or No? |
+  |------------+------------|
+  | =list=     |            |
+  | =listp=    |            |
+  | =integerp= |            |
+  | =vector=   |            |
+  | =vectorp=  |            |
+  | =symbolp=  |            |
+  | =zerop=    |            |
+  | =evenp=    |            |
+  | =oddp=     |            |
+#+end_note
+#+begin_info
+  Your answer goes here. (Replicate the above table.)
+#+end_info
+* Problems
+  Note: * means optional. If it\rsquo{}s not starred, it\rsquo{}s required.
+** TODO TBD *
+#+begin_note
+  A function is one-to-one if and only if it is onto, /provided/ its domain and
+  codomain are the same size.
+
+  Put this statement in symbolic form using the adjectives /injective/ and
+  /surjective/, and argue for its truth using the following formal definitions:
+
+  A function from domain A to codomain B
+
+  f : A \rarr B
+
+  is
+  - injective :: if f(m) \ne f(n) whenever m \ne n, for all m \in A and for all n \in A;
+
+  and/or is
+  - surjective :: if for all b \in B there exists an a \in A such that f(a) = b.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WDK *
+#+begin_note
+  Venture further into the /quote/ \ldquo{}macro\rdquo in lisp, used to \ldquo{}suppress\rdquo
+  evaluation of symbols, lists and other things. Explore the difference between
+  /set/, /setq/ and /setf/ --- /setf/ being another Common Lisp macro (hence the
+  need to =(require 'cl)=, as with =loop=) --- and note which feature of
+  functional programming is being flouted in this code:
+
+#+BEGIN_SRC emacs-lisp
+  (require 'cl)
+
+  (set 'a 'one)
+  (setq a (quote one))
+  (setf b '(one two))
+  (setf a (first b))
+  (setf (second b) a)
+#+END_SRC
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TEH
+  Important: see Exercise WDT for context.
+#+begin_note
+  Could you get by without this star-suffixed form? How?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WFC
+#+begin_note
+  Remembering that these are functions, do the four basic math operators (=+=,
+  =-=, =*=, =/=) work as you might expect?
+
+  How about when the number of operands
+  - is greater than two?
+  - is less than two (i.e., one or zero)?
+
+  This is a good time to mention that functions with arity /n/ for /n/ = 1
+  (unary) and /n/ = 2 (binary) have alternate type names, as does a generic
+  classification for /n/ > 2:
+
+  | Arity | Type     |
+  |-------+----------|
+  |     1 | Monadic  |
+  |     2 | Dyadic   |
+  |   > 2 | Polyadic |
+
+  Argue for /polyadic/ to mean having /arbitrary arity/ (taking 0 /or more/
+  arguments).
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WGP
+  Important: see Exercise TER for context.
+#+begin_note
+  The =morphify= function already exists by the name =mapcar=, and there are
+  several variations and embodiments of this /map/ feature, as you will learn
+  (and one of which you have already seen --- where?).
+
+  Write a short (one-line body) lisp function named /vector-to-string/
+  that takes a vector of symbols and converts it into a single string of the
+  symbols\rsquo{} names separated by a space. for example,
+
+#+BEGIN_SRC emacs-lisp
+  (format "%s" (vector-to-string [a b c]))
+#+END_SRC
+
+  should give
+
+: "a b c"
+
+:HINT:
+  - Hint ::
+#+BEGIN_SRC emacs-lisp
+  (let ((info '(("harry" male 42)
+                ("larry" male 31)
+                ("curly" male 29)
+                ("shirley" female 30))))
+    (mapconcat 'first info "\n"))
+#+END_SRC
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WGW *
+#+begin_note
+  Prefix notation takes some getting used to. Converting an expression from
+  prefix to infix, to make arithmetic look more \ldquo{}natural\rdquo, is as easy as
+  swapping the first two elements of a three-element list; e.g., =(+ 1 2)=
+  becomes =(1 + 2)=. But what if the expression has other expressions nested
+  within it, e.g., =(- 10 (* 2 3))=, where one (or both) of the operands is
+  another 3-element (prefix expression) list? Recursively applying the swapping
+  rule is the answer!
+
+  Study the =prefix->infix= function and the three sample calls to it. Describe
+  how it works. Try it on more complex expressions. Re-implement it without
+  using =let= or =cond= (use =if=).
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun prefix->infix (pre)
+    (cond ((listp pre)
+           (or (= 3 (length pre)) (error "not a 3-length list"))
+           (let ((operator (nth 0 pre))
+                 (operand1 (nth 1 pre))
+                 (operand2 (nth 2 pre)))
+             (list (prefix->infix operand1)
+                   operator
+                   (prefix->infix operand2))))
+          (t pre)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :results raw
+  (prefix->infix '(+ 1 2))
+#+END_SRC
+
+: (1 + 2)
+
+#+BEGIN_SRC emacs-lisp :results raw
+  (prefix->infix '(+ 1 (* 2 3)))
+#+END_SRC
+
+: (1 + (2 * 3))
+
+#+BEGIN_SRC emacs-lisp :results raw
+  (prefix->infix '(+ (/ 1 4) (* 2 3)))
+#+END_SRC
+
+: ((1 / 4) + (2 * 3))
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TFV *
+#+begin_note
+  Implement and test an =infix->prefix= function.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WJS
+#+begin_note
+  Describe an analogous situation to floor when taking the ceiling of negative
+  numbers.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WKC
+#+begin_note
+  Define the \ldquo{}take the fractional part of\rdquo function =frac-part= in terms of
+  =floor= as follows:
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun frac-part (number)
+    (- number (floor number)))
+#+END_SRC
+
+  For example,
+#+BEGIN_SRC emacs-lisp
+  (frac-part 3.14159)
+#+END_SRC
+
+: 0.14158999999999988
+
+  Suppose =frac-part= were the primitive, built-in function. How would you
+  define =floor= (assuming it were /not/ built-in) using =frac-part=?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WNW
+#+begin_note
+  What conditions/restrictions on a function must be placed for it to be
+  /invertible/ (have an inverse)?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TMZ
+#+begin_note
+  Write elisp with loops and lambda predicates to answer the following:
+  1. How many pairs of numbers between 1 and 1000 pass the predicate given by
+     the following lambda expression? (lambda (m n) (= 1 (gcd m n)))
+  2. How many solutions are there in integers to the equation 3x + 4y = 7?
+  3. Each taken from the set [2 3 4 5 6 7 8 9], how many pairs of numbers are
+     there that when multiplied together equal one more than a multiple of 11?
+  4. How many pairs of numbers that when multiplied together equal one more than
+     a multiple of 23 are found in the set [2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+     17 18 19 20 21]?
+  5. How many pairs of numbers that when multiplied together equal one more than
+     a multiple of *9* are found in the set [2 3 4 5 6 7]?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TNL
+#+begin_note
+  Explore the counterpart of \Sigma, the symbol used to collapse a /sum/ of terms;
+  namely, the Greek letter (which?) used to collapse a /product/ of terms.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WRD
+#+begin_note
+  With at least two examples of a binary function, verify the nested summation
+  interchange rule.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TNQ
+#+begin_note
+  Consider the following function:
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun calculate-pi-very-slowly (max-iterations)
+    (* 4 (loop for n from 0 to max-iterations
+               sum (/ 1.0 (* (+ (* 2 n) 1) (expt -1 n))))))
+#+END_SRC
+
+  How slow is \ldquo{}very slowly\rdquo?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Puzzles
+** TODO TEU
+#+begin_note
+  How many numbers between one and a million contain the digit 1 exactly once,
+  and the sum of the rest of the digits is 16? Write elisp code with and without
+  loops to verify your answer.
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+** TODO TME
+#+begin_note
+  Sequences can be non-numeric as well. What is the pattern for this sequence?
+: [m b w y me be wi yo met bew ith you meta bewi thyo uati metap bewit hyoua tirel]
+  How long can it continue?
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+
+** TODO WRA
+#+begin_note
+  Why is the sum of the reciprocals of the powers of two scaled by which power
+  equal to two?
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
