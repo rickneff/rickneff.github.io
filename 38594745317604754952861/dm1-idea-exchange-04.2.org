@@ -1,0 +1,102 @@
+#+TITLE: DM1 Idea Exchange 04.2 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything
+#+SETUPFILE: ../theme-bigblow.setup
+
+* Preliminaries
+  A compare/contrast exercise is one where you have two or more things that have
+  similarities and differences. Your task is to explain these similarities and
+  differences. Bear in mind that to be responsive at all there should be at
+  least one point of comparison (telling how they are the same) and at least one
+  point of contrast (telling how they are different), and preferably two or more
+  of each.
+
+  We will do a warmup example exercise in class. 
+
+  We will also do an exercise in software provisioning (tooling up).
+
+* The Meat 
+  Recall the /polygon circumscribing/ (AKA /limiting radius/) problem? The
+  limiting radius (r_\infty) of the outermost circle is 8.700 (approximately).
+
+  There are reasons finding the value of this radius is an exercise/problem in
+  /discrete/ mathematics (one is because algorithms are step-by-step discrete
+  things, another is that the answer can only be given with finite precision,
+  which is a discrete math idea) and there are reasons for it being /continuous/
+  mathematics (because you can do it without a computer, and the answer is a
+  /real/ number, which is a continuous math idea). In other words, it depends!
+
+  Whether or not this was an exercise (versus a problem) depends on if on first
+  contact you immediately knew how to answer it or not!
+
+  Below are two computational solutions to this problem, one in C++, one in
+  elisp. The exercise is to compare and contrast the two.
+
+  First post your answer. 
+
+  Then post on two other students answers, comparing/contrasting their answers
+  to yours. 
+
+#+BEGIN_SRC C++ :var global_num=10000000 :results output
+  #include <iostream>
+  #include <iomanip>
+  #include <cmath>
+  #include <ctime>
+  #include <cstdlib>
+  using namespace std;
+
+  double limitingRadius(long numSides)
+  {
+     double radius = 1.0;
+     for (long i = 3; i < numSides; i++)
+     {
+        radius /= cos(M_PI / i);
+     }
+     return radius;
+  }
+
+  int main(int argc, const char* argv[])
+  {
+     int n = (argc < 2) ? global_num : atol(argv[1]);
+     clock_t start = clock();
+     double result = limitingRadius(n);
+     clock_t end = clock();
+     cout << "Calculated " << setprecision(17) << result
+          << " with " << n << " iterations in "
+          << (end - start) / (double) CLOCKS_PER_SEC
+          << " seconds.\n";
+     return 0;
+  }
+#+END_SRC
+
+#+RESULTS:
+: Calculated 8.7000323319290214 with 10000000 iterations in 0.24998300000000001 seconds.
+
+#+BEGIN_SRC elisp :results silent
+  (defun limiting-radius (num-sides)
+    (loop with result = 1.0
+          for i from 3 below num-sides
+          do (setq result (/ result (cos (/ pi i))))
+          finally return result))
+
+  (defun calculate-limiting-radius (num-sides)
+    (let* ((start (float-time))
+           (result (limiting-radius num-sides))
+           (end (float-time)))
+      (format "Calculated %.17f with %d iterations in %.17f seconds."
+              result num-sides (- end start))))
+#+END_SRC
+
+#+BEGIN_SRC elisp
+  (calculate-limiting-radius 100000)
+#+END_SRC
+
+#+BEGIN_SRC elisp
+  (calculate-limiting-radius 1000000)
+#+END_SRC
+
+#+BEGIN_SRC elisp
+  (calculate-limiting-radius 10000000)
+#+END_SRC
