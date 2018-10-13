@@ -1,0 +1,30 @@
+#+TITLE: Idea Exchange 05.2 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything
+#+SETUPFILE: theme-bigblow.setup
+
+  In subsubsection GHS Roger Penrose is quoted. Discuss this quote, focusing on
+  how he relates awareness, understanding and intelligence. Then consider the
+  following:
+
+  In Doctrine and Covenants section 93 the Lord defines some words. In
+  particular, Doctrine and Covenants 93:24 defines truth as /knowledge
+  of things as they are, and as they were, and as they are to come./
+  Later, verse 29 equates /intelligence/ with /the light of truth/.
+  Even later, in verse 36, appears the familiar saying /The glory of
+  God is intelligence, or, in other words, light and truth/.
+
+  From these marvelous revealed words, and /thinking in terms of sets/, we can
+  conclude which of the following?
+
+  - [ ] Intelligence is the intersection of light and truth.
+  - [ ] Intelligence is the union of light and truth.
+  - [ ] Intelligence is a subset of truth, and light is the name of that subset.
+  - [ ] Intelligence, light and truth are all synonymous.
+
+  First post your answer, justifying your choice. 
+
+  Then post on two other students' answers, either augmenting their answer 
+  or correcting a mistake.

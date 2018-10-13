@@ -1,0 +1,49 @@
+#+TITLE: DM2 Idea Exchange 05.2 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: ../theme-bigblow.setup
+
+* TODO Read and Understand
+
+  A certain type of a partial order on Cartesian products of sets or strings
+  over some alphabet is called *lexicographic order*.
+
+  Such a partial order on sets A_i induces this lexicographic order on A_1 \times
+  A_2 \times \cdots \times A_n given by (a_1, a_2, \dots, a_n) \prec (b_1, b_2, \dots,
+  b_n) if for some i \ge 0, a_1 = b_1, \dots, a_i = b_i, and a_{i + 1} \prec b_{i + 1}.
+
+  A partial order on A induces lexicographic order on strings of any finite
+  length given by a_1 a_2 \dots a_n \prec b_1 b_2 \dots b_m if (a_1, a_2, \dots, a_t)
+  \prec (b_1, b_2, \dots, b_t) where t = min(m, n) or if (a_1, a_2, \dots, a_n) = (b_1, b_2, \dots, b_n)
+  and n < m.
+
+** Questions to Answer 
+  Show you understand these definitions. For the Cartesian product, let S = {1,
+  2, 3, 4}. With respect to the lexicographic order based on the usual less-than
+  relation, do the following:
+
+  1. Find all pairs in S \times S less than (2, 3).
+  2. Find all pairs in S \times S greater than (3, 1).
+
+  For strings, which of the following gives the correct lexicographic order of
+  {\ldquo{}aa\rdquo, \ldquo{}aab\rdquo, \ldquo{}ac\rdquo, \ldquo{}abb\rdquo, \ldquo{}b\rdquo, \ldquo{}ba\rdquo, \ldquo{}bba\rdquo}?
+  - [ ] \ldquo{}aa\rdquo, \ldquo{}aab\rdquo, \ldquo{}abb\rdquo, \ldquo{}ac\rdquo, \ldquo{}b\rdquo, \ldquo{}ba\rdquo, \ldquo{}bba\rdquo
+  - [ ] \ldquo{}b\rdquo, \ldquo{}aa\rdquo, \ldquo{}ac\rdquo, \ldquo{}ba\rdquo, \ldquo{}aab\rdquo, \ldquo{}abb\rdquo, \ldquo{}bba\rdquo
+  - [ ] \ldquo{}aa\rdquo, \ldquo{}ac\rdquo, \ldquo{}aab\rdquo, \ldquo{}abb\rdquo, \ldquo{}b\rdquo, \ldquo{}ba\rdquo, \ldquo{}bba\rdquo
+  - [ ] \ldquo{}aa\rdquo, \ldquo{}aab\rdquo, \ldquo{}ac\rdquo, \ldquo{}abb\rdquo, \ldquo{}ba\rdquo, \ldquo{}b\rdquo, \ldquo{}bba\rdquo
+
+  Which of the following gives the correct *numeric* order of {\ldquo{}aa\rdquo, \ldquo{}aab\rdquo,
+  \ldquo{}ac\rdquo, \ldquo{}abb\rdquo, \ldquo{}b\rdquo, \ldquo{}ba\rdquo, \ldquo{}bba\rdquo}? Numeric order differs from lexicographic order
+  by having shorter strings precede longer strings. (Strings of the same length
+  are still ordered lexicographically.)
+  - [ ] \ldquo{}aa\rdquo, \ldquo{}aab\rdquo, \ldquo{}abb\rdquo, \ldquo{}ac\rdquo, \ldquo{}b\rdquo, \ldquo{}ba\rdquo, \ldquo{}bba\rdquo
+  - [ ] \ldquo{}b\rdquo, \ldquo{}aa\rdquo, \ldquo{}ac\rdquo, \ldquo{}ba\rdquo, \ldquo{}aab\rdquo, \ldquo{}abb\rdquo, \ldquo{}bba\rdquo
+  - [ ] \ldquo{}aa\rdquo, \ldquo{}ac\rdquo, \ldquo{}aab\rdquo, \ldquo{}abb\rdquo, \ldquo{}b\rdquo, \ldquo{}ba\rdquo, \ldquo{}bba\rdquo
+  - [ ] \ldquo{}aa\rdquo, \ldquo{}aab\rdquo, \ldquo{}ac\rdquo, \ldquo{}abb\rdquo, \ldquo{}ba\rdquo, \ldquo{}b\rdquo, \ldquo{}bba\rdquo
+
+  First post your answers, and explain them. 
+
+  Then post on two other students' answers, either augmenting their answer 
+  or correcting a mistake.
