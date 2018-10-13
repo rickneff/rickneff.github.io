@@ -1,0 +1,369 @@
+#+TITLE: JKL Counting & Probability
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+[[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
+[[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
+* Exercises
+** TODO QAM
+#+begin_note
+  Henry only has one pair of pants. How many different outfits does Henry have
+  if he has 5 long-sleeve shirts and 3 short-sleeve shirts? (An outfit is \ldquo{}pants
+  with either a long-sleeve shirt or a short-sleeve shirt\rdquo.)
+
+  If Henry buys another pair of pants and 10 ties, then how many different
+  outfits (shirt /and/ tie /and/ pants) will he have?
+
+  Which basic counting principle applies to each scenario?
+:HINT:
+  - Hint :: Avoid overthinking this exercise, it is very straightforward. In the
+            first scenario, the either/or is a very obvious clue.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO REX
+#+begin_note
+  How should the /Sum Rule/ be adjusted when the two sets being selected from
+  are /not/ disjoint --- which means the /opposite/ of the oft-repeated \ldquo{}the
+  sets are disjoint\rdquo --- they have a /nonempty/ intersection; in other words,
+  they have /some/ members in common.
+:HINT:
+  - Hint :: Concretize two sets and draw their Venn diagram to get some insights
+            into this problem.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO QCV
+#+begin_note
+  How many different /functions/ are there from a set with 3 elements to a set
+  with 5 elements?
+:HINT:
+  - Hint :: It may be helpful to review the definition of a /function/.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO RFC
+#+begin_note
+  How many different /one-to-one/ functions are there from a set with 3 elements
+  to a set with 5 elements?
+:HINT:
+  - Hint :: It may be helpful to review the definition of a /one-to-one
+            function/ (an /injection/).
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO QCZ
+#+begin_note
+  How many different /onto/ functions are there from a set with 3 elements to a
+  set with 5 elements?
+:HINT:
+  - Hint :: It may be helpful to review the definition of an /onto/ function/ (a
+            /surjection/).
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO RFF
+#+begin_note
+  Concretize the equality
+
+  P(n, r) = n(n - 1)(n - 2) \cdots (n - (r - 1)) = n!/(n - r)!
+
+  and convince yourself that it /is/ an equality.
+:HINT:
+  - Hint :: Any two positive integer values for n and r with n \ge r (e.g., 8
+            and 5) will do.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO QDM
+#+begin_note
+  The English language predominantly uses the Subject-Verb-Object word type
+  ordering; for example, \ldquo{}Gary saw Alice\rdquo. Other languages might use
+  Subject-Object-Verb or Object-Verb-Subject, etc. How many different word
+  orderings are possible, /not/ depending on specific words, just their type?
+:HINT:
+  - Hint :: This is a very straightforward exercise in permutations.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO RJV
+#+begin_note
+  Suppose you flip a /fair/ coin 10 times. How many different ways can you get
+
+  1. no heads?
+  2. exactly one head?
+  3. exactly two heads?
+  4. exactly $r$ heads?
+  5. at least two heads?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO QIQ
+#+begin_note
+  How many bit strings of length 10 contain at least two 1s?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO RLH
+#+begin_note
+  There are many kinds of fruit: raspberries, strawberries, blueberries, apples,
+  oranges, bananas, kiwi, papaya, mango, just to name a few. Just choosing five
+  from that list of nine, how many different combinations of fruit salad can you
+  make?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Problems
+  Note: * means optional. If it\rsquo{}s not starred, it\rsquo{}s required.
+** TODO RGL
+#+begin_note
+  Recalling the example of how many are the permutations of the letters
+  ABCDELMNO, investigate and explain why 0! is defined to be equal to 1.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO QEB
+#+begin_note
+  How many of the 9! arrangements of the letters ABCDELMNO contain the string
+  ELM?
+:HINT:
+  - Hint :: How many arrangements of ABCDENO are there?
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO RGM
+#+begin_note
+  How many TLAs (arrangements of 3 alphabetic letters) are there /with
+  repetition allowed/?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO QFK
+#+begin_note
+  How many different sequences of initials are there for people who either have
+  two initials (first and last) or three initials (first, middle and last)?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO RHB
+#+begin_note
+  How many different sequences can be formed using /either/ two /or/ three
+  letters (A-Z) followed by /either/ two /or/ three digits (0-9)?
+
+  For example:
+
+  - AB01
+  - ABC02
+  - XYZ123
+  - ...
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO QGK
+#+begin_note
+  How many different \ldquo{}words\rdquo of the form =ccvcv= are there where =c= represents
+  one of the 21 consonants and =v= represents one of the 5 vowels in the English
+  alphabet? Assume no letter can be repeated, just count words like \ldquo{}tribe\rdquo or
+  \ldquo{}blizo\rdquo --- a non-word but count it anyway --- but not something like \ldquo{}trite\rdquo
+  or \ldquo{}gligi\rdquo, which have repeated letters.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO RVB *
+#+begin_note
+  \({n \choose k} = {n - 1 \choose k} + {n - 1 \choose k - 1}\).
+
+  This [[recurrence relation][recurrence relation]] is normally defined for nonnegative $n$ and $k$ ($0 \le
+  k \le n$), and to be implemented as a recursive function of two parameters needs
+  some \ldquo{}escape hatch\rdquo base cases. Here they are:
+
+  \({n \choose k} = 1\) whenever $k = 0$ or $k = n$;
+
+  whence this straightforward implementation:
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun n-choose-k (n k)
+    "Computes C(n, k) by the recursive definition;
+  given a pair of nonnegative integers n >= k >= 0,
+  returns the value of n choose k."
+    (if (or (zerop k) (= k n))
+        1
+      (+ (n-choose-k (- n 1) (- k 1))
+         (n-choose-k (- n 1) k))))
+#+END_SRC
+
+  However, there are good reasons to define other boundary conditions for this
+  basic combinatorial function and let its parameters range over all the
+  integers.
+
+  \({n \choose k} = 0\) whenever $k < 0$ or $k > n$.
+
+  Explore these reasons, and re-implement =n-choose-k= with =cond= instead of
+  =if= to handle these other conditions.
+
+  BTW, the numbers \({n \choose k}\) are known as the [[binomial coefficients][binomial coefficients]], and
+  for good reason!
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO QGT
+#+begin_note
+  Thinking in terms of subsets of size $k$ from a set of size $n$,
+  convince yourself of the validity of this summation:
+
+  $\sum_{k = 0}^{n}{n \choose k} = 2^n$.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO QKT
+#+begin_note
+  When you roll two dice, what is the probability that the sum of the numbers
+  (1-6) on their faces will be a multiple of 3 (3, 6, 9 or 12)?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO RNM
+#+begin_note
+  Rather than roll dice, Ruth and Ed usually flip a coin to decide who's going
+  to do the chores. One day Ed complains --- he thinks he loses too often. So
+  Ruth says, \ldquo{}OK, this time you flip two coins, and I flip one. If you get more
+  heads than I do, I\rsquo{}ll clean the toilets.\rdquo Ed likes Ruth\rsquo{}s display of
+  generosity and says, \ldquo{}You\rsquo{}re on!\rdquo
+
+  What are his chances?
+:HINT:
+  - Hint :: This was adapted from a problem posed by Marilyn Vos Savant in her
+            \ldquo{}Ask Marilyn\rdquo Parade Magazine column.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO QOS
+#+begin_note
+  Generalize the two- and four- fair-coin-flipping experiment to deal with the
+  experiment of flipping /2n/ coins. Find the probability of the event that /n/
+  will be heads, and /n/ will be tails.
+:HINT:
+  - Hint :: The answer will be a function of /n/.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO ROP *
+#+begin_note
+  What is the probability that when randomly selecting a permutation of the 26
+  letters (assumed all uppercase) of the alphabet the following events will
+  occur?
+
+  1. The first 13 letters will be in alphabetical order.
+  2. The first and last letters will be B and Y.
+  3. The letter I will come before both J and K.
+  4. The letters O and P will be next to each other.
+  5. The letters U and V will be separated by at least 23 letters.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO QRQ *
+#+begin_note
+  What should go in place of the \ldquo{};;...\rdquo in the code below? What other
+  improvements/fixes does this function need?
+
+#+BEGIN_SRC emacs-lisp
+  (defun probability (event space)
+    "A function that takes an event and a space
+  and returns a number between 0 and 1."
+    (let ((result (/ (size event) (size space))))
+      ;;...
+      result
+      ))
+#+END_SRC
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Puzzles
+** TODO QKA
+#+begin_note
+  A standard 52-card deck has 4 suits [\heartsuit \spadesuit \diamondsuit \clubsuit] of 13 cards each. A 5-card
+  hand can be chosen in any of \({52 \choose 5}\) ways. Bridge is a game where
+  each of 4 players is dealt 13 cards, which means the whole deck is dealt. A
+  hand has a distribution of suits, which is how many of each suit make up the
+  13 total. For example, =[2 2 3 6]= is the suit distribution of the hand
+  [Ace\heartsuit 3\hearts 2\diamondsuit{} 9\diamondsuit 4\clubsuit 2\clubsuit 7\clubsuit Jack\spadesuit 9\spadesuit 5\spadesuit Queen\spadesuit 10\spadesuit 6\spadesuit] (2 hearts, 2 diamonds, 3
+  clubs and 6 spades).
+
+  How many different hands with a =[4 4 3 2]= suit distribution can be dealt?
+
+  How many different suit distributions are there? (=[4 4 3 2]= is /not/
+  different than =[2 3 4 4]=, because order of the suits does /not/ matter.)
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+** TODO RNC
+#+begin_note
+  In the game of /Five Crowns/ there are 116 cards in two combined decks, and in
+  each of 11 hands the number of cards dealt each player increases by one,
+  starting at 3, ending at 13. This implies 11 different numbers of total
+  possible hands from randomly shuffled decks. At which hand (/n/ between 3
+  and 13) will it become infeasible to compute this number of possible hands
+  without overflowing the capacity of an elisp /fixnum/?
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+** TODO ROX
+#+begin_note
+  What is the probability that a randomly chosen 3-digit number unambiguously
+  designates a date (month number plus day number paired without punctuation)?
+  E.g., 111 is ambiguous, it could mean January 11th (month 1, day 11) or
+  November 1st (month 11, day 1). Don\rsquo{}t count numbers with zeros in the second
+  or third position (why not the first position?) as ambiguous, given the rule
+  that days are never written with a leading zero. E.g., 101 can only mean
+  October 1st, not January 1st. Eliminate from the event space any invalid
+  numbers, e.g. 345, as neither 3/45 nor 34/5 is a valid date.
+:HINT:
+  - Hint :: Concretize! List all the 3-digit numbers from 100 to 999 and divide
+            them into two sets: valid and invalid.
+:END:
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
