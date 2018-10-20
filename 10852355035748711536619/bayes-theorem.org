@@ -1,0 +1,213 @@
+#+TITLE: Bayes\rsquo Theorem
+#+LANGUAGE: en
+#+OPTIONS:  H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+STARTUP:  showeverything entitiespretty
+
+* Introduction
+
+  If you read the guide at [[https://arbital.com/p/bayes_rule/?l=1zq][Arbital.com]] you will get at least a glimmer of an
+  understanding that the key concept behind this mysterious thing called Bayes\rsquo
+  Theorem (also called Bayes\rsquo Rule) is that extra information allows one to
+  derive a more realistic estimate of the probability that a particular event
+  occurs.
+
+** The Theorem
+
+   If $A$ and $B$ are events such that $p(A) \ne 0$ and $p(B) \ne 0$,
+   then
+
+   $p(A\ |\ B) = \frac{p(B\ |\ A)p(A)}{p(B\ |\ A)p(A) + p(B\ |\
+   \overline{A})p(\overline{A})}$.
+
+** The Proof
+
+   Bayes\rsquo Theorem is just an equation --- it expresses the equivalence between
+   something on the left-hand-side of the equals sign (LHS) and something else
+   on the right-hand-side (RHS).
+
+   Like most proofs of equations, this one is a straightforward application of
+   definitions, first principles (axioms) such as /quantities equal to the same
+   thing are equal to each other/ and identities such as De Morgan\rsquo{}s laws or the
+   distributive laws (for sets).
+
+   From the definition of events and sample spaces we have $B = B \cap
+   S$.
+
+   From the law of set complementarity we have $S = A \cup
+   \overline{A}$.
+
+   Therefore, $p(B) = p(B \cap S) = p(B \cap (A \cup \overline{A})) =
+   p((B \cap A) \cup (B \cap \overline{A}))$ (by the
+   distributive law) $= p(B \cap A) + p(B \cap \overline{A}) - p(A
+   \cap \overline{A})$ (by the definition of probability of the
+   union of two events) $= p(B \cap A) + p(B \cap \overline{A}) - 0$
+   (by substituting equals for equals) $= p(B \cap A) + p(B
+   \cap \overline{A})$.
+
+   Now, from the definition of conditional probability (the
+   probability that $B$ will happen after it is known that $A$
+   happened) we have $p(B\ |\ A) = p(B \cap A)\ /\ p(A)$.
+
+   From that, and because $p(B \cap A) = p(A \cap B)$ (set
+   intersection is commutative), we have
+
+   $p(B\ |\ A)p(A) = p(B \cap A) = p(A \cap B) = p(A\ |\ B)p(B),\
+   \text{ or }\ p(A\ |\ B) =$
+
+   $\frac{p(B\ |\ A)p(A)}{p(B)} = \frac{p(B\ |\ A)p(A)}{p(B \cap A) +
+   p(B \cap \overline{A})} = \frac{p(B\ |\ A)p(A)}{p(B\ |\ A)p(A) +
+   p(B\ |\ \overline{A})p(\overline{A})}$.
+
+   by dividing through by $p(B)$, substituting what we saw $p(B)$
+   equals in the paragraph above that begins with the word
+   /Therefore/, and again using the definition of conditional
+   probability in the two terms of the denominator of the fraction to
+   substitute equals for equals.
+
+   Q.E.D.
+
+* Example
+
+  What is the probability that a random person who /tests positive/ for a
+  disease /actually has/ the disease, if we know that 1% of the population has
+  the disease, that 95% of those who have the disease test positive for it, and
+  2% of those who do not have the disease test positive for it?
+
+  Let $H =$ a person Has the disease.
+
+  Let $T =$ a person Tests positive for the disease.
+
+  We're given:
+
+  - $p(H) = 0.01$
+  - $p(T \mid H) = 0.95$
+  - $p(T \mid \overline{H}) = 0.02$
+
+  We want $p(H \mid T)$. Try it yourself, the answer is given below.
+
+* Three Out of Four
+
+  The relationship between the four probabilities is good to know, because we
+  often have good probability estimates for three of the numbers, but we need to
+  compute the fourth.
+
+  For another example, suppose a doctor
+
+  - knows that the disease meningitis gives a sufferer a stiff neck 70% of the
+    time.
+  - knows some unconditional facts about meningitis and stiff necks, i.e.,
+    - the prior probability of someone having meningitis is low, only .002% (1
+      out of 50,000 people);
+    - the prior probability of someone having a stiff neck is 1%.
+
+  Let S = has a stiff neck, M = has meningitis.
+
+  | p(S \vbar M) | = |                                                 0.7 |
+  | p(M)     | = |                                              .00002 |
+  | p(S)     | = |                                                 .01 |
+  | p(M \vbar S) | = | p(S \vbar M)p(M) / p(S) = (0.7)(.00002) / 0.01 = 0.0014 |
+
+* Lowered Expectations
+
+  So the doctor should expect fewer than 1 in 700 patients with a stiff
+  neck to have meningitis.
+
+  Note that even though meningitis strongly indicates a stiff neck
+  (with probability 0.7), the probability of meningitis stays small,
+  because the prior probability of stiff necks is so much higher than
+  that of meningitis.
+
+  The general idea is that we would like to determine, from our seeing
+  as evidence the /effect/ of some unknown /cause/, what that /cause/
+  is.
+
+* Cause and Effect
+
+  In this context Bayes' Theorem says
+
+  p(cause \vbar effect) = p(effect \vbar cause) \cdot p(cause) / p(effect)
+
+  Equivalently,
+
+  p(effect \vbar cause) = p(cause \vbar effect) \cdot p(effect) / p(cause)
+
+  There are two directions here, /causal/ and /diagnostic/:
+
+  - The /causal/ direction finds p(effect \vbar cause).
+  - The /diagnostic/ direction finds p(cause \vbar effect).
+
+  In medical diagnosis, estimates of the conditional probabilities on causal
+  relationships are often what a doctor has (i.e., p(symptoms \vbar disease)), and
+  what the doctor needs is to derive a diagnosis (i.e., p(disease \vbar symptoms)).
+
+  In a more general setting, *Truth* is to *cause* as *Test* is to *effect*.
+
+* Truth versus Test
+
+** Problem
+
+  What is the probability that a random person who tests positive for
+  a certain disease actually has the disease, if we know that 1% of
+  the population has the disease, that 95% of those who have the
+  disease test positive for it, and 2% of those who do not have the
+  disease test positive for it?
+
+** Solution
+
+  Let $H$ be the event that a person has the disease.
+
+  Let $T$ be the event that the person tests positive for it.
+
+  The problem statement gives $p(T\ |\ H), p(T\ |\ \overline{H})$ and
+  $p(H)$.
+
+  We know that $p(T) = p(T\ |\ H) \cdot p(H) + p(T\ |\ \overline{H})
+  \cdot p(\overline{H})$ (question: how do we know that?)
+
+  What is asked for is $p(H\ |\ T)$, which we can find using the
+  identity:
+
+  $p(H\ |\ T) = p(T\ |\ H) p(H) / p(T)$.
+
+  $p(H) = 0.01$
+
+  $p(\overline{H}) = 1 - p(H) = 1 - 0.01 = .99$
+
+  $p(T\ |\ H) = 0.95$
+
+  $p(T\ |\ \overline{H}) = 0.02$
+
+  $\therefore$
+
+  $p(T) = (.95)(.01) + (.02)(.99) = .0095 + .0198 = .0293$
+
+  $p(H\ |\ T) = (.95)(.01)/(.0293) = .0095/.0293 = .324 \approx 32\%$
+
+* Visualize
+
+  It helps to visualize the four disjoint event subsets with their
+  probabilities in table form:
+
+  \(\begin{array}{|r|r|r|r|}
+  \hline
+  & & & \\
+  & p(\overline{H}) & p(H) & \\
+  \hline
+  & & & \\
+  p(T) & p(\overline{H} \cap T) = .0198 & p(H \cap T) = .0095 & .0293 \\
+  & & & \\
+  & = p(\overline{H}\ |\ T) \cdot p(T) & = p(H\ |\ T) \cdot p(T) & \\
+  & = p(T\ |\ \overline{H}) \cdot p(\overline{H}) & = p(T\ |\ H) \cdot p(H) & \\
+  & & & \\
+  \hline
+  & & & \\
+  p(\overline{T}) & p(\overline{H} \cap \overline{T}) = .9702 & p(H \cap \overline{T}) = .0005 & .9707 \\
+  & & & \\
+  & = p(\overline{H}\ |\ \overline{T}) \cdot p(\overline{T}) & = p(H\ |\ \overline{T}) \cdot p(\overline{T}) & \\
+  & = p(\overline{T}\ |\ \overline{H}) \cdot p(\overline{H}) & = p(\overline{T}\ |\ H) \cdot p(H) & \\
+  & & & \\
+  \hline
+  & & & \\
+  & .9900 & .0100 & 1.0 \\
+  \hline
+  \end{array}\)
