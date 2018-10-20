@@ -1,0 +1,53 @@
+#+TITLE: Idea Exchange 06.2 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything
+#+SETUPFILE: ../theme-bigblow.setup
+
+* TODO Learn How to Customize a Variable
+  Many of you already know (since one way to do it --- just for one Spacemacs
+  session --- was explained in the [[file:elisp-mini-primer.org][Elisp Mini Primer]]) how to stop emacs from
+  asking you every time you go to evaluate a code block,
+
+  /Evaluate this emacs-lisp code block on your system? (y or n)/
+
+  If you don't already know, read on. First, ponder (perhaps again): Why this
+  prompt? Quoting from the elisp mini primer:
+
+  Evaluating numbers or simple numeric expressions is a pretty benign activity,
+  but that's not true of evaluating some lisp code, which potentially can do bad
+  things. Hence the safeguard confirmation prompt. But that gets tedious after a
+  while. You can disable this prompt by setting a special controlling flag
+  variable to nil. Specifically:
+
+  SPC SPC customize-variable
+
+  Then at the prompt type "org-confirm-babel-evaluate" (without the quotes), and
+  hit Enter to bring up the Customization buffer.
+
+  TAB (10 times) to the button labeled /Toggle/, and click on it or hit Enter to
+  press it. The state message will change to say:
+
+  STATE: EDITED, shown value does not take effect until you set or save it.
+
+  Shift-TAB (3 times) back to the /Apply and Save/ button and hit Enter again. 
+  That changes the state message to:
+
+  STATE: Saved and set.
+
+  Dismiss the Customization buffer by typing q.
+
+* TODO Think and Write About Decision Making
+  It's your choice: preserve the behavior of prompting every time, or customize
+  the org-confirm-babel-evaluate variable to never prompt.
+
+  Making decisions is a task all of us must perform many times, every day of our
+  lives. What if we could offload that burden?
+
+  Read [[https://firstthreeodds.org/17657741833134731255/total-noise.html][these thoughts]] by David Foster Wallace, and respond with your best
+  thinking in a paragraph or two.
+
+  First post your answer. 
+
+  Then post on two other students' answers.

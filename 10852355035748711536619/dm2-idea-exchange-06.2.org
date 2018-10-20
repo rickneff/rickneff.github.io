@@ -1,0 +1,52 @@
+#+TITLE: DM2 Idea Exchange 06.2 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: ../theme-bigblow.setup
+
+* TODO Analyze Binomial Coefficient Calculations
+  What can you say about these two different versions of the N Choose K function
+  (other than that they give the same result for 20 choose 10)?
+
+#+BEGIN_SRC elisp :results silent
+  (defun n-choose-k-1 (n k)
+    (cond ((or (< n 0) (< k 0))
+           (error "negative arg"))
+          ((> k n) 0)
+          ((or (= n k) (zerop k)) 1)
+          (t (let ((result 1)
+                   (top (- n (1- k)))
+                   (bot 1)
+                   (i 0))
+               (while (> k i)
+                 (setq result (/ (* result top) bot)
+                       top (1+ top)
+                       bot (1+ bot)
+                       i (1+ i)))
+               result))))
+
+  (defun n-choose-k-2 (n k)
+    (if (> k n)
+        0
+      (let ((result 1)
+            (d 1)
+            (g 1)
+            (m (min k (- n k))))
+        (while (<= d m)
+          (setq g (gcd result d)
+                result (* n (/ result g))
+                result (/ result (/ d g))
+                n (- n 1)
+                d (+ d 1)))
+        result)))
+#+END_SRC
+
+#+BEGIN_SRC elisp
+  (list (n-choose-k-1 20 10)
+        (n-choose-k-2 20 10))
+#+END_SRC
+
+  First post your answer. 
+
+  Then post on two other students' answers.
