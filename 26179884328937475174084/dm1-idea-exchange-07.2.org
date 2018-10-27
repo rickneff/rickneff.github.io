@@ -1,0 +1,18 @@
+#+TITLE: Idea Exchange 07.2 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything
+#+SETUPFILE: ../theme-bigblow.setup
+
+* TODO Watch and Analyze
+  Watch these three videos and (if you were making them) describe what you would
+  do differently to make them better:
+
+  - [[https://firstthreeodds.org/videos/modulus2.mp4][Modulus]]
+  - [[https://firstthreeodds.org/videos/modularInverse.mp4][Modular Inverse]]
+  - [[https://firstthreeodds.org/videos/Remainder.mp4][Chinese Remaindering]]
+
+  First post your answer. 
+
+  Then post on two other students' answers.
