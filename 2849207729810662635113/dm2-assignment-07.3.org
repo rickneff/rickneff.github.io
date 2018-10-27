@@ -1,0 +1,118 @@
+#+TITLE: DM2 Assignment 07.3
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+[[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
+[[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
+
+* TODO Answer a Question Involving Multiple Ideas
+  The Pythagoreans may have been the first to notice that the most beautiful
+  harmonies produced by lyres or flutes corresponded to the simplest fractional
+  ratios between the lengths of vibrating strings or pipes. The *Pythagorean
+  Scale* gives the numerical ratios of frequencies determining the principal
+  intervals on which Western music is essentially based. Also known as the pure
+  *diatonic scale*, these frequencies (in inverse proportion to the lengths of
+  the vibrating elements) are in the ratios 24:27:30:32:36:40:45:48, giving many
+  instances of simple ratios which underlie harmonies that are pleasing to the
+  ear.
+
+  Demonstrate an understanding of what meaning the 2-digit numbers (the 8
+  numbers separated by colons) have by matching the interval on the scale in the
+  first column with the corresponding *simple ratio* in the second column. (You
+  don\rsquo{}t need to know music theory to answer this --- logical thinking will
+  suffice.)
+
+  | Scale Interval   | Simple Ratio |
+  |------------------+--------------|
+  | a perfect unison |         15:8 |
+  | a major second   |          2:1 |
+  | a major third    |          1:1 |
+  | a perfect fourth |          5:3 |
+  | a perfect fifth  |          9:8 |
+  | a major sixth    |          5:4 |
+  | a major seventh  |          3:2 |
+  | a perfect octave |          4:3 |
+
+  Which goes with which? Reproduce the table above with the correct matching.
+
+* TODO Characterize a Letter-to-Number Mapping
+  Put Xs in the appropriate column (maybe more than one per row). The first four
+  rows have been done for you:
+
+  | Letter | Number | Visual       | Aural         | Other                 |
+  |        |        | (looks like) | (sounds like) | (some logical reason) |
+  |--------+--------+--------------+---------------+-----------------------|
+  | A      |      8 |              | X             |                       |
+  | B      |      9 |              |               | X                     |
+  | C      |      0 | X            |               |                       |
+  | D      |      0 | X            |               |                       |
+  | E      |      3 |              |               |                       |
+  | F      |      5 |              |               |                       |
+  | G      |      6 |              |               |                       |
+  | H      |      8 |              |               |                       |
+  | I      |      5 |              |               |                       |
+  | J      |      6 |              |               |                       |
+  | K      |      8 |              |               |                       |
+  | L      |      7 |              |               |                       |
+  | M      |      3 |              |               |                       |
+  | N      |      9 |              |               |                       |
+  | O      |      1 |              |               |                       |
+  | P      |      9 |              |               |                       |
+  | Q      |      4 |              |               |                       |
+  | R      |      4 |              |               |                       |
+  | S      |      7 |              |               |                       |
+  | T      |      2 |              |               |                       |
+  | U      |      1 |              |               |                       |
+  | V      |      5 |              |               |                       |
+  | W      |      2 |              |               |                       |
+  | X      |      6 |              |               |                       |
+  | Y      |      7 |              |               |                       |
+  | Z      |      0 |              |               |                       |
+
+* TODO Code The Inverse Mapping
+  Since the letters-to-number mapping was many-to-one, the inverse
+  number-to-letters mapping will be one-to-many:
+
+  | Number | Letters |
+  |--------+---------|
+  |      0 | ZCD     |
+  |      1 | OU      |
+  |      2 | TW      |
+  |      3 | EM      |
+  |      4 | QR      |
+  |      5 | FIV     |
+  |      6 | GJX     |
+  |      7 | SLY     |
+  |      8 | AHK     |
+  |      9 | BNP     |
+
+  Write elisp code to take a string of 3 digits and generate a random TLA with
+  this mapping.
+
+* TODO Discern a Pattern
+  In his book Brother Neff uses a TLA-based naming scheme to identify major
+  headings, minor headings, minor subheadings, and EPPs. 
+
+  The pattern for major/minor headings is trivial to discern:
+  - ONE
+    - ABC
+    - DEF
+    - GHI
+  - TWO
+    - JKL
+    - MNO
+    - PQR
+  - THR
+    - STU
+    - VWX
+    - YZ@
+
+  Minor subheadings have an easily-discernible pattern as well, e.g.:
+
+  (ABC ABD ABE ABF ABG ABH ABI ABJ ABK ABL ABM ABN ABO)
+
+  What about the EPPs (Exercises, Problems, Puzzles)? What is their pattern?

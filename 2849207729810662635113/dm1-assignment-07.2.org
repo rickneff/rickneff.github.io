@@ -1,0 +1,361 @@
+#+TITLE: PQR Number Theory II
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+[[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
+[[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
+* Exercises
+** TODO GMQ
+#+begin_note
+  First recall (or look up) how the =&rest= keyword works, e.g.:
+
+#+BEGIN_SRC elisp :results silent
+  (defun printf (format-directive &rest args)
+    (princ (apply 'format format-directive args)))
+#+END_SRC
+
+  Now explain what this code does after trying it on a few tests:
+
+#+BEGIN_SRC elisp :results silent
+  (defun mystery (&rest numbers)
+    (loop for n from 0 to (apply '* numbers)
+          do (printf "%3d <--> %s\n" n
+                     (loop for m in numbers collect (mod n m)))))
+#+END_SRC
+
+#+BEGIN_SRC elisp :results output
+  (mystery 3 5)
+#+END_SRC
+
+#+BEGIN_SRC elisp :results output
+  (mystery 4 6)
+#+END_SRC
+
+  Replace ='*= with ='lcm= and do the same calls again. Explain what you
+  observed, and come up with a better name for the =mystery= function.
+:HINT:
+  - Hint :: In your source code blocks, use the header directive =:results
+            output= for best results, e.g.:
+: #+BEGIN_SRC elisp :results output
+  - Peek Ahead Hint :: PQU
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO GMY
+#+begin_note
+  Replace the =;;...= line with three lines, binding the values of =y1=, =y2= and
+  =y3=. Write a helper function to compute these values.
+
+#+BEGIN_SRC elisp
+  (let* ((r1 4)
+         (r2 2)
+         (r3 9)
+         (m1 7)
+         (m2 11)
+         (m3 13)
+         (m (* m1 m2 m3))
+         (o1 (/ m m1))
+         (o2 (/ m m2))
+         (o3 (/ m m3))
+         ;;...
+         )
+    (mod (+ (* r1 o1 y1) (* r2 o2 y2) (* r3 o3 y3)) m))
+#+END_SRC
+:HINT:
+  - Hint :: The y\rsquo{}s are just the MMIs of the o\rsquo{}s mod the m\rsquo{}s. The helper
+            function should use the Extended Euclidean GCD algorithm to compute
+            these MMIs.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO JQA
+#+begin_note
+   What is a 3-digit positive simultaneous solution to the following system of
+   linear congruences?
+
+   x \equiv_7 3
+
+   x \equiv_{11} 5
+
+   x \equiv_{13} 4
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO GRZ
+#+begin_note
+   What is a 3-digit positive simultaneous solution to the following system of
+   linear congruences?
+
+   x \equiv_7 3
+
+   x \equiv_{11} 2
+
+   x \equiv_{13} 1
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO JYA
+#+begin_note
+   What is a 3-digit positive simultaneous solution to the following system of
+   linear congruences?
+
+   x \equiv_7 2
+
+   x \equiv_{11} 3
+
+   x \equiv_{13} 4
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO GXF
+#+begin_note
+   What is a 3-digit positive simultaneous solution to the following system of
+   linear congruences?
+
+   x \equiv_7 0
+
+   x \equiv_{11} 8
+
+   x \equiv_{13} 12
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Problems
+  Note: * means optional. If it\rsquo{}s not starred, it\rsquo{}s required.
+** TODO XAJ *
+#+begin_note
+  Are there any 3-digit (d_{1}d_{2}d_{3}) positive simultaneous solutions to a system of
+  linear congruences
+
+   x \equiv_7 r_1
+
+   x \equiv_{11} r_2
+
+   x \equiv_{13} r_3
+
+  with the property that d_1 = r_1, d_2 = r_2, and d_3 = r_3?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO JPZ
+#+begin_note
+  If p and q are coprime positive integers, then does a bijection necessarily
+  exist between $\mathbb{Z}_{pq}$ and $\mathbb{Z}_{p} \times \mathbb{Z}_{q}$?
+
+  Explain what the following code does, and how:
+#+BEGIN_SRC elisp
+  (let* ((p 3)
+         (q 5)
+         (z-pq (number-sequence 0 (* p q))))
+      (mapcar* 'list z-pq
+               (mapcar (lambda (n) (mod n p)) z-pq)
+               (mapcar (lambda (n) (mod n q)) z-pq)))
+#+END_SRC
+
+  Imagine the above code were wrapped in a function definition with p and q
+  passed as parameters instead of bound in the =let=, then compare this function
+  to the =mystery= function. Which function would be more in the functional
+  programming style?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO XFO
+#+begin_note
+  The Chinese Remainder Theorem makes possible the use of a /residue number
+  system/ to do computer arithmetic with \ldquo{}large\rdquo integers, where largeness is
+  relative. Large in practice means numbers with hundreds or thousands of
+  digits. For this problem, large means no greater than 1000. Normally,
+  arithmetic with numbers in this range would be trivial, but the normal
+  arithmetic operations of addition, subtraction, and multiplication are to be
+  viewed as quite expensive. You must find ways to avoid using them.
+  Exponentially more expensive are the division and modulus operations --- avoid
+  these especially!
+
+  Use the code below as a guide and a starting point, finish implementing the
+  =to-rns=, =from-rns=, =add2= and =mul2= functions, and then in separate code
+  blocks, write test code that can correctly add and multiply one-, two-, and
+  three-digit nonnegative integers, converting to rns, doing the rns operations,
+  then converting back from rns.
+
+  /Avoid at all costs/ the use of =+=, =-=, =*=, =/=, =%=, or =mod=!
+
+  You will benefit greatly if you write helper functions and use good functional
+  programming style throughout.
+
+#+BEGIN_SRC elisp
+  (defun to-rns (n)
+    "Convert a normal integer between 0 and 1000 to its rns modulo
+    1001 representation."
+    )
+
+  (defun from-rns (rns)
+    "Convert from an rns modulo 1001 integer back to its normal
+    representation."
+    )
+
+  (defun add2 (rns1 rns2)
+    "Add two rns modulo 1001 integers to produce their rns sum."
+    )
+
+  (defun mul2 (rns1 rns2)
+    "Multiply two rns modulo 1001 integers to produce their rns
+    product."
+    )
+#+END_SRC
+
+  The rest of the code is good as is. Note the mention in the documentation of
+  the $\mathbb{Z}_7$, $\mathbb{Z}_{11}$, and $\mathbb{Z}_{13}$ residue sets. Recall
+  that a $\mathbb{Z}_n$ residue set is just the possible remainders when modding
+  by n, i.e., [0 1 2 3 \dots n-1].
+
+#+BEGIN_SRC elisp
+  (defun a7 (i j)
+    "Add two nonnegative integers in the Z_7 residue set to produce
+     a sum in that set. Error check to ensure the inputs are valid,
+     and use table lookup instead of normal addition/mod."
+    (unless (and (integerp i) (integerp j) (<= 0 i) (<= 0 j) (< i 7) (< j 7))
+      (error "bad parameters %s and/or %s" i j))
+    (aref (aref [[0 1 2 3 4 5 6]
+                 [1 2 3 4 5 6 0]
+                 [2 3 4 5 6 0 1]
+                 [3 4 5 6 0 1 2]
+                 [4 5 6 0 1 2 3]
+                 [5 6 0 1 2 3 4]
+                 [6 0 1 2 3 4 5]] i) j))
+
+  (defun a11 (i j)
+    "Add two nonnegative integers in the Z_11 residue set to produce
+     a sum in that set. Error check to ensure the inputs are valid,
+     and use table lookup instead of normal addition/mod."
+    (unless (and (integerp i) (integerp j) (<= 0 i) (<= 0 j) (< i 11) (< j 11))
+      (error "bad parameters %s and/or %s" i j))
+    (aref (aref [[ 0  1  2  3  4  5  6  7  8  9 10]
+                 [ 1  2  3  4  5  6  7  8  9 10  0]
+                 [ 2  3  4  5  6  7  8  9 10  0  1]
+                 [ 3  4  5  6  7  8  9 10  0  1  2]
+                 [ 4  5  6  7  8  9 10  0  1  2  3]
+                 [ 5  6  7  8  9 10  0  1  2  3  4]
+                 [ 6  7  8  9 10  0  1  2  3  4  5]
+                 [ 7  8  9 10  0  1  2  3  4  5  6]
+                 [ 8  9 10  0  1  2  3  4  5  6  7]
+                 [ 9 10  0  1  2  3  4  5  6  7  8]
+                 [10  0  1  2  3  4  5  6  7  8  9]] i) j))
+
+  (defun a13 (i j)
+    "Add two nonnegative integers in the Z_13 residue set to produce
+     a sum in that set. Error check to ensure the inputs are valid,
+     and use table lookup instead of normal addition/mod."
+    (unless (and (integerp i) (integerp j) (<= 0 i) (<= 0 j) (< i 13) (< j 13))
+      (error "bad parameters %s and/or %s" i j))
+    (aref (aref [[ 0  1  2  3  4  5  6  7  8  9 10 11 12]
+                 [ 1  2  3  4  5  6  7  8  9 10 11 12  0]
+                 [ 2  3  4  5  6  7  8  9 10 11 12  0  1]
+                 [ 3  4  5  6  7  8  9 10 11 12  0  1  2]
+                 [ 4  5  6  7  8  9 10 11 12  0  1  2  3]
+                 [ 5  6  7  8  9 10 11 12  0  1  2  3  4]
+                 [ 6  7  8  9 10 11 12  0  1  2  3  4  5]
+                 [ 7  8  9 10 11 12  0  1  2  3  4  5  6]
+                 [ 8  9 10 11 12  0  1  2  3  4  5  6  7]
+                 [ 9 10 11 12  0  1  2  3  4  5  6  7  8]
+                 [10 11 12  0  1  2  3  4  5  6  7  8  9]
+                 [11 12  0  1  2  3  4  5  6  7  8  9 10]
+                 [12  0  1  2  3  4  5  6  7  8  9 10 11]] i) j))
+
+  (defun m7 (i j)
+    "Multiply two nonnegative integers in the Z_7 residue set to produce
+     a product in that set. Error check to ensure the inputs are valid,
+     and use table lookup instead of normal multiplication/mod."
+    (unless (and (integerp i) (integerp j) (<= 0 i) (<= 0 j) (< i 7) (< j 7))
+      (error "bad parameters %s and/or %s" i j))
+    (aref (aref [[0  0  0  0  0  0  0]
+                 [0  1  2  3  4  5  6]
+                 [0  2  4  6  1  3  5]
+                 [0  3  6  2  5  1  4]
+                 [0  4  1  5  2  6  3]
+                 [0  5  3  1  6  4  2]
+                 [0  6  5  4  3  2  1]] i) j))
+
+  (defun m11 (i j)
+    "Multiply two nonnegative integers in the Z_11 residue set to produce
+     a product in that set. Error check to ensure the inputs are valid,
+     and use table lookup instead of normal multiplication/mod."
+    (unless (and (integerp i) (integerp j) (<= 0 i) (<= 0 j) (< i 11) (< j 11))
+      (error "bad parameters %s and/or %s" i j))
+    (aref (aref [[0  0  0  0  0  0  0  0  0  0  0]
+                 [0  1  2  3  4  5  6  7  8  9 10]
+                 [0  2  4  6  8 10  1  3  5  7  9]
+                 [0  3  6  9  1  4  7 10  2  5  8]
+                 [0  4  8  1  5  9  2  6 10  3  7]
+                 [0  5 10  4  9  3  8  2  7  1  6]
+                 [0  6  1  7  2  8  3  9  4 10  5]
+                 [0  7  3 10  6  2  9  5  1  8  4]
+                 [0  8  5  2 10  7  4  1  9  6  3]
+                 [0  9  7  5  3  1 10  8  6  4  2]
+                 [0 10  9  8  7  6  5  4  3  2  1]] i) j))
+
+  (defun m13 (i j)
+    "Multiply two nonnegative integers in the Z_13 residue set to produce
+     a product in that set. Error check to ensure the inputs are valid,
+     and use table lookup instead of normal multiplication/mod."
+    (unless (and (integerp i) (integerp j) (<= 0 i) (<= 0 j) (< i 13) (< j 13))
+      (error "bad parameters %s and/or %s" i j))
+    (aref (aref [[0  0  0  0  0  0  0  0  0  0  0  0  0]
+                 [0  1  2  3  4  5  6  7  8  9 10 11 12]
+                 [0  2  4  6  8 10 12  1  3  5  7  9 11]
+                 [0  3  6  9 12  2  5  8 11  1  4  7 10]
+                 [0  4  8 12  3  7 11  2  6 10  1  5  9]
+                 [0  5 10  2  7 12  4  9  1  6 11  3  8]
+                 [0  6 12  5 11  4 10  3  9  2  8  1  7]
+                 [0  7  1  8  2  9  3 10  4 11  5 12  6]
+                 [0  8  3 11  6  1  9  4 12  7  2 10  5]
+                 [0  9  5  1 10  6  2 11  7  3 12  8  4]
+                 [0 10  7  4  1 11  8  5  2 12  9  6  3]
+                 [0 11  9  7  5  3  1 12 10  8  6  4  2]
+                 [0 12 11 10  9  8  7  6  5  4  3  2  1]] i) j))
+#+END_SRC
+:HINT:
+  - Hint :: For =to-rns= and =from-rns=, =assoc= and =rassoc= are recommended.
+            Thus the creation of an association list (alist) is a prerequisite
+            for using these functions. The challenge is to create this alist
+            without using mod (or %) or loops.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Puzzles
+  Puzzle, to be precise.
+** TODO GYI
+#+begin_note
+   These eight small-number triples are not random:
+
+   [[1 1 3] [1 1 4] [1 4 3] [1 4 4] [2 1 3] [2 1 4] [2 4 3] [2 4 4]]
+
+   They have something to do with the product of the first three odd primes and
+   the fourth power of two.
+
+   Find the connection.
+:HINT:
+  - Hint :: This problem involves the Chinese Remainder Theorem. Use of the
+            =crt-solve= function in the solution to GMY should help in your
+            problem-solving investigation!
+:END:
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
