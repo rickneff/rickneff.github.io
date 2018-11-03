@@ -1,0 +1,96 @@
+#+TITLE: PQR Number Theory III
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+[[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
+[[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
+* Exercises
+  Exercise, to be precise.
+** TODO GYN
+#+begin_note
+  Help Abu and Ila out. This version of =mod-expt= gets a /little/ better
+  mileage than their simplistic one. It keeps the numbers smaller by reducing
+  each partial exponentiation by modding it once every iteration instead of once,
+  period. What fact or facts of modular arithmetic justify this?
+
+#+BEGIN_SRC elisp :results silent
+  (defun a-better-mod-expt (base power modulus)
+    (loop with result = 1
+          for n from 1 to power
+          do (setq result (mod (* result base) modulus))
+          finally return result))
+#+END_SRC
+:HINT:
+  - Hint :: Reread the interchange between Til, Abu and Ila in PQS.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Problems
+  Problem, to be precise.
+** TODO XGG
+#+begin_note
+  Experiment with RSA using the following code. You will need a better modular
+  exponentiation function than =mod-expt= or perhaps even =a-better-mod-expt=.
+  Implement the =pow-mod= function to be this better version. Note the
+  difference between /encoding/ and /encryption/, and between /decryption/ and
+  /decoding/.
+
+  How \ldquo{}big\rdquo a message can you successfully round-trip?
+
+#+BEGIN_SRC elisp :results silent
+  (defun rsa-encrypt (message n e &optional encoder)
+    (let* ((message-encoded (funcall (or encoder 'identity) message))
+           (encrypted (pow-mod message-encoded e n)))
+      encrypted))
+
+  (defun rsa-decrypt (encrypted n d &optional decoder)
+    (let* ((decrypted (pow-mod encrypted d n))
+           (message-decoded (funcall (or decoder 'identity) decrypted)))
+      message-decoded))
+
+  (defun round-trip (message n e d &optional encoder decoder)
+    (equal message
+           (rsa-decrypt (rsa-encrypt message n e encoder)
+                        n d decoder)))
+#+END_SRC
+
+  You will need working =from-base-27= and =to-base-27= functions, as well as a
+  working knowledge of /symbol property lists/ to play with /this/ test code:
+
+#+BEGIN_SRC elisp
+  (defun test-rsa (message-with-spaces)
+    (let* ((message (mapconcat 'identity
+                               (split-string message-with-spaces " ") "@"))
+            (n (get 'rsa-players :n))
+            (e (get 'rsa-players :e))
+            (d (get 'rsa-players :d))
+            (encrypted (rsa-encrypt message n e 'from-base-27))
+            (decrypted (rsa-decrypt encrypted n d 'to-base-27))
+            (decrypted-message-with-spaces
+             (mapconcat 'identity (split-string decrypted "@") " "))
+            (success (string= message-with-spaces
+                              decrypted-message-with-spaces)))
+       (princ (format (concat "\"%s\"\nwas encoded and encrypted as\n%s\n"
+                              "then decrypted and decoded as\n\"%s\"\n")
+                      message-with-spaces
+                      encrypted
+                      decrypted-message-with-spaces))
+       (princ (if success "" "un"))
+       (princ "successfully.\n")
+       success))
+#+END_SRC
+:HINT:
+  - Hint :: This will be discussed in class.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Puzzles
+  No puzzles this week.
