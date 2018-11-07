@@ -1,1 +1,70 @@
-#+INCLUDE: "./idea-exchange-08.2.org" :minlevel 1
+#+TITLE: Idea Exchange 08.2 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything
+#+SETUPFILE: ../theme-bigblow.setup
+
+* TODO Read a Quote About Combinatorics 
+#+BEGIN_QUOTE
+  Combinatorics is a branch of mathematics dealing with problems of combining
+  objects, or sorting them into categories. It originated in the study of
+  probability by Pierre de Fermat, Blaise Pascal, and other 17^{th}-century
+  mathematicians, who were inspired not by the beauty of the math but by a very
+  practical concern: they wanted to calculate the odds associated with gambling.
+
+  During the 18^{th} and 19^{th} centuries, combinatorics was something of a
+  mathematical backwater. Its association with gambling accounted in part for
+  its lack of status, but more fundamental forces were also in play.
+  Combinatorics deals with discrete entities, like the cards in a deck or socks
+  in a drawer. But most of the important problems being investigated by
+  mathematicians at that time involved continuous entities, like lines or
+  surfaces. Mathematicians developed many general techniques to analyze such
+  problems, particularly the methods of calculus.
+
+  They found far fewer general techniques to analyze problems involving discrete
+  entities, because discrete objects can have so many different properties and
+  can be arranged in so many different ways. Each problem has to be broken down
+  into its constituent pieces, from which a useful pattern may or may not
+  emerge.
+
+  In the 20^{th} century combinatorics staged a major comeback for one overriding
+  reason: the invention of electronic computers. The objects manipulated by
+  computers are discrete, not continuous. They are the 1s and 0s of on-off
+  switches, not the smooth curves of continuous surfaces. To analyze the
+  capabilities of computers, mathematicians had to develop new ways of dealing
+  with noncontinuous objects, and that need reinvigorated the field of
+  combinatorics.
+
+  --- Steve Olson
+#+END_QUOTE
+
+* TODO Read and Write About Creativity --- The Vary Idea!
+  Steve Olson has a lot more to say about the uses of combinatorics, as you may
+  recall. [[https://firstthreeodds.org/17657741833134731255/creativity.html][This excerpt]] from the same book that the above quote came from was part
+  of your reading assignment for this week.
+
+  Next, please read [[http://www.cs.princeton.edu/courses/archive/spr05/cos126/lectures//22.pdf][Princeton COS126 Lecture 22 slides about cryptology]] (at that
+  link), and think and write about what kind of creativity Rivest, Shamir and
+  Adleman exhibited in their invention of the RSA Cryptosystem.
+
+* TODO Finally, Consider and Comment About a Creative Act
+  The in-class demonstration by Brother Neff of a CRT-related feat has one of
+  the following explanations (given that he owns the book /Secrets of Mental
+  Math/ by Arthur Benjamin):
+
+  - [ ] a verisimilitude of mental calculation of the modulus of the sum of
+    three products of one- or two-digit numbers by three different two- or
+    three-digit numbers.
+  - [ ] a verisimilitude of memorizing associations of triplets of 1 or 2-digit
+    numbers --- for example, (4, 2, 6) --- to corresponding numbers between 0
+    and 1000 --- e.g., 123.
+  - [ ] a verisimilitude of inscrutable arcana.
+  - [ ] It depends.
+
+  Which do you think it is?
+* TODO What You Know How To Do
+  First post your answer. 
+
+  Then post on two other students' answers.
+
