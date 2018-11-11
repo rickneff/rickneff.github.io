@@ -1,0 +1,9 @@
+#+TITLE: DM2 Idea Exchange 09.2 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: ../theme-bigblow.setup
+
+  The discussion this week is how to organize yourselves into official groups to
+  earn extra credit. See [[https://firstthreeodds.org/17657741833134731255/explorations.org][explorations.org]] for more.
