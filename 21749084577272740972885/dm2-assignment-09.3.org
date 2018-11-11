@@ -1,0 +1,238 @@
+#+TITLE: DM2 Assignment 09.3
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+[[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
+[[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
+* TODO Explore Huffman Trees and Huffman Codes
+  Your task is to compress a /special piece of information/ as compactly as
+  possible, *give its encoding* and *calculate its compression ratio*.
+
+  Recall that the *compression ratio* of an encoding is the percentage
+  \(\frac{(f - v)}{f} \times 100\), where /f/ is the number of bits per symbol of the
+  smallest *fixed*-length encoding, and /v/ is the average number of bits per
+  symbol with the Huffman encoding.
+
+  For example, if there were 9 different symbols in a message, \(f=4\) is the
+  number of bits of the smallest fixed-length encoding, because 2^3 = 8 (not
+  enough for 9) and 2^4 = 16 (enough and to spare). If the Huffman encoding of
+  the message had \(v=3.12\), the compression ratio would be
+
+  \(\frac{4 - 3.12}{4} \times 100\ \approx 22\%.\)
+
+  The /special piece of information/ you are tasked to compress is a list of the
+  first ten million primes. This is a list that starts
+
+  |  2 |
+  |  3 |
+  |  5 |
+  |  7 |
+  | 11 |
+  | 13 |
+  | 17 |
+  | 19 |
+  | 23 |
+  | 29 |
+
+  and ends
+
+  | 179424551 |
+  | 179424571 |
+  | 179424577 |
+  | 179424601 |
+  | 179424611 |
+  | 179424617 |
+  | 179424629 |
+  | 179424667 |
+  | 179424671 |
+  | 179424673 |
+
+  As ASCII text stored in a file with one prime per line, the size of this data
+  file is slightly over 89 megabytes. The goal is to compress this down to just
+  over 5 megabytes (5589056 bytes, to be exact). That\rsquo{}s a 94% compression ratio!
+
+  Standard compression tools can only get about a 73% compression ratio for this
+  ASCII data. A more clever approach is needed. Instead of compressing the list
+  of prime numbers, compress a list of the /gaps/ between them!
+
+  It doesn\rsquo{}t save much, just the unique (occurring only once) gap size of 1
+  between 2 and 3, but in the spirit of de Polignac\rsquo{}s conjecture that every
+  /even/ number appears infinitely often as a gap between consecutive primes,
+  just consider the even-sized gaps. The result will be a list that starts with
+  2 (the difference between 5 and 3), 2 (the difference between 7 and 5), 4 (the
+  difference between 11 and 7), 2 (the difference between 13 and 11), 4 (the
+  difference between 17 and 13), 2 (the difference between 19 and 17), 4 (the
+  difference between 23 and 19), and 6 (the difference between 29 and 23).
+
+  Generating this data is the first task. The algorithm for doing so is very
+  straightforward:
+
+  1. Find the gaps between consecutive odd primes.
+  2. Store these gaps as a list of even numbers.
+
+  Tabulating the results, the first ten gaps are as follows, where the last
+  column is the list to keep:
+
+  |  5 | - |  3 | = | 2 |
+  |  7 | - |  5 | = | 2 |
+  | 11 | - |  7 | = | 4 |
+  | 13 | - | 11 | = | 2 |
+  | 17 | - | 13 | = | 4 |
+  | 19 | - | 17 | = | 2 |
+  | 23 | - | 19 | = | 4 |
+  | 29 | - | 23 | = | 6 |
+  | 31 | - | 29 | = | 2 |
+  | 37 | - | 31 | = | 6 |
+
+  And the last ten:
+
+  | 179424551 | - | 179424533 | = | 18 |
+  | 179424571 | - | 179424551 | = | 20 |
+  | 179424577 | - | 179424571 | = |  6 |
+  | 179424601 | - | 179424577 | = | 24 |
+  | 179424611 | - | 179424601 | = | 10 |
+  | 179424617 | - | 179424611 | = |  6 |
+  | 179424629 | - | 179424617 | = | 12 |
+  | 179424667 | - | 179424629 | = | 38 |
+  | 179424671 | - | 179424667 | = |  4 |
+  | 179424673 | - | 179424671 | = |  2 |
+
+  As a check, see if the generated list of gaps has length 9999998.
+
+  The next step is to count how many times each gap size occurs, so that for the
+  Huffman encoding scheme, the larger the frequency of occurrence, the smaller
+  the number of bits encoding that gap size.
+
+  As a correctness check, here are the first ten gap counts:
+
+  | Gap |   Count |
+  |-----+---------|
+  |   2 |  738597 |
+  |   4 |  738717 |
+  |   6 | 1297540 |
+  |   8 |  566151 |
+  |  10 |  729808 |
+  |  12 |  920661 |
+  |  14 |  503524 |
+  |  16 |  371677 |
+  |  18 |  667734 |
+  |  20 |  354267 |
+
+  And the last ten:
+
+  | Gap | Count |
+  |-----+-------|
+  | 190 |     1 |
+  | 192 |     3 |
+  | 194 |     1 |
+  | 196 |     1 |
+  | 198 |     6 |
+  | 202 |     2 |
+  | 204 |     3 |
+  | 210 |     4 |
+  | 220 |     1 |
+  | 222 |     1 |
+
+  Note two things from these partial gap counts:
+
+  1. Small even numbers (< 100) are well represented, larger ones (< 1000) less
+     so.
+  2. Ten million primes aren\rsquo{}t enough to have /every/ even number represented;
+     for example, 200, 206, 208, 212, 214, 216 and 218 do not appear even once.
+
+* TODO Calculate Size of File
+  Imagine evaluating the following two code blocks:
+#+BEGIN_SRC elisp :results silent
+  (require 'first-ten-million-primes)
+
+  (defun create-ascii-file-of-first-ten-million-primes ()
+    (with-temp-buffer
+      (mapc (lambda (n) (insert (format "%d\n" n))) first-ten-million-primes)
+      (write-region nil 0 "first-ten-million-primes.txt")))
+#+END_SRC
+
+#+BEGIN_SRC elisp :results silent
+  (create-ascii-file-of-first-ten-million-primes)
+#+END_SRC
+
+  Strictly speaking, it is not necessary to create this file in order to
+  calculate its size. How? What would its size be? (Knowing this size is useful
+  for compression ratio comparison.)
+
+* TODO Study and Extend Some Sample Code
+  As you are required to build an elisp-structured Huffman tree that can
+  compress the list of primes, use the following code block, which includes code
+  for restoring a list of the first ten million primes from the list of gaps
+  between them, as a guide and a starting point. This code shows a possible
+  implementation of a tree node as a symbol. The symbol\rsquo{}s value is the node\rsquo{}s
+  value. The symbol\rsquo{}s plist (property list) is used for storing \ldquo{}pointers\rdquo to
+  left and right children, and parent.
+
+#+BEGIN_SRC elisp :results silent
+  (require 'cl)
+
+  (defun restore-primes (list-of-gaps)
+    "Given the list of gaps starting at the gap between 3 and 5
+       return a list of the first ten million primes."
+    (cons 2 (cons 3 (loop for gap in list-of-gaps with prime = 3
+                          collect (incf prime gap)))))
+
+  (defun try-it-out ()
+    (setq a 1 b 2 c 3)
+    (put 'a :right 'b)
+    (get 'a :right)
+    (put 'a :left 'c)
+    (get 'a :left)
+    (symbol-plist 'a)
+    (put 'c :parent 'a)
+    (put 'b :parent 'a)
+    a)
+
+  (setq node-counter 0)
+
+  (defun make-node ()
+    (let ((symbol (intern (concat "n" (number-to-string node-counter)))))
+      (set symbol node-counter)
+      (setf (symbol-plist symbol) nil)
+      (incf node-counter)
+      symbol))
+
+  (defun get-value (node)
+    (and (symbolp node) (symbol-value node)))
+
+  (defun set-value (node new-value)
+    (and (symbolp node) (set node new-value)))
+
+  (defun get-parent (node)
+    (and (symbolp node) (get node :parent)))
+
+  (defun set-parent (node parent)
+    (and (symbolp node) (symbolp parent) (put node :parent parent)))
+
+  (defun get-left (node)
+    (and (symbolp node) (get node :left)))
+
+  (defun set-left (node left)
+    (and (symbolp node) (symbolp left) (put node :left left)))
+
+  (defun get-right (node)
+    (and (symbolp node) (get node :right)))
+
+  (defun set-right (node right)
+    (and (symbolp node) (symbolp right) (put node :right right)))
+
+  (defun build-tree (height)
+    (let ((root (make-node)))
+      (if (> height 0)
+          (let ((left (build-tree (1- height)))
+                (right (build-tree (1- height))))
+            (set-left root left)
+            (set-right root right)
+            (set-parent left root)
+            (set-parent right root)))
+      root))
+#+END_SRC

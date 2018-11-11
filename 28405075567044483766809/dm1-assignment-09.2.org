@@ -1,0 +1,129 @@
+#+TITLE: STU Trees I
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+[[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
+[[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
+* Exercises
+** TODO LDA
+#+begin_note
+  Alter the following =let= expression so that it creates the same list using
+  =cons= rather than =list=.
+
+#+BEGIN_SRC elisp :results raw
+  (let ((a 1) (b 2) (c 3) (d 4))
+    (list (+ a b) (/ d b) (- d a) (* c d)))
+#+END_SRC
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO SQI
+#+begin_note
+  Use =cons= to re-implement the =morphifyr= function more efficiently.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO LJP
+#+begin_note
+  Use =car=, =cdr=, and =cons= to re-implement the =prime-list-from-rle-list=
+  function more efficiently.
+:HINT:
+  - Hint :: Think recursion. There are four cases to handle, the base case being
+            when the passed-in rle-list is null.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO YGT
+#+begin_note
+  Construct a binary search tree from the *words* (not the letters) of the phrase
+
+: time flies on wings of lightning
+
+  using dictionary order, inserting words in the order they appear in the
+  phrase. Don\rsquo{}t try to balance the tree (see below).
+
+  What is the *height* of this tree?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO LUM
+#+begin_note
+  Which of the above balanced BSTs is represented by the following list?
+#+BEGIN_SRC elisp :results silent
+  (so (cool (are (and) (binary)) (search (kind))) (trees (the) (wonderfully)))))
+#+END_SRC
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Problems
+  No optional problems this week.
+** TODO SUF
+#+begin_note
+  How would you write (using map /not/ a loop) an elisp function
+  =number-of-factors= that takes the CSF of a positive integer (in
+  list-of-dotted-pairs form) and returns how many factors that integer has?
+
+#+BEGIN_SRC elisp
+  (defun number-of-factors (csf)
+    "Takes a CSF like '((2 . 3) (3 . 1) (5 . 2)) and returns 24."
+    ;; ... your ONE line of code goes here
+    )
+#+END_SRC
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO LNR
+#+begin_note
+  How would you write (using map /not/ a loop) another elisp function
+  =number-of-factors-alt= that takes the CSF of a positive integer (in
+  vector-of-two-element-lists form) and returns how many factors that integer
+  has?
+
+#+BEGIN_SRC elisp
+  (defun number-of-factors-alt (csf)
+    "Takes a CSF like [(2 3) (3 1) (5 2)] and returns 24."
+    ;; ... your ONE line of code goes here
+    )
+#+END_SRC
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO LDO
+#+begin_note
+  Investigate what must happen to delete a key from a BST. Is deletion always as
+  fast as insertion?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO YCF
+#+begin_note
+  Compare and contrast the different nuances in the precise definitions of the
+  terms *full*, *complete* and *balanced* used to describe trees.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO YZU
+#+begin_note
+  Investigate various techniques to rebuild unbalanced BSTs to make them
+  balanced. Note that this rebuilding can happen on-the-fly (as items are
+  inserted) or at-the-end (after all initial items are inserted).
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Puzzles
+  No puzzles this week.
