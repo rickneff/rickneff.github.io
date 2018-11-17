@@ -1,0 +1,19 @@
+#+TITLE: Idea Exchange 10.2 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything
+#+SETUPFILE: theme-bigblow.setup
+
+* TODO Watch a Video About Imposter Syndrome
+  Something to be aware of and be wary of, courtesy [[https://www.destroyallsoftware.com/talks/ideology][a talk by Gary Bernhardt]].
+
+* TODO Watch a Video About A Whole New World 
+   Consider what Bernhardt says is \ldquo{}[a talk that] announces the most ambitious
+   software project [he\rsquo{}s] ever undertaken, then considers why its existence is
+   so surprising (and in some cases frustrating) to people\rdquo --- you included?
+   Discuss the thoughts triggered by [[https://www.destroyallsoftware.com/talks/a-whole-new-world][another talk by Gary Bernhardt]].
+
+  First post your answer --- which should be a response to both talks.
+
+  Then post on two other students' answers.

@@ -1,0 +1,42 @@
+#+TITLE: DM2 Idea Exchange 10.2 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything
+#+SETUPFILE: theme-bigblow.setup
+
+* TODO Discuss The Code Below That Finds A Spanning Tree 
+  of a graph, given the nodes, edges, and adjacency-lists of the graph:
+
+#+BEGIN_SRC elisp :results silent
+  (defun spanning-tree (nodes edges adjacency-lists)
+    ;; 1. Start with frontier = (list (first nodes))
+    (let ((frontier (list (first nodes)))
+          (num-nodes (length nodes))
+          (spanning-tree nil)
+          node-in-frontier adjacencies destination)
+      ;; 2. Pick an edge connected to a node in the frontier
+      ;;    that does not create a cycle --- that is, the
+      ;;    other (destination) node of the edge is not
+      ;;    already in the frontier.
+      (while (< (length frontier) num-nodes) ;; more to do
+        ;; randomly pick a node in the frontier, and a destination
+        ;; randomly chosen from that node's adjacencies
+        (setq node-in-frontier (nth (random (length frontier)) frontier)
+              adjacencies (cdr (assoc node-in-frontier adjacency-lists))
+              destination (nth (random (length adjacencies)) adjacencies))
+        ;; 3. Add that destination node to the frontier unless already there
+        (unless (member destination frontier)
+          (pushnew destination frontier)
+          ;; 4. Add the picked edge to the spanning-tree.
+          (push (if (< node-in-frontier destination)
+                    (cons node-in-frontier destination)
+                  (cons destination node-in-frontier))
+                spanning-tree)))
+      ;; 5. Repeat steps 2-4 until all nodes are in the frontier.
+      (sort spanning-tree (lambda (x y) (or (< (car x) (car y)) (< (cdr x) (cdr y)))))))
+#+END_SRC
+
+  First post your answer.
+
+  Then post on two other students' answers.
