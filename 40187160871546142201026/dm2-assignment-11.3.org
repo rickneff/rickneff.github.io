@@ -1,0 +1,39 @@
+#+TITLE: VWX Graphs 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+ 
+[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+[[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
+[[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
+* TODO Implement a Graph Algorithm
+  Specifically, implement Hierholzer’s Algorithm in elisp to find an Eulerian
+  circuit in a simple, connected graph. Use an alist (association list) for the
+  graph\rsquo{}s adjacency list. Test your implementation on a graph with at least 12
+  nodes and 17 links, like the below: 
+
+  #+name: graph-adjacencies
+  | Node | Adjacent Nodes |
+  |------+----------------|
+  |    1 | 2 9            |
+  |    2 | 1 3 7 9        |
+  |    3 | 2 4 6 7        |
+  |    4 | 3 5            |
+  |    5 | 4 6            |
+  |    6 | 3 5            |
+  |    7 | 2 3 8 12       |
+  |    8 | 7 11           |
+  |    9 | 1 2 10 11      |
+  |   10 | 9 11           |
+  |   11 | 9 8 10 12      |
+  |   12 | 7 11           |
+
+#+BEGIN_SRC elisp :var table=graph-adjacencies :results raw
+  (cdr (assoc 12 table))
+#+END_SRC
+
+#+RESULTS:
+(7 11)
+
