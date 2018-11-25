@@ -1,0 +1,83 @@
+#+TITLE: DM2 Idea Exchange 11.2
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything
+#+SETUPFILE: theme-bigblow.setup
+
+  What does the following have to do with graph theory?
+
+* TODO Discuss The Dating Service Problem
+  Suppose N boys and N girls join a dating service.
+
+  We write down an N-by-N matrix, where the (i, j) entry equals 1 if the ith boy
+  and the jth girl are willing to date each other, and 0 if they aren’t.
+
+  Is it possible to pair off every boy and girl with a willing partner?
+
+  Here’s a simple way to find out:
+
+  First rescale every row of the matrix to sum to 1.
+
+  Then rescale every column to sum to 1.
+
+  Then rescale every row, then rescale every column, and so on N^5 times.
+
+  If at the end of this scaling process, every row sum and every column sum is
+  between (inclusive) 1 - 1/N and 1 + 1/N, then it’s possible to pair off the
+  boys and girls; otherwise it isn’t.
+
+#+BEGIN_SRC elisp :results silent
+  (defun scale-list (lst)
+    (let ((sum (float (apply '+ lst))))
+      (if (zerop sum)
+          (error "no can do")
+        (mapcar (lambda (x) (/ x sum)) lst))))
+
+  (defun scale-rows (matrix)
+    (mapcar 'scale-list matrix))
+
+  (defun scale-columns (matrix)
+     (let ((transpose (apply 'mapcar* 'list matrix)))
+        (apply 'mapcar* 'list (scale-rows transpose))))
+
+  (defun dating-service (n matrix)
+    (or (and (= n (length matrix))
+             (every (lambda (row) (= n (length row))) matrix))
+        (error "bad parameters"))
+    (loop repeat (expt n 5)
+          do (setq matrix (scale-rows matrix)
+                   matrix (scale-columns matrix)))
+    matrix)
+#+END_SRC
+
+#+BEGIN_SRC elisp
+  (setq five-by-five '((0 1 0 1 0) (1 0 1 0 1) (0 1 1 0 0) (0 1 0 0 1) (0 0 1 1 1)))
+#+END_SRC
+
+#+RESULTS:
+| 0 | 1 | 0 | 1 | 0 |
+| 1 | 0 | 1 | 0 | 1 |
+| 0 | 1 | 1 | 0 | 0 |
+| 0 | 1 | 0 | 0 | 1 |
+| 0 | 0 | 1 | 1 | 1 |
+
+#+BEGIN_SRC elisp
+  (dating-service 5 five-by-five) 
+#+END_SRC
+
+#+RESULTS:
+| 0.0 | 0.3332991567624504 |                    0.0 |  0.6666367629688442 |                    0.0 |
+| 1.0 |                0.0 | 0.00012808973625332503 |                 0.0 | 0.00012808973625332503 |
+| 0.0 | 0.3333504216187748 |     0.6665855473677436 |                 0.0 |                    0.0 |
+| 0.0 | 0.3333504216187748 |                    0.0 |                 0.0 |     0.6665855473677436 |
+| 0.0 |                0.0 |     0.3332863628960031 | 0.33336323703115567 |     0.3332863628960031 |
+
+* TODO Demonstrate Your Understanding
+  How does this work? Can you explain it?!
+
+  Some evidence of experimentation is required for full credit.
+
+  First post your answer.
+
+  Then post on two other students' answers.

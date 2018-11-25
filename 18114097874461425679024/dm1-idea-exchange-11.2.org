@@ -1,0 +1,195 @@
+#+TITLE: Idea Exchange 11.2 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything
+#+SETUPFILE: theme-bigblow.setup
+
+* TODO Study the Traveling Salesperson Problem
+   Here, for python fans everywhere, is [[https://github.com/norvig/pytudes/blob/master/ipynb/TSP.ipynb][a \ldquo{}pytude\rdquo]] by Peter Norvig,
+   Director of Research for Google.
+
+** TODO Study the gist of it
+   Given a list of cities and the distances between them, what tour through all
+   the cities that returns to the starting city is the shortest?
+
+*** Simple to State, Hard to Solve
+
+  The simplicity of the statement of the TSP masks its complexity. But its
+  complexity must be dealt with, as the TSP is useful in many real world
+  applications:
+   - Route Optimization
+   - Manufacturing
+   - Astronomy
+   - And more...
+
+*** An Approach
+  The brute force approach is both simple and straightforward:
+
+  1. produce every permutation of cities
+  2. for each permutation, create a circuit by joining the last node to the first node
+  3. calculate each circuit\rsquo{}s distance
+  4. return the circuit with the shortest distance
+
+  The problem with this approach is \ldquo{}combinatorial explosion\rdquo --- how quickly
+  the number of permutations grows!
+
+** TODO Study the following code
+#+BEGIN_SRC elisp :results silent
+  (require 'cl)
+
+  (defun permute (lst)
+    (if (null lst)
+        (list nil)
+      (mapcan (lambda (x)
+                (mapcar (lambda (y) (cons x y))
+                        (permute (remove x lst))))
+              lst)))
+
+  (defun TSP-solver (distance-matrix)
+     (let* ((num-cities (length distance-matrix))
+            (cities (number-sequence 1 num-cities))
+            (permutations (permute cities))
+            (results (mapcar
+                      (lambda (perm)
+                        (cons
+                         (apply '+ (mapcar (lambda (city)
+                                             (dist (nth (1- city) perm)
+                                                   (nth (mod city num-cities) perm)
+                                                   distance-matrix))
+                                           cities))
+                         perm))
+                      permutations)))
+       (assoc (apply 'min (mapcar 'car results)) results)))
+
+  (defun dist (i j d-matrix)
+    (elt (elt d-matrix (1- i)) (1- j)))
+
+  (defun build-cities-coords (n width height seed)
+     (random seed)
+     (loop repeat n collect (cons (random width) (random height))))
+
+   (defun build-distance-matrix (cities-coords)
+     (apply 'vector
+            (mapcar (lambda (c1)
+                      (apply 'vector
+                             (mapcar (lambda (c2)
+                                       (distance c1 c2))
+                                     cities-coords)))
+                    cities-coords)))
+#+END_SRC
+
+* TODO Supply and Test
+  The only function definition missing from the above code block is =distance=.
+
+  Supply this missing function so that you can evaluate the following block to
+  test this =TSP-solver=:
+
+#+BEGIN_SRC elisp :results raw
+  (setq cities-coords-20 (build-cities-coords 20 900 600 "twentysomething")
+        cities-coords (subseq cities-coords-20 0 9) ;; change 9 to a smaller integer (> 3) to save time
+        start (float-time)
+        results (TSP-solver (build-distance-matrix cities-coords))
+        timed-results (cons (- (float-time) start) results))
+#+END_SRC
+
+** TODO Heed Hint
+  You may find this python code helpful:
+
+#+BEGIN_SRC python :results output
+  from math import sqrt
+
+  class City:
+    def __init__(self, x, y):
+      self.x = x
+      self.y = y
+
+  def distance(c1, c2):
+    return sqrt((c1.x - c2.x)**2 + (c1.y - c2.y)**2)
+
+  print distance(City(300, 270), City(450, 109))
+#+END_SRC
+  
+  This code, borrowed from Norvig\rsquo{}s pytude, may also come in handy:
+#+BEGIN_SRC python :results file
+  import matplotlib.pyplot as plt
+
+  def plot_tour(tour):
+      "Plot the cities as circles and the tour as lines between them."
+      plot_lines(list(tour) + [tour[0]])
+
+  def plot_lines(points, style='bo-'):
+      "Plot lines to connect a series of points."
+      plt.plot([p.real for p in points], [p.imag for p in points], style)
+      plt.axis('scaled')
+      plt.axis('off')
+
+  plot_tour(((6+546j),
+   (199+147j),
+   (350+65j),
+   (737+26j),
+   (847+187j),
+   (891+465j),
+   (554+374j),
+   (505+548j)))
+
+  plt.savefig('pyplot-tour.png')
+  return 'pyplot-tour.png'
+#+END_SRC
+
+** TODO Enjoy a Bonus!
+   Graphics are always good for helping us visualize problem results. The bonus
+   is found in the interaction between org-mode-enabled elisp code and python
+   code!
+
+#+BEGIN_SRC elisp :results value
+  (setq winning-tour (cdr results) 
+        coords (mapcar (lambda (i)
+                         (let ((city (nth (1- i) cities-coords)))
+                           (list (car city) (cdr city))))
+                        winning-tour))
+#+END_SRC
+
+  In the table produced by evaluating the above code block, replace \ldquo{}#+RESULTS\rdquo
+  with \ldquo{}#+name: points-to-plot\rdquo so that evaluating the following code block will
+  work.
+
+#+BEGIN_SRC python :var pts=points-to-plot :results file
+  import matplotlib.pyplot as plt
+
+  def plot_tour(tour):
+      "Plot the cities as circles and the tour as lines between them."
+      plot_lines(tour + [tour[0]])
+
+  def plot_lines(points, style='bo-'):
+      "Plot lines to connect a series of points."
+      plt.plot([p[0] for p in points], [p[1] for p in points], style)
+
+  plot_tour(pts)
+  plt.savefig('pyplot-tour.png')
+  return 'pyplot-tour.png'
+#+END_SRC
+
+** TODO Go above and beyond
+  To show you *really understand* this brute-force algorithm, write four new
+  functions corresponding to the four steps outlined above, such that the
+  following code block will evaluate:
+
+#+BEGIN_SRC elisp :results raw
+  (setq distance-matrix (build-distance-matrix cities-coords)
+        step-1-results (produce-every-permutation-of-cities distance-matrix)
+        step-2-results (create-circuit-for-each-permutation step-1-results)
+        step-3-results (calculate-circuit-distances step-2-results step-1-results)
+        step-4-results (find-circuit-with-shortest-distance step-3-results))
+#+END_SRC
+
+  All the code you need is found in the =TSP-solver= function. You only need to
+  reorganize it!
+* TODO Think and Discuss 
+  Think about and discuss what you learned about problem solving from grappling
+  with the TSP and relate it to what you have already learned about problem
+  solving.
+
+  First post your answer. 
+
+  Then post on two other students' answers.
