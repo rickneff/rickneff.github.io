@@ -1,0 +1,67 @@
+#+TITLE: Idea Exchange 13.2
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything
+#+SETUPFILE: theme-bigblow.setup
+
+  A fitting subtopic of Languages and Grammars is the Language of Boolean
+  Formulas. You have seen an inkling of this before:
+
+* TODO Discuss This Elisp Implementation of Boolean Formulas
+  A literal is a symbol with a value of 1 or 0. A negated literal is a function
+  with that literal\rsquo{}s name returning that symbol\rsquo{}s negated value (arithmetized,
+  so treating 0 and 1 as numbers standing in for false and true).
+
+  A clause is a list of literals. A formula a list of clauses. For now, assume a
+  formula is in Conjunctive Normal Form (CNF --- aka Product of Sums).
+
+  So '((a b c) (a (b) c) ((a) (b) c)) represents three clauses containing three
+  literals each where the literals are or\rsquo{}ed together (added) while the clauses
+  are and\rsquo{}ed together (multiplied).
+
+  An assignment is a setting of 1 (true) or 0 (false) to each literal in the
+  formula. Using an association-list for assignments, the car of each pair is
+  the symbol, the cdr its value.
+
+  So (setf a 1 b 0 c 1) to get the literal \lsquo{}a\rsquo{} with value 1, \lsquo{}b\rsquo{} with value 0,
+  and \lsquo{}c\rsquo{} with value 1:
+
+#+BEGIN_SRC elisp :results raw
+  (setf a 1 b 0 c 1
+        (symbol-function 'a) (lambda nil (- 1 (symbol-value 'a)))
+        (symbol-function 'b) (lambda nil (- 1 (symbol-value 'b)))
+        (symbol-function 'c) (lambda nil (- 1 (symbol-value 'c)))
+        formula1 '((a b c) (a (b) c) ((a) (b) c)))
+#+END_SRC
+
+#+RESULTS:
+((a b c) (a (b) c) ((a) (b) c))
+
+  A formula is evaluated with the current values of the literals, or else the
+  literals are set first from the optional assignment association list. The
+  evaluation gives either t or nil, *NOT* 1 or 0.
+
+#+BEGIN_SRC elisp :results silent
+  (defun eval-formula (formula &optional assignment)
+    (mapc (lambda (pair) (set (car pair) (cdr pair))) assignment)
+    (not (zerop (apply '* (mapcar (lambda (x) (apply '+ (mapcar (lambda (s) (eval s)) x)))
+                                  formula)))))
+#+END_SRC
+
+#+BEGIN_SRC elisp :results raw
+  (eval-formula formula1)
+#+END_SRC
+
+#+BEGIN_SRC elisp :results raw
+  (eval-formula '((a b (c)) ((a) (b) c) ((a) b (c))) '((a . 1) (b . 0) (c . 1)))
+#+END_SRC
+
+* TODO Demonstrate Your Understanding of This Implementation
+  Create a variation of the eval-formula function (call it eval-formula-alt)
+  that treats the formula as if it were in Disjunctive Normal Form (DNF --- aka
+  Sum of Products).
+
+  First post your answer.
+
+  Then post on two other students' answers.
