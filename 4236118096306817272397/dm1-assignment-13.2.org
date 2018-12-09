@@ -1,0 +1,392 @@
+#+TITLE: YZ@ Languages and Grammars
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+[[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
+[[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
+* Exercises
+  The preamble to exercises BAO, NCO and PDQ in YZH says: \ldquo{}Using the above example as a
+  guide, exercise your knowledge to produce derivations for several sentences,
+  and verify each by giving the sequence of values returned from calls to =random=
+  and using that to override the =random= function: \dots The following derivation
+  would result if the sequence of values returned from calls to random were [1 1
+  0 0 0 1 1 1 1 1 1]: \dots .\rdquo So to \lsquo{}derive-verify\rsquo each sentence, you must provide the
+  sequence of 1s and 0s you would need to enter to derive that sentence.
+
+  For your convenience, here is the PSG-implementing code from YZH:
+
+#+BEGIN_SRC elisp :results silent
+  (setq the t es "" hungry t sleepy t cat t dog t
+        chases t runs t slowly t quickly t
+        productions
+        '((SENTENCE NOUN-PHRASE VERB-PHRASE NOUN-PHRASE)
+          (SENTENCE NOUN-PHRASE VERB-PHRASE)
+          (NOUN-PHRASE ARTICLE ADJECTIVE NOUN)
+          (NOUN-PHRASE ARTICLE NOUN)
+          (VERB-PHRASE VERB ADVERB)
+          (VERB-PHRASE VERB)
+          (ARTICLE the es)
+          (ADJECTIVE hungry sleepy)
+          (NOUN cat dog)
+          (VERB chases runs)
+          (ADVERB slowly quickly))
+        reverse-productions (reverse productions))
+
+  (defun is-terminal (sym)
+    (and (symbolp sym) (boundp sym)))
+
+  (defun nonterminals-remain (derivation)
+    (notevery 'is-terminal derivation))
+
+  (defun derive (LHS)
+    (let* ((rules (if (zerop (random 2)) productions reverse-productions))
+           (RHS (cdr (assoc LHS rules))))
+      (if (null RHS)
+          (list LHS)
+        (if (nonterminals-remain RHS)
+            RHS
+          (list (nth (random (length RHS)) RHS))))))
+
+  (defun transform-terminal (terminal)
+    (or (and (boundp terminal)
+             (stringp (symbol-value terminal))
+             (symbol-value terminal))
+        (symbol-name terminal)))
+
+  (defun find-derivation (start-symbol)
+    (let ((derivation (list start-symbol)))
+      (while (nonterminals-remain derivation)
+        (setq derivation (apply 'append (mapcar 'derive derivation))))
+      (mapconcat 'transform-terminal derivation " ")))
+#+END_SRC
+
+  Note that overriding the =random= function, which evaluating this next code
+  block will do, is not the only way to get the correct sequence of 1s and 0s.
+  Can you find a better (easier) way?
+#+BEGIN_SRC elisp :results silent
+  (add-function :override
+                (symbol-function 'random)
+                (lambda (&rest args)
+                  (string-to-number
+                   (read-from-minibuffer
+                    (format "Enter random value less than %d: " (car args)))))
+                '((name . interactive-random)))
+#+END_SRC
+
+  If you do override =random=, before you try to use it as you normally would,
+  be sure to evaluate the following to undo the override:
+#+BEGIN_SRC elisp :results silent
+  (remove-function (symbol-function 'random) 'interactive-random)
+#+END_SRC
+
+** TODO BAO
+#+begin_note
+   Derive-verify =the sleepy cat runs slowly=.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO NCO
+#+begin_note
+   Derive-verify =the hungry dog runs quickly=.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO PDQ
+#+begin_note
+   Derive-verify =the hungry dog chases the sleepy cat=.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO NTC
+#+begin_note
+   Combinatorially speaking, how many different sentences can be derived by
+   repeated evaluations of =(find-derivation 'SENTENCE)=?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO PTW
+#+begin_note
+   See YZI for context for this and the next four exercises.
+
+   Using the syntax-tree tool, build a parse tree for =the quick brown fox jumps
+   over the lazy dog=.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO NTM
+#+begin_note
+   Build a parse tree for =the cat runs=.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO PMV
+#+begin_note
+   Build a parse tree for =the cat chases the hungry dog=.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO NES
+#+begin_note
+   Build a parse tree for =the dog runs quickly=.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO BRZ
+#+begin_note
+   Build a parse tree for =the sleepy dog chases quickly the hungry cat=.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Problems
+  Note: * means optional. If it\rsquo{}s not starred, it\rsquo{}s required.
+** TODO BRE
+#+begin_note
+   See Figure 123 in YZM for context.
+
+   Add a state and the necessary transitions to make this a valid state machine.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO NGP
+#+begin_note
+   Compare/contrast the 1(0 \cup 1)^{\star} machine with the (0 \cup 1)^{\star}1 machine.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO BRQ
+#+begin_note
+  The three-production grammar
+
+  1. S \rarr A1
+  2. A \rarr A0
+  3. A \rarr \lambda
+
+  generates the simple language consisting of any number of 0\rsquo{}s (including zero
+  0\rsquo{}s) followed by a single 1.
+
+  Build a simple two-state machine to model it.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO PIQ
+#+begin_note
+  The following machine recognizes which language?
+
+#+BEGIN_SRC dot :file fig-single-state-with-01-transitions.png
+  digraph {
+    size="1,2";
+    bgcolor=transparent;
+
+    node [shape=circle]; S;
+
+    S -> S [label=0 headport=n tailport=n];
+    S -> S [label=1 headport=s tailport=s];
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:fig-single-state-with-01-transitions.png]]
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO PRK
+#+begin_note
+    See YZP for context for this and the next four problems.
+    
+    Let N = [S A B] and T = [0 1]. Find the language generated by each grammar
+    [N T S P] when the set P of productions consists of:
+
+    S \rightarrow AB
+
+    A \rightarrow 01
+
+    B \rightarrow 11
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO NIO *
+#+begin_note
+    Let N = [S A B] and T = [0 1]. Find the language generated by each grammar
+    [N T S P] when the set P of productions consists of:
+
+    S \rightarrow AB
+
+    S \rightarrow 0A
+
+    A \rightarrow 0
+
+    B \rightarrow 10
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO PFA
+#+begin_note
+    Let N = [S A B] and T = [0 1]. Find the language generated by each grammar
+    [N T S P] when the set P of productions consists of:
+
+    S \rightarrow AB
+
+    S \rightarrow AA
+
+    A \rightarrow 0B
+
+    A \rightarrow 01
+
+    B \rightarrow 1
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO BGT *
+#+begin_note
+    Let N = [S A B] and T = [0 1]. Find the language generated by each grammar
+    [N T S P] when the set P of productions consists of:
+
+    S \rightarrow AA
+
+    S \rightarrow B
+
+    A \rightarrow 00A
+
+    A \rightarrow 00
+
+    B \rightarrow 1B
+
+    B \rightarrow 1
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO NGI
+#+begin_note
+    Let N = [S A B] and T = [0 1]. Find the language generated by each grammar
+    [N T S P] when the set P of productions consists of:
+
+    S \rightarrow AB
+
+    A \rightarrow 0A1
+
+    B \rightarrow 1B0
+
+    A \rightarrow \lambda
+
+    B \rightarrow \lambda
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO NLR
+#+begin_note
+  What language is generated by the grammar described by this code?
+
+#+BEGIN_SRC elisp :results silent
+  (setq es "" a "0" b "1"
+        productions
+        '((S A B)
+          (A a A b)
+          (B b B a)
+          (A es)
+          (B es))
+        reverse-productions (reverse productions))
+#+END_SRC
+
+#+BEGIN_SRC elisp
+  (find-derivation 'S)
+#+END_SRC
+
+: 0 0  1 1 1 1  0 0
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO BSP
+#+begin_note
+  Construct a PSG to generate {0^{2n }1 \vert n \ge 0}.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO NBO *
+#+begin_note
+  Construct a PSG to generate {0^{n }1^{2n} \vert n \ge 0}.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO PBI
+#+begin_note
+  Construct a PSG to generate {0^n 1^m 0^n \vert m \ge 0 and n \ge 0}.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Puzzles
+** TODO BJO
+#+begin_note
+  These triples are not random, they have something to do with something you
+  have seen before:
+: [[1 3 2] [3 1 4] [3 5 4] [5 2 3] [5 4 3] [7 1 4] [7 5 4] [9 3 2]]
+  Find the connection.
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+    N/A.
+** TODO NKY
+#+begin_note
+  These triples are not random, they have something to do with something you may
+  or may not have seen before:
+: [[3 1 0] [0 3 0] [1 1 1] [5 0 0] [2 2 0] [3 0 1] [0 2 1] [4 1 0]]
+  Find the connection.
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+    N/A.
+** TODO BMI
+#+begin_note
+  Solving a math problem to get clues to Til\rsquo{}s unknown whereabouts could be a
+  fitting conclusion, while also foreshadowing future interactions and learning
+  adventures of Til, Ila and Abu.
+
+  Til has gone missing for two weeks. He knows where he is, but has no way to
+  communicate his location in the desert where he went to seek solitude.
+  Something he feels compelled to do from time to time, much to his wife\rsquo{}s
+  dismay. This time he is in some kind of trouble, trapped without means to get
+  out on his own.
+
+  The problem is that his tracer signal is encrypted, in a very eccentric way.
+  This way may have something to do with the final puzzle he gave Abu and Ila,
+  namely, to find the connection between Edgar Allan Poe and the phrase \ldquo{}Notice
+  cousin Felipe\rdquo.
+:HINT:
+  You will need to think long and hard about this. Fortunately, this
+  life-and-death scenario is not real, so however long it takes, Til can wait!
+:END:
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+    N/A.
