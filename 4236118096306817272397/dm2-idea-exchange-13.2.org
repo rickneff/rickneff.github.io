@@ -1,0 +1,22 @@
+#+TITLE: DM2 Idea Exchange 13.2
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything
+#+SETUPFILE: theme-bigblow.setup
+
+  With your freshly heightened awareness of the ramifications of bumping your
+  head against abstraction ceilings, a look back at some major course topics (as
+  touched on in the paper on G\ouml{}del Hashes by Matt Might and two of his students)
+  will reveal how strong you have become.
+
+* TODO Discuss What You Learned
+  Finish reading the paper you started reading the first week of the semester:
+  http://matt.might.net/papers/liang2014godel.pdf
+
+  Discuss three specific things you learned from this paper. Do a little
+  research on and include lattices in your discussion.
+
+  First post your response.
+
+  Then post on two other students' responses.
