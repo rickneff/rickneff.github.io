@@ -1,0 +1,144 @@
+#+TITLE: DM2 Final Assignment 
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+ 
+[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+[[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
+[[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
+* TODO Investigate Something Fascinating
+  You are invited to explore some of the ramifications of the /Pigeonhole
+  Principle/, a fascinating counting principle belonging to combinatorics.
+
+** Requirements
+   Read Brother Kent Bessey's essay entitled /Pigeons and Pigeonholes/,
+   think about and explore the topics therein, and write your response
+   thereto.
+
+   Include in your response a description of a discussion about this
+   essay that you will have had with someone /not in the class/ (nor
+   in the STEM majors). This person can be a spouse, friend,
+   roommate, or relative; but the point is to find someone who is not
+   mathematically strong, and has probably never heard of the
+   Pigeonhole Principle, or combinatorics (or discrete mathematics) in
+   general.
+
+** Copyright Note
+   Brother Kent A. Bessey, Professor of Mathematics at BYU-Idaho,
+   holds the copyright to this essay, which means:
+
+   /All rights reserved (by him). Reproduced by permission (from
+   him). Read-only. Please do not copy, print, transmit or save a copy
+   of this work./
+
+   He has authorized your temporary use of [[https://firstthreeodds.org/17657741833134731255/pigeons-and-pigeonholes.pdf][his work]].
+
+* TODO Concretize the Abstract by Writing Some Code
+   Specifically, write some elisp code to help you figure out the problem on
+   page 40, which Brother Bessey prefaces by saying:
+
+#+BEGIN_QUOTE
+   I leave it to the reader to verify the calculations 
+   for a final (albeit challenging) exercise ...!
+#+END_QUOTE
+
+   Include the results of your grappling with this problem, and note the two
+   stubbed functions below that you must flesh out in order to verify the
+   calculations and explain the hows and whys.
+
+** Stub Code
+#+BEGIN_SRC elisp
+  (defun calculate-number-of-possible-initials-including-middle-initial-if-any
+      (number-of-letters-in-the-English-alphabet)
+    ;;... your code goes here
+  )
+
+  (defun pigeonhole-from-pigeon (pigeon-represented-as-a-person-with-traits)
+    ;;... your code goes here
+  )
+#+END_SRC
+* TODO What Is True?
+  This is a tool that allows you to assess yourself on how you did
+  with this assignment. Change false to true if warranted. 
+
+#+BEGIN_SRC elisp :results silent :tangle wit.el
+  (defun what-is-true-about-my-engagement-with-this-final-assignment ()
+      (vector
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; What is true of my experience in general?                              ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    "I had fun. (2 points)" false
+    "I learned something new. (2 points)" false
+    "I achieved something meaningful, or something I can build upon at a later time. (3 points)" false
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; What is true of my report on what I learned?                            ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    "I responded with several (> 50) well-written sentences to Brother Bessey's essay. (4 points)" false
+    "I reported what I thought about the essay in general. (5 points)" false                      
+    "I reported what I thought about the certainty-not-chance feature of the pigeonhole principle. (6 points)" false
+    "I reported what I thought about the philosophical aspect of the pigeonhole principle per page 41. (7 points)" false
+    "I reported on how my discussion with a non-STEM non-classmate went. (8 points)" false
+    "I reported on how I grappled with the problem at the bottom of page 40. (9 points)" false
+    "I reported on the connection I found between the pigeonhole principle and lossless data compression. (10 points)" false
+ 
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; What is true of the mechanical "infelicities" (misspelled words,        ;;
+    ;; grammatical errors, punctuation errors) in my report of what I learned? ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    "There are fewer than four. (4 points)" false
+    "There are fewer than three. (4 points)" false
+    "There are fewer than two. (4 points)" false
+    "There are none. (4 points)" false
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; How well did I implement the function				                           ;;
+    ;; calculate-number-of-possible-initials-including-middle-initial-if-any?  ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    "I implemented the function in 3 or fewer lines of code. (4 points)" false
+    "I used either the sum rule and product rule together or else just the product rule. (4 points)" false
+    "The function calculates and returns the correct value (see Problem QFK). (4 points)" false
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; How well did I implement the pigeonhole-from-pigeon function?           ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    "The function parses a string like \"John Doe: LDS LikesCats BornBefore NoWearsContacts NoBitesFingernails LivesClose\" and returns the string \"J_D111001\". (4 points)" false
+    "The function calls (calculate-number-of-possible-initials-including-middle-initial-if-any 26) and uses the result. (4 points)" false
+    "The function has an assert that the length of the string being returned is 9. (4 points)" false
+    "The cardinality of the codomain (set of possible return values) of this function is over a million. (4 points)" false
+  ))
+#+END_SRC
+
+#+BEGIN_SRC elisp
+  (setq points-in-general (+ 2 2 3) 
+        points-for-report (+ 4 5 6 7 8 9 10)
+        points-for-absence-of-MIs (+ 4 4 4 4)
+        points-for-1st-function (+ 4 4 4) 
+        points-for-2nd-function (+ 4 4 4 4) 
+        total-points (+ points-in-general points-for-report points-for-absence-of-MIs points-for-1st-function points-for-2nd-function))
+#+END_SRC
+
+#+RESULTS:
+: 100
+
+#+BEGIN_SRC elisp
+  (setq true t
+        false nil
+        witvec (what-is-true-about-my-engagement-with-this-final-assignment)
+        assertions (loop for datum across witvec when (stringp datum) collect datum)
+        points (mapcar (lambda (x) (string-to-number (substring x (+ 3 (string-match-p "\\." x))))) assertions)
+        total-points (apply '+ points)
+        my-responses (loop for datum across witvec unless (stringp datum) collect datum)
+        my-points (mapcar* (lambda (asserted-earned points) (if asserted-earned points 0)) my-responses points))
+        displayed-score (format "#+SCORE: %d\n" (apply '+ my-points)) 
+#+END_SRC
+
+#+RESULTS:
+: #+SCORE: 0
