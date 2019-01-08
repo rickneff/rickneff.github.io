@@ -25,11 +25,6 @@
   both /A/ and /B/ --- i.e., \(A \oplus B = (A - B) \cup (B - A)\)) of
   /A/ = =[1 3 5]= and /B/ = =[1 2 3]=.
 
-* TODO Review DeMorgan\rsquo{}s Laws
-  DeMorgan's laws for sets involve set intersection, set union, and set
-  complementation. Find what elisp functions exist to help explore these laws,
-  and do some experiments with them.
-
 * TODO Review the Cartesian Products of Sets
   Let A = [a b c], B = [x y], and C = [0 1]. Find
 
@@ -37,3 +32,56 @@
   2. C \times B \times A
   3. C \times A \times B
   4. B \times B \times B
+
+* TODO Review DeMorgan\rsquo{}s Laws
+  DeMorgan's laws for sets involve set intersection, set union, and set
+  complementation. Find what elisp functions exist to help explore these laws,
+  and do some experiments with them.
+
+  Go above and beyond by not just copying a solution using pattern matching a l\agrave
+  =pcase= that works on propositional logic formulas (not set operations) (e.g.,
+  https://stackoverflow.com/questions/35295829/emacs-lisp-demorganify-a-list).
+
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+   What is true of my experience in general?
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I reported what I thought about while doing the problems.
+  - [ ] I reported on any connections I found between these problems and something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+#+name: assertions-about-answers
+  - [ ] I got the right answer for the question about set intersections and unions.
+  - [ ] I got the right answer for the question about the symmetric difference of sets. 
+  - [ ] I got the right answer for the question about the Cartesian products of sets.
+  - [ ] I did some investigation and simple experiments about DeMorgan\rsquo{}s Laws for sets. 
+
+#+name: assertions-about-aab
+  - [ ] I went above and beyond in my answer to the last question about DeMorgan\rsquo{}s Laws for sets. 
+
+#+BEGIN_SRC elisp
+  (calculate-score
+   (quote
+    ((in-general 2 2 3)
+     (about-report 4 4 4 5)
+     (about-MIs 4 4 4 4)
+     (about-answers 15 15 15 15)
+     (about-aab 10))))
+#+END_SRC

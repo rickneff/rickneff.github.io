@@ -7,15 +7,23 @@
 
 [[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
 [[elisp:(org-clock-report%201)][Insert/Update Clock Summary Report]]
-* TODO What is it about these four words?
-  Which of the words below is least like the others? (The difference has nothing
-  to do with vowels, consonants or syllables.)
+* TODO What is it about these numbers?
+  Which number goes where the ?? is?
 
-  ADMIT    PARADE 
-  HONOR    SAVAGE
-
+:           +>(37)
+:          /      \
+:         /        \
+:     +>(16)        +>(58)
+:    /                  \
+:   /                    \
+: (4)<+                   +>(89)
+:      \                     /
+:       \                   /
+:       (??)<+       (145)<+
+:             \       /
+:              \     /
+:              (42)<+
 * TODO What about these numbers?
-
    Can you discern the pattern in these numbers? 
 
    If so, to follow the pattern by what non-zero number would you replace 0?
@@ -23,15 +31,11 @@
 #+BEGIN_SRC elisp
   [2 3 2 2 5 2 0 7 2 2 2 3 3]
 #+END_SRC
-
 * TODO Answer a What Question and a Why Question
-
-  What is the cardinality of the /Power Set/ of a set of size n? Why?
+ What is the cardinality of the /Power Set/ of a set of size n? Why?
 
 * TODO Answer a Fuzzy Question
-
   Investigate and report on some application of *fuzzy sets* and *fuzzy logic*.
-
 * TODO Answer a Hash Question
   From your increased understanding following your reading of the first four
   pages of the [[http://matt.might.net/papers/liang2014godel.pdf][Fast Flow Analysis with G\ouml{}del Hashes]] paper, compute the hash as
@@ -40,4 +44,50 @@
   What observations can you make?
 
   (We will be reading and revisiting this paper throughout the semester as we
-  learn more, so hang in there!)
+  learn more discrete mathematics.)
+
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+   What is true of my experience in general?
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I reported what I thought about while doing the problems.
+  - [ ] I reported on any connections I found between these problems and something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+#+name: assertions-about-answers
+  - [ ] I got the right answer for the first question about numbers.
+  - [ ] I got the right answer for the second question about numbers.
+  - [ ] I got the right answer for the first question about sets.
+  - [ ] I did more than parrot some answer I found online about fuzzy sets/logic.
+  - [ ] I computed the G\ouml{}del Hashes of some interesting (non-trivial) sets/subsets.
+  - [ ] I made some astute observations about G\ouml{}del Hashes.
+
+#+name: assertions-about-aab
+  - [ ] I went above and beyond in my answer to the first question about numbers.
+
+#+BEGIN_SRC elisp
+  (calculate-score
+   (quote
+    ((in-general 2 2 3)
+     (about-report 4 4 4 5)
+     (about-MIs 4 4 4 4)
+     (about-answers 10 10 10 10 10 10)
+     (about-aab 10))))
+#+END_SRC
