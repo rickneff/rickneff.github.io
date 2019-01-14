@@ -1,0 +1,45 @@
+#+TITLE: Idea Exchange 02.2
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything
+#+SETUPFILE: ../theme-bigblow.setup
+
+  Please take an opportunity to apply some logical thinking with real-world
+  consequences. With the Savior and his teachings in mind, consider the
+  following introspection by author David Foster Wallace.
+
+#+BEGIN_QUOTE
+  Am I a good person? Deep down, do I even really want to be good person, or do
+  I only want to seem like a good person so that people (including myself) will
+  approve of me? Is there a difference? How do I ever actually know whether I'm
+  deluding myself, morally speaking?
+
+  Is the real point of my life simply to undergo as little pain and as much
+  pleasure as possible? My behavior sure seems to indicate that this is what I
+  believe, at least a lot of the time. But isn't this kind of a selfish way to
+  live? Forget selfish --- isn't it awful lonely?
+
+  But if I decide there's a different, less selfish, less lonely point to my
+  life, won't the reason for this decision be my desire to be less lonely,
+  meaning to suffer less overall pain? Can the decision to be less selfish ever
+  be anything other than a selfish decision?
+
+  Is it possible really to love other people? If I'm lonely and in pain,
+  everyone outside me is potential relief --- I need them. But can you really
+  love what you need so badly? Isn't a big part of love caring more about what
+  the other person needs? How am I supposed to subordinate my own overwhelming
+  need to somebody else's needs that I can't even feel directly? And yet if I
+  can't do this, I'm doomed to loneliness, which I definitely don't want \dots so
+  I'm back at trying to overcome my selfishness for self-interested reasons.
+
+  Is there any way out of this bind?
+#+END_QUOTE
+
+  Please think about and discuss how to help Brother Wallace out of this logical
+  bind. Help him find the *truth*!
+
+  First post your answer with your logical reasoning carefully described. 
+
+  Then post on two other students' answers, either augmenting (improving) their
+  answers or suggesting corrections to their logical reasoning.
