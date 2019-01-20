@@ -95,7 +95,6 @@
 : m = 2, n = 6
 
 * TODO Probe Deeply Into A Number-Theoretic Conjecture
-
   Let us define two infinite sets of positive integers, /A/ and /B/, to be
   generated based on two real numbers. The first is \( x = \sqrt{2} \), so \( A
   = \{\lfloor x \rfloor, \lfloor 2x \rfloor, \lfloor 3x \rfloor, \lfloor 4x
@@ -118,9 +117,11 @@
   you examine this code, note the use of the calc package and how it enables
   working with /very large/ numbers.
 
-* Sample Code
+** Sample Code
 
 #+BEGIN_SRC elisp :results silent :tangle 3x+1conjecture.el
+  (require 'cl)
+
   (require 'calc)
 
   (defmath is-odd (num)
@@ -148,6 +149,9 @@
       `(let ((,start (float-time)))
          ,@body
          (- (float-time) ,start))))
+
+  (defun test-1000000 ()
+    (print (vector (measure-time (setq results (test-3x+1-conjecture 1000000))) results)))
 #+END_SRC
 
 #+BEGIN_SRC elisp
@@ -155,9 +159,15 @@
   (calcFunc-is-odd (math-read-number "3589723987598273598723958729385792875982735982759871"))
 #+END_SRC
 
+#+RESULTS:
+: t
+
 #+BEGIN_SRC elisp
   (vector (measure-time (setq results (test-3x+1-conjecture 1000000))) results)
 #+END_SRC
+
+#+RESULTS:
+: [261.9364290237427 nil]
 
 * Expectations
   *How to Earn Your Grade*
@@ -180,70 +190,81 @@
   9. With a time/computation budget of 24 hours (in a row), report on
      how many 13-digit numbers (in the trillions) you can verify.
   10. Do the \ldquo{}What Is True?\rdquo self-assessment.
-* What Is True?
-  This is a tool that allows you to quantify how engaged (interested,
-  focused, enthusiastic) you feel you were while doing this assignment.
 
-  Use this scale to score your agreement with the assertions in the function below
-  that uses a string as the first element, and a number 0-5 as the second element
-  of each vector in this vector of vectors:
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
 
-  | 5 | = | complete or total agreement   |
-  | 4 | = | not quite total agreement     |
-  | 3 | = | middling agreement            |
-  | 2 | = | some agreement                |
-  | 1 | = | piddling agreement            |
-  | 0 | = | none, no agreement whatsoever |
+   What is true of my experience in general?
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I collaborated with one or more classmates.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
 
-#+BEGIN_SRC elisp :results silent :tangle yes
-    (defun what-is-true-about-my-engagement-with-dm2-assignment-03.4 ()
-      (vector
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; What is true of my experience in general?                              ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I reported on how I attacked and solved the problem of the invert
+    function.
+  - [ ] I reported on how many 13-digit numbers I was able to verify.
+  - [ ] I reported what I thought about while doing the problems.
+  - [ ] I reported on any connections I found between these problems and
+    something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
 
-    ["I had fun." 0]
-    ["I collaborated with one or more classmates." 0]
-    ["I learned something new." 0]
-    ["I achieved something meaningful, or something I can build upon at a later time." 0]
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; What is true of my report on what I learned?                            ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   What is true about the correctness and completeness of my code?
+#+name: assertions-about-correctness-and-completeness-of-code
+  - [ ] It is verified by showing no output except that which would report a
+    failure to satisfy a correct conjecture.
+  - [ ] It uses bigpos arithmetic via the 'calc' and 'calc-math' packages.
+  - [ ] It does NOT use any floating-point arithmetic.
+  - [ ] It can correctly keep running for 24 consecutive hours without running
+    out of memory.
+  - [ ] It can correctly keep running under emacs in batch mode in the
+    background, as discussed in class.
 
-    ["I reported on how I attacked and solved the problem of the invert function." 0]
-    ["I reported on how many 13-digit numbers I was able to verify." 0]
+   What is true about the elegance of my code?
+#+name: assertions-about-elegance-of-code
+  - [ ] It has some by virtue of its correctness, as first and foremost, an
+    elegant solution is a correct solution.
+  - [ ] It increases by means of helper functions that increase cohesion, and
+    decrease complexity.
+  - [ ] It increases by having no unnecessary, redundant functionality.
+  - [ ] It increases by using data types/structures as efficiently as possible.
+  - [ ] My code has only function definitions (defuns) in it, NO function calls
+    or other expressions.
+  - [ ] The last function in my code is my 'main' test driver function defined
+    as discussed in class.
 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; What is true about the correctness and completeness of my code?         ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   What is true of the depth of my engagement with this assignment?
+#+name: assertions-about-depth-of-engagement
+  - [ ] I found and grasped a clear, unambiguous statement of the set-theoretic conjecture.
+  - [ ] I succeeded in verifying this conjecture for many, many 13-digit integers.
+    
+   What is true of the above-and-beyond depth of my engagement with this assignment?
+#+name: assertions-about-above-and-beyond-depth-of-engagement
+  - [ ] I went deeper by seeking for an approach to a proof, and getting close, but not quite to the end.
+  - [ ] I went deeper by getting all the way to the end, and clinching the proof.
+  - [ ] I went still deeper by exploring AND reporting on possible applications of the ideas I discovered.
 
-    ["It is verified by showing no output except that which would report a failure to satisfy a correct conjecture." 0]
-    ["It uses bigpos arithmetic via the 'calc' package." 0]
-    ["It does NOT use any floating-point arithmetic." 0]
-    ["It can correctly keep running for 24 consecutive hours without running out of memory." 0]
-    ["It can correctly keep running under emacs in batch mode in the background, as discussed in class." 0]
-
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; What is true about the elegance of my code?                             ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-    ["It has some by virtue of its correctness, as first and foremost, an elegant solution is a correct solution." 0]
-    ["It increases by means of helper functions that increase cohesion, and decrease complexity." 0]
-    ["It increases by having no unnecessary, redundant functionality." 0]
-    ["It increases by using data types/structures as efficiently as possible." 0]
-    ["My code has only function definitions (defuns) in it, NO function calls or other expressions." 0]
-    ["The last function in my code is my 'main' test driver function defined as discussed in class." 0]
-
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; What is true of the depth of my engagement with this assignment?        ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-    ["I found and grasped a clear, unambiguous statement of the set-theoretic conjecture." 0]
-    ["I succeeded in verifying this conjecture for many, many 13-digit integers." 0]
-    ["I went deeper by seeking for an approach to a proof." 0]
-    ["I went deeper by getting close, but not quite to the end." 0]
-    ["I went deeper by getting all the way to the end, and clinching the proof." 0]
-    ["I went still deeper by exploring AND reporting on possible applications of the ideas I discovered." 0]
-  ))
+#+BEGIN_SRC elisp
+  (org-sbe "time-for-fun.org:calculate-score")
+  (calculate-score
+   (quote
+    ((in-general 1 1 1 1)
+     (about-report 2 2 2 2 2 2)
+     (about-MIs 2 2 2 2)
+     (about-correctness-and-completeness-of-code 6 6 6 6 6)
+     (about-elegance-of-code 6 6 6 6 6 6)
+     (about-depth-of-engagement 5 5)
+     (about-above-and-beyond-depth-of-engagement 2 4 8))))
 #+END_SRC
