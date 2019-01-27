@@ -150,24 +150,34 @@
          ,@body
          (- (float-time) ,start))))
 
-  (defun test-1000000 ()
-    (print (vector (measure-time (setq results (test-3x+1-conjecture 1000000))) results)))
+  (defun test-100000()
+    (print (vector (measure-time (setq results (test-3x+1-conjecture 100000))) results)))
 #+END_SRC
 
 #+BEGIN_SRC elisp
   (require 'calc-math)
-  (calcFunc-is-odd (math-read-number "3589723987598273598723958729385792875982735982759871"))
+  (calcFunc-is-odd (setq bn (math-read-number "3589723987598273598723958729385792875982735982759871")))
 #+END_SRC
 
 #+RESULTS:
 : t
 
-#+BEGIN_SRC elisp
-  (vector (measure-time (setq results (test-3x+1-conjecture 1000000))) results)
+#+BEGIN_SRC elisp :results code
+  bn
 #+END_SRC
 
 #+RESULTS:
-: [261.9364290237427 nil]
+#+BEGIN_SRC elisp
+(bigpos 982759871 875982735 729385792 598723958 987598273 3589723)
+#+END_SRC
+(lambda (num) (if (calcFunc-is-odd num) (math-add (math-mul 3 num) 1) (math-div num 2)))
+
+#+BEGIN_SRC elisp
+  (vector (measure-time (setq results (test-3x+1-conjecture 100000))) results)
+#+END_SRC
+
+#+RESULTS:
+: [20.126811027526855 nil]
 
 * Expectations
   *How to Earn Your Grade*
