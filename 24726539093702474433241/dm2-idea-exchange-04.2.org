@@ -1,52 +1,17 @@
-#+TITLE: DM2 Idea Exchange 04.2 
+#+TITLE: Idea Exchange 04.2
 #+LANGUAGE: en
 #+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
 #+OPTIONS: html-postamble:nil
-#+STARTUP: showeverything entitiespretty
+#+STARTUP: showeverything
 #+SETUPFILE: ../theme-bigblow.setup
 
-* TODO Study the Following Explanation of Cantor's Diagonal Argument
-  [[http://www.coopertoons.com/education/diagonal/diagonalargument.html]]
+  Please take the opportunity to do some introspection about the quote
+  [[https://rickneff.github.io/making-zion.html][you read earlier]].
 
-  This is by way of review. With that fresh on your mind, tackle the next task.
+  Then think about and discuss this idea in the context of what you have
+  achieved (or will have achieved) regarding this week's assignment.
 
-* TODO Find and Rebut A Counterargument
-  Find a counterargument to Cantor\rsquo{}s proof that the Reals are more infinite than
-  the Counting Numbers, and think about how to rebut it. This is just warmup for
-  the main idea exchange task, described below.
-
-* TODO Ponder and Prove the Infinite Binary Tree 
-  Refer to the animated image in DCP under the Introductory section
-
-  [[https://rickneff.github.io/metaphors-be-with-you.html#outline-container-orgfd28ab6][Topics To Be Explored]]
-
-  in the Book. This is the \ldquo{}finite binary tree\rdquo.
-
-  Depicted at the link below is the \ldquo{}INFINITE binary tree\rdquo. (Naturally, this is
-  only a conceptualization of something that cannot actually be drawn.) The tree
-  is constructed by letting all possible paths move upward, forking infinitely
-  many times. By continually halving distances, an infinite number of \ldquo{}branches\rdquo
-  (or nodes) will fit below the horizontal line. Imagine each point on this line
-  as being a \ldquo{}leaf\rdquo that lies at the end of one of the infinitely zigzagged
-  paths up through the tree. Starting from the bottom (the root of the tree) to
-  trace a complete path up to the horizontal line one makes an infinite number
-  of Left-Right decisions (Left corresponding to 0 and Right to 1). For example,
-  the path where the squiggly line meets the horizontal line corresponds to the
-  infinite sequence: 0, 1, 1, 0, 1, .... Starting from the bottom single node,
-  the number of nodes at each step doubles as the distance to the horizontal
-  line halves.
-
-  #+ATTR_HTML: :alt infinite binary tree :title Infinite Binary Tree
-  [[https://firstthreeodds.org/img/infinitebinarytree.png]]
-
-  Which of the following statements is true of this tree in its finished form?
-
-  - [ ] It has a countable number of nodes and a countable number of paths.
-  - [ ] It has a countable number of nodes and an uncountable number of paths.
-  - [ ] It has an uncountable number of nodes and a countable number of paths.
-  - [ ] It has an uncountable number of nodes and an uncountable number of paths.
-* TODO Answer the Multiple Choice Question
   First post your answer.
 
-  Then post on two other students\rsquo answers, either expanding on their answer or
-  arguing why your answer is more correct than theirs.
+  Then post on two other students' answers, either adding to their 
+  answers, or comparing/contrasting theirs to/with yours. 
