@@ -9,22 +9,114 @@
 [[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
 [[elisp:(org-clock-report%201)][Insert/Update Clock Summary Report]]
 
-* Teaser
-  Zach on 1/25/2019 at 3:18 PM posted on the #week-03 Discord channel:
+* Expectations
+** For All
+   It is expected that the whole class will participate. Unity is a priority.
+   You decide how to organize and supervise yourselves.
 
-#+BEGIN_QUOTE
-  Wish I had thought of this sooner but thinking back on what Brother Neff was
-  talking about earlier this week or last week I can't remember, we should have
-  split up sections of the search space for this assignment. If there are 37
-  people in the class and each of us were able to verify, say, 3 billion
-  numbers, then as a class we could have verified 111 billion. A number like
-  that could be closer to Brother Neff's meaning of "many, many"
-#+END_QUOTE
+   *Everyone will get the same grade.*
 
-  In light of Zach\rsquo{}s comment --- which I heartily endorse --- for your
-  consideration, profit and learning, please read [[https://rickneff.github.io/making-zion.html][this excerpt]] from a
-  book in my collection.
+   This group grade will be a percentage of how far you got towards the goal of
+   many, many (defined below) numbers verified. (NOTE: it is possible to get
+   more than 100%!)
+   
+   The goal bar was set by Zach: 111 billion verified *ABOVE* the maximum 13-digit
+   number any of you verified last week.
+**** Language/Platform
+     You may use any language you can all agree on. Sample working elisp code is
+     given below. The platform on which you run the code is up to you.
+*** For Some
+    Somebody needs to be the Team Leader. You choose.
 
-* Trailer
-  Week 04\rsquo{}s assignment --- whose details you will get on Monday during class ---
-  is geared to helping you achieve this kind of unity.
+    Another somebody, preferably someone with a flair for writing, needs to be the Reporter (Report Writer).
+
+**** Sample Report
+***** Introduction
+      Some of the most exhilarating moments in life are usually accompanied by
+      an “aha!” Having the light bulb suddenly turn on is certainly fulfilling,
+      especially after hours of thoughtful consideration. I’m sure I wasn’t the
+      only one who experienced such a phenomenon several times during this
+      exploration.
+      ...
+***** Approach
+      [My] approach was very successful in the speed department. The code turned
+      into an O(n) algorithm, with very low initial time consumption per every 1
+      billion. On a high-end 64-bit machine and compiler, this meant 7.3 seconds
+      per billion, 72.4 per 10 billion, and 723.2 per all 100 billion—12 minutes
+      for all 100 billion! What about 100 Trillion? Assuming precision is
+      retained, it would take 233 hours (about 9 days) to verify 100 trillion.
+      This could’ve been significantly reduced by segmenting the amount of
+      integers to test into parallel executions of the program, and assigning
+      each instance to a single thread of an 8 core processor. If that same
+      arrangement is utilized across 3 machines, the test would be completed in
+      22.2 hours; consider that it took 22 hours for an NTL based algorithm to
+      reach 100 billion. Unfortunately, such timeframe was no longer available.
+      Perhaps a faster, more creative algorithm could be found.
+***** Conclusion
+      I learned a lot from this exploration. Had some unforeseeable
+      circumstances been avoided, I could’ve spent as much time as I would’ve
+      liked on it. Now I see the value of multi-threading, parallel computing,
+      supercomputers, and even quantum (or higher order) computers; larger
+      resources with efficient, specialized software can significantly improve
+      computing time. There are thousands of interesting conjectures to test,
+      and countless others waiting to be formulated. Therefore, there is a real
+      necessity for minds that can think up solutions, and machines that can
+      handle the tasks.
+
+* Sample Working Code
+
+#+BEGIN_SRC elisp :results silent :tangle test-conjecture-with-command-line-args.el
+  (require 'cl)
+  (require 'calc)
+  (require 'calc-ext)
+
+  (setq min-N (string-to-number (or (third command-line-args-left) "1000000000000"))
+        max-N (string-to-number (or (fourth command-line-args-left) "1010000000000"))
+        sq2many (math-read-number  "141421356237309504880168872")
+       sq2p2many (math-read-number "341421356237309504880168872")
+       ten2many (math-read-number  "100000000000000000000000000"))
+
+  (defun get-next-A (a)
+    (math-fixnum (math-floor (math-quotient (math-mul a sq2many) ten2many))))
+
+  (defun get-next-B (b)
+    (math-fixnum (math-floor (math-quotient (math-mul b sq2p2many) ten2many))))
+
+  (defun verify-conjecture ()
+    (loop with a = (ceiling (/ min-N (sqrt 2)))
+          with b = (ceiling (/ min-N (+ 2 (sqrt 2))))
+          with start-time = (float-time)
+          for n from min-N to max-N
+          do (cond ((= (get-next-A a) n)
+                    (incf a))
+                   ((= (get-next-B b) n)
+                    (incf b))
+                   (t (print (format "Conjecture failed at n = %d, a = %d, b = %d"
+                                     n a b))))
+          finally (print (format "Verified from %d to %d in %.2f seconds."
+                                 min-N max-N (- (float-time) start-time)))))
+#+END_SRC
+
+#+BEGIN_SRC elisp :results silent
+  (apply 'byte-compile-file (org-babel-tangle-file "dm2-assignment-04.3.org"))
+#+END_SRC
+
+#+BEGIN_SRC sh :results output
+  emacs -batch -l test-conjecture-with-command-line-args.elc -f verify-conjecture 1000000000000 1000001000000
+#+END_SRC
+
+#+RESULTS:
+: 
+: "Verified from 1000000000000 to 1000001000000 in 28.26 seconds."
+
+#+BEGIN_SRC elisp :results silent
+  (setq command-line-args-left '(0 0 "1000000000000" "1000001000000"))
+#+END_SRC
+
+#+BEGIN_SRC elisp :results output
+  (verify-conjecture)
+#+END_SRC
+
+#+RESULTS:
+: 
+: "Verified from 1000000000000 to 1000001000000 in 21.65 seconds."
