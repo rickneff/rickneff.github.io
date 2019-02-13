@@ -1,52 +1,132 @@
-#+TITLE: DM2 Idea Exchange 06.2 
+#+TITLE: Idea Exchange 06.2
 #+LANGUAGE: en
 #+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
 #+OPTIONS: html-postamble:nil
-#+STARTUP: showeverything entitiespretty
-#+SETUPFILE: ../theme-bigblow.setup
+#+STARTUP: showeverything
+#+SETUPFILE: theme-bigblow.setup
 
-* TODO Analyze Binomial Coefficient Calculations
-  What can you say about these two different versions of the N Choose K function
-  (other than that they give the same result for 20 choose 10)?
+* An Aim for the Noblest Desire
+  The pursuit of knowledge and truth. That\rsquo{}s really what we\rsquo{}re about, isn\rsquo{}t it?
+  As citizens of Planet Earth, as affiliates of this university, and most
+  especially as members of the Church of Jesus-Christ of Latter-day Saints,
+  knowledge is our business. Of course, the pursuit of knowledge is one thing,
+  but it\rsquo{}s quite another thing to catch it! To \ldquo{}get it,\rdquo that\rsquo{}s the end toward
+  which we aim. Or to use another word---a longer word---to /apprehend/
+  truth---as when the long arm of the law reaches out to apprehend a criminal.
+  We really do want to get it, and not be as Paul described to Timothy \ldquo{}ever
+  learning, and never able to come to the knowledge of the truth\rdquo---which capped
+  his list of awful things he prophesied would be part and parcel of the
+  perilous times of the last days.
 
-#+BEGIN_SRC elisp :results silent
-  (defun n-choose-k-1 (n k)
-    (cond ((or (< n 0) (< k 0))
-           (error "negative arg"))
-          ((> k n) 0)
-          ((or (= n k) (zerop k)) 1)
-          (t (let ((result 1)
-                   (top (- n (1- k)))
-                   (bot 1)
-                   (i 0))
-               (while (> k i)
-                 (setq result (/ (* result top) bot)
-                       top (1+ top)
-                       bot (1+ bot)
-                       i (1+ i)))
-               result))))
+  Which days we are in. My aim here is, with help from other sources, the
+  sharing of my own quirky angle on this subject, acquired over the course of my
+  days on Planet Earth. I wish to reveal to you a tiny bit of the current state
+  of my quest---my personal odyssey---and I also earnestly hope that the Spirit
+  will edify and uplift you in the process. Because as we know, \ldquo{}The Spirit
+  speaketh the truth and lieth not. Wherefore, it speaketh of things as they
+  really are, and of things as they really will be.\rdquo (Jacob 4:13)
 
-  (defun n-choose-k-2 (n k)
-    (if (> k n)
-        0
-      (let ((result 1)
-            (d 1)
-            (g 1)
-            (m (min k (- n k))))
-        (while (<= d m)
-          (setq g (gcd result d)
-                result (* n (/ result g))
-                result (/ result (/ d g))
-                n (- n 1)
-                d (+ d 1)))
-        result)))
-#+END_SRC
+  Begin with one source.
 
-#+BEGIN_SRC elisp
-  (list (n-choose-k-1 20 10)
-        (n-choose-k-2 20 10))
-#+END_SRC
+#+BEGIN_QUOTE
+  The Lord defined truth as things as they are, as they were, and as they will
+  be. But as long as we remain human, we are consistently at least one step away
+  from the truth. In the search for truth, we have no direct contact with things
+  as they are, were, and will be. Past events are relayed to us through
+  observers, who, no matter how honest they were, still color their observations
+  with their prejudices. Our own prejudices cloud our vision of things as they
+  are. The prophets relay to us a vision of the future, but it is impossible to
+  collate those visions into a clear, accurate forecast of all that will take
+  place. We discover truth through many means. Observation tells us not what
+  happened, but what was observed to have happened. Generalization tells us not
+  what happens, but what has always happened in similar or identical cases so
+  far. Prediction tells us not what will happen, but what the evidence leads
+  some individuals to believe will happen. Prescription tells us not what
+  /should/ happen, but what individuals /desire/ to have happen. Whether it will
+  really be good or not will only be revealed in the actual event.
 
-  First post your answer. 
+  Indeed, the shakiest of all approaches to truth is prescription, because it
+  invariably depends on the accuracy of our prediction. When a doctor prescribes
+  penicillin, it is because penicillin has been proven many times in the past to
+  relieve the particular symptoms you exhibit. It is because of the doctor\rsquo{}s
+  prediction that penicillin will cure your ailment that he prescribes it.
 
-  Then post on two other students' answers.
+  There is a great deal of evidence to support the idea that penicillin is worth
+  prescribing. However, when you move away from physics, chemistry, or the other
+  hard sciences, prediction gets pretty shaky. Into the realm of history and
+  politics and psychology and sociology prediction ceases to be what /will/
+  happen---it becomes what /might/ happen. Despite the much vaunted
+  repetitiveness of history, history does not repeat in detail. Empires may rise
+  and fall along the same patterns, but in its relentless progression the event
+  still unwinds one day at a time, and no two days are ever identical. So
+  predictions of human behavior---those grand speculations on what /might/
+  happen---are not based on experience of what happens every time the experiment
+  is repeated. Those predictions are based on conclusions drawn from a
+  collection of independent events that may or may not have relation to the
+  event in question. In predicting human behavior, we find ourselves relying on
+  statements that boil down to what might have happened, what we /think/
+  happened, and---the most dangerous of all---what would have happened /if
+  only/.
+
+  /If only/. If only there had not been sex education in school, my daughter
+  would not be pregnant. If only there /had/ been sex education in school, my
+  daughter would not be pregnant.
+
+  If only textbooks could be brought into line, our children would not think
+  incorrect thoughts.
+
+  If only the novels that showed sex and violence could be banned, our terrible
+  crime problems would be solved.
+
+  If only John Gacy\rsquo{}s father had not been cold and distant from him, Gacy would
+  not have killed a score of innocent young men.
+
+  If only we could get people to stop mentioning ugliness, the world would be
+  beautiful.
+
+  So much prescription depends on that phrase \ldquo{}if only.\rdquo And yet \ldquo{}if only\rdquo
+  contains two vicious lies that make that phrase the eternal enemy of truth.
+
+  The first lie is the word /only/: Its root is the word /one/, implying a
+  singleness that never occurs in real life. It implies that a single change
+  would have a single effect, which is absurd on its face---for instance, the
+  popular lie that /if only/ Chamberlain had not tried to pacify Hitler and
+  instead had taken firm action years earlier to stop the Hitler menace, the
+  Second World War could have been avoided. Isn\rsquo{}t that nice? Isn\rsquo{}t it pleasant
+  to think wistfully about how easily such a tragedy could be avoided, and how
+  easily we could avoid it in the future? Yet Chamberlain\rsquo{}s pacification
+  attempts were themselves an effect, not a cause. If he had even suggested
+  going to war with Hitler before the invasion of Poland, his government would
+  have collapsed and the English would have replaced him with a government that
+  would try, as he did, to avoid war. And if England and France had invaded
+  Germany long before Hitler\rsquo{}s buildup was complete, wouldn\rsquo{}t we today condemn
+  that action as vicious warmongering? There is no single cause of an event, and
+  no single result from any change.
+
+  The second lie is the word /if/: /If/ implies that the predictor has a perfect
+  knowledge of the cause-and-effect chain. But that perfect knowledge has not
+  been vouchsafed to any man. That is one of the meanings of the veil that
+  blinds us to eternal things. We live in time, day to day, and the world is
+  narrowed to what we can perceive with our own senses and learn from those who
+  teach us. If we had the perfect knowledge that God has, it would be no test
+  for us here; we are kept in ignorance because only in ignorance are we able to
+  reveal to God and to ourselves who we really are. We do not know what would
+  have happened /if only/ we had done something different; we only know the
+  desires of our own heart, and the act, but not the long string of consequences
+  that extends infinitely from the act. We are not so implacable as the Greeks.
+  We Latter-day Saints do not believe that God would punish Oedipus for sins he
+  never desired to commit. \ldquo{}If only\rdquo has no meaning to us.
+
+  --- /Orson Scott Card/ from his book of essays entitled /A Storyteller in Zion/.
+#+END_QUOTE
+
+* TODO Think and Discuss
+  Think about and discuss these ideas in the context of what you have achieved
+  (or will have achieved) regarding this week\rsquo{}s assignment. Focus particularly
+  on the simplification of the \ldquo{}cause-and-effect chain\rdquo the na\iuml{}ve Bayesian
+  approach takes.
+
+  First post your answer.
+
+  Then post on two other students\rsquo{} answers, either adding to their 
+  answers, or comparing/contrasting theirs to/with yours. 
