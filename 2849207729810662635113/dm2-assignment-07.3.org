@@ -91,7 +91,8 @@
   |      9 | BNP     |
 
   Write elisp code to take a string of 3 digits and generate a random TLA with
-  this mapping.
+  this mapping. For full credit, *make sure* that your elisp code generates a
+  [[https://rickneff.github.io/2849207729810662635113/randomness-pseudo-and-true.org][*true random* NOT a *pseudorandom*]] TLA.
 
 * TODO Discern a Pattern
   In his book Brother Neff uses a TLA-based naming scheme to identify major
@@ -116,3 +117,47 @@
   (ABC ABD ABE ABF ABG ABH ABI ABJ ABK ABL ABM ABN ABO)
 
   What about the EPPs (Exercises, Problems, Puzzles)? What is their pattern?
+
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+   What is true of my experience in general?
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I collaborated with one or more classmates.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I reported what I thought about while doing the problems.
+  - [ ] I reported on any connections I found between these problems and
+        something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+#+name: assertions-about-answers
+  - [ ] I got the right answer for the first matching problem. 
+  - [ ] I got the \ldquo{}right\rdquo answer for the \ldquo{}Characterize a Letter-to-Number Mapping\rdquo problem.
+  - [ ] I wrote provably correct code for the \ldquo{}Inverse Mapping\rdquo.
+  - [ ] My code used true randomness not pseudorandomness.
+  - [ ] I got the right answer for the \ldquo{}Discern a Pattern\rdquo problem.
+
+#+BEGIN_SRC elisp
+; (org-sbe "time-for-fun.org:calculate-score")
+  (calculate-score
+   (quote
+    ((in-general 2 2 2 2)
+     (about-report 5 5 5 5 5 5)
+     (about-MIs 3 3 3 3)
+     (about-answers 10 10 10 10 10))))
+#+END_SRC

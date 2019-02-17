@@ -1,0 +1,136 @@
+#+TITLE: Randomness Pseudo and True
+#+AUTHOR: Rick Neff
+#+EMAIL: NeffR@byui.edu
+#+OPTIONS: H:4 num:nil toc:t \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t ':t |:nil
+#+OPTIONS: html-postamble:t
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: ../book/theme-bigblow.setup
+
+* Pseudo Randomness
+  SPC h d f random and read about the details.
+
+  See also [[http://www.cs.wm.edu/~va/software/park/park.html][Random Number Generators]] and [[https://en.wikipedia.org/wiki/Linear_congruential_generator][Linear Congruential Generators]].
+
+  For example:
+
+#+BEGIN_SRC elisp :results silent :tangle sprng.el
+  (defun prng (a x m c)
+    (mod (+ c (* a x)) m))
+#+END_SRC
+
+| Variable | Meaning    | Constraints         |
+|----------+------------+---------------------|
+| a        | multiplier | 2 \le a < m           |
+| x        | seed       | 0 \le x < m           |
+| m        | modulus    | 2^p \pm 1, for prime p |
+| c        | increment  | 0 \le c < m           |
+
+#+name: vars-and-values-1
+| Var | Val |
+|-----+-----|
+| a   |   7 |
+| x   |   3 |
+| m   |   9 |
+| c   |   4 |
+
+#+name: vars-and-values-2
+| Var |        Val |
+|-----+------------|
+| a   |      16807 |
+| x   |          1 |
+| m   | 2147483647 |
+| c   |          0 |
+
+#+BEGIN_SRC elisp :results silent :var table=vars-and-values-2 :tangle sprng.el
+  (require 'cl)
+
+  (loop for (var val) in table
+        do (set (intern var) val))
+#+END_SRC
+
+#+BEGIN_SRC elisp :results silent :tangle sprng.el
+  (provide 'sprng)
+
+  (defun show-prng (a x m c)
+    (let ((i 0))
+      (while (< i m)
+        (setq x (prng a x m c))
+        (princ (format "%d " x))
+        (when (zerop (mod (incf i) 10))
+          (princ "\n")))))
+          
+   (defun sprng ()
+      (show-prng a x m c))
+#+END_SRC
+
+#+BEGIN_SRC elisp :results output
+  (show-prng a x m c)
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle ~/bin/run-app.el
+#!/usr/bin/emacs --script
+
+(push "." load-path)
+(when (setq package (and (>= (length command-line-args-left) 1)
+                         (car command-line-args-left)))
+  (let* ((package-symbol (require (intern package)))
+         (package-function (symbol-function package-symbol))
+         (number-of-arguments-required (length (cadr package-function)))
+         (arguments (cdr command-line-args-left)))
+    (if (>= (length arguments) number-of-arguments-required)
+        (apply package-function arguments)
+      (error "Not enough arguments"))))
+#+END_SRC
+
+#+BEGIN_SRC sh :results silent
+  chmod +x ~/bin/run-app.el
+#+END_SRC
+
+#+BEGIN_SRC sh
+  run-app.el sprng
+#+END_SRC
+
+* True Randomness
+#+BEGIN_SRC elisp :results silent
+  (defun get-truly-random-integer-sequence (hi)
+    (let* ((params (format "min=%d%cmax=%d%ccol=1%cformat=plain%crnd=new"
+                           1 ?& hi ?& ?& ?&))
+           (url (concat "https://www.random.org/sequences/?" params))
+           (results (shell-command-to-string (concat "curl -s '" url "'"))))
+      (mapcar 'string-to-number (split-string results))))
+
+  (defun get-truly-randomized-list-of-students (class)
+    (let ((names (get-names-pl class)))
+      (mapcar* 'list
+               (get-truly-random-integer-sequence (length names))
+               names)))
+#+END_SRC
+
+#+BEGIN_SRC elisp :results raw
+  (get-truly-random-integer-sequence 31)
+#+END_SRC
+
+#+BEGIN_SRC elisp
+  (get-truly-randomized-list-of-students dm2)
+#+END_SRC
+
+** Elisp Alternative to curl
+#+BEGIN_SRC elisp :results silent
+  (require 'eww)
+
+  (defun get-truly-random-integer-sequence (hi)
+    (let* ((params (format "min=%d%cmax=%d%ccol=1%cformat=plain%crnd=new"
+                           1 ?& hi ?& ?& ?&))
+           (url (concat "https://www.random.org/sequences/?" params))
+           (temp-buffer (url-retrieve-synchronously url t t))
+           headers content-length end content results)
+      (with-current-buffer temp-buffer
+        (unwind-protect
+            (setq headers (eww-parse-headers)
+                  content-length (string-to-number (cdr (assoc "content-length" headers)))
+                  end (point-max)
+                  content (buffer-substring-no-properties (- end content-length) end)
+                  results (mapcar 'string-to-number (split-string content)))))
+      (kill-buffer temp-buffer)
+      results))
+#+END_SRC
