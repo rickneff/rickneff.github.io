@@ -1,18 +1,82 @@
-#+TITLE: DM2 Idea Exchange 07.2 
+#+TITLE: Idea Exchange 07.2
 #+LANGUAGE: en
 #+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
 #+OPTIONS: html-postamble:nil
-#+STARTUP: showeverything entitiespretty
-#+SETUPFILE: ../theme-bigblow.setup
+#+STARTUP: showeverything
+#+SETUPFILE: theme-bigblow.setup
 
-* TODO Watch and Analyze
-  Watch these three videos and (if you were making them) describe what you would
-  do differently to make them better:
+* Pursuing Knowledge and Truth 
+  Continuing my quest to give you a glimpse of where I am at in this pursuit, I
+  present to you a few more ideas to ponder, starting with another source from
+  the same author as last time, but much shorter. Here is an argument expressed
+  as commentary this logical thinker, Orson Scott Card, makes in his book
+  entitled /Empire/ about the thoughts and behavior of certain fictional
+  military characters:
 
-  - [[https://firstthreeodds.org/videos/modulus2.mp4][Modulus]]
-  - [[https://firstthreeodds.org/videos/modularInverse.mp4][Modular Inverse]]
-  - [[https://firstthreeodds.org/videos/Remainder.mp4][Chinese Remaindering]]
+#+BEGIN_QUOTE
+  If you always behave rationally, then reason becomes the leash by which your
+  enemy pulls you. Yet if you knowingly make irrational decisions, have you not
+  betrayed your own ability? The battlefield is not a place for actors, playing
+  the role of this or that style of commander, for you can always imitate a
+  worse commander, but never a better one. You must be yourself, even if your
+  enemy comes to know your weaknesses, for you cannot pretend to have personal
+  abilities and traits that you do not have.
+#+END_QUOTE
+
+  To analogize, our life is a battlefield and the enemy is Satan. Our
+  protection? Weapons? Putting on the \ldquo{}full armor of God\rdquo (see Ephesians 6:11-18
+  and Doctrine and Covenants 27:15-18) is not just a nice analogy, it is a vital
+  necessity!
+
+  How many \ldquo{}rational\rdquo human beings has Satan pulled by the leash of reason? Like
+  he pulled those hard-hearted, unbelieving Nephites who \ldquo{}began to reason and to
+  contend among themselves, saying: That it is not /reasonable/ that such a
+  being as a Christ shall come\rdquo (Helaman 16:17-18; emphasis added).
+
+  But even if Satan knows our weaknesses, his power is limited: \ldquo{}And he became
+  Satan, yea, even the devil, the father of all lies, to deceive and to blind
+  men, and to lead them captive at his will, even as many as would not hearken
+  unto my voice\rdquo (Moses 4:4). If we hearken unto the voice of the Lord, Satan
+  has no power over us. He is bound. I love this quote from President Spencer W.
+  Kimball:
+
+#+BEGIN_QUOTE
+  \ldquo{}When Satan is bound in a single home --- when Satan is bound in a single life
+  -- the Millennium has already begun in that home, in that life.\rdquo
+#+END_QUOTE
+
+  If it is true that we cannot pretend to have personal abilities and traits
+  that we do not have, is it also true that we cannot /aspire/ to have personal
+  abilities and traits that we do not yet have? I think not. It\rsquo{}s the \ldquo{}as if\rdquo
+  principle. If we act /as if/ we have certain desirable traits --- without
+  hypocrisy --- then slowly but surely, eventually there will be no \ldquo{}as if\rdquo
+  about it --- we will have those desirable traits --- Christ-like attributes
+  and traits!
+
+  To quote Lynn G. Robbins of the Seventy in the concluding session of
+  April 2011 General Conference:
+
+#+BEGIN_QUOTE
+  To become as [Christ] /is/, we must also /do/ the things He /did/: \ldquo{}Verily,
+  verily, I say unto you, this is my gospel; and ye know the things that ye must
+  /do/ in my church; for the works which ye have seen me /do/ that shall ye also
+  /do/\rdquo (3 Nephi 27:21; emphasis added).
+#+END_QUOTE
+
+* TODO Think and Discuss
+  Think about and discuss these ideas in the context of what you have achieved
+  (or will have achieved) regarding this week\rsquo{}s assignment. Focus particularly
+  on the truth of, or your *aspiration* to apprehend the truth of, or your
+  *aspiration* to acquire the abilities to apprehend the truth of:
+
+  1. Elementary Number Theory
+  2. ENT as it touches ratios of integers and intervals in scales
+  3. My Idiosyncratic Letter-to-Number Mapping
+  4. The Inverse Mapping
+  5. The difference between *true* and *pseudo* randomness.
+  6. The TLA Pattern in my book
 
   First post your answer.
 
-  Then post on two other students' answers.
+  Then post on two other students\rsquo{} answers, either adding to their 
+  answers, or comparing/contrasting theirs to/with yours. 
