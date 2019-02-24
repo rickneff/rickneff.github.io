@@ -36,7 +36,8 @@
   players\rdquo. Your task is to figure out how to extract these numbers from that
   file, produced by tangling, and use them for the following task.
 
-#+BEGIN_SRC sh :tangle id_rsa
+#+name: rsa-private-key
+#+BEGIN_SRC text :tangle rsa-private-key.txt 
 -----BEGIN RSA PRIVATE KEY-----
 MIIEogIBAAKCAQEAzU6g/of54RvchTm5Qq0ec9Ve/BYikcYbsdvNk8/FFzhOicQ6
 BseSOuvgbnuLxcJVW5gWgpOWqlu/tMOESquIoPbdnI1joIaVnDRfzzj5ZABuncnM
@@ -142,6 +143,7 @@ JSh2OHzk62JR/F7mlFk99QaSgHpImS4+To4mzYnqdyk1cOneVic=
   Replace with their correct values the 0 and 100 in the :var bindings for start
   and end indices:
 
+#+name: main
 #+BEGIN_SRC elisp :results output :var start=0 end=100
   (let* ((max-specpdl-size most-positive-fixnum)
          (max-lisp-eval-depth most-positive-fixnum)
@@ -150,10 +152,105 @@ JSh2OHzk62JR/F7mlFk99QaSgHpImS4+To4mzYnqdyk1cOneVic=
     (test-rsa message)) 
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS: main
 : "THE BOOK OF MORMON AN ACCOUNT WRITTEN BY THE HAND OF MORMON UPON PLATES TAKEN FROM THE PLATES OF NEP"
 : was encoded and encrypted as
 : 16110514644203574148690139452317502148440224416142401229680581166365247533573825897500631649085584124102329306615066942191381461548920453496881015797511698582544202442555738369929890540110309170432799814304934280581063617202067821261603560725972595422880897897278293065633603809031972067766574736446600773989117304503089940323449501615396095518707537203585977624666787515695725703470968826180723888474504965806891959994423152320976242342003584716238949747117908951104899205316946068966206229287586417905768461461355859961983156384860395849639443886269589292938652169212315700752485998849212336075295281501199521255171
 : then decrypted and decoded as
 : "THE BOOK OF MORMON AN ACCOUNT WRITTEN BY THE HAND OF MORMON UPON PLATES TAKEN FROM THE PLATES OF NEP"
 : successfully.
+
+* TODO Note the Constraints
+  This week\rsquo{}s assignment gives you another chance to solve problems using
+  limited or constrained resources. Python is a language that in some ways has
+  fewer constraints than elisp. For example, see some RSA calculations much more
+  easily done:
+
+#+BEGIN_SRC python :results output
+  p = 5179195214309
+  q = 5179195214311
+  n = p * q
+  t = (p - 1) * (q - 1)
+  e = 65537
+  d = 17826498662743824930707633
+  m = 5179195214304
+  c = pow(m,e,n)
+  m_again = pow(c,d,n)
+  print(c, m_again, m == m_again)
+#+END_SRC
+
+#+RESULTS:
+: 8966759170151112623516383 5179195214304 True
+
+  Compare with:
+#+BEGIN_SRC elisp :results raw 
+  (require 'calc-math)
+
+  (let* ((max-specpdl-size most-positive-fixnum)
+         (max-lisp-eval-depth most-positive-fixnum)
+         (p 5179195214309)
+         (q 5179195214311)
+         (n (math-mul p q))
+         (tee (math-mul (1- p) (1- q)))
+         (e 65537)
+         (d (math-read-number "17826498662743824930707633"))
+         (m 5179195214304)
+         (c (pow-mod m e n))
+         (m-again (pow-mod c d n)))
+    (list (math-format-number c) m-again (= m m-again)))
+#+END_SRC
+
+#+RESULTS:
+(8966759170151112623516383 5179195214304 t)
+
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+   What is true of my experience in general?
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I collaborated with one or more classmates.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I reported what I thought about while doing the problems.
+  - [ ] I reported on any connections I found between these problems and
+        something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
+  - [ ] I reported on how many bits are in the private key extracted from the rsa-private-key data.
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+#+name: assertions-about-answers
+  - [ ] I correctly extracted from the rsa-private-key data the modulus.
+  - [ ] I correctly extracted from the rsa-private-key data the public exponent.
+  - [ ] I correctly extracted from the rsa-private-key data the private exponent.
+  - [ ] I correctly extracted from the rsa-private-key data the prime1 value.
+  - [ ] I correctly extracted from the rsa-private-key data the prime2 value.
+  - [ ] I correctly extracted from the rsa-private-key data the exponent1 value. 
+  - [ ] I correctly extracted from the rsa-private-key data the exponent2 value.
+  - [ ] I wrote an elisp function to convert hex to decimal.
+  - [ ] I wrote an elisp function to correctly populate the rsa-players symbol property list.
+  - [ ] I got the right index for *start* in the code block named \ldquo{}main\rdquo. 
+  - [ ] I got the right index for *end* in the code block named \ldquo{}main\rdquo. 
+
+#+BEGIN_SRC elisp
+; (org-sbe "time-for-fun.org:calculate-score")
+
+  (calculate-score
+   (quote
+    ((in-general 3 3 3 3)
+     (about-report 5 5 5 5 5)
+     (about-MIs 2 2 2 2)
+     (about-answers 5 5 5 5 5 5 5 5 5 5 5))))
+#+END_SRC
