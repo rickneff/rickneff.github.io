@@ -1,70 +1,67 @@
-#+TITLE: Idea Exchange 08.2 
+#+TITLE: Idea Exchange 08.2
 #+LANGUAGE: en
 #+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
 #+OPTIONS: html-postamble:nil
-#+STARTUP: showeverything
-#+SETUPFILE: ../theme-bigblow.setup
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
 
-* TODO Read a Quote About Combinatorics 
+* Consistently Pursuing Knowledge and Truth 
+  Continuing the pursuit, the notion of \ldquo{}fake it til you make it\rdquo (in the right
+  way) as a popular way to put it, I believe that applying the \ldquo{}as if\rdquo principle
+  is one way to exercise the kind of faith in prayer the Savior was talking
+  about when he said: \ldquo{}Therefore ye must always pray unto the Father in my name;
+  And whatsoever ye shall ask the Father in my name, which is right, believing
+  that ye shall receive, behold it shall be given unto you\rdquo (3 Nephi 18:19-20).
+
+  From the /Bible Dictionary/ entry on /Prayer/ (pages 752-753) comes this gem
+  of logical reasoning that rings absolutely true:
+
 #+BEGIN_QUOTE
-  Combinatorics is a branch of mathematics dealing with problems of combining
-  objects, or sorting them into categories. It originated in the study of
-  probability by Pierre de Fermat, Blaise Pascal, and other 17^{th}-century
-  mathematicians, who were inspired not by the beauty of the math but by a very
-  practical concern: they wanted to calculate the odds associated with gambling.
+  Prayer is the act by which the will of the Father and the will of the child
+  are brought into correspondence with each other. The object of prayer is not
+  to change the will of God, but to secure for ourselves and for others
+  blessings that God is already willing to grant, but that are made conditional
+  on our asking for them. Blessings require some work or effort on our part
+  before we can obtain them. Prayer is a form of work, and is an appointed means
+  for obtaining the highest of all blessings.
 
-  During the 18^{th} and 19^{th} centuries, combinatorics was something of a
-  mathematical backwater. Its association with gambling accounted in part for
-  its lack of status, but more fundamental forces were also in play.
-  Combinatorics deals with discrete entities, like the cards in a deck or socks
-  in a drawer. But most of the important problems being investigated by
-  mathematicians at that time involved continuous entities, like lines or
-  surfaces. Mathematicians developed many general techniques to analyze such
-  problems, particularly the methods of calculus.
-
-  They found far fewer general techniques to analyze problems involving discrete
-  entities, because discrete objects can have so many different properties and
-  can be arranged in so many different ways. Each problem has to be broken down
-  into its constituent pieces, from which a useful pattern may or may not
-  emerge.
-
-  In the 20^{th} century combinatorics staged a major comeback for one overriding
-  reason: the invention of electronic computers. The objects manipulated by
-  computers are discrete, not continuous. They are the 1s and 0s of on-off
-  switches, not the smooth curves of continuous surfaces. To analyze the
-  capabilities of computers, mathematicians had to develop new ways of dealing
-  with noncontinuous objects, and that need reinvigorated the field of
-  combinatorics.
-
-  --- Steve Olson
+  \dots We pray in Christ\rsquo{}s name when our mind is the mind of Christ, and our wishes
+  the wishes of Christ --- when his words abide in us (John 15: 7). We then ask
+  for things it is possible for God to grant. Many prayers remain unanswered
+  because they are not in Christ\rsquo{}s name at all; they in no way represent his
+  mind, but spring out of the selfishness of man\rsquo{}s heart.
 #+END_QUOTE
 
-* TODO Read and Write About Creativity --- The Vary Idea!
-  Steve Olson has a lot more to say about the uses of combinatorics, as you may
-  recall. [[https://firstthreeodds.org/17657741833134731255/creativity.html][This excerpt]] from the same book that the above quote came from was part
-  of your reading assignment for this week.
+  The mind of Christ perfectly reflects his wishes, the desires of his heart ---
+  as he revealed to Abraham: \ldquo{}\dots there is nothing that the Lord thy God shall
+  take in his heart to do but what he will do it.\rdquo --- Abraham 3:17
 
-  Next, please read [[http://www.cs.princeton.edu/courses/archive/spr05/cos126/lectures//22.pdf][Princeton COS126 Lecture 22 slides about cryptology]] (at that
-  link), and think and write about what kind of creativity Rivest, Shamir and
-  Adleman exhibited in their invention of the RSA Cryptosystem.
+  He does what he desires, and he desires nothing but good: \ldquo{}He doeth not
+  anything save it be for the benefit of the world; for he loveth the world,
+  even that he layeth down his own life that he may draw all men unto him.\rdquo
+  --- 2 Nephi 26:24
 
-* TODO Finally, Consider and Comment About a Creative Act
-  The in-class demonstration by Brother Neff of a CRT-related feat has one of
-  the following explanations (given that he owns the book /Secrets of Mental
-  Math/ by Arthur Benjamin):
+  Consider this thought from then Elder Howard W. Hunter from his BYU Devotional
+  address titled \ldquo{}Fear Not Little Flock\rdquo on 14 March 1989:
 
-  - [ ] a verisimilitude of mental calculation of the modulus of the sum of
-    three products of one- or two-digit numbers by three different two- or
-    three-digit numbers.
-  - [ ] a verisimilitude of memorizing associations of triplets of 1 or 2-digit
-    numbers --- for example, (4, 2, 6) --- to corresponding numbers between 0
-    and 1000 --- e.g., 123.
-  - [ ] a verisimilitude of inscrutable arcana.
-  - [ ] It depends.
+#+BEGIN_QUOTE
+  Please remember this one thing. If our lives and our faith are
+  centered upon Jesus Christ and his restored gospel, nothing can ever
+  go permanently wrong. On the other hand, if our lives are not
+  centered on the Savior and his teachings, no other success can ever
+  be permanently right.
+#+END_QUOTE
 
-  Which do you think it is?
-* TODO What You Know How To Do
-  First post your answer. 
+  This is real. This is right and true. This I know.
 
-  Then post on two other students' answers.
+* TODO Think and Discuss
+  Think about and further discuss these ideas in the context of what you have
+  achieved (or will have achieved) regarding this week\rsquo{}s assignment. Focus
+  particularly on the truth of, or your *aspiration* to apprehend the truth of,
+  or your *aspiration* to acquire the abilities to apprehend the truth of the
+  RSA Cryptosystem.
 
+  First post your answer.
+
+  Then post on two other students\rsquo{} answers, either adding to their 
+  answers, or comparing/contrasting theirs to/with yours. 
