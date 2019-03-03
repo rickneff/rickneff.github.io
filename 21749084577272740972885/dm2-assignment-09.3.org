@@ -165,15 +165,31 @@
 
 * TODO Study and Extend Some Sample Code
   As you are required to build an elisp-structured Huffman tree that can
-  compress the list of primes, use the following code block, which includes code
-  for restoring a list of the first ten million primes from the list of gaps
-  between them, as a guide and a starting point. This code shows a possible
-  implementation of a tree node as a symbol. The symbol\rsquo{}s value is the node\rsquo{}s
-  value. The symbol\rsquo{}s plist (property list) is used for storing \ldquo{}pointers\rdquo to
-  left and right children, and parent.
+  compress the list of primes, use the following code block as a guide and a
+  starting point. You are given code for creating a list of gaps between the
+  first ten million primes, and for restoring a list (not a vector) of the first
+  ten million primes from that list of gaps.
+
+  This code also shows a possible implementation of a tree node as a symbol. The
+  symbol\rsquo{}s value is the node\rsquo{}s value. The symbol\rsquo{}s plist (property list) is used
+  for storing \ldquo{}pointers\rdquo to left and right children, and parent.
 
 #+BEGIN_SRC elisp :results silent
   (require 'cl)
+
+  (require 'first-ten-million-primes)
+
+  (defun list-the-gaps ()
+    "Create a list of the gaps between the first ten million primes.
+     Depends on the first-ten-million-primes vector."
+    (loop with curr = 0
+          with prev = 3
+          with gap = 0
+          for i from 2 upto (1- (length first-ten-million-primes))
+          do (setq curr (elt first-ten-million-primes i)
+                   gap (- curr prev)
+                   prev curr)
+          collect gap))
 
   (defun restore-primes (list-of-gaps)
     "Given the list of gaps starting at the gap between 3 and 5
@@ -181,23 +197,11 @@
     (cons 2 (cons 3 (loop for gap in list-of-gaps with prime = 3
                           collect (incf prime gap)))))
 
-  (defun try-it-out ()
-    (setq a 1 b 2 c 3)
-    (put 'a :right 'b)
-    (get 'a :right)
-    (put 'a :left 'c)
-    (get 'a :left)
-    (symbol-plist 'a)
-    (put 'c :parent 'a)
-    (put 'b :parent 'a)
-    a)
-
   (setq node-counter 0)
 
   (defun make-node ()
-    (let ((symbol (intern (concat "n" (number-to-string node-counter)))))
+    (let ((symbol (make-symbol (concat "n" (number-to-string node-counter)))))
       (set symbol node-counter)
-      (setf (symbol-plist symbol) nil)
       (incf node-counter)
       symbol))
 
@@ -235,4 +239,76 @@
             (set-parent left root)
             (set-parent right root)))
       root))
+#+END_SRC
+
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+   What is true of my experience in general?
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I collaborated with one or more classmates.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a
+    later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I reported what I thought about while doing the problems.
+  - [ ] I reported on any connections I found between these problems and
+    something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
+  - [ ] I reported on *three different* compression ratios (see assertions about
+    answers).
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+#+name: assertions-about-answers
+  - [ ] I wrote an elisp function to make-frequency-table that takes a
+    list-of-gaps and populates the data structure created by
+    =(make-hash-table)=.
+  - [ ] I wrote an elisp function to make-node-list-from-table that takes the
+    table-of-frequencies and returns a list of nodes.
+  - [ ] I wrote an elisp function to make-huffman-tree that takes the
+    list-of-nodes and returns a Huffman tree.
+  - [ ] I wrote an elisp function to get-a-gap-code-table that takes a Huffman
+    tree (or a list-of-nodes) and returns a code-list as a list of (gap . code)
+    cons cells.
+  - [ ] I wrote an elisp function to encode the data given the list-of-gaps and
+    the code-list.
+  - [ ] I wrote an elisp function to encapsulate the above-mentioned elisp
+    functions (in order) in one encode-first-ten-million-primes function that
+    takes no parameters.
+  - [ ] I correctly calculated the number of keys in the hashtable of gap sizes.
+  - [ ] I correctly calculated the number of bits per key with a fixed encoding.
+  - [ ] I correctly calculated the total number of bits encoded with the Huffman
+    encoding.
+  - [ ] I correctly calculated the total number of bits encoded with the fixed
+    encoding.
+  - [ ] I correctly calculated the compression ratio from this fixed encoding.
+  - [ ] I correctly calculated the size of the first ten million primes encoded
+    as 32-bit integer binary data.
+  - [ ] I correctly calculated the compression ratio from the binary size.
+  - [ ] I correctly calculated the size of the first ten million primes encoded
+    as ASCII data.
+  - [ ] I correctly calculated the compression ratio from the ASCII size (just
+    the primes, nothing else).
+
+#+BEGIN_SRC elisp
+; (org-sbe "time-for-fun.org:calculate-score")
+
+  (calculate-score
+   (quote
+    ((in-general 1 1 2 2)
+     (about-report 5 5 5 5 6)
+     (about-MIs 2 2 2 2)
+     (about-answers 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4))))
 #+END_SRC
