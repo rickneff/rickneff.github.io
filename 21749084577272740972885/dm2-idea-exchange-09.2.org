@@ -1,9 +1,80 @@
-#+TITLE: DM2 Idea Exchange 09.2 
+#+TITLE: Idea Exchange 09.2
 #+LANGUAGE: en
 #+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
 #+OPTIONS: html-postamble:nil
 #+STARTUP: showeverything entitiespretty
-#+SETUPFILE: ../theme-bigblow.setup
+#+SETUPFILE: theme-bigblow.setup
 
-  The discussion this week is how to organize yourselves into official groups to
-  earn extra credit. See [[https://firstthreeodds.org/17657741833134731255/explorations.org][explorations.org]] for more.
+* Knowledge and Truth are Ours for the Asking
+  Quoting just one of the many great comments I read on last week\rsquo{}s idea
+  exchange:
+#+BEGIN_QUOTE
+  I believe that finding this balance between asking for help and putting in our
+  own effort is essential to every problem we will face in our life. --- Chase Jacobs
+#+END_QUOTE
+
+  On that note, I will share a lesson from my life many years ago as a software
+  engineer working for an internet startup.
+
+  I had a problem. I don't remember the details, but it had something to do with
+  cookies and cross-site concerns, which I knew nothing about until I came to
+  work for this company. (The internet was still getting off the ground when I
+  was in grad school.)
+
+  I was not finding a solution, despite my best efforts. I suspected a
+  colleague, Bret, who I had worked with before at two previous companies, could
+  help me find the answer. But I wanted to figure it without consulting with
+  someone else, even someone I admired and respected like Bret.
+
+  I remember thinking, and eventually admitting to myself, I am stuck! I prayed
+  fervently, \ldquo{}Heavenly Father, please help me find the solution to this
+  problem.\rdquo The answer came: \ldquo{}Go ask Bret!\rdquo I was not happy. Why? I knew that I
+  *should* go ask him, but I did not want to display my weakness, my inability
+  to figure it out on my own. I had to swallow my pride. Compounding my stubborn
+  lack of humility was the nagging \lsquo{}natural man\rsquo thought that I distinctly
+  remember thinking: \ldquo{}I have a PhD in Computer Science. I should not have to ask
+  someone who only has a Bachelor's degree in CS for help with this.\rdquo But I did
+  manage to humble myself sufficiently. I went to talk to Bret and ask for his
+  help, and you know what? He saw the solution immediately! We both rejoiced
+  that the problem was solved, and never again did I repeat that mistake of
+  *persisting*, after all I could do by my own efforts, to go it alone when
+  faced with a difficult problem!
+
+  So here again is the question each of you should ask yourself: Why Am I Here?
+  (Meaning here at BYU-Idaho.)
+
+  722 is the code of the appropriate TLA to succinctly answer that question, and
+  as I urged you in class a couple of weeks ago, you should *diligently strive*
+  to answer that question for yourself, and the sooner the better. I gave you
+  one scripture, Luke 22:32, to get you started. Here is another: Doctrine and
+  Covenants 84:106.
+
+  You will find further light and knowledge by pondering BYU-Idaho's definition
+  of an \ldquo{}A\rdquo student (which you all aspire to be, neh?!), namely:
+#+BEGIN_QUOTE
+  [one who demonstrates] outstanding understanding, application, and integration
+  of subject material and extensive evidence of original thinking, skillful use
+  of concepts, and ability to analyze and solve complex problems. Demonstrates
+  diligent application of Learning Model principles, including initiative in
+  serving other students.
+#+END_QUOTE
+
+  Regarding \ldquo{}initiative in serving other students,\rdquo quoting Truman Madsen
+  (quoting the Prophet Joseph Smith): Now one of the strongest and wisest
+  statements I have ever heard on egoism. The question was put to him, \ldquo{}Joseph,
+  is the principle of self-aggrandizement wrong? Should we seek our own good?\rdquo
+  Listen to his answer. \ldquo{}It is a correct principle and may be indulged upon only
+  one rule or plan --- and that is to elevate, benefit, and bless others first.
+  If you will elevate others, the very work itself will exalt you. Upon no other
+  plan can a man justly and permanently aggrandize himself.\rdquo
+
+* TODO Think and Discuss
+  Think about and further discuss these ideas in the context of what you have
+  achieved (or will have achieved) regarding this week\rsquo{}s assignment. Focus
+  particularly on the truth of what 722 represents in the context of data
+  compression and the unique challenges of doing it per the requirements.
+
+  First post your answer.
+
+  Then post on two other students\rsquo{} answers, either adding to their 
+  answers, or comparing/contrasting theirs to/with yours. 
