@@ -1,42 +1,118 @@
-#+TITLE: DM2 Idea Exchange 10.2 
+#+TITLE: Idea Exchange 10.2
 #+LANGUAGE: en
 #+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
 #+OPTIONS: html-postamble:nil
-#+STARTUP: showeverything
+#+STARTUP: showeverything entitiespretty
 #+SETUPFILE: theme-bigblow.setup
 
-* TODO Discuss The Code Below That Finds A Spanning Tree 
-  of a graph, given the nodes, edges, and adjacency-lists of the graph:
+* Pairing Off 
+  Your assignment this week requires working in pairs. For better or worse,
+  pairing is a part of learning to work well with others. Some people find
+  working in small groups easier when n > 2 than when n = 2, so the challenge
+  is to make it work with just two.
 
+  The real pairing in life is, of course, marriage, which in our culture is
+  usually preceded by dating. Defying logic and reason sometimes, dating in
+  reality is scary for many because of its messiness as a process with
+  ill-defined outcomes. Interestingly, dating in the abstract has a history of
+  analysis in computer science.
+** For example
+   Suppose N boys and N girls join a dating service.
+
+   We write down an N-by-N matrix, where the (i, j) entry equals 1 if boy i
+   and girl j are willing to date each other, and 0 if they aren’t.
+
+   Is it possible to pair off every boy and girl with a willing partner?
+
+   Here’s a simple way to find out:
+
+   First rescale every row of the matrix to sum to 1.
+
+   Then rescale every column to sum to 1.
+
+   Then rescale every row, then rescale every column, and so on N^5 times.
+
+   If at the end of this scaling process, every row sum and every column sum is
+   between (inclusive) 1 - 1/N and 1 + 1/N, then it’s possible to pair off the
+   boys and girls; otherwise it isn’t.
+
+   How does this work? Can you explain it?!
+
+   The following code may help: 
 #+BEGIN_SRC elisp :results silent
-  (defun spanning-tree (nodes edges adjacency-lists)
-    ;; 1. Start with frontier = (list (first nodes))
-    (let ((frontier (list (first nodes)))
-          (num-nodes (length nodes))
-          (spanning-tree nil)
-          node-in-frontier adjacencies destination)
-      ;; 2. Pick an edge connected to a node in the frontier
-      ;;    that does not create a cycle --- that is, the
-      ;;    other (destination) node of the edge is not
-      ;;    already in the frontier.
-      (while (< (length frontier) num-nodes) ;; more to do
-        ;; randomly pick a node in the frontier, and a destination
-        ;; randomly chosen from that node's adjacencies
-        (setq node-in-frontier (nth (random (length frontier)) frontier)
-              adjacencies (cdr (assoc node-in-frontier adjacency-lists))
-              destination (nth (random (length adjacencies)) adjacencies))
-        ;; 3. Add that destination node to the frontier unless already there
-        (unless (member destination frontier)
-          (pushnew destination frontier)
-          ;; 4. Add the picked edge to the spanning-tree.
-          (push (if (< node-in-frontier destination)
-                    (cons node-in-frontier destination)
-                  (cons destination node-in-frontier))
-                spanning-tree)))
-      ;; 5. Repeat steps 2-4 until all nodes are in the frontier.
-      (sort spanning-tree (lambda (x y) (or (< (car x) (car y)) (< (cdr x) (cdr y)))))))
+  (defun scale-list (lst)
+    (let ((sum (float (apply '+ lst))))
+      (if (zerop sum)
+          (error "no can do")
+        (mapcar (lambda (x) (/ x sum)) lst))))
+
+  (defun scale-rows (matrix)
+    (mapcar 'scale-list matrix))
+
+  (defun scale-columns (matrix)
+    (let ((transpose (apply 'mapcar* 'list matrix)))
+      (apply 'mapcar* 'list (scale-rows transpose))))
+
+  (defun scale-matrix (n matrix)
+    (or (and (= n (length matrix))
+             (every (lambda (row) (= n (length row))) matrix))
+        (error "bad parameters"))
+    (loop repeat (expt n 5)
+            do (setq matrix (scale-rows matrix)
+                     matrix (scale-columns matrix)))
+    matrix)
+
+  (defun verify-matrix (n matrix)
+    (let* ((one-over-n (/ 1 (float n)))
+           (lo (- 1 one-over-n))
+           (hi (+ 1 one-over-n))
+           (transpose (apply 'mapcar* 'list matrix)))
+      (and (every (lambda (row)
+                    (let ((sum (apply '+ row)))
+                      (and (<= lo sum)
+                           (<= sum hi))))
+                  matrix)
+           (every (lambda (col)
+                    (let ((sum (apply '+ col)))
+                      (and (<= lo sum)
+                           (<= sum hi))))
+                  transpose))))
 #+END_SRC
+
+   Sample use of the above code:
+
+   #+name: five-by-five
+   | 0 | 1 | 0 | 1 | 0 |
+   | 1 | 0 | 1 | 0 | 1 |
+   | 0 | 1 | 1 | 0 | 0 |
+   | 0 | 1 | 0 | 0 | 1 |
+   | 0 | 0 | 1 | 1 | 1 |
+
+#+name: five-by-five-scaled
+#+BEGIN_SRC elisp :var matrix=five-by-five
+  (scale-matrix 5 matrix) 
+#+END_SRC
+
+#+RESULTS: five-by-five-scaled
+| 0.0 | 0.3332991567624504 |                    0.0 |  0.6666367629688442 |                    0.0 |
+| 1.0 |                0.0 | 0.00012808973625332503 |                 0.0 | 0.00012808973625332503 |
+| 0.0 | 0.3333504216187748 |     0.6665855473677436 |                 0.0 |                    0.0 |
+| 0.0 | 0.3333504216187748 |                    0.0 |                 0.0 |     0.6665855473677436 |
+| 0.0 |                0.0 |     0.3332863628960031 | 0.33336323703115567 |     0.3332863628960031 |
+
+#+BEGIN_SRC elisp :var matrix=five-by-five-scaled
+  (verify-matrix 5 matrix) 
+#+END_SRC
+
+#+RESULTS:
+: t
+
+* TODO Think and Discuss
+  Think about and discuss this problem in the abstract and in reality. Focus
+  particularly on the intersection of the dating service problem with
+  probability theory and graph theory.
 
   First post your answer.
 
-  Then post on two other students' answers.
+  Then post on two other students\rsquo{} answers, either adding to their 
+  answers, or comparing/contrasting theirs to/with yours. 

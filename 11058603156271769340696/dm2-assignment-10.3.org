@@ -9,347 +9,295 @@
 [[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
 [[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
 
-* TODO Solve the Huffman Tree Problem Using a Heap Data Structure
-  Specifically, you will want to use the following five functions:
-  - heap-build
-  - heap-size
-  - heap-root
-  - heap-delete-root
-  - heap-add
-
-#+BEGIN_SRC elisp :results silent :tangle heap.el :lexical t
-;; -*- lexical-binding: t; -*-
-;;; heap.el --- Heap (a.k.a. priority queue) data structure
-
-;; Copyright (C) 2004-2006, 2008, 2012-2013, 2017  Free Software Foundation, Inc
-
-;; Author: Toby Cubitt <toby-predictive@dr-qubit.org>
-;; Version: 0.5
-;; Keywords: extensions, data structures, heap, priority queue
-;; URL: http://www.dr-qubit.org/emacs.php
-;; Repository: http://www.dr-qubit.org/git/predictive.git
-
-;; This file is part of Emacs.
-;;
-;; GNU Emacs is free software: you can redistribute it and/or modify it under
-;; the terms of the GNU General Public License as published by the Free
-;; Software Foundation, either version 3 of the License, or (at your option)
-;; any later version.
-;;
-;; GNU Emacs is distributed in the hope that it will be useful, but WITHOUT
-;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-;; FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-;; more details.
-;;
-;; You should have received a copy of the GNU General Public License along
-;; with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
-
-
-;;; Commentary:
-;;
-;; A heap is a form of efficient self-sorting tree. In particular, the root
-;; node is guaranteed to be the highest-ranked entry in the tree. (The
-;; comparison function used for ranking the data can, of course, be freely
-;; defined). Therefore repeatedly removing the root node will return the data
-;; in order of increasing rank. They are often used as priority queues, for
-;; scheduling tasks in order of importance.
-;;
-;; This package implements ternary heaps, since they are about 12% more
-;; efficient than binary heaps for heaps containing more than about 10
-;; elements, and for very small heaps the difference is negligible. The
-;; asymptotic complexity of ternary heap operations is the same as for a
-;; binary heap: 'add', 'delete-root' and 'modify' operations are all O(log n)
-;; on a heap containing n elements.
-;;
-;; Note that this package implements a heap as an implicit data structure on a
-;; vector. Therefore, the maximum size of the heap has to be specified in
-;; advance. Although the heap will grow dynamically if it becomes full, this
-;; requires copying the entire heap, so insertion has worst-case complexity
-;; O(n) instead of O(log n), though the amortized complexity is still
-;; O(log n). (For applications where the maximum size of the heap is not known
-;; in advance, an implementation based on binary trees might be more suitable,
-;; but is not currently implemented in this package.)
-;;
-;; You create a heap using `make-heap', add elements to it using `heap-add',
-;; delete and return the root of the heap using `heap-delete-root', and modify
-;; an element of the heap using `heap-modify'. A number of other heap
-;; convenience functions are also provided, all with the prefix
-;; `heap-'. Functions with prefix `heap--' are for internal use only, and
-;; should never be used outside this package.
-
-
-;;; Code:
-
-(eval-when-compile (require 'cl))
-
-(defmacro heap--when-generators (then)
-  "Evaluate THEN if `generator' library is available."
-  (declare (debug t))
-  (if (require 'generator nil 'noerror) then))
-
-
-;;; ================================================================
-;;;        Internal functions for use in the heap package
-
-(defstruct (heap-
-	    :named
-	    (:constructor nil)
-	    (:constructor heap--create
-			  (cmpfun &optional (size 10) (resize 2)
-			   &aux
-			   (vect (make-vector size nil))
-			   (count 0)))
-	    (:copier nil))
-  vect cmpfun count size resize)
-
-
-(defun heap--child (heap i)    ; INTERNAL USE ONLY
-  ;; Compare the 3 children of element I, and return element reference
-  ;; of the smallest/largest (depending on whethen it's a min- or
-  ;; max-heap).
-  (let* ((vect (heap--vect heap))
-	 (cmpfun (heap--cmpfun heap))
-	 (count (heap--count heap))
-	 (j nil) (k (* 3 i)))
-    ;; Lots of if's in case I has less than three children.
-    (if (>= (1+ k) count) nil
-      (if (>= (+ 2 k) count) (1+ k)
-	(setq j (if (funcall cmpfun (aref vect (1+ k))
-			     (aref vect (+ 2 k)))
-		    (1+ k) (+ 2 k)))
-	(if (>= (+ 3 k) count) j
-	  (if (funcall cmpfun (aref vect j) (aref vect (+ 3 k)))
-	      j (+ 3 k)))))))
-
-
-(defsubst heap--vswap (vect i j)   ; INTERNAL USE ONLY
-  ;; Swap elements I and J of vector VECT.
-  (let ((tmp (aref vect i)))
-    (aset vect i (aref vect j))
-    (aset vect j tmp) vect))
-
-
-(defun heap--sift-up (heap n)   ; INTERNAL USE ONLY
-  ;; Sift-up starting from element N of vector belonging to HEAP.
-  (let* ((i n) (j nil) (vect (heap--vect heap)) (v (aref vect n)))
-    ;; Keep moving element up until it reaches top or is smaller/bigger
-    ;; than its parent.
-    (while (and (> i 0)
-		(funcall (heap--cmpfun heap) v
-			 (aref vect (setq j (/ (1- i) 3)))))
-      (heap--vswap vect i j)
-      (setq i j))))
-
-
-(defun heap--sift-down (heap n)   ; INTERNAL USE ONLY
-  ;; Sift-down from element N of the heap vector belonging HEAP.
-  (let* ((vect (heap--vect heap))
-	(cmpfun (heap--cmpfun heap))
-	(i n) (j (heap--child heap i))
-	(v (aref vect n)))
-    ;; Keep moving the element down until it reaches the bottom of the
-    ;; tree or reaches a position where it is bigger/smaller than all
-    ;; its children.
-    (while (and j (funcall cmpfun (aref vect j) v))
-      (heap--vswap vect i j)
-      (setq i j)
-      (setq j (heap--child heap i)))))
-
-
-
-;;; ================================================================
-;;;          The public functions which operate on heaps.
-
-;;;###autoload
-(defun make-heap
-  (compare-function &optional initial-size resize-factor)
-  "Create an empty heap with comparison function COMPARE-FUNCTION.
-
-COMPARE-FUNCTION takes two arguments, A and B, and returns
-non-nil or nil. To implement a max-heap, it should return non-nil
-if A is greater than B. To implemenet a min-heap, it should
-return non-nil if A is less than B.
-
-Optional argument INITIAL-SIZE sets the initial size of the heap,
-defaulting to 10. Optional argument RESIZE-FACTOR sets the factor
-by which the heap's size is increased if it runs out of space,
-defaulting to 2."
-  ;; sadly, passing null values over-rides the defaults in the defstruct
-  ;; `heap--create', so we have to explicitly set the defaults again
-  ;; here
-  (or initial-size (setq initial-size 10))
-  (or resize-factor (setq resize-factor 2))
-  (heap--create compare-function initial-size resize-factor))
-
-
-;;;###autoload
-(defalias 'heap-create 'make-heap)
-
-
-(defun heap-copy (heap)
- "Return a copy of heap HEAP."
- (let ((newheap (heap--create (heap--cmpfun heap) (heap--size heap)
-			      (heap--resize heap))))
-   (setf (heap--vect newheap) (vconcat (heap--vect heap))
-	 (heap--count newheap) (heap--count heap))
-   newheap))
-
-
-(defun heap-empty (heap)
-  "Return t if the heap is empty, nil otherwise."
-  (= 0 (heap--count heap)))
-
-
-(defun heap-size (heap)
-  "Return the number of entries in the heap."
-  (heap--count heap))
-
-
-(defun heap-compare-function (heap)
-  "Return the comparison function for the heap HEAP."
-  (heap--cmpfun heap))
-
-
-(defun heap-add (heap data)
-  "Add DATA to the heap, and return DATA."
-  ;; Add data to bottom of heap and sift-up from bottom.
-  (let ((count (heap--count heap))
-	(size (heap--size heap))
-	(vect (heap--vect heap)))
-    ;; if there's no space left, grow the heap
-    (if (< count size)
-	(aset vect count data)
-      (setf (heap--vect heap)
-	    (vconcat (heap--vect heap) (vector data)
-		     (make-vector
-		      (1- (ceiling (* size (1- (heap--resize heap)))))
-		      nil))
-	    (heap--size heap)
-	    (ceiling (* size (heap--resize heap)))))
-    (setq count (setf (heap--count heap) (1+ (heap--count heap))))
-    (heap--sift-up heap (1- count)))
-  ;; return inserted data
-  data)
-
-
-(defun heap-root (heap)
-  "Return the root of the heap, without removing it"
-  (if (= (heap--count heap) 0) nil (aref (heap--vect heap) 0)))
-
-
-(defun heap-delete-root (heap)
-  "Return the root of the heap and delete it from the heap."
-  (let ((vect (heap--vect heap))
-	root count)
-    ;; deal with empty heaps and heaps with just one element
-    (if (= 0 (heap--count heap)) nil
-      (setq root (aref vect 0)
-	    count (decf (heap--count heap)))
-      (if (= 0 count)
-	  (setf (heap--vect heap) (make-vector 10 nil))
-	;; delete root, swap last element to top, and sift-down from top
-	(aset vect 0 (aref vect count))
-	(aset vect count nil)
-	(heap--sift-down heap 0))
-      root)))
-
-
-(defun heap-modify (heap match-function data)
-  "Replace the first heap entry identified by MATCH-FUNCTION
-with DATA, if a match exists. Return t if there was a match, nil
-otherwise.
-
-The function MATCH-FUNCTION should take one argument of the type
-stored in the heap, and return non-nil if it should be modified,
-nil otherwise.
-
-Note that only the match highest up the heap is modified."
-  (let ((vect (heap--vect heap))
-	(count (heap--count heap))
-	(i 0))
-    ;; search vector for the first match
-    (while (and (< i count)
-		(not (funcall match-function (aref vect i))))
-      (setq i (1+ i)))
-    ;; if a match was found, modify it
-    (if (< i count)
-	(let ((olddata (aref vect i)))
-	  (aset vect i data)
-	  ;; if the new data is greater than old data, sift-up,
-	  ;; otherwise sift-down
-	  (if (funcall (heap--cmpfun heap) data olddata)
-	      (heap--sift-up heap i)
-	    (heap--sift-down heap i))
-	  t)  ; return t if the match was successfully modified
-      nil)))  ; return nil if no match was found
-
-
-(defun heap-build (compare-function vec &optional resize-factor)
-  "Build a heap from vector VEC with COMPARE-FUNCTION
-as the comparison function.
-
-Note that VEC is modified, and becomes part of the heap data
-structure. If you don't want this, copy the vector first and pass
-the copy in VEC.
-
-COMPARE-FUNCTION takes two arguments, A and B, and returns
-non-nil or nil. To implement a max-heap, it should return non-nil
-if A is greater than B. To implemenet a min-heap, it should
-return non-nil if A is less than B.
-
-RESIZE-FACTOR sets the factor by which the heap's size is
-increased if it runs out of space, defaulting to 2."
-  (or resize-factor (setq resize-factor 2))
-  (let ((heap (heap--create compare-function (length vec) resize-factor))
-	(i (ceiling
-	    (1- (expt 3 (ceiling (1- (log (1+ (* 2 (length vec))) 3))))) 2)))
-    (setf (heap--vect heap) vec
-	  (heap--count heap) (length vec))
-    (while (>= (decf i) 0) (heap--sift-down heap i))
-    heap))
-
-
-(defun heap-merge (heap &rest heaps)
-  "Merge HEAP with remaining HEAPS.
-
-The merged heap takes the comparison function and resize-fector
-of the first HEAP argument.
-
-\(Note that in this heap implementation, the merge operation is
-not very efficient, taking O(n) time for combined heap size n\)."
-  (setq heaps (mapcar #'heap--vect heaps))
-  (heap-build (heap--cmpfun heap)
-	      (apply #'vconcat (heap--vect heap) heaps)
-	      (heap--resize heap)))
-
-
-(defun heap-clear (heap)
-  "Remove all entries from HEAP.
-
-Return number of entries removed."
-  (prog1
-      (heap--count heap)
-    (setf (heap--vect heap) (make-vector (length (heap--vect heap)) nil)
-          (heap--count heap) 0)))
-
-
-(heap--when-generators
- (iter-defun heap-iter (heap)
-   "Return a heap iterator object.
-
-Calling `iter-next' on this object will retrieve the next element
-from the heap. The heap itself is not modified.
-
-\(Note that in this heap implementation, constructing a heap
-iterator is not very efficient, taking O(n) time for a heap of
-size n. Each call to `iter-next' on the other hand *is*
-efficient, taking O(log n) time.\)"
-   (let ((heap (heap-copy heap)))
-     (while (not (heap-empty heap))
-       (iter-yield (heap-delete-root heap))))))
-
-
-(provide 'heap)
-
-;;; heap.el ends here
+* TODO Solve the Huffman Tree Problem Again
+  With some added constraints, namely, to use the following
+  code that has a couple of stub functions for you to flesh out
+  (one of which needs a helper function that you will provide).
+#+name: bulk-of-code
+#+BEGIN_SRC elisp :results silent
+  (require 'cl)
+
+  (require 'first-ten-million-primes)
+
+  (defun list-the-gaps ()
+    "Create a list of the gaps between the first ten million primes.
+     Depends on the first-ten-million-primes vector."
+    (loop with curr = 0
+          with prev = 3
+          with gap = 0
+          for i from 2 upto (1- (length first-ten-million-primes))
+          do (setq curr (elt first-ten-million-primes i)
+                   gap (- curr prev)
+                   prev curr)
+          collect gap))
+
+  (defun restore-primes (list-of-gaps)
+    "Given the list of gaps starting at the gap between 3 and 5
+       return a list of the first ten million primes."
+    (cons 2 (cons 3 (loop for gap in list-of-gaps with prime = 3
+                          collect (incf prime gap)))))
+
+  (defun make-node (gap-size frequency)
+    (let ((symbol (make-symbol (concat "gn" (number-to-string node-counter)))))
+      (incf node-counter)
+      (set symbol frequency)
+      (when gap-size
+        (put symbol :gap gap-size))
+      symbol))
+
+  (defun make-frequency-table (gap-list)
+    (let ((freq-table (make-hash-table)))
+      (loop for gap in gap-list
+            do (incf (gethash gap freq-table 0)))
+      freq-table))
+
+  (defun make-node-list-from-table (frequency-table)
+    (let ((node-list nil))
+      (maphash (lambda (key val) (push (make-node key val) node-list))
+               frequency-table)
+      node-list))
+
+  (defun compare-nodes (node1 node2)
+    (<= (get-value node1) (get-value node2)))
+
+  (defun get-value (node)
+    (and (symbolp node) (symbol-value node)))
+
+  (defun set-value (node new-value)
+    (and (symbolp node) (set node new-value)))
+
+  (defun get-parent (node)
+    (and (symbolp node) (get node :parent)))
+
+  (defun set-parent (node parent)
+    (and (symbolp node) (symbolp parent) (put node :parent parent)))
+
+  (defun get-left (node)
+    (and (symbolp node) (get node :left)))
+
+  (defun set-left (node left)
+    (and (symbolp node) (symbolp left) (put node :left left) (put left :is-left t)))
+
+  (defun get-right (node)
+    (and (symbolp node) (get node :right)))
+
+  (defun set-right (node right)
+    (and (symbolp node) (symbolp right) (put node :right right)))
+
+  (defun number-of-digits (n)
+    (1+ (floor (log n 10))))
+
+  (defun compression-ratio (f v)
+    (* 100 (/ (- f v) (float f))))
+
+  (defun make-internal-node (left-subtree right-subtree)
+    (let* ((new-node (make-node nil ; nil means no gap (none needed)
+                                (+ (symbol-value left-subtree)
+                                   (symbol-value right-subtree)))))
+       (set-parent left-subtree new-node)
+       (set-parent right-subtree new-node)
+       (set-left new-node left-subtree)
+       (set-right new-node right-subtree)
+       new-node))
+
+  (defun insert-sort (node node-list)
+    ;; TODO flesh this out so make-huffman-tree will work
+    )
+
+  (defun make-huffman-tree (Q)
+    (let (Tl Tr)
+      (while (> (length Q) 1)
+        (setq Tl (first Q)
+              Q (rest Q)
+              Tr (first Q)
+              Q (rest Q)
+              Q (insert-sort (make-internal-node Tl Tr) Q)))
+      (first Q)))
+
+  (defun get-ancestry (node)
+    (if (null (get-parent node))
+        nil
+      (cons node (get-ancestry (get-parent node)))))
+
+  (defun put-code (leaf-node)
+    (put leaf-node :code
+         (apply 'string
+                (loop for node in (nreverse (get-ancestry leaf-node))
+                      collect (if (get node :is-left) ?0 ?1)))))
+
+  (defun make-code-list (node-list)
+    (cl-sort (mapcar
+              (lambda (node)
+                (cons (get node :gap) (put-code node)))
+              list-of-nodes)
+             '< :key 'car))
+
+  (defun get-code-from-gap (gap code-list)
+    (cdr (assoc gap code-list)))
+
+  (defun get-code (node code-list)
+    (get-code-from-gap (get node :gap)))
+
+  (defun show-node (node)
+    (princ (format
+            "%s\n"
+            (cons node (cons (symbol-value node) (symbol-plist node))))))
+
+  (defun show-tree (root)
+    (show-node root)
+    (when (get-left root)
+       (show-tree (get-left root)))
+    (when (get-right root)
+       (show-tree (get-right root))))
+#+END_SRC
+
+  Compression Ratio Calculations (need code-list and table-of-frequencies):
+#+BEGIN_SRC elisp
+  (require 'first-ten-million-primes)
+
+  (setq num-keys (length code-list)
+        num-bits-per-key-with-fixed-encoding (ceiling (log num-keys 2))
+        total-bits-encoded-with-huffman-encoding 0
+        total-bits-encoded-with-fixed-encoding 0
+        ignore (maphash (lambda (gap freq)
+                          (incf total-bits-encoded-with-huffman-encoding
+                                (* freq (length (get-code-from-gap gap code-list))))
+                          (incf total-bits-encoded-with-fixed-encoding
+                                (* freq num-bits-per-key-with-fixed-encoding)))
+                        table-of-frequencies)
+        compression-ratio-from-fixed
+        (compression-ratio total-bits-encoded-with-fixed-encoding
+                           total-bits-encoded-with-huffman-encoding)
+        size-of-first-ten-million-primes-at-thirty-two-bits-per-prime
+        (* 32 10000000)
+        compression-ratio-from-binary
+        (compression-ratio size-of-first-ten-million-primes-at-thirty-two-bits-per-prime
+                           total-bits-encoded-with-huffman-encoding)
+        size-ascii-in-bytes
+        (loop for prime across first-ten-million-primes
+              sum (1+ (number-of-digits prime)))
+        size-ascii-in-bits
+        (* size-ascii-in-bytes 8)
+        compression-ratio-from-ascii
+        (compression-ratio size-ascii-in-bits
+                           total-bits-encoded-with-huffman-encoding)
+        results
+        (list (list 'compression-ratio-from-fixed (format "%2.15f" compression-ratio-from-fixed))
+              (list 'compression-ratio-from-binary (format "%2.2f" compression-ratio-from-binary))
+              (list 'compression-ratio-from-ascii  (format "%2.2f" compression-ratio-from-ascii))))
+#+END_SRC
+
+#+BEGIN_SRC elisp :results silent :noweb eval
+  <<bulk-of-code>>
+
+  (defun encode-gaps (code-list list-of-gaps)
+    (mapconcat (lambda (gap) (cdr (assoc gap code-list))) list-of-gaps ""))
+
+  (defun decode-gaps (encoded tree)
+    ;; TODO flesh this out so encode-first-ten-million-primes will work
+    )
+
+  (defun encode-first-ten-million-primes ()
+     (let* ((list-of-gaps (list-the-gaps))
+            (table-of-frequencies (make-frequency-table list-of-gaps))
+            (node-counter 0)
+            (list-of-nodes (sort (make-node-list-from-table table-of-frequencies)
+                                 'compare-nodes))
+            (tree (make-huffman-tree (copy-sequence list-of-nodes)))
+            (code-list (make-code-list list-of-nodes))
+            (encoded (encode-gaps code-list list-of-gaps))
+            (decoded (decode-gaps encoded tree)))
+       (list list-of-gaps encoded decoded)))
+
+  (defun test-encode-decode-first-ten-million-primes ()
+    (destructuring-bind (list-of-gaps encoded decoded)
+        (encode-first-ten-million-primes)
+      (equal list-of-gaps decoded)))
+#+END_SRC
+
+#+BEGIN_SRC elisp :results raw
+  (let* ((start (float-time))
+         (results (test-encode-decode-first-ten-million-primes)))
+    (list results (- (float-time) start)))  
+#+END_SRC
+
+* 722
+   LTT = Learn To Teach
+   LWT = Learn While Teaching
+   STW = Spread The Word
+   STW = Strengthen The Weak
+
+   | car         | cdr         | DM1 Student(s) you will mentor    | Email ID 1 | Email ID 2 |
+   |-------------+-------------+-----------------------------------+------------+------------|
+   | Zach        | Andrew      | Alex Wildblood                    | wil16197   |            |
+   | Luke        | Jonathan S. | Dallin Cawley + Jonah White       | caw15001   | whi17069   |
+   | Ashley      | Ronald      | Benjamin Bishop + Joaquin Paredes | bis11012   | par17035   |
+   | Sam         | Greg        | Mark Craig + Teddy Gehoski        | cra12019   | geh12002   |
+   | Paul        | Kathryn     | Bradley Dawson + Jake Schwantes   | daw15003   | sch15036   |
+   | Justin B.   | Taylor M.   | Shawn Lilly + Samuel Warr         | lil16001   | war13009   |
+   | Grayson     | Cameron     | Scott Pierce + Adam White         | pie15003   | whi15011   |
+   | Jon         | Curtis      | Durid Ahmad + David Gurr          | ahm16002   | gur12001   |
+   | Jonathan D. | Taylor I.   | Kwok Moon (Wilson) Ho             | ho17003    |            |
+   | Sean        | Joshua B.   | Christopher Van Kammen            | van15039   |            |
+   | Joshua M.   | Will        | Justin Jenkins                    | jen17046   |            |
+   | Justin C.   | Brenden     | Travis Jones                      | jon17064   |            |
+   | Ryan        | Tyler       | Zachary Klingler                  | kli17001   |            |
+   | Chase       | Michael     | Steven Smith                      | smi13056   |            |
+   | Mikah       | Ty          | Rochak Kunwar                     | kun16009   |            |
+   | Matt        | Dylan       | Cameron Chappell                  | cha13018   |            |
+   | Anthony     | Benj        | Joseph Olsen                      | ols17018   |            |
+   | Preston     | Madison     | Michael McCarty                   | mcc13021   |            |
+
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+   What is true of our experience in general?
+#+name: assertions-in-general
+  - [ ] We had fun. 
+  - [ ] We learned something new.
+  - [ ] We achieved something meaningful, or something we can build upon at a
+    later time.
+
+   What is true of our collaboration?
+#+name: assertions-about-collaboration
+  - [ ] We achieved a balanced distribution of labor. 
+  - [ ] We taught and learned from each other. 
+  - [ ] We taught a DM1 student or two about Huffman trees. 
+  - [ ] We taught said student(s) about Huffman encoding and decoding. 
+  - [ ] We provided some assistance with their GPAOs.
+
+    What is true of our report on what we learned?
+#+name: assertions-about-report
+  - [ ] We wrote a sufficient number of well-written sentences.
+  - [ ] We reported on any connections we found between these problems and
+    something we already knew.
+  - [ ] We reported on the results of our DM1 student mentoring.
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in our report of what we learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+   What is true about our answers?
+#+name: assertions-about-answers
+  - [ ] We wrote a correct elisp function to =insert-sort= the tree nodes into the queue. 
+  - [ ] We wrote a correct =decode-gaps= function to restore the list of gaps from its encoded string. 
+  - [ ] We wrote a correct =find-leaf= helper function for =decode-gaps= to call. 
+  - [ ] We explored the =timp= multithreading package and got it to work for this problem.
+  - [ ] We calculated the speedup obtained by creating several threads to do this work.
+
+#+BEGIN_SRC elisp
+; (org-sbe "time-for-fun.org:calculate-score")
+
+  (calculate-score
+   (quote
+    ((in-general 2 2 2)
+     (about-collaboration 8 8 8 9 9)
+     (about-report 6 6 6)
+     (about-MIs 1 1 1 1)
+     (about-answers 6 6 6 6 6))))
 #+END_SRC
