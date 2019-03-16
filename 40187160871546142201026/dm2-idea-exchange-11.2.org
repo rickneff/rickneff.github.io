@@ -1,83 +1,89 @@
-#+TITLE: DM2 Idea Exchange 11.2
+#+TITLE: Idea Exchange 11.2
 #+LANGUAGE: en
 #+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
 #+OPTIONS: html-postamble:nil
-#+STARTUP: showeverything
+#+STARTUP: showeverything entitiespretty
 #+SETUPFILE: theme-bigblow.setup
 
-  What does the following have to do with graph theory?
+* Wise Yet Harmless 
 
-* TODO Discuss The Dating Service Problem
-  Suppose N boys and N girls join a dating service.
+#+BEGIN_QUOTE
+  Behold, I send you forth as sheep in the midst of wolves: Be ye therefore wise
+  as serpents, and harmless as doves. --- Matthew 10:16
+#+END_QUOTE
 
-  We write down an N-by-N matrix, where the (i, j) entry equals 1 if the ith boy
-  and the jth girl are willing to date each other, and 0 if they aren’t.
+  So said the Savior to his Apostles as he instructed them prior to their first
+  missionary journey.
 
-  Is it possible to pair off every boy and girl with a willing partner?
+  Is there any doubt that in the midst of wolves is a dangerous place for sheep
+  to be? \ldquo{}Wolves in sheeps\rsquo clothing\rdquo is a common expression, connoting greater
+  danger because of the element of deception. Wolves pretending to be sheep can
+  lull their victims into false security and almost certain doom.
 
-  Here’s a simple way to find out:
+  Jesus knew his disciples would face derision and persecution, but why did he
+  tell them to be \ldquo{}wise as serpents?\rdquo Is not the \ldquo{}wisdom\rdquo of serpents that they
+  subtly lie in wait for their prey rather than exposing themselves to danger by
+  hunting out in the open? Does not Satan \ldquo{}lie in wait to deceive?\rdquo Surely
+  deception is not something the Lord would have his servants practice! The
+  point is, while Satan has a serpent\rsquo{}s wisdom, or \ldquo{}cunning,\rdquo he uses it to harm
+  and destroy. But the Lord wants his disciples to be \ldquo{}harmless as doves.\rdquo{} Is
+  there any creature more harmless, more innocent than a dove? Wise, yet
+  harmless. There is, I believe, a dynamic tension here.
 
-  First rescale every row of the matrix to sum to 1.
+  Being wise, we know what\rsquo{}s going on in the world around us, and are aware of
+  \ldquo{}men and things.\rdquo Being wise as serpents, we know a serpent when we see one,
+  and can thus steer clear of it. We know Satan as he is, and we know what his
+  tactics are. Besides, how can we say \ldquo{}get thee behind me Satan\rdquo unless we can
+  recognize him in front of us? (Or more likely, beside us, whispering his lies
+  in our ear?)
 
-  Then rescale every column to sum to 1.
+  A fascinating case study of being \ldquo{}wise yet harmless\rdquo is found in the Book of
+  Mormon. Recall the episode where Ammon and his brethren went to preach the
+  gospel to the Lamanites. Ammon had miraculously defended the flocks of King
+  Lamoni, whose servant he had become. At first, the king is speechless with
+  amazement at Ammon\rsquo{}s power, but when Ammon perceives and tells him his
+  thoughts, the king is too amazed not to speak:
 
-  Then rescale every row, then rescale every column, and so on N^5 times.
+#+BEGIN_QUOTE
+  And the king said: how knowest thou the thoughts of my heart? Thou mayest
+  speak boldly, and tell me concerning these things: and also tell me by what
+  power ye slew and smote off the arms of my brethren that scattered my
+  flocks --- And now, if thou wilt tell me concerning these things...whatsoever
+  thou desirest of me I will grant unto thee.
 
-  If at the end of this scaling process, every row sum and every column sum is
-  between (inclusive) 1 - 1/N and 1 + 1/N, then it’s possible to pair off the
-  boys and girls; otherwise it isn’t.
+  Now, Ammon being *wise, yet harmless*, he said unto Lamoni: Wilt thou hearken
+  unto my words, if I tell thee by what power I do these things? And this is the
+  thing that I desire of thee.
 
-#+BEGIN_SRC elisp :results silent
-  (defun scale-list (lst)
-    (let ((sum (float (apply '+ lst))))
-      (if (zerop sum)
-          (error "no can do")
-        (mapcar (lambda (x) (/ x sum)) lst))))
+  And the king answered him, and said: Yea, I will believe all thy words. And
+  thus he was *caught with guile*. --- Alma 18:20-23 (Emphasis added.)
+#+END_QUOTE
 
-  (defun scale-rows (matrix)
-    (mapcar 'scale-list matrix))
+  Lamoni was tricked?! Yes, Ammon \ldquo{}beguiled\rdquo{} him into saying he would believe
+  everything he told him! And yet this \ldquo{}guile\rdquo led to a \ldquo{}wonderful conversion\rdquo
+  of the king and many of his people. Therein lies the key. Ammon was not only
+  harmLESS, he was helpFUL. He was benevolent, seeking to bless; not malevolent,
+  seeking to harm. He was not passive, doing nothing so as not to risk doing
+  something harmful; he was \ldquo{}anxiously engaged in a good cause\rdquo seeking to
+  \ldquo{}bring to pass much righteousness\rdquo. (See Doctrine and Covenants 58:27)
 
-  (defun scale-columns (matrix)
-     (let ((transpose (apply 'mapcar* 'list matrix)))
-        (apply 'mapcar* 'list (scale-rows transpose))))
+  So we, being wise yet harmless, will use our knowledge and wisdom, not to take
+  advantage of others, but to do good and to help others. As the Lord told the
+  Prophet Joseph Smith and his missionary companions:
 
-  (defun dating-service (n matrix)
-    (or (and (= n (length matrix))
-             (every (lambda (row) (= n (length row))) matrix))
-        (error "bad parameters"))
-    (loop repeat (expt n 5)
-          do (setq matrix (scale-rows matrix)
-                   matrix (scale-columns matrix)))
-    matrix)
-#+END_SRC
+#+BEGIN_QUOTE
+  Therefore, be ye as wise as serpents and yet without sin... --- Doctrine and
+  Covenants 111:11
+#+END_QUOTE
 
-#+BEGIN_SRC elisp
-  (setq five-by-five '((0 1 0 1 0) (1 0 1 0 1) (0 1 1 0 0) (0 1 0 0 1) (0 0 1 1 1)))
-#+END_SRC
+  Sin includes being idly harmless, which is actually harmful, since the good
+  that we could be doing is not getting done, to someone\rsquo{}s detriment.
 
-#+RESULTS:
-| 0 | 1 | 0 | 1 | 0 |
-| 1 | 0 | 1 | 0 | 1 |
-| 0 | 1 | 1 | 0 | 0 |
-| 0 | 1 | 0 | 0 | 1 |
-| 0 | 0 | 1 | 1 | 1 |
-
-#+BEGIN_SRC elisp
-  (dating-service 5 five-by-five) 
-#+END_SRC
-
-#+RESULTS:
-| 0.0 | 0.3332991567624504 |                    0.0 |  0.6666367629688442 |                    0.0 |
-| 1.0 |                0.0 | 0.00012808973625332503 |                 0.0 | 0.00012808973625332503 |
-| 0.0 | 0.3333504216187748 |     0.6665855473677436 |                 0.0 |                    0.0 |
-| 0.0 | 0.3333504216187748 |                    0.0 |                 0.0 |     0.6665855473677436 |
-| 0.0 |                0.0 |     0.3332863628960031 | 0.33336323703115567 |     0.3332863628960031 |
-
-* TODO Demonstrate Your Understanding
-  How does this work? Can you explain it?!
-
-  Some evidence of experimentation is required for full credit.
+* TODO Think and Discuss
+  Think about and discuss these ideas in the context of your focus these final
+  few weeks of the semester.
 
   First post your answer.
 
-  Then post on two other students' answers.
+  Then post on two other students\rsquo{} answers, either adding to their 
+  answers, or comparing/contrasting theirs to/with yours. 
