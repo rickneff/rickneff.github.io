@@ -8,206 +8,114 @@
 [[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
 [[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
 [[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
-* TODO Investigate the Lambda Calculus
-  The lambda calculus is nothing like the calculus that deals with derivatives
-  and integrals!
+* TODO Investigate Something Fascinating
+  You are invited to explore some of the ramifications of the /Pigeonhole
+  Principle/, a fascinating counting principle belonging to combinatorics.
 
-  [[http://www.inf.fu-berlin.de/inst/ag-ki/rojas_home/documents/tutorials/lambda.pdf][This document]] describes it and its connection to [[https://firstthreeodds.org/17657741833134731255/an-introduction-to-functional-programming.pdf][functional programming]].
+** Requirements
+   Read Brother Kent Bessey's essay entitled /Pigeons and Pigeonholes/,
+   think about and explore the topics therein, and write your response
+   thereto.
 
-  As you will see, the grammar describing a lambda calculus expression is pretty
-  simple --- all of three productions!
+   Include in your response a description of a discussion about this
+   essay that you will have had with someone /not in the class/ (nor
+   in the STEM majors). This person can be a spouse, friend,
+   roommate, or relative; but the point is to find someone who is not
+   mathematically strong, and has probably never heard of the
+   Pigeonhole Principle, or combinatorics (or discrete mathematics) in
+   general.
 
-  [[https://firstthreeodds.org/the-epi-phenomenon.pdf][This document]] describes something you should be aware of if you aren\rsquo{}t already.
+** Copyright Note
+   Brother Kent A. Bessey, Professor of Mathematics at BYU-Idaho,
+   holds the copyright to this essay, which means:
 
-  How do they tie together? Explain in a few paragraphs your understanding of
-  the many interconnections between these topics.
+   /All rights reserved (by him). Reproduced by permission (from
+   him). Read-only. Please do not copy, print, transmit or save a copy
+   of this work./
+
+   He has authorized your temporary use of [[https://firstthreeodds.org/17657741833134731255/pigeons-and-pigeonholes.pdf][his work]].
 
 * TODO Concretize the Abstract by Writing Some Code
-  Expressions in the lambda calculus are pretty primitive, so we programmers
-  like to reformulate them in terms of less primitive operations. For example,
-  the initialization and binding of local variables using =let= is \ldquo{}syntactic
-  sugar\rdquo for a lambda expression applied to other expressions. First, a lambda
-  example:
+   Specifically, write some elisp code to help you figure out the problem on
+   page 40, which Brother Bessey prefaces by saying:
 
-#+BEGIN_SRC elisp :results raw
-  ((lambda (x y z) (list '= x (+ y z))) 5 2 3)
+#+BEGIN_QUOTE
+   I leave it to the reader to verify the calculations 
+   for a final (albeit challenging) exercise ...!
+#+END_QUOTE
+
+   Include the results of your grappling with this problem, and note the two
+   stubbed functions below that you must flesh out in order to verify the
+   calculations and explain the hows and whys.
+
+** Stub Code
+#+BEGIN_SRC elisp
+  (defun calculate-number-of-possible-initials-including-middle-initial-if-any
+      (number-of-letters-in-the-English-alphabet)
+    ;;... your code goes here
+  )
+
+  (defun pigeonhole-from-pigeon (pigeon-represented-as-a-person-with-traits)
+    ;;... your code goes here
+  )
 #+END_SRC
+* TODO What Is True? 
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted. 
+   
+#+name: assertions-in-general 
+  - [ ] I had fun.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
 
-#+RESULTS:
-(= 5 5)
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I responded with a sufficient number of well-written sentences to Brother Bessey\rsquo{}s essay. 
+  - [ ] I reported what I thought about the essay in general.
+  - [ ] I reported what I thought about the certainty-not-chance feature of the pigeonhole principle.
+  - [ ] I reported what I thought about the philosophical aspect of the pigeonhole principle per page 41.
+  - [ ] I reported on how my discussion with a non-STEM non-classmate went.
+  - [ ] I reported on how I grappled with the problem at the bottom of page 40.
+  - [ ] I reported on the connection I found between the pigeonhole principle and lossless data compression.
 
-  The same construct using =let=:
-#+BEGIN_SRC elisp :results raw
-  (let ((x 5)
-        (y 2)
-        (z 3))
-    (list '= x (+ y z)))
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.  
+  - [ ] There are fewer than two.  
+  - [ ] There are none. 
+
+   How well did I implement the function
+   calculate-number-of-possible-initials-including-middle-initial-if-any?
+#+name: assertions-about-easy-function
+  - [ ] I implemented the function in 3 or fewer lines of code.
+  - [ ] I used either the sum rule and product rule together or else just the product rule.
+  - [ ] The function calculates and returns the correct value (see Problem QFK).
+    
+   How well did I implement the pigeonhole-from-pigeon function?
+#+name: assertions-about-harder-function
+  - [ ] The function reads from this buffer the list named "John Doe" and returns the string "J D:111001".
+  - [ ] The function has an assert that the length of the string being returned is 10.
+  - [ ] The function calls (calculate-number-of-possible-initials-including-middle-initial-if-any 26) and uses the result.
+  - [ ] The function has an assert that the cardinality of its codomain (set of possible return values) is over a million.
+
+#+name: John Doe
+  - [X] LDS
+  - [X] Likes Cats
+  - [X] Born Before
+  - [ ] Wears Contacts
+  - [ ] Bites Fingernails
+  - [X] Lives Close
+
+#+BEGIN_SRC elisp
+; (org-sbe "time-for-fun.org:calculate-score")
+
+  (calculate-score
+   (quote
+    ((in-general 2 2 3)
+     (about-report 4 5 6 7 8 9 10)
+     (about-MIs 4 4 4 4)
+     (about-easy-function 4 4 4)
+     (about-harder-function 4 4 4 4))))
 #+END_SRC
-
-#+RESULTS:
-(= 5 5)
-
-  The bodies are the same, only the \ldquo{}appendages\rdquo differ.
-
-  The Identity lambda:
-#+BEGIN_SRC elisp :results silent
-  (fset 'I (setq I (lambda (x) x)))
-#+END_SRC
-
-#+BEGIN_SRC elisp :results raw
-  (I '(1 2 3))
-#+END_SRC
-
-#+RESULTS:
-(1 2 3)
-
-#+BEGIN_SRC elisp :results raw
-  (I (I (I I)))
-#+END_SRC
-
-#+RESULTS:
-(lambda (x) x)
-
-  The Zero lambda:
-#+BEGIN_SRC elisp :results silent
-  (fset 'Z (setq Z (lambda (x) (lambda (y) y))))
-#+END_SRC
-
-   Try out [[http://projectultimatum.org/cgi-bin/lambda][Hai (Paul) Liu’s step-by-step Lambda Viewer]] on the examples in the
-   Lambda Calculus tutorial linked-to above.
-
-  The Successor lambda:
-#+BEGIN_SRC elisp :results silent
-  ;; ??? 
-#+END_SRC
-
-  What about python?
-#+BEGIN_SRC python :results output
-  I = lambda c: c                                # Identity
-  Z = lambda b: lambda c: c                      # Number 0 (Zero)
-  S = lambda a: lambda b: lambda c: b(a(b)(c))   # Successor
-
-  print("S(Z) -->")
-  print(S(Z))
-  print("S(S(Z)) -->")
-  print(S(S(Z)))
-
-  def increment(n):
-      return n+1
-
-  print("increment(1) -->")
-  print(increment(1))
-
-  def ChurchToNat(c):
-      return c(increment)(0)
-
-  def ChurchToNat(c):
-      return c(increment)(0)
-
-  print("ChurchToNat(Z) -->")
-  print(ChurchToNat(Z))
-
-  print("ChurchToNat(S(Z)) -->")
-  print(ChurchToNat(S(Z)))
-
-  print("ChurchToNat(S(S(Z))) -->")
-  print(ChurchToNat(S(S(Z))))
-
-  def NatToChurch(n):
-      if n == 0:
-          return Z
-      else:
-          return S(NatToChurch(n-1))
-
-  print("ChurchToNat(NatToChurch(3)) -->")
-  print(ChurchToNat(NatToChurch(3)))
-#+END_SRC
-
-#+RESULTS:
-#+begin_example
-S(Z) -->
-<function <lambda> at 0x10ba5bd70>
-S(S(Z)) -->
-<function <lambda> at 0x10ba62c08>
-increment(1) -->
-2
-ChurchToNat(Z) -->
-0
-ChurchToNat(S(Z)) -->
-1
-ChurchToNat(S(S(Z))) -->
-2
-ChurchToNat(NatToChurch(3)) -->
-3
-#+end_example
-
-** Recursing with Primitives
-
-  Recursion manifests itself in functions that call themselves, or /simpler/
-  versions of themselves. Primitives once wrapped in recursive calls become less
-  primitive with each additional wrapping layer.
-
-  For example, the recursive rules for addition are just the following two
-  equations:
-
-  (+1) x + 0 = x
-  (+2) x + s(y) = s(x + y)
-
-  Thus, the successor function (s) allows us to define addition as what it
-  fundamentally is: repeated (recursive) counting. Two more equations define the
-  recursive rules for multiplication in terms of repeated addition (5 \times 4 = 5 +
-  5 + 5 + 5), reducing the calculation of a product to the calculation of sums:
-
-  (\times{}1) x \times 0 = 0
-  (\times{}2) x \times s(y) = x + (x \times y)
-
-  Here are these functions in python:
-#+BEGIN_SRC python :results output
-  def s(x):
-    return x + 1
-
-  def add(x, y):
-    if (y == 0):
-      return x
-    else:
-      return s(add(x, y - 1)) 
-
-  def mul(x, y):
-    if (y == 0):
-      return 0
-    else:
-      return add(x, mul(x, y - 1))
-
-  print("add(5, 3) -->")
-  print(add(5, 3))
-
-  print("mul(5, 3) -->")
-  print(mul(5, 3))
-#+END_SRC
-
-#+RESULTS:
-: add(5, 3) -->
-: 8
-: mul(5, 3) -->
-: 15
-
-** TODO Go Another Step Up
-   Define exp(x, y) in terms of repeated multiplication, and supply the
-   equations for exponentiation. (5^4 = 5 \times 5 \times 5 \times 5, exemplifying reducing
-   exponentiation to the calculation of products.)
-
-#+BEGIN_SRC python :results output
-  # what goes here to get the RESULTS below?
-
-  print("exp(5, 3) -->")
-  print(exp(5, 3))
-#+END_SRC
-
-#+RESULTS:
-: exp(5, 3) -->
-: 125
-
-** TODO Convert python to elisp
-
-  Find a way to define the S (Successor) function in elisp, then define
-  addition, multiplication and exponentiation to behave like the python code.
