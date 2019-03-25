@@ -1,67 +1,71 @@
-#+TITLE: DM2 Idea Exchange 12.2
+#+TITLE: Idea Exchange 12.2
 #+LANGUAGE: en
 #+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
 #+OPTIONS: html-postamble:nil
-#+STARTUP: showeverything
+#+STARTUP: showeverything entitiespretty
 #+SETUPFILE: theme-bigblow.setup
 
-  A fitting subtopic of Languages and Grammars is the Language of Boolean
-  Formulas. You have seen an inkling of this before:
+* TODO Consider 
+  The idea of an Existence Theorem is something you will encounter, perhaps for
+  the first time, in this week\rsquo{}s assignment. It\rsquo{}s pretty abstract. Something
+  called by the author of [[https://firstthreeodds.org/the-epi-phenomenon.pdf][this document]] an \ldquo{}Abstraction Ceiling\rdquo is something
+  you too may have encountered already. Your attempts to understand the
+  pigeonhole principle may indeed cause your head to bump against this ceiling
+  and cause you some real pain!
 
-* TODO Discuss This Elisp Implementation of Boolean Formulas
-  A literal is a symbol with a value of 1 or 0. A negated literal is a function
-  with that literal\rsquo{}s name returning that symbol\rsquo{}s negated value (arithmetized,
-  so treating 0 and 1 as numbers standing in for false and true).
+  Please read the document linked to above, whose main idea is to describe
+  something the author, Douglas R. Hofstadter, calls \ldquo{}The Epi Phenomenon\rdquo. In an
+  earlier book, a prequel to the book in which the above is a chapter, he
+  describes it as a single word this way (which also gives a glimpse into his
+  mind with its wicked wit):
 
-  A clause is a list of literals. A formula a list of clauses. For now, assume a
-  formula is in Conjunctive Normal Form (CNF --- aka Product of Sums).
+#+BEGIN_QUOTE
+  In drawing this Chapter to a close, I would like to relate a story about a
+  complex system. I was talking one day with two systems programmers for the
+  computer I was using. They mentioned that the operating system seemed to be
+  able to handle up to about thirty-five users with great comfort, but at about
+  thirty-five users or so, the response time all of a sudden shot up, getting so
+  slow that you might as well log off and go home and wait until later. Jokingly
+  I said, \ldquo{}Well, that\rsquo{}s simple to fix, just find the place in the operating
+  system where the number \lsquo{}35\rsquo is stored, and change it to \lsquo{}60\rsquo{}!\rdquo Everyone
+  laughed. The point is, of course, that there is no such place. Where, then,
+  does the critical number---35 users---come from? The answer is: /It is a
+  visible consequence of the overall system organization---an \ldquo{}epiphenomenon\rdquo./
 
-  So '((a b c) (a (b) c) ((a) (b) c)) represents three clauses containing three
-  literals each where the literals are or\rsquo{}ed together (added) while the clauses
-  are and\rsquo{}ed together (multiplied).
+  Similarly, you might ask about a sprinter, \ldquo{}Where is the \lsquo{}9.3\rsquo stored, that
+  makes him be able to run 100 yards in 9.3 seconds?\rdquo Obviously, it is not
+  stored anywhere. His time is a result of how he is built, what his reaction
+  time is, a million factors all interacting when he runs. The time is quite
+  reproducible, but it is not stored in his body anywhere. It is spread around
+  among all the cells of his body and only manifests itself in the act of the
+  sprint itself.
 
-  An assignment is a setting of 1 (true) or 0 (false) to each literal in the
-  formula. Using an association-list for assignments, the car of each pair is
-  the symbol, the cdr its value.
+  Epiphenomena abound. In the game of \ldquo{}Go\rdquo, there is the feature that \ldquo{}two eyes
+  live\rdquo. It is not built into the rules, but it is a consequence of the rules.
+  In the human brain, there is gullibility. How gullible are you? Is your
+  gullibility located in some \ldquo{}gullibility center\rdquo in your brain? Could a
+  neurosurgeon reach in and perform some delicate operation to lower your
+  gullibility, otherwise leaving you alone? If you believe this, you are pretty
+  gullible, and should perhaps consider such an operation.
+ #+END_QUOTE
 
-  So (setf a 1 b 0 c 1) to get the literal \lsquo{}a\rsquo{} with value 1, \lsquo{}b\rsquo{} with value 0,
-  and \lsquo{}c\rsquo{} with value 1:
+  Hofstadter, hard-core materialist that he is, would scoff at, nay, heap scorn
+  on the popular saying:
 
-#+BEGIN_SRC elisp :results raw
-  (setf a 1 b 0 c 1
-        (symbol-function 'a) (lambda nil (- 1 (symbol-value 'a)))
-        (symbol-function 'b) (lambda nil (- 1 (symbol-value 'b)))
-        (symbol-function 'c) (lambda nil (- 1 (symbol-value 'c)))
-        formula1 '((a b c) (a (b) c) ((a) (b) c)))
-#+END_SRC
+#+BEGIN_QUOTE
+  We are not mortals occasionally having spiritual experiences. We are spiritual
+  beings having mortal experiences.
+#+END_QUOTE
 
-#+RESULTS:
-((a b c) (a (b) c) ((a) (b) c))
+  You, however, are aware of and know a bit about the larger spiritual reality
+  in which we are embedded. Please read [[http://www.ams.org/notices/200707/tx070700852p.pdf][a rebuttal in the form of a review]] of
+  his book to see that Hofstadter\rsquo{}s views are easily contested. How would
+  you contest them?
 
-  A formula is evaluated with the current values of the literals, or else the
-  literals are set first from the optional assignment association list. The
-  evaluation gives either t or nil, *NOT* 1 or 0.
-
-#+BEGIN_SRC elisp :results silent
-  (defun eval-formula (formula &optional assignment)
-    (mapc (lambda (pair) (set (car pair) (cdr pair))) assignment)
-    (not (zerop (apply '* (mapcar (lambda (x) (apply '+ (mapcar (lambda (s) (eval s)) x)))
-                                  formula)))))
-#+END_SRC
-
-#+BEGIN_SRC elisp :results raw
-  (eval-formula formula1)
-#+END_SRC
-
-#+BEGIN_SRC elisp :results raw
-  (eval-formula '((a b (c)) ((a) (b) c) ((a) b (c))) '((a . 1) (b . 0) (c . 1)))
-#+END_SRC
-
-* TODO Demonstrate Your Understanding of This Implementation
-  Create a variation of the eval-formula function (call it eval-formula-alt)
-  that treats the formula as if it were in Disjunctive Normal Form (DNF --- aka
-  Sum of Products).
+* TODO Think and Discuss
+  Think about and discuss these ideas with your peers. 
 
   First post your answer.
 
-  Then post on two other students' answers.
+  Then post on two other students\rsquo{} answers, either adding to their 
+  answers, or comparing/contrasting theirs to/with yours. 
