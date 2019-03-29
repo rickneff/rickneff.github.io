@@ -1,0 +1,123 @@
+#+TITLE: What Is Determinism?
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
+
+* No Choice?
+  In his //Philosophical Essay on Probabilities// (1814), the French
+  astronomer and mathematician, Pierre-Simon Laplace (1749-1827) wrote:
+
+#+BEGIN_QUOTE
+  An intellect which at any given moment knew all the forces that
+  animate Nature and the mutual positions of the beings that comprise
+  it, if this intellect were vast enough to submit its data to analysis,
+  could condense into a single formula the movement of the greatest
+  bodies of the universe and that of the lightest atom: for such an
+  intellect nothing could be uncertain; and the future just like the
+  past would be present before our eyes.
+#+END_QUOTE
+
+  By \ldquo{}all the forces that animate Nature\rdquo{}, Laplace means \ldquo{}the laws of
+  nature\rdquo{}. And by \ldquo{}[knowing] the mutual positions of the beings that
+  comprise it [i.e. Nature]\rdquo{}, Laplace means \ldquo{}having a \lsquo{}snapshot\rsquo{}
+  description of the position and motion (at some instant of time) of
+  every object in the universe\rdquo{}.
+
+  This view --- which, naturally, came to be called \ldquo{}Laplacian
+  Determinism\rdquo{}--- was widely adopted by many scientists and philosophers
+  until early in the Twentieth Century. It is the view that the entire
+  future course of the universe is \lsquo{}laid out\rsquo{} as a consequence of two
+  factors: (1) the laws of nature, and (2) the state of the universe at
+  any one moment of time. Of course only a \lsquo{}vast intellect\rsquo{} (presumably
+  God) would be able to handle so much data; no human being, even with the
+  largest computer available, could perform the calculation. Laplace\rsquo{}s
+  claim was intended merely to explain the \lsquo{}principles\rsquo{} by which the
+  universe operates; he did not believe, nor has anyone (that I know of
+  since) believed that we human beings could perform the calculation.
+
+  But our inability to perform the calculation notwithstanding, the
+  philosophical view remains: the future course of the universe, our own
+  behavior (choices, actions, etc.) included, is completely determined by
+  the laws of nature and the state of the universe at any one moment.
+
+  According to Laplacian Determinism, in principle (although not always in
+  practice) whatever happens (whether physical, chemical, biological,
+  social, economic, psychological, geological, etc.) is to be
+  accounted-for by citing the *natural laws of the universe and*
+  *antecedent (and sometimes prevailing) conditions*.
+
+  The preceding is from the web page entitled /Notes on Free Will and
+  Determinism/ by Professor Norman Schwartz, reproduced by
+  permission:\\
+  Copyright \copy Norman Schwartz 1997, 2004\\
+  First posted: Oct. 24, 1997\\
+  Updated, with additional links: Oct. 7, 2004\\
+  Department of Philosophy\\
+  Simon Fraser University\\
+  URL: http://www.sfu.ca/~swartz/freewill1.htm
+
+  So that\rsquo{}s Laplace\rsquo{}s story, related by Norman Schwartz.
+
+* Or Maximum Choice?
+
+  Abraham tells a different story! What follows is this story related and
+  commented on by Hugh Nibley, who made a case for the peculiar brand of
+  Mormon \ldquo{}Creationism\rdquo{} in a talk he gave at BYU entitled //Before Adam//:
+
+#+BEGIN_QUOTE
+  The creation process as described in the Pearl of Great Price is open
+  ended and ongoing, entailing careful planning based on vast
+  experience, long consultations, models, tests, and even trial runs for
+  a complicated system requiring a vast scale of participation by the
+  creatures concerned. The whole operation is dominated by the
+  overriding principle of love. [\dots]
+
+  Consider how it was done: \ldquo{}And the Gods said: We will do everything
+  that we have said, and organize them.\rdquo{} (Abraham 4:31.) \ldquo{}And the Gods
+  saw that they would be obeyed, and that their plan was good.\rdquo{} (Abraham
+  4:21.) \ldquo{}We will end our work, which we have counseled. \dots And
+  thus were their decisions at the time that they counseled among
+  themselves to form the heavens and the earth.\rdquo{} (Abraham 5:2-3.) After
+  the talk they got down to work. \ldquo{}The Gods came down and formed these
+  the generations of the heavens and of the earth, \dots according to
+  all that which they had said ... before.\rdquo{} (Abraham 5:4-5.) They worked
+  through agents: \ldquo{}The Gods ordered, saying: Let [such-and-such happen]
+  \dots; and it was so, even as they ordered.\rdquo{} (Abraham 4:9, 11.)
+
+  What they ordered was not the completed product, but the process to
+  bring it about, providing a scheme under which life might expand: \ldquo{}Let
+  us /prepare/ the earth to bring forth grass\rdquo{} (Abraham 4:11; italics
+  added), not \ldquo{}Let us create grass.\rdquo{}
+
+  \ldquo{}Let us prepare the waters to bring forth abundantly. \dots And the
+  Gods prepared the waters that they might bring forth great whales, and
+  every living creature that moveth.\rdquo{} (Abraham 4:20.) Note the future
+  tense: the waters are so treated that they will have the capacity. The
+  Gods did not make whales on the spot but arranged it so that in time
+  they might appear. They created the potential. \ldquo{}And the Gods saw that
+  they would be obeyed, and that their plan was good\rdquo{} (Abraham 4:21),
+  that is, it was working, not because they were doing it all
+  themselves---there were other agents at work: they were being obeyed.
+  By whom? Well, the land animals, we are told, which \ldquo{}would obey.\rdquo{}
+  (Abraham 4:25.) \ldquo{}And the Gods watched those things which they had
+  ordered until they obeyed.\rdquo{} (Abraham 4:18.)
+
+  \ldquo{}They obeyed\rdquo{} is the active voice, introducing a teaching that, in my
+  opinion, is by far the most significant and distinct aspect of
+  Mormonism. It is the principle of maximum participation, of the active
+  cooperation of all of God\rsquo{}s creatures in the working out of his plans,
+  which, in fact, are devised for their benefit: \ldquo{}This is my work and my
+  glory\rdquo{} (Moses 1:39.) Everybody gets into the act. Every creature, to
+  the limit of its competence, is given the supreme compliment of being
+  left on its own, so that the word \ldquo{}obey\rdquo{} is correctly applied. \ldquo{}We
+  will go down, for there is space there, and we will take of these
+  materials, and we will make an earth whereon these may dwell.\rdquo{}
+  (Abraham 3:24.) Why? \ldquo{}And we will prove them herewith, to see if they
+  will do all things whatsoever the Lord their God shall command them.\rdquo{}
+  (Abraham 3:25.) What he commands is what will best fulfill the measure
+  of their existence, but they are not forced to do it---*they are not
+  automata* (emphasis added). Adam was advised not to eat the fruit but was told at the
+  same time that he was permitted to do it. It was up to him whether he
+  would obey or not.
+#+END_QUOTE
