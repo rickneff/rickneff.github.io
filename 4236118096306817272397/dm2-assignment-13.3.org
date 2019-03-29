@@ -1,144 +1,105 @@
-#+TITLE: DM2 Final Assignment 
+#+TITLE: DM2 Final Assignment
 #+LANGUAGE: en
 #+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
 #+OPTIONS: html-postamble:nil
 #+STARTUP: showeverything entitiespretty
 #+SETUPFILE: theme-bigblow.setup
- 
+
 [[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
 [[elisp:(progn%20(save-buffer)%20(browse-url-of-file%20(org-html-export-to-html)))][Export to HTML and Browse]]
 [[elisp:(progn%20(save-buffer)%20(org-clock-report%201)%20(save-buffer))][Insert/Update Clock Summary Report]]
-* TODO Investigate Something Fascinating
-  You are invited to explore some of the ramifications of the /Pigeonhole
-  Principle/, a fascinating counting principle belonging to combinatorics.
 
-** Requirements
-   Read Brother Kent Bessey's essay entitled /Pigeons and Pigeonholes/,
-   think about and explore the topics therein, and write your response
-   thereto.
+* Instructions
+  Please analyze and reason carefully, making full use of the *mind tools* in
+  your possession:
 
-   Include in your response a description of a discussion about this
-   essay that you will have had with someone /not in the class/ (nor
-   in the STEM majors). This person can be a spouse, friend,
-   roommate, or relative; but the point is to find someone who is not
-   mathematically strong, and has probably never heard of the
-   Pigeonhole Principle, or combinatorics (or discrete mathematics) in
-   general.
-
-** Copyright Note
-   Brother Kent A. Bessey, Professor of Mathematics at BYU-Idaho,
-   holds the copyright to this essay, which means:
-
-   /All rights reserved (by him). Reproduced by permission (from
-   him). Read-only. Please do not copy, print, transmit or save a copy
-   of this work./
-
-   He has authorized your temporary use of [[https://firstthreeodds.org/17657741833134731255/pigeons-and-pigeonholes.pdf][his work]].
-
-* TODO Concretize the Abstract by Writing Some Code
-   Specifically, write some elisp code to help you figure out the problem on
-   page 40, which Brother Bessey prefaces by saying:
-
+  The philosopher John Locke wrote in 1690 about three mind tools (which he
+  called acts) in /An Essay Concerning Human Understanding/:
 #+BEGIN_QUOTE
-   I leave it to the reader to verify the calculations 
-   for a final (albeit challenging) exercise ...!
+  The acts of the mind, wherein it exerts its power over simple ideas, are
+  chiefly these three:
+
+ 1. Combining several simple ideas into one compound one, and thus all complex
+    ideas are made.
+ 2. The second is bringing two ideas, whether simple or complex, together, and
+    setting them by one another so as to take a view of them at once, without
+    uniting them into one, by which it gets all its ideas of relations.
+ 3. The third is separating them from all other ideas that accompany them in
+    their real existence: this is called abstraction, and thus all its general
+    ideas are made.
 #+END_QUOTE
 
-   Include the results of your grappling with this problem, and note the two
-   stubbed functions below that you must flesh out in order to verify the
-   calculations and explain the hows and whys.
+   Focus particularly on number 2, as you strive to make good connections to
+   help make your discrete math learning stick!
 
-** Stub Code
-#+BEGIN_SRC elisp
-  (defun calculate-number-of-possible-initials-including-middle-initial-if-any
-      (number-of-letters-in-the-English-alphabet)
-    ;;... your code goes here
-  )
+** Reading
+   Choose one of the following three books to read (parts of) and write about:
 
-  (defun pigeonhole-from-pigeon (pigeon-represented-as-a-person-with-traits)
-    ;;... your code goes here
-  )
-#+END_SRC
-* TODO What Is True?
-  This is a tool that allows you to assess yourself on how you did
-  with this assignment. Change false to true if warranted. 
+   1. [[https://www.math.wustl.edu/~wright/Math109/00Book.pdf][Mathematics and Music]] by David Wright (at least Chapters 1-9).
+   2. [[https://www.math.upenn.edu/~wilf/gfologyLinked2.pdf][generatingfunctionology]] by Herbert Wilf (at least Chapters 1-3).
+   3. /Random Walks and Diffusions on Graphs and Databases: An Introduction/
+      by Philipp Blanchard and Dimitri Volchenkov (read selected chapters
+      --- to learn the connection between \radic3 - 1 and ladder graphs).
+*** Especially Electrical Resistance Networks
+**** The probabilistic interpretation of voltage and current
+      --- is fascinating!
+***** For the ladder graph connection ---
+      Random walks defined on connected undirected graphs have a profound connection
+      to electric resistor networks. The effective resistance between two nodes of
+      an electric resistor network defined as the potential difference between them
+      at a unit current is equal (up to a normalization) to the commute time of a
+      random walk between them. The effective resistance distance is bounded above
+      by the shortest path distance and equals the shortest path distance only if
+      the graph forms a tree, in which any two nodes are connected by the only
+      possible path.
+** Writing
+   Write at least 8 pages (with 12 point font and 1 inch margins) using the
+   supplied rubric to guide you to a permutation of a combination of words of
+   exceptional quality! Your submission will be hardcopy (your choice how to
+   create this document) delivered personally to Brother Neff no later than 5:30
+   PM on Thursday, 11 April 2019.
 
-#+BEGIN_SRC elisp :results silent :tangle wit.el
-  (defun what-is-true-about-my-engagement-with-this-final-assignment ()
-      (vector
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; What is true of my experience in general?                              ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+*** Rubric
+|              | *Exceptional*          | *Good*                  | *Acceptable*            | *Developing*          | *Missing*          |
+|              | 100%                 | 90%                   | 70%                   | 50%                 | 0%               |
+|--------------+----------------------+-----------------------+-----------------------+---------------------+------------------|
+| *Connections*  | Superb connections   | Good and plentiful    | A few connections     | A few connections   | No discernible   |
+| 30%          | are made between     | connections are made  | are made in three or  | are made in one or  | connections.     |
+|              | the ideas in the     | in five or six areas  | four areas of         | two areas of        |                  |
+|              | paper you read and   | of discrete math.     | discrete math.        | discrete math.      |                  |
+|              | what you already     |                       |                       |                     |                  |
+|              | knew about discrete  |                       |                       |                     |                  |
+|              | mathematics.         |                       |                       |                     |                  |
+|              |                      |                       |                       |                     |                  |
+| *Organization* | Exceptionally well   | Good organization,    | Organized, but        | Some organization,  | Not organized,   |
+| 30%          | organized. All parts | sharp sense of        | transitions are       | transitions jump    | transitions make |
+|              | and transitions are  | beginning and end.    | somewhat jumpy.       | around, start and   | no sense.        |
+|              | logically ordered,   |                       |                       | end are unclear.    |                  |
+|              | flow is natural,     |                       |                       |                     |                  |
+|              | start and end are    |                       |                       |                     |                  |
+|              | crystal clear.       |                       |                       |                     |                  |
+|              |                      |                       |                       |                     |                  |
+| *Quality of*   | Support details      | Support details       | Some details are      | Details are         | Specific details |
+| *Information*  | are superbly         | are specific to       | non-supportive of the | somewhat sketchy.   | are missing.     |
+| 20%          | specific to the      | the subject.          | subject.              |                     |                  |
+|              | subject.             |                       |                       |                     |                  |
+|              |                      |                       |                       |                     |                  |
+| *Interest*     | Brother Neff finds   | Vocabulary is varied, | Vocabulary is varied, | Vocabulary is       | Needs            |
+| *Level*        | your writing         | supporting details    | supporting details    | monotonous,         | descriptive,     |
+| 10%          | scintillating!       | are vivid.            | need work.            | details lack color. | colorful words.  |
+|              |                      |                       |                       |                     |                  |
+| *Mechanics*    | Writing has          | There are a few       | There are no more     | There are more than | Some portion of  |
+| 10%          | no discernible       | departures from       | than an average of    | 2.                  | the writing is   |
+|              | departures from      | SWE.                  | 2 departures from     |                     | impossible to    |
+|              | Standard Written     |                       | SWE per page in the   |                     | read because of  |
+|              | English (SWE).       |                       | critical areas listed |                     | departures from  |
+|              |                      |                       | below.                |                     | SWE.             |
 
-    "I had fun. (2 points)" false
-    "I learned something new. (2 points)" false
-    "I achieved something meaningful, or something I can build upon at a later time. (3 points)" false
-
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; What is true of my report on what I learned?                            ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-    "I responded with several (> 50) well-written sentences to Brother Bessey's essay. (4 points)" false
-    "I reported what I thought about the essay in general. (5 points)" false                      
-    "I reported what I thought about the certainty-not-chance feature of the pigeonhole principle. (6 points)" false
-    "I reported what I thought about the philosophical aspect of the pigeonhole principle per page 41. (7 points)" false
-    "I reported on how my discussion with a non-STEM non-classmate went. (8 points)" false
-    "I reported on how I grappled with the problem at the bottom of page 40. (9 points)" false
-    "I reported on the connection I found between the pigeonhole principle and lossless data compression. (10 points)" false
- 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; What is true of the mechanical "infelicities" (misspelled words,        ;;
-    ;; grammatical errors, punctuation errors) in my report of what I learned? ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-    "There are fewer than four. (4 points)" false
-    "There are fewer than three. (4 points)" false
-    "There are fewer than two. (4 points)" false
-    "There are none. (4 points)" false
-
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; How well did I implement the function				                           ;;
-    ;; calculate-number-of-possible-initials-including-middle-initial-if-any?  ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-    "I implemented the function in 3 or fewer lines of code. (4 points)" false
-    "I used either the sum rule and product rule together or else just the product rule. (4 points)" false
-    "The function calculates and returns the correct value (see Problem QFK). (4 points)" false
-
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; How well did I implement the pigeonhole-from-pigeon function?           ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-    "The function parses a string like \"John Doe: LDS LikesCats BornBefore NoWearsContacts NoBitesFingernails LivesClose\" and returns the string \"J_D111001\". (4 points)" false
-    "The function calls (calculate-number-of-possible-initials-including-middle-initial-if-any 26) and uses the result. (4 points)" false
-    "The function has an assert that the length of the string being returned is 9. (4 points)" false
-    "The cardinality of the codomain (set of possible return values) of this function is over a million. (4 points)" false
-  ))
-#+END_SRC
-
-#+BEGIN_SRC elisp
-  (setq points-in-general (+ 2 2 3) 
-        points-for-report (+ 4 5 6 7 8 9 10)
-        points-for-absence-of-MIs (+ 4 4 4 4)
-        points-for-1st-function (+ 4 4 4) 
-        points-for-2nd-function (+ 4 4 4 4) 
-        total-points (+ points-in-general points-for-report points-for-absence-of-MIs points-for-1st-function points-for-2nd-function))
-#+END_SRC
-
-#+RESULTS:
-: 100
-
-#+BEGIN_SRC elisp
-  (setq true t
-        false nil
-        witvec (what-is-true-about-my-engagement-with-this-final-assignment)
-        assertions (loop for datum across witvec when (stringp datum) collect datum)
-        points (mapcar (lambda (x) (string-to-number (substring x (+ 3 (string-match-p "\\." x))))) assertions)
-        total-points (apply '+ points)
-        my-responses (loop for datum across witvec unless (stringp datum) collect datum)
-        my-points (mapcar* (lambda (asserted-earned points) (if asserted-earned points 0)) my-responses points))
-        displayed-score (format "#+SCORE: %d\n" (apply '+ my-points)) 
-#+END_SRC
-
-#+RESULTS:
-: #+SCORE: 0
+**** Critical Areas
+   - Spelling or typo
+   - Sentence boundary punctuation (run-ons, comma splices, fused sentences, fragments)
+   - Use of apostrophes, -s, and -es
+   - Pronoun forms
+   - Pronoun agreement, and providing antecedents for pronouns
+   - Verb forms and subject-verb agreement
+   - Capitalization of proper nouns and of first words in the sentence
