@@ -1,8 +1,23 @@
 #+TITLE: Elisp Mini Primer 
 #+LANGUAGE: en
-#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+OPTIONS: html-postamble:nil
 #+STARTUP: showeverything entitiespretty
+#+SETUPFILE: theme-bigblow.setup
 
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report%201)][Insert/Update Clock Summary Report]]
+:END:
+* A Learning Tip
   At certain points in this primer you will be asked to \ldquo{}Predict Verify Ponder\rdquo
   (PVP as a TLA). That means to predict what will happen *before* you carry out
   some instruction, then *verify* your prediction, and *ponder* why you were or
@@ -32,21 +47,13 @@
   markers, with the language of the code that will go in the block identified by
   name, like so:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
 
-#+END_SRC
+#+end_src
 
-  Entering that text manually every time is tedious. Here\rsquo{}s a shortcut:
-
-  Enter \lsquo{}<s\rsquo{} then hit the tab key to expand it, then type \lsquo{}elisp\rsquo{} (without the
-  quotes). Try it. Move the cursor to two lines below, just after the s, and
-  press TAB.
-
-<s
-
-  Another way that will save you typing is to have emacs insert an elisp source
-  code block for you. Try it. Move to the line just below these four characters
-  \lsquo{}(\rsquo, \lsquo{}e\rsquo, \lsquo{}l\rsquo, and \lsquo{})\rsquo
+  Entering that text manually every time is tedious. Here\rsquo{}s a shortcut: have
+  Emacs insert an elisp source code block for you! Try it. Move to the line just
+  below these four characters \lsquo{}(\rsquo, \lsquo{}e\rsquo, \lsquo{}l\rsquo, and \lsquo{})\rsquo
 
 (el)
 
@@ -102,42 +109,49 @@
   not your prediction was right. This is a specific instance of the generic PVP
   exercise mentioned at the top of this file.
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
  3.14159
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   42
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   42.
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   .42
-#+END_SRC
+#+end_src
 
-  If you did it, you had to answer the \ldquo{}are-you-sure\rdquo question four times. Why
-  this prompt? Evaluating numbers is a pretty benign activity, but that\rsquo{}s not
-  true of evaluating some lisp code, which potentially can do bad things. Hence
-  the safeguard confirmation prompt. But that gets tedious after a while. You
-  can disable this prompt by setting a special controlling flag variable to nil.
+:HINT:
+  Evaluating numbers is a pretty benign activity, but that\rsquo{}s not true of
+  evaluating some elisp code, which potentially can do bad things. Would it not
+  be prudent to have some kind of "are-you-sure" confirmation prompt you have to
+  answer first?
+
+  There *is* such a safeguard confirmation prompt, but it has been configured to
+  be off by default, as answering the prompt by typing \lsquo{}y\rsquo every time gets
+  tedious really fast.
+
+  You can enable this prompt by setting a special controlling flag variable to
+  =t= (see below about =t= and =nil=):
 
   SPC SPC set-variable
 
-  prompts for the variable name (org-confirm-babel-evaluate) and then the value
-  (enter nil). Do that now. (More on setting variable values later.)
+  prompts for the variable name (org-confirm-babel-evaluate) and then the value (t).
+:END:
 
   Strings are sequential \ldquo{}strings\rdquo of characters surrounded by double quotes:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   "Dog bites man --- not news."
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   "Man bites dog --- news!"
-#+END_SRC
+#+end_src
 
   Did you notice the missing quotes in the results? That\rsquo{}s intentional. It\rsquo{}s
   still a string, just displayed without quotes. To preserve them in this
@@ -146,27 +160,27 @@
   Characters (whose syntax requires a preceding question mark to flag them as
   such) evaluate to a number (their ASCII code equivalent):
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   ?H
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   ?a
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   ?+
-#+END_SRC
+#+end_src
 
   Finally, the special symbols =t= (true) and =nil= (false) self-evaluate:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   t
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   nil
-#+END_SRC
+#+end_src
 
   Note that nil is not displayed here. Note too that =nil= does double duty. It
   represents the Boolean false *and* the empty list, which is useful in certain
@@ -183,18 +197,18 @@
   of the \lsquo{}+\rsquo{} function (note that in lisp, even standard arithmetic operators are
   functions):
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (+ 1 2 3)
-#+END_SRC
+#+end_src
 
   You no doubt have noticed that *prefix* ordering is the lisp way, which just
   means that operators get listed first, then come the operands (what operators
   operate on, also called arguments). This is very convenient and efficient. The
   more familiar *infix* ordering --- not so much.
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (1 + 2 + 3)
-#+END_SRC
+#+end_src
 
   Getting a message like \lsquo{}Invalid function: 1\rsquo{} is something you want to avoid!
 
@@ -202,26 +216,26 @@
   in. Or rather, you must first summon it like a genie by passing its name to
   the =require= function.
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (require 'calc)
   (calc-eval "1 + 2 + 3")
-#+END_SRC
+#+end_src
 
   A nested list, if well-formed, forms a more complex ele:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (* 3 (+ 1 3 5))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (+ 1 2 3 (* 4 5))
-#+END_SRC
+#+end_src
 
   What does well-formed mean? Well, here\rsquo{}s an example of bad form, *not* well-formed:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   ) 1 2 3 + (* 4 5)(
-#+END_SRC
+#+end_src
 
   Note that evaluating that code block produced no output, because the input was
   not well-formed. By the way, if you ever get thrown into the debugger (into a
@@ -230,9 +244,9 @@
 * Create and Render Lists
   The =list= function is your friend:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (list 1 3 5)
-#+END_SRC
+#+end_src
 
   Note that lists are rendered in org-mode as tables, with vertical bars
   separating the list elements. This is a nifty feature! But one way to suppress
@@ -240,92 +254,92 @@
   first argument is a \lsquo{}directive\rsquo{} (a string with a very idiosyncratic syntax)
   that tells it what to do with the rest of the arguments.)
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (format "%s" (list 1 2 3))
-#+END_SRC
+#+end_src
 
   \ldquo{}Quote\rdquo a list to suppress evaluation of its first element.
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (format "%s" '(1 2 3))
-#+END_SRC
+#+end_src
 
   Alternatively,
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (format "%s" (quote (1 2 3)))
-#+END_SRC
+#+end_src
 
   Use =format= with a capital S directive to keep the quotes when inserting the
   results of evaluating strings:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (format "%S" "abc")
-#+END_SRC
+#+end_src
 * Compare Vectors and Lists
   Related to lists are vectors, which unlike lists, self-evaluate (like most
   atoms):
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   [A B C]
-#+END_SRC
+#+end_src
 
   Try this:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (elt [A B C] 0)
-#+END_SRC
+#+end_src
 
   And this:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (elt [A B C] 2)
-#+END_SRC
+#+end_src
 
   And this:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (elt [A B C] 3)
-#+END_SRC
+#+end_src
 
   Oops! The function =elt=, by the way, is short for /element/.
 
   The string "abc" is composed of three characters, ?a, ?b, and ?c.
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   ?a
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   ?A
-#+END_SRC
+#+end_src
 
   The =elt= function works on strings as well as vectors, and the =vector=
   function creates, what? 
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (vector (elt "ABC" 0) (elt "abc" 1) (elt "XyZ" 2))
-#+END_SRC
+#+end_src
 * Learn How to Append Lists and Vectors
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (append '(a b c) '(0 1 2))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (append '(0 1 2) '("red" "green" "blue"))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (append '(a b c) '("red" "green" "blue"))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (append [a vector of symbols] '(0 1 2))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (append [a b c] nil)
-#+END_SRC
+#+end_src
 
   Apparently, this last one serves to convert a vector into a list!
 * Learn About =if=
@@ -334,25 +348,25 @@
   be emulated in elisp, which will introduce one of many \ldquo{}conditional\rdquo
   constructs:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (if t 'true 'false)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (if nil 'true 'false)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (if (< 1 3)
       "if-preceding-ele-is-true-evaluate-this-ele"
     "else-this-ele")
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (if (< 5 3)
       "if-preceding-ele-is-true-evaluate-this-ele"
     "else-this-ele")
-#+END_SRC
+#+end_src
 
   You\rsquo{}ll see more of this later. This is a \ldquo{}special form\rdquo, not a normal
   function, because only two of its three arguments are evaluated.
@@ -362,9 +376,9 @@
 
   How are variables defined in lisp? Here\rsquo{}s one way:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (defvar abc 123)
-#+END_SRC
+#+end_src
 
   The value of that ele is, as you might *not* not have been expecting, the
   symbol being defvar\rsquo{}ed rather than the value it\rsquo{}s initialized with.
@@ -376,13 +390,13 @@
   Symbols are not the same as strings (although their *names* are strings), so
   note the difference.
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   "xyz"
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   xyz
-#+END_SRC
+#+end_src
 
   Symbol's value as variable is void: xyz
 
@@ -391,42 +405,42 @@
   /keywords/, which are meant to stand for themselves and not hold some value.
   For example:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (format "The value of abc is %d" abc)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   abc
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (format "The value of :xyz is %s" :xyz)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   :xyz
-#+END_SRC
+#+end_src
 
   That\rsquo{}s all well and good, but how do you \ldquo{}assign\rdquo a new value to variables?
   The =setq= *special form* stands for \ldquo{}set quoted\rdquo, and is a convenient
   alternative to using the =set= *function* to make assignments of values to
   variables:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (setq abc 789)
-#+END_SRC
+#+end_src
 
   which is equivalent to:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (set (quote abc) 789)
-#+END_SRC
+#+end_src
 
   which is equivalent to:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (set 'abc 789)
-#+END_SRC
+#+end_src
 
   In lisp, types are dynamic, not static like in many other programming
   languages. That means that variables do not have types, values do.
@@ -434,16 +448,16 @@
   The value type of the variable =abc= was initially a number, but it could just
   as well be changed by assignment later in its life to be a list of numbers:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (setq abc '(1 2 3 4 5 6 7 8 9))
-#+END_SRC
+#+end_src
 
   Note the value of the =setq= ele is the value being set, in this case, a list.
   The value is *NOT* the symbol being set (remember =defvar=?).
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   abc
-#+END_SRC
+#+end_src
 
   Since you assigned =abc= the list of numbers one through nine as its value,
   you can pass this list around as a unit by its neat symbol handle. It\rsquo{}s not
@@ -453,117 +467,117 @@
 
   It so happens that =elt= works on lists as well as vectors and strings!
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (elt abc 0)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (elt abc 2)
-#+END_SRC
+#+end_src
 
   But the following accessor functions work *only* on lists:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (first abc)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (second abc)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (third abc)
-#+END_SRC
+#+end_src
 
   How far do you think this progression goes? PVP please!
 
   Using numbers instead of words is more convenient. To get the \ldquo{}nth\rdquo element of
   a list:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (nth 0 abc)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (nth 8 abc)
-#+END_SRC
+#+end_src
 
   Note the swapping of the order of the arguments from the =elt= way.
 
   It\rsquo{}s easy to get the first thing, how about the rest of the list (everything
   *but* the first thing)?
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (rest abc)
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (rest (rest abc))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (rest (rest (rest abc)))
-#+END_SRC
+#+end_src
 * Learn About Functions
   There is no better way to start learning Functional Programming precepts than
   to learn about the core of FP -- functions!
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (defun my-function (number)
      (list number (* number number)))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (list (my-function 1) (my-function 2) (my-function 3))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (defun function-name (arguments-to-function)
      "Optional documentation string."
      (if arguments-to-function
          (list 'body 'forms (list 'to 'evaluate))))
-#+END_SRC
+#+end_src
 
   Can you predict the value \ldquo{}returned\rdquo by calling the above function with =t= as
   its (only) argument? 
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (function-name t)
-#+END_SRC
+#+end_src
 
   How about with =nil=?
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (function-name nil)
-#+END_SRC
+#+end_src
 
   Nada. Which means =nil= was the value.
 
   The built-in function called =rot13= is a fun one. See if you can predict the
   result of evaluating this ele:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (rot13 "zvpxrl@znfgrevatrznpf.bet")
-#+END_SRC
+#+end_src
 
   How about this?!
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (rot13 (rot13 "zvpxrl@znfgrevatrznpf.bet"))
-#+END_SRC
+#+end_src
 
   As in most other languages, in elisp functions can call themselves recursively:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (defun frobulate (x)
      (if x (append (frobulate (rest x)) (list (first x)))))
-#+END_SRC
+#+end_src
 
   PVP --- and then propose a more descriptive name for this function:
 
-#+BEGIN_SRC elisp
+#+begin_src elisp
   (frobulate '(1 2 3 4 5 6 7))
-#+END_SRC
+#+end_src
 * Read and Heed a Scripture
   Liken [[https://www.lds.org/languages/eng/content/scriptures/ot/isa/28.10#9][Isaiah 28:10]] to yourself, take a break and pause to absorb what you\rsquo{}ve
   learned!
