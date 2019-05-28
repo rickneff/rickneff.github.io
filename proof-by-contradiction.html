@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-05-28 Tue 06:12 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Proof By Contradiction</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Rick Neff" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Proof By Contradiction</h1>
+
+<div id="outline-container-org10f3e21" class="outline-2">
+<h2 id="org10f3e21">How and When to Use the Contradiction Method</h2>
+<div class="outline-text-2" id="text-org10f3e21">
+<p>
+From the book <i>How to Read and Do Proofs</i> by Daniel Solow (<a href="https://www.amazon.com/How-Read-Proofs-Introduction-Mathematical/dp/1118164024">ISBN 0471680583</a>):
+</p>
+
+<p>
+With the contradiction method, you begin by assuming that \(A\) is true, just as
+you do in [a straightforward proof] method.
+</p>
+
+<p>
+However, to reach the desired conclusion that \(B\) is true, you proceed by
+asking yourself the simple question ``Why can&rsquo;t \(B\) be false?&rsquo;&rsquo; After all, if
+\(B\) is supposed to be true, then there must be some reason why \(B\) cannot be
+false. The objective of the contradiction method is to discover that reason.
+</p>
+
+<p>
+In other words, the idea of a proof by contradiction is to assume that \(A\) is
+true and \(B\) is false, and see why this cannot happen. So what does it mean
+&ldquo;to see why this cannot happen?&rdquo; Suppose, for example, that as a result of
+assuming that \(A\) is true and \(B\) is false (hereafter written as \(\lnot B\)),
+you were somehow able to reach the conclusion that \(1 = 0\). Would that not
+convince you that it is impossible for \(A\) to be true and \(B\) to be false
+simultaneously?! Thus, in a proof by contradiction, you assume that \(A\) is
+true and \(\lnot B\) is true, and you must then use this information to reach a
+contradiction to something that you absolutely know is true.
+</p>
+
+<p>
+Another way of viewing the contradiction method is to recall that the
+statement &ldquo;\(A\) implies $B$&rdquo; \((A \rightarrow B)\) is true in all cases except when \(A\) is
+true and \(B\) is false. With a proof by contradiction, you rule out this one
+unfavorable case by assuming that it actually does happen, and then reaching a
+contradiction.
+</p>
+
+<p>
+At this point, [a couple of] questions arise:
+</p>
+
+<ol class="org-ol">
+<li>What contradiction should you be looking for?</li>
+<li>Exactly how do you use the assumption that \(A\) is true and \(B\) is false to
+reach the contradiction?</li>
+</ol>
+
+<p>
+The first question is by far the hardest to answer because there are no
+specific guidelines. Each problem gives rise to its own contradiction. It
+takes creativity, insight, persistence, and sometimes luck to produce a
+contradiction.
+</p>
+
+<p>
+As to the second question, the most common approach to finding a contradiction
+is to work forward from the assumptions that \(A\) and \(\lnot B\) are true.
+</p>
+
+<p>
+Normally, working forward means you assume only that \(A\) is true, while in the
+contradiction method, you assume that both \(A\) and \(\lnot B\) are true. Thus,
+you have two statements from which to reason forward instead of just one. On
+the other hand, you do not [necessarily] know what the contradiction will be
+and therefore cannot work backward.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgaf7f3ea" class="outline-2">
+<h2 id="orgaf7f3ea">Proving the Irrationality of the Square Root of Two</h2>
+<div class="outline-text-2" id="text-orgaf7f3ea">
+<p>
+What definitions/lemma(s) should we use to prove that the square root of 2 is
+irrational?
+</p>
+
+<p>
+Definition: &ldquo;x is irrational&rdquo; means x is NOT rational.
+</p>
+
+<p>
+Definition: &ldquo;x is rational&rdquo; means \(\exists m,n(m,n \in Int \land n \neq 0 \land x = m/n)\).
+</p>
+
+<p>
+Definition: &ldquo;x is even&rdquo; means \(\exists k(k \in Int \land x = 2k)\).
+</p>
+
+<p>
+Lemma: \(\forall x(x \in Int \land (x^2\) is even iff \(x\) is even\())\).
+</p>
+
+<p>
+(Alread proved.)
+</p>
+
+<p>
+Now assume, to the contrary of what we want to prove, that \(\sqrt{2}\) is
+rational. Then by definition it can be written in the form:
+</p>
+
+<p>
+\[\begin{equation}
+	    \sqrt{2} = \frac{m}{n}
+	  \end{equation}\]
+</p>
+
+<p>
+where \(m\) and \(n\) are integers. Further assume&#x2014;and this is the <b>key</b>
+assumption&#x2014; that \(m\) and \(n\) have no common factors.
+</p>
+
+<p>
+Now square both sides of (1) to get
+</p>
+
+<p>
+\[\begin{equation}
+	     2 = \frac{m^2}{n^2}\ \ \mbox{or}\ \ m^2 = 2n^2
+	  \end{equation}\]
+</p>
+
+<p>
+Thus \(m^2\) is even. It follows that \(m\) is also even (by the above Lemma).
+</p>
+
+<p>
+Since \(m\) is even it can be written as \(m = 2k\). Thus (2) becomes
+\[4k^2 = 2n^2\ \ \mbox{or}\ \ n^2 = 2k^2.\]
+</p>
+
+<p>
+Thus \(n^2\) is even, and therefore \(n\) must be even too.
+</p>
+
+<p>
+However, this would mean that <b>both</b> \(m\) and \(n\) are even, and so they have
+the common factor 2, which is contrary to our <b>key</b> assumption.
+</p>
+
+<p>
+This contradiction proves that \(\sqrt{2}\) is <b>not</b> rational, i.e., that it is
+irrational.
+</p>
+
+<p>
+Q.E.D.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9bc518c" class="outline-2">
+<h2 id="org9bc518c">Proving the Divergence of the Harmonic Series</h2>
+<div class="outline-text-2" id="text-org9bc518c">
+<p>
+Assume, contrary to what we wish to show, that the harmonic series converges.
+Say it converges to the real number \(s\).
+</p>
+
+<p>
+Then the sum of the reciprocals of the even numbers, \[\sum_{n=1}^{\infty} \frac{1}{2n}
+  = \frac{1}{2} \sum_{n=1}^{\infty} \frac{1}{n} = \frac{s}{2}.\]
+</p>
+
+<p>
+Thus, the sum of the reciprocals of the odd numbers, \[\sum_{n=1}^{\infty}
+  \frac{1}{2n - 1}\ =\ \sum_{n=1}^{\infty} \frac{1}{n} \ -\ \sum_{n=1}^{\infty} \frac{1}{2n} =
+  s - \frac{s}{2} = \frac{s}{2}\ \mbox{too}.\]
+</p>
+
+<p>
+But \(1 > \frac{1}{2}, \frac{1}{3} > \frac{1}{4}\), and in general
+\(\frac{1}{2n - 1} > \frac{1}{2n}\) for all \(n \ge 1\). So the notion that the sum
+of the reciprocals of the even numbers is the same as the sum of the
+reciprocals of the odd numbers is absurd.
+</p>
+
+<p>
+Therefore, the harmonic series cannot converge but rather must diverge.
+</p>
+
+<p>
+Q.E.D.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Rick Neff</p>
+<p class="date">Created: 2019-05-28 Tue 06:12</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
