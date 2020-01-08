@@ -1,0 +1,167 @@
+-*- mode: org -*-
+#+title: Org Mode Primer
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window%20"generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report%201)][Insert/Update Clock Summary Report]]
+:END:
+* Preliminaries
+** Basics
+  The third column of [[https://ontologicalblog.files.wordpress.com/2016/12/spacemacs_cheat_sheet_1-22.pdf][this Spacemacs cheat sheet]] has some Org Mode helps.
+  Check it out!
+
+** Pretty Entities
+  There is a \ldquo{}startup\rdquo attribute missing from this file that appears in other
+  files you already have: entitiespretty
+
+  If you include it, when you visit this file you will start up in the *entities
+  pretty* display mode. Otherwise, you will see the \ldquo{}ORG entity\rdquo as a backslash
+  (\) followed by the name of a symbol.
+
+  If you type Control-C (C-c) followed by Control-x (C-x) followed by the
+  backslash (\) character, you will run the
+
+  =org-toggle-pretty-entities=
+
+  command. Of course,
+
+  =SPC SPC org-toggle-pretty-entities=
+
+  will also invoke it, but at the cost of more typing.
+
+*** Warmup
+  Try it: C-c C-x \
+
+  then remove each of the spaces that just follow the four backslashes below to
+  see how they change to a symbol.
+
+  \ sum
+
+  \ prod
+
+  \ forall
+
+  \ exists
+
+  (Type the u character four times to undo those four deletions.)
+
+** Subscripts and Superscripts
+
+  To create a subscript, type an underscore (_) character just after a letter or
+  word, then the SINGLE character you want as the subscript.
+
+  For example, a _ 1
+
+  typed without the spaces before and after the underscore produces
+
+  a_1
+
+  If you want more than a single character to be the subscript, type an open ({)
+  and close (}) curly brace before and after the subscript text.
+
+  For example, type
+
+  node _ { prev }
+
+  without the spaces to see
+
+  node_{prev}
+
+* More symbols and math writing
+  If you remember learning this in a calculus class, great! If not, you
+  are not expected to understand it --- just play with the symbols!
+
+  The definition of the limit of a real-valued function *f(x)* of a real
+  variable *x* at a point *a* in its domain goes like this:
+
+  lim_{x \rightarrow a} f(x) = L
+
+  means
+
+  \forall \epsilon > 0 \exists \delta > 0 \forall x (0 < |x - a| < \delta \rightarrow |f(x) - L| < \epsilon).
+
+* TODO Create your own table
+  Type C-h i (for help info) and scroll down to and hit enter (or click) on the
+  Org Mode menu item, and likewise for the Tables menu item under that. Learn
+  this powerful magic and you will be amazed at what you can do!
+
+  | Type a backslash (\) |        |
+  | followed by          | to see |
+  |----------------------+--------|
+  | sum                  | \sum      |
+  | prod                 | \prod      |
+  | forall               | \forall      |
+  | exist                | \exist      |
+  | ...                  |        |
+  | (you fill in         |        |
+  | a dozen or so        |        |
+  | more rows)           |        |
+
+  To help you accomplish this task:
+
+  =SPC SPC org-entities-help=
+
+  is your friend.
+
+* For your Consideration, Profit and Learning
+  (Shared with permission.)
+
+  Ronald Josue Muñoz Ralda <ronald.munoz@churchofjesuschrist.org>
+
+  Subject: Spacemacs/VIM - My testimony for your students
+
+  I remember sitting in your class and thinking “spacemacs, you are the most
+  stupid thing ever created and I hate you.” I didn’t like editing with VIM
+  key bindings. I forced myself to learn and to get used to it for discrete
+  math but I still hated it a little.
+
+  Now I have an internship and on a really good suggestion I decided to keep a
+  journal. Not one of those journals in which you write about how you feel but
+  a programmer’s journal. I keep a record of everything I do. I thought for a
+  bit what was the best way to do it and honestly I couldn’t think of a better
+  way to do it than in ORG MODE!!! I was laughing because at the beginning when
+  I started using VI I hated it and now the more I use it the more helpful it
+  is and the more comfortable I feel with it so tell your students to not be
+  as stupid as this Guatemalan friend of yours but to learn to love the power
+  of VI and to learn how to use it, because if they hate it it is probably
+  because they don’t know how to use it.
+
+  I have here a tip that will make them feel they are using one of those fancy
+  IDEs they use now: Enable auto completion. This will help with some basic
+  errors and even improve your spelling. This is commented out in your
+  configuration but it is really nice once you enable it. (SPC f e d)
+
+  [[https://rickneff.github.io/images/ron-munoz-journal.png][Here is a picture of my internship journal]]:
+
+  You can see there the work of basically 2 days. There is a lot there because
+  real life is not like college but honestly org mode is amazing. Saves you a
+  lot of time if you have the right configuration. Tell them to save a copy of
+  the .spacemacs.d files we use in DM. It is easier than trying to download
+  and install packages and layers. One very useful package is the one that
+  lets you import pictures just dragging them into spacemacs.
+
+  Thanks for not changing DM and letting us use our dumbifiers (IDEs).
+  Honestly a lot of people hate the class because of that, but that is nothing
+  but a proof of how ignorant we can be in college. Don’t worry we realize
+  eventually how wrong we were!
+** Not from Ron
+  Some possibly helpful Spacemacs video tutorials:
+
+  https://www.reddit.com/r/emacs/comments/bia36n/spacemacs_intro_tutorial/
+
+  These next tutorials are each about half an hour to an hour long, but
+  listenable at 1.5 speed:
+
+  https://www.youtube.com/playlist?list=PLrJ2YN5y27KLhd3yNs2dR8_inqtEiEweE
