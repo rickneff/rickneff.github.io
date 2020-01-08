@@ -106,7 +106,7 @@ cursor somewhere in it, press the Enter key.
 ** Thursday
    - PPT :: --- See above.
    - ASQ (Answer Selected Questions) :: --- I will answer questions that have
-       surfaced through various means, including the quiz you will have just taken.
+       surfaced through various means.
    - HMF (Have Mathy Fun) :: --- If there is time, we will have some
         mathematically oriented fun --- indulge in some kind of recreational
         math exploration, if you will.
