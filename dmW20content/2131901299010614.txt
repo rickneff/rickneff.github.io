@@ -1,0 +1,374 @@
+-*- mode: org -*-
+#+title: CS 238 Syllabus and Portfolio@@html:<br>@@ Winter 2020
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]] <--- Click your mouse on this link, or with your
+cursor somewhere in it, press the Enter key.
+:END:
+
+* What\rsquo{}s It All About?
+  This course is about *mathematics for computer science.*
+
+  It delves deeper into the mathematical topics needed to provide a solid
+  theoretical foundation for your career and continued learning in computer
+  science.
+
+  The following topics will be covered:
+
+  + Sets and Logic
+  + Functions and Relations
+  + Combinatorics and Probability
+  + Number Theory and Practice
+  + Trees and Graphs
+  + Languages and Grammars
+
+* Outcomes
+  + Master more advanced terminology and operations of sets and logic, functions
+    and relations, combinatorics and probability, number theory and practice,
+    trees and graphs, and languages and grammars.
+  + Demonstrate logical reasoning as you solve interesting problems.
+  + Learn more advanced programming by way of elisp, reading and writing elisp
+    code. (See [[file:elisp-mini-primer.txt][elisp-mini-primer.txt]] for a refresher.)
+  + Discern between effective and ineffective approaches to problem solving.
+  + Solve problems using limited or constrained resources.
+
+* Prerequisites
+  + You must have successfully completed CS 237 Discrete Mathematics I.
+  + You must also have a basic grasp of elisp (*not* erlang).
+
+* Requirements
+** Required Text
+  + [[https://rickneff.github.io/metaphors-be-with-you.html][Metaphors Be With You]]
+
+  This is an online textbook. No print version is available unless you make it.
+  Other supplementary course materials will be made available to you when the
+  time comes.
+** Required Software
+  To install these tools, see the instructions [[https://rickneff.github.io][here]] (and go to the /Tools/
+  section).
+  + git
+  + Emacs/Spacemacs
+
+** Required Accounts
+   You are required to have an account using your real name and school email
+   address with (at least) these three platforms:
+   + https://github.com (free)
+   + https://kritik.io (requires paying a $15 fee)
+   + https://quizlet.com (free)
+
+** Required Behaviors
+  You are required to:
+  + attend class each class period (but then again, why wouldn\rsquo{}t you?);
+  + read assigned portions of the course materials /before/ class each Tuesday;
+  + take “prepare” before-class or in-class quizzes;
+  + do “teach one another” in-and-out-of-class exercises;
+  + do weekly “ponder and prove” assignments to deepen your understanding of
+    selected topics; and
+  + bring a laptop or other Internet-connectable (and tools-ready) device to
+    each class meeting.
+  + maintain a portfolio of your completed work (see below).
+
+* Course Periodicity
+  This course has a weekly period, i.e., you can count on knowing ahead of time
+  (most of the time) what you will be doing each day of each week. Each class
+  meeting consists of the types of activity identified by TLA and described
+  below. The day each activity happens may vary, as for example when there is a
+  short week.
+
+** Monday
+  - PPT (Prayer Plus Tip) :: --- A daily start-us-off
+       exercise most of you will have a turn doing.
+  - PNI (Present New Information) :: --- A time where I will add depth
+       information to the preparation material you finished reading *before
+       class*.
+  - DPC (Divide Pair Conquer) :: --- A time where you will pair up with a
+       partner and conquer a small task during class.
+
+** Tuesday
+   - PPT :: --- See above.
+   - RAT (Readiness Assurance Test) :: --- A short in-class quiz on the
+        reading and topics for the week.
+   - CDL (Class Directed Learning) :: --- You will participate in a class-wide
+        activity that reinforces what you\rsquo{}ve read and what I\rsquo{}ve shown you. Based
+        on Monday\rsquo{}s Presentation and questions on the quiz.
+
+** Wednesday
+   - PPT :: --- See above.
+   - EOT (Expound on Topics) :: --- A time where I will add more information to
+        the topics of the week, or invite one of you to do so!
+   - TPS (Team Problem Solving) :: --- A time where you will work in teams on
+        the problem(s) for the week.
+
+** Thursday
+   - PPT :: --- See above.
+   - ASQ (Answer Selected Questions) :: --- I will answer questions that have
+       surfaced through various means, including the quiz you will have just taken.
+   - HMF (Have Mathy Fun) :: --- If there is time, we will have some
+        mathematically oriented fun --- indulge in some kind of recreational
+        math exploration, if you will.
+
+* Questions
+  + Some of the questions answered on Thursdays are verbatim or generalized from
+    those you create via the [[https://rickneff.github.io/kritik-introduction.html][Kritik platform]].
+  + Creating and evaluating questions help you develop higher order thinking
+    skills.
+  + You will have plenty of questions. Engage with them! Choose knowledge over
+    ignorance.
+* Work
+** Exercises
+   Exercises are smaller experiences that are designed to float uncertainties and
+   questions you have to the surface of your mind. They are designed to be smaller
+   so you can find out what you don\rsquo{}t know and then take the steps necessary to
+   know.
+
+** Problems
+   Problems are weightier experiences that invite you to explore topics in discrete
+   mathematics, as well as increase your logical thinking and problem solving
+   prowess. Many of these involve writing mathematically (see [[file:org-mode-primer.txt][org-mode-primer.txt]]).
+
+   [[https://rickneff.github.io/exercises-versus-problems.html][Here is a description of the difference]] between Exercises and Problems.
+
+* Assessment
+  About every four weeks you will meet with me in my office. The purpose of this
+  meeting is for you to present your portfolio of work to me, make a
+  grade-to-date claim, and provide evidence justifying that claim.
+
+  Your portfolio *MUST* be a modified version of this file, and those included by
+  it. All entries must follow the example format you will find at the end of
+  this file. Also, your evidences must be complete and internally consistent.
+  You are required to produce your portfolio using Spacemacs, and you *MUST* be
+  able to successfully export it as an HTML file (see the link at the top of
+  this file).
+
+* Grades
+  In each of our three personal meetings, you will present your portfolio and a
+  letter-based grade-to-date claim. Afterwards I will give you my thoughts on
+  the strength of your claim. The last claim that you make (*not an average* of
+  the three), taking into account any feedback from me, will be your final grade
+  for the course. All of your claims must must be evidence-based. That means you
+  *MUST* bring the evidence with you, in your portfolio, that supports your
+  claim.
+
+** Letter-Based
+   When making your claim, you are required to use the [[http://www.byui.edu/student-records/grades/grading-system][BYU-Idaho standard]]
+   letter-based definition of grades, reproduced below. *Note with one exception
+   that there are no plusses or minuses!*
+
+   + \ldquo{}A\rdquo represents outstanding understanding, application, and integration of
+     subject material and extensive evidence of original thinking, skillful use
+     of concepts, and ability to analyze and solve complex problems.
+     Demonstrates diligent application of Learning Model principles, including
+     initiative in serving other students.
+   + \ldquo{}B\rdquo represents considerable/significant understanding, application, and
+     incorporation of the material that would prepare a student to be successful
+     in next level courses, graduate school, or employment. The student
+     participates in the Learning Model as applied in the course.
+   + \ldquo{}C\rdquo represents sufficient understanding of subject matter. The student
+     demonstrates minimal initiative to be prepared for class. Sequenced courses
+     could be attempted, but mastering new materials might prove challenging.
+     The student participates only marginally in the Learning Model.
+   + \ldquo{}D\rdquo represents poor performance and initiative to learn and understand and
+     apply course materials. Retaking a course or remediation may be necessary
+     to prepare for additional instruction in this subject matter.
+   + \ldquo{}D-\rdquo represents failure in the course. [[https://rickneff.github.io/why-not-f.html][Why not F?]]
+
+   Note that the above description of an \ldquo{}A\rdquo implies that you have gone *above
+   and beyond*. To claim this grade you *must* have done and recorded evidence
+   in your portfolio of doing *some* of the behaviors listed below, *each week*
+   throughout each 4-week period.
+   1. teaching and/or helping others in the class but not in your group
+   2. teaching a Non-CS, Non-CE, Non-EE, Non-SE major about the material in
+      this class to help them with a class they are taking
+   3. applying what you\rsquo{}ve learned in this class in another class you are
+      currently taking
+   4. solving problems marked as optional
+   5. solving puzzles
+   6. doing other work not assigned, exploring other topics in mathematics,
+      writing code implementing what you are learning that has not been
+      assigned, etc.
+
+   How many is *some*? It is doing at least two of the first three (1, 2, 3),
+   *and* at least two of the last three (4, 5, 6).
+
+   Regarding the first two about teaching others, quoting Truman Madsen (quoting
+   the Prophet Joseph Smith): Now one of the strongest and wisest statements I
+   have ever heard on egoism. The question was put to him, \ldquo{}Joseph, is the
+   principle of self-aggrandizement wrong? Should we seek our own good?\rdquo Listen
+   to his answer. \ldquo{}It is a correct principle and may be indulged upon only one
+   rule or plan --- and that is to elevate, benefit, and bless others first. If
+   you will elevate others, the very work itself will exalt you. Upon no other
+   plan can a man justly and permanently aggrandize himself.\rdquo
+* Moral/Legal
+** Honor Code
+   + [[http://www.byui.edu/catalog/#/policy/HJPtItSal?bc=true&bcCurrent=Academic%2520Honesty&bcGroup=University%2520Standards&bcItemType=policies][Academic Honesty]]
+   + [[http://www.byui.edu/catalog/#/policy/SkaRPKHTl?bc=true&bcCurrent=Dress%2520and%2520Grooming%2520Standards&bcGroup=University%2520Standards&bcItemType=policies][Dress and Grooming]]
+
+     Quoting from the latter:
+#+BEGIN_QUOTE
+  Men are expected to be clean-shaven; beards are not acceptable.
+#+END_QUOTE
+  Regarding the celebrated [[https://byuiscroll.org/beard-card-used-abused/][beard card]]:
+  1. Students who are requesting a first-time shaving exemption will be
+     required to attend a seminar led by Student Honor Office administrators.
+  2. All students who are seeking a shaving exemption, whether it’s a first
+     time or a renewal exemption for the new semester, will have a one on one
+     meeting with a Student Honor administrator to discuss the policy,
+     expectations, and to sign a new commitment to abide by the standard as
+     close as medically possible (i.e. no lumberjack beards).
+  3. Students who are granted a shaving exemption will receive a printed card.
+  4. Faculty members will be notified by the Student Honor Office through
+     email when a student registered in their class receives a shaving
+     exemption.
+  5. All shaving exemptions are granted for no more than one semester and
+     expire at the end of each semester.
+  6. There will be a short grace period during the first week or two of the
+     semester in order to give time for the Student Honor Office to process
+     new requests.
+  7. After that grace period, if you are not meeting the standard, and we have
+     a conversation about it, and if it continues to be a problem, I will
+     refer you to the Student Honor Office, which you must visit with before
+     returning to class --- either clean-shaven or with a card.
+** Links to Official Policies and Channels
+  + [[http://www.byui.edu/catalog/#/policy/SJ8pMAmZr?bc=true&bcCurrent=Student%2520Grievance&bcGroup=Academic%2520Grievance%2520Policy&bcItemType=policies][Academic Student Grievance]]
+  + [[http://www.byui.edu/academic-support-centers][Student Support]]
+  + [[http://www.byui.edu/titleix/faculty-resources][Sexual Harassment]]
+  + [[http://www.byui.edu/disability-services/syllabus-statement][Students with Disabilities]]
+
+* Readings
+  These readings are to be completed *prior to* each listed week\rsquo{}s Tuesday class.
+  The assignments for each week are to be completed *prior to* midnight each
+  Saturday. (Assignment details will be available in each week\rsquo{}s course files.)
+
+  | Week | Reading | Description            |
+  |------+---------+------------------------|
+  |   01 | <ABC    | Introduction           |
+  |   02 | ABC     | Sets and Logic         |
+  |   03 | DEF     | Functions              |
+  |   04 | GHI     | Relations              |
+  |   05 | JKL     | Combinatorics          |
+  |   06 | JKL     | Probability            |
+  |   07 | MNO     | Number Theory          |
+  |   08 | PQR     | Number Practice        |
+  |   09 | STU     | Trees                  |
+  |   10 | VWX     | Graphs                 |
+  |   11 | VWX     | Graphs, continued      |
+  |   12 | YZ@     | Languages and Grammars |
+  |   13 | YZ@     | Models of Computation  |
+
+@@latex:\pagebreak@@
+* Portfolio
+  Your portfolio consists of your Course Tracker together with Grade Claims and
+  Evidences.
+** Course Tracker Acronyms and Their Meanings
+	+ CRU - I Completed the Reading and achieved a level of Understanding
+          *before* the start of Tuesday\rsquo{}s class and recorded questions about the
+          items I didn\rsquo{}t understand.
+	+ PFP - I was present for and attentive to the presentation for this week.
+	+ CDL - I fully participated in the Class Directed Learning for this day.
+	+ PRA - I was Present for and fully engaged with the Readiness Assessment for
+          this week.
+	+ EWQ - Engaging With Questions --- your [[https://rickneff.github.io/kritik-introduction.html][Kritik Score]] for this week.
+  + SAS - Self-Assessment Score for the assignment for this week.
+  + ABC - Above/Beyond Climbing journal, a check means you performed at an A-level
+          and [[https://rickneff.github.io/abc-journal-guidelines.html][recorded your evidences]] of A-grade behaviors, otherwise no check.
+** Course Tracker Table
+   You are required to track your progress in the course using the table below.
+   Currently, you see *full credit* for week 1\rsquo{}s work. (\checkmark means yes. Blank means
+   no.) Update the table for week 1 and all subsequent weeks each class day and
+   week during the semester.
+
+@@latex:\pagebreak@@
+| / |   <> | <>  | <>  | <>  | <>  | <>   | <>  | <>  |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # | Week | CRU | PFP | CDL | PRA | EWQ  | SAS | ABC |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # |    1 | \check   | \check   | \check   | \check   | 2000 | 100 | \check   |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # |    2 |     |     |     |     |      |     |     |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # |    3 |     |     |     |     |      |     |     |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # |    4 |     |     |     |     |      |     |     |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # |    5 |     |     |     |     |      |     |     |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # |    6 |     |     |     |     |      |     |     |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # |    7 |     |     |     |     |      |     |     |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # |    8 |     |     |     |     |      |     |     |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # |    9 |     |     |     |     |      |     |     |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # |   10 |     |     |     |     |      |     |     |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # |   11 |     |     |     |     |      |     |     |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # |   12 |     |     |     |     |      |     |     |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+| # |   13 |     |     |     |     |      |     |     |
+|---+------+-----+-----+-----+-----+------+-----+-----|
+
+  During weeks five, nine, and fourteen, you will make your claims by bringing
+  to my office with you a printed copy of a [[https://rickneff.github.io/grade-claim-meeting-readiness-certification.html][readiness certification document]], on
+  which you will have already signed your name to an assertion similar to the
+  one below, and filled in your grade claim:
+
+| / | <>                                                             | <>    | <>         |
+|---+----------------------------------------------------------------+-------+------------|
+| # | The course tracker table in my syllabus-portfolio.txt file     | Grade | Instructor |
+| # | is an honest and true record of my work in this course so far. | Claim | Grade      |
+|---+----------------------------------------------------------------+-------+------------|
+| # | Signed:                                                        |       |            |
+| # |                                                                |       |            |
+|---+----------------------------------------------------------------+-------+------------|
+@@html:<br /><br /><br />@@
+@@latex:\pagebreak@@
+* Evidences
+  Fill in your evidences here each week to build your portfolio. The number of
+  pieces of evidence are determined by you. However, the more you have the
+  better off you will be.
+
+:HINT:
+  There is an extra \lsquo{}x\rsquo on the front of the INCLUDE directives below. Delete the
+  \lsquo{}x\rsquo when the assignment file is in place, and put it back if you do not want
+  that week exported.
+
+   The =org-edit~special= command (=C-c '=) allows visiting the included document.
+:END:
+
+** Week 1
+#+xINCLUDE: ./assignment-01.txt :only-contents t :lines "7-"
+** Week 2
+#+xINCLUDE: ./assignment-02.txt :only-contents t :lines "7-"
+** Week 3
+#+xINCLUDE: ./assignment-03.txt :only-contents t :lines "7-"
+** Week 4
+#+xINCLUDE: ./assignment-04.txt :only-contents t :lines "7-"
+** Week 5
+#+xINCLUDE: ./assignment-05.txt :only-contents t :lines "7-"
+** Week 6
+#+xINCLUDE: ./assignment-06.txt :only-contents t :lines "7-"
+** Week 7
+#+xINCLUDE: ./assignment-07.txt :only-contents t :lines "7-"
+** Week 8
+#+xINCLUDE: ./assignment-08.txt :only-contents t :lines "7-"
+** Week 9
+#+xINCLUDE: ./assignment-09.txt :only-contents t :lines "7-"
+** Week 10
+#+xINCLUDE: ./assignment-10.txt :only-contents t :lines "7-"
+** Week 11
+#+xINCLUDE: ./assignment-11.txt :only-contents t :lines "7-"
+** Week 12
+#+xINCLUDE: ./assignment-12.txt :only-contents t :lines "7-"
+** Week 13
+#+xINCLUDE: ./assignment-13.txt :only-contents t :lines "7-"
+
+@@latex:\pagebreak@@
+* Other
+  This document may be modified by the instructor at any time without
+  notification.
