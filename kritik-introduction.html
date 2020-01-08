@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-01-08 Wed 09:36 -->
+<!-- 2020-01-08 Wed 10:12 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Kritik Introduction</title>
@@ -180,6 +180,63 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/bigblow.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/hideshow.css"/>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.localscroll-min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.zclip.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/bigblow.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/hideshow.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript">document.helps = [];</script>
+<script type="text/javascript">
+function draw(levels) {
+var c = document.getElementById("btree");
+var w = c.width;
+var h = c.height;
+var ctx = c.getContext("2d");
+var repeat_delay = 3000;
+var teardown_delay = 1000;
+var level_delay = 500;
+var margins = 10;
+// If h_frac is changed, slope will need to be adjusted to
+// prevent overlap.  I might fix this in the future.
+var h_frac = 2;
+var slope = ((h - margins * 2) / 2) / (w - margins * 2);
+ctx.clearRect(0, 0, w, h);
+// This goes in here so that above variables will be in scope
+function lines(dist, loc, depth, delay=0) {
+function render_lines(dist, loc) {
+ctx.beginPath();
+ctx.moveTo(loc[0], loc[1]);
+ctx.lineTo(loc[0] + dist, loc[1] + slope * -dist);
+ctx.moveTo(loc[0], loc[1]);
+ctx.lineTo(loc[0] + dist, loc[1] + slope * dist);
+ctx.stroke();
+}
+setTimeout(render_lines, delay, dist, loc);
+setTimeout(function (x) {ctx.clearRect(x, 0, w, h)},
+level_delay * levels * 2 + teardown_delay - delay,
+loc[0]);
+depth--;
+if (depth) {
+lines((dist / h_frac) * (h_frac - 1),
+[loc[0] + dist, loc[1] + slope * -dist],
+depth,
+delay + level_delay);
+lines((dist / h_frac) * (h_frac - 1),
+[loc[0] + dist, loc[1] + slope *  dist],
+depth,
+delay + level_delay);
+}
+}
+lines((w - margins * 2) / h_frac, [margins, h/2], levels);
+setTimeout(draw, repeat_delay + teardown_delay + levels * level_delay * 2, levels);
+}
+</script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -231,9 +288,13 @@ for the JavaScript code in this tag.
 <div id="content">
 <h1 class="title">Kritik Introduction</h1>
 
-<div id="outline-container-org947b95e" class="outline-2">
-<h2 id="org947b95e">HOT Skill-et</h2>
-<div class="outline-text-2" id="text-org947b95e">
+<div id="outline-container-orga370980" class="outline-2">
+<h2 id="orga370980">HOT Skill-et</h2>
+<div class="outline-text-2" id="text-orga370980">
+<p>
+(<a href="https://rickneff.github.io/kritik-introduction.pdf">Click here</a> if you prefer a slide show with similar information.)
+</p>
+
 <p>
 In this course we will be using <a href="https://kritik.io">Kritik.io</a>, a peer-to-peer learning platform
 utilizing an engaging and gamified web technology that helps you develop your
