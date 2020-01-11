@@ -1,0 +1,61 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 01
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+   The goal of this CDL is to help clarify the difference between exercises and
+   problems in the contexts of numbers and words.
+
+* Numbers
+** An Exercise
+   Find the area and perimeter of a rectangle with height 3 and base 11.
+
+** Extend An Exercise into a Problem
+   Create two rectangles so that the first has a bigger perimeter, and the
+   second a bigger area.
+
+** Take It To The Next Level
+   Create two rectangles so that the first has exactly twice the perimeter of
+   the second, and the second has exactly twice the area of the first.
+* Words
+** Another Six Times Three
+    TIL \rarr Tiberius Ishmael Luxor
+    ABU \rarr Atticus Bernhold Ushnol
+    ILA \rarr Ila
+    ENT \rarr Elementary Number Theory
+    RSA \rarr (Ron) Rivest (Adi) Shamir (Leonard) Adleman
+    CRT \rarr Chinese Remainder Theorem
+** Four Times Four
+*** Not a Word
+     ABCDLMNOOSARSICD is just 16 letters concatenated together.
+**** But divide and stack it
+     ABCD
+     LMNO
+     OSAR
+     SICD
+***** and what does it mean?
+****** TODO Think about it and write your thoughts:
+*** Another Non-Word
+    but closer: TETRAGRAMAMALGAM
+
+    TETR
+    AGRA
+    MAMA
+    LGAM
+
+    If we define Word Search Density (WSD) appropriately, the above would have a
+    WSD of 2/20 = 0.1 -- not great.
+
+**** TODO Write a definition of WSD
+***** Use Only Common Words
+ #+begin_src elisp
+   (symbol-value (require 'common-words))
+ #+end_src
+
+****** TODO With this constraint write another WSD definition
+*** TODO Look For Better
+    Find a 16-letter word that when stacked has a bigger than 0.1 WSD.
+
+    Is this an exercise or a problem?
