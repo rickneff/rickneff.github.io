@@ -1,0 +1,3 @@
+-*- mode: org -*-
+[[elisp:(progn (delete-file "presentation-01.txt") (kill-buffer))][Remove this useless file]]
+Content not yet available.
