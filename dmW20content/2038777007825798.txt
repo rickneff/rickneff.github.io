@@ -12,6 +12,8 @@
 ** An Exercise
    Find the area and perimeter of a rectangle with height 3 and base 11.
 
+   area = (* 3 11) 33, perimeter = (* 2 (+ 3 11)) 28
+
 ** Extend An Exercise into a Problem
    Create two rectangles so that the first has a bigger perimeter, and the
    second a bigger area.
