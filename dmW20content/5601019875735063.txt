@@ -1,0 +1,204 @@
+-*- mode: org -*-
+#+title: Presentation 02
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* Why study the theory of computation?
+** Reason #1
+   It is useful.
+*** 1
+    When using computers to solve problems, it’s often important to understand
+    whether a given problem is computable and/or tractable.
+*** 2
+    If it’s not tractable, is there a suitable variant or approximation that is
+    tractable?
+*** 3
+    How do we compare the efficiency and effectiveness of proposed methods
+    for solving the problem?
+*** 4
+    Certain specific techniques have practical applications, including
+    reductions, regular expressions, and automata theory.
+**** Let us see
+     by filling in this table:
+
+|             | tractable         | intractable      | unsolvable      |
+|             | problems          | problems         | problems        |
+|-------------+-------------------+------------------+-----------------|
+| Description | problems solvable | problems that    | computers       |
+|             | efficiently       | are not solvable | cannot solve    |
+|             |                   | efficiently      | these in any    |
+|             |                   |                  | amount of time  |
+|             |                   |                  |                 |
+| Computable  | yes               | yes              | no              |
+| in theory   |                   |                  |                 |
+|             |                   |                  |                 |
+| Computable  |                   |                  |                 |
+| in practice | yes               | yes/no/(?)       | no              |
+|             |                   |                  |                 |
+| Example     | RSA encryption    | RSA decryption   | Halting problem |
+|             |                   | by brute force   |                 |
+|             |                   |                  |                 |
+***** Sample Answer
+
+   |             | tractable   | intractable           | unsolvable       |
+   |             | problems    | problems              | problems         |
+   |-------------+-------------+-----------------------+------------------|
+   | Description | can be      | method for solving    | cannot by solved |
+   |             | solved      | exists but is hope-   | by any computer  |
+   |             | efficiently | lessly time-consuming | program          |
+   |             |             |                       |                  |
+   | Computable  |             |                       |                  |
+   | in theory   | Yes         | Yes                   | No               |
+   |             |             |                       |                  |
+   | Computable  |             |                       |                  |
+   | in practice | Yes         | Yes/No(?)             | No               |
+   |             |             |                       |                  |
+   | Example     | shortest    | decryption            | finding all bugs |
+   |             | route on    |                       | in computer      |
+   |             | a map       |                       | programs         |
+
+** Reason #2
+   The theory of computation is beautiful and important.
+*** Beautiful?
+    Beauty is in the eye of the beholder, as the saying goes.
+*** Important?
+    We would like to more fully understand computer science as an intellectual
+    discipline. This will mean dipping our toes into the philosophy of science,
+    and the philosophy of mathematics.
+* Some string-matching basics
+  illustrated with org-mode source-block evaluation in python and elisp:
+#+name: containsGAGA
+#+begin_src python :results raw :session my-session
+  def containsGAGA(inString):
+    if 'GAGA' in inString:
+      return 'yes'
+    else:
+      return 'no'
+#+end_src
+
+#+begin_src python :results output :session my-session
+  print(containsGAGA('ABGAGHI'))
+#+end_src
+
+#+begin_src python :results output :noweb eval
+  <<containsGAGA>>
+  print(containsGAGA('ABGAGHI'))
+#+end_src
+
+#+begin_src python :results output :noweb eval
+  <<containsGAGA>>
+  print(containsGAGA('ABGAGAI'))
+#+end_src
+
+#+name: contGAGA
+#+begin_src elisp :results silent
+  (defun contains-GAGA? (in-string)
+    (if (string-match "GAGA" in-string)
+        "Yes"
+      "No"))
+#+end_src
+
+#+begin_src elisp
+  (org-sbe contGAGA)
+  (contains-GAGA? "ABGAGHI")
+#+end_src
+
+#+begin_src elisp
+  (contains-GAGA? "ABGAGAI")
+#+end_src
+
+** Practice
+*** Run containsGAGA? on inputs
+**** Prompted for and typed-in by the user
+#+begin_src elisp
+  (org-sbe contGAGA)
+  (contains-GAGA? (read-from-minibuffer "Type input string: "))
+#+end_src
+**** Read in from a file
+ #+begin_src elisp
+   (defun get-string-from-file (filepath)
+     (with-temp-buffer
+       (insert-file-contents filepath)
+       (buffer-substring-no-properties (point-min) (point-max))))
+ #+end_src
+*** TODO Create a new function that searches for a passed-in string
+*** TODO Create more sophisticated programs, for example:
+     return “yes” if the input contains “GAGA” but not “TATA”
+* What IS a computer program?
+** Let us restrict our computer program universe to SISO
+*** SISO means String In String Out
+    So all programs receive a string as input and return a string as output.
+**** However, sometimes we allow
+     multiple string inputs.
+** In SISO programs
+   numeric inputs/outputs must be converted to/from strings.
+*** For example
+#+name: multiplyAll
+#+begin_src python :results silent
+  def multiplyAll(inString):
+      # split on whitespace
+      numbers = inString.split()
+
+      # convert strings to integers
+      for i in range(len(numbers)):
+          numbers[i] = int(numbers[i])
+
+      # compute the product of the numbers array
+      product = 1
+      for num in numbers:
+          product = product * num
+
+      # convert product to string, and return it
+      productString = str(product)
+      return productString
+#+end_src
+
+#+begin_src python :results output :noweb eval
+  <<multiplyAll>>
+  print(multiplyAll("54 42 7 531"))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun multiply-all (in-string)
+    (let* ((numbers (loop for num in (split-string in-string)
+                          collect (string-to-number num)))
+           (product (apply '* numbers)))
+      (number-to-string product)))
+#+end_src
+
+#+begin_src elisp :results code
+  (multiply-all "54 42 7 531")
+#+end_src
+
+** Restrict alphabet
+   to the ASCII standard character set of 128 characters, which includes all of
+   the following:
+
+#+begin_verbatim
+
+   !"#$%&'()*+,./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+
+#+end_verbatim
+
+   plus newline and space characters.
+*** Therefore, a SISO program can receive and return large multiline blocks of text
+
+#+begin_src python :results silent
+  def countLines(inString):
+    # split on newlines
+    lines = inString.split('\n')
+    # return the number of lines as a string
+    return str(len(lines))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun count-lines (in-string)
+    (let ((lines (split-string in-string "\n")))
+      (number-to-string (length lines))))
+#+end_src
+
+#+begin_src elisp
+  (string-to-number "A" 16)
+#+end_src
