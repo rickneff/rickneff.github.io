@@ -1,0 +1,217 @@
+-*- mode: org -*-
+#+title: Presentation 02
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+options: html-postamble:nil
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* Sets and Their Representations
+  But first...
+*** Mapping Numbers to Numbers
+    What is the definition of f(n)?
+
+     |    n | f(n) |
+     |------+------|
+     |    1 |    2 |
+     |    2 |    3 |
+     |    3 |    5 |
+     |    4 |    7 |
+     |   12 |    6 |
+     |   31 |   10 |
+     |   14 |   14 |
+     |   23 |   15 |
+     |   42 |   21 |
+     |   34 |   35 |
+     |  123 |   30 |
+     |  142 |   42 |
+     |  143 |   70 |
+     |  234 |  105 |
+     | 2143 |  210 |
+*** Code
+#+begin_src elisp :results silent
+  (require 'first-ten-million-primes)
+
+  (defun encode-number (n)
+    (if (zerop n)
+        1
+      (* (prime (1- (% n 10)))
+         (encode-number (/ n 10)))))
+#+end_src
+
+#+begin_src elisp
+  (require 'ment) ; for generate-permutations
+
+  (append '(("n" "f(n)") hline)
+    (mapcar (lambda (perm)
+              (let* ((str (mapconcat 'number-to-string perm ""))
+                     (num (string-to-number str)))
+                (list num (encode-number num))))
+            (generate-permutations '(1 2 3 4))))
+#+end_src
+
+*** What we want
+    Every permutation of every combination of '(1 2 3 4):
+
+     |    n | f(n) |
+     |------+------|
+     |    1 |    2 |
+     |    2 |    3 |
+     |    3 |    5 |
+     |    4 |    7 |
+     |   12 |    6 |
+     |   21 |    6 |
+     |   13 |   10 |
+     |   31 |   10 |
+     |   14 |   14 |
+     |   41 |   14 |
+     |   23 |   15 |
+     |   32 |   15 |
+     |   24 |   21 |
+     |   42 |   21 |
+     |   34 |   35 |
+     |   43 |   35 |
+     |  123 |   30 |
+     |  132 |   30 |
+     |  213 |   30 |
+     |  231 |   30 |
+     |  312 |   30 |
+     |  321 |   30 |
+     |  124 |   42 |
+     |  142 |   42 |
+     |  214 |   42 |
+     |  241 |   42 |
+     |  412 |   42 |
+     |  421 |   42 |
+     |  134 |   70 |
+     |  143 |   70 |
+     |  314 |   70 |
+     |  341 |   70 |
+     |  413 |   70 |
+     |  431 |   70 |
+     |  234 |  105 |
+     |  243 |  105 |
+     |  324 |  105 |
+     |  342 |  105 |
+     |  423 |  105 |
+     |  432 |  105 |
+     | 1234 |  210 |
+     | 1243 |  210 |
+     | 1324 |  210 |
+     | 1342 |  210 |
+     | 1423 |  210 |
+     | 1432 |  210 |
+     | 2134 |  210 |
+     | 2143 |  210 |
+     | 2314 |  210 |
+     | 2341 |  210 |
+     | 2413 |  210 |
+     | 2431 |  210 |
+     | 3124 |  210 |
+     | 3142 |  210 |
+     | 3214 |  210 |
+     | 3241 |  210 |
+     | 3412 |  210 |
+     | 3421 |  210 |
+     | 4123 |  210 |
+     | 4132 |  210 |
+     | 4213 |  210 |
+     | 4231 |  210 |
+     | 4312 |  210 |
+     | 4321 |  210 |
+
+*** What we really want
+    We now fix the code to handle sets bigger than 9 elements! (Why 9?)
+#+begin_src elisp :results silent
+  (require 'first-ten-million-primes)
+
+  (defun encode-set (nset)
+    (if (null nset)
+        1
+      (* (prime (1- (car nset)))
+         (encode-set (cdr nset)))))
+#+end_src
+
+#+begin_src elisp
+  (require 'ment) ; for generate-combinations
+
+  (append '(("nset" "f(nset)") hline)
+           (cl-sort
+            (loop with set = '(1 2 3 4)
+                  with subsets = (generate-combinations set)
+                  for nset in subsets
+                  collect (list nset (encode-set nset)))
+            '< :key 'second))
+#+end_src
+
+* What About Infinite Sets?
+  For example, the set of all primes:
+** A Warmup Proof
+   The harmonic series:
+   \(1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} + \cdots = \sum_{n=1}^{\infty}\frac{1}{n}\)
+   diverges, but how do we prove that?
+
+   Using the classic technique of Proof By Contradiction, assume, contrary to
+   what we wish to show, that the harmonic series converges. Say it converges to
+   the real number $s$.
+
+   Then the sum of the reciprocals of the even numbers,
+   \(\sum_{n=1}^{\infty} \frac{1}{2n} = \frac{1}{2} \sum_{n=1}^{\infty} \frac{1}{n} = \frac{s}{2}.\)
+
+   Thus, the sum of the reciprocals of the odd numbers,
+   \(\sum_{n=1}^{\infty} \frac{1}{2n - 1}\ =\ \sum_{n=1}^{\infty} \frac{1}{n}
+   \ -\ \sum_{n=1}^{\infty} \frac{1}{2n} = s - \frac{s}{2} = \frac{s}{2}\ \mbox{too}.\)
+
+   But $1 > \frac{1}{2}, \frac{1}{3} > \frac{1}{4}$, and in general
+   $\frac{1}{2n - 1} > \frac{1}{2n}$ for all $n \ge 1$. So the notion that the sum
+   of reciprocals of the even numbers has the same sum as the sum of reciprocals
+   of the odd numbers is absurd!
+
+   Q.E.D.
+
+** What Euclid and Euler Have in Common
+   Recall Euclid's classic Proof (By Contradiction) that there are infinitely
+   many primes?
+
+   Euler proved it another way using the harmonic series divergence result
+   together with the Fundamental Theorem of Arithmetic implication that every
+   positive integer has a unique factorization as the product of primes!
+
+   Recall that a geometric series $\sum_{k=0}^{\infty} r^k$ converges if $|r| < 1$ and
+   diverges otherwise. If it converges, then $\sum_{k=0}^{\infty} r^k = \frac{1}{1 - r}$.
+
+   Euler reasoned as follows:
+
+   Suppose that $p_1 = 2, p_2 = 3, \ldots, p_n$ are all the primes. Since $0 <
+   \frac{1}{p_i} < 1$ for all $i$, the geometric series
+
+   \(\sum_{k=0}^{\infty} \frac{1}{p_i^k}\) converges, in fact to $\frac{1}{1 - \frac{1}{p_i}}$.
+
+   Hence
+   \(\prod_{i=1}^{n}\left(\sum_{k=0}^{\infty} \frac{1}{p_i^k}\right) =
+   \prod_{i=1}^{n}\left(\frac{1}{1 - \frac{1}{p_i}}\right).\)
+
+   We'll refer to the above as \ldquo{}The Equation\rdquo below. Its left-hand side
+   can be expanded to
+   \(\left(1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{16} + \cdots \right) \times
+   \)
+   \(\left(1 + \frac{1}{3} + \frac{1}{9} + \frac{1}{27} + \cdots \right) \times
+   \)
+   \(\left(1 + \frac{1}{5} + \frac{1}{25} + \cdots \right) \times \cdots \times
+   \)
+   \(\left(1 + \frac{1}{p_n} + \frac{1}{p_n^2} + \frac{1}{p_n^3} + \cdots
+   \right) =
+   \)
+
+** The Surprising Result!
+   \(1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} + \frac{1}{6} +
+   \cdots = \sum_{m=1}^{\infty} \frac{1}{m}\)
+
+   by the Fundamental Theorem of Arithmetic.
+
+   This is the divergent harmonic series! But the right-hand side of \ldquo{}The
+   Equation\rdquo was presumed to be finite, which is a contradiction.
+
+   Therefore, there must be infinitely many primes.
+
+   Q.E.D.
