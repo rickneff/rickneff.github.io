@@ -12,8 +12,6 @@
 ** An Exercise
    Find the area and perimeter of a rectangle with height 3 and base 11.
 
-   area = (* 3 11) 33, perimeter = (* 2 (+ 3 11)) 28
-
 ** Extend An Exercise into a Problem
    Create two rectangles so that the first has a bigger perimeter, and the
    second a bigger area.
@@ -22,6 +20,13 @@
    Create two rectangles so that the first has exactly twice the perimeter of
    the second, and the second has exactly twice the area of the first.
 * Words
+** Another Six Times Three
+    TIL \rarr Tiberius Ishmael Luxor
+    ABU \rarr Atticus Bernhold Ushnol
+    ILA \rarr Ila
+    ENT \rarr Elementary Number Theory
+    RSA \rarr (Ron) Rivest (Adi) Shamir (Leonard) Adleman
+    CRT \rarr Chinese Remainder Theorem
 ** Four Times Four
 *** Not a Word
      ABCDLMNOOSARSICD is just 16 letters concatenated together.
