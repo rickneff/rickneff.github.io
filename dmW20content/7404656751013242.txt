@@ -1,0 +1,115 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 02
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* TODO Join the CS 238 01 W20 class at Quizlet.com
+  https://quizlet.com/join/SVMs2DqXk
+* TODO Learn About Macros
+   First, experiment to see what the /backquote/ (`) and /unquote/ (,) operators do:
+
+#+begin_src elisp :results raw
+  `(list ,(+ 1 2))
+#+end_src
+
+#+results:
+(list 3)
+(list (+ 1 2))
+
+#+begin_src elisp :results output
+  (defmacro do-times (n &rest body)
+    `(dotimes (i ,n) ,@body))
+
+  (do-times 10 (princ "hi\n") (princ "bye\n"))
+#+end_src
+
+#+begin_src elisp :results code
+  (macroexpand (quote
+  (do-times 10 (princ "hi\n") (princ "bye\n"))))
+#+end_src
+
+#+results:
+#+BEGIN_SRC elisp
+(cl--block-wrapper
+ (catch '--cl-block-nil--
+   (let
+       ((--dotimes-limit-- 10)
+        (i 0))
+     (while
+         (< i --dotimes-limit--)
+       (princ "hi\n")
+       (princ "bye\n")
+       (setq i
+             (1+ i))))))
+#+END_SRC
+
+#+begin_src elisp :results code
+  (macroexpand '(loop for item in item-list collect (* item 10)))
+#+end_src
+
+#+begin_src elisp :results raw
+  (defun times-ten (n)
+    (* n 10))
+
+  (symbol-function 'times-ten)
+#+end_src
+
+  A macro you may have seen before:
+#+begin_src elisp :var filename="desert.jpg" :results code
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (base64-encode-region (point-min) (point-max))
+    (buffer-substring (point-min) (point-max)))))))
+#+end_src
+
+* TODO Learn More About Elisp Macros
+  For those who find the =let*= or =let= forms difficult to use:
+#+begin_src elisp :results silent
+  (defmacro with (bindings &rest forms)
+    (let* ((len (length bindings))
+           (sym-list (loop for i from 0 below len by 3 collect (elt bindings i)))
+           (val-list (loop for i from 2 below len by 3 collect (elt bindings i)))
+           (bindings-list (apply 'list (mapcar* 'list sym-list val-list))))
+      `(let* ,bindings-list ,@forms)))
+#+end_src
+
+  Sample use:
+#+begin_src elisp :results raw
+  (with [a = 1
+         b = 2
+         c = (* a b)
+         d = (+ b b c)]
+    (+ a b d))
+#+end_src
+
+  A more practical use:
+#+begin_src elisp :results silent
+  (defun compute-letter-grade (weighted-percentage)
+    "Convert weighted percentage to a letter grade, returning both as strings
+  separated by the = symbol."
+    (with [number = (ceiling weighted-percentage) ; generous!
+           tens-digit = (/ number 10)
+           ones-digit = (% number 10)
+           index = (min (max (- tens-digit 5) 0) 4)
+           letter = (substring "FDCBA" index (+ index 1))
+           sign = (if (<= ones-digit 2) "-" (if (>= ones-digit 7) "+"))
+           letter-grade = (concat letter (if (and (< number 95) (>= number 60)) sign))]
+      (list (format "%2.2f%%" weighted-percentage) '= letter-grade)))
+#+end_src
+
+#+begin_src elisp :results raw
+  (compute-letter-grade 91.37)
+#+end_src
+
+#+results:
+(91.37% = A-)
+
+** TODO Make More Robust
+   Your task as teams is to make the =with= macro more robust by performing three
+   types of error-checking before attempting to compute the =sym-list=, =val-list= and =bindings-list=:
+
+   1. Make sure the =bindings= argument is a vector (use =vectorp=).
+   2. Make sure the length of the bindings vector is a multiple of 3 (use =(zerop (mod len 3))=).
+   3. Make sure the *symbol = value* pattern is adhered to uniformly (use =symbolp=).
