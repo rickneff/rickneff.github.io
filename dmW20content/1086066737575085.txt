@@ -1,0 +1,22 @@
+-*- mode: org -*-
+#+title: Divide Pair Conquer 02
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* Numbers and Words and Cycles and Patterns
+  Remember CJF in section ONE of
+
+  https://rickneff.github.io/metaphors-be-with-you.html#outline-container-org32e5c89 ?
+
+** TODO Refresh or (re)create a solution to this puzzle
+
+* Taking a GPAO
+** TODO Discuss and Answer the Question
+   What does it mean to go above and beyond?
+
+   Answer generally and then specifically in the context of the last assertion of
+   file:assignment-01.txt:
+
+  - [ ] I went above and beyond in my answer to the first question about numbers.

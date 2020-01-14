@@ -1,0 +1,159 @@
+-*- mode: org -*-
+#+title: Assignment 01 Key
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  These are sample/examplary answers, some of which come from former students.
+* What is it about these numbers?
+
+:           +>(37)
+:          /      \
+:         /        \
+:     +>(16)        +>(58)
+:    /                  \
+:   /                    \
+: (4)<+                   +>(89)
+:      \                     /
+:       \                   /
+:       (20)<+       (145)<+
+:             \       /
+:              \     /
+:              (42)<+
+
+  These numbers form a cycle where the next number is generated from the current number by summing the squares of its digits.
+  It loops around back to 4 after reaching 20.
+
+  Going above and beyond, try to generalize this puzzle to other cycle possibilities:
+#+begin_src elisp :results silent
+  (defun list-of-digits (n)
+    (if (zerop n)
+        nil
+      (cons (% n 10) (list-of-digits (/ n 10)))))
+
+  (defun sod (n)
+    (if (zerop n)
+        0
+      (+ (% n 10) (sod (/ n 10)))))
+
+  (defun ssod (n)
+    (if (zerop n)
+        0
+      (let ((d (% n 10)))
+        (+ (* d d) (ssod (/ n 10))))))
+
+   (defun find-cycle (n)
+     (loop with cycle = nil
+           until (member n cycle)
+           do (push n cycle)
+           (setq n (ssod n))
+           finally return (reverse (cons n cycle))))
+#+end_src
+
+#+begin_src elisp :results raw
+  (ssod 37)
+#+end_src
+
+#+begin_src elisp :results code
+  (loop for n from 1 to 100
+        collect (find-cycle n))
+#+end_src
+
+* What about these numbers?
+   Can you discern the pattern in these numbers?
+
+   If so, to follow the pattern by what non-zero number would you replace 0?
+
+#+begin_src elisp
+  [2 3 2 2 5 2 3 7 2 2 2 3 3]
+#+end_src
+
+  The 0 is correctly replaced by the number 3. Why? The sequence is the
+  listed-in-order non-trivial factors (so exclude 1) of every natural number 2
+  through 9:
+
+  | n | factors of n |
+  |---+--------------|
+  | 2 | 2            |
+  | 3 | 3            |
+  | 4 | 2 2          |
+  | 5 | 5            |
+  | 6 | 2 3          |
+  | 7 | 7            |
+  | 8 | 2 2 2        |
+  | 9 | 3 3          |
+
+  Continuing through n = 20:
+
+  #+name: n-plus-factors-of-n
+  |  n | factors of n |
+  |----+--------------|
+  |  2 | 2            |
+  |  3 | 3            |
+  |  4 | 2 2          |
+  |  5 | 5            |
+  |  6 | 2 3          |
+  |  7 | 7            |
+  |  8 | 2 2 2        |
+  |  9 | 3 3          |
+  | 10 | 2 5          |
+  | 11 | 11           |
+  | 12 | 2 2 3        |
+  | 13 | 13           |
+  | 14 | 2 7          |
+  | 15 | 3 5          |
+  | 16 | 2 2 2 2      |
+  | 17 | 17           |
+  | 18 | 2 3 3        |
+  | 19 | 19           |
+  | 20 | 2 2 5        |
+
+#+begin_src elisp :var table=n-plus-factors-of-n
+  (apply 'vector
+    (loop for (n . factors) in table
+          append (if (stringp (car factors)) (mapcar 'string-to-number (split-string (car factors))) factors)))
+#+end_src
+
+#+results:
+: [2 3 2 2 5 2 3 7 2 2 2 3 3 2 5 11 2 2 3 13 2 7 3 5 2 2 2 2 17 2 3 3 19 2 2 5]
+
+* Answer a What Question and a Why Question
+  What is the cardinality of the /Power Set/ of a set of size n? Why?
+
+  2^n is the answer.
+
+  2^n is a function that calculates the ubiquitous powers of 2, which form the
+  most fundamental additive building blocks of the natural numbers, and inform
+  the binary language of computers. 2^n also counts the number of subsets of a
+  set of size n. Also called the cardinality of the power set of a set of size
+  n, 2^n shows the simplest example of exponential growth, and the complexity
+  of dealing with the combinatorial explosion of possibilities in many computer
+  search algorithms.
+
+  Here's one elisp way to create a small table of powers of 2:
+
+#+begin_src elisp
+  (require 'cl)
+
+  (loop for n from 0 to 13
+        collect (list n (expt 2 n)))
+#+end_src
+
+  One way to explain the why: if when creating a subset you have two choices to
+  make for each element of a set, namely is this element in the subset or not,
+  then the total number of ways you can choose a subset is 2 \cdot 2 \cdot \dots \cdot 2 (where
+  there are n 2s) --- in or out? in or out? (n of these questions to decide).
+
+* Answer a Fuzzy Question
+  You were to have investigated and reported on some application of *fuzzy sets*
+  and *fuzzy logic*. Did you?
+
+* Answer a Hash Question
+  From your increased understanding following your reading of the first four
+  pages of the [[http://matt.might.net/papers/liang2014godel.pdf][Fast Flow Analysis with G\ouml{}del Hashes]] paper, you were to compute
+  the hash as shown in class for a few sets and subsets of your devising.
+
+  Did you make any observations?
+
+  See file:presentation-02.txt.
