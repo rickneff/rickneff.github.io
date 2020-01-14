@@ -1,0 +1,261 @@
+-*- mode: org -*-
+#+title: Assignment 02
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window%20"generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report%201)][Insert/Update Clock Summary Report]]
+:END:
+* TODO Review Set Intersections and Unions
+  Let /A/ = =[0 2 4 6 8 10]=,
+      /B/ = =[0 1 2 3 4 5 6]=, and
+      /C/ = =[4 5 6 7 8 9 10]=.
+
+  Find
+  1. \(A \cap B \cap C\)
+  2. \(A \cup B \cup C\)
+  3. \((A \cup B) \cap C\)
+  4. \((A \cap B) \cup C\)
+  5. (A \cup (B \cap C))
+
+* TODO Review the Symmetric Difference of Sets
+  Find the *symmetric difference* (\(A \oplus B\)) (which, recall, is
+  the set containing those elements in either /A/ or /B/, but not in
+  both /A/ and /B/ --- i.e., \(A \oplus B = (A - B) \cup (B - A)\)) of
+  /A/ = =[1 3 5]= and /B/ = =[1 2 3]=.
+
+* TODO Review the Cartesian Products of Sets
+  Let A = [a b c], B = [x y], and C = [0 1]. Find
+
+  1. A \times B \times C
+  2. C \times B \times A
+  3. C \times A \times B
+  4. B \times B \times B
+
+* TODO Review DeMorgan\rsquo{}s Laws
+  DeMorgan\rsquo{}s laws for sets involve set intersection, set union, and set
+  complementation. Find what elisp functions exist to help explore these laws,
+  and do some experiments with them.
+
+  *DO NOT* just copy a solution using pattern matching a l\agrave =pcase= that works on
+  propositional logic formulas (not set operations) (e.g.,
+  https://stackoverflow.com/questions/35295829/emacs-lisp-demorganify-a-list).
+
+* TODO Explore Creative Thinking and Writing
+  The goal of this task is for you to be exposed to and explore some of the
+  deep ramifications of the idea of infinity and infiniteness.
+
+** Requirements
+   Read Brother Kent Bessey\rsquo{}s essay entitled /To Infinity and Beyond/. Then
+   reflect on what you read, discuss it and write your response.
+
+   Brother Bessey holds the copyright to this essay, which means:
+
+   /All rights reserved (by him). Reproduced by permission (from him). Read-only.
+   Please do not copy, print, transmit or save a copy of this work./
+
+   He has authorized your temporary use of [[https://rickneff.github.io/to-infinity-and-beyond.pdf][his work]].
+
+   Include in your response a summary of your discussion, which must be with
+   someone who is not now in the class, nor has taken it before, nor indeed is
+   studying or practicing in any STEM field.
+
+   When you read this essay, you\rsquo{}ll note that the running footer on odd-numbered
+   pages is \ldquo{}Thinking as Latter-day Saints\rdquo and for even-numbered pages it is
+   \ldquo{}Perspective\rdquo (the name of the publication). In that light, consider two
+   possible objectives for this course *NOT* listed in the syllabus (both are
+   variations of some DM1 outcomes), namely that you will learn to:
+
+   + Interpret the meaning of mathematical statements in the context of
+     real-world applications.
+   + Think like a mathematician by making sense out of ambiguous,
+     paradoxical or contradictory messages.
+
+   Reaching the first of these objectives requires you to broaden your
+   /Perspective/ on reality and mathematics. So ask yourself, is infinity
+   *Real*\trade? Persuade your audience (one way or the other)!
+
+   The second, thinking like a mathematician, etc., may not seem to have much to
+   do with /Thinking as Latter-day Saints/, but consider that the gospel deals
+   with many paradoxical, or seemingly contradictory ideas! These are ideas that
+   can only be resolved by looking at a larger context. Can you think of some
+   examples?
+
+   Regarding persuading your audience, here are some suggestions on how to use
+   /rhetoric/ to /earn/ the agreement of your audience with your argument. To quote
+   from a famous author:
+
+#+BEGIN_QUOTE
+  The term /rhetoric/ has to do with the persuasive use of language to influence
+  the thoughts and actions of an audience. So, consider it your rhetorical job
+  to /earn/ the agreement of your audience with your argument, which will
+  necessitate your keeping in mind two fundamentals of good writing:
+
+  1. Do not presume that the reader can read your mind --- anything
+     that you want him or her to visualize or consider or conclude, you
+     must provide.
+  2. Do not presume that the reader feels the same way that you do
+     about a given experience or issue --- your argument cannot just
+     assume as true the very things you\rsquo{}re trying to argue for.
+#+END_QUOTE
+
+  Remember, one of the arguments you could make is for the \ldquo{}realness\rdquo (or not)
+  of infinity. To make the reality-truth connection more vivid in your mind,
+  please [[https://rickneff.github.io/the-epi-phenomenon.pdf][read a book chapter]] that seems to argue against this connection.
+
+* TODO Explore Creative Problem Solving
+  The goal of this task is for you to creatively explore the meaning of /infinite/
+  sets, their definition and computer representation.
+
+  Computer representation of sets in general has several intriguing aspects.
+  /Infinite/ sets, whose members of course can be neither stored nor listed in
+  their entirety, are problematic, but they /can/ be represented in part, as for
+  example, the set of all integers:
+
+  \[\mathbb{Z} = \{\ldots, -3, -2, -1, 0, 1, 2, 3, \ldots\}\]
+
+  An alternate representation that requires only one ellipsis is
+
+  \[\mathbb{Z} = \{0, 1, -1, 2, -2, 3, -3, \ldots\}\]
+
+  which has the disadvantage of not being ordered by magnitude (unless it is by
+  /absolute value/).
+
+  Or, a few magnitude-ordered one-sided infinite sets (in lisp vector form
+  (except for the three dots)):
+
+  Primes = [2 3 5 7 11 13 17 19 23 29 . . .]
+
+  Fibonacci = [1 1 2 3 5 8 13 21 34 55 . . .]
+
+  TwoPowers = [2 4 8 16 32 64 128 256 512 1024 . . .]
+
+  The empty set is easily represented as \empty or {}, and while of course not
+  infinite itself, it can be the result of a set operation on two infinite sets,
+  e.g., the intersection of the Evens and the Odds.
+
+  Use your imagination and creativity to find ways to represent and manipulate
+  (and demonstrate) these sets and their features. You are not required to write
+  code, but if you do, *make sure it is elisp!* But even more important than
+  writing code, be aware of and record your thinking and insights into the
+  issues you grapple with.
+
+** Suggestions for Writing Code
+   + Use a single argument predicate named *contains* to determine set membership.
+     Make this argument of type string, because /anything/ can be represented as (and
+     parsed from) a string. The alternative of defining a hierarchy of classes
+     (e.g., Java\rsquo{}s /Object/, /Integer/, /Rational/, etc.) is arduous at best.
+   + Figure out a good way to print out a partial but humanly readable
+     representation of a set.
+   + The usual operations of set complement, union, intersection, etc., may be
+     performed on infinite sets, but the membership test for these must be based on
+     some combination of the operand sets\rsquo membership tests.
+   + Be thoughtful and careful! Set intersection, union, and complement are
+     relatively straightforward, but set inclusion -- determining whether or not
+     one set is a subset of another -- is not, as it seems to require iteration
+     over all the elements of the set to be tested for inclusion in another.
+
+** Sample Report Excerpts
+   For your consideration, here are some excerpts from past DM students\rsquo
+   reports:
+*** 1
+    I liked this assignment because it made me think in a different way. It was
+    hard to find any information on infinite sets, so I had to think of the ways I
+    knew how to make something infinite. I also liked it because it wasn\rsquo{}t easy. I
+    spent over 8 hours looking up information about infinite sets, and when I
+    finally just sat down and tried to make an infinite set---just sitting down
+    and attempting to apply previous knowledge, THAT\rsquo{}s when the inspiration came.
+    I know it\rsquo{}s really rudimentary, but it was a lot better than what I had
+    studied and even envisioned. It\rsquo{}s interesting how the Lord works that way with
+    other areas in my life.
+*** 2
+    I enjoyed learning how to implement different sets and representing infinite
+    sets. It was enjoyable once I got started working with my union and
+    intersection operators. With infinite sets the possibilities are endless. I
+    worked with others to focus my ideas. It was very interesting to see how
+    others were approaching this. I think that this was a challenging assignment
+    not because of how open-ended it was, but because I had a lot of ideas and I
+    didn\rsquo{}t know how to start them.
+*** 3
+    Wow. This was an awesome assignment. It was fun. I played. And then the due
+    date came and that meant I had to [finish up] and move on. Now that the
+    assignment is being submitted I can no longer justify playing here, but rest
+    assured I will be back to play more with this assignment. I learned quite a
+    bit about programming even though this assignment was about something
+    seemingly unrelated. It was great that there were few to no guidelines. While
+    some of my classmates griped about not knowing what to do, I felt liberated.
+    Finally, the suggestions of the instructor did not interfere with my
+    creativity. Though I must admit that before I figured out what to do, this
+    assignment was much less appealing. It would have been better if I\rsquo{}d had a
+    whole semester and hundreds of hours to work on this!
+
+* TODO My Report On What I Learned
+** I Had Fun
+** I Learned Something New
+** I Achieved Something Meaningful
+** Etc.
+
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+   What is true of my experience in general?
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I reported what I thought about while doing the problems.
+  - [ ] I reported on any connections I found between these problems and something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+#+name: assertions-about-answers
+  - [ ] I got the right answer for the question about set intersections and unions.
+  - [ ] I got the right answer for the question about the symmetric difference of sets.
+  - [ ] I got the right answer for the question about the Cartesian products of sets.
+  - [ ] I did some investigation and simple experiments about DeMorgan\rsquo{}s Laws for sets.
+
+#+name: assertions-about-creative-thinking-and-writing
+  - [ ] My response was something better than a repetitious rehashing of the essay.
+  - [ ] My response had value added via a good description of an actual, serious discussion I had with a non-classmate.
+  - [ ] My response demonstrated some interpretative handling of mathematical statements whose meaning applies to the real world.
+  - [ ] My response demonstrated some mathematician-like thinking by describing how to make sense out of ambiguous, paradoxical or contradictory messages related to infinity and the gospel.
+
+#+name: assertions-about-creative-problem-solving
+  - [ ] I had to think in a different way than I am used to.
+  - [ ] I learned something new specifically about programming.
+  - [ ] I fully engaged with the challenge of an open-ended assignment.
+  - [ ] I wished I had more time to grapple with this further.
+
+#+begin_src elisp
+  (calculate-score
+   (quote
+    ((in-general 2 2 2)
+     (about-report 2 2 2 2)
+     (about-MIs 1 1 2 2)
+     (about-answers 5 5 5 5)
+     (about-creative-thinking-and-writing 7 7 7 7)
+     (about-creative-problem-solving 8 8 8 8))))
+#+end_src
