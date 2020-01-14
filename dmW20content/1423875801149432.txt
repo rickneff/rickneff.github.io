@@ -1,0 +1,147 @@
+-*- mode: org -*-
+#+title: Assignment 01 Key
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  These are sample/examplary answers, some of which come from former students.
+
+* Exercises
+** CRC
+#+begin_info
+  What does a desert have to do with the study of discrete mathematics?
+
+  Well, it\rsquo{}s obvious that sand is a discrete kind of thing. Clump together
+  enough grains of sand and you get a sea of sand, a desert. As opposed to a sea
+  of water, an ocean, a continuous substance. Zoom in close enough, however, and
+  an ocean is a collection of individual water molecules, again discrete.
+
+  More metaphorically, it could suggest that we sometimes think of discrete
+  mathematics as a \ldquo{}dry\rdquo topic?! Or perhaps it means that if we work alone, we
+  can get lost in the \ldquo{}sands of time\rdquo --- meaning that it will be a long and
+  lonely adventure if we try to do it all by ourselves!
+
+  But this desert image also conjures up all that might be buried beneath the
+  sand. We\rsquo{}ve all heard stories of possible lost libraries, cities and the
+  knowledge that the desert civilizations once had being swallowed up in the
+  sand, resulting in it being lost until archaeologists uncover it again. That is
+  somewhat representative of discrete math, or math in general. Math can explain
+  the world around us, but sometimes the math is hidden, and we have to bring it
+  up to the surface.
+#+end_info
+** DGZ
+#+begin_info
+  Searching the web based on the hint and the one word that did not get
+  dehydrated, using the search terms /Carroll Cabbages/ reveals the answer. This
+  is from the nonsense poem Carroll called \ldquo{}The Walrus and the Carpenter\rdquo in his
+  1872 book /Through the Looking-Glass and What Alice Found There/:
+
+  THE TIME HAS COME THE WALRUS SAID TO TALK OF MANY THINGS OF SHOES AND SHIPS
+  AND SEALING WAX OF CABBAGES AND KINGS AND WHY THE SEA IS BOILING HOT AND
+  WHETHER PIGS HAVE WINGS
+#+end_info
+* Problems
+** CHJ
+#+begin_info
+  A search of online or ondisk English dictionaries or word lists will reveal
+  that the word \lsquo{}strengths\rsquo has a CVR of 8/1. Other answers (less common words)
+  with higher (finite) CVRs are acceptable.
+#+end_info
+** DZB
+#+begin_info
+  The limiting radius (r_\infty) of the outermost circle is 8.700 (approximately).
+
+  A good answer includes the method, and if you wrote code, the code you used to
+  find it. For example, this Python solution:
+#+end_info
+#+begin_src python
+from math import *
+
+radius = 1.0
+for n in range (3, 10000000):
+   radius *= 1/cos(pi/n)
+return radius
+#+end_src
+
+#+results:
+: 8.7000323368
+
+  This problem has a fascinating history, presented in /The Math Book/ by
+  Clifford Pickover, and excerpted for your consideration, profit and learning
+  in the following images:
+
+#+ATTR_HTML: :alt Limiting Radius :title Circumscribed Polygons and Circles
+  [[https://rickneff.github.io/img/polygon-circumscribing-page-382.png]]
+
+#+ATTR_HTML: :alt Limiting Radius :title Circumscribed Polygons and Circles
+  [[https://rickneff.github.io/img/polygon-circumscribing-page-383.png]]
+* Puzzles
+** DOK
+*** Rephrase
+    For many different numbers, call each k, make the product of k, k + 1, and
+    2k + 1. Find the pattern in these products.
+*** Approach
+    Following the hints, create a table looking at k \cdot (k + 1) \cdot (2k + 1) and
+    that product divided by 6 for several consecutive values of k, starting
+    at 1. Look for patterns between consecutive elements, or in the sequence as
+    a whole.
+*** Solution
+    Each product is divisible by 6:
+    | k | k + 1 | 2k + 1 | Product | Product/6 |
+    |---+-------+--------+---------+-----------|
+    | 1 |     2 |      3 |       6 |         1 |
+    | 2 |     3 |      5 |      30 |         5 |
+    | 3 |     4 |      7 |      84 |        14 |
+    | 4 |     5 |      9 |     180 |        30 |
+    | 5 |     6 |     11 |     330 |        55 |
+*** Proof
+    The differences between the k^{th} and the (k-1)^{th} Product/6 values
+    are k^2, the squares. Shown by:
+
+    | (k)(k+1)(2k+1)/6 - (k-1)(k)(2k-1)/6 | = | [(k)(k+1)(2k+1) - (k-1)(k)(2k-1)]/6           |
+    |                                     | = | [(k^2 + k)(2k + 1) - (k^2 - k)(2k - 1)]/6       |
+    |                                     | = | [2k^3 + 2k^2 + k^2 + k - (2k^3 - 2k^2 - k^2 + k)]/6 |
+    |                                     | = | [2k^3 - 2k^3 + 3k^2 + 3k^2 + k - k]/6             |
+    |                                     | = | [6k^2]/6                                       |
+    |                                     | = | k^2                                            |
+
+	  The numbers 1, 5, 14, 30, 55 \dots are called the [[https://oeis.org/A000330][/square pyramidal numbers/]]:
+    a(k) = 0^2 + 1^2 + 2^2 + \cdots + k^2
+** CJF
+*** Rephrase
+    Is there a pattern connecting 654321 with CLAHCK? If so find it.
+*** Approach
+    Using \lsquo{}CLOCK\rsquo as a hint, treat the numbers as times by inserting a colon after
+    their first digits:
+
+    6:54 3:21
+
+    Then do a little clock arithmetic and find the difference between those two
+    times (treating the first as AM, the second as PM). Look for more patterns.
+*** Solution
+    If you divide 654321 into 654 321 and add then you get 975 which, when
+    converted to hex, is 3CF which is the corresponding hex value of the first 3
+    letters of CLOCK- CLO -> 3 12 15 or 3CF
+
+    From 7 AM to 3 PM is 8 hours. Add the 6 minutes before 7 AM to the 21 minutes
+    after 3 PM to get 27 minutes.
+
+    8 hours and 27 minutes. 8 and 27.
+
+    Using a reasonable alphabetic-order decoding, if A = 1, B = 2, C = 3, etc.,
+    then K = 11:
+
+    C is the Least Of CLOCK, K is the Last Of CLOCK, C LOC K invites the focus to
+    be on the first (least) and last letters, which have 3 and 11 as number
+    equivalents. How now to relate 3 and 11 to 8 and 27?
+
+    Factor 8 and 27 into 2^3 and 3^3, take just the exponents, 3 and 3, concatenate
+    them to make the number 33. There you have it: the prime factors of 33 are 3
+    and 11.
+*** Proof
+    The proof of the solution resides in it being the explanation given by
+    Brother Neff of this puzzle he created.
+
+    ASK him if you could have figured this out without talking to him, or some
+    former student who remembers doing this puzzle.
