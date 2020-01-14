@@ -1,0 +1,135 @@
+-*- mode: org -*-
+#+title: Presentation 02
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* Applications of Discrete Mathematics
+- Formal Languages (computer languages)
+- Natural Languages (people languages)
+- Data Structures
+- Algorithm Design
+- Compiler Design
+- Relational Database Theory
+- Computability Theory
+- ...
+* All of these (except one)
+   are built on the foundation of /formal/ logic.
+** As Opposed to Everyday Logic?
+#+BEGIN_QUOTE
+  When we think, we bring a variety of thoughts together into some order. When
+  the combination of thoughts are mutually supporting and make sense in
+  combination, the thinking is “logical.” When the combination is not mutually
+  supporting, is contradictory in some sense, or does not “make sense,” the
+  combination is \ldquo{}not logical.”
+
+  --- Richard Paul and Linda Elder, /Critical Thinking, Concepts & Tools/
+#+END_QUOTE
+* Questions
+  - Why is it important to think logically?
+  - Why learn logic (formal or informal)?
+* Answers
+ - Logic gives you a tool that 99.9% of the population lacks.
+ - Logic sharpens your thinking, allowing it to “cut” more powerfully.
+ - Logic gives you a means to mechanize reasoning.
+** What does that mean?
+   Mechanizing reasoning means programming a computer to do it.
+** The Proposition
+  Time flies like an arrow.
+
+** The Problem
+  According to Steven Pinker:
+
+  The problem is that computer parsers are too *meticulous* for their own good.
+  They find ambiguities that are quite legitimate, as far as English grammar is
+  concerned, but that would never occur to a sane person. One of the first
+  computer parsers provided this famous example ... by finding, to the surprise
+  of the programmers, five different meanings for these five words.
+
+*** Meaning 1 (the intended reading)
+
+   Time proceeds as quickly as an arrow proceeds.
+
+*** Meaning 2
+
+   Measure the speed of flies in the same way that you measure the
+   speed of an arrow.
+
+*** Meaning 3
+
+   Measure the speed of flies in the same way that an arrow measures
+   the speed of flies.
+
+*** Meaning 4
+
+   Measure the speed of flies that resemble an arrow.
+
+*** Meaning 5
+
+   Flies of a particular kind, time-flies, are fond of an arrow.
+
+*** An Aphorism to Capture the Moment
+
+   Time flies like an arrow, fruit flies like a banana.
+* Rules
+  To reason logically and make correct inferences, you have to follow some
+  rules --- Rules of Inference. Here are a few:
+
+*** Rule 1
+    If you have p and you have p \rarr q (if p then q), you can infer q.
+*** Rule 2
+    If you have \not{}q and you have p \rarr q (if p then q), you can infer \not{}p.
+*** Rule 3
+    If you have p \rarr q and you have q \rarr r, you can infer p \rarr r.
+*** Rule 4
+    If you have p \lor q and you have \not{}q, you can infer p.
+*** Apply
+    You are about to leave for school in the morning and discover that you don’t
+    have your glasses.
+
+    You know the following statements are true:
+
+    a. If I was reading the newspaper in the kitchen, then my glasses are on the
+    kitchen table.
+    b. If my glasses are on the kitchen table, then I saw them at breakfast.
+    c. I did not see my glasses at breakfast.
+    d. I was reading the newspaper in the living room or I was reading the
+    newspaper in the kitchen.
+    e. If I was reading the newspaper in the living room then my glasses are on
+    the coffee table.
+
+    Where are your glasses?
+**** Solution
+    Let RK = I was reading the newspaper in the kitchen,
+        GK = My glasses are on the kitchen table,
+        SB = I saw my glasses at breakfast,
+        RL = I was reading the newspaper in the living room,
+        GC = My glasses are on the coffee table.
+
+    You have the following as \ldquo{}premises\rdquo:
+
+    1. RK \rarr GK
+    2. GK \rarr SB
+    3. \not{}SB
+    4. RL \lor RK
+    5. RL \rarr GC
+
+    Starting with your premises, build your argument step by step:
+
+    | Step | Inference | Reason       |
+    |------+-----------+--------------|
+    |    1 | RK \rarr GK   | premise      |
+    |    2 | GK \rarr SB   | premise      |
+    |    3 | \not{}SB       | premise      |
+    |    4 | RL \lor RK   | premise      |
+    |    5 | RL \rarr GC   | premise      |
+    |    6 | \not{}GK       | 3, 2, Rule 2 |
+    |    7 | \not{}RK       | 6, 1, Rule 2 |
+    |    8 | RL        | 7, 4, Rule 4 |
+    |    9 | GC        | 8, 5, Rule 1 |
+
+    Your glasses on the coffee table.
+***** Shorter Solution Possible?
+      Try to build a solution using Rule 3 somewhere.
+      Is it a shorter (fewer rows) solution?
