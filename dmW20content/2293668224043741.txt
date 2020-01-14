@@ -1,0 +1,352 @@
+-*- mode: org -*-
+#+title: Assignment 03
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report%201)][Insert/Update Clock Summary Report]]
+:END:
+* TODO Convert Infix to Prefix
+  Last week [[https://stackoverflow.com/questions/35295829/emacs-lisp-demorganify-a-list][this link]] was provided with a caution not to just copy it in doing
+  some experiments with elisp functions to help explore DeMorgan\rsquo{}s laws for
+  sets.
+
+  This week your task is to use the code at that link as a model to follow to
+  \ldquo{}fix\rdquo (make more correct/useful) the code below:
+
+#+begin_src elisp :results silent
+  (defun infix-to-prefix (exp)
+    (cond ((null exp) nil)
+          ((atom exp) exp)
+          ((= 3 (length exp))
+           (cons (second exp)
+                 (list (infix-to-prefix (first exp))
+                       (infix-to-prefix (third exp)))))
+          (t nil)))
+#+end_src
+
+  Specifically, you are to convert the plus-half (of the plus-or-minus) of the
+  quadratic formula from infix to prefix. Then *without using* =defun= set the
+  =quadratic-formula= symbol\rsquo{}s function to be the converted expression.
+
+  In other words, start with:
+#+begin_src elisp :results raw
+  (setq infix-quadratic-formula
+        '((-b + sqrt((b * b) - (4 * a * c))) / (2 * a)))
+#+end_src
+
+  And end with the moral equivalent of executing the following block:
+#+begin_src elisp :results silent
+  (defun quadratic-formula (a b c)
+    (/ (+ (- b) (sqrt (- (* b b) (* 4 a c)))) (* 2 a)))
+#+end_src
+
+  Such that you can get the answer:
+#+begin_src elisp :results raw
+  (quadratic-formula 1 -1 -1)
+#+end_src
+
+#+results:
+1.618033988749895
+
+* TODO Study this Function and its Partial Implementation in C++
+   The function f : Z^{\plus} \times Z^{\plus} \rarr Z^{\plus}, where
+
+   f(m, n) = [(m + n - 2)(m + n - 1)/2] + m,
+
+   is one-to-one and onto (a bijection).
+
+   A little experimentation with this function shows the pattern (reminiscent of
+   what?):
+
+   | m/n |  *1* |  *2* |  *3* |  *4* |  *5* |  *6* |  *7* |
+   |-----+----+----+----+----+----+----+----|
+   | *1*   |  1 |  2 |  4 |  7 | 11 | 16 | 22 |
+   | *2*   |  3 |  5 |  8 | 12 | 17 | 23 |    |
+   | *3*   |  6 |  9 | 13 | 18 | 24 |    |    |
+   | *4*   | 10 | 14 | 19 | 25 |    |    |    |
+   | *5*   | 15 | 20 | 26 |    |    |    |    |
+
+   Or transposed:
+
+:  f(1,1) =  1   f(2,1) =  3   f(3,1) =  6   f(4,1) = 10   f(5,1) = 15
+
+:  f(1,2) =  2   f(2,2) =  5   f(3,2) =  9   f(4,2) = 14   f(5,2) = 20
+
+:  f(1,3) =  4   f(2,3) =  8   f(3,3) = 13   f(4,3) = 19   f(5,3) = 26
+
+:  f(1,4) =  7   f(2,4) = 12   f(3,4) = 18   f(4,4) = 25
+
+:  f(1,5) = 11   f(2,5) = 17   f(3,5) = 24
+
+:  f(1,6) = 16   f(2,6) = 23
+
+:  f(1,7) = 22
+
+   Convince yourself that the range of values this function takes on for a fixed
+   value of m + n, say m + n = x, is
+
+   \(\frac{(x - 2)(x - 1)}{2} + 1\) through \(\frac{(x - 2)(x - 1)}{2} + (x - 1)\)
+
+   since m can assume the values 1, 2, 3, \dots, (x - 1) under these
+   conditions, and the first term in the formula is a fixed positive
+   integer when m + n is fixed.
+
+   To show that this function is one-to-one and onto, we merely need
+   to show that the range of values for x + 1 picks up precisely
+   where the range of values for x left off, i.e., that
+
+   f(x - 1, 1) + 1 = f(1, x).
+
+   It is!
+
+   f(x - 1, 1) + 1 = (x - 2)(x - 1)/2 + (x - 1) + 1 = (x^2 - x + 2)/2 = (x - 1)x/2 + 1 = f(1, x)
+
+#+begin_src C++ :results output :var global_y=23
+  #include <cmath>
+  #include <cstdlib>
+  #include <iostream>
+  using namespace std;
+
+  int f(int m, int n)
+  {
+     int x = m + n;
+     return (((x - 2) * (x - 1) / 2) + m);
+  }
+
+  void invert(int y, int& m, int& n)
+  {
+     int x = 0; // what should this assignment to x really be?
+     m = y - ((x-1)*(x-2)/2);
+     n = x - m;
+  }
+
+  int main(int argc, char* argv[])
+  {
+     int y = (argc > 1) ? atoi(argv[1]) : global_y;
+     int m = 0;
+     int n = 0;
+     invert(y, m, n);
+     // check answer
+     if (y == f(m, n)) {
+       cout << "m = " << m << ", n = " << n << endl;
+     }
+     return 0;
+  }
+#+end_src
+
+  If correctly implemented, the output will be:
+#+results:
+: m = 2, n = 6
+
+* TODO Probe Deeply Into \ldquo{}Pairing Functions\rdquo
+  AKA Bijections from Natural Numbers to Tuples of Natural Numbers.
+
+  Any kind of deep probing will require working with /very large/ numbers ---
+  bignums for short --- or big positive integers (bigpos in elisp).
+
+  In the supplied sample code is an elisp program (=3x+1conjecture.el=) that
+  verifies the so-called /3x + 1 conjecture/ for a given positive integer. When
+  you examine this code, note the use of the calc package and how it enables
+  working with bigpos numbers. Note too the use (and utility) of the =defmath=
+  macro.
+
+** Sample Code
+
+#+begin_src elisp :results silent :tangle 3x+1conjecture.el
+  (require 'cl)
+
+  (require 'calc)
+
+  (defmath is-odd (num)
+    (= (logand num 1) 1))
+
+  (defmath 3x+1 (num)
+    (if (is-odd num)
+        (1+ (* 3 num))
+      (/ num 2)))
+
+  (defmath transform-3x+1 (num)
+    (while (> num 1)
+      (setq num (3x+1 num)))
+    num)
+
+  (defun test-3x+1-conjecture (max-num)
+    (loop for n from 2 to max-num
+          unless (= 1 (calcFunc-transform-3x+1 n))
+          collect n))
+
+  (defmacro measure-time (&rest body)
+    "Measure and return the running time of the code in body."
+    (declare (indent defun))
+    (let ((start (make-symbol "start")))
+      `(let ((,start (float-time)))
+         ,@body
+         (- (float-time) ,start))))
+
+  (defun test-100000()
+    (print (vector (measure-time (setq results (test-3x+1-conjecture 100000))) results)))
+#+end_src
+
+#+begin_src elisp :results raw
+  (require 'calc-math)
+  (setq bn (math-read-number "3589723987598273598723958729385792875982735982759871"))
+#+end_src
+
+#+begin_src elisp :results raw
+ (calcFunc-is-odd bn)
+#+end_src
+
+  How has the =defmath= macro transformed the =3x+1= code?
+#+begin_src elisp :results code
+  (symbol-function 'calcFunc-3x+1)
+#+end_src
+
+  Test it for 100000:
+#+begin_src elisp :results output
+  (test-100000)
+#+end_src
+
+  As of 29 September 2019 the conjecture has been verified up to
+  56120000000000000000 (\approx 5.6 \times 10^{19}). So your task is to see how many numbers
+  bigger than that YOU can verify!
+
+** An Ongoing Investigation
+   At the top of the third page of the Matt Might paper you are reading, it
+   states:
+#+BEGIN_QUOTE
+   We make use of Cantor\rsquo{}s bijection: C^{\ast} : Z^{\ast} \rarr N. There are many such
+   bijections (but [[https://en.wikipedia.org/wiki/Georg_Cantor%2527s_first_set_theory_article][Cantor first proved their existence]]). Any such bijection
+   will work. For example, for the simple case of assigning pairs of naturals to
+   a unique natural, the function C^{+}_{2} : N^{2} \rarr N works:
+
+   \[C^{+}_{2}(x, y) = \sum_{i = 0}^{x} i + \sum_{j = x + 2}^{y + 2} j\]
+#+END_QUOTE
+   Note for simplicity we are using N for \({\mathbb{N}}\) and Z for
+   \({\mathbb{Z}}\), etc.
+
+   Implementing this function yields one that can be profitably compared to the
+   one described and implemented in C++ above.
+
+   As mentioned in the paper, many examples exist of a \ldquo{}pairing function\rdquo that
+   assigns one positive integer to each pair of positive integers. Cantor
+   generalized this to a *tuple function* as follows:
+
+   \pi^{(n)} : N^{n }\to N
+
+   for n > 2 as
+
+   \pi^{(n)}(k_1, \dots, k_{n-1}, k_n) = \pi^{(2)}(\pi^{(n-1)}(k_1, \dots, k_{n-1}), k_n)
+
+   with the base case defined as above for a pair: \pi^{(2)}(k_{1}, k_{2}) = f(k_{1}, k_{2}).
+
+* TODO Partial List of Requirements in More Detail
+  1. Fix the =infix-to-prefix= function as specified above.
+  2. Set the =quadratic-formula= symbol\rsquo{}s function *without using* =defun=.
+  3. Test =infix-to-prefix= using the quadratic formula given.
+  4. Understand the C++ code and how to run it from within Spacemacs/org-mode.
+  5. Supply the correct missing expression in the assignment of /x/ in the /invert/
+     function.
+  6. Get the supplied 3x+1conjecture.el code to “tangle”
+     (see [[http://orgmode.org/guide/Working-With-Source-Code.html]]).
+  7. Learn how to run emacs in \ldquo{}batch mode\rdquo.
+  8. Load the supplied code and run it in batch mode.
+  9. Report on how long it took to run the =test-3x+1-conjecture= function.
+  10. Modify the =test-3x+1-conjecture= function to take a =min-num= as well as a
+      =max-num= parameter.
+  11. With a time/computation budget of 24 hours (in a row), report on
+      how many 20-digit numbers (in the 10 quintillions) you can verify.
+  12. Do the \ldquo{}What Is True?\rdquo self-assessment.
+
+* TODO My Report On What I Learned
+** I Had Fun
+** I Learned Something New
+** I Achieved Something Meaningful
+** Etc.
+
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+   What is true of my experience in general?
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I collaborated with one or more classmates.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I recognized the =f= function from Brother Bessey\rsquo{}s paper (and that
+        we talked about in class).
+  - [ ] I reported on how I attacked and solved the problem of the invert
+        function.
+  - [ ] I reported on how many 20-digit numbers I was able to verify.
+  - [ ] I reported what I thought about while doing these problems.
+  - [ ] I reported on any connections I found between these problems and
+        something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+   What is true about the correctness and completeness of my code?
+#+name: assertions-about-correctness-and-completeness-of-code
+  - [ ] It correctly uses the =pcase= macro.
+  - [ ] It correctly uses bigpos arithmetic via the 'calc' and 'calc-math'
+        packages.
+
+   What is true about the elegance of my code?
+#+name: assertions-about-elegance-of-code
+  - [ ] It has some by virtue of its correctness, as first and foremost, an
+        elegant solution is a correct solution.
+  - [ ] It increases by means of helper functions that increase cohesion, and
+        decrease complexity.
+  - [ ] It increases by having no unnecessary, redundant functionality.
+  - [ ] It increases by using data types/structures as efficiently as possible.
+  - [ ] My long-running code has only function definitions (defuns) in it, NO
+        function calls or other expressions.
+  - [ ] The last function in my long-running code is my 'main' test driver
+        function defined as discussed in class.
+
+   What is true of the depth of my engagement with this assignment?
+#+name: assertions-about-depth-of-engagement
+  - [ ] I succeeded in fixing the =infix-to-prefix= function.
+  - [ ] I succeeded in inverting the =f= function.
+  - [ ] I succeeded in verifying the 3x+1 conjecture for many, many 20-digit
+        integers.
+
+   What is true of the above-and-beyond depth of my engagement with this assignment?
+#+name: assertions-about-above-and-beyond-depth-of-engagement
+  - [ ] I encoded as a single natural number the first ten primes (as a tuple).
+  - [ ] I went still deeper by exploring AND reporting on possible applications
+        of the ideas I discovered.
+
+#+begin_src elisp
+  (calculate-score
+   (quote
+    ((in-general 1 1 1 1)
+     (about-report 2 2 2 2 2 2 2)
+     (about-MIs 2 2 2 2)
+     (about-correctness-and-completeness-of-code 6 6)
+     (about-elegance-of-code 6 6 6 6 6 6)
+     (about-depth-of-engagement 8 8 10)
+     (about-above-and-beyond-depth-of-engagement 10 10))))
+#+end_src
