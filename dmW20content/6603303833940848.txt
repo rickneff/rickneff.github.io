@@ -1,0 +1,98 @@
+-*- mode: org -*-
+#+title: Readiness Assurance Test 02
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+   Take this as a team. Enter your answers individually.
+
+* Watch and Answer
+  Watch the video of Mike Davey\rsquo{}s Turing Machine. Starting at 2:50, which
+  program is being run? Does this program halt?
+
+- [ ] A program that multiplies two numbers.
+- [ ] A program that counts up in binary.
+- [ ] Halts, but in 1,000 steps.
+- [ ] Halts in less than 100 steps.
+
+* Code
+  Diophantine equations call for integer solutions to polynomial equations.
+  Write one line of python code that searches over all x, y, z in range(3) such
+  that the equation below is true.
+
+  3x^2 - 2xy -y^{2}z - 7 = 0
+
+  In other words, replace the three dots and CONDITION to do the search requested.
+#+begin_src python
+  print({(x, y, z) for x in range(3) ... if CONDITION })
+#+end_src
+
+  Now do the same in elisp:
+#+begin_src elisp :results output
+
+#+end_src
+
+* Scanner/Lexer/Parser
+  On page 8 Ganesh discusses a pattern that a scanner (also called a lexer) must
+  reject (a malformed number) and a pattern that is legal (a well-formed number)
+  that the scanner must accept.
+
+  He also discusses a pattern that a parser must reject (a malformed variable
+  declaration) and a pattern that is legal (a well-formed variable declaration)
+  that the parser must accept.
+
+  Based on discussion, choose the right answer:
+
+- [ ] A scanner recognizes a sequence of IDs.
+- [ ] A scanner recognized the structure of simpler entities such as numbers.
+- [ ] A parser deals with the syntactic correctness of each keyword.
+- [ ] A parser deals with the overall syntactic correctness of an entire variable declaration.
+
+* Strings/Sets/Languages/Symbols
+  Choose all that apply:
+
+  \epsilon is a
+- [ ] symbol
+- [ ] string (we can say which alphabet it is over)
+- [ ] set
+- [ ] language
+
+  /a/ is a
+- [ ] symbol
+- [ ] string (we can say which alphabet it is over (at least what its alphabet has))
+- [ ] set
+- [ ] language
+
+  /ab/ is a
+- [ ] symbol
+- [ ] string
+- [ ] set
+- [ ] language
+
+  {/aa/} is a
+- [ ] symbol
+- [ ] string
+- [ ] set
+- [ ] language
+
+  {/aa/, \epsilon} is a
+- [ ] symbol
+- [ ] string
+- [ ] set
+- [ ] language
+
+  {/aa/, \empty}
+- [ ] symbol
+- [ ] string
+- [ ] set
+- [ ] language
+
+  Let U be the universal language over {a, b}. Then
+
+- [ ] the complement of {} is U.
+- [ ] the complement of {} is not U.
+- [ ] the complement of {\epsilon} is U.
+- [ ] the complement of {\epsilon} is not U.
+- [ ] the complement of {/a/, /abb/} is U.
+- [ ] the complement of {/a/, /abb/} is U - {/a/, /abb/}.
