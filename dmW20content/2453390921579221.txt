@@ -1,0 +1,196 @@
+-*- mode: org -*-
+#+title: Expound On Topics 02
+#+subtitle: Cogitate, Ruminate, Ratiocinate
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* TODO Learn About Infinite Sets
+** TODO Who Can Name TBN
+   the BIGGEST number?
+** TODO Who Can Explain
+   a Set-Theoretic Paradox?
+*** For example
+    *Russell's paradox*
+**** Which says
+     Let S be the set that contains a set x if the set x does not belong to
+     itself, so that S = {x | x \notin x}.
+
+***** Contradictory!
+      1. Show that the assumption that S is a member of S leads to a
+         contradiction.
+****** Why?
+     By definition S \in S means S is *not* a member of S.
+******* Paradoxical!
+       2. Show that the assumption that S is *not* a member of S leads
+          to a contradiction.
+******** Why?
+         By definition S \notin S means S \in S.
+**** An Analogy
+     Divide the set of words into two sets:
+***** 1
+      self-describing words
+****** For example
+       small, polysyllabic, awkwardnessful
+***** 2
+      NON-self-describing
+****** For example
+       long, monosyllabic, edible
+
+       Call Set 1 the autological words.
+       Call Set 2 the heterological words.
+
+** TODO Get Technical
+*** Learn How to Compare Set Sizes
+
+    Let S and T be (finite or infinite) sets.
+
+    Recall that |S| and |T| denote the *cardinality* of S and T, respectively.
+
+    Define |S| = |T| (the cardinalities of S and T are *equal* iff there is a
+    /one-to-one correspondence/ from S to T.
+
+    Define |S| \le |T| (the cardinality of S is *less than or equal to* the
+    cardinality of T) iff there is a one-to-one /function/ from S to T.
+
+    If |S| \le |T| but |S| \ne |T|
+
+    then |S| < |T|
+
+    (the cardinality of S is *strictly less* than the cardinality of T).
+***** Also works for \sube
+      if A \sube B but A \neq B then A \subset B.
+*** Squeeze play
+
+    |S| = |T| iff |S| \le |T| and |T| \le |S|.
+
+**** In first-order logic
+     p \leftrightarrow q \equiv (p \rarr q) \land (p \larr q)
+
+**** Squeeze Play Example: Legal C Programs
+
+     Exactly how many legal C programs are there?
+
+     Note: /legal/ does not mean useful, or meaningful, or even /compilable/!
+
+     Infinitely many, but how do we show that it is a /countable/ infinity?
+
+     Let LCP = {x | x is a string containing a legal C program}.
+
+     Let N = {0, 1, 2, 3, \dots } (the set of all natural numbers).
+
+**** What is an injection from N to LCP?
+
+     f_1 : N \rightarrow LCP
+***** One of many mappings
+      0 \rightarrow  "main(){}"
+
+      1 \rightarrow  "main(){;}"
+
+      2 \rightarrow  "main(){;;}"
+      \dots
+      n \rightarrow  "main(){;;; \dots ;}"
+      \dots
+
+**** What is an injection from LCP to N?
+
+     f_2 : LCP \rightarrow N
+
+     f_2 looks at each program in LCP as a bitstring, and returns the equivalent
+        unsigned binary integer (converted to decimal).
+
+     LCP_0 \rightarrow  1398
+
+     LCP_1 \rightarrow  62308
+
+     LCP_2 \rightarrow  730129
+     \dots
+     LCP_n \rightarrow  987131734445134773
+     \dots
+
+     Since by definition, the existence of f_1 guarantees that |N| \leq |LCP|,
+
+     and the existence of f_2 guarantees that |LCP| \leq |N|,
+
+     it follows that |N| = |LCP|.
+**** QED
+     Thus, there are as many legal C programs as there are natural numbers.
+
+*** Ponder me this
+
+    Does a proper subset always have a smaller cardinality?
+
+    If we deal with finite sets, then S \subset T always implies |S| < |T|.
+
+    But for infinite sets, /this is not necessarily the case!/
+
+    Let E be the set of even natural numbers. How does its cardinality relate
+    to the cardinality of N (the set of all natural numbers)?
+
+    Let f : N \rightarrow E be defined by f(n) = 2n.
+
+    Then f is a one-to-one correspondence, therefore |E| = |N|.
+
+    | N: | 0 | 1 | 2 | 3 | 4 |  5 |  6 |  7 | \dots |
+    | E: | 0 | 2 | 4 | 6 | 8 | 10 | 12 | 14 | \dots |
+
+*** Ponder me this too
+
+    Do all infinite sets have the same cardinality?
+**** The answer is
+     *NO!* It would be incredibly uninteresting if they did. But
+     finding sets of different infinite sizes is another matter.
+
+     It\rsquo{}s fairly easy to see that the cardinality of the positive integers is
+     equal to the cardinality of the positive rationals.
+
+     It's a little harder to show that |Z^{+}| = |Q|.
+
+     Still, there /are/ cardinalities strictly greater than |Z^{+}|.
+
+**** In particular
+      |R| > |Z^{+}^{}| (there are \ldquo{}more\rdquo real numbers than positive integers)!
+
+**** Define the difference
+     Sets that are finite or have the same cardinality as Z^{+} (or N, it doesn't
+     matter) are called *countable*.
+
+     Countable sets are sets whose elements can be *listed*.
+
+     e_1, e_2, e_3, \dots, e_n (if the set is finite) or
+
+     e_1, e_2, e_3, \dots (if the set is infinite).
+
+***** By Contrast
+
+      Uncountable sets are sets whose elements *CANNOT* be listed.
+
+*** Talk about Sizes of Infinity
+**** Power Setting One
+   |     | 1 | 2 | 3 | 4 | 5 | ... |
+   |-----+---+---+---+---+---+-----|
+   |   1 | 0 | 0 | 0 | 0 | 0 | ... |
+   |   2 | 0 | 1 | 0 | 1 | 0 | ... |
+   |   3 | 1 | 0 | 1 | 0 | 1 | ... |
+   |   4 | 0 | 1 | 1 | 0 | 1 | ... |
+   |   5 | 0 | 0 | 1 | 0 | 0 | ... |
+   | ... |   |   |   |   |   |     |
+**** Generates the Next
+   |     | 1 | 2 | 3 | 4 | 5 | ... |
+   |-----+---+---+---+---+---+-----|
+   |   1 | 1 | 0 | 0 | 0 | 0 | ... |
+   |   2 | 0 | 0 | 0 | 1 | 0 | ... |
+   |   3 | 1 | 0 | 0 | 0 | 1 | ... |
+   |   4 | 0 | 1 | 1 | 1 | 1 | ... |
+   |   5 | 0 | 0 | 1 | 0 | 1 | ... |
+   | ... |   |   |   |   |   |     |
+***** Recap
+   |P(Z^{+})| > |Z^{+}|
+
+   |S| \le |T| if there is a one-to-one /mapping/ between S and T
+
+   |Z^{+}| \ne |P(Z^{+})| must be argued for and proven to conclude |Z^{+}| < |P(Z^{+})|
+
+* TODO Play With The Definitions
+  But first! [[https://www.amazon.com/Mathematics-1001-Absolutely-Everything-Explanations/dp/1554077192][Mathematics 1001]].
