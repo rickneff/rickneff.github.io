@@ -8,7 +8,8 @@
 
 * TODO Learn About Infinite Sets
 ** TODO Who Can Name TBN
-   the BIGGEST number?
+   The BIGGEST number?
+   TREE(3) is just the tip of the iceberg...
 ** TODO Who Can Explain
    a Set-Theoretic Paradox?
 *** For example
@@ -40,6 +41,8 @@
 
        Call Set 1 the autological words.
        Call Set 2 the heterological words.
+
+       Is /heterological/ heterological?
 
 ** TODO Get Technical
 *** Learn How to Compare Set Sizes
@@ -135,6 +138,9 @@
     | N: | 0 | 1 | 2 | 3 | 4 |  5 |  6 |  7 | \dots |
     | E: | 0 | 2 | 4 | 6 | 8 | 10 | 12 | 14 | \dots |
 
+    Tom: I'm happy.
+    Sue: I'm happy you're happy!
+
 *** Ponder me this too
 
     Do all infinite sets have the same cardinality?
@@ -192,5 +198,7 @@
 
    |Z^{+}| \ne |P(Z^{+})| must be argued for and proven to conclude |Z^{+}| < |P(Z^{+})|
 
+   \aleph_0 Aleph Null is the cardinality of the
+   *smallest* infinite set.
 * TODO Play With The Definitions
   But first! [[https://www.amazon.com/Mathematics-1001-Absolutely-Everything-Explanations/dp/1554077192][Mathematics 1001]].
