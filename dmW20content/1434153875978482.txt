@@ -1,0 +1,1241 @@
+-*- mode: org -*-
+#+title: Assignment 03
+#+subtitle: DEF Functions
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
+:END:
+* Exercises
+** TODO TDR
+#+begin_note
+  Find the =setf= way of doing the equivalent of =fset=.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WDT
+#+begin_note
+  PVP the result of evaluating the following (paying special attention to the
+  more-than-syntactic difference between the \lsquo{}starless\rsquo{} form of =let= and the
+  \lsquo{}star-suffixed\rsquo{} form):
+
+#+begin_src elisp
+  (let ((a 1) (b 2) (c 3)) (+ a b c))
+#+end_src
+
+#+begin_src elisp
+  (let ((a 1) (b 2) (c 3)) (+ a b c d))
+#+end_src
+
+#+begin_src elisp
+  (let ((a 1) (b 2) (c 3)) [+ a b c d])
+#+end_src
+
+#+begin_src elisp
+  (let ((a 1) (b 2) (c 3) (+ 4)) (+ a b c +))
+#+end_src
+
+#+begin_src elisp
+  (makunbound 'a)
+  (let ((a 1) (b 2) (c 3) (d (+ a 4))) (+ a b c d))
+#+end_src
+
+#+begin_src elisp
+  (let* ((a 1) (b 2) (c 3) (d (+ a 4))) (+ a b c d))
+#+end_src
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TEJ
+#+begin_note
+  A function-as-association between elements of a domain and elements of a
+  codomain, for \ldquo{}small\rdquo domains and codomains, inspired so-called \ldquo{}association
+  lists\rdquo (or alists) and the =assoc= (and associated) functions.
+
+  =(assoc KEY LIST)= returns non-nil if KEY is \ldquo{}equal\rdquo to the first element of
+  an element of LIST. The value is actually the first element of LIST whose
+  first element equals KEY.
+
+  For example, here is a function that uses an alist to look up the RGB values
+  of a given color name:
+
+#+begin_src elisp :results silent
+  (defun lookup-rgb (color-name)
+    (rest (assoc color-name
+                 '(("red" 255 0 0) ("green" 0 255 0) ("blue" 0 0 255)))))
+#+end_src
+
+#+begin_src elisp :results raw
+  (lookup-rgb "blue")
+#+end_src
+
+: (0 0 255)
+
+  What if the color name is not in the alist?
+
+#+begin_src elisp :results raw
+  (lookup-rgb "grue")
+#+end_src
+
+: nil
+
+  There are several variations of =assoc=. Find and give examples of using them.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WFK
+#+begin_note
+  In the function-as-map context, here is another interpretation:
+
+  A \ldquo{}map\rdquo type (AKA associative array, AKA hashtable) is found in many
+  languages. For example, C++:
+#+begin_src C++ :results output
+  #include <iostream>
+  #include <map>
+  using namespace std;
+
+  int main() {
+     map<string, string> mymap;
+
+     mymap["one"] = "red";
+     mymap["two"] = "blue";
+     mymap["three"] = "green";
+
+     for (auto const &ent1 : mymap) {
+        cout << ent1.first << " : " << ent1.second << endl;
+     }
+  }
+#+end_src
+
+: one : red
+: three : green
+: two : blue
+
+  And python:
+#+begin_src python :results output
+  mymap = {}
+
+  mymap["one"] = "red"
+  mymap["two"] = "blue"
+  mymap["three"] = "green"
+
+  if __name__ == "__main__":
+          for key in mymap.keys():
+                  print key + " : " + str(mymap[key])
+#+end_src
+
+: three : green
+: two : blue
+: one : red
+
+  And of course elisp:
+#+begin_src elisp :results output
+  (let* ((mymap (make-hash-table :test 'equal)))
+    (puthash "one" "red" mymap)
+    (puthash "two" "blue" mymap)
+    (puthash "three" "green" mymap)
+    (pp (list (gethash "one" mymap)
+              (gethash "two" mymap)
+              (gethash "three" mymap)))
+    (maphash (lambda (key value) (princ (format "%s : %s\n" key value))) mymap))
+#+end_src
+
+: ("red" "blue" "green")
+: one : red
+: two : blue
+: three : green
+
+  What happens if you omit the =:test 'equal= parameters to the
+  =make-hash-table= call?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TER
+#+begin_note
+  This exercise explores /looping/ versus /mapping/.
+
+  What does the =morphify= function defined below do? Think about it, then PVP
+  the result of the call to it that follows.
+
+#+begin_src elisp :results silent
+  (defun morphify (fun lst)
+    (loop for item in lst
+          collect (funcall fun item)))
+#+end_src
+
+  Note the quotes:
+
+#+begin_src elisp :results raw
+  (morphify (quote downcase) (quote ("THIS" "IS" "TOO" "LOUD")))
+#+end_src
+
+  The =morphify= function is essentially a /mapping/ function, which means it
+  takes a passed-in function (=fun=) and a passed-in list (=lst=), and /maps fun
+  over lst/, i.e., the results of calling the function =fun= on each element of
+  the list =lst= are collected into a new list, which is returned.
+
+  This shows one way (iteratively) a /map/ function could be implemented.
+  Another way is /recursively/, as in:
+
+#+begin_src elisp :results silent
+  (defun morphifyr (fun lst)
+    (if (null lst)
+        nil
+      (append (list (funcall fun (first lst))) (morphifyr fun (rest lst)))))
+#+end_src
+
+  Explain how this version of =morphify= works.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TGE
+#+begin_note
+  Note the difference if -13 is used instead of 13 below:
+#+begin_src elisp :results silent
+  (defun compute-floor-the-hard-way (dividend divisor)
+    (- (/ dividend (float divisor)) (/ (mod dividend divisor) (float divisor))))
+#+end_src
+
+#+begin_src elisp :results raw
+  (let* ((number (/ 13 4.0))
+         (floor1 (floor number))
+         (floor2 (compute-floor-the-hard-way 13 4.0)))
+    (list number floor1 floor2))
+#+end_src
+
+: (3.25 3 3.0)
+
+  Is the hard way correct?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO THP
+#+begin_note
+  Graph the floor and ceiling functions f(x) = \lfloor{}x\rfloor and f(x) = \lceil{}x\rceil for real
+  number values of x in the interval [-5.0 .. 5.0].
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WKM
+#+begin_note
+  Which of these statements about floor and ceiling are correct, for any real
+  number $x$ and any integers $n$ and $m$?
+  1. $x - 1 < \lfloor{}x\rfloor \le x \le \lceil{}x\rceil < x + 1$.
+  2. $\lfloor{}-x\rfloor = -\lceil{}x\rceil$.
+  3. $\lceil{}-x\rceil = -\lfloor{}x\rfloor$.
+  4. $\lfloor{}x + n\rfloor = \lfloor{}x\rfloor + n$.
+  5. $\lceil{}x + n\rceil = \lceil{}x\rceil + n$.
+  6. $\lfloor{}\frac{n}{2}\rfloor + \lceil{}\frac{n}{2}\rceil = n$.
+  7. $\lfloor{}\frac{n}{2}\rfloor + \lfloor{}\frac{n + 1}{2}\rfloor = n$.
+  8. $\lceil{}\frac{n}{2}\rceil + \lceil{}\frac{n + 1}{2}\rceil = n$.
+  9. $\lfloor{}\frac{n + m}{2}\rfloor + \lceil{}\frac{n - m + 1}{2}\rceil = n$ (for any $m$, not just $m =
+     0$ as in statement 7).
+  10. $\lceil{}\frac{n + m}{2}\rceil + \lceil{}\frac{n - m + 1}{2}\rceil = n$ (for any $m$, not just $m =
+      0$ as in statement 8).
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TIW
+#+begin_note
+  Define the function \ldquo{}round to nearest integer\rdquo using the floor and ceiling
+  functions, together with the \ldquo{}Iverson bracket\rdquo function. (A number whose
+  fractional part is less than one-half should be rounded down, otherwise up.)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TKG
+#+begin_note
+  Explore the inverse of =assoc= via the functions =rassoc= and associates.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WOV
+#+begin_note
+  Identify the formula or rule that generates the terms of each sequence:
+  1. =[7 14 21 28 35 42 49 56 63 70 ...]=
+  2. =[7 11 15 19 23 27 31 35 39 43 ...]=
+  3. =[3 4 6 9 13 18 24 31 39 48 ...]=
+  4. =[1 10 11 100 101 110 111 1000 1001 1010 ...]=
+  5. =[1 1 2 3 5 8 13 21 34 55 ...]=
+  6. =[7 22 11 34 17 52 26 13 40 20 ...]=
+  7. =[2 1 3 4 7 11 18 29 47 76 ...]=
+  8. =[6 12 24 48 96 192 384 768 1536 3072 ...]=
+  9. =[6 18 54 162 486 1458 4374 13122 39366 118098 ...]=
+  10. =[2 3 5 7 11 13 17 19 23 29 ...]=
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WQW
+#+begin_note
+  Classify the following lisp functions according as each is or is not a predicate:
+  | Predicate? | Yes or No? |
+  |------------+------------|
+  | =list=       |            |
+  | =listp=      |            |
+  | =integerp=   |            |
+  | =vector=     |            |
+  | =vectorp=    |            |
+  | =symbolp=    |            |
+  | =zerop=      |            |
+  | =evenp=      |            |
+  | =oddp=       |            |
+#+end_note
+#+begin_info
+  Your answer goes here. (Replicate the above table.)
+#+end_info
+** TODO WRP
+#+begin_note
+  Let P(x) be the statement \ldquo{}x is older than 21 years\rdquo where the domain for x
+  consists of all people.
+
+  Express each quantification in English.
+  1. $\exists$ x P(x)
+  2. $\forall$ x P(x)
+  3. $\exists$ x $\neg$ P(x)
+  4. $\forall$ x $\neg$ P(x)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TOJ
+#+begin_note
+  Let S(x) be the statement \ldquo{}x is a student at BYU-Idaho\rdquo where the domain
+  consists of the residents of Idaho.
+
+  Express each of these quantifications in English.
+  1. $\exists$ x S(x)
+  2. $\forall$ x S(x)
+  3. $\neg \exists$ x S(x)
+  4. $\exists$ x $\neg$ S(x)
+  5. $\neg \forall$ x $\neg$ S(x)
+  6. $\forall$ x $\neg$ S(x)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WRU
+#+begin_note
+  Translate these statements into English, where F(x) is \ldquo{}x is a friend\rdquo,
+  C(x) is \ldquo{}x is cool\rdquo, and the domain consists of all people.
+  1. $\forall$ x (F(x) $\rightarrow$ C(x))
+  2. $\exists$ x (F(x) $\wedge$ C(x))
+  3. $\forall$ x (F(x) $\wedge$ C(x))
+  4. $\exists$ x (F(x) $\rightarrow$ C(x))
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TOL
+#+begin_note
+  Translate these statements into English, where S(x) is \ldquo{}x is a student\rdquo, R(x)
+  is \ldquo{}x is from Russia\rdquo, and the domain consists of all people.
+  1. $\forall$ x (S(x) $\rightarrow$ R(x))
+  2. $\exists$ x (R(x) $\rightarrow$ R(x))
+  3. $\forall$ x (S(x) $\wedge$ R(x))
+  4. $\exists$ x (S(x) $\wedge$ R(x))
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TUK
+#+begin_note
+  Translate these statements into English, where the domain for each variable
+  consists of all real numbers.
+  1. $\exists$ x $\forall$ y (x > y)
+  2. $\exists$ x $\exists$ y (((x $\geq$ 0) $\wedge$ (y $\geq$ 0)) $\rightarrow$ (xy $\geq$ 0))
+  3. $\exists$ x $\forall$ y $\exists$ z (x = y + z)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WVQ
+#+begin_note
+  Let Q(x, y) be the statement \ldquo{}x asks y a question,\rdquo where the domain for both
+  x and y consists of all students in a class. Express each quantification in an
+  English sentence.
+  1. $\forall$ x $\exists$ y Q(x, y)
+  2. $\forall$ x $\forall$ y Q(x, y)
+  3. $\exists$ x $\exists$ y Q(x, y)
+  4. $\exists$ x $\forall$ y Q(x, y)
+  5. $\forall$ y $\exists$ x Q(x, y)
+  6. $\exists$ y $\exists$ x Q(x, y)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TUQ
+#+begin_note
+  Take the statement Q(x, y) \ldquo{}x asks y a question\rdquo. Express each of these
+  sentences in terms of Q(x, y), quantifiers, and logical connectives, where the
+  domain for x consists of people at your school, and likewise for y consists of
+  people at your school. Use the predicates S(x) = \ldquo{}x is a student\rdquo, T(x) = \ldquo{}x
+  is a teacher\rdquo, and A(x) = \ldquo{}x is a TA\rdquo to distinguish different roles for
+  people.
+  1. No student has ever asked a teacher a question.
+  2. There is a student who has asked a teacher a question.
+  3. Every student has asked a teacher and a TA a question.
+  4. At least two students have asked a teacher a question.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WVU
+#+begin_note
+  Let the statement T(x, y) \ldquo{}x has taught y\rdquo where the domains for x and y
+  consist of all teachers teaching and all classes taught in some department.
+  Express each of these sentences in terms of T(x, y), quantifiers, and logical
+  connectives.
+  1. No teacher has taught every class.
+  2. Every teacher has taught every class.
+  3. Every teacher has taught some class.
+  4. At least two teachers have taught a class.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TVL
+#+begin_note
+  Let D(x, y) be the statement \ldquo{}x has dropped out of y\rdquo where the domain for x
+  consists of all students and the domain for y consists of all classes. Express
+  each of the statements below as an English sentence.
+  1. D(Jackson Andrews, Discrete Mathematics)
+  2. $\exists$! x $\forall$ y D(x, y)
+  3. $\forall$ x $\exists$ y D(x, y)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TXG
+#+begin_note
+  What are the truth values of the expressions below if T(x, y) is \ldquo{}xy < y\rdquo,
+  where the domain consists of all integers?
+  1. T(0, 5)
+  2. T(1, 1)
+  3. T(7, -3)
+  4. $\exists$ x $\forall$ y T(x, y)
+  5. $\exists$ x T(x, 2)
+  6. $\forall$ y T(9, y)
+  7. $\forall$ x $\forall$ y T(x, y)
+  8. $\forall$ x $\exists$ y T(x, y)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Problems
+  Note: * means optional. If it\rsquo{}s not starred, it\rsquo{}s required.
+** TODO TBD *
+#+begin_note
+  A function is one-to-one if and only if it is onto, /provided/ its domain and
+  codomain are the same size.
+
+  Put this statement in symbolic form using the adjectives /injective/ and
+  /surjective/, and argue for its truth using the following formal definitions:
+
+  A function from domain A to codomain B
+
+  f : A \rarr B
+
+  is
+  - injective :: if f(m) \ne f(n) whenever m \ne n, for all m \in A and for all n \in A;
+
+  and/or is
+  - surjective :: if for all b \in B there exists an a \in A such that f(a) = b.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WDK *
+#+begin_note
+  Venture further into the /quote/ \ldquo{}macro\rdquo in lisp, used to \ldquo{}suppress\rdquo
+  evaluation of symbols, lists and other things. Explore the difference between
+  /set/, /setq/ and /setf/ --- /setf/ being another Common Lisp macro (hence the
+  need to =(require 'cl)=, as with =loop=) --- and note which feature of
+  functional programming is being flouted in this code:
+
+#+begin_src elisp
+  (require 'cl)
+
+  (set 'a 'one)
+  (setq a (quote one))
+  (setf b '(one two))
+  (setf a (first b))
+  (setf (second b) a)
+#+end_src
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TEH
+  Important: see Exercise WDT for context.
+#+begin_note
+  Could you get by without this star-suffixed form? How?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WFC
+#+begin_note
+  Remembering that these are functions, do the four basic math operators (=+=,
+  =-=, =*=, =/=) work as you might expect?
+
+  How about when the number of operands
+  - is greater than two?
+  - is less than two (i.e., one or zero)?
+
+  This is a good time to mention that functions with arity /n/ for /n/ = 1
+  (unary) and /n/ = 2 (binary) have alternate type names, as does a generic
+  classification for /n/ > 2:
+
+  | Arity | Type     |
+  |-------+----------|
+  |     1 | Monadic  |
+  |     2 | Dyadic   |
+  |   > 2 | Polyadic |
+
+  Argue for /polyadic/ to mean having /arbitrary arity/ (taking 0 /or more/
+  arguments).
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WGP
+  Important: see Exercise TER for context.
+#+begin_note
+  The =morphify= function already exists by the name =mapcar=, and there are
+  several variations and embodiments of this /map/ feature, as you will learn
+  (and one of which you have already seen --- where?).
+
+  Write a short (one-line body) lisp function named /vector-to-string/
+  that takes a vector of symbols and converts it into a single string of the
+  symbols\rsquo{} names separated by a space. for example,
+
+#+begin_src elisp
+  (format "%s" (vector-to-string [a b c]))
+#+end_src
+
+  should give
+
+: "a b c"
+
+:HINT:
+  - Hint ::
+#+begin_src elisp
+  (let ((info '(("harry" male 42)
+                ("larry" male 31)
+                ("curly" male 29)
+                ("shirley" female 30))))
+    (mapconcat 'first info "\n"))
+#+end_src
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WGW *
+#+begin_note
+  Prefix notation takes some getting used to. Converting an expression from
+  prefix to infix, to make arithmetic look more \ldquo{}natural\rdquo, is as easy as
+  swapping the first two elements of a three-element list; e.g., =(+ 1 2)=
+  becomes =(1 + 2)=. But what if the expression has other expressions nested
+  within it, e.g., =(- 10 (* 2 3))=, where one (or both) of the operands is
+  another 3-element (prefix expression) list? Recursively applying the swapping
+  rule is the answer!
+
+  Study the =prefix->infix= function and the three sample calls to it. Describe
+  how it works. Try it on more complex expressions. Re-implement it without
+  using =let= or =cond= (use =if=).
+#+begin_src elisp :results silent
+  (defun prefix->infix (pre)
+    (cond ((listp pre)
+           (or (= 3 (length pre)) (error "not a 3-length list"))
+           (let ((operator (nth 0 pre))
+                 (operand1 (nth 1 pre))
+                 (operand2 (nth 2 pre)))
+             (list (prefix->infix operand1)
+                   operator
+                   (prefix->infix operand2))))
+          (t pre)))
+#+end_src
+
+#+begin_src elisp :results raw
+  (prefix->infix '(+ 1 2))
+#+end_src
+
+: (1 + 2)
+
+#+begin_src elisp :results raw
+  (prefix->infix '(+ 1 (* 2 3)))
+#+end_src
+
+: (1 + (2 * 3))
+
+#+begin_src elisp :results raw
+  (prefix->infix '(+ (/ 1 4) (* 2 3)))
+#+end_src
+
+: ((1 / 4) + (2 * 3))
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TFV *
+#+begin_note
+  Implement and test an =infix->prefix= function.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WJS
+#+begin_note
+  Describe an analogous situation to floor when taking the ceiling of negative
+  numbers.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WKC
+#+begin_note
+  Define the \ldquo{}take the fractional part of\rdquo function =frac-part= in terms of
+  =floor= as follows:
+
+#+begin_src elisp :results silent
+  (defun frac-part (number)
+    (- number (floor number)))
+#+end_src
+
+  For example,
+#+begin_src elisp
+  (frac-part 3.14159)
+#+end_src
+
+: 0.14158999999999988
+
+  Suppose =frac-part= were the primitive, built-in function. How would you
+  define =floor= (assuming it were /not/ built-in) using =frac-part=?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WNW
+#+begin_note
+  What conditions/restrictions on a function must be placed for it to be
+  /invertible/ (have an inverse)?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TMZ
+#+begin_note
+  Write elisp with loops and lambda predicates to answer the following:
+  1. How many pairs of numbers between 1 and 1000 pass the predicate given by
+     the following lambda expression? (lambda (m n) (= 1 (gcd m n)))
+  2. How many solutions are there in integers to the equation 3x + 4y = 7?
+  3. Each taken from the set [2 3 4 5 6 7 8 9], how many pairs of numbers are
+     there that when multiplied together equal one more than a multiple of 11?
+  4. How many pairs of numbers that when multiplied together equal one more than
+     a multiple of 23 are found in the set [2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+     17 18 19 20 21]?
+  5. How many pairs of numbers that when multiplied together equal one more than
+     a multiple of *9* are found in the set [2 3 4 5 6 7]?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TNL
+#+begin_note
+  Explore the counterpart of \Sigma, the symbol used to collapse a /sum/ of terms;
+  namely, the Greek letter (which?) used to collapse a /product/ of terms.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WRD
+#+begin_note
+  With at least two examples of a binary function, verify the nested summation
+  interchange rule.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TNQ
+#+begin_note
+  Consider the following function:
+
+#+begin_src elisp :results silent
+  (defun calculate-pi-very-slowly (max-iterations)
+    (* 4 (loop for n from 0 to max-iterations
+               sum (/ 1.0 (* (+ (* 2 n) 1) (expt -1 n))))))
+#+end_src
+
+  How slow is \ldquo{}very slowly\rdquo?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WZO
+#+begin_note
+  Translate each of these statements into logical expressions using predicates,
+  quantifiers, and logical connectives.
+  1. Everyone\rsquo{}s a critic.
+  2. No one is perfect.
+  3. At least one of your friends is perfect.
+  4. All of your friends are critics.
+  5. Everyone is a critic or someone is your friend.
+  6. No one is a critic and everyone is your friend.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TOU
+#+begin_note
+  Express each of these statements using quantifiers. Then form the negation of
+  the statement so that no negation is to the left of a quantifier. Next,
+  express the negation in simple English.
+  1. All horses have hooves.
+  2. No horses can fly.
+  3. Every bat is blind.
+  4. No bear can dance.
+  5. There is at least one penguin that can swim and catch fish.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WYH *
+#+begin_note
+  Express each of these statements using predicates, quantifiers, and logical connectives.
+  1. At least one more song, among the nonempty set of songs, can be sung if
+     there is a soul alive to music.
+  2. Whenever there is an error, at least one error message is displayed.
+  3. All the programs have been scanned, but at least one program has a virus.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TLI
+#+begin_note
+  The notation $\exists$! x P(x) denotes \ldquo{}There exists a unique x such that P(x) is
+  true.\rdquo If the domain consists of all integers, what are the truth values of
+  these statements?
+  1. $\exists$! x (x > 1)
+  2. $\exists$! x (x^2 = 1)
+  3. $\exists$! x (x + 3 = 2x)
+  4. $\exists$! x (x = x + 1)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WPI
+#+begin_note
+  What are the truth values of these statements?
+  1. $\exists$! x P(x) $\rightarrow$ $\exists$ x P(x)
+  2. $\forall$ x P(x) $\rightarrow$ $\exists$! x P(x)
+  3. $\exists$! x $\neg$ P(x) $\rightarrow$ $\neg\forall$ x P(x)
+  4. $\forall$ x P(x) $\rightarrow$ $\exists$ x P(x)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TSD *
+#+begin_note
+  Let E(x) be the statement \ldquo{}x is an excuse\rdquo, L(x) be the statement \ldquo{}x is a
+  lie\rdquo, and R(x) be the statement \ldquo{}x is a reason\rdquo. Suppose that the domain for x
+  consists of all English words. Express each of these statements using
+  quantifiers, logical connectives, and E(x), L(x), and R(x).
+  1. Some excuses are ignored.
+  2. Not all lies are reasons.
+  3. Some excuses are not reasons.
+  4. Some excuses are lies.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WTM *
+#+begin_note
+  Let T(x), F(x), R(x), and D(x) be the statements \ldquo{}x is a saint\rdquo, \ldquo{}x is one of
+  my friends\rdquo, \ldquo{}x is a soldier\rdquo, and \ldquo{}x is willing to drink\rdquo, respectively.
+  Express each of these statements using quantifiers, logical connectives, and
+  L(x), M(x), O(x), and D(x).
+  1. No saint is willing to drink.
+  2. No soldiers ever decline a drink.
+  3. All my friends are saints.
+  4. My friends are not soldiers.
+  5. Does 4 follow logically from 1, 2 and 3? If not, is there a correct
+     conclusion?
+:HINT:
+  - Hint :: This was adapted from a puzzle by Lewis Carroll.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TTV
+#+begin_note
+  Determine the truth value of each of these statements if the domain consists
+  of all real numbers.
+  1. $\exists$ x (x^3 = -9)
+  2. $\exists$ x (x^4 > x^2)
+  3. $\forall$ x ((-x)^2 = x^2)
+  4. $\forall$ x (2x > x)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WUZ
+#+begin_note
+  Solidify your knowledge of how looping works in elisp, and then translate the
+  following C++ code into elisp:
+
+#+begin_src C++ :results output
+/*************************************************************************
+,* Quantifiers Example With Unary Predicates
+*************************************************************************/
+#include <cstdlib>
+#include <iomanip>
+#include <iostream>
+using namespace std;
+
+/**************************************************************
+,* The Predicate class is an abstract base class with pure virtual
+,* abstract functions (per the =0 suffix).
+***************************************************************/
+class Predicate
+{
+public:
+   /**************************************************************
+   * Is this Predicate true for the given x?
+   ***************************************************************/
+   virtual bool isTrue(int x)=0;
+
+   /**************************************************************
+   * Is this Predicate true for the given x?
+   ***************************************************************/
+   virtual bool isFalse(int x)=0;
+
+   /**************************************************************
+   * Is this Predicate true for all values in the given set?
+   ***************************************************************/
+   bool forAll(int set[], int size);
+
+   /**************************************************************
+   * Is this Predicate true for some value in the given set?
+   ***************************************************************/
+   bool forSome(int set[], int size);
+};
+
+/**************************************************************
+,* forAll is A#xP(x) (The Universal Quantification of P(x), the
+,* proposition that is true if and only if P(x) is true for all
+,* x in the universe of discourse.)
+,*
+,* loops through all values in a set (of a finite size) to see
+,* if the Predicate is always true.  If it encounters a value
+,* for which the Predicate is false, then A#xP(x) is false.
+,* Otherwise A#xP(x) is true.
+***************************************************************/
+bool Predicate::forAll(int set[], int size)
+{
+   for (int i = 0; i < size; i++)
+   {
+      if (isFalse(set[i]))
+      {
+         return false;
+      }
+   }
+   return true;
+}
+
+/**************************************************************
+,* forSome = E#xP(x) (The Existential Quantification of P(x),
+,* the proposition that is true if and only if there exists an
+,* x in the universe of discourse such that P(x) is true.)
+,*
+,* loops through all values in a set (of a finite size) to see
+,* if the Predicate is ever true.  If it encounters any value
+,* for which the Predicate is true, then E#xP(x) is true.
+,* Otherwise E#xP(x) is false.
+***************************************************************/
+bool Predicate::forSome(int set[], int size)
+{
+   for (int i = 0; i < size; i++)
+   {
+      if (isTrue(set[i]))
+      {
+         return true;
+      }
+   }
+   return false;
+}
+
+class Even : public Predicate
+{
+public:
+   bool isTrue(int x)
+   {
+      return ((x % 2) == 0);
+   }
+
+   bool isFalse(int x)
+   {
+      return !isTrue(x);
+   }
+};
+
+class Odd : public Predicate
+{
+public:
+   bool isTrue(int x)
+   {
+      return ((x % 2) == 1);
+   }
+
+   bool isFalse(int x)
+   {
+      return !isTrue(x);
+   }
+};
+
+/**************************************************************
+,* main tests for both true and false return values for the
+,* two functions forAll and forSome for the simple Predicates
+,* Even and Odd.
+***************************************************************/
+int main()
+{
+   Even even;
+   Odd odd;
+
+   int Evens[] = {0, 2, 4, 6, 8};
+   int Odds[] = {1, 3, 5, 7, 9};
+
+   cout << boolalpha << endl;
+   cout << "even.forAll(Evens, 5)\n"
+        << "     expected to return true;\n"
+        << " actual return value is "
+        <<  even.forAll(Evens, 5) << ".\n\n";
+   cout << "odd.forAll(Evens, 5)\n"
+        << "     expected to return false;\n"
+        << " actual return value is "
+        <<  odd.forAll(Evens, 5) << ".\n\n";
+   cout << "even.forAll(Odds, 5)\n"
+        << "     expected to return false;\n"
+        << " actual return value is "
+        <<  even.forAll(Odds, 5) << ".\n\n";
+   cout << "odd.forAll(Odds, 5)\n"
+        << "     expected to return true;\n"
+        << " actual return value is "
+        <<  odd.forAll(Odds, 5) << ".\n\n";
+
+   cout << "--------------------------------\n\n";
+
+   cout << "even.forSome(Evens, 5)\n"
+        << "     expected to return true;\n"
+        << " actual return value is "
+        <<  even.forSome(Evens, 5) << ".\n\n";
+   cout << "odd.forSome(Evens, 5)\n"
+        << "     expected to return false;\n"
+        << " actual return value is "
+        <<  odd.forSome(Evens, 5)  << ".\n\n";
+   cout << "even.forSome(Odds, 5)\n"
+        << "     expected to return false;\n"
+        << " actual return value is "
+        <<  even.forSome(Odds, 5) << ".\n\n";
+   cout << "odd.forSome(Odds, 5)\n"
+        << "     expected to return true;\n"
+        << " actual return value is "
+        <<  odd.forSome(Odds, 5)  << ".\n\n";
+
+   return 0;
+}
+#+end_src
+
+:HINT:
+  - Hint :: First make this code NON-object-oriented (purely imperative) by
+            using function pointers instead of using a class to encapsulate a
+            function. For example:
+#+begin_src C++ :results output
+#include <cstdlib>
+#include <iomanip>
+#include <iostream>
+using namespace std;
+
+bool oddp(int n) { return ((n % 2) == 1); }
+
+typedef bool (*intPredicate)(int);
+
+int main()
+{
+   intPredicate pred = oddp;
+   cout << boolalpha << pred(5) << endl;
+   return 0;
+}
+#+end_src
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WZM *
+#+begin_note
+  Write the definitions of /injective/ and /surjective/ given in TBD
+  using quantifier symbols instead of words.
+:HINT:
+  - Hint :: Recall that \lsquo{}for all\rsquo or \lsquo{}for every\rsquo is Universal ($\forall$), and \lsquo{}for
+            some\rsquo or \lsquo{}there exists\rsquo is Existential ($\exist$).
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TUW
+#+begin_note
+  Use quantifiers and predicates with more than one variable to express these statements.
+  1. Every CS major needs to take discrete mathematics.
+  2. Every student in the class owns a laptop.
+  3. There is a student in the class who has taken data structures.
+  4. No student has been in every building at the University.
+  5. Exactly one student has been in every room of the STC.
+  6. Every student has been in at least one room of every building on campus.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WWD *
+#+begin_note
+  Use quantifiers and predicates with more than one variable to express the
+  /negations/ of these statements:
+  1. Every CS major needs to take discrete mathematics.
+  2. Every student in the class owns a laptop.
+  3. There is a student in the class who has taken data structures.
+  4. No student has been in every building at the University.
+  5. Exactly one student has been in every room of the STC.
+  6. Every student has been in at least one room of every building on campus.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WWR *
+#+begin_note
+  Express each of these statements using predicates, quantifiers, logical
+  connectives, and mathematical operators where the domain consists of all
+  integers.
+  1. The average of two numbers is not greater than those two numbers.
+  2. The product of a positive number and a negative number is negative.
+  3. There is no solution for a number divided by zero.
+  4. All positive numbers are greater than all negative numbers.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TWN *
+#+begin_note
+  Express the statement \ldquo{}no prime number has 3 factors\rdquo using predicates,
+  quantifiers, logical connectives, and mathematical operators.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WWS
+#+begin_note
+  If the domain consists of all integers, what are the truth values of these statements?
+  1. $\forall$ x $\forall$ y (x $\neq$ 0) $\wedge$ (y $\neq$ 0) $\leftrightarrow$ (xy $\neq$ 0)
+  2. $\exists$ x $\forall$ y (x + y > y)
+  3. $\exists$ x $\forall$ y (x + y < y)
+  4. $\exists$! x $\forall$ y (x + y = y)
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WZG *
+#+begin_note
+  Determine the truth value of the statement
+
+  $\forall$ x $\exists$ y (x - y $\geq$ x)
+
+  if the domain for x and y consists of
+  1. all real numbers.
+  2. the natural numbers.
+  3. all negative integers.
+  4. rational numbers.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO TKH
+#+begin_note
+  Expand to two nested quantifiers the code you created for one quantifier.
+
+  Specifically, implement these four functions, shown side-by-side with their
+  symbolic logic equivalents:
+
+  | Function Name     | In Symbols  |
+  |-------------------+-------------|
+  | for-all-for-all   | $\forall{}$ x $\forall{}$ y |
+  | for-all-for-some  | $\forall{}$ x $\exists{}$ y |
+  | for-some-for-all  | $\exists{}$ x $\forall{}$ y |
+  | for-some-for-some | $\exists{}$ x $\exists{}$ y |
+
+  Let\rsquo{}s examine these quantifications in the context of loops and a generic
+  predicate P. These will be /nested/ loops, an outer one wrapping an inner one,
+  because /nested/ quantification is what is being expressed. The predicate
+  (function) call (P x y) goes in the inner loop, which controls the y, while
+  the outer loop controls the x.
+
+  \ldquo{}For all x for all y\rdquo wants to find (P x y) always true. That\rsquo{}s what it means
+  for the nested quantification to be true, and naturally, this only works if
+  the domains of x and y are finite. Even then, it really only /works/ if these
+  domains are reasonably finite --- not /too/ big. Iteration is serial, after
+  all, and time is short.
+
+  So, for-all-for-all loops through x\rsquo{}s domain, and for each x loops through
+  each y in y\rsquo{}s domain. On each inner-loop iteration it calls (P x y) and checks
+  the value. If the value is ever false, then for-all-for-all is false ---
+  immediately --- no need to check any further. Some y has been found for some x
+  where the predicate is false. If both loops finish with nary a false
+  evaluation, for-all-for-all is ultimately true. There is no x for which, for
+  any y, (P x y) is false.
+
+  The other function with similarly relatively simple logic is
+  for-some-for-some. This function loops through x\rsquo{}s domain, and for each x
+  loops through each y in y\rsquo{}s domain. On each inner-loop iteration it calls (P x
+  y) and checks the value. If a true value is found, then for-some-for-some is
+  true --- immediately --- no need to check any further. If both loops finish
+  never having triggered true, for-some-for-some is ultimately false. There is
+  no x for which there is some y for which (P x y) is true.
+
+  The other two are trickier. \ldquo{}For all x for some y\rdquo wants (P x y) to always be
+  true sometimes, and \ldquo{}for some x for all y\rdquo wants (P x y) to sometimes be true
+  always. Implement for-all-for-some and for-some-for-all the best, most elegant
+  way you can.
+
+  Test your implementations of these four functions using a suitable binary
+  (arity 2) predicate, for example =>=.
+:HINT:
+  - Hint :: See WUZ for the context.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO WUE
+#+begin_note
+  Consider Doctrine and Covenants 130:20-21 in light of what you know of
+  predicates and quantifiers:
+
+  - 20. :: /There is a law, irrevocably decreed in heaven before the foundations
+           of this world, upon which all blessings are predicated./
+  - 21. :: /And when we obtain any blessing from God, it is by obedience to that
+           law upon which it is predicated./
+
+  Given the predicate $P(x, y)$ = \ldquo{}blessing $x$ is predicated on law \(y\)\rdquo,
+  these two verses are best expressed as a quantified statement by which of the
+  following?
+
+  1. $\forall\,x\,\forall\,y\,P(x, y)$
+  2. $\forall\,x\,\exists\,y\,P(x, y)$
+  3. $\exists\,x\,\forall\,y\,P(x, y)$
+  4. $\exists\,x\,\exists\,y\,P(x, y)$
+
+  Justify your choice.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Puzzles
+** TODO TEU
+#+begin_note
+  How many numbers between one and a million contain the digit 1 exactly once,
+  and the sum of the rest of the digits is 16? Write elisp code with and without
+  loops to verify your answer.
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+** TODO TME
+#+begin_note
+  Sequences can be non-numeric as well. What is the pattern for this sequence?
+: [m b w y me be wi yo met bew ith you meta bewi thyo uati metap bewit hyoua tirel]
+  How long can it continue?
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+
+** TODO WRA
+#+begin_note
+  Why is the sum of the reciprocals of the powers of two scaled by which power
+  equal to two?
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+** TODO MMP (not in book)
+#+begin_note
+   What is the following code demonstrating?
+#+begin_src elisp :results silent
+  (defun mm (m1 m2)
+    "
+    Multiplication of 2x2 matrices works as follows:
+    | a b |   | e f |   | a*e + b*g   a*f + b*h |
+    |     | x |     | = |                       |
+    | c d |   | g h |   | c*e + d*g   c*f + d*h |
+  "
+    (let* ((ab (elt m1 0))
+           (cd (elt m1 1))
+           (ef (elt m2 0))
+           (gh (elt m2 1))
+           (a (elt ab 0))
+           (b (elt ab 1))
+           (c (elt cd 0))
+           (d (elt cd 1))
+           (e (elt ef 0))
+           (f (elt ef 1))
+           (g (elt gh 0))
+           (h (elt gh 1)))
+      (vector (vector (+ (* a e) (* b g))
+                      (+ (* a f) (* b h)))
+              (vector (+ (* c e) (* d g))
+                      (+ (* c f) (* d h))))))
+#+end_src
+
+#+begin_src elisp :results raw
+  (rest (rest (rest (symbol-function 'mm))))
+#+end_src
+
+#+begin_src elisp
+  (let ((m [[0 1] [1 1]]))
+    (mm m (mm m (mm m (mm m (mm m m))))))
+#+end_src
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
