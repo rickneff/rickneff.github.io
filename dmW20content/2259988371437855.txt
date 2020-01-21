@@ -1,0 +1,191 @@
+-*- mode: org -*-
+#+title: Presentation 03
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+
+* Speaking of Cantor
+   Here is a pretty good explanation of his Diagonal Argument
+   (and a lot more!): [[http://www.coopertoons.com/education/diagonal/diagonalargument.html]]
+* Discuss Cantor\rsquo{}s Discovery
+    that led him to exclaim:
+#+begin_quote
+    Je le vois, mais je ne le crois pas! (I see it but I don\rsquo{}t believe it!)
+#+end_quote
+
+#+begin_src elisp
+  (org-sbe shunffle)
+  (shuffle [1 3 5 7 9] [4 2 6 8 0])
+#+end_src
+
+#+results:
+: [1 4 3 2 5 6 7 8 9 0]
+
+#+name: shunffle
+#+begin_src elisp :results silent
+  (defun shuffle (&rest vectors)
+    (apply 'vconcat (apply 'mapcar* 'vector vectors)))
+
+  (defun unshuffle (vector &optional num-parts)
+    (loop with answer = nil
+          with l = (length vector)
+          with n = (or num-parts 2)
+          for i from 0 below n
+          do (push (loop for j from i below l by n
+                         vconcat (subseq vector j (+ j 1)))
+                   answer)
+          finally return (nreverse answer)))
+#+end_src
+
+#+begin_src elisp :results raw
+  (unshuffle [1 4 1 5 9 2 6 5 3 5 8 9 7 9 3 2 3 8 4 6 2 6] 3)
+#+end_src
+
+#+results:
+([1 5 6 5 7 2 4 6] [4 9 5 8 9 3 6] [1 2 3 9 3 8 2])
+
+#+begin_src elisp
+  (apply 'shuffle '([1 7] [2 8] [3 9] [4 7] [5 3] [6 4]))
+#+end_src
+
+#+results:
+: [1 2 3 4 5 6 7 8 9 7 3 4]
+
+** Meaning
+   A 1-dimensional line
+   \leftrightarrow 2-dimensional plane
+   \leftrightarrow 3-dimensional space
+   \leftrightarrow ....
+   \leftrightarrow n-dimensional space
+   \leftrightarrow ....
+
+   0.314159265... \leftrightarrow (0.34525.., 0.1196...)
+
+   \aleph_0 = countable infinity
+
+   \aleph_1 = uncountable infinity
+
+   \aleph_1 = 2^{\aleph_0}
+
+   \aleph_2 = 2^{\aleph_1}
+
+   \(\aleph_n = 2^{\aleph_{n-1}}\)
+* Talk About Math-Mode Delimiters
+  e.g., the statement
+
+  \({\mathbf N} \leftrightarrow \bigcup_{n = 2}^{\infty} \left( \overbrace{{\mathbf N} \times {\mathbf N} \times \cdots \times {\mathbf N}}^{n} \right)\)
+** Meaning
+   the Union of a Countable Number of Countable Sets is countable!
+** And
+   discuss the pros and cons of
+   1. raw LaTeX
+   [[https://firstthreeodds.org/scratch-paper.tex][scratch-paper.tex]] \rarr [[https://firstthreeodds.org/scratch-paper.pdf][scratch-paper.pdf]]
+*** Retrieve
+#+begin_src sh :results silent
+  curl -O https://firstthreeodds.org/scratch-paper.tex
+  curl -O https://firstthreeodds.org/scratch-paper.pdf
+#+end_src
+   file:scratch-paper.tex
+   file:scratch-paper.pdf
+   2. org-mode LaTeX
+*** Is there a third option?
+    How about raw LaTeX inside a .org file?!
+
+    For example: [[file:latex-all-2-input-truth-tables.org]]
+
+#+begin_src sh :results silent
+  curl -O https://firstthreeodds.org/latex-all-2-input-truth-tables.org
+#+end_src
+* Talk More About Sets and Logic (and Lisp)
+  First, here is a 4-input truth table:
+**   p  q   r  s
+   | p | q | r | s |
+   |---+---+---+---|
+   | 0 | 0 | 0 | 0 |
+   | 0 | 0 | 0 | 1 |
+   | 0 | 0 | 1 | 0 |
+   | 0 | 0 | 1 | 1 |
+   | 0 | 1 | 0 | 0 |
+   | 0 | 1 | 0 | 1 |
+   | 0 | 1 | 1 | 0 |
+   | 0 | 1 | 1 | 1 |
+   | 1 | 0 | 0 | 0 |
+   | 1 | 0 | 0 | 1 |
+   | 1 | 0 | 1 | 0 |
+   | 1 | 0 | 1 | 1 |
+   | 1 | 1 | 0 | 0 |
+   | 1 | 1 | 0 | 1 |
+   | 1 | 1 | 1 | 0 |
+   | 1 | 1 | 1 | 1 |
+:HINT:
+#+begin_src elisp :results raw
+ (org-sbe tt-input)
+ (truth-table-inputs 4)
+#+end_src
+
+#+begin_src elisp :results value
+ (org-sbe tt-input)
+ (truth-table-inputs 5)
+#+end_src
+:END:
+
+:HINT:
+#+name: tt-input
+#+begin_src elisp :results silent
+  (defun truth-table-input (i j)
+    "Return the truth table input value (1 or 0) for the i-th row
+  and the j-th column"
+    (mod (/ (1- i) (expt 2 (1- j))) 2))
+
+  (defun truth-table-inputs (num-vars)
+    (loop with num-cols = num-vars
+          with num-rows = (expt 2 num-vars)
+          for i from 1 to num-rows
+          collect (loop for j from num-cols downto 1
+                        collect (truth-table-input i j))))
+#+end_src
+:END:
+* Discuss How to Do Truth Tables
+#+begin_src elisp
+  (make-truth-table "(p --> (q ^ r)")
+#+end_src
+
+:HIDE:
+#+results1:
+| p | q | r | (q \land r) | (p --> (q \land r)) |
+|---+---+---+---------+-----------------|
+| 0 | 0 | 0 |       0 |               1 |
+| 0 | 0 | 1 |       0 |               1 |
+| 0 | 1 | 0 |       0 |               1 |
+| 0 | 1 | 1 |       1 |               1 |
+| 1 | 0 | 0 |       0 |               0 |
+| 1 | 0 | 1 |       0 |               0 |
+| 1 | 1 | 0 |       0 |               0 |
+| 1 | 1 | 1 |       1 |               1 |
+
+#+results2:
+| (p | --> | (q | \land | r)) |
+|----+-----+----+---+-----|
+|  0 |   1 |  0 | 0 |   0 |
+|  0 |   1 |  0 | 0 |   1 |
+|  0 |   1 |  1 | 0 |   0 |
+|  0 |   1 |  1 | 1 |   1 |
+|  1 |   0 |  0 | 0 |   0 |
+|  1 |   0 |  0 | 0 |   1 |
+|  1 |   0 |  1 | 0 |   0 |
+|  1 |   1 |  1 | 1 |   1 |
+:END:
+** TTG Courtesy Kyle West
+*** A JavaScript Truth Table Generator
+    Published on GitHub Page [[https://kyle-west.github.io/truthfulness/]]
+    Repo lives at [[https://github.com/kyle-west/truthfulness]].
