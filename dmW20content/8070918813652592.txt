@@ -1,0 +1,57 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 03
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* Sample Solution
+  to the file:class-directed-learning-02.txt \ldquo{}Make More Robust\rdquo task.
+
+#+begin_src elisp :results silent
+  (defmacro with (bindings &rest forms)
+    (unless (vectorp bindings)
+      (error "bindings should be a vector"))
+    (let ((len (length bindings)))
+      (unless (zerop (mod len 3))
+        (error "bad length for bindings"))
+      (unless (loop for i from 0 below len by 3 always (symbolp (elt bindings i)))
+        (error "bindings must have symbols on the left-hand-sides of the ='s"))
+      (unless (loop for i from 1 below len by 3 always (eq '= (elt bindings i)))
+        (error "bad bindings: %S" bindings))
+      (let* ((sym-list (loop for i from 0 below len by 3 collect (elt bindings i)))
+             (val-list (loop for i from 2 below len by 3 collect (elt bindings i)))
+             (bindings-list (apply 'list (mapcar* 'list sym-list val-list))))
+        `(let* ,bindings-list ,@forms))))
+#+end_src
+* TODO Ponder and Prove as Teams
+
+  Refer to the animated image in DCP under the Introductory section
+
+  [[https://rickneff.github.io/metaphors-be-with-you.html#outline-container-orgfd28ab6][Topics To Be Explored]]
+
+  in the Book. This is the \ldquo{}finite binary tree\rdquo.
+
+  Depicted at the link below is the \ldquo{}INFINITE binary tree\rdquo. (Naturally, this is
+  only a conceptualization of something that cannot actually be drawn.) The tree
+  is constructed by letting all possible paths move upward, forking infinitely
+  many times. By continually halving distances, an infinite number of \ldquo{}branches\rdquo
+  (or nodes) will fit below the horizontal line. Imagine each point on this line
+  as being a \ldquo{}leaf\rdquo that lies at the end of one of the infinitely zigzagged
+  paths up through the tree. Starting from the bottom (the root of the tree) to
+  trace a complete path up to the horizontal line one makes an infinite number
+  of Left-Right decisions (Left corresponding to 0 and Right to 1). For example,
+  the path where the squiggly line meets the horizontal line corresponds to the
+  infinite sequence: 0, 1, 1, 0, 1, .... Starting from the bottom single node,
+  the number of nodes at each step doubles as the distance to the horizontal
+  line halves.
+
+  #+ATTR_HTML: :alt infinite binary tree :title Infinite Binary Tree
+  [[https://firstthreeodds.org/img/infinitebinarytree.png]]
+
+  Which of the following statements is true of this tree in its finished form?
+
+  - [ ] It has a countable number of nodes and a countable number of paths.
+  - [ ] It has a countable number of nodes and an uncountable number of paths.
+  - [ ] It has an uncountable number of nodes and a countable number of paths.
+  - [ ] It has an uncountable number of nodes and an uncountable number of paths.
