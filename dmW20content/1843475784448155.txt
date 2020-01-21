@@ -1,0 +1,173 @@
+-*- mode: org -*-
+#+title: Presentation 03
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
+:END:
+* DEF
+** Discuss Functions
+  Which one is a *pure* function?
+*** factorize
+#+begin_src elisp
+  (factorize 41089328579283753)
+#+end_src
+
+#+results:
+: ((3 . 1) (101 . 1) (269 . 1) (911 . 1) (553370189 . 1))
+
+*** relocate-file-to-work-folder
+     [[file:desert.jpg]]
+     [[https://ontologicalblog.files.wordpress.com/2016/12/spacemacs_cheat_sheet_1-22.pdf][Spacemacs Cheat Sheet]]
+     [[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+#+begin_src elisp :results silent
+  (setenv "WORK" (directory-file-name (file-name-directory (buffer-file-name)))
+#+end_src
+**** What is the Crucial Difference
+     between these two functions?
+** Discuss DeMorgan\rsquo{}s Laws
+*** For Propositional Logic
+     The negation of a disjunction/conjunction is equivalent to the
+     conjunction/disjunction of the negations of the disjuncts/conjuncts.
+**** In symbols
+     \not (p \lor q) \equiv \not p \land \not q
+
+     \not (p \land q) \equiv \not p \lor \not q
+** Discuss \ldquo{}Everything\rdquo First
+*** Failure to Distinguish
+    between Use and Mention.
+    https://www.bryantstratton.edu/about-us
+*** What means this?
+    \forall{}x A(x) \land [\exist{}y(T(y) \land u \in y) \rarr \forall{}z C(z)]
+**** With predicates
+     A = is-awesome
+     T = is-a-team
+     C = is-cool
+**** And free variable
+     u = you
+***** Or
+      = [[https://www.youtube.com/watch?v=StTqXEQ2l-Y][Emmet]]
+**** Meaning revealed
+     - Everything is awesome
+     - Everything is cool when you\rsquo{}re part of a team!
+** Continue Discussing DeMorgan\rsquo{}s Laws
+*** For Quantifiers
+
+    \forall x Even(x)
+
+    In code, assume the =for-all= function is defined (see WUZ (and then consider
+    TKH where you are asked to expand to two nested quantifiers the code you created
+    for one quantifier)).
+
+#+begin_src elisp :results raw
+  (for-all 'evenp (number-sequence 2 222222 2)
+#+end_src
+**** A Large Universe
+     \forall x Even(x) \equiv Even(2) \land Even(4) \land Even(6) \land Even(8) \land \dots
+**** A Small Universe
+     Consisting of two elements: [2 4]
+
+     \forall x Even(x) \equiv Even(2) \land Even(4)
+
+    \not \forall x Even(x) \equiv \not (Even(2) \land Even(4))
+                  \equiv \not Even(2) \lor \not Even(4)
+
+                  \equiv \exist x \not Even(x)
+***** The Other Way
+      \exist x LessThan(x, 4) \equiv LessThan(2, 4) \lor LessThan(4, 4)
+
+      \not \exist x LessThan(x, 4) \equiv \not (LessThan(2, 4) \lor LessThan(4, 4))
+                           \equiv \not LessThan(2, 4) \land \not LessThan(4, 4)
+
+                           \equiv \forall x \not LessThan(x, 4)
+***** Neither All Nor Some
+      Not All does *not* mean None. It means Some are NOT (but Some Are).
+
+      Not Some does *not* mean All. It means All are NOT.
+**** What Say?
+***** An Axiom of Real Numbers
+   - Trichotomy: one (and only one) of these three statements is true:
+     1. x < y
+     2. x = y
+     3. x > y
+
+     \neg (x < y) \rarr x \ge y
+     \neg (x > y) \rarr x \le y
+     \neg (x = y) \rarr x < y \lor x > y
+***** In English
+     x < 0 can be stated: x is a negative number
+     x > 0 can be stated: x is a positive number
+     x \ge 0 can be stated: x is a NONnegative number
+     x \le 0 can be stated: x is a NONpositive number
+***** Examples
+      Like Exercise TUK (Part 2) that asks how to say in English:
+****** 1
+      \exists x \exists y (((x \geq 0) \wedge (y \geq 0)) \rightarrow (xy \geq 0))
+******* Not the Most Succinct Answer
+        For some x and some y, when x \ge 0 and y \ge 0 then x times y will be greater than or equal to zero.
+******** More succinctly
+         The product of two nonnegatives is nonnegative.
+****** 2
+      \forall x \forall y ((x < 0) \wedge (y < 0) \rightarrow (xy > 0))
+******* Answer
+        The product of two negatives is positive.
+****** 3
+      \forall x \forall y ((x > 0) \wedge (y > 0) \rightarrow ((x + y)/2 > 0))
+******* Answer
+        The average of two positives is positive.
+****** 4
+      \forall x \forall y [(x < 0) \wedge (y < 0) \rightarrow (x - y < 0)]
+      The difference between two negatives is negative.
+******* Is It?
+         No, it is *false*. Here is a counterexample: -3 - -4 = 1.
+:EXPLORE:
+    \neg \forall x \forall y [(x < 0) \wedge (y < 0) \rightarrow (x - y < 0)] \equiv
+      \exists x \neg \forall y [(x < 0) \wedge (y < 0) \rightarrow (x - y < 0)] \equiv
+      \exists x \exists y \neg [(x < 0) \wedge (y < 0) \rightarrow (x - y < 0)].
+
+     With p = (x < 0) \land (y < 0), and
+          q = (x - y < 0)
+
+     what is \neg (p \rarr q)? \neg(\neg p \lor q) \equiv p \land \neg q
+
+     \exists x \exists y [(x < 0) \wedge (y < 0) \land (x - y \ge 0)]. Is this true? YES!
+
+    x = -3, y = -4.
+:END:
+:NOTES:
+ \forall x \forall y ((x < 0) \wedge (y < 0) \rightarrow (xy > 0))
+
+ \forall x \forall y ((x > 0) \wedge (y > 0) \rightarrow ((x + y)/2 > 0))
+
+ \neg \forall x \forall y ((x < 0) \wedge (y < 0) \rightarrow (x - y < 0)
+
+   \neg (p \lor q) \equiv \neg p \land \neg q
+   p \rarr q \equiv \neg p \vee q
+
+   Let p = (x < 0) \land (y < 0)
+   Let q = (x - y < 0)
+
+ \exist x \exists{}y \neg (((x < 0) \wedge (y < 0)) \rarr (x - y < 0)) (pushing \neg across the \forall \forall )
+
+ \exists x \exists y \neg (\neg (((x < 0) \wedge (y < 0)) \lor (x - y < 0))) (eliminate conditional)
+
+ \exists x \exists y (\neg \neg (((x < 0) \wedge (y < 0))) \land \neg (x - y < 0)) (DeMorgan's)
+
+ \exists x \exist y (((x < 0) \land (y < 0)) \land \neg (x - y < 0)) (double negation elimination)
+
+ \exists x \exists y ((x < 0) \land (y < 0) \land (x - y \geq 0)) (eliminate last negation and remove some parens)
+
+ \exists x \exist y (x < 0) \land (y < 0) \land (x - y \geq 0) (this is the goal after removing outermost parens)
+:END:
