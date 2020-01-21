@@ -1,0 +1,24 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 03
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Now that you know how to negate p \rarr q (the conditional operator), write the
+  symbolic equivalent of the full quantified expression using the given
+  predicates:
+
+  A = is-awesome
+  T = is-a-team
+  C = is-cool
+  D = is-living-dream
+
+* The Proposition In English
+   Everything is cool when you\rsquo{}re part of a team (AND)
+   Everything is awesome when we\rsquo{}re living our dream.
+
+* TODO Translate the Proposition to Symbols
+
+* TODO Negate the Symbolic Proposition
+   Follow the steps shown in file:presentation-03.txt.
