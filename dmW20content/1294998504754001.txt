@@ -1,0 +1,1011 @@
+-*- mode: org -*-
+#+title: Assignment 02 Key
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+
+  These are sample/examplary answers, some of which come from former students.
+
+* Exercises
+** UCA
+#+begin_info
+  Do you know what /pithy/ means?
+
+  Example of a pithy proposition: Ed is tall.
+
+  Example of a non-pithy proposition: Now is the time for all good men to come to the aid of their country.
+
+  Example of a pithy non-proposition: Ed, duck!
+
+  Example of a non-pithy non-proposition: Did you know that now is the time for
+  all good men to come to the aid of their country?
+#+end_info
+** ODS
+#+begin_info
+  | # | Statement                          | Proposition? | Truth Value |
+  |---+------------------------------------+--------------+-------------|
+  | 1 | 2 + 2 = 4.                         | Yes          | true        |
+  | 2 | 2 + 1 = 4.                         | Yes          | false       |
+  | 3 | Toronto is the capital of Germany. | Yes          | false       |
+  | 4 | Read these questions carefully.    | No           | N/A         |
+  | 5 | x + y + z = q.                     | It depends.  | Unknown     |
+  | 6 | What time is it?                   | No           | N/A         |
+  | 7 | 2x + 3 = 9.                        | It depends.  | Unknown     |
+  | 8 | Simon says jump.                   | No           | N/A         |
+#+end_info
+** UGX
+#+begin_info
+  /v/ \in /C/
+#+end_info
+** OGR
+#+begin_info
+  Only the first is a simple proposition. The second and third are conjunctions
+  (read the second as \ldquo{}Days are longer than hours and days are longer than
+  minutes\rdquo), and the fourth is a disjunction.
+#+end_info
+** UWM
+#+begin_info
+  1. Two plus two does not equal four.
+  2. Two plus one is not less than four.
+  3. Toronto is not the capital of Germany.
+  4. A total eclipse does not happen infrequently.
+  5. Special measures must not be taken to deal with the current situation.
+#+end_info
+** OPZ
+#+begin_info
+  1. I did not study.
+  2. I studied or I got an F on the test.
+  3. I studied and I got an F on the test.
+  4. I did not study and I did not get an F on the test.
+  5. I did not study or I got an F on the test.
+  6. It is not the case that I studied or I got an F on the test.
+#+end_info
+** UOX
+#+begin_info
+  The other special forms besides =if= that lisp has for doing
+  conditionals include:
+
+  - =cond=
+  - =when=
+  - =unless=
+  - =while=
+  - =and=
+  - =or=
+
+  They are special because they must be handled as special cases in the lisp
+  interpreter, for the reason that not all of their arguments should be
+  evaluated (recall how normal functions evaluate /all/ their arguments).
+#+end_info
+** OTX
+#+begin_info
+  1. Exclusive or.
+  2. Inclusive or.
+  3. Inclusive or.
+  4. Inclusive or.
+  5. Exclusive or.
+  6. Exclusive or.
+#+end_info
+** UOT
+#+begin_info
+  The differences are the two bolded zeros in this truth table of expression 2:
+
+  #+ATTR_HTML: :border 2 :rules all :frame border
+  |-----+----+----+----+----+----|
+  |   / | <> | <> | <> | <> | <> |
+  |-----+----+----+----+----+----|
+  | ((p |  \land | q) |  \lor |  \not | r) |
+  |-----+----+----+----+----+----|
+  |   0 |  0 |  0 |  1 |  1 |  0 |
+  |   0 |  0 |  0 |  0 |  0 |  1 |
+  |   0 |  0 |  1 |  1 |  1 |  0 |
+  |   0 |  0 |  1 |  *0* |  0 |  1 |
+  |   1 |  *0* |  0 |  1 |  1 |  0 |
+  |   1 |  0 |  0 |  0 |  0 |  1 |
+  |   1 |  1 |  1 |  1 |  1 |  0 |
+  |   1 |  1 |  1 |  1 |  0 |  1 |
+  |-----+----+----+----+----+----|
+#+end_info
+** UIN
+#+begin_info
+#+BEGIN_SRC emacs-lisp
+  (setq English [A B C D E F G H I J K L M N O P Q R S T U V W X Y Z]
+        Hawaiian [A E H I K L M N O P U W]
+        Difference [B C E F G J Q R S T V X Y Z])
+#+END_SRC
+#+end_info
+** OJL
+#+begin_info
+  We can justify set A as the union of numbered regions 4, 5, 7 and 6, because
+  the first of the logical propositions that are or\rsquo{}ed together, $(p \land \lnot q \land
+  \lnot r)$ means x \in A \land x \notin B \land x \notin C, which means x \in (A \cap comp(B) \cap comp(C))
+  --- using comp instead of an overline for the complement operator. But region
+  4 is exactly that set: (A \cap comp(B) \cap comp(C)). Similarly, (p \land \lnot q \land r)
+  corresponds to (A \cap comp(B) \cap C), which is region 5, (p \land q \land r) corresponds
+  to (A \cap B \cap C), which is region 7, and (p \land q \land \lnot r) corresponds to (A \cap B
+  \cap comp(C)), which is region 6. Since union (\cup) corresponds to logical or (\lor),
+  the union of those four sets (4, 5, 6 and 7) corresponds exactly to the or\rsquo{}ed
+  together logical proposition.
+
+  Similar reasoning justifies sets B and C being described as unions of sets as
+  well as equivalent logically or\rsquo{}ed propositions.
+#+end_info
+** UCG
+#+begin_info
+  1. =[vim verve butter vinegar pepper vigor]=
+  2. =[vigor]=
+  3. =[vim verve vinegar vigor]=
+  4. =[butter vinegar pepper vigor]=
+  5. =[vinegar vigor]=
+  6. \emptyset
+
+#+BEGIN_SRC emacs-lisp
+  (setq A [verve vim vigor]
+        B [butter vinegar pepper vigor]
+        set1 (apply 'vector (union (append A nil) (append B nil)))
+        set2 (apply 'vector (intersection (append A nil) (append B nil)))
+        partial-answer (list (list 1 set1) (list 2 set2)))
+#+END_SRC
+
+#+RESULTS:
+| 1 | [vim verve butter vinegar pepper vigor] |
+| 2 | [vigor]                                 |
+#+end_info
+** OQT
+#+begin_info
+  1. If I studied then I got an A on the test.
+  2. I did not study or I did not get an A on the test. (I neither studied nor did I get an A on the test.)
+  3. If I didn\rsquo{}t study then I either studied or I got an A on the test.
+  4. If I didn\rsquo{}t study then I didn\rsquo{}t get an A on the test.
+#+end_info
+** UTQ
+#+begin_info
+  1. /p/ \land /q/
+  2. \not /p/ \land /q/
+  3. /p/ \land \not /q/
+  4. (\not /p/ \land \not /q/) \lor (/p/ \land /q/)
+#+end_info
+** UJU
+#+begin_info
+  1. Just compact:
+  | p | \lor | q | \leftrightarrow | q | \lor | p |
+  |---+---+---+---+---+---+---|
+  | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
+  | 1 | 1 | 0 | 1 | 0 | 1 | 1 |
+  | 0 | 1 | 1 | 1 | 1 | 1 | 0 |
+  | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+
+  2. Just compact:
+  | p | \land | q | \leftrightarrow | q | \land | p |
+  |---+---+---+---+---+---+---|
+  | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
+  | 1 | 0 | 0 | 1 | 0 | 0 | 1 |
+  | 0 | 0 | 1 | 1 | 1 | 0 | 0 |
+  | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+#+end_info
+** OLH
+#+begin_info
+  1. Just compact:
+  | ( | p | \lor | q | ) | \lor | r | \leftrightarrow | p | \lor | ( | q | \lor | r | ) |
+  |---+---+---+---+---+---+---+---+---+---+---+---+---+---+---|
+  |   | 0 | 0 | 0 |   | 0 | 0 | 1 | 0 | 0 |   | 0 | 0 | 0 |   |
+  |   | 0 | 0 | 0 |   | 1 | 1 | 1 | 0 | 1 |   | 0 | 1 | 1 |   |
+  |   | 0 | 1 | 1 |   | 1 | 0 | 1 | 0 | 1 |   | 1 | 1 | 0 |   |
+  |   | 0 | 1 | 1 |   | 1 | 1 | 1 | 0 | 1 |   | 1 | 1 | 1 |   |
+  |   | 1 | 1 | 0 |   | 1 | 0 | 1 | 1 | 1 |   | 0 | 0 | 0 |   |
+  |   | 1 | 1 | 0 |   | 1 | 1 | 1 | 1 | 1 |   | 0 | 1 | 1 |   |
+  |   | 1 | 1 | 1 |   | 1 | 0 | 1 | 1 | 1 |   | 1 | 1 | 0 |   |
+  |   | 1 | 1 | 1 |   | 1 | 1 | 1 | 1 | 1 |   | 1 | 1 | 1 |   |
+
+  2. Just compact:
+  | ( | p | \land | q | ) | \land | r | \leftrightarrow | p | \land | ( | q | \land | r | ) |
+  |---+---+---+---+---+---+---+---+---+---+---+---+---+---+---|
+  |   | 0 | 0 | 0 |   | 0 | 0 | 1 | 0 | 0 |   | 0 | 0 | 0 |   |
+  |   | 0 | 0 | 0 |   | 0 | 1 | 1 | 0 | 0 |   | 0 | 0 | 1 |   |
+  |   | 0 | 0 | 1 |   | 0 | 0 | 1 | 0 | 0 |   | 1 | 0 | 0 |   |
+  |   | 0 | 0 | 1 |   | 0 | 1 | 1 | 0 | 0 |   | 1 | 1 | 1 |   |
+  |   | 1 | 0 | 0 |   | 0 | 0 | 1 | 1 | 0 |   | 0 | 0 | 0 |   |
+  |   | 1 | 0 | 0 |   | 0 | 1 | 1 | 1 | 0 |   | 0 | 0 | 1 |   |
+  |   | 1 | 1 | 1 |   | 0 | 0 | 1 | 1 | 0 |   | 1 | 0 | 0 |   |
+  |   | 1 | 1 | 1 |   | 1 | 1 | 1 | 1 | 1 |   | 1 | 1 | 1 |   |
+#+end_info
+** UWY
+#+begin_info
+  1. Just compact:
+  | p | \land | ( | q | \lor | r | ) | \leftrightarrow | ( | p | \land | q | ) | \lor | ( | p | \land | r | ) |
+  |---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---|
+  | 0 | 0 |   | 0 | 0 | 0 |   | 1 |   | 0 | 0 | 0 |   | 0 |   | 0 | 0 | 0 |   |
+  | 0 | 0 |   | 0 | 1 | 1 |   | 1 |   | 0 | 0 | 0 |   | 0 |   | 0 | 0 | 1 |   |
+  | 1 | 0 |   | 0 | 0 | 0 |   | 1 |   | 1 | 0 | 0 |   | 0 |   | 1 | 0 | 0 |   |
+  | 1 | 1 |   | 0 | 1 | 1 |   | 1 |   | 1 | 0 | 0 |   | 1 |   | 1 | 1 | 1 |   |
+  | 0 | 0 |   | 1 | 1 | 0 |   | 1 |   | 0 | 0 | 1 |   | 0 |   | 0 | 0 | 0 |   |
+  | 0 | 0 |   | 1 | 1 | 1 |   | 1 |   | 0 | 0 | 1 |   | 0 |   | 0 | 0 | 1 |   |
+  | 1 | 1 |   | 1 | 1 | 0 |   | 1 |   | 1 | 1 | 1 |   | 1 |   | 1 | 0 | 0 |   |
+  | 1 | 1 |   | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   |
+
+  2. Just compact:
+  | p | \lor | ( | q | \land | r | ) | \leftrightarrow | ( | p | \lor | q | ) | \land | ( | p | \lor | r | ) |
+  |---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---|
+  | 0 | 0 |   | 0 | 0 | 0 |   | 1 |   | 0 | 0 | 0 |   | 0 |   | 0 | 0 | 0 |   |
+  | 0 | 0 |   | 0 | 0 | 1 |   | 1 |   | 0 | 0 | 0 |   | 0 |   | 0 | 1 | 1 |   |
+  | 1 | 1 |   | 0 | 0 | 0 |   | 1 |   | 1 | 1 | 0 |   | 1 |   | 1 | 1 | 0 |   |
+  | 1 | 1 |   | 0 | 0 | 1 |   | 1 |   | 1 | 1 | 0 |   | 1 |   | 1 | 1 | 1 |   |
+  | 0 | 0 |   | 1 | 0 | 0 |   | 1 |   | 0 | 1 | 1 |   | 0 |   | 0 | 0 | 0 |   |
+  | 0 | 1 |   | 1 | 1 | 1 |   | 1 |   | 0 | 1 | 1 |   | 1 |   | 0 | 1 | 1 |   |
+  | 1 | 1 |   | 1 | 0 | 0 |   | 1 |   | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 0 |   |
+  | 1 | 1 |   | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   |
+#+end_info
+** OBW
+#+begin_info
+  1. Just compact:
+  | \not | ( | p | \lor | q | ) | \leftrightarrow | \not | p | \land | \not | q |
+  |---+---+---+---+---+---+---+---+---+---+---+---|
+  | 1 |   | 0 | 0 | 0 |   | 1 | 1 | 0 | 1 | 1 | 0 |
+  | 0 |   | 0 | 1 | 1 |   | 1 | 1 | 0 | 0 | 0 | 1 |
+  | 0 |   | 1 | 1 | 0 |   | 1 | 0 | 1 | 0 | 1 | 0 |
+  | 0 |   | 1 | 1 | 1 |   | 1 | 0 | 1 | 0 | 0 | 1 |
+
+  2. Just compact:
+  | \not | ( | p | \land | q | ) | \leftrightarrow | \not | p | \lor | \not | q |
+  |---+---+---+---+---+---+---+---+---+---+---+---|
+  | 1 |   | 0 | 0 | 0 |   | 1 | 1 | 0 | 1 | 1 | 0 |
+  | 1 |   | 0 | 0 | 1 |   | 1 | 1 | 0 | 1 | 0 | 1 |
+  | 1 |   | 1 | 0 | 0 |   | 1 | 0 | 1 | 1 | 1 | 0 |
+  | 0 |   | 1 | 1 | 1 |   | 1 | 0 | 1 | 0 | 0 | 1 |
+#+end_info
+** USL
+#+begin_info
+  1. Just compact:
+  | p | \land | 1 | \leftrightarrow | p |
+  |---+---+---+---+---|
+  | 0 | 0 | 1 | 1 | 0 |
+  | 1 | 1 | 1 | 1 | 1 |
+
+  2. Just compact:
+  | p | \lor | 0 | \leftrightarrow | p |
+  |---+---+---+---+---|
+  | 0 | 0 | 0 | 1 | 0 |
+  | 1 | 1 | 0 | 1 | 1 |
+
+  3. Just compact:
+  | \not | \not | p | \leftrightarrow | p |
+  |---+---+---+---+---|
+  | 0 | 1 | 0 | 1 | 0 |
+  | 1 | 0 | 1 | 1 | 1 |
+
+  4. Just compact:
+  | p | \land | 0 | \leftrightarrow | 0 |
+  |---+---+---+---+---|
+  | 0 | 0 | 0 | 1 | 0 |
+  | 1 | 0 | 0 | 1 | 0 |
+
+  5. Just compact:
+  | p | \lor | 1 | \leftrightarrow | 1 |
+  |---+---+---+---+---|
+  | 0 | 1 | 1 | 1 | 1 |
+  | 1 | 1 | 1 | 1 | 1 |
+#+end_info
+** OYP
+#+begin_info
+  1 \leftrightarrow 1, 2 \leftrightarrow 5, 3 \leftrightarrow 2, 4 \leftrightarrow 4, 5 \leftrightarrow 3.
+#+end_info
+** UBV
+#+begin_info
+  1. Winning the first round is necessary for winning the trophy.
+     - Alternatively :: You did not win the trophy or you won the first round.
+     - Negate :: It is not the case that you did not win the trophy or you won the first round.
+     - Apply DeMorgan :: You won the trophy and you did not win the first round.
+
+  2. Winning the tournament is sufficient for winning the trophy.
+     - Alternatively :: You did not win the tournament or you won the trophy.
+     - Negate :: It it not the case that you did not win the tournament or you won the trophy.
+     - Apply DeMorgan :: You won the tournament and you did not win the trophy.
+
+  3. I am not powerful or I am not successful.
+
+  4. You cannot pass this test and you cannot fail this test.
+
+  5. Getting an A on the final exam is necessary and sufficient for passing this class.
+     - Symbolize :: p = You got an A on the final exam, q = you passed this class
+     - Meaning of necessary and sufficient :: p \leftrightarrow q
+     - Expand :: p \rarr q \land q \rarr p
+     - Negate :: \not (p \rarr q \land q \rarr p)
+     - DeMorgan :: \not (p \rarr q) \lor \not (q \rarr p)
+     - Back to English :: It is not true that if you got an A on the final exam
+          then you passed this class or it is not true that if you passed this
+          class then you got an A on the final exam
+#+end_info
+
+* Problems
+** OIM
+#+begin_info
+  The first three columns give three different ways to identify a subset, the
+  first two corresponding to the numbered and colored regions in the Venn
+  Diagram, the third column giving the set operations that define each region.
+  The last three columns also give these defining operations, only in terms of a
+  0 meaning \ldquo{}not in\rdquo and a 1 meaning \ldquo{}in\rdquo the sets A, B and C, which head the
+  columns.
+#+end_info
+** OIO
+#+begin_info
+#+BEGIN_SRC emacs-lisp
+  (setq A [s i z e]
+        a (length A)
+        B [b i g g e r i n s i z e]
+        b (length B)
+        A-is-a-subset-of-B (subsetp (append A nil) (append B nil))
+        a-is-less-than-or-equal-to-b (<= a b))
+#+END_SRC
+#+end_info
+** UIJ
+#+begin_info
+  Definition of subset: A \sube B means x \in A \rightarrow x \in B.
+
+  1. The scenario that x \notin A \land x \notin B is possible and corresponds to region #1.
+  2. The scenario that x \notin A \land x \in B is possible and corresponds to region #2.
+  3. The scenario that x \in A \land x \in B is possible and corresponds to region #3.
+  4. The scenario that x \in A \land x \notin B is impossible.
+
+  Let p be the proposition that x \in A
+
+  Let q be the proposition that x \in B
+
+  The truth table for p \rightarrow q looks like:
+
+  | p | q | p \rarr q | Corresponding to Scenario # |
+  |---+---+-------+-----------------------------|
+  | 0 | 0 |     1 |                           1 |
+  | 0 | 1 |     1 |                           2 |
+  | 1 | 0 |     0 |                           4 |
+  | 1 | 1 |     1 |                           3 |
+
+
+  Note: this answer is just making more formal the reasoning Til leads Ila and
+  Abu through in DEH (realizing what was alluded to in the opening paragraph of
+  the book proper).
+#+end_info
+** OYU
+#+begin_info
+  1. q is necessary for p.
+  2. q is a necessary condition for p.
+  3. p is sufficient for q.
+  4. p is a sufficient condition for q.
+  5. p implies q.
+  6. q is implied by p.
+  7. p entails q.
+  8. q is entailed by p.
+#+end_info
+** UOH
+#+begin_info
+  1. /q/ \rarr /p/
+  2. /q/ \rarr /p/
+  3. /p/ \leftrightarrow /q/
+#+end_info
+** OZD
+#+begin_info
+  1. false (true \rarr false)
+  2. true (false \rarr false)
+  3. true (false \rarr true)
+  4. true (true \rarr true)
+#+end_info
+** UZM
+#+begin_info
+  1. true (true \leftrightarrow true)
+  2. false (true \leftrightarrow false)
+  3. true (false \leftrightarrow false)
+  4. true (true \leftrightarrow true)
+#+end_info
+** OOY
+#+begin_info
+  1. If I win the contest, then I signed up. (p = \lsquo{}I win the contest\rsquo, q = \lsquo{}I
+     signed up\rsquo.)
+  2. If I go outside, then I get a cold. (p = \lsquo{}I go outside\rsquo, q = \lsquo{}I get a
+     cold\rsquo.)
+  3. If you are an A student, then you (will) receive the scholarship. (p = \lsquo{}you
+     are an A student\rsquo, q = \lsquo{}you will receive the scholarship\rsquo.)
+  4. If you leave now, then you will get there on time. (p = \lsquo{}you leave now\rsquo, q
+     = \lsquo{}you will get there on time\rsquo.)
+  5. If I act now, then I\rsquo{}ll get half off. (p = \lsquo{}I act now\rsquo, q = \ldquo{}I\rsquo{}ll get half
+     off\rdquo.)
+#+end_info
+** OKJ
+#+begin_info
+  | Statement (put in p \rarr q form)                           | Converse                                                    | Inverse                                                                 | Contrapositive                                                          |
+  |---------------------------------------------------------+-------------------------------------------------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------------|
+  | it rains today \rarr we won\rsquo{}t go to the park.               | If we won\rsquo{}t go to the park, then it rains today.            | If it doesn\rsquo{}t rain today, then we will go to the park.                  | If we will go to the park, then it doesn\rsquo{}t rain today.                  |
+  | you do your homework \rarr I\rsquo{}ll give you a pat on the back. | If I give you a pat on the park, then you do your homework. | If you don\rsquo{}t do your homework, then I won\rsquo{}t give you a pat on the back. | If I won\rsquo{}t give you a pat on the back, then you don\rsquo{}t do your homework. |
+  | I babysit \rarr I get sick.                                 | If I get sick, then I babysit.                              | If I don\rsquo{}t babysit, then I don\rsquo{}t get sick.                              | If I don\rsquo{}t get sick, then I don\rsquo{}t babysit.                              |
+  | there is a quiz \rarr I go to class.                        | If I go to class, then there is a quiz.                     | If there isn\rsquo{}t a quiz, then I don\rsquo{}t go to class.                        | If I don\rsquo{}t go to class, then there isn\rsquo{}t a quiz.                        |
+  | I stay up past my bedtime \rarr I wake up late.             | If I wake up late, then I stayed up past my bedtime.        | If I don\rsquo{}t stay up past my bedtime, then I don\rsquo{}t wake up late.          | If I don\rsquo{}t wake up late, then I didn\rsquo{}t stay up past my bedtime.         |
+#+end_info
+** UVH
+#+begin_info
+  1. Compact then full:
+  | p | \rightarrow | q |
+  |---+---+---|
+  | 0 | 1 | 0 |
+  | 0 | 1 | 1 |
+  | 1 | 0 | 0 |
+  | 1 | 1 | 1 |
+
+  | p | q | p \rightarrow q |
+  |---+---+-------|
+  | 0 | 0 |     1 |
+  | 0 | 1 |     1 |
+  | 1 | 0 |     0 |
+  | 1 | 1 |     1 |
+
+  2. Compact then full:
+  | p | \oplus | q |
+  |---+---+---|
+  | 0 | 0 | 0 |
+  | 0 | 1 | 1 |
+  | 1 | 1 | 0 |
+  | 1 | 0 | 1 |
+
+  | p | q | p \oplus q |
+  |---+---+-------|
+  | 0 | 0 |     0 |
+  | 0 | 1 |     1 |
+  | 1 | 0 |     1 |
+  | 1 | 1 |     0 |
+
+  3. Compact then full:
+  | p | \rightarrow | \not | q |
+  |---+---+---+---|
+  | 0 | 1 | 1 | 0 |
+  | 0 | 1 | 0 | 1 |
+  | 1 | 1 | 1 | 0 |
+  | 1 | 0 | 0 | 1 |
+
+  | p | q | \not q | p \rightarrow \not q |
+  |---+---+-----+---------|
+  | 0 | 0 |   1 |       1 |
+  | 0 | 1 |   0 |       1 |
+  | 1 | 0 |   1 |       1 |
+  | 1 | 1 |   0 |       0 |
+
+  4. Compact then full:
+  | \not | p | \rightarrow | q |
+  |---+---+---+---|
+  | 1 | 0 | 0 | 0 |
+  | 1 | 0 | 1 | 1 |
+  | 0 | 1 | 1 | 0 |
+  | 0 | 1 | 1 | 1 |
+
+  | p | q | \not p | \not p \rightarrow q |
+  |---+---+-----+---------|
+  | 0 | 0 |   1 |       0 |
+  | 0 | 1 |   1 |       1 |
+  | 1 | 0 |   0 |       1 |
+  | 1 | 1 |   0 |       1 |
+
+  5. Compact then full:
+  | p | \land | \not | q |
+  |---+---+---+---|
+  | 0 | 0 | 1 | 0 |
+  | 0 | 0 | 0 | 1 |
+  | 1 | 1 | 1 | 0 |
+  | 1 | 0 | 0 | 1 |
+
+  | p | q | \not q | p \land \not q |
+  |---+---+-----+---------|
+  | 0 | 0 |   1 |       0 |
+  | 0 | 1 |   0 |       0 |
+  | 1 | 0 |   1 |       1 |
+  | 1 | 1 |   0 |       0 |
+#+end_info
+** OJM
+#+begin_info
+  1. Compact then full:
+  | p | \rightarrow | \not | p |
+  |---+---+---+---|
+  | 0 | 1 | 1 | 0 |
+  | 1 | 0 | 0 | 1 |
+
+  | p | \not p | p \rightarrow \not p |
+  |---+-----+---------|
+  | 0 |   1 |       1 |
+  | 1 |   0 |       0 |
+
+  2. Compact then full:
+  | p | \leftrightarrow | q |
+  |---+---+---|
+  | 0 | 1 | 0 |
+  | 0 | 0 | 1 |
+  | 1 | 0 | 0 |
+  | 1 | 1 | 1 |
+
+  | p | q | p \leftrightarrow q |
+  |---+---+-------|
+  | 0 | 0 |     1 |
+  | 0 | 1 |     0 |
+  | 1 | 0 |     0 |
+  | 1 | 1 |     1 |
+
+  3. Compact then full:
+  | p | \leftrightarrow | \not | p |
+  |---+---+---+---|
+  | 0 | 0 | 1 | 0 |
+  | 1 | 0 | 0 | 1 |
+
+  | p | \not p | p \leftrightarrow \not p |
+  |---+-----+---------|
+  | 0 |   1 |       0 |
+  | 1 |   0 |       0 |
+
+  4. Compact then full:
+  | p | \land | p |
+  |---+---+---|
+  | 0 | 0 | 0 |
+  | 1 | 1 | 1 |
+
+  | p | p \land p |
+  |---+-------|
+  | 0 |     0 |
+  | 1 |     1 |
+
+  5. Compact then full:
+  | p | \lor | p |
+  |---+---+---|
+  | 0 | 0 | 0 |
+  | 1 | 1 | 1 |
+
+  | p | p \lor p |
+  |---+-------|
+  | 0 |     0 |
+  | 1 |     1 |
+#+end_info
+** ULQ
+#+begin_info
+  Compact:
+  | ( | p | \rightarrow | q | ) | \rightarrow | ( | q | \rightarrow | r | ) | \rightarrow | ( | r | \rightarrow | s | ) |
+  |---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---|
+  |   | 0 | 1 | 0 |   | 1 |   | 0 | 1 | 0 |   | 1 |   | 0 | 1 | 0 |   |
+  |   | 0 | 1 | 0 |   | 1 |   | 0 | 1 | 0 |   | 1 |   | 0 | 1 | 1 |   |
+  |   | 0 | 1 | 0 |   | 1 |   | 0 | 1 | 1 |   | 0 |   | 1 | 0 | 0 |   |
+  |   | 0 | 1 | 0 |   | 1 |   | 0 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   |
+  |   | 0 | 1 | 1 |   | 0 |   | 1 | 0 | 0 |   | 1 |   | 0 | 1 | 0 |   |
+  |   | 0 | 1 | 1 |   | 0 |   | 1 | 0 | 0 |   | 1 |   | 0 | 1 | 1 |   |
+  |   | 0 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   | 0 |   | 1 | 0 | 0 |   |
+  |   | 0 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   |
+  |   | 1 | 0 | 0 |   | 1 |   | 0 | 1 | 0 |   | 1 |   | 0 | 1 | 0 |   |
+  |   | 1 | 0 | 0 |   | 1 |   | 0 | 1 | 0 |   | 1 |   | 0 | 1 | 1 |   |
+  |   | 1 | 0 | 0 |   | 1 |   | 0 | 1 | 1 |   | 0 |   | 1 | 0 | 0 |   |
+  |   | 1 | 0 | 0 |   | 1 |   | 0 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   |
+  |   | 1 | 1 | 1 |   | 0 |   | 1 | 0 | 0 |   | 1 |   | 0 | 1 | 0 |   |
+  |   | 1 | 1 | 1 |   | 0 |   | 1 | 0 | 0 |   | 1 |   | 0 | 1 | 1 |   |
+  |   | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   | 0 |   | 1 | 0 | 0 |   |
+  |   | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   |
+
+  Full:
+  | p | q | r | s | p \rightarrow q | q \rightarrow r | r \rightarrow s | (p \rightarrow q) \rightarrow (q \rightarrow r) | (p \rightarrow q) \rightarrow (q \rightarrow r) \rightarrow (r \rightarrow s) |
+  |---+---+---+---+-------+-------+-------+-------------------+-----------------------------|
+  | 0 | 0 | 0 | 0 |     1 |     1 |     1 |                 1 |                           1 |
+  | 0 | 0 | 0 | 1 |     1 |     1 |     1 |                 1 |                           1 |
+  | 0 | 0 | 1 | 0 |     1 |     1 |     0 |                 1 |                           0 |
+  | 0 | 0 | 1 | 1 |     1 |     1 |     1 |                 1 |                           1 |
+  | 0 | 1 | 0 | 0 |     1 |     0 |     1 |                 0 |                           1 |
+  | 0 | 1 | 0 | 1 |     1 |     0 |     1 |                 0 |                           1 |
+  | 0 | 1 | 1 | 0 |     1 |     1 |     0 |                 1 |                           0 |
+  | 0 | 1 | 1 | 1 |     1 |     1 |     1 |                 1 |                           1 |
+  | 1 | 0 | 0 | 0 |     0 |     1 |     1 |                 1 |                           1 |
+  | 1 | 0 | 0 | 1 |     0 |     1 |     1 |                 1 |                           1 |
+  | 1 | 0 | 1 | 0 |     0 |     1 |     0 |                 1 |                           0 |
+  | 1 | 0 | 1 | 1 |     0 |     1 |     1 |                 1 |                           1 |
+  | 1 | 1 | 0 | 0 |     1 |     0 |     1 |                 0 |                           1 |
+  | 1 | 1 | 0 | 1 |     1 |     0 |     1 |                 0 |                           1 |
+  | 1 | 1 | 1 | 0 |     1 |     1 |     0 |                 1 |                           0 |
+  | 1 | 1 | 1 | 1 |     1 |     1 |     1 |                 1 |                           1 |
+#+end_info
+** OTD
+#+begin_info
+  Compact:
+  | ( | p | \lor | q | ) | \land | ( | \not | p | \lor | r | ) | \rightarrow | ( | q | \lor | r | ) |
+  |---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---|
+  |   | 0 | 0 | 0 |   | 0 |   | 1 | 0 | 1 | 0 |   | 1 |   | 0 | 0 | 0 |   |
+  |   | 0 | 0 | 0 |   | 0 |   | 1 | 0 | 1 | 1 |   | 1 |   | 0 | 1 | 1 |   |
+  |   | 0 | 1 | 1 |   | 1 |   | 1 | 0 | 1 | 0 |   | 1 |   | 1 | 1 | 0 |   |
+  |   | 0 | 1 | 1 |   | 1 |   | 1 | 0 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   |
+  |   | 1 | 1 | 0 |   | 0 |   | 0 | 1 | 0 | 0 |   | 1 |   | 0 | 0 | 0 |   |
+  |   | 1 | 1 | 0 |   | 1 |   | 0 | 1 | 1 | 1 |   | 1 |   | 0 | 1 | 1 |   |
+  |   | 1 | 1 | 1 |   | 0 |   | 0 | 1 | 0 | 0 |   | 1 |   | 1 | 1 | 0 |   |
+  |   | 1 | 1 | 1 |   | 1 |   | 0 | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   |
+
+  Full:
+  | p | q | r | p \lor q | \not p | \not p \lor r | q \lor r | (p \lor q) \land (\not p \lor r)  | (p \lor q) \land (\not p \lor r) \rightarrow (q \lor r) |
+  |---+---+---+-------+-----+---------+-------+---------------------+-------------------------------|
+  | 0 | 0 | 0 |     0 |   1 |       1 |     0 |                   0 |                             1 |
+  | 0 | 0 | 1 |     0 |   1 |       1 |     1 |                   0 |                             1 |
+  | 0 | 1 | 0 |     1 |   1 |       1 |     1 |                   1 |                             1 |
+  | 0 | 1 | 1 |     1 |   1 |       1 |     1 |                   1 |                             1 |
+  | 1 | 0 | 0 |     1 |   0 |       0 |     0 |                   0 |                             1 |
+  | 1 | 0 | 1 |     1 |   0 |       1 |     1 |                   1 |                             1 |
+  | 1 | 1 | 0 |     1 |   0 |       0 |     1 |                   0 |                             1 |
+  | 1 | 1 | 1 |     1 |   0 |       1 |     1 |                   1 |                             1 |
+#+end_info
+** OKQ
+#+begin_info
+  From the truth table we discover that in fact it is /not/ a logical equivalence:
+  | ( | ( | p | \leftrightarrow | q | ) | \land | ( | p | \leftrightarrow | r | ) | ) | \leftrightarrow | ( | p | \leftrightarrow | ( | q | \land | r | ) | ) |
+  |---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---|
+  |   |   | 0 | 1 | 0 |   | 1 |   | 0 | 1 | 0 |   |   | 1 |   | 0 | 1 |   | 0 | 0 | 0 |   |   |
+  |   |   | 0 | 1 | 0 |   | 0 |   | 0 | 0 | 1 |   |   | 0 |   | 0 | 1 |   | 0 | 0 | 1 |   |   |
+  |   |   | 0 | 0 | 1 |   | 0 |   | 0 | 1 | 0 |   |   | 0 |   | 0 | 1 |   | 1 | 0 | 0 |   |   |
+  |   |   | 0 | 0 | 1 |   | 0 |   | 0 | 0 | 1 |   |   | 1 |   | 0 | 0 |   | 1 | 1 | 1 |   |   |
+  |   |   | 1 | 0 | 0 |   | 0 |   | 1 | 0 | 0 |   |   | 1 |   | 1 | 0 |   | 0 | 0 | 0 |   |   |
+  |   |   | 1 | 0 | 0 |   | 0 |   | 1 | 1 | 1 |   |   | 1 |   | 1 | 0 |   | 0 | 0 | 1 |   |   |
+  |   |   | 1 | 1 | 1 |   | 0 |   | 1 | 0 | 0 |   |   | 1 |   | 1 | 0 |   | 1 | 0 | 0 |   |   |
+  |   |   | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   |   | 1 |   | 1 | 1 |   | 1 | 1 | 1 |   |   |
+#+end_info
+** UKF
+#+begin_info
+  From either the compact
+  | ( | \not | ( | p | \leftrightarrow | q | ) | ) | \leftrightarrow | ( | p | \leftrightarrow | \not | q | ) |
+  |---+---+---+---+---+---+---+---+---+---+---+---+---+---+---|
+  |   | 0 |   | 0 | 1 | 0 |   |   | 1 |   | 0 | 0 | 1 | 0 |   |
+  |   | 1 |   | 0 | 0 | 1 |   |   | 1 |   | 0 | 1 | 0 | 1 |   |
+  |   | 1 |   | 1 | 0 | 0 |   |   | 1 |   | 1 | 1 | 1 | 0 |   |
+  |   | 0 |   | 1 | 1 | 1 |   |   | 1 |   | 1 | 0 | 0 | 1 |   |
+
+  or the full truth table
+  | p | q | p \leftrightarrow q | \not (p \leftrightarrow q) | \not q | p \leftrightarrow \not q | (\not (p \leftrightarrow q)) \leftrightarrow (p \leftrightarrow \not q) |
+  |---+---+-------+-----------+-----+---------+-------------------------|
+  | 0 | 0 |     1 |         0 |   1 |       0 |                       1 |
+  | 0 | 1 |     0 |         1 |   0 |       1 |                       1 |
+  | 1 | 0 |     0 |         1 |   1 |       1 |                       1 |
+  | 1 | 1 |     1 |         0 |   0 |       0 |                       1 |
+
+  we see that the two are logically equivalent.
+#+end_info
+** OKL
+#+begin_info
+  Refer to the truth table for OTD. By that we know that it is a tautology.
+#+end_info
+** UEZ
+#+begin_info
+  The compound proposition /p/ \land /q/ \land \not /r/ is true when /p/ and /q/ are true
+  and /r/ is false, but is false otherwise.
+#+end_info
+** OYW
+#+begin_info
+#+BEGIN_SRC emacs-lisp :results raw
+  (let* ((p [It is raining])
+         (q [The grass is wet])
+         (p-or-q [p or q]))
+    (prop-eval p-or-q))
+#+END_SRC
+
+#+RESULTS:
+([It is raining] (nil) or [The grass is wet] (nil) yields nil)
+([It is raining] (nil) or [The grass is wet] (t) yields t)
+([It is raining] (t) or [The grass is wet] (nil) yields t)
+([It is raining] (t) or [The grass is wet] (t) yields t)
+
+#+BEGIN_SRC emacs-lisp :results raw
+  (let* ((p [It is raining])
+         (q [The grass is wet])
+         (p-xor-q [p xor q]))
+    (prop-eval p-xor-q))
+#+END_SRC
+
+#+RESULTS:
+([It is raining] (nil) xor [The grass is wet] (nil) yields nil)
+([It is raining] (nil) xor [The grass is wet] (t) yields t)
+([It is raining] (t) xor [The grass is wet] (nil) yields t)
+([It is raining] (t) xor [The grass is wet] (t) yields nil)
+
+#+BEGIN_SRC emacs-lisp :results raw
+  (let* ((p [It is raining])
+         (q [The grass is wet])
+         (p-if-and-only-if-q [p <--> q]))
+    (prop-eval p-if-and-only-if-q))
+#+END_SRC
+
+#+RESULTS:
+([It is raining] (nil) <--> [The grass is wet] (nil) yields t)
+([It is raining] (nil) <--> [The grass is wet] (t) yields nil)
+([It is raining] (t) <--> [The grass is wet] (nil) yields nil)
+([It is raining] (t) <--> [The grass is wet] (t) yields t)
+#+end_info
+** UEF
+#+begin_info
+  How to make =prop-eval= handle more complex propositions is a complex
+  problem. You are excused from solving it, unless you really want to tackle
+  a full-blown parser based on a grammar for propositional logic. See me if you
+  are interested.
+#+end_info
+** OUB
+#+begin_info
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun <-- (p q)
+    "Reverse conditional: q only if p"
+    (or (not q) p))
+#+END_SRC
+
+  Two shorter ways to correctly implement =<-->=:
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun <-xor-> (p q)
+    "Biconditional: p if and only if q"
+    (not (xor p q)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun <-eq-> (p q)
+    "Biconditional: p if and only if q"
+    (eq p q))
+#+END_SRC
+
+  Four quick tests:
+#+BEGIN_SRC emacs-lisp
+  (list (list 'p 'q "p <--> q" "p <-xor-> q" "p <-eq-> q")
+        (list  nil nil (<--> nil nil) (<-xor-> nil nil) (<-eq-> nil nil))
+        (list  nil  t  (<--> nil  t ) (<-xor-> nil  t ) (<-eq-> nil  t ))
+        (list   t  nil (<-->  t  nil) (<-xor->  t  nil) (<-eq->  t  nil))
+        (list   t   t  (<-->  t   t ) (<-xor->  t   t ) (<-eq->  t   t )))
+#+END_SRC
+
+#+RESULTS:
+| p   | q   | p <--> q | p <-xor-> q | p <-eq-> q |
+| nil | nil | t        | t           | t          |
+| nil | t   | nil      | nil         | nil        |
+| t   | nil | nil      | nil         | nil        |
+| t   | t   | t        | t           | t          |
+#+end_info
+** UQY
+#+begin_info
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun not1 (x)
+    (- 1 x))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (list (list 'x "(not1 x)" "(not (not (zerop x)))")
+        (list  0 (not1 0) (not (not (zerop 0))))
+        (list  1 (not1 1) (not (not (zerop 1)))))
+#+END_SRC
+
+#+RESULTS:
+| x | (not1 x) | (not (not (zerop x))) |
+| 0 |        1 | t                     |
+| 1 |        0 | nil                   |
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun and2 (x y)
+    (* x y))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (list (list 'x 'y "(and2 x y)" "(and (not (zerop x)) (not (zerop y)))")
+        (list  0  0  (and2 0 0)   (and (not (zerop 0)) (not (zerop 0))))
+        (list  0  1  (and2 0 1)   (and (not (zerop 0)) (not (zerop 1))))
+        (list  1  0  (and2 1 0)   (and (not (zerop 1)) (not (zerop 0))))
+        (list  1  1  (and2 1 1)   (and (not (zerop 1)) (not (zerop 1)))))
+#+END_SRC
+
+#+RESULTS:
+| x | y | (and2 x y) | (and (not (zerop x)) (not (zerop y))) |
+| 0 | 0 |          0 | nil                                   |
+| 0 | 1 |          0 | nil                                   |
+| 1 | 0 |          0 | nil                                   |
+| 1 | 1 |          1 | t                                     |
+
+#+BEGIN_SRC emacs-lisp :results silent
+  (defun or2 (x y)
+    (- (+ x y) (* x y)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (list (list 'x 'y "(or2 x y)" "(or (not (zerop x)) (not (zerop y)))")
+        (list  0  0  (or2 0 0)   (or (not (zerop 0)) (not (zerop 0))))
+        (list  0  1  (or2 0 1)   (or (not (zerop 0)) (not (zerop 1))))
+        (list  1  0  (or2 1 0)   (or (not (zerop 1)) (not (zerop 0))))
+        (list  1  1  (or2 1 1)   (or (not (zerop 1)) (not (zerop 1)))))
+#+END_SRC
+
+#+RESULTS:
+| x | y | (or2 x y) | (or (not (zerop x)) (not (zerop y))) |
+| 0 | 0 |         0 | nil                                  |
+| 0 | 1 |         1 | t                                    |
+| 1 | 0 |         1 | t                                    |
+| 1 | 1 |         1 | t                                    |
+
+ The other tests (in the book) work too.
+#+end_info
+* Puzzles
+** OQP
+*** Rephrase
+    This is the first introduction to the elisp language, and because the language is quite
+    different from those that most will have encountered before, it is good to have a directed
+    introduction, i.e., a primer.
+*** Approach
+    Work through the primer and record answers to PVP (and other) queries in the file itself.
+*** Solution
+    Note from grader: The main thing is whether or not you did it! Did you work
+    through the entire mini-primer in emacs? Did you understand everything you
+    did? If you didn\rsquo{}t, you will be at a disadvantage going forward. Already,
+    the very next puzzle is begging for you to apply something the mini-primer
+    had to teach you.
+
+    Some evidence of working through the primer and learning something is
+    required for credit.
+*** Proof
+    Not applicable.
+** USV
+*** Rephrase
+    The syllabus warned that puzzles are more difficult, one reason being that
+    the statement of the problem may be obscure, indirect or encoded somehow. So
+    rot13 will transform the given text and thus rephrase the question readably!
+#+BEGIN_SRC elisp
+  (rot13 " Or pyrire jvgu ahzoref. Svaq n jnl gb vafreg vagb gurfr gra yvarf gur sbhe
+    fgnaqneq zngu bcrengbef (+, -, \gvzrf, \qvi), be ! (snpgbevny), be \enqvp (fdhner ebbg),
+    naq cneragurfrf sbe tebhcvat, gb znxr gra qvssrerag rkcerffvbaf gung rnpu
+    rinyhngr gb 6. Sbe rknzcyr: \enqvp4 + \enqvp4 + \enqvp4 = 6.")
+#+END_SRC
+
+#+RESULTS:
+:  Be clever with numbers. Find a way to insert into these ten lines the four
+:   standard math operators (+, -, \times, \div), or ! (factorial), or adic (square root),
+:   and parentheses for grouping, to make ten different expressions that each
+:   evaluate to 6. For example: adic4 + adic4 + adic4 = 6.
+*** Approach
+  The puzzle is first of all to figure out what this exercise/problem is asking.
+  Working all the way through the Elisp Mini Primer was definitely a prerequisite!
+
+  Once it is apparent that being clever with numbers is what is being asked, an
+  approach that works is mostly thinking and just figuring things out, with
+  occasional guess-and-check type experimentation.
+*** Solution
+    There are in some cases (e.g., 6) more than one way. Here is one way to do
+    all ten:
+   |  (0! | + | 0! | + |  0!)! |   |   | = |   |   | 6 |
+   |      |   |    |   |       |   |   |   |   |   |   |
+   |   (1 | + |  1 | + |   1)! |   |   | = |   |   | 6 |
+   |      |   |    |   |       |   |   |   |   |   |   |
+   |    2 | + |  2 | + |     2 |   |   | = |   |   | 6 |
+   |      |   |    |   |       |   |   |   |   |   |   |
+   |    3 | * |  3 | - |     3 |   |   | = |   |   | 6 |
+   |      |   |    |   |       |   |   |   |   |   |   |
+   |    4 | + |  4 | - |    \radic4 |   |   | = |   |   | 6 |
+   |      |   |    |   |       |   |   |   |   |   |   |
+   |    5 | + | (5 | \div |    5) |   |   | = |   |   | 6 |
+   |      |   |    |   |       |   |   |   |   |   |   |
+   |    6 | + |  6 | - |     6 |   |   | = |   |   | 6 |
+   |      |   |    |   |       |   |   |   |   |   |   |
+   |    7 | - | (7 | \div |    7) |   |   | = |   |   | 6 |
+   |      |   |    |   |       |   |   |   |   |   |   |
+   | (\radic(8 | + | (8 | \div | 8)))! |   |   | = |   |   | 6 |
+   |      |   |    |   |       |   |   |   |   |   |   |
+   |   \radic9 | * | \radic9 | - |    \radic9 |   |   | = |   |   | 6 |
+*** Proof
+    Verified with code calculations.
+#+BEGIN_SRC elisp
+  (defun ! (n) (if (= n 0) 1 (* n (! (- n 1)))))
+
+  (defun isqrt (x) (truncate (sqrt x)))
+
+  (list (! (+ (! 0) (! 0) (! 0)))
+        (! (+ 1 1 1))
+        (+ 2 2 2)
+        (- (* 3 3) 3)
+        (- (+ 4 4) (isqrt 4))
+        (+ 5 (/ 5 5))
+        (+ 6 (- 6 6))
+        (- 7 (/ 7 7))
+        (! (isqrt(+ 8 (/ 8 8))))
+        (- (* (isqrt 9) (isqrt 9)) (isqrt 9)))
+#+END_SRC
+
+#+RESULTS:
+| 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
+
+** UFZ
+*** Rephrase
+    The conditional form has variants -- find and compare them.
+*** Approach
+     Search and find the variants, and use elisp to explore their similarities
+     and differences.
+*** Solution
+    Variants of p \rarr q (the \ldquo{}straight\rdquo conditional):
+    - converse :: q \rarr p (swap left and right sides)
+    - inverse :: \not p \rarr \not q (negate both sides)
+    - contrapositive :: \not q \rarr \not p (form the inverse of the converse)
+#+BEGIN_SRC elisp :results silent
+  (defun --> (p q)
+    "straight conditional"
+    (or (not p) q))
+
+  (defun converse (p q)
+    "swaps p and q"
+    (--> q p))
+
+  (defun inverse (p q)
+    "negates p and q"
+    (--> (not p) (not q)))
+
+  (defun contrapositive (p q)
+    "swaps and negates p and q"
+    (--> (not q) (not p)))
+#+END_SRC
+
+  Try them with p true and q false:
+#+BEGIN_SRC elisp
+  (setq it-is-raining t
+        the-grass-is-wet nil
+        results (mapcar 'list (list
+                 (--> it-is-raining the-grass-is-wet)
+                 (inverse it-is-raining the-grass-is-wet)
+                 (converse it-is-raining the-grass-is-wet)
+                 (contrapositive it-is-raining the-grass-is-wet))))
+#+END_SRC
+
+#+RESULTS:
+| nil |
+| t   |
+| t   |
+| nil |
+
+  Try them with p false and q true:
+#+BEGIN_SRC elisp
+  (setq it-is-raining nil
+        the-grass-is-wet t
+        results (mapcar 'list (list
+                 (--> it-is-raining the-grass-is-wet)
+                 (inverse it-is-raining the-grass-is-wet)
+                 (converse it-is-raining the-grass-is-wet)
+                 (contrapositive it-is-raining the-grass-is-wet))))
+#+END_SRC
+
+#+RESULTS:
+| t   |
+| nil |
+| nil |
+| t   |
+
+  Try them with both p and q false:
+#+BEGIN_SRC elisp
+  (setq it-is-raining nil
+        the-grass-is-wet nil
+        results (mapcar 'list (list
+                 (--> it-is-raining the-grass-is-wet)
+                 (inverse it-is-raining the-grass-is-wet)
+                 (converse it-is-raining the-grass-is-wet)
+                 (contrapositive it-is-raining the-grass-is-wet))))
+#+END_SRC
+
+#+RESULTS:
+| t |
+| t |
+| t |
+| t |
+
+  Try them with both p and q true:
+#+BEGIN_SRC elisp
+  (setq it-is-raining t
+        the-grass-is-wet t
+        results (mapcar 'list (list
+                 (--> it-is-raining the-grass-is-wet)
+                 (inverse it-is-raining the-grass-is-wet)
+                 (converse it-is-raining the-grass-is-wet)
+                 (contrapositive it-is-raining the-grass-is-wet))))
+#+END_SRC
+
+#+RESULTS:
+| t |
+| t |
+| t |
+| t |
+*** Proof
+    Not applicable.
