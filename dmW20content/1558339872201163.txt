@@ -1,0 +1,230 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 03
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty
+#+setupfile: theme-bigblow.setup
+
+* Files to Tangle
+
+#+begin_src python :tangle geneticString.txt
+CAGTGGGGCAATTTTTCATAGCTAGAAATTCCGAATCTAGAGCCTCTCTAGAGTATCGAGACTATATCTATATCATCTACTCATCATCACGCGTCTCGCTCGCGCTCGTCGCTGCTGGCGCCCCCTCCTGCATAAAAAAAAAAACCTCTCGCGCTCGCTACCAGTGGGGCAATTTTTCATAGCTAGAAATTCCGAATCTAGAGCCTCTCTAGAGTATCGAGACTATATCTATATCATCTACTCATCATCACGCGTCTCGCTCGCGCTCGTCGCTGCTGGCGCCCCCTCCTGCATAAAAAAAAAAACCTCTCGCGCTCGCTACCAGTGGGGCAATTTTTCATAGCTAGAAATTCCGAATCTAGAGCCTCTCTAGAGTATCGAGACTATATCTATATCATCTACTCATCATACCGCGTCTCGCTCGCGCTCGTCGCTGCTGGCGCCCCCTCCTGCATAAAAAAAAAAACCTCTCGCGCTCGCTACCAGTGGGGCAATTTTTCATAGCTAGAAATTCCGAATCTAGAGCCTCTCTAGAGTATCGAGACTATATCTATATCATCTACTCATCATCACGCGTCTCGCTCGCGCTCGTCGCTGCTGGCGCCCCCTCCTGCATAAAAAAAAAAACCTCTCGCGCTCGCTACCAGTGGGGCAATTTTTCATAGCTAGAAATTCCGAATCTAGAGCCTCTCTAGAGATTCGAGACTATATCTATATCATCTACTCATCATCACGCGTCTCGCTCGCGCTCGTCGCTGCTGGCGCCCCCTCCTGCATAAAAAAAAAAACCTCTCGCGCCTGCTACCAGTGGGGCAATTTTTCATAGCTAGAAATTCCGAATCTAGAGCCTCTCTAGAGTATCGAGACTATATCTATATCATCTACTCATCTACACGCGTCTCGCTCGCGCTCGTCGCTGCTGGCGCCCCCTCCTGCATAAAAAAAAAAACCTCTCGCGCTCGCTACCAGTGGGGCAATTTTTCATAGCTAGAAATTCCGAATCTGAAGCCTCTCTAGAGTATCGAGACTATATCTATATCATCTACTCATCATCACGCGTCTCGCTCGGCCTCGTCGCTGCTGGCGCCCCCTCCTGCATAAAAAAAAAAACCTCTCGCGCTCGCTCACAGTGGGGCAATTTTTCATAGCTAGAAATTCCGAATCTAGAGCTCCTCTAGAGTATCGAGACTATATCTATATCATCTACTCACTATCACGCGTCTCGCTCGCGCTCGTCGCTGCTGGCGCCCCCTCCTGCATAAAAAAAAAAACCTCTCGCGCTCGCTACCAGTGGGGCAATTTTTCATAGCTAGAAATTCCGAATCTAGAGCCTCTCTAGAGTATCGAGACTATATCTATATCATCTACTCATCATCACGCGTCTCGCTCGCGCTCGTCGCTGCTGGCGCCCCCTCCTCGATAAAAAAAAAAACCTCTCGCGCTCGCTACCAGTGGGGCAATTTTTCATAGCTAGAAATTCCGAATTCAGACGCTCTCTAGAGTATCGAGACTATATCTATATCATCTACTCATCATCAGCCGTCTCGCTCGCGCTCGTCGCTGCTGGCGCCCCCTCCTGCATAAAAAAAAAAACCTCTCGCGCTCGCTACCAGTGGGGCAATTTTTCATAGCTAGAAATTCCGATACTAGAGCCTCTCTAGAGTATCGAGACTATATCTATACTATCTACTCATCATCACGCGTCTCGCTCGCGCTGCTCGCTGCTGGCGCCCCCTCCTGCATAAAAAAAAAAACCTCTCGCGCTCGCTACCAGTGGGGCAATTTTTACTAGCTAGAAATTCCGAATCTAGAGCCTCTCTAGAGTATCGAGACTATATCTATATCATCTACTCTACATCACGCGTCTCGCTCGCGCTCGTCGCTGCTGGCGCCCCCCTCTGCATAAAAAAAAAAACCTCTCGCGCTCGCTACCAGTGGGGCAATTTTTCATAGCTAGAAATTCCGAATCTAGAGCCTCTCTAGGATATCGAGACTTAATCTATATCATCTACTCATACTCACGCGTCTCGCTCGCGCTCGTCGTCGCTGGCGCCCCCCTCTGCATAAAAAAAAAAACCTCTCGCGCTCGCTCA
+#+end_src
+
+file:geneticString.txt
+
+  Tangle the files in [[file:presentation-03.txt::*Some%20Example%20Decision%20Programs]].
+
+* Reasoning About Programs
+** TODO Fill in the Output Column of this Table
+   rf = readFile
+
+   | Code                                  | Output |
+   |---------------------------------------+--------|
+   | containsGAGA('CTGAGAT')               |        |
+   | containsGAGA(rf('geneticString.txt')  |        |
+   | containsGAGA(rf('longerThan1K.py'))   |        |
+   | containsGAGA(rf('containsGAGA.py'))   |        |
+   |                                       |        |
+   | yes('CTGAGAT')                        |        |
+   | yes(rf('geneticString.txt'))          |        |
+   | yes(rf('containsGAGA.py'))            |        |
+   | yes(rf('yes.py'))                     |        |
+   |                                       |        |
+   | longerThan1K('CTGAGAT')               |        |
+   | longerThan1K(rf('geneticString.txt')) |        |
+   | longerThan1K(rf('containsGAGA.py'))   |        |
+   | longerThan1K(rf('longerThan1K.py'))   |        |
+   |                                       |        |
+   | maybeLoop('CTGAGAT')                  |        |
+   | maybeLoop('some secret sauce')        |        |
+   | maybeLoop(rf('containsGAGA.py'))      |        |
+   | maybeLoop(rf('maybeLoop.py'))         |        |
+
+:SOLUTION:
+   | Code                                  | Output    |
+   |---------------------------------------+-----------|
+   | containsGAGA('CTGAGAT')               | yes       |
+   | containsGAGA(rf('geneticString.txt')  | yes       |
+   | containsGAGA(rf('longerThan1K.py'))   | no        |
+   | containsGAGA(rf('containsGAGA.py'))   | yes       |
+   |                                       |           |
+   | yes('CTGAGAT')                        | yes       |
+   | yes(rf('geneticString.txt'))          | yes       |
+   | yes(rf('containsGAGA.py'))            | yes       |
+   | yes(rf('yes.py'))                     | yes       |
+   |                                       |           |
+   | longerThan1K('CTGAGAT')               | no        |
+   | longerThan1K(rf('geneticString.txt')) | no        |
+   | longerThan1K(rf('containsGAGA.py'))   | no        |
+   | longerThan1K(rf('longerThan1K.py'))   | no        |
+   |                                       |           |
+   | maybeLoop('CTGAGAT')                  | undefined |
+   | maybeLoop('some secret sauce')        | no        |
+   | maybeLoop(rf('containsGAGA.py'))      | undefined |
+   | maybeLoop(rf('maybeLoop.py'))         | yes       |
+:END:
+** Definition of yesOnString.py
+
+                          { "yes" if P is a Python program,
+   yesOnString.py(P,I) = <        P(I) is defined, and P(I) = "yes";
+                          {  "no" otherwise.
+*** TODO Fill in this Table
+    | Code                                                       | Output |
+    |------------------------------------------------------------+--------|
+    | yesOnString('not a program','CAGT')                        |        |
+    | yesOnString(rf('containsGAGA.py'),'CAGT')                  |        |
+    | yesOnString(rf('containsGAGA.py'),rf('containsGAGA.py'))   |        |
+    | yesOnString(rf('yes.py'),'CAGT')                           |        |
+    | yesOnString(rf('yes.py'),rf('yes.py'))                     |        |
+    | yesOnString(rf('longerThan1K.py'),rf('geneticString.txt')) |        |
+    | yesOnString(rf('longerThan1K.py'),rf('longerThan1K.py'))   |        |
+
+:SOLUTION:
+    | Code                                                       | Output |
+    |------------------------------------------------------------+--------|
+    | yesOnString('not a program','CAGT')                        | no     |
+    | yesOnString(rf('containsGAGA.py'),'CAGT')                  | no     |
+    | yesOnString(rf('containsGAGA.py'),rf('containsGAGA.py'))   | yes    |
+    | yesOnString(rf('yes.py'),'CAGT')                           | yes    |
+    | yesOnString(rf('yes.py'),rf('yes.py'))                     | yes    |
+    | yesOnString(rf('longerThan1K.py'),rf('geneticString.txt')) | no     |
+    | yesOnString(rf('longerThan1K.py'),rf('longerThan1K.py'))   | no     |
+:END:
+
+** Definition of yesOnSelf.py
+
+                      { "yes" if P is a Python program,
+   yesOnSelf.py(P) = <        P(P) is defined, and P(P) = "yes";
+                      {  "no" otherwise.
+
+*** TODO Fill in this Table
+    | Code                             | Output |
+    |----------------------------------+--------|
+    | yesOnSelf('not a program')       |        |
+    | yesOnSelf(rf('containsGAGA.py')) |        |
+    | yesOnSelf(rf('yes.py'))          |        |
+    | yesOnSelf(rf('longerThan1K.py')) |        |
+    | yesOnSelf(rf('yesOnSelf.py'))    |        |
+
+:SOLUTION:
+    | Code                             | Output         |
+    |----------------------------------+----------------|
+    | yesOnSelf('not a program')       | no             |
+    | yesOnSelf(rf('containsGAGA.py')) | yes            |
+    | yesOnSelf(rf('yes.py'))          | yes            |
+    | yesOnSelf(rf('longerThan1K.py')) | no             |
+    | yesOnSelf(rf('yesOnSelf.py'))    | yes or no (?!) |
+:END:
+
+** notYesOnSelf.py reverses yesOnSelf.py
+
+                           {  "no" if P is a Python program,
+   notYesOnSelf.py(P,I) = <        P(P) is defined, and P(P) = "yes";
+                           { "yes" otherwise.
+
+*** TODO Use the earlier results to fill in this Table
+
+    | Code                                | Output |
+    |-------------------------------------+--------|
+    | notYesOnSelf('not a program')       |        |
+    | notYesOnSelf(rf('containsGAGA.py')) |        |
+    | notYesOnSelf(rf('yes.py'))          |        |
+    | notYesOnSelf(rf('longerThan1K.py')) |        |
+    | notYesOnSelf(rf('notYesOnSelf.py')) |        |
+
+:SOLUTION:
+     | Code                                | Output |                                  |
+     |-------------------------------------+--------+----------------------------------|
+     | notYesOnSelf('not a program')       | yes    |                                  |
+     | notYesOnSelf(rf('containsGAGA.py')) | no     |                                  |
+     | notYesOnSelf(rf('yes.py'))          | no     |                                  |
+     | notYesOnSelf(rf('longerThan1K.py')) | yes    |                                  |
+     | notYesOnSelf(rf('notYesOnSelf.py')) | ?!?!?! | <-- no output is correct here... |
+
+     ... therefore, notYesOnSelf.py cannot exist!
+:END:
+*** Solution Continued
+**** If yesOnString.py existed
+     we could create notYesOnSelf.py
+
+#+begin_src python :results silent
+  def yesOnSelf(progString):
+      return yesOnString(progString, progString)
+
+  def notYesOnSelf(progString):
+      val = yesOnSelf(progString)
+      if val == 'yes':
+          return 'no'
+      else:
+          return 'yes'
+#+end_src
+
+**** Therefore
+     yesOnString.py cannot exist either!
+***** Proof
+     1. Assume yesOnString.py exists.
+     2. Create notYesOnSelf.py:
+       | Program Name     | Program Behavior                |
+       |------------------+---------------------------------|
+       | yesOnString(P,I) | - return 'yes', if P(I) = 'yes' |
+       |                  | - return 'no', otherwise        |
+       | \darr                |                                 |
+       | yesOnSelf(P)     | - return 'yes', if P(P) = 'yes' |
+       |                  | - return 'no', otherwise        |
+       | \darr                |                                 |
+       | notYesOnSelf(P)  | - return 'no', if P(P) = 'yes'  |
+       |                  | - return 'yes', otherwise       |
+     3. This contradicts the impossibility of notYesOnSelf.py
+**** By Combining Many Tricks
+     into one program, a shorter proof is possible:
+
+#+begin_src python :results silent
+  def weirdYesOnSelf(progString):
+      if yesOnString(progString, progString) == 'yes':
+          return 'no'
+      else:
+          return 'yes'
+#+end_src
+***** Proof
+      *that yesOnString.py does not exist:*
+
+   1. Assume yesOnString.py exists.
+   2. Create weirdYesOnString.py as above.
+   3. Observe that weirdYesOnString.py produces a contradiction when given
+      itself as input (it outputs 'yes' if and only if it outputs 'no').
+
+**** Similar reasoning shows
+     that no program can correctly predict, for all possible inputs, whether
+     other programs will crash.
+***** Proof
+     *that crashOnString.py does not exist:*
+
+   1. Assume crashOnString.py exists.
+   2. Create weirdCrashOnString.py:
+       | Program Name        | Program Behavior                        |
+       |---------------------+-----------------------------------------|
+       | crashOnString(P,I)  | - return 'yes', if P crashes on input I |
+       |                     | - return 'no', otherwise                |
+       | \darr                   |                                         |
+       | crashOnSelf(P)      | - return 'yes', if P crashes on input P |
+       |                     | - return 'no', otherwise                |
+       | \darr                   |                                         |
+       | weirdCrashOnSelf(P) | - return without crashing, if P crashes |
+       |                     |   on input P                            |
+       |                     | - crash, otherwise                      |
+   3. Observe that weirdCrashOnString.py produces a contradiction when given
+      itself as input (crashes if and only if it doesn\rsquo{}t crash).
+
+**** Be Careful
+     to interpret the “impossibility of bug-finding programs” correctly.
+
+     - It is true that no program P can correctly predict, for all programs Q,
+       whether Q will crash.
+     - However, P might work correctly on many inputs.
+     - Software companies and academic researchers invest great effort in doing
+       exactly this: developing programs P that work efficiently and correctly
+       on useful classes of software. For example, Microsoft\rsquo{}s Terminator
+       project developed software for detecting termination for the limited
+       class of device drivers and such, which may still cause it to loop!
+       https://en.wikipedia.org/wiki/Microsoft_Terminator
