@@ -88,7 +88,7 @@
 #+end_src
 
 #+name: maybeLoop-program
-#+begin_src python :results silent :tangle mabyeLoop.py
+#+begin_src python :results silent :tangle maybeLoop.py
   def maybeLoop(inString):
       if not 'secret sauce' in inString:
           # enter an infinite loop
