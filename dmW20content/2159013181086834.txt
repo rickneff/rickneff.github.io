@@ -125,5 +125,3 @@
   # Define a very short convenient alias for the readFile function
   rf = readFile
 #+end_src
-
-* *Some
