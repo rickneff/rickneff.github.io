@@ -1,0 +1,29 @@
+-*- mode: org -*-
+#+title: Assignment 03
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+   Please do all Chapter 3 exercises:
+
+* TODO Exercise 3.2, Star properties
+** 1
+** 2
+** 3
+** 4
+** 5
+** 6
+
+* TODO Exercise 3.4.1, Language puzzles
+** 1
+
+* TODO Exercise 3.5, Homomorphism
+** 1
+** 2
+
+* TODO Exercise 3.6, Lexicographic order
+
+* TODO Exercise 3.6, Numeric order
+** 1
+** 2
