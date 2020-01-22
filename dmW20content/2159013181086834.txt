@@ -1,0 +1,129 @@
+-*- mode: org -*-
+#+title: Presentation 03
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Here we investigate some IMPOSSIBLE programs --- ones that cannot exist
+  without causing a contradictory state of affairs.
+
+  To see this, we need to look closely at this very famous and useful proof
+  technique:
+
+* Proof By Contradiction
+  Follows a familiar human thought pattern:
+
+  S = statement we would like to prove false, e.g.: “I bought the milk on Monday.”
+
+  C = consequence that follows from S being true, e.g.: “I was in town on Monday.”
+
+  T = a fact that is known to be true, but contradicts C, e.g.: “I was out of town on Monday.”
+
+  Reasoning pattern: If S were true, then C would be true, but that’s impossible
+  because T is true and T contradicts C. So S must be false. e.g. “if I bought
+  the milk on Monday, then I was in town on Monday, but I was out of town on
+  Monday, so I could not have bought the milk on Monday.”
+
+** Closely Related
+   *Proof by Contraposition (or Contrapositivity)*
+
+   In the contrapositive of a conditional statement, the negation of the
+   consequent may indirectly be easier to have as an assumption to start off
+   with. A direct proof of the negated antecedent is often straightforward.
+
+   For example, let us use this to prove: If n^2 is even then n is even.
+
+   Proof: If n were odd then n^2 would be odd.
+
+   This is true because, in general, the product of *any* two odds is odd (even
+   the same odd multiplied by itself -- i.e., squared).
+
+   A 4-step direct proof shows this:
+
+   1. Let i and j be two odd integers.
+   2. By definition, i = 2m + 1 for some m, and j = 2n + 1 for some n.
+      (That\rsquo{}s what it means to be odd.)
+   3. Their product, ij, is (2m + 1)(2n + 1), which by FOIL = 4mn + 2n + 2m + 1,
+   4. Which equals 2(2mn + n + m) + 1, which is also odd, by definition.
+
+** The Difference?
+
+   With [[file:proof-by-contradiction.txt][Proof By Contradiction]], you get to assume more.
+
+#+begin_src elisp :results raw
+  (get-dm-file "proof-by-contradiction.txt" 1904724421641958)
+#+end_src
+
+* Programs Can Analyze Things
+  They can analyze other programs, and they can analyze themselves.
+
+  A program analyzing another program:
+
+#+begin_src python
+  countLines(rf(’multiplyAll.py’))
+#+end_src
+
+  A program analyzing itself:
+
+#+begin_src python
+  countLines(rf(’countLines.py’))
+#+end_src
+
+* Some Example Decision Programs
+
+#+name: yes-program
+#+begin_src python :results silent :tangle yes.py
+  def yes(inString):
+      return 'yes'
+#+end_src
+
+#+name: longerThan1K-program
+#+begin_src python :results silent :tangle longerThan1K.py
+  def longerThan1K(inString):
+      if len(inString) > 1000:
+          return 'yes'
+      else:
+          return 'no'
+#+end_src
+
+#+name: maybeLoop-program
+#+begin_src python :results silent :tangle mabyeLoop.py
+  def maybeLoop(inString):
+      if not 'secret sauce' in inString:
+          # enter an infinite loop
+          i = 0
+          while i >= 0:
+              i = i + 1
+      else:
+          # output 'yes' if input length is even, and 'no' otherwise
+          if len(inString) % 2 == 0:
+              return 'yes'
+          else:
+              return 'no'
+#+end_src
+
+#+name: readFile-program
+#+begin_src python :results silent :tangle readFile.py
+  def readFile(fileName):
+      """Read a file, returning its contents as a single string.
+
+      Args:
+
+          fileName (str): The name of the file to be read.
+
+      Returns:
+
+          str: The contents of the file.
+      """
+
+      fileContents = ''
+      with open(fileName) as inputFile:
+          fileContents = inputFile.read()
+      return fileContents
+
+  # Define a very short convenient alias for the readFile function
+  rf = readFile
+#+end_src
+
+* *Some
