@@ -1,0 +1,199 @@
+-*- mode: org -*-
+#+title: Assignment 02 Key
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+These are sample/examplary answers, some of which come from former students.
+* Review Set Intersections and Unions
+  Let /A/ = =[0 2 4 6 8 10]=,
+      /B/ = =[0 1 2 3 4 5 6]=, and
+      /C/ = =[4 5 6 7 8 9 10]=.
+
+  Find
+  1. \(A \cap B \cap C\)
+  2. \(A \cup B \cup C\)
+  3. \((A \cup B) \cap C\)
+  4. \((A \cap B) \cup C\)
+  5. (A \cup (B \cap C))
+
+#+begin_src elisp :results value
+  (setq A (append [0 2 4 6 8 10] nil) ;; to turn vectors into lists
+        B (append [0 1 2 3 4 5 6] nil)
+        C (append [4 5 6 7 8 9 10] nil)
+        one (intersection A (intersection B C))
+        two (union A (union B C))
+        three (intersection (union A B) C)
+        four (union (intersection A B) C)
+        five (union A (intersection B C))
+        answers (list (list 1 (apply 'vector (sort one '<)))
+                      (list 2 (apply 'vector (sort two '<)))
+                      (list 3 (apply 'vector (sort three '<)))
+                      (list 4 (apply 'vector (sort four '<)))
+                      (list 5 (apply 'vector (sort five '<)))))
+#+end_src
+
+#+results:
+| 1 | [4 6]                    |
+| 2 | [0 1 2 3 4 5 6 7 8 9 10] |
+| 3 | [4 5 6 8 10]             |
+| 4 | [0 2 4 5 6 7 8 9 10]     |
+| 5 | [0 2 4 5 6 8 10]         |
+* Review the Symmetric Difference of Sets
+  Find the *symmetric difference* (\(A \oplus B\)) (which, recall, is
+  the set containing those elements in either /A/ or /B/, but not in
+  both /A/ and /B/ --- i.e., \(A \oplus B = (A - B) \cup (B - A)\)) of
+  /A/ = =[1 3 5]= and /B/ = =[1 2 3]=.
+
+#+begin_src elisp :results raw
+  (setq A (append [1 3 5] nil)
+        B (append [1 2 3] nil)
+        A-B (set-difference A B)
+        B-A (set-difference B A)
+        symmetric-difference (apply 'vector (union A-B B-A)))
+#+end_src
+
+#+results:
+[2 5]
+
+* Review the Cartesian Products of Sets
+  Let A = [a b c], B = [x y], and C = [0 1]. Find
+
+  1. A \times B \times C
+  2. C \times B \times A
+  3. C \times A \times B
+  4. B \times B \times B
+
+#+begin_src elisp :results silent
+  (setq A (append [a b c] nil)
+        B (append [x y] nil)
+        C (append [0 1] nil))
+#+end_src
+** 1
+#+begin_src elisp
+  (mapcar (lambda (x) (list (apply 'vector x)))
+    (cartesian-product A B C))
+#+end_src
+
+#+results:
+| [a x 0] |
+| [a x 1] |
+| [a y 0] |
+| [a y 1] |
+| [b x 0] |
+| [b x 1] |
+| [b y 0] |
+| [b y 1] |
+| [c x 0] |
+| [c x 1] |
+| [c y 0] |
+| [c y 1] |
+
+** 2
+#+begin_src elisp
+  (mapcar (lambda (x) (list (apply 'vector x)))
+    (cartesian-product C B A))
+#+end_src
+
+#+results:
+| [0 x a] |
+| [0 x b] |
+| [0 x c] |
+| [0 y a] |
+| [0 y b] |
+| [0 y c] |
+| [1 x a] |
+| [1 x b] |
+| [1 x c] |
+| [1 y a] |
+| [1 y b] |
+| [1 y c] |
+
+** 3
+#+begin_src elisp
+  (mapcar (lambda (x) (list (apply 'vector x)))
+    (cartesian-product C A B))
+#+end_src
+
+#+results:
+| [0 a x] |
+| [0 a y] |
+| [0 b x] |
+| [0 b y] |
+| [0 c x] |
+| [0 c y] |
+| [1 a x] |
+| [1 a y] |
+| [1 b x] |
+| [1 b y] |
+| [1 c x] |
+| [1 c y] |
+
+** 4
+#+begin_src elisp
+  (mapcar (lambda (x) (list (apply 'vector x)))
+    (cartesian-product B B B))
+#+end_src
+
+#+results:
+| [x x x] |
+| [x x y] |
+| [x y x] |
+| [x y y] |
+| [y x x] |
+| [y x y] |
+| [y y x] |
+| [y y y] |
+
+* Review DeMorgan\rsquo{}s Laws
+  DeMorgan\rsquo{}s laws for sets involve set intersection, set union, and set
+  complementation. Find what elisp functions exist to help explore these laws,
+  and do some experiments with them.
+
+  SPC h d f the following:
+
+: set-difference
+: union
+: intersection
+: set-complement (does not exist, use set-difference)
+
+#+begin_src elisp :results silent
+  (defun set-complement (set universe)
+    (set-difference set universe))
+#+end_src
+
+
+#+begin_src elisp :results raw
+  (de-morgan '(not (or 1 2))) ; => (and (not 1) (not 2))
+#+end_src
+
+#+results:
+(and (not 1) (not 2))
+
+#+begin_src elisp :results raw
+  (de-morgan '(not (and 1 2))) ; => (or (not 1) (not 2))
+#+end_src
+
+#+results:
+(or (not 1) (not 2))
+
+#+begin_src elisp :results raw
+  (de-morgan '(or a (and b (not (or c d))))) ; => (or a (and b (and (not c) (not d))))
+#+end_src
+
+#+results:
+(or a (and b (and (not c) (not d))))
+* Explore Creative Thinking and Writing
+  The goal of this task was for you to be exposed to and explore some of the
+  deep ramifications of the idea of infinity and infiniteness.
+
+  Did you expose yourself to and explore infinity and infinteness? How deeply?
+* Explore Creative Problem Solving
+  The goal of this task was for you to creatively explore the meaning of
+  /infinite/ sets, their definition and computer representation.
+
+  Did you explore the meaning of /infinite/ sets, their definition and computer
+  representation? How creatively?
