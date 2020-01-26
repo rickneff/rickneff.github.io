@@ -12,11 +12,11 @@
 
 [[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
 
-[[elisp:(find-file-other-window%20"generic-instructions.org")][Read Instructions]]
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
 
-[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
 
-[[elisp:(org-clock-report%201)][Insert/Update Clock Summary Report]]
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
 :END:
 * Time Hint
   In the past students have been known to spend an average of 7.38 hours on this
