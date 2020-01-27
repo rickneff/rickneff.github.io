@@ -1,0 +1,336 @@
+-*- mode: org -*-
+#+title: Presentation 04
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+
+* Do You Need Encouragement?
+  [[https://stackoverflow.com/questions/4724/why-should-i-learn-lisp][Why should I learn lisp?]]
+
+** TODO Review the Loop Macro
+*** Loop With Always and Never
+
+#+begin_src elisp
+  (documentation 'loop)
+#+end_src
+
+#+begin_src elisp :results value
+  (loop for n from 1 to 20 collect (list n (* n n)))
+#+end_src
+
+#+begin_src elisp :results value
+  (loop for n from 1 to 20 collect (list n (loop for i from 1 to n sum i)))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun compare-gauss-with-loop (n)
+    (= (* (+ n 1) (/ n 2)) (loop for i from 1 to n sum i)))
+#+end_src
+
+#+begin_src elisp :results raw
+  (loop for n from 1 to 1000 collect (compare-gauss-with-loop n))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun compare-better-gauss-with-loop (n)
+    (= (/ (* (+ n 1) n) 2)) (loop for i from 1 to n sum i)))
+#+end_src
+
+#+begin_src elisp
+  (loop for n from 1 to 1000 always (compare-better-gauss-with-loop n))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun count-digits (n)
+    (+ 1 (floor (log n 10))))
+#+end_src
+
+#+begin_src elisp
+  (list
+    most-positive-fixnum
+    (1- (expt 2 61))
+    (count-digits most-positive-fixnum)
+    (format "%x" most-positive-fixnum))
+#+end_src
+
+*** A Question
+   How long would you expect to wait for the following loop to evaluate?
+
+#+begin_src elisp
+  (loop for n from 1 to most-positive-fixnum never (> (count-digits n) 20))
+#+end_src
+**** A Related Question
+     How many years is a billion seconds?
+***** Answer
+#+begin_src elisp
+  (/ (expt 10 9) 60 60 24 365.0)
+#+end_src
+
+** TODO Review Lambdas and Variable Bindings
+   A /lambda/ in lisp is a function --- an anonymous function to be precise.
+   Evaluating a =defun= form is just a way to give a function a name.
+
+#+begin_src elisp :results code
+  (symbol-function 'count-digits)
+#+end_src
+
+   A global variable can have a value bound to it by =setq=.
+#+begin_src elisp
+  (setq x 2)
+#+end_src
+
+   Functions can refer to global variables:
+#+begin_src elisp
+  ((lambda () (setq x (* x x))))
+#+end_src
+
+   What value does x have now?
+#+begin_src elisp
+  x
+#+end_src
+
+   Or functions can refer to a locally bound variable of the same name:
+#+begin_src elisp
+  (let ((x 1))
+    (funcall (lambda () (setq x (* x x)))))
+#+end_src
+
+   What value does x have now?
+#+begin_src elisp
+  x
+#+end_src
+
+#+begin_src elisp :var function=(symbol-function 'count-digits)
+  (let ((x 12345678))
+    (setq y x)
+    (funcall function x))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun get-y ()
+    y)
+#+end_src
+
+   The =get-y= function refers to the global binding of y.
+#+begin_src elisp
+  (get-y)
+#+end_src
+
+** TODO Look at Lexical Binding
+   If lexical binding is enabled we see different behavior. (Lexical means based
+   solely on the textual position of a variable in the code. So a variable that
+   is lexically bound has scope that lives with (is \ldquo{}attached to\rdquo{}) any function
+   that references it.)
+
+   Enable it by putting \ldquo{}:lexical t\rdquo in the source block header:
+#+begin_src elisp :results raw :lexical t
+  (setq my-incrementer
+        (let ((n 0))
+          (lambda () (incf n))))
+#+end_src
+
+#+begin_src elisp :results raw
+  (funcall my-incrementer)
+#+end_src
+
+#+begin_src elisp :results raw
+  (loop repeat 10 collect (funcall my-incrementer))
+#+end_src
+
+   Can you explain these results?
+#+begin_src elisp :results raw
+  my-incrementer
+#+end_src
+
+#+begin_src elisp :results raw
+  (setf (symbol-function 'my-closure) '(closure ((x . 93) nil) nil (incf x)))
+#+end_src
+
+#+begin_src elisp :results raw
+  (funcall 'my-closure)
+#+end_src
+
+#+begin_src elisp :results raw
+  (symbol-function 'my-closure)
+#+end_src
+
+* Relations versus Functions
+** What is the difference
+   between a Function and a Relation?
+*** Answer
+    There is no _________ restriction with a Relation like there is with a Function.
+**** Fill in the blank
+     "fan-out"
+** What are the four basic properties
+   of binary Relations?
+*** R
+    Reflexivity
+**** Meaning
+     \forall x \in U [xRx]
+**** Example
+      equals (=), CMM, or CM5 a \equiv_5 a
+*** S
+    Symmetry
+**** Meaning
+     \forall x \forall y [xRy \rarr yRx]
+**** Example
+     *is-sibling-of* is a symmetric relation between two people
+*** A
+    Antisymmetry
+**** Meaning
+     \forall x \forall y [xRy \land yRx \rarr x = y]
+**** Example
+     \le is an antisymmetric relation between two numbers
+*** T
+    Transitivity
+**** Meaning
+     \forall x \forall y \forall z [xRy \land yRz \rarr xRz]
+**** Example
+     \le is a transitive relation between two numbers
+
+     RST \rarr Equivalence Relation
+     CMM = Congruence Modulo Modulus
+     CM5 = Congruence Modulo 5
+***** So
+      15 \equiv_5 3
+****** ?
+       No.
+***** And
+      18 \equiv_5 3
+****** ?
+       Yes!
+* TODO Learn About a Deeper Relation Type
+  Namely: Partial Orders. Learn about and ponder what applications these
+  particular types of relations might have.
+
+** The Idea
+   Binary relations help capture the basic structure underlying items
+   of interest. Of course, there are relations that are intrinsically
+   UNinteresting, for example, the /identity/ relation and the
+   /universal/ relation:
+
+*** The Identity Relation
+   The /identity relation/ /R/ over /S/ (some given set) is the set of
+   all /x/ \in /S/ such that /xRx/.
+
+*** The Universal Relation
+   The /universal relation/ /R/ over /S/ is just \(S \times S\), and
+   simply represents the other extreme of relating everything to
+   everything else.
+
+*** Neither Extreme
+   What are the underlying basic structures of those relations that are
+   somewhere in the middle between these two uninteresting extremes?
+
+*** Revealing Properties
+   What do the properties of /reflexivity/, /symmetry/, /antisymmetry/,
+   /transitivity/, etc., tell us about these relations?
+** Examples and Definitions
+*** Intransitivity
+    \neq not being transitive tells us more about \neq.
+
+    If observer A observes event /x/ to be before event /y/ (denote as
+    /x<y/), B observes /y<z/, will C, if observing /x/ and /z/, always
+    observe /x<z/?
+
+*** Symmetry or Antisymmetry?
+    If p \preceq q and q \preceq p for some relation \preceq,
+    are /p/ and /q/ identical?
+
+*** Preparatory Notion
+    A *preorder* essentially allows two things /A/ and /B/ to be
+    mutually \le each other, but still keep their separate
+    identities (i.e., /A = B/ is not forced).
+
+*** Forced
+    A *partial order* is one where when two things are \le with
+    respect to each other, their separate identities vanish (i.e.,
+    /A = B/ *is* forced).
+
+*** In other words
+    - Preorder = Reflexive + Transitive
+    - Partial Order = Preorder + Antisymmetric
+** A Plethora of Terminology
+   *Partially Ordered Set*
+
+   A *poset* (pronounced poe-set) is a pair /(S, R)/ consisting of a
+   set /S/ and a partial order /R/ on this set. /R/ is often denoted
+   by the curvy less-than-or-equals (\preceq) sign.
+
+   *Comparable Elements*
+
+   /x/ and /y/ (of a poset) under some \preceq relation obey
+   either x \preceq y or y \preceq x.
+
+   *Incomparable Elements*
+
+   Elements of a poset that are NOT comparable.
+
+   *Total Order*
+
+   A partial order for which every pair of elements is comparable; in
+   other words, where either /xRy/ or /yRx/ for all (not necessarily
+   distinct) /x/ and /y/ in /S/.
+
+   *Linear Order*
+
+   Another name for Total Order.
+
+   *Totally Ordered Set*
+
+   A poset with a Total Order.
+
+   *Linearly Ordered Set*
+
+   Another name for Totally Ordered Set.
+
+   *Well-ordered Set*
+
+    A poset (/S/, \preceq) where \preceq is a Total Order and every
+    nonempty subset of /S/ has a least element.
+
+   *Hasse Diagram*
+
+    A graphical representation of a poset where loops and all edges
+    resulting from the transitive property are not shown, and the
+    direction of the edges is indicated by the position of the
+    vertices.
+
+   *Maximal Element*
+
+   An element of a poset that is not less than any other element of the
+   poset.
+
+   *Minimal Element*
+
+   An element of a poset that is not greater than any other element of
+   the poset.
+
+   *Greatest Element*
+
+   An element of a poset that is greater than all other elements in the
+   set.
+
+   *Least Element*
+
+   An element of a poset that is less than all other elements in the
+   set.
+
+   *Compatible Total Order for a Partial Order*
+
+   A total order that contains the given partial order.
+
+   *Topological Sort*
+
+   The construction of a total order compatible with a given partial
+   order.
