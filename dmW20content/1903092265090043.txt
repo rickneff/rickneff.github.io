@@ -1,0 +1,26 @@
+-*- mode: org -*-
+#+title: Assignment 04
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Please do all the Chapter 4 exercises except for the first three parts of
+  Exercise 4.9:
+
+* TODO Exercise 4.2, DFA basics
+** 1
+** 2
+
+* TODO Exercise 4.6, DFA Lasso
+** 1
+** 2
+
+* Exercise 4.7.1, Regular or not?
+** 1
+** 2
+** 3
+
+* Exercise 4.9, Regularity Preserving
+** 4
+** 5
