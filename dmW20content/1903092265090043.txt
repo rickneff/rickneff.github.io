@@ -16,11 +16,11 @@
 ** 1
 ** 2
 
-* Exercise 4.7.1, Regular or not?
+* TODO Exercise 4.7.1, Regular or not?
 ** 1
 ** 2
 ** 3
 
-* Exercise 4.9, Regularity Preserving
+* TODO Exercise 4.9, Regularity Preserving
 ** 4
 ** 5
