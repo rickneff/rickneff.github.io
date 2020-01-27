@@ -1,0 +1,1747 @@
+-*- mode: org -*-
+#+title: Assignment 03 Key
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+
+  These are sample/examplary answers, some of which come from former students.
+
+* Exercises
+** TDR
+#+begin_info
+#+begin_src emacs-lisp :results silent
+  (setf (symbol-function 'fun1) (lambda (n) (* 42 n)))
+#+end_src
+
+  is the equivalent of
+
+#+begin_src emacs-lisp :results silent
+  (fset 'fun1 (lambda (n) (* 42 n)))
+#+end_src
+#+end_info
+** WDT
+#+begin_info
+  Learn by doing: predict the results, verify your predictions, and ponder why
+  there was a difference (if there was).
+
+  Prediction: 6
+#+begin_src emacs-lisp
+  (let ((a 1) (b 2) (c 3)) (+ a b c))
+#+end_src
+
+#+results:
+: 6
+
+  Prediction: error (d not bound)
+#+begin_src emacs-lisp
+  (let ((a 1) (b 2) (c 3)) (+ a b c d))
+#+end_src
+
+  Result: error message \ldquo{}Symbol\rsquo{}s value as variable is void: d\rdquo.
+
+  Prediction: [+ a b c d] (because vectors self-evaluate)
+#+begin_src emacs-lisp
+  (let ((a 1) (b 2) (c 3)) [+ a b c d])
+#+end_src
+
+#+results:
+: [+ a b c d]
+
+  Prediction: 10 (+ was bound as variable)
+#+begin_src emacs-lisp
+  (let ((a 1) (b 2) (c 3) (+ 4)) (+ a b c +))
+#+end_src
+
+#+results:
+: 10
+
+  Prediction: error (a was globally unbound, and the let binding was not seen)
+#+begin_src emacs-lisp
+  (makunbound 'a)
+  (let ((a 1) (b 2) (c 3) (d (+ a 4))) (+ a b c d))
+#+end_src
+
+  Result: error message \ldquo{}Symbol\rsquo{}s value as variable is void: a\rdquo.
+
+  Prediction: 11 (the let binding for a will be seen)
+#+begin_src emacs-lisp
+  (let* ((a 1) (b 2) (c 3) (d (+ a 4))) (+ a b c d))
+#+end_src
+
+#+results:
+: 11
+#+end_info
+** TEJ
+#+begin_info
+  SPC h d f then type assoc to find the variants assoc-if and assoc-if-not:
+
+  (assoc-if PREDICATE LIST [KEYWORD VALUE]...)
+
+  Find the first item whose car satisfies PREDICATE in LIST.
+
+#+begin_src emacs-lisp :results raw
+  (assoc-if (lambda (color) (equal (upcase color) "BLUE"))
+            '(("red" 255 0 0) ("green" 0 255 0) ("blue" 0 0 255)))
+#+end_src
+
+#+results:
+(blue 0 0 255)
+
+(assoc-if-not PREDICATE LIST [KEYWORD VALUE]...)
+
+Find the first item whose car does not satisfy PREDICATE in LIST.
+
+#+begin_src emacs-lisp :results raw
+  (assoc-if-not (lambda (colorname) (= 3 (length colorname)))
+                '(("red" 255 0 0) ("green" 0 255 0) ("blue" 0 0 255)))
+#+end_src
+
+#+results:
+(green 0 255 0)
+
+  You might have stumbled across the very-poorly-named variant:
+
+  (assq KEY LIST)
+
+  Return non-nil if KEY is `eq' to the car of an element of LIST. The value is
+  actually the first element of LIST whose car is KEY. Elements of LIST that are
+  not conses are ignored.
+
+  The only difference between that variant and assoc is the \lsquo{}eq\rsquo test as opposed
+  to \lsquo{}equal\rsquo.
+
+#+begin_src emacs-lisp :results raw
+  (assq 'four '((one 1) (two 2) (three 3) (four 4) (five 5)))
+#+end_src
+
+#+results:
+(four 4)
+
+#+begin_src emacs-lisp :results raw
+  (assq "four" '(("one" 1) ("two" 2) ("three" 3) ("four" 4) ("five" 5)))
+#+end_src
+
+#+results:
+nil
+
+  Thus we see that strings are not \lsquo{}eq\rsquo to other strings with the same
+  characters in them, but they are \lsquo{}equal\rsquo:
+
+#+begin_src emacs-lisp
+ (and
+   (not (eq "four" "four"))
+   (equal "four" "four"))
+#+end_src
+
+#+results:
+: t
+#+end_info
+** WFK
+#+begin_info
+  What happens when you omit the =:test 'equal= parameters to the
+  =make-hash-table= call is that only nils get printed out in the list that pp
+  sees:
+
+#+begin_src emacs-lisp :results output
+  (let* ((mymap (make-hash-table)))
+   (puthash "one" "red" mymap)
+   (puthash "two" "blue" mymap)
+   (puthash "three" "green" mymap)
+   (pp (list (gethash "one" mymap)
+             (gethash "two" mymap)
+             (gethash "three" mymap)))
+   (maphash (lambda (key value) (princ (format "%s : %s\n" key value))) mymap))
+#+end_src
+
+#+results:
+: (nil nil nil)
+: one : red
+: two : blue
+: three : green
+
+  SPC h d f make-hash-table reveals that the default for the =:test= keyword is
+  =eql=, which fails with strings:
+
+#+begin_src emacs-lisp :results raw
+  (eql "one" "one")
+#+end_src
+
+#+results:
+nil
+#+end_info
+** TER
+#+begin_info
+  From the looks of it, =morphify= loops over the items in a list, calls a
+  supplied function on each item, and collects the results of these function
+  calls in a list that is returned.
+
+  Predicted: ("this" "is" "too" "loud")
+
+#+begin_src emacs-lisp :results raw
+  (format "%S" (morphify (quote downcase) (quote ("THIS" "IS" "TOO" "LOUD"))))
+#+end_src
+
+#+results:
+("this" "is" "too" "loud")
+
+  The recursive version walks the list by recursion, appending the result of
+  calling the function on the first item in the list to the results of
+  recursively calling itself on the rest of the items in the list. The base case
+  is the empty list, which returns nil, which does not affect the append call:
+
+#+begin_src emacs-lisp :results raw
+  (append '(a b c) nil)
+#+end_src
+
+#+results:
+(a b c)
+#+end_info
+** TGE
+#+begin_info
+#+begin_src emacs-lisp :results raw
+  (let* ((number (/ -13 4.0))
+         (floor1 (floor number))
+         (floor2 (compute-floor-the-hard-way -13 4.0)))
+    (list number floor1 floor2))
+#+end_src
+
+#+results:
+(-3.25 -4 -4.0)
+
+  Yes, the hard way is correct --- it gives the same answer.
+#+end_info
+** THP
+#+begin_info
+: Graph of Floor
+:
+:  5                                                             *
+:  4                                                       *-----o
+:  3                                                 *-----o
+:  2                                           *-----o
+:  1                                     *-----o
+:  0                               *-----o
+: -1                         *-----o
+: -2                   *-----o
+: -3             *-----o
+: -4       *-----o
+: -5 *-----o
+:   -5    -4    -3    -2    -1     0     1     2     3     4     5
+
+: Graph of Ceiling
+:
+:  5                                                       o-----*
+:  4                                                 o-----*
+:  3                                           o-----*
+:  2                                     o-----*
+:  1                               o-----*
+:  0                         o-----*
+: -1                   o-----*
+: -2             o-----*
+: -3       o-----*
+: -4 o-----*
+: -5 *
+:   -5    -4    -3    -2    -1     0     1     2     3     4     5
+#+end_info
+** WKM
+#+begin_info
+  1 is correct:
+#+begin_src emacs-lisp
+  (loop for x from -4.0 to 4.4 by .1
+        always (and (< (- x 1) (floor x))
+                    (<= (floor x) x)
+                    (<= x (ceiling x))
+                    (< (ceiling x) (+ x 1)))))
+#+end_src
+
+#+results:
+: t
+
+  2 and 3 are correct:
+#+begin_src emacs-lisp
+  (loop for x from -4 to 4 by 1
+        always (and (= (floor (- x)) (- (ceiling x)))
+                    (= (ceiling (- x)) (- (floor x)))))
+#+end_src
+
+#+results:
+: t
+
+#+begin_src emacs-lisp
+  (loop for x from -4.0 to 4.4 by .1
+        always (and (= (floor (- x)) (- (ceiling x)))
+                    (= (ceiling (- x)) (- (floor x)))))
+#+end_src
+
+#+results:
+: t
+
+  4 and 5 are correct:
+
+#+begin_src emacs-lisp
+  (loop for n from -1 to 1
+        always (loop for x from -4.0 to 4.4 by .1
+                     always (and (= (floor (+ x n)) (+ (floor x) n))
+                                 (= (ceiling (+ x n)) (+ (ceiling x) n)))))
+#+end_src
+
+#+results:
+: t
+
+  6 is correct:
+#+begin_src emacs-lisp
+  (loop for n from -3 to 3
+        always (= (+ (floor (/ n 2.0)) (ceiling (/ n 2.0))) n))
+#+end_src
+
+#+results:
+: t
+
+  7 is correct:
+#+begin_src emacs-lisp
+  (loop for n from -3 to 3
+        always (= (+ (floor (/ n 2.0)) (floor (/ (+ n 1) 2.0))) n))
+#+end_src
+
+#+results:
+: t
+
+  8 is NOT correct:
+#+begin_src emacs-lisp :results raw
+  (loop for n from 1 to 1
+        always (= (+ (ceiling (/ n 2.0)) (ceiling (/ (+ n 1) 2.0))) n))
+#+end_src
+
+#+results:
+nil
+
+  9 is correct:
+#+begin_src emacs-lisp :results raw
+  (loop for m from -3 to 3
+        always (loop for n from -3 to 3
+                     always (= (+ (floor (/ (+ n m) 2.0)) (floor (/ (+ n 1 (- m)) 2.0))) n)))
+#+end_src
+
+#+results:
+t
+
+  10 is NOT correct (because 8 is not):
+#+begin_src emacs-lisp :results raw
+  (loop for m from 1 to 1
+        always (loop for n from -3 to 3
+                     always (= (+ (ceiling (/ (+ n m) 2.0)) (ceiling (/ (+ n 1 (- m)) 2.0))) n)))
+#+end_src
+
+#+results:
+nil
+#+end_info
+** TIW
+#+begin_info
+#+begin_src emacs-lisp :results silent
+  (defun Iverson-bracket (prop)
+    (if prop 1 0))
+
+  (defun round-to-nearest-integer (x)
+    (if (minusp x)
+        (let ((up (ceiling x)))
+          (- up (Iverson-bracket (>= (- up x) .5))))
+      (let ((down (floor x)))
+        (+ down (Iverson-bracket (>= (- x down) .5))))))
+#+end_src
+
+#+begin_src emacs-lisp :results raw
+  (list (round-to-nearest-integer 3.0)
+        (round-to-nearest-integer 3.1)
+        (round-to-nearest-integer 3.499)
+        (round-to-nearest-integer 3.5)
+        (round-to-nearest-integer 3.678)
+        (round-to-nearest-integer 3.999))
+#+end_src
+
+#+results:
+(3 3 3 4 4 4)
+
+#+begin_src emacs-lisp :results raw
+  (list (round-to-nearest-integer -3.0)
+        (round-to-nearest-integer -3.1)
+        (round-to-nearest-integer -3.499)
+        (round-to-nearest-integer -3.5)
+        (round-to-nearest-integer -3.678)
+        (round-to-nearest-integer -3.999))
+#+end_src
+
+#+results:
+(-3 -3 -3 -4 -4 -4)
+#+end_info
+** TKG
+#+begin_info
+  SPC h d f then type rassoc to find the variants rassoc*, rassoc-if and
+  rassoc-if-not (and rassq on the way):
+
+  (rassoc KEY LIST)
+
+  Return non-nil if KEY is `equal' to the cdr of an element of LIST.
+  The value is actually the first element of LIST whose cdr equals KEY.
+
+#+begin_src emacs-lisp :results raw
+  (rassoc '(0 255 0)
+          '(("red" 255 0 0) ("green" 0 255 0) ("blue" 0 0 255)))
+#+end_src
+
+#+results:
+(green 0 255 0)
+
+  rassoc* is the same, except it supports the keywords: :test :test-not :key
+
+  (rassoc-if PREDICATE LIST [KEYWORD VALUE]...)
+
+  Find the first item whose cdr satisfies PREDICATE in LIST.
+
+  Keywords supported:  :key
+
+#+begin_src emacs-lisp :results raw
+  (rassoc-if (lambda (rgb) (= (second rgb) 255))
+             '(("red" 255 0 0) ("green" 0 255 0) ("blue" 0 0 255)))
+#+end_src
+
+#+results:
+(green 0 255 0)
+
+  (rassoc-if-not PREDICATE LIST [KEYWORD VALUE]...)
+
+  Find the first item whose cdr does not satisfy PREDICATE in LIST.
+
+  Keywords supported:  :key
+
+#+begin_src emacs-lisp :results raw
+  (rassoc-if-not (lambda (rgb) (zerop (third rgb)))
+                 '(("red" 255 0 0) ("green" 0 255 0) ("blue" 0 0 255)))
+#+end_src
+
+#+results:
+(blue 0 0 255)
+
+  (rassq KEY LIST)
+
+  Return non-nil if KEY is `eq' to the cdr of an element of LIST.
+  The value is actually the first element of LIST whose cdr is KEY.
+
+  The same difference applies --- the \lsquo{}eq\rsquo test as opposed to \lsquo{}equal\rsquo.
+
+#+begin_src emacs-lisp :results raw
+  (rassq 'four '((1 . one) (2 . two) (3 . three) (4 . four) (5 . five)))
+#+end_src
+
+#+results:
+(4 . four)
+
+#+begin_src emacs-lisp :results raw
+  (rassq "four" '((1 . "one") (2. "two") (3 . "three") (4 . "four") (5 . "five")))
+#+end_src
+
+#+results:
+nil
+#+end_info
+** WOV
+#+begin_info
+  1. Arithmetic progression with a=7 and d=7.
+  2. Arithmetic progression with a=7 and d=4.
+  3. Start at 3, add 1 to get 4, then add 2 to 4 to get 6, then add 3 to 6 to
+     get 9, then continue each time increasing by one what gets added to each
+     term to get the next.
+  4. Count up in binary starting at 1.
+  5. This is the Fibonacci sequence, the nth term is the nth Fibonacci number.
+  6. This is the 3x+1 \ldquo{}orbit of 7\rdquo.
+  7. This is the Lucas sequence, the nth term is the nth Lucas number.
+  8. These are the powers of two (starting at 2) multiplied by three.
+  9. These are the powers of three (starting at 3) multiplied by two.
+  10. These numbers are the prime numbers.
+
+#+begin_src emacs-lisp
+  (require 'cl)
+
+  (defun to-binary (n)
+    (case n (1 1) (2 10) (3 11) (4 100) (5 101)
+          (6 110) (7 111) (8 1000) (9 1001) (10 1010)))
+
+  (defun fibonacci (n)
+    (if (or (= n 1) (= n 2))
+        1
+      (+ (fibonacci (- n 1)) (fibonacci (- n 2)))))
+
+  (defun lucas (n)
+    (cond ((= n 1) 2)
+          ((= n 2) 1)
+          (t (+ (lucas (- n 1)) (lucas (- n 2))))))
+
+  (defun 3x+1 (x)
+    (if (evenp x)
+        (/ x 2)
+      (+ (* 3 x) 1)))
+
+  (setq 3x+1-orbit-of-7
+        (append (list 7)
+                (loop with n = 7 repeat 9 collect (setq n (3x+1 n))))
+        first-ten-primes (list 2 3 5 7 11 13 17 19 23 29))
+  (mapcar (lambda (x) (list (apply 'vector x)))
+    (list
+      (loop for n from 1 to 10 collect (* 7 n))
+      (loop for n from 0 to  9 collect (+ 7 (* n 4)))
+      (loop for n from 0 to  9 with a = 3 collect (setq a (+ a n)))
+      (loop for n from 1 to 10 collect (to-binary n))
+      (loop for n from 1 to 10 collect (fibonacci n))
+      (loop for n from 0 to  9 collect (nth n 3x+1-orbit-of-7))
+      (loop for n from 1 to 10 collect (lucas n))
+      (loop for n from 1 to 10 collect (* 3 (expt 2 n)))
+      (loop for n from 1 to 10 collect (* 2 (expt 3 n)))
+      (loop for n from 0 to  9 collect (nth n first-ten-primes))
+    )
+  )
+#+end_src
+
+#+results:
+| [7 14 21 28 35 42 49 56 63 70]                 |
+| [7 11 15 19 23 27 31 35 39 43]                 |
+| [3 4 6 9 13 18 24 31 39 48]                    |
+| [1 10 11 100 101 110 111 1000 1001 1010]       |
+| [1 1 2 3 5 8 13 21 34 55]                      |
+| [7 22 11 34 17 52 26 13 40 20]                 |
+| [2 1 3 4 7 11 18 29 47 76]                     |
+| [6 12 24 48 96 192 384 768 1536 3072]          |
+| [6 18 54 162 486 1458 4374 13122 39366 118098] |
+| [2 3 5 7 11 13 17 19 23 29]                    |
+#+end_info
+** WQW
+#+begin_info
+  | Predicate? | Yes or No? |
+  |------------+------------|
+  | =list=     | No         |
+  | =listp=    | Yes        |
+  | =integerp= | Yes        |
+  | =vector=   | No         |
+  | =vectorp=  | Yes        |
+  | =symbolp=  | Yes        |
+  | =zerop=    | Yes        |
+  | =evenp=    | Yes        |
+  | =oddp=     | Yes        |
+#+end_info
+
+** WRP
+#+begin_info
+  1. Someone is older than 21.
+  2. Everyone is older than 21.
+  3. Someone is not older than 21.
+  4. Everyone is not older than 21. Or, No one is older than 21.
+#+end_info
+** TOJ
+#+begin_info
+  1. Some resident of Idaho is a student at BYU-Idaho.
+  2. Every resident of Idaho is a student at BYU-Idaho.
+  3. There is no resident of Idaho who is a student at BYU-Idaho.
+  4. There is a resident of Idaho who is not a student at BYU-Idaho.
+  5. Not all residents of Idaho are non-students at BYU-Idaho.
+  6. Every resident of Idaho is a non-student at BYU-Idaho. Or, No resident of
+     Idaho is a student at BYU-Idaho.
+#+end_info
+** WRU
+#+begin_info
+  1. For all people, if a person is a friend, then that person is cool. Better:
+     All friends are cool.
+  2. Some person is a friend and is cool.
+  3. Every person is a friend and is cool.
+  4. For some person, if that person is a friend, then that person is cool.
+     Better: Some friends are cool.
+#+end_info
+** TOL
+#+begin_info
+  1. All students are from Russia.
+  2. For some person, if that person is from Russia, then that person is from
+     Russia. This would follow the pattern established by the other three and
+     make more sense as \exist x S(x) $\rarr$ R(x). In which case, it would be: Someone,
+     if he/she is a student then he/she is from Russia.
+  3. Every person is a student and is from Russia.
+  4. Some student is from Russia.
+#+end_info
+** TUK
+#+begin_info
+  1. Some number is greater than every number. (Or, there is a greatest number.
+     Clearly false!)
+  2. The product of some nonnegative numbers is nonnegative.
+  3. Some number is the sum of every number and some other number.
+#+end_info
+** WVQ
+#+begin_info
+  1. Every student asks some student a question.
+  2. Every student asks every student a question.
+  3. Some student asks at least one student a question.
+  4. Some student asks every student a question.
+  5. Every student is asked a question by some (or at least one) student.
+  6. Some student asks some student a question. (Another way to say the answer to 3.)
+#+end_info
+** TUQ
+#+begin_info
+  1. \forall x \forall y S(x) \land T(y) \rarr \not Q(x, y)
+  2. \exists x \exists y S(x) \land T(y) \land Q(x, y)
+  3. \forall x \exists y \exists z S(x) \land T(y) \land A(z) \rarr (Q(x y) \land Q(x, z))
+  4. \exists x \exists y \exists z S(x) \land S(y) \land x \ne y \land T(z) \land Q(x, z) \land Q(y, z)
+#+end_info
+** WVU
+#+begin_info
+  1. \not \exists x \forall y T(x, y). Or, \forall x \exists y \not T(x, y)
+  2. \forall x \forall y T(x, y)
+  3. \forall x \exist y T(x, y)
+  4. \exists x_1 \exists x_2 \exists y T(x_1, y) \land T(x_2, y) \land x_1 \ne x_2
+#+end_info
+** TVL
+#+begin_info
+  1. Jackson Andrews has dropped out of Discrete Mathematics.
+  2. There is exactly one student who has dropped out of every class.
+  3. Every student has dropped at least one class.
+#+end_info
+** TXG
+#+begin_info
+  1. True
+  2. False
+  3. True
+  4. True
+  5. True
+  6. False
+  7. False
+  8. True
+#+end_info
+
+* Problems
+** TBD
+#+begin_info
+  The statement of the problem in symbolic form is:
+
+  \vert{}A\vert = \vert{}B| \rarr (f is injective \leftrightarrow f is surjective)
+
+  As a conditional, this is true unless the antecedent is true and the
+  consequent is false. So we must argue that given the same-sizeness of the sets
+  A and B, it /must be true/ that the function f is injective if it is
+  surjective, and it is surjective if it is injective.
+
+  If f is injective, then every element of A gets mapped to a different element
+  of B. If in addition to the range of A there were another element in B, then
+  \vert{}B\vert would be at least one greater than \vert{}A\vert. This is not possible, so it is
+  inescapable that f is surjective. Conversely, suppose that f is surjective, so
+  that every element of B is the image of some element of A. In particular,
+  there is an element of A for each element of B. If two or more elements of A
+  were mapped to the same element of B, then \vert{}A\vert would be at least one greater
+  than \vert{}B\vert. Again, this is impossible, so it is inescapable that f is injective.
+#+end_info
+** WDK
+#+begin_info
+  Your venturing should have produced some comfort with the difference between
+  the /set/ *function* (which evaluates its two arguments), the /setq/ *special
+  form* (which evaluates only its even-numbered arguments) and the /setf/
+  *macro* (like a special form) --- which is a generalized \ldquo{}place-setter\rdquo. All
+  of these flout the \ldquo{}variable values never change once assigned\rdquo functional
+  programming feature.
+#+end_info
+** TEH
+#+begin_info
+  You could get by without let* by (clumsily) nesting starless lets, e.g.:
+#+begin_src emacs-lisp
+  (let ((a 4))
+    (let ((b 5))
+      (let ((c 6))
+        (let ((d (+ a 7)))
+          (+ a b c d)))))
+#+end_src
+
+#+results:
+: 26
+#+end_info
+** WFC
+#+begin_info
+  + with 3 operands prediction: 6 (verified)
+#+begin_src emacs-lisp
+ (+ 1 2 3)
+#+end_src
+
+#+results:
+: 6
+
+  + with 2 operands prediction: 3 (verified)
+#+begin_src emacs-lisp
+ (+ 1 2)
+#+end_src
+
+#+results:
+: 3
+
+  + with 1 operand prediction: 1 (verified)
+#+begin_src emacs-lisp
+ (+ 1)
+#+end_src
+
+#+results:
+: 1
+
+  + with 0 operands prediction: 0? (verified! --- see [[https://en.wikipedia.org/wiki/Empty_sum][Empty Sum]])
+#+begin_src emacs-lisp
+ (+ )
+#+end_src
+
+#+results:
+: 0
+
+  + with 3 operands prediction: -4 (verified)
+#+begin_src emacs-lisp
+ (- 1 2 3)
+#+end_src
+
+#+results:
+: -4
+
+  - with 2 operands prediction: -1 (verified)
+#+begin_src emacs-lisp
+ (- 1 2)
+#+end_src
+
+#+results:
+: -1
+
+  - with 1 operand prediction: -1 (verified --- see [[https://en.wikipedia.org/wiki/Empty_sum][Empty Sum]] (or difference))
+#+begin_src emacs-lisp
+ (- 1)
+#+end_src
+
+#+results:
+: -1
+
+  - with 0 operands prediction: 0 (verified)
+#+begin_src emacs-lisp
+ (- )
+#+end_src
+
+#+results:
+: 0
+
+  * with 3 operands prediction: 120 (verified)
+#+begin_src emacs-lisp
+ (* 4 5 6)
+#+end_src
+
+#+results:
+: 120
+
+  * with 2 operands prediction: 20 (verified)
+#+begin_src emacs-lisp
+ (* 4 5)
+#+end_src
+
+#+results:
+: 20
+
+  * with 1 operand prediction: 4 (verified)
+#+begin_src emacs-lisp
+ (* 4)
+#+end_src
+
+#+results:
+: 4
+
+  * with 0 operands prediction: 1 (verified --- see [[https://en.wikipedia.org/wiki/Empty_product][Empty Product]])
+#+begin_src emacs-lisp
+ (* )
+#+end_src
+
+#+results:
+: 1
+
+  / with 3 operands prediction: 0.09722222222222222 (verified)
+
+#+begin_src emacs-lisp
+  (/ 7.0 8.0 9.0)
+#+end_src
+
+#+results:
+: 0.09722222222222222
+
+  Equivalent to:
+
+#+begin_src emacs-lisp
+ (/ (/ 7.0 8.0) 9.0))
+#+end_src
+
+#+results:
+: 0.09722222222222222
+
+  / with 2 operands prediction: 2 (verified)
+#+begin_src emacs-lisp
+ (/ 16 8)
+#+end_src
+
+#+results:
+: 2
+
+  / with 1 operand prediction: 7 (verified)
+#+begin_src emacs-lisp
+ (/ 7)
+#+end_src
+
+#+results:
+: 7
+
+  / with 0 operands prediction: not allowed --- error! (verified)
+#+begin_src emacs-lisp
+ (/ )
+#+end_src
+
+  Result was error message: Wrong number of arguments: /, 0
+
+  As demonstrated, for all basic math operators except for /, polyadic /can/
+  mean having /arbitrary arity/ (taking 0 /or more/ arguments). For /, it means
+  taking 1 or more arguments.
+#+end_info
+** WGP
+#+begin_info
+  We have already seen the variation of =mapcar= named =mapconcat= in the
+  =prop-eval= function in OYW. That is exactly the one to use for
+  =vector-to-string=!
+
+#+begin_src emacs-lisp :results silent
+  (defun vector-to-string (vec)
+    (mapconcat 'symbol-name vec " "))
+#+end_src
+
+#+begin_src emacs-lisp :results output
+  (print (format "%s" (vector-to-string [a b c])))
+#+end_src
+
+#+results:
+:
+: "a b c"
+
+  We had to add a =print= call to get the quotes to show up. Alternatively, use
+  a capital S:
+
+#+begin_src emacs-lisp
+  (format "%S" (vector-to-string [a b c]))
+#+end_src
+
+#+results:
+: "a b c"
+#+end_info
+** WGW
+#+begin_info
+  The =prefix->infix= function parses the outermost expression into three parts,
+  the operator (0th elements) and the two operands (1st and 2nd elements), and
+  then rearranges them, putting the operator in a new list formed by surrounding
+  the operator with the results of /recursively/ calling =prefix->-infix= on the
+  two operands.
+
+#+begin_src emacs-lisp :results raw
+  (prefix->infix '(+ (* 2 3) (/ 4 (- 5 6))))
+#+end_src
+
+#+results:
+((2 * 3) + (4 / (5 - 6)))
+
+#+begin_src emacs-lisp :results raw
+  (prefix->infix '(+ (* (/ 2 3) (/ 3 2)) (/ (+ 7 (* 8 9)) (- 5 6))))
+#+end_src
+
+#+results:
+(((2 / 3) * (3 / 2)) + ((7 + (8 * 9)) / (5 - 6)))
+
+#+begin_src emacs-lisp :results silent
+  (defun prefix->infix-with-if (pre)
+    (if (not (listp pre))
+        pre
+      (or (= 3 (length pre)) (error "not a 3-length list"))
+      (list (prefix->infix-with-if (nth 1 pre))
+            (nth 0 pre)
+            (prefix->infix-with-if (nth 2 pre)))))
+#+end_src
+
+#+begin_src emacs-lisp :results raw
+  (prefix->infix-with-if '(+ (* 2 3) (/ 4 (- 5 6))))
+#+end_src
+
+#+results:
+((2 * 3) + (4 / (5 - 6)))
+
+#+begin_src emacs-lisp :results raw
+  (prefix->infix-with-if '(+ (* (/ 2 3) (/ 3 2)) (/ (+ 7 (* 8 9)) (- 5 6))))
+#+end_src
+
+#+results:
+(((2 / 3) * (3 / 2)) + ((7 + (8 * 9)) / (5 - 6)))
+#+end_info
+** TFV
+#+begin_info
+#+begin_src emacs-lisp :results silent
+  (defun infix->prefix (pre)
+    (if (not (listp pre))
+        pre
+      (or (= 3 (length pre)) (error "not a 3-length list"))
+      (list (nth 1 pre)
+            (infix->prefix (nth 0 pre))
+            (infix->prefix (nth 2 pre)))))
+#+end_src
+
+#+begin_src emacs-lisp :results raw
+  (infix->prefix '(1 + 2))
+#+end_src
+
+#+results:
+(+ 1 2)
+
+#+begin_src emacs-lisp :results raw
+  (infix->prefix '((2 * 3) + (4 / (5 - 6))))
+#+end_src
+
+#+results:
+(+ (* 2 3) (/ 4 (- 5 6)))
+
+#+begin_src emacs-lisp :results raw
+  (infix->prefix '(((2 / 3) * (3 / 2)) + ((7 + (8 * 9)) / (5 - 6))))
+#+end_src
+
+#+results:
+(+ (* (/ 2 3) (/ 3 2)) (/ (+ 7 (* 8 9)) (- 5 6)))
+
+  Expected:
+: (+ (* (/ 2 3) (/ 3 2)) (/ (+ 7 (* 8 9)) (- 5 6))))
+
+  They match!
+#+end_info
+** WJS
+#+begin_info
+  An analogous situation when taking the ceiling of negative numbers: Integer
+  division and then /adding 1/ is not the same as the ceiling of the fraction:
+
+#+begin_src emacs-lisp :results raw
+  (list (+ 1 (/ -13 4)) (ceiling (/ -13 4.0)))
+#+end_src
+
+#+results:
+(-2 -3)
+#+end_info
+** WKC
+#+begin_info
+  Define =floor= as the number minus its fractional part, which for negative
+  numbers is actually wrong if you say the fractional part of -3.24 is 0.24 ---
+  =frac-part= as defined gives 0.7599999 --- which is =(+ 4 -3.24)= --- but it
+  gives the right answer after subtracting that from the number (and truncating
+  to make it an int).
+
+#+begin_src emacs-lisp :results silent
+  (defun floor-not-primitive (number)
+    (truncate (- number (frac-part number))))
+#+end_src
+
+#+begin_src emacs-lisp :results raw
+  (floor-not-primitive 3.24)
+#+end_src
+
+#+results:
+3
+
+#+begin_src emacs-lisp :results raw
+  (floor-not-primitive -3.24)
+#+end_src
+
+#+results:
+-4
+#+end_info
+** WNW
+#+begin_info
+  For a function to be /invertible/ it must be a /bijection/.
+#+end_info
+** TMZ
+#+begin_info
+  1. How many pairs of numbers between 1 and 1000 pass the predicate given by
+     the following lambda expression? (lambda (m n) (= 1 (gcd m n)))
+#+begin_src emacs-lisp
+  (loop with pred = (lambda (m n) (= 1 (gcd m n)))
+        for m from 1 to 1000
+        sum (loop for n from 1 to 1000
+                  count (funcall pred m n)))
+#+end_src
+
+#+results:
+: 608383
+
+  Just over half as many if duplicate pairs are eliminated:
+#+begin_src emacs-lisp
+  (loop with pred = (lambda (m n) (= 1 (gcd m n)))
+        for m from 1 to 1000
+        sum (loop for n from m to 1000
+                  count (funcall pred m n)))
+#+end_src
+
+#+results:
+: 304192
+
+  Just under half as many if (1 1) is eliminated:
+#+begin_src emacs-lisp
+  (loop with pred = (lambda (m n) (= 1 (gcd m n)))
+        for m from 1 to 1000
+        sum (loop for n from (+ m 1) to 1000
+                  count (funcall pred m n)))
+#+end_src
+
+#+results:
+: 304191
+  2. How many solutions are there in integers to the equation 3x + 4y = 7?
+
+     There are infinite solutions, but only 15 if limiting the range of x and y
+     to [-30 .. 30].
+
+#+begin_src emacs-lisp
+  (loop with pred = (lambda (x y) (= (+ (* 3 x) (* 4 y)) 7))
+        for x from -30 to 30
+        sum (loop for y from -30 to 30
+                  count (funcall pred x y)))
+#+end_src
+
+#+results:
+: 15
+
+  Here are the 15 solutions:
+#+begin_src emacs-lisp
+  (loop with pred = (lambda (x y) (= (+ (* 3 x) (* 4 y)) 7))
+        with n = 0
+        for x from -30 to 30
+        append (loop for y from -30 to 30
+                     if (funcall pred x y)
+                     collect (list (incf n) x y)))
+#+end_src
+
+#+results:
+|  1 | -27 |  22 |
+|  2 | -23 |  19 |
+|  3 | -19 |  16 |
+|  4 | -15 |  13 |
+|  5 | -11 |  10 |
+|  6 |  -7 |   7 |
+|  7 |  -3 |   4 |
+|  8 |   1 |   1 |
+|  9 |   5 |  -2 |
+| 10 |   9 |  -5 |
+| 11 |  13 |  -8 |
+| 12 |  17 | -11 |
+| 13 |  21 | -14 |
+| 14 |  25 | -17 |
+| 15 |  29 | -20 |
+
+  3. Each taken from the set [2 3 4 5 6 7 8 9], how many pairs of numbers are
+     there that when multiplied together equal one more than a multiple of 11?
+
+#+begin_src emacs-lisp
+  (loop with pred = (lambda (x y) (= 1 (mod (* x y) 11)))
+        for x from 2 to 8
+        sum (loop for y from (+ x 1) to 9
+                  count (funcall pred x y)))
+#+end_src
+
+#+results:
+: 4
+
+  And the four pairs are:
+#+begin_src emacs-lisp
+  (loop with pred = (lambda (x y) (= 1 (mod (* x y) 11)))
+        for x from 2 to 8
+        append (loop for y from (+ x 1) to 9
+                     if (funcall pred x y)
+                     collect (list x y)))
+#+end_src
+
+#+results:
+| 2 | 6 |
+| 3 | 4 |
+| 5 | 9 |
+| 7 | 8 |
+
+  4. How many pairs of numbers that when multiplied together equal one more than
+     a multiple of 23 are found in the set [2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+     17 18 19 20 21]? The answer is 10:
+#+begin_src emacs-lisp
+  (loop with pred = (lambda (x y) (= 1 (mod (* x y) 23)))
+        for x from 2 to 20
+        append (loop for y from (+ x 1) to 21
+                     if (funcall pred x y)
+                     collect (list x y)))
+#+end_src
+
+#+results:
+|  2 | 12 |
+|  3 |  8 |
+|  4 |  6 |
+|  5 | 14 |
+|  7 | 10 |
+|  9 | 18 |
+| 11 | 21 |
+| 13 | 16 |
+| 15 | 20 |
+| 17 | 19 |
+
+  5. How many pairs of numbers that when multiplied together equal one more than
+     a multiple of *9* are found in the set [2 3 4 5 6 7]? The answer is 2:
+#+begin_src emacs-lisp
+  (loop with pred = (lambda (x y) (= 1 (mod (* x y) 9)))
+        for x from 2 to 6
+        append (loop for y from (+ x 1) to 7
+                     if (funcall pred x y)
+                     collect (list x y)))
+#+end_src
+
+#+results:
+| 2 | 5 |
+| 4 | 7 |
+#+end_info
+** TNL
+#+begin_info
+  The symbol is the Greek capital \lsquo{}P\rsquo (or Pi): \Pi
+
+  \Pi^{20}_{n = 1} = (* 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20)
+
+  There is no loop keyword counterpart to \lsquo{}sum\rsquo for \lsquo{}product\rsquo, but we can
+  collect the terms and apply '*:
+#+begin_src emacs-lisp
+  (apply '* (loop for n from 1 to 19 collect n))
+#+end_src
+
+#+results:
+: 121645100408832000
+
+  Multiplying that by 20 would overflow the capacity of an elisp fixnum, which
+  is =most-positive-fixnum=:
+#+begin_src emacs-lisp
+  most-positive-fixnum
+#+end_src
+
+#+results:
+: 2305843009213693951
+
+  There is of course a way to form the product (19!) without using a loop:
+#+begin_src emacs-lisp
+  (apply '* (number-sequence 1 19))
+#+end_src
+
+#+results:
+: 121645100408832000
+#+end_info
+** WRD
+#+begin_info
+#+begin_src emacs-lisp
+  (loop for j from 1 to 9
+        collect (loop for k from 1 to j
+                      collect (list j k)))
+#+end_src
+
+#+results:
+| (1 1) |       |       |       |       |       |       |       |       |
+| (2 1) | (2 2) |       |       |       |       |       |       |       |
+| (3 1) | (3 2) | (3 3) |       |       |       |       |       |       |
+| (4 1) | (4 2) | (4 3) | (4 4) |       |       |       |       |       |
+| (5 1) | (5 2) | (5 3) | (5 4) | (5 5) |       |       |       |       |
+| (6 1) | (6 2) | (6 3) | (6 4) | (6 5) | (6 6) |       |       |       |
+| (7 1) | (7 2) | (7 3) | (7 4) | (7 5) | (7 6) | (7 7) |       |       |
+| (8 1) | (8 2) | (8 3) | (8 4) | (8 5) | (8 6) | (8 7) | (8 8) |       |
+| (9 1) | (9 2) | (9 3) | (9 4) | (9 5) | (9 6) | (9 7) | (9 8) | (9 9) |
+
+#+begin_src emacs-lisp
+  (loop for k from 1 to 9
+        collect (loop for j from k to 9
+                      collect (list j k)))
+#+end_src
+
+#+results:
+| (1 1) | (2 1) | (3 1) | (4 1) | (5 1) | (6 1) | (7 1) | (8 1) | (9 1) |
+| (2 2) | (3 2) | (4 2) | (5 2) | (6 2) | (7 2) | (8 2) | (9 2) |       |
+| (3 3) | (4 3) | (5 3) | (6 3) | (7 3) | (8 3) | (9 3) |       |       |
+| (4 4) | (5 4) | (6 4) | (7 4) | (8 4) | (9 4) |       |       |       |
+| (5 5) | (6 5) | (7 5) | (8 5) | (9 5) |       |       |       |       |
+| (6 6) | (7 6) | (8 6) | (9 6) |       |       |       |       |       |
+| (7 7) | (8 7) | (9 7) |       |       |       |       |       |       |
+| (8 8) | (9 8) |       |       |       |       |       |       |       |
+| (9 9) |       |       |       |       |       |       |       |       |
+
+Replace =list= with =+=, rinse and repeat:
+
+#+begin_src emacs-lisp
+  (loop for j from 1 to 9
+        collect (loop for k from 1 to j
+                      collect (+ j k)))
+#+end_src
+
+#+results:
+|  2 |    |    |    |    |    |    |    |    |
+|  3 |  4 |    |    |    |    |    |    |    |
+|  4 |  5 |  6 |    |    |    |    |    |    |
+|  5 |  6 |  7 |  8 |    |    |    |    |    |
+|  6 |  7 |  8 |  9 | 10 |    |    |    |    |
+|  7 |  8 |  9 | 10 | 11 | 12 |    |    |    |
+|  8 |  9 | 10 | 11 | 12 | 13 | 14 |    |    |
+|  9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 |    |
+| 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 |
+
+#+begin_src emacs-lisp
+  (loop for k from 1 to 9
+        collect (loop for j from k to 9
+                      collect (+ j k)))
+#+end_src
+
+#+results:
+|  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 |
+|  4 |  5 |  6 |  7 |  8 |  9 | 10 | 11 |    |
+|  6 |  7 |  8 |  9 | 10 | 11 | 12 |    |    |
+|  8 |  9 | 10 | 11 | 12 | 13 |    |    |    |
+| 10 | 11 | 12 | 13 | 14 |    |    |    |    |
+| 12 | 13 | 14 | 15 |    |    |    |    |    |
+| 14 | 15 | 16 |    |    |    |    |    |    |
+| 16 | 17 |    |    |    |    |    |    |    |
+| 18 |    |    |    |    |    |    |    |    |
+#+end_info
+** TNQ
+#+begin_info
+  Timing it up to max-iterations 100 then 1000:
+
+#+begin_src emacs-lisp
+  (calculate-pi-very-slowly 100)
+#+end_src
+
+#+results:
+: 3.1514934010709914
+
+#+begin_src emacs-lisp
+  (calculate-pi-very-slowly 1000)
+#+end_src
+
+#+results:
+: 3.1425916543395442
+
+  Both took less than a second. Going for broke, try the next three powers of 10:
+
+#+begin_src emacs-lisp
+  (calculate-pi-very-slowly 10000)
+#+end_src
+
+#+results:
+: 3.1416926435905346
+
+#+begin_src emacs-lisp
+  (calculate-pi-very-slowly 100000)
+#+end_src
+
+#+results:
+: 3.1416026534897203
+
+#+begin_src emacs-lisp
+  (calculate-pi-very-slowly 1000000)
+#+end_src
+
+#+results:
+: 3.1415936535887745
+
+  The last took about 5 seconds. The \ldquo{}very slowly\rdquo applies to how slowly it
+  converges to the true value of \pi for a given number of iterations. The table
+  below summarizes:
+
+  |       n | Difference from \pi                     |
+  |---------+---------------------------------------|
+  |     100 | (- 3.1514934010709914 pi) \approx 0.01      |
+  |    1000 | (- 3.1425916543395442 pi) \approx 0.001     |
+  |   10000 | (- 3.1416926435905346 pi) \approx 0.0001    |
+  |  100000 | (- 3.1416026534897203 pi) \approx 0.00001   |
+  | 1000000 | (- 3.1415936535887745 pi) \approx 0.0000001 |
+
+  In 3 cases out of 4 it took an order of magnitude more iterations to get just
+  one more digit of precision.
+#+end_info
+
+** WZO
+#+begin_info
+  Using the predicates C(x) = \ldquo{}x is a critic\rdquo, P(x) = \ldquo{}x is perfect\rdquo, F(x) = \ldquo{}x
+  is your friend\rdquo:
+  1. \forall x C(x)
+  2. \not \exists x P(x) or \forall x \not P(x)
+  3. \exists x F(x) \land P(x)
+  4. \forall x F(x) \rarr C(x)
+  5. \forall x C(x) \lor \exist x F(x)
+  6. \not \exists x C(x) \land \forall x F(x)
+#+end_info
+** TOU
+#+begin_info
+  The problem did not ask for predicates, but we supply them anyway:
+  1. \forall x horse(x) \rarr hashooves(x).
+  2. \forall x horse(x) \rarr \not canfly(x).
+  3. \forall x bat(x) \rarr blind(x).
+  4. \forall x bear(x) \rarr \not candance(x).
+  5. \exists x penguin(x) \land canswim(x) \land cancatchfish(x).
+
+  Negated:
+  1. \exists x horse(x) \land \not hashooves(x).
+  2. \exists x horse(x) \land canfly(x).
+  3. \exists x bat(x) \land \not blind(x).
+  4. \exists x bear(x) \land candance(x).
+  5. \forall x \not penguin(x) \lor \not canswim(x) \lor \not cancatchfish(x).
+
+  Negations in English:
+  1. Some horse does not have hooves.
+  2. Some horse can fly.
+  3. Some bat is not blind.
+  4. Some bear can dance.
+  5. Everything is either a non-penguin or a non-swimmer or a non-fish-catcher.
+     Better: No penguin can swim and catch fish.
+#+end_info
+** WYH
+#+begin_info
+  1. Using set-of-songs, S(x) = x \in set-of-songs, C(x) = x can be sung, A(x) = x
+     is a soul alive to music, the statement is: A(x) \rarr \exists x set-of-songs \ne \empty \land S(x) \land C(x)
+  2. Using E(x) = x is an error, M(x) = x is an error message, D(x) = x is
+     displayed, the statement is: E(x) \rarr \exists x M(x) \land D(x)
+  3. Using P(x) = x is a program, S(x) = x has been scanned, V(x) = x has a
+     virus, the statement is: [\forall x (P(x) \rarr S(x))] \land [\exists x (P(x) \land V(x))]
+#+end_info
+** TLI
+#+begin_info
+  1. False
+  2. False
+  3. True
+  4. False
+#+end_info
+** WPI
+#+begin_info
+  1. True
+  2. It depends. If the universe has exactly one thing in it, the statement is
+     true, but if the universe has more than one thing in it, the statement is
+     false.
+  3. True
+  4. It depends. If the universe is empty, the statement is false, but if the
+     universe is nonempty, it is true.
+#+end_info
+** TSD
+#+begin_info
+  1. \exists x E(x) \land ignored(x)
+  2. \not \forall x L(x) \rarr R(x). Or, \exists x L(x) \land \not R(x).
+  3. \exists x E(x) \land \not R(x).
+  4. \exists x E(x) \land L(x).
+#+end_info
+** WTM
+#+begin_info
+  1. \forall x T(x) \rarr \not D(x)
+  2. \forall x R(x) \rarr D(x)
+  3. \forall x F(x) \rarr T(x)
+  4. \forall x F(x) \rarr \not R(x)
+  5. Yes, 4 logically follows from 1, 2 and 3. No friend of mine is willing to
+     drink by 1 and 3, and soldiers are willing to drink by 2, so no soldier can
+     be a friend of mine.
+#+end_info
+** TTV
+#+begin_info
+  1. True
+  2. True
+  3. True
+  4. False (fails on negative x)
+#+end_info
+** WUZ
+#+begin_info
+  We took the hint to first make the code NON-object-oriented (purely
+  imperative) by using function pointers instead of using a class to encapsulate
+  a function. Note the use of =funcall= to call a function indirectly through a
+  symbol --- which as mentioned in DEK is exactly analogous to a function
+  pointer:
+
+#+begin_src emacs-lisp
+  (require 'cl) ;; for the "loop" macro
+
+  (defun for-all (predicate domain)
+    "for-all is the Universal Quantification of a predicate,
+     the proposition that is true if and only if the predicate is true
+     for all items in a universe of discourse (domain).
+     This function loops across domain (which has finite size)
+     to see if predicate is always true.
+     If it encounters a single item for which the predicate is false,
+     then the loop short-circuits and returns false (nil) from for-all.
+     Otherwise for-all returns true (t)."
+    (loop for item across domain
+          always (funcall predicate item)))
+
+  (defun for-some (predicate domain)
+    "for-some is the Existential Quantification of a predicate,
+     the proposition that is true if and only if the predicate is true
+     for at least one item in a universe of discourse (domain).
+     This function loops across domain (which has finite size)
+     to see if predicate is ever true.
+     If it encounters a single item for which the predicate is true,
+     then the loop short-circuits and returns true (t) from for-some.
+     Otherwise for-some returns false (nil)."
+    (loop for item across domain
+          thereis (funcall predicate item)))
+#+end_src
+
+  Here are some sample calls using the built-in evenp and oddp predicates, and
+  vectors of integers for domains:
+
+#+begin_src emacs-lisp
+  (for-all  'evenp [1 2 3]) ; => nil
+  (for-some 'evenp [1 2 3]) ; => t
+  (for-all  'evenp [2 4 6]) ; => t
+  (for-some 'evenp [1 3 7]) ; => nil
+  (for-all  'oddp [1 3 5])  ; => t
+  (for-some 'oddp [2 6 10]) ; => nil
+  (for-all  'oddp [5 4 3]) ; => nil
+  (for-some 'oddp [6 4 3]) ; => t
+#+end_src
+
+  Here are two sample calls using the built-in symbolp predicate, and vectors of
+  purely symbols or mixed symbols and integers for domains:
+
+#+begin_src emacs-lisp
+  (for-all 'symbolp [a b c]); => t
+  (for-all 'symbolp [a b c 1 2 3]); => nil
+#+end_src
+
+  Make it more like the C++ code, only without the redundant output statements:
+
+#+begin_src emacs-lisp
+  (defun tf (t-or-nil)
+    "Convenience adapter converting t to \"TRUE\" and nil to \"FALSE\"."
+    (if t-or-nil "TRUE" "FALSE"))
+
+  (defun run-test (function predicate domain expected)
+    "Run function with predicate and domains to get ACTUAL result.
+     Check to see if ACTUAL is the same as EXPECTED, with clarity of test
+     output achieved by AT-A-GLANCE matching of TRUE with TRUE or FALSE with FALSE."
+    (let ((actual (funcall function predicate domain)))
+      (princ (format "\nFor the predicate '%s\nand domain %s:
+  %s\nwas expected to return\n%s, the actual value returned was\n%s.\n\n"
+                     predicate domain function (tf expected) (tf actual)))
+      t))
+#+end_src
+
+#+begin_src emacs-lisp :results output
+  (run-test 'for-all 'evenp [1 2 3] nil)
+#+end_src
+#+end_info
+** WZM
+#+begin_info
+   f : A \rarr B
+   is
+   - injective :: if $\forall$ m \in A \land $\forall$ n \in A, f(m) \ne f(n) whenever m \ne n;
+   and/or is
+   - surjective :: if $\forall$ b \in B $\exists$ a \in A, f(a) = b.
+#+end_info
+** TUW
+#+begin_info
+  Using CS(x) = x is a CS major, T(x, y) = x needs to take y, C(x) = x is a
+  student in the class, O(x, y) = x owns y, HT(x, y) = x has taken y, S(x) = x
+  is a student, R(x) = x is a room, BI(x, y) = x has been in y, BU(x) = x is a
+  building at the University (on campus), and II(x, y) = x is in y:
+  1. \forall x CS(x) \rarr T(x, discrete mathematics)
+  2. \forall x C(x) \rarr O(x, laptop)
+  3. \exists x C(x) \land HT(x, data structures)
+  4. \forall x \exists y [S(x) \land BU(y) \land \not BI(x, y)]
+  5. \exists! x \forall y [(S(x) \land R(y) \land II(y, STC)) \rarr BI(x, y)]
+  6. \forall x \exists y \forall z [(S(x) \land R(y)) \rarr (BU(z) \rarr BI(x, y))]
+#+end_info
+** WWD
+#+begin_info
+  Using the same predicates as in TUW, the negations of the statements are:
+  1. \exists x CS(x) \land \not T(x, discrete mathematics)
+  2. \exists x C(x) \land \not O(x, laptop)
+  3. \forall x \not C(x) \lor \not HT(x, data structures)
+  4. \exists x \forall y [(S(x) \land BU(y)) \rarr BI(x, y)]
+  5. \forall x \exists y [S(x) \land R(y) \land II(y, STC) \land \not BI(x, y)]
+  6. \exists x \forall y \exists z [S(x) \land R(y) \land BU(z) \land \not BI(x, y)]
+#+end_info
+** WWR
+#+begin_info
+  1. \forall x \forall y (Average(x, y) \le x) \lor (Average(x, y) \le y)
+  2. \forall x \forall y [((x > 0) \land (y < 0)) \rarr xy < 0]
+  3. \forall x \not HasSolution(x / 0)
+  4. \forall x \forall y [((x > 0) \land (y < 0)) \rarr x > y]
+#+end_info
+** TWN
+#+begin_info
+  \forall p \forall x \forall y \forall z [Prime(p) \land x > 1 \land y > 1 \land z > 1 \rarr p \ne xyz]
+#+end_info
+** WWS
+#+begin_info
+  1. True
+  2. True
+  3. True
+  4. True
+#+end_info
+** WZG
+#+begin_info
+  1. True
+  2. True
+  3. True
+  4. True
+#+end_info
+** TKH
+#+begin_info
+#+begin_src emacs-lisp :results silent
+  (defun for-all-for-all (predicate domain-x domain-y)
+    "Nested-loop for-all (always) for-all (always)."
+    (loop for x across domain-x
+          always (loop for y across domain-y
+                       always (funcall predicate x y))))
+
+  (defun for-all-for-some (predicate domain-x domain-y)
+    "Nested-loop for-all (always) for-some (thereis)."
+    (loop for x across domain-x
+          always (loop for y across domain-y
+                       thereis (funcall predicate x y))))
+
+  (defun for-some-for-all (predicate domain-x domain-y)
+    "Nested-loop for-some (thereis) for-all (always)."
+    (loop for x across domain-x
+          thereis (loop for y across domain-y
+                        always (funcall predicate x y))))
+
+  (defun for-some-for-some (predicate domain-x domain-y)
+    "Nested-loop for-some (thereis) for-some (thereis)."
+    (loop for x across domain-x
+          thereis (loop for y across domain-y
+                        thereis (funcall predicate x y))))
+#+end_src
+
+#+begin_src emacs-lisp
+  (for-all-for-all '> [4 5 6] [1 2 3])
+#+end_src
+
+#+results:
+: t
+
+#+begin_src emacs-lisp
+  (for-all-for-some '> [4 5 6] [3 6 9])
+#+end_src
+
+#+results:
+: t
+
+#+begin_src emacs-lisp
+  (for-some-for-all '> [4 5 6] [3 4 5])
+#+end_src
+
+#+results:
+: t
+
+#+begin_src emacs-lisp
+  (for-some-for-some '> [4 5 6] [5 6 7])
+#+end_src
+
+#+results:
+: t
+
+#+begin_src emacs-lisp :results raw
+  (for-all-for-all '< [4 5 6] [1 2 3])
+#+end_src
+
+#+results:
+nil
+
+#+begin_src emacs-lisp :results raw
+  (for-all-for-some '> [4 5 6] [7 8 9])
+#+end_src
+
+#+results:
+nil
+
+#+begin_src emacs-lisp :results raw
+  (for-some-for-all '> [4 5 6] [7 8 9])
+#+end_src
+
+#+results:
+nil
+
+#+begin_src emacs-lisp :results raw
+  (for-some-for-some '> [4 5 6] [7 8 9])
+#+end_src
+
+#+results:
+nil
+#+end_info
+** WUE
+#+begin_info
+  Choice 2 ($\forall\,x\,\exists\,y\,P(x, y)$) makes the most sense, especially in light of
+  Doctrine and Covenants 132:5, which rephrases verses 20 and 21 in section 130.
+
+  - 5. :: /For all who will have a blessing at my hands shall abide the law
+          which was appointed for that blessing, and the conditions thereof, as/
+          /were instituted from before the foundation of the world./
+
+  So for every blessing there is some law (but there could be more than one)
+  upon which it is predicated (or for which it was appointed).
+#+end_info
+
+* Puzzles
+** TEU
+*** Rephrase
+    Write elisp code that will loop through the numbers 1 through a million and
+    output the amount of numbers that contain '1' exactly once in their digits
+    --- which all add up to 17.
+*** Approach
+   Break the task into small functions to work for the solution with and without
+   using loops.
+*** Solution
+#+begin_src elisp :results silent
+  (require 'cl)
+
+  (defun list-of-digits (n)
+    (if (= n 0) nil
+      (append (list-of-digits (/ n 10)) (list (% n 10)))))
+
+  (defun sum-of-digits (n)
+    (apply '+ (list-of-digits n)))
+
+  (defun how-many-in (digit digit-list)
+    (loop for n in digit-list
+          count (= n digit)))
+
+  (defun how-many-in-with-map (digit digit-list)
+     (apply '+ (mapcar (lambda (n) (if (= n digit) 1 0)) digit-list)))
+
+  (defun has-one (digit digit-list)
+    (= 1 (how-many-in digit digit-list)))
+
+  (defun filter (n)
+    (let ((digits (list-of-digits n)))
+      (and (has-one 1 digits) (= 17 (apply '+ digits)))))
+
+  (defun get-answer ()
+    (loop for n from 1 to 999999
+          count (filter n)))
+
+  (defun get-answer-with-map ()
+    (let ((sum 0))
+      (mapc (lambda (n) (if (filter n) (incf sum)))
+            (number-sequence 1 999999))
+      sum))
+#+end_src
+
+  Be patient --- it takes about a minute to evaluate this code block:
+#+begin_src elisp
+  (list (get-answer) (get-answer-with-map))
+#+end_src
+
+: | 9150 | 9150 |
+*** Proof
+    The proof is in the code.
+** TME
+*** Rephrase
+    What are the similarities and the differences between the segments of this
+    sequence? The goal is to recognize the pattern in the sequence and discern
+    how long it can go for.
+*** Approach
+    Stare at it until it make sense?! Here is a former student\rsquo{}s approach:
+#+BEGIN_QUOTE
+    I first recongized looking at values 16-20 that the string being written was
+    the title of our book for this course. I then figured that there were two
+    ends, one when the end of the title was in a string and another when the
+    entire title was in one string. Past this point, the sequence would repeat
+    itself forever. I had to find the number of words in the title; this was
+    simple enough. To find the first ending, I just needed to find if the number
+    of letters was divisible by four, because the number of letters at that
+    point would be the final iteration. There are two answers to the final
+    iteration of the second ending: one that factored for blank iterations and
+    one that skipped them. The first answer is three less than the amount of
+    words in the title multiplied by four. For skipping iterations, I found the
+    sets iterations where there were only 3 and 2 and multiplied and added them
+    to find the total iterations skipping blank ones.
+#+END_QUOTE
+*** Solution
+    The pattern is that every fourth word adds a letter to the next four words.
+    Specifically, there are four more (sub)sequences of four:
+: metaph bewith youati reless
+: metapho bewithy ouatire lesswor
+: metaphor bewithyo uatirele ssworkon
+: metaphors bewithyou atireless workonpla yonwords
+  The caboose =yonwords= breaks the pattern, but does provide closure!
+*** Proof
+    Just by inspection we see that the first four have one letter, then next
+    four have two letters, the next four have three, and so on.
+
+    The title and subtitle of the book give it away.
+** WRA
+*** Rephrase
+    The puzzle is asking why this is the case: \sum^\infty_{n=0} n/2^n = 2.
+*** Approach
+    Exploit the commutativity and associativity of addition by rearranging terms
+    of the infinite sum.
+*** Solution
+    Break apart the sum
+
+    $\frac{1}{2} + \frac{2}{4} + \frac{3}{8} + \frac{4}{16} + \cdots$
+
+   into the following rows, with the sum of each row after the first just half
+   the sum of the previous row, making the entire sum just the (infinite) sum of
+   the \ldquo{}last\rdquo column --- the sum of the reciprocals of the powers of two, this
+   time starting with two to the power zero:
+
+   | $\frac{1}{2}$ | + | $\frac{1}{4}$ | + | $\frac{1}{8}$ | + | $\frac{1}{16}$ | + | \cdots | = | 1             |
+   |               | + | $\frac{1}{4}$ | + | $\frac{1}{8}$ | + | $\frac{1}{16}$ | + | \cdots | = | $\frac{1}{2}$ |
+   |               |   |               | + | $\frac{1}{8}$ | + | $\frac{1}{16}$ | + | \cdots | = | $\frac{1}{4}$ |
+   |               |   |               |   |               | + | $\frac{1}{16}$ | + | \cdots | = | $\frac{1}{8}$ |
+   |               |   |               |   |               |   |                | + | \cdots | = | \cdots             |
+*** Proof
+   How about a little elisp?!
+#+begin_src elisp :results silent
+  (defun sum-of-reciprocals-of-powers-of-two-scaled-by-which-power (max-iterations)
+    (loop for n from 1 to max-iterations
+          sum (/ n (expt 2.0 n))))
+#+end_src
+
+  Beware that this next block takes a few minutes to evaluate!
+#+begin_src elisp
+  (sum-of-reciprocals-of-powers-of-two-scaled-by-which-power 10000000)
+#+end_src
+
+#+results:
+: 1.9999999999999998
+** MMP
+*** Rephrase
+    What is revealed by running the given code that multiplies a certain 2x2
+    matrix by itself several times?
+*** Approach
+    PVP: Predict and check if correct by evaluating each code block.
+*** Solution
+    The first code block is demonstrating a very crude way to do 2x2 matrix
+    multiplication.
+
+    The second code block is demonstrating how to access the \ldquo{}guts\rdquo of a
+    function definition, as a list.
+
+    (Actually, one more function call should be done to retrieve the =let*=.
+    Which one?)
+
+    The third and last code block shows a sample use of the =mm= function on a
+    matrix with =[0 1]= as its first row and =[1 1]= as its second row. The code
+    actually shows that matrix being \ldquo{}raised\rdquo to the sixth power, with results:
+    =[[5 8] [8 13]]=.
+*** Proof
+    The numbers 5, 8 and 13 look like consecutive Fibonacci numbers. We recall
+    how these numbers are defined:
+
+    \(f_n = f_{n - 1} + f_{n - 2}, f_0 = 0, f_1 = 1.\)
+
+    Hint: exporting to HTML shows the above and below formulas as LaTeX rendered
+    in more readable form.
+
+    Raising the initial matrix (noting that 0, 1 and 1 are the first three
+    Fibonacci numbers) to powers other than 6, leads us to this conjecture:
+
+    \(\left[\begin{array}{cc} f_{n - 1} & f_{n}\\ f_{n} & f_{n + 1}\\ \end{array}\right]
+    = \left[\begin{array}{cc} 0 & 1\\ 1 & 1\\ \end{array}\right]^n\ \mbox{for}\ n \ge 1.\)
+
+    Proving this equality relationship holds for all $n$ is best done using a
+    technique called /mathematical induction/, which is introduced in DM3 and
+    discussed in more depth in DM4.
