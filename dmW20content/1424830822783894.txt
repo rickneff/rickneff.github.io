@@ -1,0 +1,40 @@
+-*- mode: org -*-
+#+title: Divide Pair Conquer 04
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* TODO Ponder and Prove
+  as Pairs, how to Represent and Manipulate Rational Numbers (Fractions).
+
+  Start with this code, and improve and enhance it:
+#+begin_src elisp :results silent
+  (defun numerator (frac)
+    (car frac))
+
+  (defun denominator (frac)
+    (cdr frac))
+
+  (defun fracp (x)
+    (and (consp x)
+         (integerp (numerator x))
+         (integerp (denominator x))))
+
+  (defun frac-eval (frac)
+    (if (fracp frac)
+        (/ (float (numerator frac))
+           (float (denominator frac)))))
+
+  (defun mediant (a b)
+    (if (and (fracp a) (fracp b))
+        (cons (+ (numerator a) (numerator b))
+              (+ (denominator a) (denominator b)))))
+#+end_src
+
+#+begin_src elisp
+  (mediant '(1 . 2) '(3 . 4))
+#+end_src
+
+* TODO Discuss Relating Fractions To Something Else
+  What, exactly, do Fractions have to do with Relations?
