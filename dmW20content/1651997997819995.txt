@@ -1,0 +1,17 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 04
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Do you understand the Pumping Lemma?
+
+  Work through the three resources below and enhance your understanding by
+  helping each other and assess your understanding by quizzing each other.
+
+  https://rickneff.github.io/regular-languages-pumping-words.pdf
+
+  https://www.cs.toronto.edu/~azadeh/page11/page12/material/pumping-lemma.pdf
+
+  https://cs.stackexchange.com/questions/50559/pumping-lemma-if-you-can-keep-pumping-what-does-this-tell-you
