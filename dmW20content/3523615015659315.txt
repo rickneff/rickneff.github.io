@@ -1,0 +1,445 @@
+-*- mode: org -*-
+#+title: Assignment 04
+#+subtitle: GHI Relations
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
+:END:
+* Time Hint
+  In the past students have been known to spend an average of 7.38 hours on this
+  assignment.
+* Exercises
+** TODO MGX
+#+begin_note
+  More mapping versus looping.
+
+  In the context of the binary-predicate/nested-quantifier code you were
+  expected to write using loops, explore the following code that is implemented
+  in the functional programming way (with implicit mapping):
+
+#+begin_src elisp :results silent
+  (defun map-for-all (pred x domain-y)
+    (every (lambda (y) (funcall pred x y)) domain-y))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun map-for-all-for-all (pred domain-x domain-y)
+    (every (lambda (x) (map-for-all pred x domain-y)) domain-x))
+#+end_src
+
+#+begin_src elisp :results raw
+  (map-for-all-for-all '< [1 2 3] [4 5 6])
+#+end_src
+:HINT:
+  - Hint :: See TKH for the context.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO ECI
+#+begin_note
+  Implement the =for-some-for-some=, =for-some-for-all=, and =for-all-for-some=
+  functions in a similar manner to the mapping =for-all-for-all=. Test them with
+  at least three different predicates and their associated domains.
+:HINT:
+  - Hint :: See MGX for the context. If there is an =every= for universal
+            quantification, what might be its existential counterpart function?
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO ECT
+#+begin_note
+  Which of the following pairs are in the relation on the set [1 2 3 4] given by
+  the mathy set description {(x, y) | x > y + 1} or by the equivalent lispy set
+  membership predicate:
+
+#+begin_src elisp :results silent
+  (defun in-the-relation (x y)
+    (> x (+ y 1)))
+#+end_src
+
+  1. (2 1)
+  2. (2 2)
+  3. (2 3)
+  4. (2 4)
+  5. (3 1)
+  6. (3 2)
+  7. (4 1)
+  8. (4 2)
+  9. (4 3)
+:HINT:
+  - Hint :: This is a very straightforward exercise.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO MKJ
+#+begin_note
+  What is the most correct description of relation types for the relation
+  on the set [1 2 3] given as the pairs heading the first column?
+  | [(1 1) (1 3) (2 2) (3 1)] | Yes or No? |
+  |---------------------------+------------|
+  | Reflexive?                |            |
+  | Symmetric?                |            |
+  | Antisymmetric?            |            |
+  | Transitive?               |            |
+:HINT:
+  - Hint :: This is a very straightforward exercise.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO EFE
+#+begin_note
+  What is the most correct description of relation types for the relation
+  on the set [1 2 3] given as the pairs heading the first column?
+  | [(1 1) (2 2) (3 1) (3 3)] | Yes or No? |
+  |---------------------------+------------|
+  | Reflexive?                |            |
+  | Symmetric?                |            |
+  | Antisymmetric?            |            |
+  | Transitive?               |            |
+:HINT:
+  - Hint :: This is a very straightforward exercise.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO MKL
+#+begin_note
+  What is the most correct description of relation types for the relation
+  on the set [1 2 3] given as the pairs heading the first column?
+  | [(1 2) (2 1) (3 3)] | Yes or No? |
+  |---------------------+------------|
+  | Reflexive?          |            |
+  | Symmetric?          |            |
+  | Antisymmetric?      |            |
+  | Transitive?         |            |
+:HINT:
+  - Hint :: This is a very straightforward exercise.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO EFS
+#+begin_note
+  What is the most correct description of relation types for the relation
+  on the set [1 2 3] given as the pairs heading the first column?
+  | [(1 3) (2 3)]  | Yes or No? |
+  |----------------+------------|
+  | Reflexive?     |            |
+  | Symmetric?     |            |
+  | Antisymmetric? |            |
+  | Transitive?    |            |
+:HINT:
+  - Hint :: This is a very straightforward exercise.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO MMC
+#+begin_note
+  Create a table like the one above with the members of the CM7 partition sets.
+:HINT:
+  - Hint :: Just copy/paste the table above and modify it. No need to write code
+            to create the table.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Problems
+  Note: * means optional. If it\rsquo{}s not starred, it\rsquo{}s required.
+** TODO EBQ
+#+begin_note
+  Here is one way to do a Cartesian product of two 3-element sets:
+#+begin_src elisp :results raw
+  (let* ((A [a b c])
+         (B [1 2 3]))
+    (list (list 'a 1) (list 'a 2) (list 'a 3)
+          (list 'b 1) (list 'b 2) (list 'b 3)
+          (list 'c 1) (list 'c 2) (list 'c 3)))
+#+end_src
+
+: ((a 1) (a 2) (a 3) (b 1) (b 2) (b 3) (c 1) (c 2) (c 3))
+
+  Here is a better way, that avoids hardcoding literal elements from sets =A=
+  and =B=, and renders the list-of-lists result as a table:
+#+begin_src elisp
+  (let* ((A [a b c])
+         (B [1 2 3])
+         (A0 (elt A 0))
+         (A1 (elt A 1))
+         (A2 (elt A 2))
+         (B0 (elt B 0))
+         (B1 (elt B 1))
+         (B2 (elt B 2)))
+    (list (list A0 B0) (list A0 B1) (list A0 B2)
+          (list A1 B0) (list A1 B1) (list A1 B2)
+          (list A2 B0) (list A2 B1) (list A2 B2)))
+#+end_src
+
+| a | 1 |
+| a | 2 |
+| a | 3 |
+| b | 1 |
+| b | 2 |
+| b | 3 |
+| c | 1 |
+| c | 2 |
+| c | 3 |
+
+  Here is a much better way that defines a function that returns the Cartesian
+  product of /three/ sets, and that also allows the sets to be of different
+  sizes:
+#+begin_src elisp :results silent
+  (defun cartesian-product-3 (s1 s2 s3)
+    (loop for i across s1
+          append (loop for j across s2
+                       append (loop for k across s3
+                                    collect (list i j k)))))
+#+end_src
+
+#+begin_src elisp
+  (cartesian-product-3 [a b c d] [1 2] [x y z w t])
+#+end_src
+
+| a | 1 | x |
+| a | 1 | y |
+| a | 1 | z |
+| a | 1 | w |
+| a | 1 | t |
+| a | 2 | x |
+| a | 2 | y |
+| a | 2 | z |
+| a | 2 | w |
+| a | 2 | t |
+| b | 1 | x |
+| b | 1 | y |
+| b | 1 | z |
+| b | 1 | w |
+| b | 1 | t |
+| b | 2 | x |
+| b | 2 | y |
+| b | 2 | z |
+| b | 2 | w |
+| b | 2 | t |
+| c | 1 | x |
+| c | 1 | y |
+| c | 1 | z |
+| c | 1 | w |
+| c | 1 | t |
+| c | 2 | x |
+| c | 2 | y |
+| c | 2 | z |
+| c | 2 | w |
+| c | 2 | t |
+| d | 1 | x |
+| d | 1 | y |
+| d | 1 | z |
+| d | 1 | w |
+| d | 1 | t |
+| d | 2 | x |
+| d | 2 | y |
+| d | 2 | z |
+| d | 2 | w |
+| d | 2 | t |
+
+  We can do better still. The problem is to figure out how best to generalize
+  this to a Cartesian product of /n/ sets, again allowing for arbitrary sizes.
+:HINT:
+  - Hint :: To generalize this to /n/ any-sized sets is a hard problem. Try to
+            think of an approach that appears promising. Write it up in English
+            so that your ideas can perhaps be coded up later.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO MHB
+#+begin_note
+   From the definition of antisymmetric, show using logic that if xRy and x \ne y
+   then it is false that yRx.
+:HINT:
+  - Hint :: The definition is a conditional, so use its contrapositive, which is
+            equivalent.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO MLB
+#+begin_note
+  How many possible binary relations are there on a set with 3 elements?
+
+  Replace the =;;...= to answer the question in the general case:
+#+begin_src elisp
+  (defun number-of-binary-relations (n)
+    "Computes the number of binary relations on a set with n elements."
+    ;;...
+    )
+#+end_src
+:HINT:
+  - Hint :: How big is the Cartesian product of a set with 3 elements times
+            itself? The number of possible binary relations is the number of
+            subsets of that Cartesian product.
+  - Code Hint :: What you are replacing the comment line (=;;...=) with is a
+                 one-line expression (two to the fourth characters, to be exact)
+                 computing the function of /n/ described in the other hint.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO EJE *
+#+begin_note
+  Study the following code and add to it your own. The =setq= chain implements a
+  very simple and simplistic database of students and courses. Double check by
+  just looking at it, but also write code to
+
+  - find all students who have taken all courses, using the predicate
+    =student-has-taken-course=.
+  - find all courses that have been taken by all students, using the predicate
+    =course-has-been-taken-by-student=.
+
+  You will want some kind of =for-all-for-all= function that takes a predicate
+  and two domains, like what you have already seen.
+
+#+begin_src elisp :results silent
+  (setq students [1 2 3 4 5 6 7 8]
+        courses [100 200 300 400]
+        by-student '((1 100 200)
+                     (2 100)
+                     (3 100 200 300)
+                     (4 100 200 300 400)
+                     (5 100)
+                     (6 100)
+                     (7 100 200)
+                     (8 100 200 300 400))
+        by-course '((100 1 2 3 4 5 6 7 8)
+                    (200 1 3 4 7 8)
+                    (300 3 4 8)
+                    (400 4 8)))
+
+  (defun student-has-taken-course (student course)
+    (not (null (member course (rest (assoc student by-student))))))
+
+  (defun course-has-been-taken-by-student (course student)
+    (not (null (member student (rest (assoc course by-course))))))
+#+end_src
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO MLU *
+#+begin_note
+  Add a few more records to the birthday table, and implement that table and the
+  zodiac table in elisp using a vector of vectors (or list of lists). Then write
+  code for answering the \ldquo{}complex join/query\rdquo what is a person\rsquo{}s Zodiac sign?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO EKQ
+#+begin_note
+  Which of the following are equivalence relations? If it is, show it has
+  reflexivity, symmetry and transitivity. If not, argue for which of these three
+  properties it lacks. The first four have people for their domain, the last
+  four have numbers for their domain:
+
+  1. xRy if x and y are siblings.
+  2. xRy if x and y have the same parents.
+  3. xRy if x and y share a common parent.
+  4. xRy if x and y speak a common language.
+  5. With domain English words, xRy if x shares a vowel with y.
+  6. xRy if x \le y.
+  7. xRy if x^2 + y^2 = 1.
+  8. xRy if x + y = 42.
+  9. xRy if \lceil{}x\rceil = \lfloor{}y\rfloor.
+:HINT:
+  - Hint :: This is a straightforward exercise in applying the definitions of
+            these properties, and doing some logical thinking.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO MON
+#+begin_note
+  Give a better name to this function:
+#+begin_src elisp :results silent
+  (defun do-something (m &optional n)
+    (let* ((count (if (null n) 20 n))
+           (bound (* count m)))
+      (loop for i from 0 below m
+            do (princ "[ ")
+            (loop for j from (+ (- bound) i) to (+ bound i) by m
+                  do (princ j)
+                  (princ " "))
+            (princ "]\n"))))
+#+end_src
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Puzzles
+** TODO EJK
+#+begin_note
+  Investigate the many features and benefits of the interaction between org-mode
+  tables and elisp source blocks.
+:HINT:
+  - Hint :: Look at the answer to MLU for ideas on where to start.
+:END:
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+    Not applicable.
+** TODO EJU
+#+begin_note
+  Call two bitstrings equivalent if they both end in a 0 (and have length at
+  least one). What CMM equivalence relation does this suggest?
+:HINT:
+  - Hint :: Think parity, or oddness and evenness.
+:END:
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+** TODO MNE
+#+begin_note
+  Consider the set of all bitstrings having length at least 3. Show that the
+  relation on this set that says two bitstrings are related if they agree in the
+  first three bits is an equivalence relation.
+:HINT:
+  - Hint :: Show that the three properties (Reflexive, Symmetric, Transitive)
+            of an equivalence relation hold.
+:END:
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof

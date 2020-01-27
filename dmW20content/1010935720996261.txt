@@ -1,0 +1,113 @@
+-*- mode: org -*-
+#+title: Assignment 04
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
+:END:
+* TODO Read and Relate
+  Read the next 3 pages of [[http://matt.might.net/papers/liang2014godel.pdf][the Matt Might paper you have been reading]], that is,
+  pages 5, 6, and 7 (up to but not including section VI).
+
+  Relate what you read in this paper about partial orders and posets to what you
+  learn this week about these special type of relations and their applications.
+
+* TODO Understand and Write
+  Understand the techniques of construction of the standard set-theoretic
+  operations and relations out of arithmetic. Quoting from page 3:
+#+BEGIN_QUOTE
+  On the G\ouml{}del hash of a set, familiar number-theoretic operations become
+  set-theoretic operations: modulo tests both membership and subset-inclusion;
+  union becomes least common multiple; and intersection becomes greatest-common
+  divisor.
+#+END_QUOTE
+
+  Understand also how relations can be encoded as sets of pairs.
+
+  Write elisp code to enhance your understanding of these encodings and
+  constructions.
+
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+   What is true of my experience in general?
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I collaborated with one or more classmates.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I reported on any connections I found between these problems and
+        something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+   What is true about the correctness and completeness of my code?
+#+name: assertions-about-correctness-and-completeness-of-code
+  - [ ] It correctly calculates set membership.
+  - [ ] It correctly calculates subset-inclusion.
+  - [ ] It correctly calculates set union.
+  - [ ] It correctly calculates set intersection.
+  - [ ] It correctly encodes relations as sets of pairs.
+  - [ ] It correctly uses bigpos arithmetic via the 'calc' and 'calc-math'
+        packages.
+
+   What is true about the elegance of my code?
+#+name: assertions-about-elegance-of-code
+  - [ ] It has some by virtue of its correctness, as first and foremost, an
+        elegant solution is a correct solution.
+  - [ ] It increases by means of helper functions that increase cohesion, and
+        decrease complexity.
+  - [ ] It increases by having no unnecessary, redundant functionality.
+  - [ ] It increases by using data types/structures as efficiently as possible.
+  - [ ] My main code block has only function definitions (defuns) in it, NO
+        function calls or other expressions.
+  - [ ] I used a/several separate code block(s) for my test driver function(s).
+
+   What is true of the depth of my engagement with this assignment?
+#+name: assertions-about-depth-of-engagement
+  - [ ] I used sets of sufficient size that doing bigpos arithmetic was necessary.
+  - [ ] Even if I have not yet taken Algorithms and Complexity (CS 306) I tried
+        to understand what the paper says about the space efficiency and the time
+        efficiency of the operations on G\ouml{}del hashes for sets.
+
+   What is true of the above-and-beyond depth of my engagement with this assignment?
+#+name: assertions-about-above-and-beyond-depth-of-engagement
+  - [ ] I researched and learned what it means for a poset to have a /prime basis/.
+  - [ ] I researched lattices so as to better understand Section V, especially
+        where it talks about promoting a partial order to a lattice.
+
+#+begin_src elisp
+  (calculate-score
+   (quote
+    ((in-general 2 2 2 2)
+     (about-report 2 2 2)
+     (about-MIs 2 2 2 2)
+     (about-correctness-and-completeness-of-code 4 4 4 4 4 6)
+     (about-elegance-of-code 6 6 6 6 6 6)
+     (about-depth-of-engagement 8 8)
+     (about-above-and-beyond-depth-of-engagement 10 10))))
+#+end_src
