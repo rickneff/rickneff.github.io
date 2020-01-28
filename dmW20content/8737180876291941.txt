@@ -1,0 +1,131 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 04
+#+subtitle: Continued Fractions
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* An Ancient Fascination
+  https://en.wikipedia.org/wiki/Continued_fraction
+
+* TODO Study and Understand
+  The sample code below finds the first few partial quotients (coefficients) of
+  the /continued fraction/ (CF) representing a positive rational or irrational
+  number.
+
+** Sample Code
+#+name: main
+#+begin_src elisp :results silent
+  (defalias 'numerator 'car)
+
+  (defalias 'denominator 'cdr)
+
+  (defalias 'make-frac 'cons)
+
+  (defun fracp (x)
+    (and (consp x)
+         (integerp (numerator x))
+         (integerp (denominator x))))
+
+  (defun frac-eval (frac)
+    (if (fracp frac)
+        (/ (float (numerator frac))
+           (float (denominator frac)))))
+
+  (defun mediant (a b)
+    (if (and (fracp a) (fracp b))
+        (make-frac (+ (numerator a) (numerator b))
+                   (+ (denominator a) (denominator b)))))
+
+  (defun flipover (x)
+    (if (fracp x) (make-frac (denominator x) (numerator x))))
+
+  (defun oneover (x)
+    (if (integerp x)
+        (/ 1.0 x)
+      (flipover x)))
+
+  (defun plus (a c)
+    (if (and (integerp a) (integerp c))
+        (+ a c)
+      (if (and (integerp a) (fracp c))
+          (make-frac (+ (numerator c) (* a (denominator c))) (denominator c)))))
+
+  (defun continued-fraction-of-frac (frac)
+    (let* ((n (numerator frac))
+           (d (denominator frac)))
+      (unless (zerop d)
+        (make-frac (/ n d)
+                   (continued-fraction-of-frac (make-frac d (% n d)))))))
+
+  (defun continued-fraction-of-float-with-iterations (n iterations)
+    (let* ((next-coefficient (floor n))
+           (difference (- n next-coefficient)))
+      (if (or (zerop difference) (<= iterations 0))
+          (and (zerop difference) (list next-coefficient))
+        (make-frac next-coefficient
+                   (continued-fraction-of-float-with-iterations
+                    (/ 1 difference) (1- iterations))))))
+
+  (defun cf-expression (cf)
+    (if (null cf)
+        (list 'make-frac 1 0)
+      (list 'plus (first cf)
+            (list 'oneover
+                  (cf-expression (rest cf))))))
+
+  (defmacro cf-value (&rest coefficients)
+     (cf-expression `,coefficients))
+#+end_src
+
+** Sample Usage
+#+name: cf-899-493
+#+begin_src elisp :results code
+  (let* ((frac (make-frac 899 493))
+         (frac-as-float (frac-eval frac)))
+    (continued-fraction-of-float-with-iterations frac-as-float 6))
+#+end_src
+
+#+begin_src elisp :results code :var cf=cf-899-493
+  (cf-expression (car (read-from-string cf)))
+#+end_src
+
+#+begin_src elisp :results raw
+  (cf-value 1 1 4 1 1 1)
+#+end_src
+
+#+begin_src elisp :results raw
+  (- (frac-eval (make-frac 899 493))
+     (frac-eval (make-frac 31 17)))
+#+end_src
+
+* TODO Calculate and Compare
+  Find and compare the CFRs of the irrational square root of 2 and the rational
+  number \(\frac{1393}{985}\). Compare both of those CFRs with the CFR of the
+  golden ratio, phi, which is the value that is one-half of the quantity one
+  more than the square root of five:
+
+#+begin_src elisp :results raw
+  (setq phi (/ (1+ (sqrt 5)) 2))
+#+end_src
+
+#+begin_src elisp :results raw
+  (continued-fraction-of-float-with-iterations phi 20)
+#+end_src
+
+#+begin_src elisp :results raw
+  (cf-value 1 1 1)
+#+end_src
+
+#+begin_src elisp :results raw
+  (continued-fraction-of-float-with-iterations phi 20)
+#+end_src
+
+#+begin_src elisp :results raw
+  (continued-fraction-of-float-with-iterations (1+ (sqrt 2)) 20)
+#+end_src
+
+#+begin_src elisp :results raw
+  (frac-eval (cf-value 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2))
+#+end_src
