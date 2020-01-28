@@ -1,0 +1,28 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 04
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Now that you know the definitions of four properties of self-relations, your
+  task is to correctly fill in the table below with *Yes* or *No* in each of the
+  last four columns.
+
+* TODO Fill in Table
+  What is the most correct description of relation types for the relations
+  on the set [1 2 3] given as sets of pairs in the first column?
+
+  |---+------------------------------+------------+------------+----------------+-------------|
+  | # | Relations on the set [1 2 3] | Reflexive? | Symmetric? | Antisymmetric? | Transitive? |
+  |---+------------------------------+------------+------------+----------------+-------------|
+  | 1 | [(1 1) (1 3) (2 2) (3 1)]    |            |            |                |             |
+  |---+------------------------------+------------+------------+----------------+-------------|
+  | 2 | [(1 1) (2 2) (3 1) (3 3)]    |            |            |                |             |
+  |---+------------------------------+------------+------------+----------------+-------------|
+  | 3 | [(1 2) (2 1) (2 3)]          |            |            |                |             |
+  |---+------------------------------+------------+------------+----------------+-------------|
+  | 4 | [(1 2) (2 1) (3 3)]          |            |            |                |             |
+  |---+------------------------------+------------+------------+----------------+-------------|
+  | 5 | [(1 3) (2 3)]                |            |            |                |             |
+  |---+------------------------------+------------+------------+----------------+-------------|
