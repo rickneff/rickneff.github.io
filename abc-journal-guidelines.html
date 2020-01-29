@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-01-29 Wed 09:30 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ABC Journal Guidelines</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Rick Neff" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/bigblow.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/hideshow.css"/>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.localscroll-min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.zclip.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/bigblow.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/hideshow.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript">document.helps = [];</script>
+<script type="text/javascript">
+function draw(levels) {
+var c = document.getElementById("btree");
+var w = c.width;
+var h = c.height;
+var ctx = c.getContext("2d");
+var repeat_delay = 3000;
+var teardown_delay = 1000;
+var level_delay = 500;
+var margins = 10;
+// If h_frac is changed, slope will need to be adjusted to
+// prevent overlap.  I might fix this in the future.
+var h_frac = 2;
+var slope = ((h - margins * 2) / 2) / (w - margins * 2);
+ctx.clearRect(0, 0, w, h);
+// This goes in here so that above variables will be in scope
+function lines(dist, loc, depth, delay=0) {
+function render_lines(dist, loc) {
+ctx.beginPath();
+ctx.moveTo(loc[0], loc[1]);
+ctx.lineTo(loc[0] + dist, loc[1] + slope * -dist);
+ctx.moveTo(loc[0], loc[1]);
+ctx.lineTo(loc[0] + dist, loc[1] + slope * dist);
+ctx.stroke();
+}
+setTimeout(render_lines, delay, dist, loc);
+setTimeout(function (x) {ctx.clearRect(x, 0, w, h)},
+level_delay * levels * 2 + teardown_delay - delay,
+loc[0]);
+depth--;
+if (depth) {
+lines((dist / h_frac) * (h_frac - 1),
+[loc[0] + dist, loc[1] + slope * -dist],
+depth,
+delay + level_delay);
+lines((dist / h_frac) * (h_frac - 1),
+[loc[0] + dist, loc[1] + slope *  dist],
+depth,
+delay + level_delay);
+}
+}
+lines((w - margins * 2) / h_frac, [margins, h/2], levels);
+setTimeout(draw, repeat_delay + teardown_delay + levels * level_delay * 2, levels);
+}
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">ABC Journal Guidelines</h1>
+
+<div id="outline-container-orgab057e1" class="outline-2">
+<h2 id="orgab057e1">For A-Grade Claimer Consideration</h2>
+<div class="outline-text-2" id="text-orgab057e1">
+<p>
+If you aspire to and think you should claim an A, please heed the following:
+</p>
+
+<p>
+You must <b>only check the ABC column</b> for each week if your record of &ldquo;Above and
+Beyond Climbing&rdquo; shows <b>complete compliance</b> with what the syllabus says:
+</p>
+<blockquote>
+<p>
+To claim [an A] you <b>must</b> have done and recorded evidence in your portfolio of
+doing [at least two of the first three <b>and</b> at least two of the last three]
+behaviors listed below, <b>each week</b> throughout each 4-week period.
+</p>
+<ol class="org-ol">
+<li>teaching and/or helping others in the class but not in your group;</li>
+<li>teaching a Non-CS, Non-CE, Non-EE, Non-SE major about the material in this
+class to help them with a class they are taking;</li>
+<li>applying what you&rsquo;ve learned in this class in another class you are
+currently taking;</li>
+<li>posting thoughtful questions;</li>
+<li>solving puzzles (see above) or problems marked as optional; and</li>
+<li>doing other work not assigned, exploring other topics in mathematics,
+writing code implementing what you are learning that has not been
+assigned, etc.</li>
+</ol>
+</blockquote>
+
+<p>
+What if you comply completely with these ABC requirements, but the rest of
+your performance is pretty spotty? That&rsquo;s called undermining your claim. How
+can you go <b>above and beyond</b> course requirements, if you don&rsquo;t even go <b>up to</b>
+them?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org823337c" class="outline-2">
+<h2 id="org823337c">Suggestion for Journal Keeping</h2>
+<div class="outline-text-2" id="text-org823337c">
+<p>
+Too late for this time around, but hereafter you could profitably learn to use
+the <code>org-capture</code> package!
+</p>
+
+<p>
+<a href="http://howardism.org/Technical/Emacs/capturing-intro.html">Here is a gentle introduction</a> to this powerful tool.
+</p>
+
+<p>
+And here is some sample configuration code to put in a source block and
+evaluate when starting up spacemacs:
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">require</span> '<span style="color: #259ea2;">org-capture</span><span style="color: #262626;">)</span>
+
+<span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">setq</span> org-directory <span style="color: #077707;">(</span><span style="color: #2020cc; font-weight: bold;">or</span> <span style="color: #ab9c3a;">(</span>getenv <span style="color: #fa5151;">"WORK"</span><span style="color: #ab9c3a;">)</span> <span style="color: #ab9c3a;">(</span>getenv <span style="color: #fa5151;">"HOME"</span><span style="color: #ab9c3a;">)</span><span style="color: #077707;">)</span>
+      capture-file <span style="color: #fa5151;">"seize-the-day.org"</span>
+      standard-options <span style="color: #077707;">(</span>list <span style="color: #ba55d3;">:empty-lines</span> <span style="color: #259ea2;">1</span> <span style="color: #ba55d3;">:clock-in</span> t <span style="color: #ba55d3;">:clock-resume</span> t<span style="color: #077707;">)</span>
+      org-capture-templates `<span style="color: #077707;">(</span><span style="color: #ab9c3a;">(</span><span style="color: #fa5151;">"t"</span> <span style="color: #fa5151;">"todo"</span> entry <span style="color: #358d8d;">(</span>file ,capture-file<span style="color: #358d8d;">)</span>
+                               <span style="color: #fa5151;">"* </span><span style="color: #cc9393;">TODO</span><span style="color: #fa5151;"> %?\n%U\n%a\n"</span> ,@standard-options<span style="color: #ab9c3a;">)</span>
+                              <span style="color: #ab9c3a;">(</span><span style="color: #fa5151;">"n"</span> <span style="color: #fa5151;">"note"</span> entry <span style="color: #358d8d;">(</span>file ,capture-file<span style="color: #358d8d;">)</span>
+                               <span style="color: #fa5151;">"* %? :</span><span style="color: #d0bf8f;">NOTE</span><span style="color: #fa5151;">:\n%U\n%a\n"</span> ,@standard-options<span style="color: #ab9c3a;">)</span>
+                              <span style="color: #ab9c3a;">(</span><span style="color: #fa5151;">"j"</span> <span style="color: #fa5151;">"journal"</span> entry <span style="color: #358d8d;">(</span>file+datetree ,capture-file<span style="color: #358d8d;">)</span>
+                               <span style="color: #fa5151;">"* %?\n%U\n"</span> ,@standard-options<span style="color: #ab9c3a;">)</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span><span style="color: #88090B;">)</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf9d9fe3" class="outline-3">
+<h3 id="orgf9d9fe3">Tip for Windows Users</h3>
+<div class="outline-text-3" id="text-orgf9d9fe3">
+<p>
+If you want a universal keyboard shortcut to capture something in Org,
+you'll want to create one more shortcut:
+</p>
+
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> Step 1: Create a shortcut named <code>Org-Capture</code> with the following target:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #fa5151;">"C:\Program Files\GNU Emacs\bin\emacsclientw.exe"</span> -n --eval <span style="color: #fa5151;">'(org-capture)'</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> <p>
+Step 2: Create a shortcut key combination:
+</p>
+
+<p>
+In the shortcut-creation dialogue box, in the bottom cluster of
+options, there&rsquo;s a field labeled &ldquo;Shortcut key&rdquo;. Click once into the box,
+then hit the desired key combination (e.g., <code>Ctrl + Shift + F1,</code> but you
+can use whatever). Apply, and close. Now hit your keyboard combination,
+and the shorcut should launch. Some versions of Windows require a logout
+and perhaps even a reboot before remembering this keyboard shortcut.
+</p></li>
+
+<li class="off"><code>[&#xa0;]</code> Step 3: Copy the shortcut to the <code>Start Menu</code>:</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-sh">C:\Users<span style="color: #fa5151;">\[</span>USERNAME<span style="color: #88090B;">]</span>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs<span style="color: #505050; font-weight: bold;">\</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
