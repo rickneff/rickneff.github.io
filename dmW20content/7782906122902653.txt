@@ -1,0 +1,103 @@
+-*- mode: org -*-
+#+title: Presentation 05
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+
+* Discuss Week 05\rsquo{}s Assignment
+  file:assignment-05.txt
+  Warm up by (re)watching Arthur Benjamin\rsquo{}s TED talk [[https://www.ted.com/talks/arthur_benjamin_the_magic_of_fibonacci_numbers][The Magic of Fibonacci Numbers]].
+* A Marvelous Mathematical Playground
+  known as Pascal\rsquo{}s Triangle:
+#+begin_src elisp :results silent
+  (defun n-choose-k (n k)
+    (cond ((or (< k 0) (> k n))
+           0)
+          ((or (zerop k) (= k n))
+           1)
+          (t (+ (nth (- k 1) last-row) (nth k last-row)))))
+
+  (defun center (str n)
+    (let* ((len (length str))
+           (pad (make-string (/ (- n len) 2) ? )))
+      (concat pad str pad)))
+
+  (defun draw-pascals-triangle (num-rows output-function)
+    (mapc output-function
+          (loop for n from 0 to num-rows
+                do (setq last-row
+                         (loop for k from 0 to n
+                               collect (n-choose-k n k)))
+                collect (mapconcat 'number-to-string last-row " "))))
+#+end_src
+
+#+begin_src elisp :results output
+  (draw-pascals-triangle 12 (lambda (x) (princ (center x 75)) (princ "\n")))
+#+end_src
+
+  Without centering:
+#+begin_src elisp :results output
+  (draw-pascals-triangle 12 (lambda (x) (princ x) (princ "\n")))
+#+end_src
+
+#+begin_src elisp :results output
+  (draw-pascals-triangle 40 (lambda (x) (princ (center x 380)) (princ "\n")))
+#+end_src
+
+  Without centering:
+#+begin_src elisp :results output
+  (draw-pascals-triangle 40 (lambda (x) (princ x) (princ "\n")))
+#+end_src
+
+** Identify Identities
+   Here are two different identities that point out the same pattern in
+   Pascal\rsquo{}s triangle. What is the name of this pattern?
+
+*** 1st Identity (for nonnegative integer n)
+
+    \(\sum^n_{k=0} {r+k \choose k} = {r+n+1 \choose n}\)
+
+*** 2nd Identity (for nonnegative integers m and n)
+
+    \(\sum^n_{k=0} {k \choose m} = {n+1 \choose m+1}\)
+
+*** Validate Hexagon Identity
+    Suppose that k and n are integers with 1 \le k \le n. Argue using the n-choose-k
+    definition and algebra for the validity of the *hexagon identity* \({n - 1
+    \choose k - 1}{n \choose k + 1}{n + 1 \choose k} = {n - 1 \choose k}{n \choose
+    k - 1}{n + 1 \choose k + 1}\) which relates terms in Pascal's triangle that
+    form a hexagon.
+
+*** The 11 Pattern
+#+begin_src elisp :results silent
+  (defun n-choose-k-alt (n k)
+    "Computes C(n, k) by the recursive definition;
+  given a pair of integers n and k
+  returns the value of n choose k."
+    (cond ((or (< k 0) (> k n))
+           0)
+          ((or (zerop k) (= k n))
+           1)
+          (t (+ (n-choose-k-alt (- n 1) (- k 1))
+                (n-choose-k-alt (- n 1) k)))))
+
+  (defun sum-pt-row (n)
+    (loop with power-of-10 = -1
+          for k from n downto 0
+          sum (* (expt 10 (incf power-of-10)) (n-choose-k-alt n k))))
+#+end_src
+
+#+begin_src elisp
+  (loop for n from 0 to 9
+        collect (list n (expt 11 n) (sum-pt-row n)))
+#+end_src
