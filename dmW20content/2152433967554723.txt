@@ -1,0 +1,489 @@
+-*- mode: org -*-
+#+title: Assignment 04 Key
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+
+  These are sample/examplary answers, some of which come from former students.
+
+* Exercises
+** MGX
+#+begin_info
+  What does it mean to explore? Did you provide any evidence of a curious mind
+  at work?
+#+end_info
+** ECI
+#+begin_info
+#+begin_src elisp :results silent
+  (defun map-for-some (pred x domain-y)
+    (some (lambda (y) (funcall pred x y)) domain-y))
+
+  (defun map-for-some-for-some (pred domain-x domain-y)
+    (some (lambda (x) (map-for-some pred x domain-y)) domain-x))
+
+  (defun map-for-some-for-all (pred domain-x domain-y)
+    (some (lambda (x) (map-for-all pred x domain-y)) domain-x))
+
+  (defun map-for-all-for-some (pred domain-x domain-y)
+    (every (lambda (x) (map-for-some pred x domain-y)) domain-x))
+#+end_src
+
+#+begin_src elisp
+  (map-for-some-for-some '> [4 5 6] [5 6 7])
+#+end_src
+
+#+results:
+: t
+
+#+begin_src elisp
+  (map-for-some-for-all '> [4 5 6] [3 4 5])
+#+end_src
+
+#+results:
+: t
+
+#+begin_src elisp
+  (map-for-all-for-some '> [4 5 6] [3 6 9])
+#+end_src
+
+#+results:
+: t
+
+#+begin_src elisp :results raw
+  (map-for-some-for-some '> [4 5 6] [7 8 9])
+#+end_src
+
+#+results:
+nil
+
+#+begin_src elisp :results raw
+  (map-for-some-for-all '> [4 5 6] [7 8 9])
+#+end_src
+
+#+results:
+nil
+
+#+begin_src elisp :results raw
+  (map-for-all-for-some '> [4 5 6] [7 8 9])
+#+end_src
+
+#+results:
+nil
+
+  Did you come up with two other predicates (besides \lsquo>\rsquo) and test them for both
+  =t= and =nil=?
+#+end_info
+** ECT
+#+begin_info
+  (3 1) is in the relation because 3 > 1+1, (4 1) is in because 4 > 1+1, and
+  (4 2) is in because 4 > 2+1. All the rest are out.
+#+end_info
+** MKJ
+#+begin_info
+  | [(1 1) (1 3) (2 2) (3 1)] | Yes or No? |
+  |---------------------------+------------|
+  | Reflexive?                | No         |
+  | Symmetric?                | Yes        |
+  | Antisymmetric?            | No         |
+  | Transitive?               | No         |
+#+end_info
+** EFE
+#+begin_info
+  | [(1 1) (2 2) (3 1) (3 3)] | Yes or No? |
+  |---------------------------+------------|
+  | Reflexive?                | Yes        |
+  | Symmetric?                | No         |
+  | Antisymmetric?            | Yes        |
+  | Transitive?               | Yes        |
+#+end_info
+** MKL
+#+begin_info
+  | [(1 2) (2 1) (3 3)] | Yes or No? |
+  |---------------------+------------|
+  | Reflexive?          | No         |
+  | Symmetric?          | Yes        |
+  | Antisymmetric?      | No         |
+  | Transitive?         | No         |
+#+end_info
+** EFS
+#+begin_info
+  | [(1 3) (2 3)]  | Yes or No? |
+  |----------------+------------|
+  | Reflexive?     | No         |
+  | Symmetric?     | No         |
+  | Antisymmetric? | Yes        |
+  | Transitive?    | Yes        |
+#+end_info
+** MMC
+#+begin_info
+  | Set Name | Equivalence Class | Lesser Members |     |     |    | \darr   |    |    |    | Greater Members |
+  |----------+-------------------+----------------+-----+-----+----+-----+----+----+----+-----------------|
+  | A_0       | [0]               | \dots              | -21 | -14 | -7 | *0* |  7 | 14 | 21 | \dots               |
+  | A_1       | [1]               | \dots              | -20 | -13 | -6 | *1* |  8 | 15 | 22 | \dots               |
+  | A_2       | [2]               | \dots              | -19 | -12 | -5 | *2* |  9 | 16 | 23 | \dots               |
+  | A_3       | [3]               | \dots              | -18 | -11 | -4 | *3* | 10 | 17 | 24 | \dots               |
+  | A_4       | [4]               | \dots              | -17 | -10 | -3 | *4* | 11 | 18 | 25 | \dots               |
+  | A_5       | [5]               | \dots              | -16 |  -9 | -2 | *5* | 12 | 19 | 26 | \dots               |
+  | A_6       | [6]               | \dots              | -15 |  -8 | -1 | *6* | 13 | 20 | 27 | \dots               |
+#+end_info
+
+* Problems
+** EBQ
+#+begin_info
+  Here are two solutions, a 10-liner and a 13-liner:
+#+begin_src elisp :results silent
+  (defun mappend (fn &rest lsts)
+    "Maps fn over elements in lsts and finally appends all resulting lists."
+    (apply 'append (apply 'mapcar fn lsts)))
+
+  (defun cartesian-product (&rest lists)
+    (if (null lists)
+        (list nil)
+      (mappend (lambda (x)
+                 (mapcar (lambda (lst) (cons x lst))
+                         (apply 'cartesian-product (cdr lists))))
+       (car lists))))
+#+end_src
+
+#+begin_src elisp :results raw
+  (cartesian-product '(a b) '(1 2 3) '(w x y z))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun make-nested-loops-to-iterate-over-n-lists (n num-lists)
+    (if (= n num-lists)
+        (apply 'list 'list items)
+      (append (list 'loop 'for (get-current-item n) 'in (list 'nth n 'lists))
+              (list (if (< n (- num-lists 1)) 'append 'collect))
+              (list (make-nested-loops-to-iterate-over-n-lists (+ n 1) num-lists)))))
+
+  (defun get-current-item (n)
+    (let ((item (intern (format "i%d" n))))
+      (setq items (append items (list item)))
+      item))
+
+  (defun cart-prod (&rest lists)
+    (let ((items nil))
+      (eval (make-nested-loops-to-iterate-over-n-lists 0 (length lists)))))
+#+end_src
+
+#+begin_src elisp :results raw
+  (cart-prod '(a b) '(1 2 3) '(w x y z))
+#+end_src
+
+  The 13-line solution demonstrates the power of lisp in writing code that
+  creates other code. Which do you like better?!
+#+end_info
+** MHB
+#+begin_info
+  \ldquo{}R is *antisymmetric*\rdquo means $\forall$ x $\forall$ y [xRy \land yRx \rightarrow x = y]. The
+  contrapositive of this conditional says:
+
+  x \ne y \rarr \not (xRy \land yRx), which is equivalent to
+
+  x \ne y \rarr \not xRy \lor \not yRx (by DeMorgan\rsquo{}s), which is only false when the consequent
+  is false (since x \ne y is assumed true), and
+
+  \not xRy \lor \not yRx is only false (given xRy is true) when \not yRx is false, or when
+  yRx is true.
+
+  So yRx must be false.
+#+end_info
+** MLB
+#+begin_info
+  The Cartesian product of a set with 3 elements times itself is 3x3 = 9.
+  The number of subsets of a set with 9 elements is 2^9 = 512.
+#+begin_src elisp
+  (defun number-of-binary-relations (n)
+    "Computes the number of binary relations on a set with n elements."
+    (expt 2 (* n n))
+    )
+#+end_src
+#+end_info
+** EJE *
+#+begin_info
+#+begin_src elisp :results silent
+  (defun for-all-for-all-collect (pred domain1 domain2)
+    (loop for x across domain1
+          when (loop for y across domain2
+                     always (funcall pred x y))
+          collect x))
+#+end_src
+
+#+begin_src elisp :results raw
+  (for-all-for-all-collect 'student-has-taken-course students courses)
+#+end_src
+
+#+results:
+(4 8)
+
+#+begin_src elisp :results raw
+  (for-all-for-all-collect 'course-has-been-taken-by-student courses students)
+#+end_src
+
+#+results:
+(100)
+
+  Another solution uses the =seq-filter= function from the =seq-24= package, and
+  the =map-for-all= function defined in MGX:
+
+
+#+begin_src elisp :results raw
+  (setq students-who-have-taken-all-courses
+        (seq-filter (lambda (student)
+                      (map-for-all 'student-has-taken-course student courses))
+                    students)
+        courses-that-have-been-taken-by-all-students
+        (seq-filter (lambda (course)
+                      (map-for-all 'course-has-been-taken-by-student course students))
+                    courses)
+        both-answers (list students-who-have-taken-all-courses courses-that-have-been-taken-by-all-students))
+#+end_src
+
+#+results:
+((4 8) (100))
+
+:FEEDBACK:
+  Pearson Roberts from DM1 F17 came up with the =seq-filter= solution.
+:END:
+#+end_info
+** MLU *
+#+begin_info
+  #+tblname: birthdays
+  | Name | Year | Month | Day |
+  |------+------+-------+-----|
+  | Bill | 1992 | Jan   |   1 |
+  | Bart | 1992 | Feb   |  10 |
+  | Ben  | 1999 | Mar   |  12 |
+  | Amy  | 2000 | Apr   |   4 |
+  | Bob  | 2001 | May   |  13 |
+  | Chet | 2002 | Jun   |  14 |
+  | Dave | 2003 | Jul   |  15 |
+  | Ed   | 2004 | Aug   |  17 |
+  | Len  | 2005 | Sep   |  19 |
+  | Milt | 2006 | Oct   |  20 |
+  | Ray  | 2007 | Nov   |  21 |
+  | Sue  | 2000 | Dec   |  22 |
+
+  #+tblname: zodiac
+  | Month | Day | Sign        |
+  |-------+-----+-------------|
+  | Jan   |  20 | Aquarius    |
+  | Feb   |  19 | Pisces      |
+  | Mar   |  21 | Aries       |
+  | Apr   |  20 | Taurus      |
+  | May   |  21 | Gemini      |
+  | Jun   |  21 | Cancer      |
+  | Jul   |  23 | Leo         |
+  | Aug   |  23 | Virgo       |
+  | Sep   |  23 | Libra       |
+  | Oct   |  23 | Scorpio     |
+  | Nov   |  22 | Sagittarius |
+  | Dec   |  22 | Capricorn   |
+
+#+begin_src elisp :var bday=birthdays signs=zodiac
+  (require 'cl)
+
+  (let* ((rotated-signs (append (last signs) (butlast signs)))
+         (months (mapcar 'second signs))
+         (rotated-signs (mapcar* 'list
+                                 (mapcar 'first signs)
+                                 months
+                                 (mapcar 'third rotated-signs)))
+         (full-zodiac
+          (append signs
+                  (apply 'append
+                         (mapcar
+                          (lambda (x)
+                            (destructuring-bind (m d s) x
+                              (mapcar* 'list
+                                       (make-list 31 m)
+                                       (number-sequence (1+ d) 31)
+                                       (make-list 31 s))))
+                          signs))
+                  (apply 'append
+                         (mapcar
+                          (lambda (x)
+                            (destructuring-bind (m d s) x
+                              (mapcar* 'list
+                                       (make-list 31 m)
+                                       (number-sequence 1 (1- d))
+                                       (make-list 31 s))))
+                          rotated-signs))))
+         (joined (mapcar (lambda (x) (apply 'append x))
+                         (cartesian-product bday full-zodiac)))
+         (filtered (delete-if (lambda (x)
+                                (or (not (string= (third x) (fifth x)))
+                                    (/= (fourth x) (sixth x))))
+                              joined))
+         (projected (mapcar (lambda (x)
+                              (append (butlast x 3) (last x)))
+                            filtered)))
+    projected)
+#+end_src
+
+#+results:
+| Bill | 1992 | Jan |  1 | Capricorn |
+| Bart | 1992 | Feb | 10 | Aquarius  |
+| Ben  | 1999 | Mar | 12 | Pisces    |
+| Amy  | 2000 | Apr |  4 | Aries     |
+| Bob  | 2001 | May | 13 | Taurus    |
+| Chet | 2002 | Jun | 14 | Gemini    |
+| Dave | 2003 | Jul | 15 | Cancer    |
+| Ed   | 2004 | Aug | 17 | Leo       |
+| Len  | 2005 | Sep | 19 | Virgo     |
+| Milt | 2006 | Oct | 20 | Libra     |
+| Ray  | 2007 | Nov | 21 | Scorpio   |
+| Sue  | 2000 | Dec | 22 | Capricorn |
+#+end_info
+** EKQ
+#+begin_info
+  1. Not an ER, lacks reflexivity. You are not your own sibling.
+  2. Is an ER.
+     - Reflexivity: you have the same parents as yourself.
+     - Symmetry: If you have the same parents as your brother, your brother has
+       the same parents as you.
+     - Transitivity: If you have the same parents as your sister, and your
+       sister has the same parents as your brother, then you have the same
+       parents as your brother.
+  3. Not an ER, because it is not necessarily transitive (assuming biological
+     parents are what is meant). X may have parents A and B, Y may have parents
+     B and C, and Z may have parents C and D. Then X and Y share a common parent
+     (B), Y and Z share a common parent (C), but X and Z do not share a common
+     parent.
+  4. Not an ER, for similar reasoning to why 3 is not.
+  5. Ditto.
+  6. Not an ER, lacks symmetry. 3 \le 4, but 4 is not \le 3.
+  7. Not an ER, lacks transitivity. if x^2 + y^2 = 1, and y^2 + z^2 = 1, then x^2 +
+     z^2 does not necessarily = 1.
+  8. Not an ER, lacks reflexivity. x + x = 42 is true for exactly one value, x
+     = 21. So unless the universe for this relation consists of the number 21,
+     /and nothing else/, it cannot be reflexive. If the universe is just the
+     number 21, then it is an ER (trivially).
+  9. Not an ER, lacks reflexivity. \lfloor3.14\rfloor \ne \lceil3.14\rceil. (Lacks symmetry too.)
+#+end_info
+** MON
+#+begin_info
+#+begin_src elisp :results output
+  (defalias 'equivalence-classes 'do-something)
+  (equivalence-classes 7 10)
+#+end_src
+
+#+results:
+: [ -70 -63 -56 -49 -42 -35 -28 -21 -14 -7 0 7 14 21 28 35 42 49 56 63 70 ]
+: [ -69 -62 -55 -48 -41 -34 -27 -20 -13 -6 1 8 15 22 29 36 43 50 57 64 71 ]
+: [ -68 -61 -54 -47 -40 -33 -26 -19 -12 -5 2 9 16 23 30 37 44 51 58 65 72 ]
+: [ -67 -60 -53 -46 -39 -32 -25 -18 -11 -4 3 10 17 24 31 38 45 52 59 66 73 ]
+: [ -66 -59 -52 -45 -38 -31 -24 -17 -10 -3 4 11 18 25 32 39 46 53 60 67 74 ]
+: [ -65 -58 -51 -44 -37 -30 -23 -16 -9 -2 5 12 19 26 33 40 47 54 61 68 75 ]
+: [ -64 -57 -50 -43 -36 -29 -22 -15 -8 -1 6 13 20 27 34 41 48 55 62 69 76 ]
+#+end_info
+
+* Puzzles
+** EJK
+*** Rephrase
+    What of interest is revealed when investigating the interaction between
+    org-mode tables and elisp source blocks?
+*** Approach
+    Search the Internet, read the built-in info page (C-h i "Org Mode" ->
+    "Working with source code" -> "Header arguments" -> "Specific header
+    arguments" -> "var") --- experiment.
+
+    PVP: Predict and check if correct by evaluating each code block. Note your
+    surprise factor.
+*** Solution
+    Your investigation should have uncovered, at the very least, the source block
+    header \ldquo{}:var abc=xyz\rdquo feature, where abc is the variable name that will be
+    used in the source block, and xyz is the name of a table appearing somewhere
+    in the org file. The \ldquo{}#+tblname: xyz\rdquo tag is the mechanism that gives a name
+    to the table. The list-of-lists data in the table will be the value of the abc
+    variable.
+
+    For example, in MLU the two tables are named =birthdays= and =zodiac=, and are
+    identified to the source block with this header:
+
+#+begin_src elisp :var bday=birthdays signs=zodiac
+#+end_src
+** EJU
+*** Rephrase
+    The Hint says to think parity, oddness and evenness, which are revealed by which CMM?
+*** Approach
+    The straightforward way is to start with CM2 and go from there. It is quickly discerned
+    that there is no need to go further.
+*** Solution
+    CM2 is the equivalence relation that says evens (numbers ending in 0 in
+    binary) are equivalent to evens, and odds (numbers ending in 1 in binary) are
+    equivalent to odds.
+*** Proof
+    PVP: Predict and check if correct by evaluating several code blocks. But
+    that is more of a verification than a proof. Proving means showing CM2 is an
+    equivalence relation *by definition* because the three properties hold in
+    the domain of integers:
+    - Reflexivity :: \forall{}n n%2 = n%2.
+    - Symmetry :: \forall{}n \forall{}m if n%2 = m%2 then m%2 = n%2.
+    - Transitivity :: \forall{}n \forall{}m \forall{}p if n%2 = m%2 and m%2 = p%2 then m%2 = p%2.
+** MNE
+*** Rephrase
+    What is revealed by exploring the specific relation given in terms of the
+    three properties Reflexive, Symmetric, and Transitive?
+*** Approach
+    Write some code to illuminate this equivalence relation, gaining confidence
+    that it *is* an equivalence relation.
+*** Solution
+  The function =first-three-bits= takes a bitstring of length at least 3 and
+  returns the substring of its first three bits:
+#+begin_src elisp :results silent
+  (defun first-three-bits (bitstring)
+    (or (>= (length bitstring) 3) (error "bitstring too short"))
+    (substring bitstring 0 3))
+#+end_src
+
+#+begin_src elisp :results raw
+  (first-three-bits "010111001")
+#+end_src
+
+#+results:
+010
+
+  - Reflexivity holds, e.g., \forall s (at least 3 in length):
+
+#+begin_src elisp :var s="0110" :results raw
+  (equal (first-three-bits s) (first-three-bits s))
+#+end_src
+
+#+results:
+t
+
+  - Symmetry holds, e.g., \forall s, v (at least 3 in length):
+
+#+begin_src elisp :var s="1010" :var v="10110" :results raw
+  (and (equal (first-three-bits s) (first-three-bits v))
+       (equal (first-three-bits v) (first-three-bits s)))
+#+end_src
+
+#+results:
+t
+
+  - Transitivity holds, e.g., \forall s, v, w (at least 3 in length):
+
+#+begin_src elisp :var s="1001" :var v="10000" :var w="10011" :results raw
+  (and (equal (first-three-bits s) (first-three-bits v))
+       (equal (first-three-bits v) (first-three-bits w))
+       (equal (first-three-bits s) (first-three-bits w)))
+#+end_src
+
+#+results:
+t
+*** Proof
+    Go further with propositional and predicate logic. Build an argument that
+    does not involve code.
