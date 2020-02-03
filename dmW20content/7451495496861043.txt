@@ -1,0 +1,175 @@
+-*- mode: org -*-
+#+title: Presentation 05
+#+subtitle: Designing DFA
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* TODO First Look At Some Proofs
+** TODO Easiest Proof Problem
+
+   Prove that if \( a \equiv b \pmod{5} \) where /a/ and /b/ are integers, then
+   \( a^2 \equiv b^2 \pmod{5} \).
+
+   (What about the converse?)
+
+    Proved on the whiteboard in class.
+** TODO Easy Proof Problem
+
+     Prove that for every natural number \(n\), there exist integers \(a, b\) such
+     that \( n = 3a + 7b \).
+
+     Can you generalize this result?
+
+** TODO Hard Proof Problem
+
+   Show that for $n \ge 2$, the sum $1 + \frac{1}{2} + \cdots + \frac{1}{n}$ is never an integer.
+
+   In other words, for $n \ge 2$, $\sum_{i = 1}^n \frac{1}{i}$ is never an integer.
+*** Proof Step
+    Let the sum $H_n$ be expressed as a fraction, $\frac{a}{b}$, where b
+    is the least common multiple of \(2,3, \cdots, n\).  Then $b = 2^r
+    \cdot s$, where $2^r$ is the largest power of $2 \leq n$, and $s$ is
+    an odd number.
+
+*** Proof Step (Example)
+    Consider $a$ and $b$, for $H_5$:
+
+    $b = 2^2 \cdot s$
+
+    $a = 2^2 \cdot s + 2s + 2^2 \cdot (\frac{s}{3}) + s + 2^2 \cdot (\frac{s}{5})$
+
+*** Consequences
+    From the example we can see that $a$ is odd because it is the sum of
+    one odd number, $s$, and several even numbers. We also know that $b$
+    is even. So when $\frac{a}{b}$ is written as a fraction in its
+    lowest terms, \(\frac{c}{d}, d\) must be greater than 1.
+
+*** Conclusion
+    Therefore, for $n \ge 2$, $H_n$ is N.A.I., Q.E.D.
+
+** TODO Harder Proof Problem
+
+   Given that
+
+   \( \frac{1}{n(n+1)} = \frac{1}{n} - \frac{1}{n+1}, \)
+
+   what is the value of the summation
+
+   \( \sum^{\infty}_{n=1} \frac{b(n)}{n(n+1)} \)
+
+   where \( b(n) \) counts the number of ones in the binary expansion of \(n\)?
+
+   The harder question is, why does this value converge to the number it does?
+   Can you find an expression in common mathematical symbols (using 5 or fewer
+   characters) for this value? And what does binary expansion have to do with
+   why this value is what it is? How would you prove it?
+
+   Hint: you may find it helpful at some point to refer to the Theoretical
+   Computer Science Cheat Sheet, which can be found online.
+
+** TODO Hardest Proof Problem
+
+   Prove that \( a^4 + b^4 + c^4 = d^4 \) has no positive integer solutions.
+*** Why?
+   Why is this the hardest one to prove?
+
+**** Proving a negative
+   Brute force search is impossible --- we can't write a program to try
+   every possible set of 4 positive integers to see if all of them fail!
+
+***** Alternative
+   Could we start a program to see if one set could succeed?
+
+***** Hope Springs Eternal
+    In fact, the claim is false! Here's a counterexample:
+
+:    2682440^4 + 15365639^4 + 18796760^4 = 20615673^4
+
+#+begin_src elisp
+  (list (list (calc-eval "2682440^4 + 15365639^4 + 18796760^4"))
+        (list (calc-eval "20615673^4")))
+#+end_src
+
+* TODO Explore an Exercise from ACAPP Chapter 5
+  This approach to solving Exercise 5.2.4.2 is based on suggestions by Ganesh,
+  which expand on the analysis/design methodology presented on pages 61 and 62
+  in Chapter 5.
+
+  The idea is to capture the \ldquo{}in your head\rdquo thoughts about state name and
+  transition choices. There are P equivalence classes under the mod operation,
+  where P is the modulus. A representative of each equivalence class is all that
+  is needed to keep track of \ldquo{}input bits seen so far\rdquo.
+
+  1. Let Modulus P > 2 (P = 5 for the exercise, but let P = 3 below).
+  2. Use % for mod.
+  3. Use a pair of numbers for a state name.
+  4. Use -b-> to indicate bit b arriving in the input.
+
+  This is how the LSB-first series goes (call it \ldquo{}ORIG\rdquo). After \ldquo{}modding\rdquo we
+  call it \ldquo{}ALT\rdquo below.
+
+  ORIG: (2^k, N) -b-> (2^{k+1}, N+2^{k}\cdot{}b) -b-> (2^{k+2}, (N+2^{k}^{}\cdot{}b) + (b\cdot{}2^{k+1}^{})) ...
+
+  Example bits arriving LSB-first:
+
+:         0
+:       0 0
+:     1 0 0
+:   1 1 0 0
+: 1 1 1 0 0
+
+  Here is ORIG line by line: it starts at the pair (1,0) where so far, yes, % 3 = 0:
+
+  | Input bit | To Pair | So far % 3 = 0? |
+  |-----------+---------+-----------------|
+  | -0->      | (2,0)   | yes             |
+  | -0->      | (4,0)   | yes             |
+  | -1->      | (8,4)   | no              |
+  | -1->      | (16,12) | yes             |
+  | -1->      | (32,28) | no              |
+
+  This goes unbounded, but we don\rsquo{}t need all that info if we just do the
+  mod-based summarization of essential information.
+
+  We only need the \ldquo{}N % P\rdquo part; thus, let\rsquo{}s apply the % operator and use its
+  properties to simplify what we see:
+
+  (N + 2^{k}\cdot{}b) % P
+
+  = (N % P + (2^{k}\cdot{}b) % P) % P
+
+  = (N % P + (2^k % P \cdot b % P) % P) % P
+
+  = (N % P + 2^k % P \cdot b) % P --- why?
+
+  Thus maintain just 2^k % P for \ldquo{}exponent so far\rdquo and N % P for \ldquo{}number so far\rdquo.
+
+  Call them ModExp and ModNum for crispness.
+
+  How does ModExp evolve?
+
+  2^k -> 2^{k+1} becomes (2^k) % P -> (2 % P \cdot 2^k % P) % P which is (2\cdot{}2^k % P) % P.
+
+  I.e., ModExp ALWAYS goes to (2 \cdot ModExp) % P.
+
+  Thus the ALT series becomes
+
+  ALT: (2^k % P, N % P) -b-> ((2 \cdot (2^k % P)) % P,  (N % P + 2^k % P \cdot b) % P)
+
+  or in more readable form
+
+  ALT: (ModExp, ModNum) -b->  ((2 \cdot ModExp) % P, (ModNum + ModExp \cdot b) % P)
+
+  Let\rsquo{}s calculate the ALT series for P = 3 now, line by line.
+
+  ALT starts at (1,0), where so far, yes, % 3 = 0.
+
+  | From pair | Input bit | Calculation               | To pair | So far % 3 = 0? |
+  |-----------+-----------+---------------------------+---------+-----------------|
+  | (1,0)     | -0->      | ((2\cdot{}1)%3, (0 + (1\cdot{}0))%3))  | (2,0)   | yes             |
+  | (2,0)     | -0->      | ((2\cdot{}2)%3, (0 + (0\cdot{}0))%3))  | (1,0)   | yes             |
+  | (1,0)     | -1->      | ((2\cdot{}1)%3, (0 + (1\cdot{}1))%3))  | (2,1)   | no              |
+  | (2,1)     | -1->      | ((2\cdot{}2)%3, (1 + (0\cdot{}1))%3))  | (1,0)   | yes             |
+  | (1,0)     | -1->      | (continue as before)      | (2,1)   | no              |
