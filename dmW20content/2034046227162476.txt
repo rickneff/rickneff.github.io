@@ -1,0 +1,132 @@
+-*- mode: org -*-
+#+title: Assignment 05
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
+:END:
+* Combinatorial Proofs
+** TODO Validate A Committee with Chair and Co-Chair Identity
+    Give a *combinatorial argument* that if n is a positive integer then
+
+    \(\sum^n_{k = 0} k^2{n \choose k} = n(n + 1)2^{n - 2}.\)
+
+:HINT:
+    Show that both sides count the ways to select a subset of a set of n
+    elements together with two not necessarily distinct elements from this
+    subset. It will be easier to do so if you express the right-hand side of the
+    identity as the equivalent n(n - 1)2^{n - 2} + n2^{n - 1} (after verifying that
+    they are indeed equivalent).
+:END:
+** TODO Validate Another Identity
+    Using a *combinatorial argument*, argue for the validity of the identity
+
+    \({n \choose r}{r \choose k} = {n \choose k}{n - k \choose r - k}\)
+
+    whenever n, r, and k are nonnegative integers with r \le n and k \le r.
+
+:HINT:
+    A major hint will be given in class on Day 2. *Be sure* you have grappled with
+    this problem before the hint is revealed!
+:END:
+* Basic Probability Theory
+** TODO Answer a Probability Question
+    A dark room contains two barrels. The first barrel is filled with green
+    marbles, the second is filled with a half-and-half mixture of green and blue
+    marbles. So there\rsquo{}s a 100% chance of choosing a green marble from the first
+    barrel, and a 50% chance of choosing either color in the second barrel. You
+    reach into one of the barrels (it\rsquo{}s dark so you don\rsquo{}t know which one) and
+    select a marble at random. It\rsquo{}s green. You select another. It\rsquo{}s green too. You
+    select a third, a fourth, a fifth, etc. Green each time. What is the *minimum*
+    number of marbles you need to select to *exceed* a probability of 99% that you
+    are picking them out of the all-green barrel? (Note that there are enough
+    marbles so that the answer does not depend on how many marbles are in the
+    second barrel.)
+
+:HINT:
+    These are all independent events, so the probability of choosing n green
+    marbles in a row from the half-and-half barrel is (1/2)^n. Compute the
+    complementary probability --- that of choosing at least one blue marble ---
+    to be 1 - (1/2)^n. That probability first exceeds 99% when n equals what? In
+    other words, after how many green marbles in a row are you 99+% sure that
+    you are picking marbles out of the all-green barrel?
+:END:
+** TODO Answer Another Probability Question
+   Take a deep breath. Suppose Shakespeare\rsquo{}s account is accurate and Julius
+   Caesar gasped \ldquo{}You too, Brutus\rdquo before breathing his last. What is the
+   probability that you just inhaled a molecule that Julius Caesar exhaled in
+   his dying breath?
+
+   Assume that after more than two thousand years the exhaled molecules are
+   uniformly spread about the world and the vast majority are still free in the
+   atmosphere. Assume further that there are 10^{44} molecules of air in the world,
+   and that your inhaled quantity and Caesar\rsquo{}s exhaled quantity were each about
+   2.2 x 10^{22} molecules.
+
+:HINT:
+   If a number x is small, then (1 - x) is approximately equal to e^{-x}, where e =
+   2.718281828 (approximately).
+
+#+begin_src elisp :results raw
+  (exp 1)
+#+end_src
+:END:
+* TODO My Report On What I Learned
+** I Had Fun
+** I Learned Something New
+** I Achieved Something Meaningful
+** Etc.
+
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+   What is true of my experience in general?
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I collaborated with one or more classmates.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I reported what I thought about while doing the problems.
+  - [ ] I reported on any connections I found between these problems and
+        something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+#+name: assertions-about-answers
+  - [ ] I correctly completed the first combinatorial proof.
+  - [ ] I correctly completed the second combinatorial proof.
+  - [ ] I got the right answer for the first probability theory question.
+  - [ ] I got the right answer for the second probability theory question.
+
+#+begin_src elisp
+  (calculate-score
+   (quote
+    ((in-general 2 2 2 2)
+     (about-report 2 2 2 2)
+     (about-MIs 2 2 2 2)
+     (about-answers 18 18 20 20))))
+#+end_src
