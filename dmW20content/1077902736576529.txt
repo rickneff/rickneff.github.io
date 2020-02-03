@@ -1,0 +1,32 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 05
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Based on what you learned from file:presentation-05.txt:
+
+* TODO Proceed to Design the DFA where P = 5
+
+  ALT: (ModExp, ModNum) -b->  ((2 \cdot ModExp) % P, (ModNum + ModExp \cdot b) % P)
+
+  Example bits arriving LSB-first:
+
+:             0
+:           0 0
+:         1 0 0
+:       1 1 0 0
+:     1 1 1 0 0
+:   0 1 1 1 0 0
+: 1 0 1 1 1 0 0
+
+  | From pair | Input bit | Calculation             | To pair | So far % 5 = 0? |
+  |-----------+-----------+-------------------------+---------+-----------------|
+  | (1,0)     | -0->      | ((2\cdot{}1)%5, (0 + (1\cdot{}0))%5) | (2,0)   | yes             |
+  | (2,0)     | -0->      | ((2\cdot{}2)%5, (0 + (2\cdot{}0))%5) | (4,0)   | yes             |
+  | (4,0)     | -1->      | ((2\cdot{}4)%5, (0 + (4\cdot{}1))%5) | (3,4)   | no              |
+  | (3,4)     | -1->      | ((2\cdot{}3)%5, (4 + (3\cdot{}1))%5) | (1,2)   | no              |
+  | (1,2)     | -1->      | ((2\cdot{}1)%5, (2 + (1\cdot{}1))%5) | (2,3)   | no              |
+  | (2,3)     | -0->      | ((2\cdot{}2)%5, (3 + (2\cdot{}0))%5) | (4,3)   | no              |
+  | (4,3)     | -1->      | ((2\cdot{}4)%5, (3 + (4\cdot{}1))%5) | (3,2)   | no              |
