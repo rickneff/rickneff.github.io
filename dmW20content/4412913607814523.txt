@@ -1,0 +1,29 @@
+-*- mode: org -*-
+#+title: Divide Pair Conquer 05
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* TODO Investigate A Possible Relationship
+  Does any row in Pascal\rsquo{}s Triangle have the Fibonacci numbers\rsquo relationship
+  between three consecutive entries (in other words, where x, y and z are three
+  consecutive entries in a single row, x + y = z)?
+
+  The number of rows where this relationship could possibly hold is:
+  - [ ] Zero.
+  - [ ] At least one.
+  - [ ] At most one.
+  - [ ] Exactly one.
+  - [ ] It cannot be determined.
+
+* TODO Investigate Another Possible Relationship
+   Does any row in Pascal\rsquo{}s Triangle have three consecutive entries in the ratio
+   1:2:3? (12:24:36 is an example of three numbers in a 1:2:3 ratio.)
+
+   The number of rows where this relationship could possibly hold is:
+- [ ] Zero.
+- [ ] At least one.
+- [ ] At most one.
+- [ ] Exactly one.
+- [ ] It cannot be determined.
