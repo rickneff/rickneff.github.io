@@ -1,0 +1,148 @@
+-*- mode: org -*-
+#+title: Assignment 04 Key
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+  These are sample/examplary answers, some of which come from former students.
+* Read and Relate
+  Did you relate what you read in this paper about partial orders and posets to what you
+  learned about these special type of relations and their applications?
+
+* Understand and Write
+  Did you understand the techniques of construction of the standard set-theoretic
+  operations and relations out of arithmetic?
+
+  Specifically, using the G\ouml{}del hash of a set, did you correctly calculate the
+  following?
+  - set membership
+  - subset-inclusion
+  - set union
+  - set intersection
+  - the encoding of relations as sets of pairs
+
+  Does the elisp code you wrote to enhance your understanding of these encodings
+  and constructions correctly use bigpos arithmetic?
+
+  Did you go beyond what was given in class?
+
+  Sample code:
+#+begin_src elisp :results silent
+  (require 'calc)
+  (require 'calc-math)
+
+  (require 'first-ten-million-primes)
+
+  (defalias 'calcFunc-prime 'prime)
+
+  (defmath gh-encode-element (e)
+    (prime (1- e)))
+
+  (defalias 'gh-encode-element 'calcFunc-gh-encode-element)
+
+  (defmath gh-encode-set (nset)
+    (if (null nset)
+        1
+      (* (gh-encode-set (cdr nset))
+         (gh-encode-element (car nset)))))
+
+  (defalias 'gh-encode-set 'calcFunc-gh-encode-set)
+
+  (defmath divides (n1 n2)
+    (zerop (mod n2 n1)))
+
+  (defalias 'divides 'calcFunc-divides)
+
+  (defmath gh-is-member-of (element set)
+    (divides (gh-encode-element element)
+             (gh-encode-set set)))
+
+  (defalias 'gh-is-member-of 'calcFunc-gh-is-member-of)
+
+  (defmath gh-is-subset-of (set1 set2)
+    (divides (gh-encode-set set1)
+             (gh-encode-set set2)))
+
+  (defalias 'gh-is-subset-of 'calcFunc-gh-is-subset-of)
+
+  (defmath gh-set-union (set1 set2)
+    (lcm (gh-encode-set set1)
+         (gh-encode-set set2)))
+
+  (defalias 'gh-set-union 'calcFunc-gh-set-union)
+
+  (defmath gh-set-intersection (set1 set2)
+    (gcd (gh-encode-set set1)
+         (gh-encode-set set2)))
+
+  (defalias 'gh-set-intersection 'calcFunc-gh-set-intersection)
+
+  (defun gh-encode-relation (relation)
+    (calcFunc-gh-encode-set (mapcar 'calcFunc-gh-encode-set relation)))
+#+end_src
+
+  Sample tests (you should have many more):
+#+begin_src elisp
+  (gh-is-member-of 3 '(1 2 3))
+#+end_src
+
+#+results:
+: t
+
+#+begin_src elisp
+  (gh-is-subset-of '(91 99) (number-sequence 50 100))
+#+end_src
+
+#+results:
+: t
+
+#+begin_src elisp
+  (gh-is-subset-of '(91 99) (number-sequence 50 80))
+#+end_src
+
+#+results:
+
+#+begin_src elisp
+  (setq set1 (number-sequence 1 20)
+        set2 (number-sequence 21 40)
+        gh-of-union-of-set1-and-set2 (gh-set-union set1 set2)
+        union-of-set1-and-set2 (union set1 set2)
+        same (equal gh-of-union-of-set1-and-set2 (gh-encode-set union-of-set1-and-set2)))
+#+end_src
+
+#+results:
+: t
+
+#+begin_src elisp
+  (setq set1 (number-sequence 20 40)
+        set2 (number-sequence 30 50)
+        gh-of-intersection-of-set1-and-set2 (gh-set-intersection set1 set2)
+        intersection-of-set1-and-set2 (intersection set1 set2)
+        set1-intersect-set2 (gh-encode-set intersection-of-set1-and-set2)
+        same (equal gh-of-intersection-of-set1-and-set2 set1-intersect-set2))
+#+end_src
+
+#+results:
+: t
+
+#+begin_src elisp
+  (setq set1 (number-sequence 10 20)
+        set2 (number-sequence 30 50)
+        gh-of-intersection-of-set1-and-set2 (gh-set-intersection set1 set2)
+        intersection-of-set1-and-set2 (intersection set1 set2)
+        set1-intersect-set2 (gh-encode-set intersection-of-set1-and-set2)
+        empty-intersection (= 1 gh-of-intersection-of-set1-and-set2 set1-intersect-set2))
+#+end_src
+
+#+results:
+: t
+
+#+begin_src elisp
+  (gh-encode-relation [(1 2) (2 3) (1 3)])
+#+end_src
+
+#+results:
+: 17719
