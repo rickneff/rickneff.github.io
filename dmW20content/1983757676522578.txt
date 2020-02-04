@@ -1,0 +1,132 @@
+-*- mode: org -*-
+#+title: Presentation 05
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* Counting Matters
+** View a Possibly Helpful Video
+    on your own time!
+    https://www.youtube.com/watch?v=S4f-GUxu3CY
+** Discuss Basic Counting
+     A Variation of RGM:
+
+     How many different TLAs are there from the set [A B C]?
+     (WITH repeats allowed --- so uniqueness not required.)
+
+:ANSWER:
+     3 \cdot 3 \cdot 3 = 3^3 = 27
+     AAA
+     AAB
+     AAC
+     ...
+     ABC
+     ...
+     CBA
+     ...
+     CCC
+#+begin_src elisp :results code
+  (loop with set = [A B C]
+        for p1 across set
+        append (loop for p2 across set
+                      append (loop for p3 across set
+                               collect (make-symbol (mapconcat 'symbol-name (list p1 p2 p3) "")))))
+#+end_src
+
+#+results:
+#+begin_src elisp
+(AAA AAB AAC ABA ABB ABC ACA ACB ACC BAA BAB BAC BBA BBB BBC BCA BCB BCC CAA CAB CAC CBA CBB CBC CCA CCB CCC)
+#+end_src
+
+:END:
+
+*** QGT
+#+begin_note
+  Thinking in terms of subsets of size $k$ from a set of size $n$,
+  convince yourself of the validity of this summation:
+
+  $\sum^{n}_{k = 0 } {n \choose k} = 2^n$.
+#+end_note
+  - Size 0 :: (n choose 0) = 1, empty set \empty
+  - Size 1 :: (n choose 1) = n, [1 2 3 4] has subsets of size 1 [1] [2] [3] [4]
+  - ... ::
+  - Size n :: (n choose n) = 1, [1 2 3 4]
+
+:ANSWER:
+  $2^n$ is the total number of subsets of a set of size $n$. The same total is
+  also arrived at by adding up the total number of subsets of each possible
+  size:
+  - Size 0 :: \({n \choose 0} = 1\).
+  - Size 1 :: \({n \choose 1} = n\).
+  - Size 2 :: \({n \choose 2} = \frac{n(n-1)}{2}\).
+  - Size ... :: \cdots
+  - Size n :: \({n \choose n} = 1\).
+:END:
+
+:TABULATION:
+| 1 | 2 | 3 | 4 | subset    | size |
+|---+---+---+---+-----------+------|
+| 0 | 0 | 0 | 0 | []        |    0 |
+| 0 | 0 | 0 | 1 | [4]       |    1 |
+| 0 | 0 | 1 | 0 | [3]       |    1 |
+| 0 | 0 | 1 | 1 | [3 4]     |    2 |
+| 0 | 1 | 0 | 0 | [2]       |    1 |
+| 0 | 1 | 0 | 1 | [2 4]     |    2 |
+| 0 | 1 | 1 | 0 | [2 3]     |    2 |
+| 0 | 1 | 1 | 1 | [2 3 4]   |    3 |
+| 1 | 0 | 0 | 0 | [1]       |    1 |
+| 1 | 0 | 0 | 1 | [1 4]     |    2 |
+| 1 | 0 | 1 | 0 | [1 3]     |    2 |
+| 1 | 0 | 1 | 1 | [1 3 4]   |    3 |
+| 1 | 1 | 0 | 0 | [1 2]     |    2 |
+| 1 | 1 | 0 | 1 | [1 2 4]   |    3 |
+| 1 | 1 | 1 | 0 | [1 2 3]   |    3 |
+| 1 | 1 | 1 | 1 | [1 2 3 4] |    4 |
+:END:
+** Discuss Basic Probability Theory
+   in terms of optional problem:
+*** QRQ
+#+begin_note
+  What should go in place of the \ldquo{};;...\rdquo in the code below? What other
+  improvements/fixes does this function need?
+#+end_note
+#+begin_src elisp :results silent
+  (defun probability (event space)
+    "A function that takes an event and a space
+  and returns a number between 0 and 1."
+    (let ((result (/ (size event) (size space))))
+      ;;...
+      result
+      ))
+#+end_src
+
+#+begin_src elisp
+  (probability ...)
+#+end_src
+
+:ANSWER:
+#+begin_src elisp :results silent
+  (require 'cl) ; for subsetp
+
+  (defun size (s)
+    (float (length s)))
+
+  (defun probability (event space)
+    "A function that takes an event and a space
+   and returns a number between 0 and 1."
+    (setq event (remove-duplicates (append event nil))
+          space (remove-duplicates (append space nil)))
+    (if (subsetp event space)
+        (/ (size event) (size space))
+      (error "probability undefined")))
+#+end_src
+:END:
