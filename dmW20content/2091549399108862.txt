@@ -1,0 +1,27 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 05
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Now that you know a few basics, here is a warmup for Puzzle ROX:
+
+  What is the probability that a randomly chosen date in 2020 (expressed as an
+  8-digit number, e.g., 20200204) is a multiple of three?
+
+:HINT:
+   The following code snippets may be helpful:
+#+begin_src elisp :var m=12
+  (case m (2 29) ((4 6 9 11) 30) (t 31))
+#+end_src
+
+#+begin_src elisp :var m=1 d=15
+  (string-to-number (format "2020%02d%02d" m d))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun is-multiple-of-three (n)
+    (zerop (mod n 3)))
+#+end_src
+:END:
