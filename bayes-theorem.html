@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-02-08 Sat 17:18 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bayes&rsquo; Theorem</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Rick Neff" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/bigblow.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/hideshow.css"/>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.localscroll-min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.zclip.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/bigblow.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/hideshow.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript">document.helps = [];</script>
+<script type="text/javascript">
+function draw(levels) {
+var c = document.getElementById("btree");
+var w = c.width;
+var h = c.height;
+var ctx = c.getContext("2d");
+var repeat_delay = 3000;
+var teardown_delay = 1000;
+var level_delay = 500;
+var margins = 10;
+// If h_frac is changed, slope will need to be adjusted to
+// prevent overlap.  I might fix this in the future.
+var h_frac = 2;
+var slope = ((h - margins * 2) / 2) / (w - margins * 2);
+ctx.clearRect(0, 0, w, h);
+// This goes in here so that above variables will be in scope
+function lines(dist, loc, depth, delay=0) {
+function render_lines(dist, loc) {
+ctx.beginPath();
+ctx.moveTo(loc[0], loc[1]);
+ctx.lineTo(loc[0] + dist, loc[1] + slope * -dist);
+ctx.moveTo(loc[0], loc[1]);
+ctx.lineTo(loc[0] + dist, loc[1] + slope * dist);
+ctx.stroke();
+}
+setTimeout(render_lines, delay, dist, loc);
+setTimeout(function (x) {ctx.clearRect(x, 0, w, h)},
+level_delay * levels * 2 + teardown_delay - delay,
+loc[0]);
+depth--;
+if (depth) {
+lines((dist / h_frac) * (h_frac - 1),
+[loc[0] + dist, loc[1] + slope * -dist],
+depth,
+delay + level_delay);
+lines((dist / h_frac) * (h_frac - 1),
+[loc[0] + dist, loc[1] + slope *  dist],
+depth,
+delay + level_delay);
+}
+}
+lines((w - margins * 2) / h_frac, [margins, h/2], levels);
+setTimeout(draw, repeat_delay + teardown_delay + levels * level_delay * 2, levels);
+}
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Bayes&rsquo; Theorem</h1>
+<div id="outline-container-orgdd4ea6f" class="outline-2">
+<h2 id="orgdd4ea6f">Preliminary</h2>
+<div class="outline-text-2" id="text-orgdd4ea6f">
+<p>
+Necessary to understanding Bayes&rsquo; Theorem is an understanding of <b>conditional probability</b>.
+</p>
+
+<p>
+Given the logical equivalence q &rarr; r &equiv; &not; q &or; r, wouldn&rsquo;t a <i>conditional</i>
+probability just be the probability of the union of the effect (consequent)
+with the complement of the cause (antecedent)?
+</p>
+
+<p>
+So, \(p(E \rightarrow F) = p(\overline{E} \cup F)?\)
+</p>
+
+<p>
+No! It doesn&rsquo;t work that way. But we do want to ask, if \(E\) occurs, what is
+the probability that \(F\) occurs also?
+</p>
+
+<p>
+Here is how it works: if \(E\) and \(F\) are events in a probability space then
+the conditional probability of \(F\) <i>given</i> \(E\), which is denoted \(p(F \mid
+  E)\), is the sum of probabilities of points in both \(E\) <b>and</b> \(F\) divided by
+the sum of probabilities of points in just \(E\).
+</p>
+
+<ol class="org-ol">
+<li>\(p(F \mid E) = p(F \cap E)\ /\ p(E)\)</li>
+<li>\(p(E \mid F) = p(E \cap F)\ /\ p(F)\)</li>
+</ol>
+
+<p>
+The obvious implication of the above two facts, together with the fact that
+set intersection is commutative, is that
+</p>
+
+<p>
+\(p(F \mid E) \cdot p(E) = p(E \mid F) \cdot p(F)\)
+</p>
+
+<p>
+And if \(E\) and \(F\) are independent events, then
+</p>
+
+<p>
+\(p(F \mid E) = p(F) \text{ and } p(E \mid F) = p(E)\).
+</p>
+</div>
+
+<div id="outline-container-orga3ed32c" class="outline-3">
+<h3 id="orga3ed32c">Example &#x2014; Roll a Die Twice</h3>
+<div class="outline-text-3" id="text-orga3ed32c">
+<p>
+What is the probability of a 3 on the first roll and a 4 on the second roll?
+</p>
+
+<p>
+\(E =\) the event of a 3 on the first roll
+</p>
+
+<p>
+Points in \(E\): [(3 . 1) (3 . 2) (3 . 3) (3 . 4) (3 . 5) (3 . 6)]
+</p>
+
+<p>
+\(F =\) the event of a 4 on the second roll
+</p>
+
+<p>
+Points in \(F\): [(1 . 4) (2 . 4) (3 . 4) (4 . 4) (5 . 4) (6 . 4)]
+</p>
+
+<p>
+Points in \(F\) and \(E\): [(3 . 4)]
+</p>
+
+<p>
+Turn it into a conditional &#x2014; what is the probability of a 4 on the second
+roll <i>given</i> a 3 on the first roll?
+</p>
+
+<p>
+\(p(F \mid E) = p(F \cap E)\ /\ p(E) = \frac{1/36}{1/6} = \frac{1}{6}\)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6102c16" class="outline-3">
+<h3 id="org6102c16"><b>Intuitive</b> versus <b>Calculated</b></h3>
+<div class="outline-text-3" id="text-org6102c16">
+<p>
+Draw one card from a 52-card deck:
+</p>
+
+<p>
+\(p(\clubsuit \mid Ace\ \clubsuit) = p(\clubsuit \cap Ace\ \clubsuit)\ /\ p(Ace\ \clubsuit) = \frac{1/52}{1/52} = 1\)
+</p>
+
+<p>
+\(p(\spadesuit \mid Ace\ \heartsuit) = p(\spadesuit \cap Ace\ \heartsuit)\ /\ p(Ace\ \heartsuit) = \frac{0}{1/52} = 0\)
+</p>
+
+<p>
+\(p(King\ \heartsuit \mid King) =  p(King\ \heartsuit \cap King)\ /\ p(King) = \frac{1/52}{4/52} = \frac{1}{4}\)
+</p>
+
+<p>
+\(p(\clubsuit \mid Black) = p(\clubsuit \cap Black)\ /\ p(Black) = \frac{13/52}{1/2} = \frac{1/4}{1/2} = \frac{1}{2}\)
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga6a7be3" class="outline-3">
+<h3 id="orga6a7be3">General Conjunction Rule</h3>
+<div class="outline-text-3" id="text-orga6a7be3">
+<p>
+\(p(E \cap F) = p(F) \cdot p(E \mid F) = p(E) \cdot p(F \mid E) = p(F \cap E)\)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org54c7d61" class="outline-3">
+<h3 id="org54c7d61">More Examples</h3>
+<div class="outline-text-3" id="text-org54c7d61">
+<p>
+Draw two cards in a row (without replacement):
+</p>
+
+<p>
+\(p(Ace\ \spadesuit\ \mbox{first} \cap Ace\ \spadesuit\
+   \mbox{second}) = p(Ace\ \spadesuit\ \mbox{first}) \cdot p(Ace\
+   \spadesuit\ \mbox{second} \mid Ace\ \spadesuit\ \mbox{first}) =
+   \frac{1}{52} \cdot 0 = 0\)
+</p>
+
+<p>
+\(p(\mbox{Red first} \cap \mbox{Red second}) = p(\mbox{Red first})
+   \cdot p(\mbox{Red second} \mid \mbox{Red first}) = \frac{1}{2} \cdot
+   \frac{25}{51} = \frac{25}{102} < \frac{1}{4} = \frac{1}{2} \cdot
+   \frac{1}{2}\)
+</p>
+
+<p>
+\(p(\mbox{Ace first} \cap \mbox{Ace second}) = p(\mbox{Ace first})
+   \cdot p(\mbox{Ace second} \mid \mbox{Ace first}) = \frac{1}{13}
+   \cdot \frac{3}{51} = \frac{1}{13} \cdot \frac{1}{17} = \frac{1}{221}
+   < \frac{1}{169} = \frac{1}{13} \cdot \frac{1}{13}\)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org92c222b" class="outline-3">
+<h3 id="org92c222b">Independence and the Product Rule</h3>
+<div class="outline-text-3" id="text-org92c222b">
+<p>
+Recall that independent experiments are when the outcome of one
+experiment does not affect the outcome of others.
+</p>
+
+<p>
+If \(p(F \mid E) = p(F)\) then \(E\) and \(F\) are independent.
+</p>
+
+<p>
+If two independent experiments \(E\) and \(F\) are carried out in
+sequence, then the probability of both outcomes is \(p(E) \cdot p(F)\)
+</p>
+
+<p>
+\(p(F \mid E) = p(F)\)
+</p>
+
+<p>
+\(p(F \mid E) = p(F \cap E)\ /\ p(E)\)
+</p>
+
+<p>
+\(p(F) \cdot p(E) = p(F \cap E)\)
+</p>
+
+<p>
+Recall the first example: What is the probability of rolling a 3 and
+then rolling a 4 with a single die?
+</p>
+
+<p>
+\(1/6 \cdot 1/6 = 1/36\). These events are independent.
+</p>
+
+<p>
+<a href="http://setosa.io/conditional/">http://setosa.io/conditional/</a> is a <b>very</b> helpful site for grasping the
+definition and significance of conditional probabilities and independent
+events. See if you agree!
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6c8d900" class="outline-2">
+<h2 id="org6c8d900">Introduction</h2>
+<div class="outline-text-2" id="text-org6c8d900">
+<p>
+If you read the guide at <a href="https://arbital.com/p/bayes_rule/?l=1zq">Arbital.com</a> you will get at least a glimmer of an
+understanding that the key concept behind this mysterious thing called Bayes&rsquo;
+Theorem (also called Bayes&rsquo; Rule) is that extra information allows one to
+derive a more realistic estimate of the probability that a particular event
+occurs.
+</p>
+</div>
+
+<div id="outline-container-org2468e49" class="outline-3">
+<h3 id="org2468e49">The Theorem</h3>
+<div class="outline-text-3" id="text-org2468e49">
+<p>
+If \(A\) and \(B\) are events such that \(p(A) \ne 0\) and \(p(B) \ne 0\),
+then
+</p>
+
+<p>
+\(p(A\ |\ B) = \frac{p(B\ |\ A)p(A)}{p(B\ |\ A)p(A) + p(B\ |\
+   \overline{A})p(\overline{A})}\).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org47e2b09" class="outline-3">
+<h3 id="org47e2b09">The Proof</h3>
+<div class="outline-text-3" id="text-org47e2b09">
+<p>
+Bayes&rsquo; Theorem is just an equation &#x2014; it expresses the equivalence between
+something on the left-hand-side of the equals sign (LHS) and something else
+on the right-hand-side (RHS).
+</p>
+
+<p>
+Like most proofs of equations, this one is a straightforward application of
+definitions, first principles (axioms) such as <i>quantities equal to the same
+thing are equal to each other</i> and identities such as De Morgan&rsquo;s laws or the
+distributive laws (for sets).
+</p>
+
+<p>
+From the definition of events and sample spaces we have \(B = B \cap
+   S\).
+</p>
+
+<p>
+From the law of set complementarity we have \(S = A \cup
+   \overline{A}\).
+</p>
+
+<p>
+Therefore, \(p(B) = p(B \cap S) = p(B \cap (A \cup \overline{A})) =
+   p((B \cap A) \cup (B \cap \overline{A}))\) (by the
+distributive law) \(= p(B \cap A) + p(B \cap \overline{A}) - p(A
+   \cap \overline{A})\) (by the definition of probability of the
+union of two events) \(= p(B \cap A) + p(B \cap \overline{A}) - 0\)
+(by substituting equals for equals) \(= p(B \cap A) + p(B
+   \cap \overline{A})\).
+</p>
+
+<p>
+Now, from the definition of conditional probability (the
+probability that \(B\) will happen after it is known that \(A\)
+happened) we have \(p(B\ |\ A) = p(B \cap A)\ /\ p(A)\).
+</p>
+
+<p>
+From that, and because \(p(B \cap A) = p(A \cap B)\) (set
+intersection is commutative), we have
+</p>
+
+<p>
+\(p(B\ |\ A)p(A) = p(B \cap A) = p(A \cap B) = p(A\ |\ B)p(B),\
+   \text{ or }\ p(A\ |\ B) =\)
+</p>
+
+<p>
+\(\frac{p(B\ |\ A)p(A)}{p(B)} = \frac{p(B\ |\ A)p(A)}{p(B \cap A) +
+   p(B \cap \overline{A})} = \frac{p(B\ |\ A)p(A)}{p(B\ |\ A)p(A) +
+   p(B\ |\ \overline{A})p(\overline{A})}\).
+</p>
+
+<p>
+by dividing through by \(p(B)\), substituting what we saw \(p(B)\)
+equals in the paragraph above that begins with the word
+<i>Therefore</i>, and again using the definition of conditional
+probability in the two terms of the denominator of the fraction to
+substitute equals for equals.
+</p>
+
+<p>
+Q.E.D.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org912b9d4" class="outline-2">
+<h2 id="org912b9d4">Example</h2>
+<div class="outline-text-2" id="text-org912b9d4">
+<p>
+What is the probability that a random person who <i>tests positive</i> for a
+disease <i>actually has</i> the disease, if we know that 1% of the population has
+the disease, that 95% of those who have the disease test positive for it, and
+2% of those who do not have the disease test positive for it?
+</p>
+
+<p>
+Let \(H =\) a person Has the disease.
+</p>
+
+<p>
+Let \(T =\) a person Tests positive for the disease.
+</p>
+
+<p>
+We're given:
+</p>
+
+<ul class="org-ul">
+<li>\(p(H) = 0.01\)</li>
+<li>\(p(T \mid H) = 0.95\)</li>
+<li>\(p(T \mid \overline{H}) = 0.02\)</li>
+</ul>
+
+<p>
+We want \(p(H \mid T)\). Try it yourself, the answer is given below.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgae8ad10" class="outline-2">
+<h2 id="orgae8ad10">Three Out of Four</h2>
+<div class="outline-text-2" id="text-orgae8ad10">
+<p>
+The relationship between the four probabilities is good to know, because we
+often have good probability estimates for three of the numbers, but we need to
+compute the fourth.
+</p>
+
+<p>
+For another example, suppose a doctor
+</p>
+
+<ul class="org-ul">
+<li>knows that the disease meningitis gives a sufferer a stiff neck 70% of the
+time.</li>
+<li>knows some unconditional facts about meningitis and stiff necks, i.e.,
+<ul class="org-ul">
+<li>the prior probability of someone having meningitis is low, only .002% (1
+out of 50,000 people);</li>
+<li>the prior probability of someone having a stiff neck is 1%.</li>
+</ul></li>
+</ul>
+
+<p>
+Let S = has a stiff neck, M = has meningitis.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">p(S | M)</td>
+<td class="org-left">=</td>
+<td class="org-right">0.7</td>
+</tr>
+
+<tr>
+<td class="org-left">p(M)</td>
+<td class="org-left">=</td>
+<td class="org-right">.00002</td>
+</tr>
+
+<tr>
+<td class="org-left">p(S)</td>
+<td class="org-left">=</td>
+<td class="org-right">.01</td>
+</tr>
+
+<tr>
+<td class="org-left">p(M | S)</td>
+<td class="org-left">=</td>
+<td class="org-right">p(S | M)p(M) / p(S) = (0.7)(.00002) / 0.01 = 0.0014</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org342248b" class="outline-2">
+<h2 id="org342248b">Lowered Expectations</h2>
+<div class="outline-text-2" id="text-org342248b">
+<p>
+So the doctor should expect fewer than 1 in 700 patients with a stiff
+neck to have meningitis.
+</p>
+
+<p>
+Note that even though meningitis strongly indicates a stiff neck
+(with probability 0.7), the probability of meningitis stays small,
+because the prior probability of stiff necks is so much higher than
+that of meningitis.
+</p>
+
+<p>
+The general idea is that we would like to determine, from our seeing
+as evidence the <i>effect</i> of some unknown <i>cause</i>, what that <i>cause</i>
+is.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7383370" class="outline-2">
+<h2 id="org7383370">Cause and Effect</h2>
+<div class="outline-text-2" id="text-org7383370">
+<p>
+In this context Bayes' Theorem says
+</p>
+
+<p>
+p(cause | effect) = p(effect | cause) &sdot; p(cause) / p(effect)
+</p>
+
+<p>
+Equivalently,
+</p>
+
+<p>
+p(effect | cause) = p(cause | effect) &sdot; p(effect) / p(cause)
+</p>
+
+<p>
+There are two directions here, <i>causal</i> and <i>diagnostic</i>:
+</p>
+
+<ul class="org-ul">
+<li>The <i>causal</i> direction finds p(effect | cause).</li>
+<li>The <i>diagnostic</i> direction finds p(cause | effect).</li>
+</ul>
+
+<p>
+In medical diagnosis, estimates of the conditional probabilities on causal
+relationships are often what a doctor has (i.e., p(symptoms | disease)), and
+what the doctor needs is to derive a diagnosis (i.e., p(disease | symptoms)).
+</p>
+
+<p>
+In a more general setting, <b>Truth</b> is to <b>cause</b> as <b>Test</b> is to <b>effect</b>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc177784" class="outline-2">
+<h2 id="orgc177784">Truth versus Test</h2>
+<div class="outline-text-2" id="text-orgc177784">
+</div>
+<div id="outline-container-orge52a0ae" class="outline-3">
+<h3 id="orge52a0ae">Problem</h3>
+<div class="outline-text-3" id="text-orge52a0ae">
+<p>
+What is the probability that a random person who tests positive for
+a certain disease actually has the disease, if we know that 1% of
+the population has the disease, that 95% of those who have the
+disease test positive for it, and 2% of those who do not have the
+disease test positive for it?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org79dcec0" class="outline-3">
+<h3 id="org79dcec0">Solution</h3>
+<div class="outline-text-3" id="text-org79dcec0">
+<p>
+Let \(H\) be the event that a person has the disease.
+</p>
+
+<p>
+Let \(T\) be the event that the person tests positive for it.
+</p>
+
+<p>
+The problem statement gives \(p(T\ |\ H), p(T\ |\ \overline{H})\) and
+\(p(H)\).
+</p>
+
+<p>
+We know that \(p(T) = p(T\ |\ H) \cdot p(H) + p(T\ |\ \overline{H})
+  \cdot p(\overline{H})\) (question: how do we know that?)
+</p>
+
+<p>
+What is asked for is \(p(H\ |\ T)\), which we can find using the
+identity:
+</p>
+
+<p>
+\(p(H\ |\ T) = p(T\ |\ H) p(H) / p(T)\).
+</p>
+
+<p>
+\(p(H) = 0.01\)
+</p>
+
+<p>
+\(p(\overline{H}) = 1 - p(H) = 1 - 0.01 = .99\)
+</p>
+
+<p>
+\(p(T\ |\ H) = 0.95\)
+</p>
+
+<p>
+\(p(T\ |\ \overline{H}) = 0.02\)
+</p>
+
+<p>
+\(\therefore\)
+</p>
+
+<p>
+\(p(T) = (.95)(.01) + (.02)(.99) = .0095 + .0198 = .0293\)
+</p>
+
+<p>
+\(p(H\ |\ T) = (.95)(.01)/(.0293) = .0095/.0293 = .324 \approx 32\%\)
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgacc6138" class="outline-2">
+<h2 id="orgacc6138">Visualize</h2>
+<div class="outline-text-2" id="text-orgacc6138">
+<p>
+It helps to visualize the four disjoint event subsets with their
+probabilities in table form:
+</p>
+
+<p>
+\(\begin{array}{|r|r|r|r|}
+  \hline
+  & & & \\
+  & p(\overline{H}) & p(H) & \\
+  \hline
+  & & & \\
+  p(T) & p(\overline{H} \cap T) = .0198 & p(H \cap T) = .0095 & .0293 \\
+  & & & \\
+  & = p(\overline{H}\ |\ T) \cdot p(T) & = p(H\ |\ T) \cdot p(T) & \\
+  & = p(T\ |\ \overline{H}) \cdot p(\overline{H}) & = p(T\ |\ H) \cdot p(H) & \\
+  & & & \\
+  \hline
+  & & & \\
+  p(\overline{T}) & p(\overline{H} \cap \overline{T}) = .9702 & p(H \cap \overline{T}) = .0005 & .9707 \\
+  & & & \\
+  & = p(\overline{H}\ |\ \overline{T}) \cdot p(\overline{T}) & = p(H\ |\ \overline{T}) \cdot p(\overline{T}) & \\
+  & = p(\overline{T}\ |\ \overline{H}) \cdot p(\overline{H}) & = p(\overline{T}\ |\ H) \cdot p(H) & \\
+  & & & \\
+  \hline
+  & & & \\
+  & .9900 & .0100 & 1.0 \\
+  \hline
+  \end{array}\)
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>
