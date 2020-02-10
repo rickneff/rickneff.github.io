@@ -1,0 +1,19 @@
+-*- mode: org -*-
+#+title: Assignment 06
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Please do all the Chapter 6 exercises.
+
+* TODO Exercise 6.2, DFA Jove, \cup, \cap
+** 1
+** 2
+
+* TODO Exercise 6.5.2, DFA, DeMorgan's Law
+** 1
+** 2
+** 3
+** 4
+** 5
