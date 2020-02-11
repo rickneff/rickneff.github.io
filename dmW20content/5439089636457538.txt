@@ -1,0 +1,101 @@
+-*- mode: org -*-
+#+title: Assignment 05 Key
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+:END:
+
+* Combinatorial Proofs
+** Validate A Committee with Chair and Co-Chair Identity Exemplary Answer
+  A *combinatorial argument* that if n is a positive integer then
+
+  \(\sum^n_{k = 0} k^2{n \choose k} = n(n + 1)2^{n - 2}.\)
+
+  goes as follows:
+
+  Following the hint, first note that we can start the summation with /k = 1/,
+  since the term with /k = 0/ is 0. The left-hand side counts the number of ways
+  to choose a subset as described in the hint by breaking it down by the number
+  of elements in the subset; note that there are /k/ ways to choose each of the
+  distinguished elements if the subset has size /k/. For the right-hand side,
+  after changing by per the hint from n(n + 1)2^{n - 2} to n(n - 1 + 2)2^{n - 2} =
+  n(n - 1)2^{n - 2} + n2^{n - 1}. The first term counts the number of ways to make
+  this choice if the two distinguished elements are different (choose them, then
+  choose any subset of the remaining elements to be the rest of the subset). The
+  second term counts the number of ways to make this choice if the two
+  distinguished elements are the same (choose it, then choose any subset of the
+  remaining elements to be the rest of the subset). Note that this works even if
+  /n = 1/.
+
+** Validate Another Identity Exemplary Answer
+  A *combinatorial argument* for the validity of the identity
+
+  \({n \choose r}{r \choose k} = {n \choose k}{n - k \choose r - k}\)
+
+  goes as follows:
+
+  Suppose that we have a set with /n/ elements, and we wish to choose a subset
+  /A/ with /k/ elements and another, disjoint, subset, with /r - k/ elements.
+  The left-hand side gives us the number of ways to do this, namely the product
+  of the number of ways to choose the /r/ elements that are to go into one or
+  the other of the subsets and the number of ways to choose which of /these/
+  elements are to go into the first of the subsets. The right-hand side gives us
+  the number of ways to do this as well, namely the product of the number of
+  ways to choose the first subset and the number of ways to choose the second
+  subset from the elements that remain.
+
+* Basic Probability Theory
+** Answer a Probability Question
+   Using the hint, since they\rsquo{}re all independent events, the probability of
+   choosing n green marbles in a row from the half-and-half barrel is (1/2)^n.
+   Compute the complementary probability --- that of choosing at least one blue
+   marble --- to be 1 - (1/2)^n. That probability first exceeds 99% when n
+   equals 7. That is when 2^n > 100, which is saying 1 - (1/2)^n > .99 in an
+   equivalent way.
+
+** Answer Another Probability Question
+   Take a deep breath. Suppose Shakespeare\rsquo{}s account is accurate and Julius
+   Caesar gasped \ldquo{}You too, Brutus\rdquo before breathing his last. What is the
+   probability that you just inhaled a molecule that Julius Caesar exhaled in
+   his dying breath?
+
+   Assume that after more than two thousand years the exhaled molecules are
+   uniformly spread about the world and the vast majority are still free in the
+   atmosphere. Assume further that there are 10^{44} molecules of air in the world,
+   and that your inhaled quantity and Caesar\rsquo{}s exhaled quantity were each about
+   2.2 x 10^{22} molecules.
+
+:HINT:
+   If a number x is small, then (1 - x) is approximately equal to e^{-x}, where e =
+   2.718281828 (approximately).
+
+#+begin_src elisp :results raw
+  (exp 1)
+#+end_src
+:END:
+
+  2.2 x 10^{22} molecules in each breath, yours or Caesar\rsquo{}s.
+
+  We want one minus the probability that your next breath does NOT contain one
+  of Caesar\rsquo{}s dying breath air molecules.
+
+  2.2 \times 10^22 / 10^44 (call it tiny) is the probability that the next molecule you
+  breath is one of Caesar\rsquo{}s. So (1 - tiny) is the probability that the next
+  molecule is NOT one of his. That probability (call it next) needs to be
+  multiplied by itself 2.2 \times 10^22 times --- next \times next \times ... \times next (2.2 \times 10^22
+  times) to give the probability that NONE of the molecules in your next breath
+  came from Caesar: (1 - tiny)^{2.2 \times 10^22}
+
+  Using (1 - x) is approximately equal to e^{-x}, where x = 4.84 (2.2 \times 2.2 --- the
+  10^22 \times 10^22 / 10^44 reduces to 1), 1 minus that is:
+
+#+begin_src elisp
+  (- 1 (exp -4.84))
+#+end_src
+
+#+results:
+: 0.9920929459484066
