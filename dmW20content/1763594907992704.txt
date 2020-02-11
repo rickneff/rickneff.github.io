@@ -1,0 +1,27 @@
+-*- mode: org -*-
+#+title: Divide Pair Conquer 06
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* TODO Divide and Conquer in Pairs the Properties of Probabilities!
+  Remember that probability distributions satisfy two conditions:
+
+  1. 0 \le p(s) \le 1 for each s \in S, and
+  2. \sum_{s \in S} p(s) = 1.
+
+  Knowing these two conditions and how the s events partition the probability
+  space, we can infer these three additional facts:
+
+  1. For the *complementary* event, $p(\overline{s}) = 1 - p(s)$.
+  2. For the *union* of two events (either one or both happen), p(E \cup F) =
+     p(E) + p(F) - p(E \cap F).
+  3. For *independent events*, p(E \cap F) = p(E)p(F).
+
+  Furthermore, the probability of the union of two independent events is the sum
+  of the probabilities of the two events minus the product of their
+  probabilities.
+
+  Given the above, what can you say about the probability of the union of two
+  *mutually exclusive* events?
