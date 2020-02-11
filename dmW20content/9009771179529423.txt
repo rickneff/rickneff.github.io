@@ -1,0 +1,234 @@
+-*- mode: org -*-
+#+title: Presentation 06
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* ENT versus ANT
+  Elementary Number Theory versus Advanced Number Theory
+** Divisibility
+*** The Division Theorem
+    If n is an integer, and d is a positive integer
+    then \exist q \exist r such that n = d \cdot q + r, 0 \le r < d.
+**** The Witnesses
+      q = quotient
+      r = remainder
+***** The Algorithm
+      n/d = dq/d + r/d
+
+      n/d = q + r/d
+        q = n/d - r/d
+        q = \lfloor{}n/d\rfloor (note that / is normal mathematical division)
+        r = n - dq
+****** The Reality
+#+begin_src elisp :results raw
+  (list (/ -13 5.0) (% -13 5) (mod -13 5))
+#+end_src
+
+#+results:
+(-2.6 -3 2)
+
+#+begin_src elisp
+  (loop for n from -1 downto -4
+        never (= (% n 5) (mod n 5)))
+#+end_src
+
+#+begin_src elisp
+  (every (lambda (n) (= (% n 5) (mod n 5)))
+         (number-sequence 0 100))
+#+end_src
+
+#+begin_src python :results output
+  for n in range(10):
+    print(-n % 5)
+#+end_src
+
+  What is the last digit (% 10) of 7^9999?
+#+begin_src elisp
+  (calc-eval "7^9999%10")
+#+end_src
+
+#+begin_src python
+  return (7 ** 9999)
+#+end_src
+
+** Cyclicity
+    The CMM ER (Congruence Modulo M Equivalence Relation)
+    Z_m = {0, 1, 2, \dots m - 1}
+
+    Concretize with m = 5:
+
+    Z_5 = {0, 1, 2, 3, 4}
+
+    CM5 puts every integer into one of five equivalence classes:
+
+    - 5x + 0 (a multiple of 5)
+    - 5x + 1 (one more than a multiple of 5)
+    - 5x + 2 (two more than a multiple of 5)
+    - 5x + 3 (three more than a multiple of 5)
+    - 5x + 4 (four more than a multiple of 5)
+
+    Make use of these facts in solving VGX (the chicken nuggets problem).
+** Modularity
+   Meaning Modular Arithmetic for Fun and Profit!
+*** Choose
+     Some 3-digit number (100-999).
+**** More Choices
+     2020 compressess to 22 = 2 \cdot 11 so go with 7, 11 and 13.
+     #+name: mod-table-0
+     | n % 7 | n % 11 | n % 13 | Guess |
+     |-------+--------+--------+-------|
+     |     6 |      3 |      2 |   223 |
+     |     1 |      6 |      3 |   666 |
+     |     3 |      5 |      3 |   731 |
+     |     4 |      8 |      4 |   459 |
+     |     4 |      6 |      7 |   501 |
+     |     0 |      7 |     10 |   777 |
+     |     5 |      7 |      0 |   117 |
+     |     4 |      9 |      9 |   438 |
+
+#+begin_src elisp :results silent
+  (defun check (n)
+     (list (% n 7) (% n 11) (% n 13)))
+#+end_src
+
+#+begin_src elisp
+  (check 438)
+#+end_src
+#+begin_src elisp :var table=mod-table-0
+  (append '(("n%7" "n%11" "n%13" "Check" "n%7" "n%11" "n%13") hline)
+           (mapcar (lambda (row) (append row (check (nth 3 row))))
+                   table))
+#+end_src
+
+#+results:
+| n%7 | n%11 | n%13 | Check | n%7 | n%11 | n%13 |
+|-----+------+------+-------+-----+------+------|
+|   6 |    3 |    2 |   223 |   6 |    3 |    2 |
+|   1 |    6 |    3 |   666 |   1 |    6 |    3 |
+|   3 |    5 |    3 |   731 |   3 |    5 |    3 |
+|   4 |    8 |    4 |   459 |   4 |    8 |    4 |
+|   4 |    6 |    7 |   501 |   4 |    6 |    7 |
+|   0 |    7 |   10 |   777 |   0 |    7 |   10 |
+|   5 |    7 |    0 |   117 |   5 |    7 |    0 |
+|   4 |    9 |    9 |   438 |   4 |    9 |    9 |
+
+#+begin_src elisp
+  (loop for n from 0 to 1001
+        collect (append (list n) (check n)))
+#+end_src
+
+** Proofs
+*** Definitions
+    - Axiom (or postulate) :: a \ldquo{}Recognized Truth\rdquo. (Self-evident.)
+    - Truth :: that which is true.
+    - Theorem :: a proposition that has been or is to be proved on the
+                 basis of explicit assumptions. It is a significant
+                 statement that can be proven using logical (deductive)
+                 reasoning.
+    - Proof :: a demonstration that a theorem is true. Not true as in
+                 convincing as in a court of law --- beyond any reasonable
+                 doubt. True as in convincing as in beyond all doubt!
+    - Lemma :: a theorem used in the proof of other theorems.
+    - Corollary :: a proposition that can be proved as an immediate
+                   consequence of a theorem that has just been proved.
+    - Conjecture :: a mathematical statement which has been /proposed/ as a
+                    true statement, but which no one has yet been able to
+                    prove or disprove. (Not just a wild guess!)
+*** Types of Proof
+**** Not Found in Textbooks
+     From [[https://stellar.mit.edu/S/course/6/sp08/6.080/courseMaterial/topics/topic1/lectureNotes/lec1/lec1.pdf][Scott Aaronson]], an \ldquo{}example of East-West convergence\rdquo:
+
+     Apparently, several ancient cultures independently came up with
+     the same proof that A = \pi r^2. It's obvious that the area of a
+     circle should go like the radius squared; the question is why the
+     constant of proportionality (\pi) should be the same one that
+     relates circumference to diameter.
+***** Proof
+      Cut a circle of radius r into thin pizza slices, and then
+      \ldquo{}Sicilianize\rdquo (i.e. stack the slices into a rectangle of height r and
+      length \pi{}r).
+
+      [[https://rickneff.github.io/img/pi-r.jpg][What to call this type of proof?]]
+***** Signaling the End
+     [[https://en.wikipedia.org/wiki/Q.E.D.][Q.E.D.]] (also rendered QED).
+**** Direct Proof
+	   A proof of a conditional statement p \rightarrow q constructed in a straightforward
+	   way.
+
+	   The first step is the assumption that p is true.
+
+	   Subsequent steps are constructed using rules of inference.
+
+	   The final step shows that q must also be true.
+***** For example:
+	    Proving that the product of two odd numbers is odd is a simple,
+	    four-step proof:
+****** 1
+       An odd number is one of the form 2n + 1, where n is an integer.
+****** 2
+       We are given two odd numbers, say 2a + 1 and 2b + 1.
+****** 3
+       Their product is (2a + 1)(2b + 1) = 4ab + 2a + 2b + 1 = 2(2ab + a +
+       b) + 1.
+****** 4
+       This last expression shows that the product is odd, since it is of the
+       form 2n + 1, with n = 2ab + a + b.
+**** Indirect Proof
+	   A proof of a conditional statement p \rightarrow q constructed in a sneaky \ldquo{}backwards\rdquo
+	   way, for example, by using the contrapositive equivalence: p \rarr q \equiv \not q \rarr \not p:
+
+     Proof by contraposition that for all integers x, x^2 is even \rarr x is even:
+
+     This must be true, because if x were odd (negation of q) then x^2 would be
+     odd (negation of p).
+
+     Why must that be true? Because we just proved that the product of two odd
+     integers (which can be the same integer, i.e., that integer squared) is odd.
+
+     Another very powerful (and closely related) indirect proof method is
+     mentioned in the book. [[https://rickneff.github.io/proof-by-contradiction.html][Here is more information about it]].
+**** Proof by Factoring
+***** Easier
+       If a \equiv_5 b then a^2 \equiv_5 b^2.
+
+:HINT:
+       Use definitions: x \equiv_m y means m divides x - y, which means km = x - y for some k.
+:END:
+***** Harder
+     Twin primes are defined to be two primes which differ by two (for example 17, 19).
+
+     How many twin primes are there where the number between them is a perfect square?
+
+     - [ ] None
+     - [ ] One
+     - [ ] Two
+     - [ ] This is an unsolved problem.
+     - [ ] None of the above.
+**** Proof by Counterexample
+	   A universally quantified statement \forall{}x P(x) can be shown to be false by producing
+	   a single counterexample.
+***** Prime Example
+	    All prime numbers are odd.
+****** Not!
+	     2 is prime and is even.
+**** Mistakes in Proofs
+	   Which step is wrong in this famous /alleged/ proof that 1 = 2?
+
+     | (1) | a = b                     | Given a and b, two equal positive integers. |
+     | (2) | a^2 = ab                   | Multiply both sides of (1) by a.            |
+     | (3) | a^2 - b^2 = ab - b^2         | Subtract b^2 from both sides of (2).         |
+     | (4) | (a - b)(a + b) = b(a - b) | Factor both sides of (3).                   |
+     | (5) | a + b = b                 | Divide both sides of (4) by a - b.          |
+     | (6) | b + b = b                 | Replace a by b in (5) because a = b.        |
+     | (7) | 2b = b                    | Simplify.                                   |
+     | (8) | 2 = 1                     | Divide both sides of (7) by b.              |
