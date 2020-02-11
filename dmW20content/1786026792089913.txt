@@ -1,0 +1,508 @@
+-*- mode: org -*-
+#+title: Assignment 05 Key
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+
+  These are sample/examplary answers, some of which come from former students.
+
+  *Also note: this is the last key that will be supplied. From now on, teach and
+  learn from one another what the correct answers are!*
+
+* Exercises
+** QAM
+#+begin_info
+  Henry has (5 + 3 =) 8 choices for shirts (but only 1 for pants, so that can be
+  ignored). The *Addition Principle* is used to choose either a long-sleeve
+  shirt (5 choices) or a short-sleeve shirt (3 choices).
+
+  For the second question, now Henry must choose one of 2 pants *and* one of 8
+  shirts *and* one of 10 ties. The *Multiplication Principle* yields 2 * 8 * 10
+  = 160 as the answer.
+#+end_info
+** REX
+#+begin_info
+  Shorter Explanation:
+
+  The sum of the sizes of the two sets should be diminished by the size of the
+  /intersection/ of the two sets, as that size would be counted twice if the
+  sets were not disjoint.
+
+  Longer Explanation:
+
+  To correct the overcounting that would otherwise occur, the number of members
+  the two sets (say A and B) have in common (their intersection) must be
+  subtracted out from the total count of members of A and members of B. In
+  symbols:
+
+  \vbar{}A \cup B\vbar = \vbar{}A\vbar + \vbar{}B\vbar - \vbar{}A \cap B\vbar
+
+  If their intersection is empty (zero members in common) the adjustment amounts
+  to subtracting zero, meaning no change from the original rule.
+#+end_info
+** QCV
+#+begin_info
+  There are 5 choices for the image of the first of 3 elements, 5 choices for
+  the second, and 5 for the third. 5^3 = 125 in total.
+#+end_info
+** RFC
+#+begin_info
+  In this case, the same image cannot be selected more than once. So there are 5
+  choices for the image of the first of 3 elements, 4 choices for the second,
+  and 3 for the third. 5 \times 4 \times 3 = 60 in total.
+#+end_info
+** QCZ
+#+begin_info
+  Zero. It is impossible to have a /surjection/ from a smaller set to a larger set.
+#+end_info
+** RFF
+#+begin_info
+  P(8, 5) = 8 * 7 * 6 * 5 * 4 = 6720 = 8!/3! = 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1 / 3 * 2 * 1.
+#+end_info
+** QDM
+#+begin_info
+  3 * 2 * 1 (or 3!) = 6 word-type orderings are possible.
+#+end_info
+** RJV
+#+begin_info
+  1. $C(10, 0) = 1$.
+  2. $C(10, 1) = 10$.
+  3. $C(10, 2) = 45$.
+  4. $C(10, r) = \frac{10!}{r!(10 - r)!}$.
+  5. $C(10, 2) + C(10, 3) + \cdots + C(10, 10)$  = $45 + 120 + 210 + 252 + 210 + 120 + 45 + 10 + 1 = 1013$.
+
+  The last one can be computed more easily as:
+
+  $2^{10} - C(10, 0) - C(10, 1)$ = $1024 - 1 - 10 = 1013$.
+#+end_info
+** QIQ
+#+begin_info
+  This is exactly the same as the answer to how many ways you can get at least
+  two heads when flipping a coin 10 times:
+
+  $2^{10} - C(10, 0) - C(10, 1)$ = $1024 - 1 - 10 = 1013$.
+#+end_info
+** RLH
+#+begin_info
+  \({9 \choose 5} = \frac{9!}{5!4!} = \frac{9 \cdot 8 \cdot 7 \cdot 6 }{ 4 \cdot 3 \cdot 2 \cdot 1} = 9 \cdot 7 \cdot 2 = 126.\)
+#+end_info
+
+* Problems
+** RGL
+#+begin_info
+  Having 0! = 1 not only makes the formula give the right answer, it makes sense
+  that there is only one arrangement (permutation) of an empty set of objects
+  --- namely, the empty permutation! This is similar to why x^0 = 1, or why the
+  [[https://en.wikipedia.org/wiki/Empty_product][empty product]] is 1.
+#+end_info
+** QEB
+#+begin_info
+  Treating ELM as one indivisible \lsquo{}superletter\rsquo gives 7! = 5040 as the answer.
+#+end_info
+** RGM
+#+begin_info
+  26 * 26 * 26 = 17576
+#+end_info
+** QFK
+#+begin_info
+  Using either the sum rule and product rule together, or just the product rule:
+  26^2 + 26^3 = 18252 = 26 * 27 * 26
+#+end_info
+** RHB
+#+begin_info
+  (26^2 * 10^2) + (26^3 * 10^2) + (26^2 * 10^3) + (26^3 * 10^3) = 20077200
+#+end_info
+** QGK
+#+begin_info
+  The 2 vowels can be arranged in P(5, 2) = 5!/(5 - 2)! = 5!/3! = 5 \cdot 4 = 20
+  ways. The 3 consonants can be arranged in P(21, 3) = 21!/(21 - 3)! = 21!/18! =
+  21 \cdot 20 \cdot 19 = 7980 ways, for a total of 20 \cdot 7980 = 159,600 different ways to
+  arrange the 5 letters.
+#+end_info
+** RVB *
+#+begin_info
+  This is the re-implementation asked for:
+
+#+begin_src elisp :results silent
+  (defun n-choose-k-alt (n k)
+    "Computes C(n, k) by the recursive definition;
+  given a pair of nonnegative integers n >= k >= 0,
+  returns the value of n choose k."
+    (cond ((or (< k 0) (> k n))
+           0)
+          ((or (zerop k) (= k n))
+           1)
+          (t (+ (n-choose-k-alt (- n 1) (- k 1))
+                (n-choose-k-alt (- n 1) k)))))
+#+end_src
+
+  Exploring the reasons for this more robust implementation is left to you!
+#+end_info
+** QGT
+#+begin_info
+  $2^n$ is the total number of subsets of a set of size $n$. The same total is
+  also arrived at by adding up the total number of subsets of each possible
+  size:
+  - Size 0 :: \({n \choose 0} = 1\).
+  - Size 1 :: \({n \choose 1} = n\).
+  - Size 2 :: \({n \choose 2} = \frac{n(n-1)}{2}\).
+  - Size ... :: \cdots
+  - Size n :: \({n \choose n} = 1\).
+#+end_info
+** QKT
+#+begin_info
+  The 36 possibilities, all equally likely:
+
+  |   | 1 | 2 | 3 |  4 |  5 |  6 |
+  | 1 | 2 | 3 | 4 |  5 |  6 |  7 |
+  | 2 | 3 | 4 | 5 |  6 |  7 |  8 |
+  | 3 | 4 | 5 | 6 |  7 |  8 |  9 |
+  | 4 | 5 | 6 | 7 |  8 |  9 | 10 |
+  | 5 | 6 | 7 | 8 |  9 | 10 | 11 |
+  | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+
+  The event has 12 points, hence 12/36 or 1/3 is the probability.
+#+end_info
+** RNM
+#+begin_info
+ Exactly the same!
+
+ There are eight possibilities, and in only four of them does Ed have more heads
+ than Ruth:
+
+ | Ruth | Ed | Ed has more heads than Ruth |
+ |------+----+-----------------------------|
+ | H    | HH | X                           |
+ | H    | HT |                             |
+ | H    | TH |                             |
+ | H    | TT |                             |
+ | T    | HH | X                           |
+ | T    | HT | X                           |
+ | T    | TH | X                           |
+ | T    | TT |                             |
+#+end_info
+** QOS
+#+begin_info
+  The event size is (2n choose n) = (2n)!/(2n -n)!n! = (2n!)/(n!)^2.
+  The space size is 2^{2n}.
+
+  The probability is the former over the latter, or (2n!)/((n!)^2 \cdot 2^{2n}).
+#+end_info
+** ROP *
+#+begin_info
+  1. The first 13 letters will be in alphabetical order.
+
+ There are 13! possible arrangements of the first 13 letters of the permutation,
+ and in only one of these are they in alphabetical order. Therefore the answer
+ is 1/13!.
+
+  2. The first and last letters will be B and Y.
+
+ Once these two conditions are met, there are 24! ways to choose the remaining
+ letters for positions 2 through 25. Therefore the answer is 24!/26! = 1/650.
+
+  3. The letter I will come before both J and K.
+
+ Just looking at the relative placements of I, J and K, only one-third of the
+ time will I come first. The answer is therefore 1/3.
+
+  4. The letters O and P will be next to each other.
+
+ In effect we are forming a permutation of 25 items --- the letters A through N
+ and Q through Z and the double letter combination OP or PO. There are 25! ways
+ to permute these items, and for each of these permutations there are two
+ choices as to whether O or P comes first. Thus there are 2 \cdot 25! ways to form
+ such a permutation, and therefore the answer is 2 \cdot 25! / 26! = 1/13.
+
+  5. The letters U and V will be separated by at least 23 letters.
+
+ There are six ways this can happen: UX^{24}V, VX^{24}U, XUX^{23}V, XVX^{23}U, UX^{23}VX, and
+ VX^{23}UX, where X stands for any letter other than U and V (but of course all the
+ Xs are different in each permutation). In each of these there are 24! ways to
+ permute the letters other than U and V, so there are 24! permutations of each
+ type. This gives a total of 6 \cdot 24! permutations meeting the conditions, so the
+ answer is (6 \cdot 24!)/26! = 3/325.
+#+end_info
+** QRQ *
+#+begin_info
+#+begin_src elisp :results silent
+  (require 'cl) ; for subsetp
+
+  (defun size (s)
+    (float (length s)))
+
+  (defun probability (event space)
+    "A function that takes an event and a space
+   and returns a number between 0 and 1."
+    (let* ((event (remove-duplicates (append event nil)))
+           (space (remove-duplicates (append space nil)))
+           (result (/ (size event) (size space))))
+      (unless (subsetp event space)
+        (error "probability undefined"))
+      result))
+#+end_src
+
+#+begin_src elisp
+  (probability [2 4 6 6] [1 2 3 4 5 6])
+#+end_src
+
+#+RESULTS:
+: 0.5
+#+end_info
+
+* Puzzles
+** QKA
+*** Rephrase
+    There are two questions to answer, both about counting ways of choosing
+    cards from a standard 52-card deck:
+    1. How many choices of suit distribution are there for 13 dealt cards to
+       have 4 of one suit, 4 of another, 3 of yet another, and 2 of the last
+       suit?
+    2. How many choices are there for a number of one suit, a number of another,
+       a number of yet another, and a number of the last suit, where what the
+       order of the suits is does not matter, just that the total number of all
+       4 suits is 13?
+*** Approach
+    Use the product rule together with the \({n \choose k}\) formula. Count
+    carefully.
+*** Solution
+    There are \({4 \choose 2} = 6\) ways of choosing the 2 suits for the 2 sets
+    of 4 dealt cards, \({2 \choose 1} = 2\) ways of choosing the suit for the 3
+    cards, and only \({1 \choose 1} = 1\) way left to choose the remaining suit
+    for the 2 dealt cards. Hence the number of hands is the product of $6 \cdot 2 \cdot
+    1 = 12$ and how many ways there are of choosing the specific number of cards
+    from the 13 of each suit:
+
+    \(12 {13 \choose 4} {13 \choose 4} {13 \choose 3} {13 \choose 2} = 136,852,887,600\).
+
+    The second question is harder! It is asking for how many sets of 4
+    nonnegative integers there are with 13 as the sum of their members. The
+    answer is 39. Here they are --- can you discern their pattern?:
+
+    | 0 | 0 | 0 | 13 |
+    | 0 | 0 | 1 | 12 |
+    | 0 | 0 | 2 | 11 |
+    | 0 | 0 | 3 | 10 |
+    | 0 | 0 | 4 |  9 |
+    | 0 | 0 | 5 |  8 |
+    | 0 | 0 | 6 |  7 |
+    | 0 | 1 | 1 | 11 |
+    | 0 | 1 | 2 | 10 |
+    | 0 | 1 | 3 |  9 |
+    | 0 | 1 | 4 |  8 |
+    | 0 | 1 | 5 |  7 |
+    | 0 | 1 | 6 |  6 |
+    | 0 | 2 | 2 |  9 |
+    | 0 | 2 | 3 |  8 |
+    | 0 | 2 | 4 |  7 |
+    | 0 | 2 | 5 |  6 |
+    | 0 | 3 | 3 |  7 |
+    | 0 | 3 | 4 |  6 |
+    | 0 | 3 | 5 |  5 |
+    | 0 | 4 | 4 |  5 |
+    | 1 | 1 | 1 | 10 |
+    | 1 | 1 | 2 |  9 |
+    | 1 | 1 | 3 |  8 |
+    | 1 | 1 | 4 |  7 |
+    | 1 | 1 | 5 |  6 |
+    | 1 | 2 | 2 |  8 |
+    | 1 | 2 | 3 |  7 |
+    | 1 | 2 | 4 |  6 |
+    | 1 | 2 | 5 |  5 |
+    | 1 | 3 | 3 |  6 |
+    | 1 | 3 | 4 |  5 |
+    | 1 | 4 | 4 |  4 |
+    | 2 | 2 | 2 |  7 |
+    | 2 | 2 | 3 |  6 |
+    | 2 | 2 | 4 |  5 |
+    | 2 | 3 | 4 |  4 |
+    | 3 | 3 | 3 |  4 |
+    | 4 | 4 | 4 |  1 |
+
+    What if order matters? That is, what if we want to know which number goes
+    with which suit? Another way to ask it is, how many solutions in nonnegative
+    integers are there to the equation \(h + s + d + c = 13\)? The answer is \ldquo{}4
+    multichoose 13\rdquo, which equals \({16 \choose 13} = 560\). The table above is
+    reproduced below with an additional fifth column. What do the numbers in
+    this fifth column count?
+
+    | 0 | 0 | 0 | 13 |  4 |
+    | 0 | 0 | 1 | 12 | 12 |
+    | 0 | 0 | 2 | 11 | 12 |
+    | 0 | 0 | 3 | 10 | 12 |
+    | 0 | 0 | 4 |  9 | 12 |
+    | 0 | 0 | 5 |  8 | 12 |
+    | 0 | 0 | 6 |  7 | 12 |
+    | 0 | 1 | 1 | 11 | 12 |
+    | 0 | 1 | 2 | 10 | 24 |
+    | 0 | 1 | 3 |  9 | 24 |
+    | 0 | 1 | 4 |  8 | 24 |
+    | 0 | 1 | 5 |  7 | 24 |
+    | 0 | 1 | 6 |  6 | 12 |
+    | 0 | 2 | 2 |  9 | 12 |
+    | 0 | 2 | 3 |  8 | 24 |
+    | 0 | 2 | 4 |  7 | 24 |
+    | 0 | 2 | 5 |  6 | 24 |
+    | 0 | 3 | 3 |  7 | 12 |
+    | 0 | 3 | 4 |  6 | 24 |
+    | 0 | 3 | 5 |  5 | 12 |
+    | 0 | 4 | 4 |  5 | 12 |
+    | 1 | 1 | 1 | 10 |  4 |
+    | 1 | 1 | 2 |  9 | 12 |
+    | 1 | 1 | 3 |  8 | 12 |
+    | 1 | 1 | 4 |  7 | 12 |
+    | 1 | 1 | 5 |  6 | 12 |
+    | 1 | 2 | 2 |  8 | 12 |
+    | 1 | 2 | 3 |  7 | 24 |
+    | 1 | 2 | 4 |  6 | 24 |
+    | 1 | 2 | 5 |  5 | 12 |
+    | 1 | 3 | 3 |  6 | 12 |
+    | 1 | 3 | 4 |  5 | 24 |
+    | 1 | 4 | 4 |  4 |  6 |
+    | 2 | 2 | 2 |  7 |  6 |
+    | 2 | 2 | 3 |  6 | 12 |
+    | 2 | 2 | 4 |  5 | 12 |
+    | 2 | 3 | 4 |  4 | 12 |
+    | 3 | 3 | 3 |  4 |  6 |
+    | 4 | 4 | 4 |  1 |  6 |
+
+*** Proof
+    Use the following code to prove that 39 is correct. The function =p-k-n=
+    counts the number of [[https://en.wikipedia.org/wiki/Partition_(number_theory)#Restricted_part_size_or_number_of_parts][\ldquo{}partitions\rdquo into =k= parts of a number =n=.]]
+
+#+begin_src elisp :results silent
+  (defun p-k-n (k n)
+    (cond ((and (zerop k) (zerop n))
+           1)
+          ((or (<= k 0) (<= n 0))
+           0)
+          (t (+ (p-k-n k (- n k))
+                (p-k-n (- k 1) (- n 1))))))
+#+end_src
+
+  We then just sum up the number of partitions of 13 into 1, 2, 3, and 4 parts:
+
+#+begin_src elisp
+  (loop for k from 1 to 4 sum (p-k-n k 13))
+#+end_src
+
+: 39
+
+** RNC
+*** Rephrase
+    Given the need to compute C(116, n) for n from 3 to 13, at what value of n
+    will the computation fail because of elisp fixnum overflow?
+*** Approach
+    Computing the naive way, e.g., 116!/3!\cdot{}113! will fail immediately, as
+    =most-positive-fixnum= = 2305843009213693951, which is just over 19! (19! =
+    121645100408832000, but if you try to multiply that number by 20, it will
+    give you -2178784010250747904, which is a dead giveaway that overflow has
+    happened. So a more clever approach is needed. Googling for efficient
+    n-choose-k functions is a viable approach, as long as you can translate them
+    correctly into elisp!
+*** Solution
+    You can compute all 11 answers as shown below /if/ your algorithm is
+    efficient enough --- which means it avoids computing factorials!
+#+begin_src elisp :results silent
+  (defun n-choose-k (n k)
+    (if (> k n)
+        0
+      (loop with r = 1 with g = 1
+            for d from 1 to (min k (- n k))
+            do (setq g (gcd r d)
+                     r (* n (/ r g))
+                     r (/ r (/ d g))
+                     n (- n 1))
+            finally return r)))
+#+end_src
+
+#+begin_src elisp
+  (n-choose-k 10 5)
+#+end_src
+
+#+RESULTS:
+: 252
+
+#+begin_src elisp :results raw
+  (loop for k from 3 to 13
+        collect (n-choose-k 116 k))
+#+end_src
+
+: (253460 7160245 160389488 2967205528 46627515440 635299897870 7623598774440 81572506886508 786062339088168 6878045467021470 55024363736171760)
+*** Proof
+    Proving those numbers are all less than =most-positive-fixnum= is trivial.
+    Proving that the =n-choose-k= function correctly computes the right numbers
+    --- not so trivial. Using a different computational engine (e.g., python) to
+    verify these answers is enough to give you confidence, but not enough to
+    qualify as proof (what if both engines are wrong?). But recording musings
+    such as these is a step in the right direction!
+** ROX
+*** Rephrase
+    The heart of the problem is to compute a probability that choosing a 3-digit
+    number at random will yield a number that can unambiguously be interpreted
+    as a date (month + day). Ambiguity is present when the month has 1 digit
+    (e.g., January) and the day has 2 digits (e.g., day 12), which is 112
+    (representing 1/12) where if you take the first day digit and put it with
+    the month (112 -> 11/2) it represents a different date (November 2nd, in
+    this case).
+*** Approach
+    Follow the hint and list all the 3-digit numbers from 100 to 999 (that\rsquo{}s all
+    of them) and divide them into two sets, valid and invalid. Carefully count
+    the members of each, and divide the number of valid (which means
+    unambiguous) date-numbers by the total (999 - 100 + 1 = 900).
+*** Solution
+#+begin_src elisp :results silent
+  (defun compute-unambiguous-date-probability ()
+    (let* ((invalid '(100 (111 . 119)
+                          (121 . 129) (132 . 209)
+                          (230 . 309) (332 . 409)
+                          (431 . 509) (532 . 609)
+                          (631 . 709) (732 . 809)
+                          (832 . 909) (931 . 999)))
+           (valid '((101 . 110) 120 130 131
+                    (210 . 229) (310 . 331)
+                    (410 . 430) (510 . 531)
+                    (610 . 630) (710 . 731)
+                    (810 . 831) (910 . 930)))
+           (all-invalid (loop for x in invalid
+                              append (if (consp x)
+                                         (loop for n from (car x) to (cdr x)
+                                               collect n) (list x))))
+           (all-valid (loop for x in valid
+                            append (if (consp x)
+                                       (loop for n from (car x) to (cdr x)
+                                             collect n) (list x))))
+           (probability (/ (length all-valid) (float (length (union all-valid all-invalid))))))
+      probability))
+#+end_src
+
+#+begin_src elisp
+  (compute-unambiguous-date-probability)
+#+end_src
+
+#+RESULTS:
+: 0.20444444444444446
+*** Proof
+   The calculation critically depends on counting the points in the event space
+   and the probability space correctly. Proving, for example, that 121 is
+   invalid (ambiguous) whereas 211 is valid (unambiguous) involves setting up a
+   knowledge base of what constitutes a 3-digit number that when subdivided can
+   be interpreted as a month/day date, and what ambiguity means in this context.
+   Not a trivial task, as also needed are a correct inference engine that can
+   query the knowledge base and deduce additional facts from it. Or make your
+   knowledge base contain a fact for each day of the year, where the association
+   is from a day to a date (e.g., 10/21), thence to a number (1021). Scan the
+   numbers and filter out any that are not 3-digits (making single-digit day
+   numbers NOT have a leading zero), then see what days have duplicate numbers
+   (e.g., January 21st and December 1st). Logically deduce the probability from
+   that knowledge.
