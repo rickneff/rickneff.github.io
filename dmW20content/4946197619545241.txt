@@ -1,0 +1,1025 @@
+-*- mode: org -*-
+#+title: Assignment 06
+#+subtitle: MNO Number Theory
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
+:END:
+* Time Hint
+  Students who did well on this assignment in the past spent an average of 4.6
+  hours on it. But if you know a little python, the PYTHON-HINT drawers may help
+  you save time in the creation of equivalent (or better!) elisp code.
+#+begin_src elisp :results raw
+  (setq times (quote (
+        (8 . 00)
+        (7 . 33)
+        (7 . 23)
+        (8 . 46)
+        (6 . 28)
+        (5 . 13)
+        (3 . 08)
+        (1 . 56)
+        (6 . 29)
+        (7 . 36)
+        (0 . 44)
+        (1 . 25)
+        (0 . 23)
+        (1 . 47)
+        (5 . 25)
+        (1 . 40)
+        (3 . 05)
+        (9 . 36)
+        (1 . 29)))
+        total-students (length times)
+        total-hours (apply '+ (mapcar 'car times))
+        minutes (apply '+ (mapcar 'cdr times))
+        hours-from-minutes (/ minutes 60)
+        leftover-minutes (% minutes 60)
+        total-time (+ total-hours hours-from-minutes (/ leftover-minutes 60.0))
+        average-time (/ total-time total-students))
+#+end_src
+
+* Exercises
+** TODO FAB
+#+begin_note
+  There is a redundant word in the statement of the division theorem. What is
+  it, and why is it redundant?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FDZ
+#+begin_note
+  Re-implement =prime-power-list-to-number= without using =let= by instead
+  putting everything =let= is doing within the =loop=.
+:HINT:
+  - Hint :: Use the =with= and =finally return= keywords.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FJH
+#+begin_note
+  The FTA supports the mapping of the sequence =[2 0 0 0 0 1]= to a two-digit
+  number. What is that number?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO IWK
+#+begin_note
+  A famous theorem states that there are infinitely many primes of the form
+  /ak/ + /b/ whenever /a/ and /b/ are coprime. To get a feel for this, find for
+  /a/ = 4 and /b/ = 11, ten different values for /k/ where /4k + 11/ is prime,
+  and ten values where /4k + 11/ is nonprime.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FOJ
+#+begin_note
+  CCS = Consecutive Composite Sequence.
+
+  What is the first CCS of length 2? 3? 4? 10?
+:HINT:
+  - Hint :: This is a potentially tricky series of questions.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO VAR
+#+begin_note
+  Browse the linked information on [[https://en.wikipedia.org/wiki/Highly_composite_number][highly composite numbers]]. Find the video
+  about the synonymous \ldquo{}anti-primes\rdquo and watch it. What is your favorite HCN (or
+  anti-prime)? Is it divisible by at least 10 distinct primes?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO VAY
+#+begin_note
+  Trace through the steps of each of these GCD calculations:
+
+  | # |   a |   b | (gcd a b) |
+  |---+-----+-----+-----------|
+  | 1 |  57 |  43 |         1 |
+  | 2 | 501 |  39 |         3 |
+  | 3 | 765 | 110 |         5 |
+  | 4 | 899 | 493 |        29 |
+:HINT:
+  - Hint :: This is a very straightforward exercise.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FQW
+#+begin_note
+  PVP what the following returns:
+
+#+begin_src elisp :results silent
+  (and (= (gcd 56 8) 8)
+       (= (gcd 65 15) 5)
+       (= (lcm 5 7) 35)
+       (= (lcm 4 6) 12))
+#+end_src
+:HINT:
+  - Hint :: This is a very straightforward exercise.
+  - Hint :: See your file:elisp-mini-primer.txt file if you have forgotten what
+            PVP stands for.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO VCR
+#+begin_note
+  Verify that for many pairs of positive integers =a= and =b=:
+
+#+begin_src elisp :results silent
+  (= (* (gcd a b) (lcm a b)) (* a b))
+#+end_src
+
+  Does this equality necessarily hold for /all/ pairs of positive integers? Why
+  or why not?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FRM
+#+begin_note
+  Given that (a slight expansion of) the CSF of /a/ is 2^3 \cdot 3^2 \cdot 5^1
+  \cdot 7^0 and the CSF of /b/ is 2^2 \cdot 3^3 \cdot 5^0 \cdot 7^1, give the CSFs of the
+  GCD, the LCM, and the product of /a/ and /b/. Then flesh out the following
+  code using map instead of loops:
+
+#+begin_src elisp :results silent
+  (defun gcd-lcm-ab (a-in-csf b-in-csf)
+    (let* ((a-csf-powers ...)
+           (b-csf-powers ...)
+           (gcd-of-a-and-b-in-csf ...)
+           (lcm-of-a-and-b-in-csf ...)
+           (product-of-a-and-b-in-csf ...))
+      (list gcd-of-a-and-b-in-csf
+            lcm-of-a-and-b-in-csf
+            product-of-a-and-b-in-csf)))
+#+end_src
+
+  Does doing this exercise help you see the answer to the previous one?
+:HINT:
+  - Hint :: Use =mapcar= and =mapcar*= with some suitable =lambda= functions.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Problems
+  Note: * means optional. If it\rsquo{}s not starred, it\rsquo{}s required.
+** TODO ISM *
+#+begin_note
+  There are shortcuts for determining divisibility by 2, 3, 4, 5, 6, 7, 8, 9, 10
+  and 11. Of course, using the =is-divisible-by= function is the easy way, but
+  in case the modulus function were somehow off limits, or only worked for numbers
+  that aren\rsquo{}t too big, these shortcuts are helpful.
+
+  In the following list /N/ (preceding the colon) is short for /A number is
+  divisible by N if/.
+
+  - 2: the units digit is 0, 2, 4, 6 or 8.
+  - 3: the sum of the digits is divisible by 3.
+  - 4: the number formed by the 2 rightmost digits is divisible by 4.
+  - 5: the units digit is 0 or 5.
+  - 6: it passes the shortcuts for 2 /and/ 3.
+  - 7: it has a zero remainder from \ldquo{}short\rdquo division, where you ignore partial
+    quotients, and just keep remainders.
+  - 8: the number formed by the 3 rightmost digits is divisible by 8.
+  - 9: the sum of the digits is divisible by 9.
+  - 10: the units digit is a zero. (It must pass shortcuts for 2 /and/ 5).
+  - 11: you add up every other digit into /sum1/, you add up the rest that you
+    didn\rsquo{}t already add into /sum2/, and if the difference between /sum1/ and
+    /sum2/ is divisible by 11, the original number is.
+
+  Write elisp functions implementing these shortcuts and test them on several
+  numbers (e.g., 13097034951). The first two are given to you (7 is the hardest):
+
+#+begin_src elisp :results silent
+  (defun is-divisible-by-2 (n)
+    (let* ((digits-as-string (number-to-string n))
+           (last-digit (elt digits-as-string (- (length digits-as-string) 1))))
+      (or (= last-digit ?0)
+          (= last-digit ?2)
+          (= last-digit ?4)
+          (= last-digit ?6)
+          (= last-digit ?8))))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun sum-of-digits (number)
+    (apply '+ (mapcar (lambda (d) (- d ?0)) (number-to-string number))))
+#+end_src
+
+#+begin_src elisp
+  (sum-of-digits 1598795)
+#+end_src
+
+: 44
+
+#+begin_src elisp :results silent
+  (defun is-divisible-by-3 (number)
+    "Checks divisibility by 3 by a simple rule.
+  Does not work for negative numbers."
+    (or (= number 3)
+        (= number 6)
+        (= number 9)
+        (zerop number)
+        (unless (< number 10)
+          (is-divisible-by-3 (sum-of-digits number)))))
+#+end_src
+
+#+begin_src elisp
+  (is-divisible-by-3 871987398719952888)
+#+end_src
+
+: t
+:HINT:
+  - Hint :: This problem is potentially time-consuming.
+
+  Found with a quick google search:
+
+  To find out if a number is divisible by seven, take the last digit, double it,
+  and subtract it from the rest of the number. If you get an answer divisible by
+  7 (including zero), then the original number is divisible by seven. If you
+  don't know the new number's divisibility, you can apply the rule again.
+
+  Which do you think is easier, this rule or the short division rule?
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FBH *
+#+begin_note
+  Create a new version of =sum-of-digits= as a recursive function, avoiding any
+  converting of the number to a string. You are allowed to use the modulus
+  function to \ldquo{}peel off\rdquo the units digit, and division by 10 to shorten the
+  number by one digit (keep everything except the units digit).
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO ITT
+#+begin_note
+  How many divisors does a given number have?
+
+  Take 36. By trial division (trying successive divisors, starting with 1, which
+  remember divides everything) we see that
+
+  36 =
+#+begin_verse
+  1 ⋅ 36 (that’s 2),
+  2 ⋅ 18 (another 2),
+  3 ⋅ 12 (2 more),
+  4 ⋅ 9 (2 more),
+  6 ⋅ 6 (1 more — no double counting!)
+#+end_verse
+  --- which totals 9 divisors.
+
+  What is a general method for finding this total divisor count for any positive
+  number?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FDK *
+#+begin_note
+  From the \(42^{nd}\) International Mathematical Olympiad:
+
+  Let $n$ be an odd integer greater than 1 and let $c_1, c_2, \dots{}, c_n$ be
+  integers.
+
+  For each permutation $a = (a_1, a_2, \dots{}, a_n)$ of ${1, 2, \dots{}, n}$, define
+
+  \(S(a) = \sum_{i = 1}^{n} c_i a_i\).
+
+  The problem is to prove that there exist distinct permutations $b$ and $c$
+  such that
+
+  $n!\,\vert{}\,S(b) - S(c)$.
+
+  How would you approach solving this (hard) problem (given that Googling is not
+  allowed)?
+:HINT:
+  - Hint :: This problem is potentially time-consuming, especially since
+            Googling is not allowed.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO IVO *
+#+begin_note
+  Write composite(n), the opposite of the prime(n) predicate, in first-order
+  logic.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO IWC
+#+begin_note
+  Re-implement =prime-power-list-to-number= as =prime-powers-to-number= using
+  mapping instead of looping, and a vector /or/ a list, instead of just a list
+  as its argument.
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO IXT *
+#+begin_note
+  A famous conjecture (not theorem) states that every even number appears
+  infinitely often as a gap between consecutive primes. This statement has not
+  been proved --- nor has it been disproved. Even proving that there are
+  infinitely many twin primes (gap of 2) remains elusive. Indeed, the [[https://www.youtube.com/watch?v=QKHKD8bRAro&list=PLt5AfwLFPxWJdwkdjaK1ogByEGiVHdEnM][TPC]] is an
+  active area of mathematical research, both in finding twins and in attempting
+  to prove (or disprove) that they never run out.
+
+  As of September 2016 the pair 2996863034895  \cdot 2^{1290000} \pm 1 holds
+  the twin-prime record. Each is a prime with 388,342 digits!
+
+  Here is a statement in first-order (predicate) logic that there are infinitely
+  many primes --- as proved by Euclid, recall:
+
+  \(\forall{}q\,\exists{}p\,\forall{}x\,\forall{}y\,[p > q \land ((x > 1 \land y > 1) \rightarrow xy \ne p)]\)
+
+  Add to this statement no more than ten symbols to change it to a statement of
+  the TPC, namely, that there is no largest $p$ such that $p$ and $p + 2$ are
+  both prime.
+:HINT:
+  - Hint :: This is very straightforward, and easier than you think.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FMD
+#+begin_note
+  Find the smallest primes such that n^2 < p < (n + 1)^2 for the first 100 pairs
+  of consecutive squares. That is, find the smallest primes in the ranges (1 4),
+  (4 9), (9 16), etc.
+:HINT:
+  - Hint :: Find them all with the help of a small amount of code.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO IYJ
+#+begin_note
+  How many 7-digit primes have the form n^2 + 1? What are they?
+:HINT:
+  - Time Hint :: This hard problem is potentially time-consuming.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO IZL
+#+begin_note
+  Not the first, nor the only one, but this function (with its =factorial=
+  helper) gives one such CCS:
+
+#+begin_src elisp :results silent
+  (defun factorial (n)
+    (if (zerop n)
+        1
+      (* n (factorial (- n 1)))))
+
+  (defun consecutive-composite-sequence-of-length (r)
+    (let ((r+1-factorial (factorial (1+ r))))
+      (loop for n from 1 to r
+            collect (+ r+1-factorial n 1))))
+#+end_src
+
+  Write code (e.g., flesh out)
+
+#+begin_src elisp :results silent
+  (defun all-composite (r) ...)
+#+end_src
+
+  to verify that the above defined sequence contains only composites. Note that
+  in a sequence of consecutive numbers, every other one is even, hence
+  composite, every third one is a multiple of 3, hence composite, etc. But is
+  there a better way to see this than sifting through the sequence looking for
+  primes somehow hiding among all those composites? Why or why not?
+:PYTHON-HINT:
+#+begin_src python :results output
+from math import *
+def isPrime(n):
+    for i in range(2,int(sqrt(n))+1):
+        if n % i == 0:
+            return False
+    return True
+
+def allComp(n):
+  for i in n:
+    if isPrime(i):
+      return False
+  return True
+
+comp = [39916802, 39916803, 39916804, 39916805, 39916806, 39916807, 39916808, 39916809, 39916810, 39916811]
+print(allComp(comp))
+#+end_src
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FOY *
+#+begin_note
+  Experiment to see that there /are/ gaps of many (with one exception,
+  even-numbered) sizes between consecutive primes.
+
+  Write some elisp code to facilitate your experiment. For example, create
+  something like a frequency table suitable for computing some statistics, e.g.,
+  the average gap size in the first million primes.
+:HINT:
+  - Time Hint :: This hard problem is potentially time-consuming.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO VAO
+#+begin_note
+  Pierre de Fermat found a way of finding factors of a number. It is based on
+  certain assumptions. Study the code below and articulate what these
+  assumptions are.
+
+#+begin_src elisp :results silent
+  (defun maybe-find-factorization (number limit)
+    (mapc (lambda (n)
+            (let* ((a (floor (sqrt number)))
+                   (s (+ a n))
+                   (x (sqrt (- (* s s) number))))
+              (when (= x (floor x))
+                (princ (format "n = %d, a = %d, s = %d, x = %d,
+   factor1 = s - x = %d,
+   factor2 = s + x = %d\n"
+                               n a s x (- s x) (+ s x))))))
+          (number-sequence 1 limit)))
+#+end_src
+
+#+begin_src elisp :results output
+  (maybe-find-factorization 125 10)
+#+end_src
+
+: n = 4, a = 11, s = 15, x = 10,
+:  factor1 = s - x = 5,
+:  factor2 = s + x = 25
+:HINT:
+  - Hint :: Did you look at the [[https://en.wikipedia.org/wiki/Fermat%2527s_factorization_method][Wikipedia Page]]?
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FQI
+#+begin_note
+  Recall RLE? The following code reveals another way to do it. What assumption
+  is needed for this approach to work?
+
+  Recall looping versus mapping? The first code block shows a comparison.
+
+  To make the second code block evaluate to =t=, the 0 assigned to =limit= must
+  be replaced by what?
+
+#+begin_src elisp :results silent
+  (defun reconstitute-primes (rle-list)
+    (loop for b in rle-list
+          for n from 2
+          unless (or (zerop b) (and (> b 1) (incf n (- b 1))))
+          collect n))
+
+  (defun prime-list-from-rle-list (rle-list limit)
+    (mapcar 'first
+            (remove-if
+             (lambda (x)
+               (zerop (second x)))
+             (mapcar* 'list
+                      (number-sequence 2 limit)
+                      (apply 'append
+                             (mapcar (lambda (x)
+                                       (if (> x 1)
+                                           (make-list x 0)
+                                         (list x)))
+                                     rle-list))))))
+#+end_src
+
+#+begin_src elisp :results silent
+  (setq limit 0
+        p100rle (list 1 1 0 1 0 1 3 1 0 1 3 1 0 1 3 1 5 1 0 1 5 1 3 1 0
+                      1 3 1 5 1 5 1 0 1 5 1 3 1 0 1 5 1 3 1 5 1 7 1 3)
+        got-it-right (equal (reconstitute-primes p100rle)
+                            (prime-list-from-rle-list p100rle limit)))
+#+end_src
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FQL *
+#+begin_note
+  A *semiprime* is a composite number with four factors. In other words, it is
+  a number that is \ldquo{}almost\rdquo prime, being the product of just two primes, e.g.,
+  15 = 3 \cdot 5. (Its other two factors are, of course, one and itself.)
+
+  A *semiprime chain* is a sequence of numbers whose rule is best learned by
+  studying some examples:
+
+  15 (3 \cdot 5) links to 23, because 3 is the 2nd prime and 5 is the 3rd prime. This
+  is a short chain of length one, just 15, because 23 is prime not semiprime.
+
+  14 (2 \cdot 7) links to 14, because 2 is the 1st prime and 7 is the 4th prime. This
+  is a circular chain of length one, just 14.
+
+  22 (2 \cdot 11) links to 15, which links to 23, so 22-15 is a 2-long chain.
+
+  33 (3 \cdot 11) links to 25, which links back to 33, a circular chain of length two.
+
+  Because some semiprimes have a prime factor whose \ldquo{}index\rdquo is greater than 9
+  (e.g., 41 is the 13th prime), use this function to reconstitute a number from
+  its two prime index \ldquo{}digits\rdquo:
+
+#+begin_src elisp :results silent
+  (defun digits-to-number (d1 d2)
+    (+ (* (if (< d2 10) 10 16) d1) d2))
+#+end_src
+
+  Find the longest semiprime chains among numbers less than 100. Justify the
+  logic of the =digits-to-number= function.
+:HINT:
+  - Time Hint :: This hard problem is potentially time-consuming.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO VEM
+#+begin_note
+  Verify the correctness of this iterative implementation of the Euclidean GCD
+  Algorithm:
+
+#+begin_src elisp :results silent
+  (defun gcdi (a b)
+    (let ((x a) (y b) r)
+      (while (not (zerop y))
+        (setq r (mod x y) x y y r))
+      x))
+#+end_src
+
+  Compare this =gcdi= function with the built-in =gcd= function. Is it faster or
+  slower? How else do they differ?
+
+  Compare the faster of =gcdi= and =gcd= with this recursive version:
+
+#+begin_src elisp :results silent
+  (defun gcdr (a b)
+     (if (zerop b)
+         a
+       (gcdr b (mod a b))))
+#+end_src
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FUA
+#+begin_note
+  Study this recursive version of the iterative algorithm sketched above for
+  finding an ABR:
+
+#+begin_src elisp :results silent
+  (defalias 'div '/)
+
+  (defun alternate-base-representation (n b)
+    (let ((d (div n b))
+          (m (mod n b)))
+      (if (zerop d)
+          (list m)
+        (append (alternate-base-representation d b) (list m)))))
+#+end_src
+
+  Try it with several values for =n= and =b=, e.g.:
+
+#+begin_src elisp :results raw
+  (alternate-base-representation 987654321 127)
+#+end_src
+
+: (3 101 20 87 86)
+
+  Why are some ABRs more useful than others?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO VFJ
+#+begin_note
+  Convert your name (first and last with @ between) as a base 27 number to
+  decimal. Write two elisp functions =from-base-27= and =to-base-27= to do in
+  general the round-trip conversion from base 27 to decimal and back to base 27
+  again.
+:PYTHON-HINT:
+#+begin_src python :results output
+  def alphadec(a):
+      if (a == ' '):
+          return 0
+      elif (a >= 'A' and a <= 'Z'):
+          return ord(a) - ord('@')
+      else:
+          raise 'Invalid Character'
+
+  def decalpha(d):
+      if (d == 0):
+          return ' '
+      elif (d >= 1 and d <= 26):
+          return chr(d + ord('@'))
+      else:
+          raise 'Invalid Number'
+
+  def engtodec(n):
+      decimal = []
+      for i in n:
+          decimal.append(alphadec(i))
+      return decimal
+
+  def dectoeng(d):
+      english = []
+      for i in d:
+          english.append(decalpha(i))
+      return english
+
+  def list_to_string(l):
+      string = ""
+      last = ""
+      index = 0
+      for i in l:
+          if index == 0 or last == ' ':
+              i = i.upper()
+          string += i
+          last = str(i)
+          index += 1
+      return string
+
+  name = ['Y', 'O', 'U', 'R', ' ', 'N', 'A', 'M', 'E']
+
+  dec = engtodec(name)
+  print(dec)
+  eng = dectoeng(dec)
+  print(eng)
+  string = list_to_string(eng)
+  print(string)
+#+end_src
+
+#+RESULTS:
+: [25, 15, 21, 18, 0, 14, 1, 13, 5]
+: ['Y', 'O', 'U', 'R', ' ', 'N', 'A', 'M', 'E']
+: YOUR NAME
+
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO VGU
+#+begin_note
+  Using the demonstrated /rinse and repeat/ approach given 33(-5) + 28(11) =
+  143, find a pair of integers x and y such that 33x + 28y = 1. You may find the
+  following function helpful:
+#+begin_src elisp :results silent
+  (defun ax+by (a x b y)
+    (+ (* a x) (* b y)))
+#+end_src
+:PYTHON-HINT:
+#+begin_src python :results output
+def find_x_and_y(a, b):
+    pairs = []
+    for i in range(-100, 100):
+        for j in range(-100, 100):
+            if a*i + b*j == 1:
+                pairs.append("x: {}, y: {}".format(i, j))
+    print('\n'.join(pairs))
+
+find_x_and_y(33, 28)
+#+end_src
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FVH
+#+begin_note
+  Find if there is an integer-pair solution to 91x + 11y = 1 in the range
+  =[-49..50]= by writing a predicate (using =lambda= --- /not/ =defun=) suitable
+  for passing to =for-some-for-some= in the following code:
+
+#+begin_src elisp :results silent
+  (require 'cl)
+
+  (defun for-some-for-some (predicate domain-x domain-y)
+     (loop for x in domain-x
+           thereis (loop for y in domain-y
+                         thereis (funcall predicate x y))))
+
+  (let ((domain-x-y (number-sequence -49 50)))
+    (for-some-for-some "your predicate goes here"
+                       domain-x-y domain-x-y))
+#+end_src
+:HINT:
+  - Hint :: Use =ax+by= in your predicate.
+:END:
+:PYTHON-HINT:
+#+begin_src python :results output
+  ax_by = lambda a, b, c: ["x: {}, y: {}".format(x, int((c-a*x)/b)) for x in range(-49, 50) if c in [a*x + b*y for y in range(-49, 50)]]
+  print('\n'.join(ax_by(91, 11, 1)))
+#+end_src
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO VGX
+#+begin_note
+  What is the largest /unfillable/ order of chicken nuggets that only come 5 to
+  a box or 7 to a box, with no partial boxes allowed? Note that negative boxes
+  aren\rsquo{}t allowed either, but zero boxes are, hence every multiple of 5 or 7 is a
+  fillable number.
+
+:HINT:
+  - Hint :: Functions from the previous two exercises might be helpful, as might
+            the code below:
+
+#+begin_src elisp :results silent
+  (defun is-fillable (n x y)
+    (and (integerp n)
+         (integerp x)
+         (>= x 0)
+         (integerp y)
+         (>= y 0)
+         (= n (ax+by 5 x 7 y))))
+#+end_src
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FXI *
+#+begin_note
+  How does Euclid\rsquo{}s First Theorem generalize?
+:HINT:
+  - Hint :: An Internet search will reveal an answer (or two)!
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO VIB
+#+begin_note
+  What is the largest number you can verify as prime by the sample use of
+  Wilson\rsquo{}s Theorem? Why is it inadvisable to try extending this method to be a
+  general-purpose primality test for larger numbers?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO FYR
+#+begin_note
+  Two notable applications of CMM are \ldquo{}casting out nines\rdquo (using CM9) and \ldquo{}ISBN error
+  detection\rdquo (using CM11). Investigate. Where have you seen CM11 before?
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+** TODO VIW
+#+begin_note
+  Implement and test a version of =egcd= that has no =let=. (Binding of q and r
+  is unnecessary, because why?)
+:PYTHON-HINT:
+  Here are python implementations of a recursive gcd, a recursive egcd and an
+  iterative egcd:
+#+begin_src python :results output
+  import sys
+  sys.setrecursionlimit(1000000)
+
+  def gcdr(a,b):
+      r=a%b
+      if r==0:
+          return b
+      elif r==1:
+          return 1
+      return gcdr(b,r)
+
+  def egcd(a,b):
+      if a == 0:
+          return (b,0,1)
+      else:
+          g,x,y = egcd(b%a,a)
+          return (g,y-(b//a)*x,x)
+
+  def igcd(b, n):
+      x0, x1, y0, y1 = 1, 0, 0, 1
+      while n != 0:
+          q, b, n = b // n, n, b % n
+          x0, x1 = x1, x0 - q * x1
+          y0, y1 = y1, y0 - q * y1
+      return b, x0, y0
+
+  print(gcdr(157342834759, 123500064952863))
+  print(egcd(157342834759, 123500064952863))
+  print(igcd(157342834759, 123500064952863))
+#+end_src
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Puzzles
+** TODO FJY
+#+begin_note
+   Euler\rsquo{}s polynomial, x^2 + x + 41, has the /sweet/ feature that it computes a
+   prime number for every integer x in the range -40 \le x \le 39, which is 80
+   primes total. So, in probability terms, the chances that you will generate a
+   prime by plugging in a random integer in that range are 100%. So no chance
+   about it, it\rsquo{}s certain!
+
+   Other polynomials of the form f(x) = x^2 + x + C, where C is some integer
+   constant, can also generate primes, though maybe not as reliably as Euler\rsquo{}s
+   (which is the special case where C = 41). And different ranges and constants
+   will vary in the number of primes generated.
+
+   Suppose the /sweetness/ of a given range+constant pair is a quantity such
+   that the more integers in the range that generate primes through this
+   constant plugged into the polynomial (and taking the absolute value, \vert f(x)
+   \vert), the higher the sweetness. So the first example, with range+constant -40 \le
+   x \le 39, C = 41, is seemingly pretty sweet, 80 out of 80, 100%, as already
+   mentioned. But how many of these 80 are duplicates? Looking closer, it\rsquo{}s
+   half. Only 40 unique primes are generated. Not so sweet after all.
+
+   Find a range and constant that have a sweetness value as high as possible,
+   subject to the arbitrary constraints that the constant will be between
+   negative four million and positive four million. To fix another degree of
+   freedom, which will also save some time, use the constant value of ten
+   thousand for the /size/ of the range (so only its starting value will vary).
+:HINT:
+  - Time Hint :: This hard problem is potentially time-consuming.
+  - Hint :: Two observations will make the search task faster. First
+            observation. x^2 + x is always even, so for adding C and having some
+            hope of being prime, C can only be odd. That cuts the possible
+            values for C in half!
+
+            Second observation. If you limit your search to the best constant
+            for the range 0 to 9999, you can assume you\rsquo{}re not going to do much
+            better with a different constant while varying the range. So find
+            the best constant first, then see if varying the range can improve
+            the sweetness. Realize, too, that any range that straddles the
+            origin, i.e, that has both positive and negative x values, will
+            produce duplicate primes (why is that?) that will lessen the
+            sweetness.
+:END:
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+     Not applicable.
+** TODO FVF
+#+begin_note
+  *Squareful* numbers are positive integers with some factor besides 1
+  that is a square (e.g., 4, 9, 16). *Squarefree* numbers are positive
+  integers with *no* factors that are squares. (The one exception is 1
+  --- by convention, 1 is considered squarefree.) For example, 12 is
+  squareful because it has 4 as a factor. 15 is squarefree because
+  none of its factors --- 3 and 5 and 15 (remember, don\rsquo{}t count 1) ---
+  are squares.
+
+  Justify the mapping below of squarefree number to nonnegative integer:
+
+  | Squarefree Number | Nonnegative Integer | Binary of 2nd column | factorization of 1st column |
+  |-------------------+---------------------+----------------------+-----------------------------|
+  |                 1 |                   0 |          00000000000 | 2^0 3^0 5^0                    |
+  |                 2 |                   1 |          00000000001 | 2^1 3^0 5^0                    |
+  |                 3 |                   2 |          00000000010 | 2^0 3^1 5^0                    |
+  |                 5 |                   4 |          00000000100 |                             |
+  |                 6 |                   3 |          00000000011 |                             |
+  |                 7 |                   8 |          00000001000 |                             |
+  |                10 |                   5 |          00000000101 |                             |
+  |                11 |                  16 |          00000010000 |                             |
+  |                13 |                  32 |          00000100000 |                             |
+  |                14 |                   9 |          00000001001 |                             |
+  |                15 |                   6 |          00000000110 |                             |
+  |                17 |                  64 |          00001000000 |                             |
+  |                19 |                 128 |          00010000000 |                             |
+  |                21 |                  10 |          00000001010 |                             |
+  |                22 |                  17 |          00000010001 |                             |
+  |                23 |                 256 |          00100000000 |                             |
+  |                26 |                  33 |          00000100001 |                             |
+  |                29 |                 512 |          01000000000 |                             |
+  |                30 |                   7 |          00000000111 |                             |
+  |                31 |                1024 |          10000000000 |                             |
+
+  What is the integer that the squarefree number 42 would map to under this
+  mapping?
+:HINT:
+  - Hint :: Think /alternate base representation/!
+  - Time Hint :: This hard problem is potentially time-consuming.
+:END:
+:PYTHON-HINT:
+#+begin_src python :results output
+  from math import *
+
+  def isPrime(n):
+      for i in range(2,int(sqrt(n))+1):
+          if n % i == 0:
+              return False
+      return True
+
+  def isSquareFree(n):
+      for i in range(2,int(sqrt(n))+1):
+          for j in range(2,10):
+              if n % (i**j) == 0:
+                  return False
+      return True
+
+  def prime_list(n):
+      prime = []
+      for i in range(2,n+1):
+          if isPrime(i):
+              prime.append(i)
+      return prime
+
+  plist = prime_list(20)
+
+  def PrimeBaseTwoDec(n,p):
+      bin = 1
+      out = 0
+      for i in p:
+          if n % i == 0:
+              out += bin
+          bin *= 10
+      return int(str(out),2)
+
+  def twostuff(n):
+      cool = []
+      count = 0
+      cool.append("\n  | Squarefree Number | Nonnegative Integer |\n  |-------------------+---------------------|")
+      for i in range(1, n+1):
+          if i == 1:
+              cool.append("  | \t\t\t\t\t\t\t\t{} | \t\t\t\t\t\t\t\t\t{} |".format(i,0))
+          if isPrime(i) and i != 1:
+              t1 = '\t\t'
+              t2 = '\t\t'
+              if i // 10 >= 1:
+                  t1 = '\t '
+              if i // 100 >= 1:
+                  t1 = ''
+              if 2**count // 10 >= 1:
+                  t2 = '\t '
+              if 2**count // 100 >= 1:
+                  t2 = '  '
+              if 2**count // 1000 >= 1:
+                  t2 = ' '
+              cool.append("  | \t\t\t\t\t\t{}{} | \t\t\t\t\t\t\t{}{} |".format(t1,i,t2,2**count))
+              count += 1
+          if isSquareFree(i) and not isPrime(i):
+              t1 = '\t'
+              t2 = '\t'
+              if i // 10 >= 1:
+                  t1 = ' '
+              if PrimeBaseTwoDec(i,plist) // 10 >= 1:
+                  t2 = ' '
+              if PrimeBaseTwoDec(i,plist) // 100 >= 1:
+                  t2 = ''
+              cool.append("  | \t\t\t\t\t\t\t{}{} | \t\t\t\t\t\t\t\t{}{} |".format(t1,i,t2,PrimeBaseTwoDec(i,plist)))
+      cool.append('\n')
+      print('\n'.join(cool))
+
+  twostuff(42)
+#+end_src
+:END:
+#+end_note
+*** Rephrase
+*** Approach
+*** Solution
+*** Proof
+     Not applicable.
