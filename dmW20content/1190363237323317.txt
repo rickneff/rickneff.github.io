@@ -1,0 +1,176 @@
+-*- mode: org -*-
+#+title: Presentation 06
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+
+* Consider a Famous Sum or Two
+  Remember the 2nd Hockey Stick Identity (for nonnegative integers m and n)?
+
+  \(\sum^n_{k=0} {k \choose m} = {n+1 \choose m+1}\)
+
+  When m = 1 we have a special case:
+
+  \({0 \choose 1} + {1 \choose 1} + \dots + {n \choose 1} = {n + 1 \choose 2} = \frac{(n + 1)n}{2}.\)
+
+  What is this sequence of partial sums called?
+
+** What about Summing Squares?
+   Observe that \(k^2 = 2{k \choose 2} + {k \choose 1}.\)
+
+   Hence...?
+* Consider Euler\rsquo{}s Famous Sum
+     \sum^{\infty}_{n=1} 1/n^2 = (1 + 1/4 + 1/9 + 1/16 + 1/25 + ...)
+#+begin_src elisp :results silent
+  (defun compute-Eulers-famous-sum (max)
+    (loop for n from 1 to max
+          sum (/ 1.0 (* n n))))
+#+end_src
+
+#+begin_src elisp
+  (format "%1.11f" (compute-Eulers-famous-sum 100000))
+#+end_src
+
+#+results:
+: 1.64492406690
+
+#+name: compute_Eulers_famous_sum
+#+begin_src python :results silent
+  def compute_Eulers_famous_sum (max):
+          return sum((1.0 / (n * n) for n in range(1, max + 1)))
+#+end_src
+
+#+begin_src python :noweb eval
+  <<compute_Eulers_famous_sum>>
+
+  return compute_Eulers_famous_sum(100000)
+#+end_src
+
+#+results:
+: 1.6449240668982423
+
+** A Polynomial Principle
+   Namely, factorization, e.g.:
+
+   \(P(x) = \left[\left(1 - \frac{x}{2}\right)\right] \left[\left(1 - \frac{x}{3}\right)\right] \left[\left(1 - \frac{x}{6}\right)\right] \Leftrightarrow P(x) = \left[1 - x + \frac{11x^2}{36} - \frac{x^3}{36} \right]\)
+
+   and hence, this *finite* polynomial has roots at 2, 3, and 6.
+** Using Trigonmetry and Calculus
+
+   Euler claimed the same principle applies to *infinite* polynomials, e.g.:
+
+   \(sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} \cdots\)
+
+   \(\frac{sin(x)}{x} = 1 - \frac{x^2}{3!} + \frac{x^4}{5!} - \frac{x^6}{7!} \cdots\)
+
+   \(= \left[\left(1 - \frac{x}{\pi}\right)\left(1 - \frac{x}{-\pi}\right)\right] \left[\left(1 - \frac{x}{2\pi}\right)\left(1 - \frac{x}{-2\pi}\right)\right] \left[\left(1 - \frac{x}{3\pi}\right)\left(1 - \frac{x}{-3\pi}\right)\right] \cdots\)
+
+   \(= \left[\left(1 - \frac{x}{\pi}\right)\left(1 + \frac{x}{\pi}\right)\right] \left[\left(1 - \frac{x}{2\pi}\right)\left(1 + \frac{x}{2\pi}\right)\right] \left[\left(1 - \frac{x}{3\pi}\right)\left(1 + \frac{x}{3\pi}\right)\right] \cdots\)
+
+   \(= \left[\left(1 - \frac{x^2}{\pi^2}\right)\right] \left[\left(1 - \frac{x^2}{4\pi^2}\right)\right] \left[\left(1 - \frac{x^2}{9\pi^2}\right)\right] \cdots\)
+
+   \(= \left[1 - x^2 \left(\frac{1}{\pi^2} + \frac{1}{4\pi^2} + \frac{1}{9\pi^2} + \frac{1}{16\pi^2} + \cdots \right)\right] + stuff \)
+
+   \(= \left[1 - \frac{x^2}{\pi^2} \left(\frac{1}{1} + \frac{1}{4} + \frac{1}{9} + \frac{1}{16} + \cdots \right)\right] + stuff \)
+
+   \(\therefore 1 - \frac{x^2}{6} = 1 - \frac{x^2}{\pi^2} \left(\frac{1}{1} + \frac{1}{4} + \frac{1}{9} + \frac{1}{16} + \cdots \right)\)
+
+   and hence
+
+   \(\left(\frac{1}{1} + \frac{1}{4} + \frac{1}{9} + \frac{1}{16} + \cdots \right) = \frac{\pi^2}{6}.\)
+
+   Do you see it?
+
+#+begin_src elisp
+  (/ (* pi pi) 6)
+#+end_src
+
+#+results:
+: 1.6449340668482264
+
+** Consider Coprime Probability
+   What is the probability that two randomly chosen positive integers will be
+   coprime?
+
+   Recall the definition of /coprime/, or /relatively prime/. Two numbers are
+   coprime if their greatest common divisor is 1, as is the case with any two
+   /prime/ numbers.
+
+   A prime, p, is coprime with any other positive integer that is not a
+   multiple of p. But it is not the case that at least one of the two numbers
+   must be prime for the two of them to be coprime: 8 and 9 have a GCD of 1,
+   so they are coprime even though neither of them is prime.
+
+#+begin_src elisp :results prepend :var max=1000
+  (loop for m from 1 to max
+        sum (loop for n from 1 to max
+                  count (= 1 (gcd m n))))
+#+end_src
+
+#+results:
+: 608383
+: 6087
+: 63
+
+**** The Euler Connection
+#+begin_src elisp :results raw
+  (/ 1.0 (/ (* pi pi) 6))
+#+end_src
+
+#+results:
+0.6079271018540267
+
+*** What? How??
+    From Donald Knuth\rsquo{}s /The Art of Computer Programming/ section 4.5.2:
+**** The Theorem
+     Originally published and proven by Lejeune Dirichlet:
+
+     If u and v are integers chosen at random, the probability that gcd(u, v) = 1
+
+     is 6/\pi^2 \approx .60793.
+
+**** Hand Waving Proof
+     A precise formulation of this theorem, which carefully defines what is meant
+     by being \ldquo{}chosen at random\rdquo, [needs a rigorous proof]. Let us content
+     ourselves here with a heuristic argument that shows why the theorem is
+     plausible.
+***** Assumption
+     If we assume, without proof, the existence of a well-defined probability p
+     that gcd(u, v) equals unity, then we can determine the probability that
+     gcd(u, v) = d for any positive integer d.
+****** Why?
+       Because gcd(u, v) = d
+
+       if and only if
+
+       u is a multiple of d [i.e., d is a divisor of u]
+
+       and
+
+       v is a multiple of d [i.e., d is a divisor of v]
+
+       and
+
+       gcd(u/d, v/d) = 1.
+******* Which means?
+        Thus the probability that gcd(u, v) = d is equal to 1/d times 1/d
+        times p, namely p/d^2.
+******** And so?
+         Now let us sum these probabilities over all possible values of d; we
+         should get
+
+         1 = \sum_{d \ge 1} p/d^2 = p(1 + 1/4 + 1/9 + 1/16 + \cdots).
+********* Got it!
+          Since the sum (1 + 1/4 + 1/9 + 1/16 + \cdots) is equal to \pi^2/6,
+
+          we need p = 6/\pi^2 in order to make this equation come out right.
