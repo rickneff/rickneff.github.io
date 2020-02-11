@@ -1,0 +1,29 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 06
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Now that you know a few proof basics, here is a chance to apply them:
+
+* A Tale of Two Proofs
+** TODO Simple Proof Problem
+    Prove that if two whole numbers are mutually divisible they must be the same number.
+
+    That is, if a divides b and b divides a then a = b.
+:HINT:
+  Use the definition: r | s means \exist{}x rx = s.
+:END:
+:ALSO:
+  Use the fact that equals multiplied by equals are equal!
+:END:
+** TODO Harder Proof Problem
+   In the form of a multiple choice question:
+
+   For which y, for all integers x > 1, is x^y + y never a prime?
+   - [ ] 2
+   - [ ] 3
+   - [ ] 4
+   - [ ] 5
+   - [ ] It cannot be determined.
