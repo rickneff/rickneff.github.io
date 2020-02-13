@@ -1,0 +1,90 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 07
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* TODO Solve the Eggs Problem
+  An old woman goes to market and a horse steps on her basket and crushes the
+  eggs. The rider offers to pay for the damage and asks her how many eggs she
+  had brought. She does not remember the exact number, but when she had taken
+  them out two at a time, there was one egg left. The same happened when she
+  picked them out three, four, five, and six at a time, but when she took them
+  seven at a time they came out even. What is the smallest number of eggs she
+  could've had?
+** In other words
+   Solve for x in:
+
+   x \equiv_2 1
+   x \equiv_3 1
+   x \equiv_4 1
+   x \equiv_5 1
+   x \equiv_6 1
+   x \equiv_7 0
+* TODO Solve the Shuffling Problem
+  If you finish the eggs problem, here is another bigger challenge:
+
+  Write elisp code that takes two same-sized vectors of one-character symbols
+  and \ldquo{}shuffles\rdquo them together into one vector. For example:
+#+begin_src elisp :results silent
+  (defun shuffle (vector1 vector2)
+  )
+#+end_src
+
+#+begin_src elisp :results raw
+  (shuffle [a b c d] [1 2 3 4])
+#+end_src
+
+#+results:
+[a 1 b 2 c 3 d 4]
+
+   It\rsquo{}s EASY with a loop:
+
+#+begin_src elisp :results silent
+  (defun shuffle (v1 v2)
+    (loop for e1 across v1
+          for e2 across v2
+          vconcat (vector e1 e2)))
+#+end_src
+
+** The challenge?
+   Do it without using loops.
+*** The further challenge?
+    Make it polyadic (variadic) --- so it can take, 0, 1, 2, or more vectors
+    and do the reasonable thing:
+
+    With 0 vectors:
+#+begin_src elisp
+  (shuffle)
+#+end_src
+
+#+results:
+: []
+
+  With 1 vector --- split it in two, then shuffle:
+#+begin_src elisp
+  (shuffle [1 2 3 4 5 6 7 8])
+#+end_src
+
+#+results:
+: [1 5 2 6 3 7 4 8]
+
+** Hint
+   The two-vector version can be done with one line of code in the body of the
+   =shuffle= defun. This one line of code uses four functions, two of which take
+   another function as an argument, the other two being those argument
+   functions.
+
+*** Functions to Use
+    #+name: functions-to-use
+  | Functions to Use | (IN THIS ORDER! (Textually, not the order invoked.)) |
+  |------------------+------------------------------------------------------|
+  | apply            | See documentation by evaluating next code block.     |
+  | vconcat          | Ditto.                                               |
+  | mapcar*          | Ditto.                                               |
+  | vector           | Ditto.                                               |
+
+#+begin_src elisp :results raw :var funcs=functions-to-use
+  (mapcar 'documentation (mapcar 'intern (mapcar 'car funcs)))
+#+end_src
