@@ -1,0 +1,347 @@
+-*- mode: org -*-
+#+title: Presentation 07
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* Preliminaries
+** Solutions to Proof Problems
+*** Proof by Factoring
+    If a number factors (non-trivially) --- it CANNOT be prime!
+*** Easier
+    If a \equiv_5 b then a^2 \equiv_5 b^2.
+:HINT:
+    Use definitions: x \equiv_m y means m divides x - y, which means km = x - y for some k.
+:END:
+:ANSWER:
+    On whiteboard.
+:END:
+*** Harder
+    How many twin primes are there where the number between them is a perfect square?
+:HINT:
+    This is also solved by factoring.
+:END:
+:ANSWER:
+    On whiteboard.
+:END:
+** Solutions to CDL 06
+   [[file:class-directed-learning-06.txt]]
+*** First Proof
+    Prove that if a divides b and b divides a then a = b.
+**** Using the hint
+     r | s means \exist{}x rx = s
+
+     Given a | b meaning \exist{}x ax = b.
+     Given b | a meaning \exist{}y by = a.
+***** Using the other hint
+      The fact that equals multiplied by equals are equal ---
+
+      axby = ba \rarr abxy = ab \rarr xy = 1 \rarr x = y = 1 \rarr a\cdot{}1 = b and b\cdot{}1 = a \rarr a = b.
+*** Second Proof
+    For which y, for all integers x > 1, is x^y + y never a prime?
+    - [ ] 2
+    - [ ] 3
+    - [X] 4
+    - [ ] 5
+    - [ ] It cannot be determined.
+**** Because
+     x^4 + 4 can be factored!  x^4 + 4x^2 + 4 - 4x^2 = (x^2 + 2)^2 - 4x^2 = (x^2 + 2 - 2x)(x^2 + 2 + 2x)
+
+     = (x^2 - 2x + 2)(x^2 + 2x + 2).
+
+     Given x > 1, the smallest this can be is (2^2 - 2\cdot{}2 + 2)(2^2 + 2\cdot{}2 + 2)
+     = 2 \cdot 10 = 20 (not prime).
+
+* Chinese Remaindering
+  Learning some remaindering magic to "guess" (compute) the number between
+  100-999 by knowing the remainders of the number\rsquo{}s division by 7, 11, and 13 ---
+** Requires
+   Heed and Diligence (1 Nephi 16:28)
+*** To Help You
+    I will give you hints towards a method using smaller numbers with just two
+    digits (10-99) and moduli 3, 5, and 7 (whose product is 105).
+*** Ask and Answer
+    What multiple of 35 (5 \cdot 7) is 1 more than a multiple of 3? (70)
+
+    What multiple of 21 (3 \cdot 7) is 1 more than a multiple of 5? (21)
+
+    What multiple of 15 (3 \cdot 5) is 1 more than a multiple of 7? (15)
+
+#+begin_src elisp
+  (setq r1 1
+        r2 2
+        r3 3
+        x (mod (+ (* r1 70) (* r2 21) (* r3 15)) 105))
+#+end_src
+
+**** Cheat Sheet
+#+name: cheat-sheet
+| 1 | 1 | 70 | 21 |-14 |
+| 1 | 2 | 70 | 42 |  7 |
+| 1 | 3 | 70 | 63 | 28 |
+| 1 | 4 | 70 | 84 | 49 |
+| 2 | 1 | 35 | 21 | 56 |
+| 2 | 2 | 35 | 42 | 77 |
+| 2 | 3 | 35 | 63 | -7 |
+| 2 | 4 | 35 | 84 | 14 |
+**** Examples
+   | n%3 | n%5 | n%7 | last col | 3rd col * 15 | Sum of prev 2 cols |
+   |-----+-----+-----+----------+--------------+--------------------|
+   |   2 |   3 |   5 |       -7 |           75 |                 68 |
+   |   1 |   2 |   3 |        7 |           45 |                 52 |
+   |   0 |   3 |   4 |       63 |           60 |                 18 |
+
+#+begin_src elisp
+  (loop for n from 10 to 99
+        collect (list n (% n 3) (% n 5) (% n 7)))
+#+end_src
+
+#+results:
+| 10 | 1 | 0 | 3 |
+| 11 | 2 | 1 | 4 |
+| 12 | 0 | 2 | 5 |
+| 13 | 1 | 3 | 6 |
+| 14 | 2 | 4 | 0 |
+| 15 | 0 | 0 | 1 |
+| 16 | 1 | 1 | 2 |
+| 17 | 2 | 2 | 3 |
+| 18 | 0 | 3 | 4 |
+| 19 | 1 | 4 | 5 |
+| 20 | 2 | 0 | 6 |
+| 21 | 0 | 1 | 0 |
+| 22 | 1 | 2 | 1 |
+| 23 | 2 | 3 | 2 |
+| 24 | 0 | 4 | 3 |
+| 25 | 1 | 0 | 4 |
+| 26 | 2 | 1 | 5 |
+| 27 | 0 | 2 | 6 |
+| 28 | 1 | 3 | 0 |
+| 29 | 2 | 4 | 1 |
+| 30 | 0 | 0 | 2 |
+| 31 | 1 | 1 | 3 |
+| 32 | 2 | 2 | 4 |
+| 33 | 0 | 3 | 5 |
+| 34 | 1 | 4 | 6 |
+| 35 | 2 | 0 | 0 |
+| 36 | 0 | 1 | 1 |
+| 37 | 1 | 2 | 2 |
+| 38 | 2 | 3 | 3 |
+| 39 | 0 | 4 | 4 |
+| 40 | 1 | 0 | 5 |
+| 41 | 2 | 1 | 6 |
+| 42 | 0 | 2 | 0 |
+| 43 | 1 | 3 | 1 |
+| 44 | 2 | 4 | 2 |
+| 45 | 0 | 0 | 3 |
+| 46 | 1 | 1 | 4 |
+| 47 | 2 | 2 | 5 |
+| 48 | 0 | 3 | 6 |
+| 49 | 1 | 4 | 0 |
+| 50 | 2 | 0 | 1 |
+| 51 | 0 | 1 | 2 |
+| 52 | 1 | 2 | 3 |
+| 53 | 2 | 3 | 4 |
+| 54 | 0 | 4 | 5 |
+| 55 | 1 | 0 | 6 |
+| 56 | 2 | 1 | 0 |
+| 57 | 0 | 2 | 1 |
+| 58 | 1 | 3 | 2 |
+| 59 | 2 | 4 | 3 |
+| 60 | 0 | 0 | 4 |
+| 61 | 1 | 1 | 5 |
+| 62 | 2 | 2 | 6 |
+| 63 | 0 | 3 | 0 |
+| 64 | 1 | 4 | 1 |
+| 65 | 2 | 0 | 2 |
+| 66 | 0 | 1 | 3 |
+| 67 | 1 | 2 | 4 |
+| 68 | 2 | 3 | 5 |
+| 69 | 0 | 4 | 6 |
+| 70 | 1 | 0 | 0 |
+| 71 | 2 | 1 | 1 |
+| 72 | 0 | 2 | 2 |
+| 73 | 1 | 3 | 3 |
+| 74 | 2 | 4 | 4 |
+| 75 | 0 | 0 | 5 |
+| 76 | 1 | 1 | 6 |
+| 77 | 2 | 2 | 0 |
+| 78 | 0 | 3 | 1 |
+| 79 | 1 | 4 | 2 |
+| 80 | 2 | 0 | 3 |
+| 81 | 0 | 1 | 4 |
+| 82 | 1 | 2 | 5 |
+| 83 | 2 | 3 | 6 |
+| 84 | 0 | 4 | 0 |
+| 85 | 1 | 0 | 1 |
+| 86 | 2 | 1 | 2 |
+| 87 | 0 | 2 | 3 |
+| 88 | 1 | 3 | 4 |
+| 89 | 2 | 4 | 5 |
+| 90 | 0 | 0 | 6 |
+| 91 | 1 | 1 | 0 |
+| 92 | 2 | 2 | 1 |
+| 93 | 0 | 3 | 2 |
+| 94 | 1 | 4 | 3 |
+| 95 | 2 | 0 | 4 |
+| 96 | 0 | 1 | 5 |
+| 97 | 1 | 2 | 6 |
+| 98 | 2 | 3 | 0 |
+| 99 | 0 | 4 | 1 |
+
+** The CRT via GCD
+   Chinese Remainder Theorem via Greatest Common Divisor
+*** Key Fact
+    (gcd a b) = (gcd b (% a b))
+*** From Assignment 06
+     VEM
+#+begin_src elisp :results silent
+  (defun gcdr (a b)
+     (if (zerop b)
+         a
+       (gcdr b (mod a b))))
+#+end_src
+
+#+begin_src elisp
+  (gcdr 87 55)
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun trace-gcd (a b)
+    "Show each (iterative) step of the gcd algorithm."
+    (loop with r = -1
+          until (zerop r)
+          collect (list a '= b (list (/ a b)) '+ (setq r (% a b)))
+          do (setq a b b r)))
+#+end_src
+
+#+begin_src elisp
+  (trace-gcd 87 55)
+#+end_src
+
+#+results:
+| 87 | = | 55 | (1) | + | 32 |
+| 55 | = | 32 | (1) | + | 23 |
+| 32 | = | 23 | (1) | + |  9 |
+| 23 | = |  9 | (2) | + |  5 |
+|  9 | = |  5 | (1) | + |  4 |
+|  5 | = |  4 | (1) | + |  1 |
+|  4 | = |  1 | (4) | + |  0 |
+
+#+begin_src elisp
+  (trace-gcd 88 55)
+#+end_src
+
+#+results:
+| 88 | = | 55 | (1) | + | 33 |
+| 55 | = | 33 | (1) | + | 22 |
+| 33 | = | 22 | (1) | + | 11 |
+| 22 | = | 11 | (2) | + |  0 |
+
+*** For Solving Simultaneous Congruences
+#+begin_src elisp :results value
+  (list
+    (list (% 221 3) (% 221 5) (% 221 7))
+    (list (% 116 3) (% 116 5) (% 116 7))
+    (list (% 11 3) (% 11 5) (% 11 7)))
+#+end_src
+
+#+results:
+| 2 | 1 | 4 |
+| 2 | 1 | 4 |
+| 2 | 1 | 4 |
+
+**** See GMY in PQV
+#+begin_src elisp :results silent
+  (defun egcd (a b)
+    "Computes the greatest common divisor of a and b recursively.
+     This extended version returns a list of d, x and y, where
+     d = ax + by = gcd(a, b)."
+    (if (zerop b)
+        (list a 1 0)
+      (let ((q (/ a b))
+            (r (% a b)))
+        (destructuring-bind (d x y) (egcd b r)
+          (list d y (- x (* q y)))))))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun find-y (o m)
+    (second (egcd o m)))
+#+end_src
+
+#+begin_src elisp :results raw
+  (let* ((r1 2)
+         (r2 3)
+         (r3 10)
+         (m1 7)
+         (m2 11)
+         (m3 13)
+         (m (* m1 m2 m3))
+         (o1 (/ m m1))
+         (o2 (/ m m2))
+         (o3 (/ m m3))
+         (y1 (find-y o1 m1))
+         (y2 (find-y o2 m2))
+         (y3 (find-y o3 m3)))
+    (mod (+ (* r1 o1 y1) (* r2 o2 y2) (* r3 o3 y3)) m))
+#+end_src
+
+#+begin_src elisp :results raw
+  (list (mod 751 7) (mod 751 11) (mod 751 13))
+#+end_src
+
+#+results:
+(2 3 10)
+
+#+begin_src elisp :results raw
+  (egcd 91 11)
+#+end_src
+
+#+results:
+(1 4 -33)
+
+*** For Residue Number System implementation
+**** Follow the Hint for XFO
+     For =to-rns= and =from-rns=, =assoc= and =rassoc= are recommended. Thus the
+     creation of an association list (alist) is a prerequisite for using these
+     functions. The challenge is to create this alist without using mod (or %)
+     or loops.
+**** Two Tasks
+    1. Create the function =create-rns-alist=.
+    2. Use the =test-rns= package.
+#+begin_src elisp :results silent
+  (defun make-rns-representation (n)
+    (list (mod n 7) (mod n 11) (mod n 13)))
+
+  (defun create-rns-alist ()
+    (loop for n from 0 to 1001
+          collect (cons n (make-rns-representation n))))
+#+end_src
+
+#+begin_src elisp :results value
+  (setq rns-alist (create-rns-alist))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun to-rns (n)
+    "Lookup n in rns-alist."
+    (cdr (assoc n rns-alist)))
+
+  (defun from-rns (rns-representation)
+    "Reverse lookup rns-representation in rns-alist."
+    (car (rassoc rns-representation rns-alist)))
+#+end_src
+
+#+begin_src elisp :results raw
+  (list (to-rns 999)
+        (from-rns '(5 9 11)))
+#+end_src
+
+#+begin_src elisp :results raw
+  (list (to-rns 12) (to-rns 16))
+#+end_src
+
+#+begin_src elisp :results raw
+  (list (mod (* 5 2) 7) (mod (* 1 5) 11) (mod (* 12 3) 13))
+#+end_src
