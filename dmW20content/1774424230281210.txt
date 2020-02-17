@@ -1,0 +1,199 @@
+-*- mode: org -*-
+#+title: Assignment 07
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
+:END:
+* TODO Explore Fermat\rsquo{}s Little Theorem Further
+  Fermat\rsquo{}s Little Theorem (FLT) says that if N is prime, then N divides X^N - X.
+
+  Remember, the contrapositive of the conditional statement in this theorem is
+  that if N *doesn\rsquo{}t* divide X^N - X for some X, then N *can\rsquo{}t* be prime.
+
+  Unfortunately, this simple primality test doesn\rsquo{}t always work, because
+  *pseudoprimes* fool it.
+
+  341 = 11 \cdot 31 is not prime. But 341 *does* divide 2^{341} - 2.
+#+begin_src elisp
+  (calc-eval "((2^341)-2)%341")
+#+end_src
+
+#+results:
+: 0
+
+  So 341 is a *base-2 pseudoprime*. What about *base-3*?
+
+#+begin_src elisp
+  (calc-eval "((3^341)-3)%341")
+#+end_src
+
+#+results:
+: 165
+
+  So 341 is *not* a *base-3* pseudoprime.
+
+  Are there any other bases that will not fool the FLT test for 341?
+
+  Are there any pseudoprimes that will fool the FLT for *any choice* of base
+  (as long as that base is coprime to the pseudoprime)?
+
+:ANSWER:
+  Yes! Your task is the find the first 4-digit *bullet-proof pseudoprime* and prove
+  that it will fool the FLT test for every base coprime to it.
+:END:
+:IMPORTANT:
+  Your proof must use all of the following:
+  1) the definition of coprime, a consequence of coprimality,
+  2) the factorization of the *bppp*,
+  3) FLT, and
+  4) the CRT (Chinese Remainder Theorem).
+:END:
+
+* TODO Characterize a Letter-to-Number Mapping
+  Learn to think like Brother Neff! (If this sounds hard --- it is! It is meant
+  to be a challenge. :-)
+
+  Fill out the following table like he would. Put Xs in the appropriate column
+  (maybe more than one per row). The first four rows have been done for you:
+
+  | Letter | Number | Visual       | Aural         | Other                     |
+  |        |        | (looks like) | (sounds like) | (some logical reason)     |
+  |--------+--------+--------------+---------------+---------------------------|
+  | A      |      8 |              | X             |                           |
+  | B      |      9 |              |               | X (B9 (benign) is a word) |
+  | C      |      0 | X            |               |                           |
+  | D      |      0 | X            |               |                           |
+  | E      |      3 |              |               |                           |
+  | F      |      5 |              |               |                           |
+  | G      |      6 |              |               |                           |
+  | H      |      8 |              |               |                           |
+  | I      |      5 |              |               |                           |
+  | J      |      6 |              |               |                           |
+  | K      |      8 |              |               |                           |
+  | L      |      7 |              |               |                           |
+  | M      |      3 |              |               |                           |
+  | N      |      9 |              |               |                           |
+  | O      |      1 |              |               |                           |
+  | P      |      9 |              |               |                           |
+  | Q      |      4 |              |               |                           |
+  | R      |      4 |              |               |                           |
+  | S      |      7 |              |               |                           |
+  | T      |      2 |              |               |                           |
+  | U      |      1 |              |               |                           |
+  | V      |      5 |              |               |                           |
+  | W      |      2 |              |               |                           |
+  | X      |      6 |              |               |                           |
+  | Y      |      7 |              |               |                           |
+  | Z      |      0 |              |               |                           |
+
+* TODO Code The Inverse Mapping
+  Since the letters-to-number mapping was many-to-one, the inverse
+  number-to-letters mapping will be one-to-many:
+
+  | Number | Letters |
+  |--------+---------|
+  |      0 | ZCD     |
+  |      1 | OU      |
+  |      2 | TW      |
+  |      3 | EM      |
+  |      4 | QR      |
+  |      5 | FIV     |
+  |      6 | GJX     |
+  |      7 | SLY     |
+  |      8 | AHK     |
+  |      9 | BNP     |
+
+  Write elisp code to take a string of 3 digits and generate a random TLA with
+  this mapping.
+
+  For full credit, *make sure* that your elisp code is *efficient*, and that it
+  generates a [[file:expound-on-topics-07.txt][true random NOT a pseudorandom]] TLA.
+
+* TODO Discern a Pattern
+  In his book Brother Neff uses a TLA-based naming scheme to identify major
+  headings, minor headings, minor subheadings, and EPPs.
+
+  The pattern for major/minor headings is trivial to discern:
+  - ONE
+    - ABC
+    - DEF
+    - GHI
+  - TWO
+    - JKL
+    - MNO
+    - PQR
+  - THR
+    - STU
+    - VWX
+    - YZ@
+
+  Minor subheadings have an easily-discernible pattern as well, e.g.:
+
+  (ABC ABD ABE ABF ABG ABH ABI ABJ ABK ABL ABM ABN ABO)
+
+  What about the EPPs (Exercises, Problems, Puzzles)? What is their pattern?
+
+* TODO My Report on What I Learned
+** How I had fun
+** How I collaborated
+** What new I learned
+** What meaningful I achieved
+** Etc.
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+   What is true of my experience in general?
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I collaborated with one or more classmates.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I reported what I thought about while doing the problems.
+  - [ ] I reported on any connections I found between these problems and
+        something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+#+name: assertions-about-answers
+  - [ ] I got the right answer for the \ldquo{}Are there any other bases that will not fool ...\rdquo question?
+  - [ ] I found the first (smallest) 4-digit *bppp*.
+  - [ ] I proved the 4-digit number I found was a *bppp* and the smallest 4-digit one.
+  - [ ] I got the right answer for the \ldquo{}Characterize a Letter-to-Number Mapping\rdquo problem.
+  - [ ] I wrote provably correct code for the \ldquo{}Inverse Mapping\rdquo.
+  - [ ] My code used true randomness not pseudorandomness.
+  - [ ] My code is efficient by virtue of getting a truly random sequence once, instead of once per call to inverse map.
+  - [ ] I got the right answer for the \ldquo{}Discern a Pattern\rdquo problem.
+
+#+begin_src elisp
+  (calculate-score
+   (quote
+    ((in-general 2 2 2 2)
+     (about-report 4 4 4 4)
+     (about-MIs 2 2 2 2)
+     (about-answers 8 10 10 10 10 10 10 10))))
+#+end_src
