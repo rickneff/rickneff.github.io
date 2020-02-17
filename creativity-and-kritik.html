@@ -1,0 +1,1117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-02-17 Mon 07:14 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Creativity and Kritik</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Rick Neff" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/bigblow.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/styles/bigblow/css/hideshow.css"/>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery-ui-1.10.2.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.localscroll-min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/jquery.zclip.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/bigblow.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/bigblow/js/hideshow.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript">document.helps = [];</script>
+<script type="text/javascript">
+function draw(levels) {
+var c = document.getElementById("btree");
+var w = c.width;
+var h = c.height;
+var ctx = c.getContext("2d");
+var repeat_delay = 3000;
+var teardown_delay = 1000;
+var level_delay = 500;
+var margins = 10;
+// If h_frac is changed, slope will need to be adjusted to
+// prevent overlap.  I might fix this in the future.
+var h_frac = 2;
+var slope = ((h - margins * 2) / 2) / (w - margins * 2);
+ctx.clearRect(0, 0, w, h);
+// This goes in here so that above variables will be in scope
+function lines(dist, loc, depth, delay=0) {
+function render_lines(dist, loc) {
+ctx.beginPath();
+ctx.moveTo(loc[0], loc[1]);
+ctx.lineTo(loc[0] + dist, loc[1] + slope * -dist);
+ctx.moveTo(loc[0], loc[1]);
+ctx.lineTo(loc[0] + dist, loc[1] + slope * dist);
+ctx.stroke();
+}
+setTimeout(render_lines, delay, dist, loc);
+setTimeout(function (x) {ctx.clearRect(x, 0, w, h)},
+level_delay * levels * 2 + teardown_delay - delay,
+loc[0]);
+depth--;
+if (depth) {
+lines((dist / h_frac) * (h_frac - 1),
+[loc[0] + dist, loc[1] + slope * -dist],
+depth,
+delay + level_delay);
+lines((dist / h_frac) * (h_frac - 1),
+[loc[0] + dist, loc[1] + slope *  dist],
+depth,
+delay + level_delay);
+}
+}
+lines((w - margins * 2) / h_frac, [margins, h/2], levels);
+setTimeout(draw, repeat_delay + teardown_delay + levels * level_delay * 2, levels);
+}
+</script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Creativity and Kritik</h1>
+
+<div id="outline-container-orgc59de03" class="outline-2">
+<h2 id="orgc59de03">New Direction</h2>
+<div class="outline-text-2" id="text-orgc59de03">
+</div>
+<div id="outline-container-orga729d81" class="outline-3">
+<h3 id="orga729d81">Objective</h3>
+<div class="outline-text-3" id="text-orga729d81">
+<p>
+To foster learning curiosity and learning <b>permanence</b>, to encourage
+inquisitiveness, and to spur application of the gersy principle.
+</p>
+</div>
+</div>
+<div id="outline-container-org44cbceb" class="outline-3">
+<h3 id="org44cbceb">Instructions</h3>
+<div class="outline-text-3" id="text-org44cbceb">
+<p>
+There are three parts to your submission:
+</p>
+
+<ol class="org-ol">
+<li>Create a connection between some topic from this week to previous class
+material, or anything relevant that you have learned before.</li>
+<li>Create a question that shows genuine curiosity &#x2014; not just trying to
+&ldquo;demonstrate rich and deep comprehension of the subject&rdquo;. (That focus has
+tended to produce complicated and complex questions that are difficult to
+unpack and understand.)</li>
+<li>Create a GPAO that you think would be fun and/or interesting to explore.</li>
+</ol>
+</div>
+
+<div id="outline-container-orgb506784" class="outline-4">
+<h4 id="orgb506784">Elaboration</h4>
+<div class="outline-text-4" id="text-orgb506784">
+</div>
+<div id="outline-container-org32a207c" class="outline-5">
+<h5 id="org32a207c">Create a connection</h5>
+<div class="outline-text-5" id="text-org32a207c">
+<p>
+Regarding creating connections, recall the TOC (Table Of Connections) I
+showed in class during Week 02. This was in the context of solving Problem
+UIJ:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Term or Concept</th>
+<th scope="col" class="org-left">is related to</th>
+<th scope="col" class="org-left">Term or Concept</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Subset</td>
+<td class="org-left">is defined in terms of</td>
+<td class="org-left">&rarr;</td>
+</tr>
+
+<tr>
+<td class="org-left">Truth Table</td>
+<td class="org-left">uses</td>
+<td class="org-left">Inputs</td>
+</tr>
+
+<tr>
+<td class="org-left">Truth Table</td>
+<td class="org-left">displays</td>
+<td class="org-left">Outputs</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Reread <a href="https://rickneff.github.io/metaphors-be-with-you.html#outline-container-org32e5c89">GHS and the quote by Roger Penrose</a> on the importance of <b>making
+connections</b>! See also <a href="https://slate.com/news-and-politics/2005/11/college-makeover.html">Steven Pinker&rsquo;s College Makeover</a> where he makes this
+provocative assertion:
+</p>
+
+<blockquote>
+<p>
+Disconnected facts in the mind are like unlinked pages on the Web: They might as well not exist.
+</p>
+</blockquote>
+
+<p>
+Week 08 will reveal the &ldquo;RSA Players, their Roles and Relationships&rdquo;. Many connections to make there!
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6924747" class="outline-5">
+<h5 id="org6924747">Create a question</h5>
+<div class="outline-text-5" id="text-org6924747">
+<p>
+Regarding creating questions, Mohsen Shahini, CEO of Kritik, had this to say:
+</p>
+<blockquote>
+<p>
+I think there could be two purposes for having students create questions. One
+could really be to inspire their curiosity (which is the preferred one), and
+one to have them demonstrate their understanding of concepts and their
+ability to construct questions that are relevant to the materials they are
+learning. Both in my opinion are important. In your case, it seems like the
+second one is easier to think of when trying to participate.
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org02506f6" class="outline-5">
+<h5 id="org02506f6">Create a GPAO</h5>
+<div class="outline-text-5" id="text-org02506f6">
+<p>
+Regarding creativity in general, and GPAOs in particular:
+</p>
+
+<p>
+<a href="https://firstthreeodds.org/17657741833134731255/creativity.html">Steve Olson</a> and <a href="https://rickneff.github.io/exercises-versus-problems.html">Paul Zietz</a> are two kindred spirits. Check out the below
+excerpt from Steve Olson&rsquo;s book where he introduces Paul Zietz and quotes him
+on his approach to teaching <i>creative problem solving</i>, which Paul Zietz
+believes <b>can be taught</b> &#x2014; but his approach may surprise you!
+</p>
+
+<blockquote>
+<p>
+Paul Zeitz, now a professor of mathematics at the University of San Francisco,
+was a member of the U.S. Olympiad team that competed [in 1974].
+</p>
+
+<p>
+[&hellip;]
+</p>
+
+<p>
+Zeitz [is] always interested in applying the problem solving he’d done as an
+Olympian in his teaching. So he [developed] a series of tough mathematical
+challenges that his students would work on for extended periods. He found this
+approach often engaged the least talented kids just as much as the most
+talented.
+</p>
+
+<p>
+[&hellip;]
+</p>
+
+<p>
+He [wrote the book] <a href="https://www.wiley.com/en-us/The+Art+and+Craft+of+Problem+Solving%2C+3rd+Edition-p-9781119094845">The Art and Craft of Problem Solving</a>, which was [first]
+published in 1999. It’s a challenging book &#x2014; many math Olympians use it to
+prepare for the competition. Zeitz uses it with all the students in his
+classes &#x2014; including those studying to be teachers &#x2014; often by breaking them
+up into teams and letting them work on specific problems for days at a time.
+“The level of the math is not really an issue,” he says. “My main goal when I
+teach this kind of course is to inspire my students to really think hard. It
+sounds simplistic, but that’s all there is to it. I want to get students used
+to a mindset that a problem that is worth solving is worth pondering for a
+long time. It’s hard to train somebody how to think for a long amount of time.
+Most people think in maybe five-second bursts. I’m talking about spending days
+thinking about something. So the level of the math is less an issue than is
+rewiring their brains so they can concentrate better.”
+</p>
+
+<p>
+Rewiring the brains of students is an ambitious goal, Zeitz admits. But it can
+be done by demonstrating that math is not what people think it is. “To be good
+at math you have to be both rigorous and a good explorer,” he says. “And this
+exploration, this organized play, that’s what people don’t understand about
+math &#x2014; it’s a very social activity.”
+</p>
+</blockquote>
+
+<p>
+Pursuing GPAOs is an excellent opportunity for this social activity of problem
+exploration. And yes, creating GPAOs (not just doing them) is good for
+demonstrating &ldquo;A&rdquo;-student-like <b>above and beyond</b> behavior. Who to team up with,
+to learn from and teach one another &#x2014; you decide, and if you do collaborate
+on the creation of GPAOs (which you are strongly encouraged to do) mention
+that fact (but no names, for anonymity&rsquo;s sake) when you post your submission
+on Kritik.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcd5cf2a" class="outline-4">
+<h4 id="orgcd5cf2a">New Rubric</h4>
+<div class="outline-text-4" id="text-orgcd5cf2a">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">Subpar</th>
+<th scope="col" class="org-left">Par</th>
+<th scope="col" class="org-left">Superpar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Connection</td>
+<td class="org-left">Gave it little to no thought.</td>
+<td class="org-left">Made an obvious connection.</td>
+<td class="org-left">Never thought of that connection.</td>
+</tr>
+
+<tr>
+<td class="org-left">Question</td>
+<td class="org-left">Gave it little to no thought.</td>
+<td class="org-left">Posed a question you really want answered (from the reading or homework).</td>
+<td class="org-left">Answered your own question (with research) or attempted an answer (could be incorrect).</td>
+</tr>
+
+<tr>
+<td class="org-left">GPAO</td>
+<td class="org-left">Gave it little to no thought.</td>
+<td class="org-left">Stated a GPAO idea, including that this was a shared creation, if it was.</td>
+<td class="org-left">Did investigation and included proof of investigation.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc70f127" class="outline-2">
+<h2 id="orgc70f127">Sample Submissions</h2>
+<div class="outline-text-2" id="text-orgc70f127">
+</div>
+<div id="outline-container-org8c1d84d" class="outline-3">
+<h3 id="org8c1d84d">#1</h3>
+<div class="outline-text-3" id="text-org8c1d84d">
+</div>
+<div id="outline-container-orgfcc9c67" class="outline-4">
+<h4 id="orgfcc9c67">Connection</h4>
+<div class="outline-text-4" id="text-orgfcc9c67">
+</div>
+<div id="outline-container-org017af01" class="outline-5">
+<h5 id="org017af01">Subpar</h5>
+<div class="outline-text-5" id="text-org017af01">
+<p>
+[Missing &#x2014; no thought]
+</p>
+</div>
+</div>
+<div id="outline-container-org7b8cce0" class="outline-5">
+<h5 id="org7b8cce0">Par</h5>
+<div class="outline-text-5" id="text-org7b8cce0">
+<p>
+The GCD of a prime number and the product of all positive integers below it is always 1.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb9fff68" class="outline-5">
+<h5 id="orgb9fff68">Superpar</h5>
+<div class="outline-text-5" id="text-orgb9fff68">
+<p>
+&forall; n list n-choose-k, where k &ne; 0 and k &ne; n, is not coprime to n.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org1e765b5" class="outline-4">
+<h4 id="org1e765b5">Question</h4>
+<div class="outline-text-4" id="text-org1e765b5">
+</div>
+<div id="outline-container-org56ad557" class="outline-5">
+<h5 id="org56ad557">Subpar</h5>
+<div class="outline-text-5" id="text-org56ad557">
+<p>
+[Missing &#x2014; no thought]
+</p>
+</div>
+</div>
+<div id="outline-container-orgc5af525" class="outline-5">
+<h5 id="orgc5af525">Par</h5>
+<div class="outline-text-5" id="text-orgc5af525">
+<p>
+What is the best way to find if a number is prime?
+</p>
+</div>
+</div>
+<div id="outline-container-orgd5676fb" class="outline-5">
+<h5 id="orgd5676fb">Superpar</h5>
+<div class="outline-text-5" id="text-orgd5676fb">
+<p>
+Can a number x be checked against the product of all prime numbers (at least through the square root of x) as a quick way to tell if x is prime?
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org1f77927" class="outline-4">
+<h4 id="org1f77927">GPAO</h4>
+<div class="outline-text-4" id="text-org1f77927">
+</div>
+<div id="outline-container-orgdd23c4d" class="outline-5">
+<h5 id="orgdd23c4d">Subpar</h5>
+<div class="outline-text-5" id="text-orgdd23c4d">
+<p>
+[Missing &#x2014; no thought]
+</p>
+</div>
+</div>
+<div id="outline-container-orgf7da8ed" class="outline-5">
+<h5 id="orgf7da8ed">Par</h5>
+<div class="outline-text-5" id="text-orgf7da8ed">
+<p>
+Write a function that determines if a number is prime.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc7e4cf3" class="outline-5">
+<h5 id="orgc7e4cf3">Superpar</h5>
+<div class="outline-text-5" id="text-orgc7e4cf3">
+<p>
+Write a function that determines if a number is prime. For example:
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">defun</span> <span style="color: #2c53ca;">build-prime-prod</span> <span style="color: #077707;">(</span>max last-checked product<span style="color: #077707;">)</span>
+  <span style="color: #077707;">(</span><span style="color: #2020cc; font-weight: bold;">if</span> <span style="color: #ab9c3a;">(</span>&gt;= last-checked max<span style="color: #ab9c3a;">)</span>
+      product
+    <span style="color: #ab9c3a;">(</span><span style="color: #2020cc; font-weight: bold;">let*</span> <span style="color: #358d8d;">(</span><span style="color: #1c9e28;">(</span>to-check <span style="color: #2020cc;">(</span>1+ last-checked<span style="color: #2020cc;">)</span><span style="color: #1c9e28;">)</span><span style="color: #358d8d;">)</span>
+      <span style="color: #358d8d;">(</span>build-prime-prod max to-check <span style="color: #1c9e28;">(</span><span style="color: #2020cc; font-weight: bold;">if</span> <span style="color: #2020cc;">(</span>= <span style="color: #9ca30b;">(</span>gcd product to-check<span style="color: #9ca30b;">)</span> <span style="color: #259ea2;">1</span><span style="color: #2020cc;">)</span>
+                                         <span style="color: #2020cc;">(</span>* product to-check<span style="color: #2020cc;">)</span>
+                                       product<span style="color: #1c9e28;">)</span><span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span><span style="color: #88090B;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #262626;">(</span><span style="color: #2020cc; font-weight: bold;">defun</span> <span style="color: #2c53ca;">is-prime</span> <span style="color: #077707;">(</span>x<span style="color: #077707;">)</span>
+  <span style="color: #077707;">(</span><span style="color: #2020cc; font-weight: bold;">let</span> <span style="color: #ab9c3a;">(</span><span style="color: #358d8d;">(</span>product <span style="color: #1c9e28;">(</span>build-prime-prod <span style="color: #2020cc;">(</span>sqrt x<span style="color: #2020cc;">)</span> <span style="color: #259ea2;">1</span> <span style="color: #259ea2;">1</span><span style="color: #1c9e28;">)</span><span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span>
+    <span style="color: #ab9c3a;">(</span>= <span style="color: #358d8d;">(</span>gcd x product<span style="color: #358d8d;">)</span> <span style="color: #259ea2;">1</span><span style="color: #ab9c3a;">)</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #262626;">(</span>mapcar <span style="color: #077707;">(</span><span style="color: #2020cc; font-weight: bold;">lambda</span> <span style="color: #ab9c3a;">(</span>x<span style="color: #ab9c3a;">)</span> <span style="color: #ab9c3a;">(</span>list x <span style="color: #358d8d;">(</span>is-prime x<span style="color: #358d8d;">)</span><span style="color: #ab9c3a;">)</span><span style="color: #077707;">)</span> <span style="color: #077707;">(</span>number-sequence <span style="color: #259ea2;">2</span> <span style="color: #259ea2;">256</span><span style="color: #077707;">)</span><span style="color: #262626;">)</span>
+</pre>
+</div>
+<p>
+How efficient is the is-prime (and helper) code? Is there a way to make it/them more efficient?
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org435ef6e" class="outline-3">
+<h3 id="org435ef6e">#2</h3>
+<div class="outline-text-3" id="text-org435ef6e">
+<p>
+Trees and Things &rarr; [Topic]
+</p>
+</div>
+<div id="outline-container-org538dc64" class="outline-4">
+<h4 id="org538dc64">Connection</h4>
+<div class="outline-text-4" id="text-org538dc64">
+</div>
+<div id="outline-container-org815c705" class="outline-5">
+<h5 id="org815c705">Subpar</h5>
+<div class="outline-text-5" id="text-org815c705">
+<p>
+A bunch of binary trees is a forest. &rarr; [This has no thought put into it and
+is simply regurgitating what the textbook says.]
+</p>
+</div>
+</div>
+<div id="outline-container-orgddf58dd" class="outline-5">
+<h5 id="orgddf58dd">Par</h5>
+<div class="outline-text-5" id="text-orgddf58dd">
+<p>
+An elisp list is a lot like a binary tree where all the nodes only have one right child.
+</p>
+</div>
+</div>
+<div id="outline-container-org4a55d0e" class="outline-5">
+<h5 id="org4a55d0e">Superpar</h5>
+<div class="outline-text-5" id="text-org4a55d0e">
+<p>
+We can use what we learned in probability to find how many ways we can
+rearrange the phrase &ldquo;time flies on wings of lightning&rdquo;. &rarr; [Not entirely
+sure if this would qualify but ideally it would be something that shows
+real thought went into the connection.]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org846bbc9" class="outline-4">
+<h4 id="org846bbc9">Question</h4>
+<div class="outline-text-4" id="text-org846bbc9">
+</div>
+<div id="outline-container-org579fbd6" class="outline-5">
+<h5 id="org579fbd6">Subpar</h5>
+<div class="outline-text-5" id="text-org579fbd6">
+<p>
+Why do we have to do this? &rarr; [No thought, bad attitude and not helpful to
+learning.]
+</p>
+</div>
+</div>
+<div id="outline-container-orgafdd13f" class="outline-5">
+<h5 id="orgafdd13f">Par</h5>
+<div class="outline-text-5" id="text-orgafdd13f">
+<p>
+The homework asks us to write code that uses mapping instead of looping.
+When would we want to use mapping instead of looping in the real world?
+</p>
+</div>
+</div>
+<div id="outline-container-org05ea667" class="outline-5">
+<h5 id="org05ea667">Superpar</h5>
+<div class="outline-text-5" id="text-org05ea667">
+<p>
+(NOTE: A great way to turn the par question of why do we map instead of
+loop would be to research the advantages of mapping and looping and doing
+your best to answer the question you asked.)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9fead28" class="outline-4">
+<h4 id="org9fead28">GPAO</h4>
+<div class="outline-text-4" id="text-org9fead28">
+</div>
+<div id="outline-container-org497f56a" class="outline-5">
+<h5 id="org497f56a">Subpar</h5>
+<div class="outline-text-5" id="text-org497f56a">
+<p>
+I don&rsquo;t have one. &rarr; [This is the same as missing the statement altogether.]
+</p>
+</div>
+</div>
+<div id="outline-container-org178d655" class="outline-5">
+<h5 id="org178d655">Par</h5>
+<div class="outline-text-5" id="text-org178d655">
+<p>
+Write code in elisp to build a self-balancing binary tree.
+</p>
+</div>
+</div>
+<div id="outline-container-orgfd0f987" class="outline-5">
+<h5 id="orgfd0f987">Superpar</h5>
+<div class="outline-text-5" id="text-orgfd0f987">
+<p>
+Research into why we would want to make Huffman trees.
+(NOTE: Just an example, no actual research went into this due to time constraints.)
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd864d78" class="outline-3">
+<h3 id="orgd864d78">#3</h3>
+<div class="outline-text-3" id="text-orgd864d78">
+<p>
+Some of these responses were made as if we were in week 5 and others are week
+6 responses. To clarify, connections should be from the current week to a
+previous week, or to anything relevant.
+</p>
+</div>
+<div id="outline-container-org7bcdfa1" class="outline-4">
+<h4 id="org7bcdfa1">Connection</h4>
+<div class="outline-text-4" id="text-org7bcdfa1">
+</div>
+<div id="outline-container-orge32d948" class="outline-5">
+<h5 id="orge32d948">Subpar</h5>
+<div class="outline-text-5" id="text-orge32d948">
+<p>
+I couldn&rsquo;t make any connections from this week&rsquo;s material to previous
+weeks.
+</p>
+</div>
+</div>
+<div id="outline-container-org41db9ab" class="outline-5">
+<h5 id="org41db9ab">Par</h5>
+<div class="outline-text-5" id="text-org41db9ab">
+<p>
+Combinations and permutations connect directly to sets. Combinations are a
+subset of permutations. From the same set of elements, there are fewer
+combinations (unordered sets) compared to permutations (ordered sets).
+[Only par because this connection is made in the textbook.]
+</p>
+</div>
+</div>
+<div id="outline-container-org8ded43e" class="outline-5">
+<h5 id="org8ded43e">Superpar</h5>
+<div class="outline-text-5" id="text-org8ded43e">
+<p>
+Any positive integer can be thought of as a combination with replacement of
+prime numbers from the set of all prime numbers. For example, the
+number 120. 120 is the product of prime numbers 2 2 2 3 5. Order doesn&rsquo;t
+matter because multiplication is commutative, and repetition/replacement is
+necessary because there exist integers that cannot be represented with
+unique primes (e.g., 120). [Can be expanded into a GPAO by diving into
+multichoosing, stars and bars, and writing elisp code.]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org43e51bd" class="outline-4">
+<h4 id="org43e51bd">Question</h4>
+<div class="outline-text-4" id="text-org43e51bd">
+</div>
+<div id="outline-container-orgced43e6" class="outline-5">
+<h5 id="orgced43e6">Subpar</h5>
+<div class="outline-text-5" id="text-orgced43e6">
+<p>
+Is Brother Neff a wizard?
+</p>
+</div>
+</div>
+<div id="outline-container-orga9b809e" class="outline-5">
+<h5 id="orga9b809e">Par</h5>
+<div class="outline-text-5" id="text-orga9b809e">
+<p>
+How do I do homework problem PHI? [This question could be boosted into
+superpar by being more specific or explaining what you&rsquo;ve done to try to
+solve it]
+</p>
+</div>
+</div>
+<div id="outline-container-org569e54f" class="outline-5">
+<h5 id="org569e54f">Superpar</h5>
+<div class="outline-text-5" id="text-org569e54f">
+<p>
+I understand most of Euclid&rsquo;s proof for infinitely many primes as described
+in MNP. However, I&rsquo;m still having trouble understanding step 4. If y is
+composite, does that necessarily mean it is divisible by some new larger
+prime z? How do we prove it can&rsquo;t be the product of primes &lt; x?
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf183569" class="outline-4">
+<h4 id="orgf183569">GPAO</h4>
+<div class="outline-text-4" id="text-orgf183569">
+</div>
+<div id="outline-container-orge42a325" class="outline-5">
+<h5 id="orge42a325">Subpar</h5>
+<div class="outline-text-5" id="text-orge42a325">
+<p>
+I didn&rsquo;t think of an idea.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd8a37ca" class="outline-5">
+<h5 id="orgd8a37ca">Par</h5>
+<div class="outline-text-5" id="text-orgd8a37ca">
+<p>
+I came across an interesting problem. Let&rsquo;s say I have 6 pegs in 6 holes,
+and I remove them. If I put them back into the 6 holes randomly, what is
+the probability that all 6 pegs are in their orignial holes? (What about
+the probability the pegs are all in all different? Only 1 peg in the same
+hole? 2? Etc.) Solving this would be a good GPAO.
+</p>
+</div>
+</div>
+<div id="outline-container-org853abb6" class="outline-5">
+<h5 id="org853abb6">Superpar</h5>
+<div class="outline-text-5" id="text-org853abb6">
+<p>
+After grappling with [the problem described in Par], I solved it! Attached
+is a org document detailing my thought process as I solved it. It includes
+elisp code that will solve the problem given an arbitrary amount of pegs/
+holes, as well as the mathematical principles behind it. I learned about
+the inclusion-exclusion principle, the hat-check problem, derangement,
+and subfactorials.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org75cfd3e" class="outline-3">
+<h3 id="org75cfd3e">#4</h3>
+<div class="outline-text-3" id="text-org75cfd3e">
+</div>
+<div id="outline-container-org3387eda" class="outline-4">
+<h4 id="org3387eda">Connection</h4>
+<div class="outline-text-4" id="text-org3387eda">
+</div>
+<div id="outline-container-org0429cc0" class="outline-5">
+<h5 id="org0429cc0">Subpar</h5>
+<div class="outline-text-5" id="text-org0429cc0">
+<p>
+I couldn&rsquo;t make a connection.
+</p>
+</div>
+</div>
+<div id="outline-container-orgfeaf0af" class="outline-5">
+<h5 id="orgfeaf0af">Par</h5>
+<div class="outline-text-5" id="text-orgfeaf0af">
+<p>
+CRT and division.
+</p>
+</div>
+</div>
+<div id="outline-container-org3cb2681" class="outline-5">
+<h5 id="org3cb2681">Superpar</h5>
+<div class="outline-text-5" id="text-org3cb2681">
+<p>
+CRT is connected to the division theorem and lcms because they are
+mentioned in the CRT.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgde2f76e" class="outline-4">
+<h4 id="orgde2f76e">Question</h4>
+<div class="outline-text-4" id="text-orgde2f76e">
+</div>
+<div id="outline-container-org93201d0" class="outline-5">
+<h5 id="org93201d0">Subpar</h5>
+<div class="outline-text-5" id="text-org93201d0">
+<p>
+I understood everything.
+</p>
+</div>
+</div>
+<div id="outline-container-orgf5788d9" class="outline-5">
+<h5 id="orgf5788d9">Par</h5>
+<div class="outline-text-5" id="text-orgf5788d9">
+<p>
+What is mod?
+</p>
+</div>
+</div>
+<div id="outline-container-org711ed27" class="outline-5">
+<h5 id="org711ed27">Superpar</h5>
+<div class="outline-text-5" id="text-org711ed27">
+<p>
+I am struggling to understand how mod works. What are some resources you
+could recommend I study or excersices I can study?
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga4826f2" class="outline-4">
+<h4 id="orga4826f2">GPAO</h4>
+<div class="outline-text-4" id="text-orga4826f2">
+</div>
+<div id="outline-container-org370d00c" class="outline-5">
+<h5 id="org370d00c">Subpar</h5>
+<div class="outline-text-5" id="text-org370d00c">
+<p>
+Not feeling it.
+</p>
+</div>
+</div>
+<div id="outline-container-orge426dc2" class="outline-5">
+<h5 id="orge426dc2">Par</h5>
+<div class="outline-text-5" id="text-orge426dc2">
+<p>
+Create a CRT function in elisp.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd59fd98" class="outline-5">
+<h5 id="orgd59fd98">Superpar</h5>
+<div class="outline-text-5" id="text-orgd59fd98">
+<p>
+Actually create a GPAO with working or mostly working code. Here is a link
+to a website that helped me understand CRT enough to write this code
+(exampleLink.com).
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org909d5fb" class="outline-3">
+<h3 id="org909d5fb">#5</h3>
+<div class="outline-text-3" id="text-org909d5fb">
+<p>
+Regarding Functions and Relations:
+</p>
+</div>
+<div id="outline-container-org1b765f1" class="outline-4">
+<h4 id="org1b765f1">Connection</h4>
+<div class="outline-text-4" id="text-org1b765f1">
+</div>
+<div id="outline-container-orgacb71ee" class="outline-5">
+<h5 id="orgacb71ee">Subpar</h5>
+<div class="outline-text-5" id="text-orgacb71ee">
+<p>
+Relations are kind of like functions except things can relate to more than
+one other thing.
+</p>
+</div>
+</div>
+<div id="outline-container-org323227a" class="outline-5">
+<h5 id="org323227a">Par</h5>
+<div class="outline-text-5" id="text-org323227a">
+<p>
+If links in graphs represent relations then a binary tree (with parent and
+child links) is a symmetric system.
+</p>
+</div>
+</div>
+<div id="outline-container-org3394f9f" class="outline-5">
+<h5 id="org3394f9f">Superpar</h5>
+<div class="outline-text-5" id="text-org3394f9f">
+<p>
+If relational databases are modeled with rows and columns with some columns
+being keys to other items in other tables, then a relational database
+diagram is the graph that represents these complex relationships.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc2c7102" class="outline-4">
+<h4 id="orgc2c7102">Question</h4>
+<div class="outline-text-4" id="text-orgc2c7102">
+</div>
+<div id="outline-container-org1d70e5e" class="outline-5">
+<h5 id="org1d70e5e">Subpar</h5>
+<div class="outline-text-5" id="text-org1d70e5e">
+<p>
+How do I do [TLA of Problem]?
+</p>
+</div>
+</div>
+<div id="outline-container-orgaf1dbeb" class="outline-5">
+<h5 id="orgaf1dbeb">Par</h5>
+<div class="outline-text-5" id="text-orgaf1dbeb">
+<p>
+I have been trying really hard to figure out [TLA]. Can I get a little help
+on it?
+</p>
+</div>
+</div>
+<div id="outline-container-org3a5a183" class="outline-5">
+<h5 id="org3a5a183">Superpar</h5>
+<div class="outline-text-5" id="text-org3a5a183">
+<p>
+I have been trying really hard to figure out [TLA]. I have tried [X, Y and
+Z] but I still can&rsquo;t figure it out. Can I get a little help on it?
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orge40a277" class="outline-4">
+<h4 id="orge40a277">GPAO</h4>
+<div class="outline-text-4" id="text-orge40a277">
+</div>
+<div id="outline-container-org99fa12f" class="outline-5">
+<h5 id="org99fa12f">Subpar</h5>
+<div class="outline-text-5" id="text-org99fa12f">
+<p>
+I looked up what relations are. I didn&rsquo;t find much that was very helpful.
+</p>
+</div>
+</div>
+<div id="outline-container-org4b27be9" class="outline-5">
+<h5 id="org4b27be9">Par</h5>
+<div class="outline-text-5" id="text-org4b27be9">
+<p>
+I thought I could write code to help with [TLA] by doing [X, Y and Z] but I
+couldn&rsquo;t figure out how to do it in elisp.
+</p>
+</div>
+</div>
+<div id="outline-container-org0509524" class="outline-5">
+<h5 id="org0509524">Superpar</h5>
+<div class="outline-text-5" id="text-org0509524">
+<p>
+The connection that I made earlier was of a high-level graph of the tables,
+but is there a way to graph the relationships of the actual data in the
+database?
+</p>
+
+<p>
+I did some research and found that there are relational databases and
+non-relational databases but both are actually pretty slowed down by data
+that has a lot of relationships. But I found a third kind of database
+called a graph database that is really fast and now the database is the
+graph, which is pretty cool. Here are some links:
+</p>
+
+<p>
+<a href="https://neo4j.com/blog/why-graph-databases-are-the-future/?ref=blog/#definition">https://neo4j.com/blog/why-graph-databases-are-the-future/?ref=blog/#definition</a>
+</p>
+
+<p>
+<a href="https://neo4j.com/blog/why-graph-data-relationships-matter/">https://neo4j.com/blog/why-graph-data-relationships-matter/</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Rick Neff</p>
+<p class="date">Created: 2020-02-17 Mon 07:14</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
