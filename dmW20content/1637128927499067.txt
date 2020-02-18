@@ -1,0 +1,282 @@
+-*- mode: org -*-
+#+title: Presentation 07
+#+subtitle: Designing NFA
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* Nondeterministic Finite Automata
+  DFA conform to the rules of NFA, but not (always) vice versa.
+** Formal Definition of DFA
+   5-tuple (Q, \Sigma, \delta, q_0, F), where
+
+  1. Q is a finite set called the *states*,
+  2. \Sigma is a finite set called the *alphabet*,
+  3. \delta: Q \times \Sigma \rarr Q is the *transition function*,
+  4. q_0 \in Q is the *start state*, and
+  5. F \sube Q is the *set of accept states* (or *final* states).
+
+** Formal Definition of NFA
+   5-tuple (Q, \Sigma, \delta, q_0, F), where
+
+  1. Q is a finite set called the *states*,
+  2. \Sigma is a finite set called the *alphabet* (which does NOT include \epsilon)
+  3. \delta: Q \times \Sigma \cup {\epsilon} \rarr \weierp(Q) is the *transition function*, (\Sigma_{\epsilon}_{} is short for \Sigma \cup {\epsilon}).
+  4. Q_0 \sube Q is the *set of start states*, and
+  5. F \sube Q is the *set of accept states* (or *final* states).
+
+** Equivalence
+   NFA can be converted into DFA because they both represent regular languages.
+
+** Easy to Design
+#+begin_src python :results file
+  from jove.Def_md2mc import md2mc
+  from jove.Def_DFA import min_dfa
+  from jove.Def_NFA import nfa2dfa
+  from jove.DotBashers import dotObj_dfa, dotObj_nfa
+
+  nfa='''
+  NFA
+  I    : 0|1 -> I
+  I    : 0   -> S0
+  S0   : 1   -> S01
+  S01  : 0   -> S010
+  S010 : 1   -> F
+  F    : 0|1 -> F
+  '''
+  mc = md2mc(nfa)
+  dfa = min_dfa(nfa2dfa(mc))
+  # try mc also changing dotObj_dfa to dotObj_nfa
+  return dotObj_dfa(dfa).render(filename = "contains0101", format = "png")
+#+end_src
+
+#+begin_src python :results file
+  from jove.Def_md2mc import md2mc
+  from jove.DotBashers import dotObj_nfa
+
+  nfa = md2mc('''NFA
+  IA : a -> IA
+  IA : a -> B
+  IA : b -> FC
+  B  : a -> IA
+  B  : b -> B
+  FC : b -> IA
+  FC : b -> B
+  ''')
+  return dotObj_nfa(nfa).render(filename = "nfa-one", format = "png")
+#+end_src
+
+#+begin_src python :results output
+  from jove.Def_md2mc import md2mc
+  from jove.Def_NFA import totalize_nfa, nfa2dfa, is_consistent_nfa
+
+  nfa = md2mc('''NFA
+  IA : a -> IA
+  IA : a -> B
+  IA : b -> FC
+  B  : a -> IA
+  B  : b -> B
+  FC : b -> IA
+  FC : b -> B
+  ''')
+
+  dfa = nfa2dfa(totalize_nfa(nfa))
+  print(is_consistent_nfa(nfa))
+  print(nfa["Q0"])
+  print(dfa["Delta"])
+#+end_src
+
+#+begin_src python :results file
+  from jove.Def_NFA import totalize_nfa, nfa2dfa
+  from jove.DotBashers import dotObj_dfa
+  from jove.Def_md2mc import md2mc
+
+  nfa = md2mc('''NFA
+  IA : a -> IA
+  IA : a -> B
+  IA : b -> FC
+  B  : a -> IA
+  B  : b -> B
+  FC : b -> IA
+  FC : b -> B
+  ''')
+
+  dfa = nfa2dfa(totalize_nfa(nfa))
+  return dotObj_dfa(dfa).render(filename = "dfa-one", format = "png")
+#+end_src
+
+#+begin_src python :results file
+   from jove.DotBashers import dotObj_nfa
+   from jove.Def_md2mc import md2mc
+
+   nfa = md2mc('''NFA
+   I : 0 -> A
+   A : '' -> F1
+   F1 : 0 -> F
+   F : '' -> I
+   ''')
+
+   return dotObj_nfa(nfa).render(filename = "nfa-two", format = "png")
+#+end_src
+
+** Easy to Simulate
+#+begin_src python :results output
+  from jove.Def_NFA import accepts_nfa
+  from jove.Def_md2mc import md2mc
+
+  nfa = md2mc('''NFA
+  I    : 0|1 -> I
+  I    : 0   -> S0
+  S0   : 0|1   -> S01
+  S01  : 0|1   -> S010
+  S010 : 0|1   -> F
+  ''')
+
+  for i in range(200):
+      into_the_depths = bin(i)[2:].zfill(5)
+      print(into_the_depths, ': ', accepts_nfa(nfa, into_the_depths))
+#+end_src
+
+* Nondeterminism in General
+** Excerpts from Ganesh's /Computation Engineering/ book:
+   Nondeterminism has many uses in computer science. It can help designers
+   describe the systems they are about to build even at stages of the design
+   where they have not determined all the details. In some cases, while these
+   details may be known to designers, they may still choose /not/ to include them
+   to avoid inundating their audience with excess information.
+
+   To understand nondeterminism in a real-world context, consider the act of
+   summoning an elevator car in a busy building that has multiple elevators.
+   After one presses the call button, it is not entirely predictable what will
+   happen. One may, if lucky, get a car headed in the same direction as they
+   intend to travel. If unlucky, one would get a car going in the opposite
+   direction, or a car that is full, etc. If one had perfect knowledge about the
+   entire building and its occupants, they could predict the outcome with
+   certainty. However, most people (except perhaps *control freaks*) /do not/ want
+   to keep track of all such information, instead preferring to live according
+   to a nondeterministic protocol that goes as follows: /if I am fated not to get
+   an empty car, I should try again./ In short, by employing nondeterminism, one
+   can write system descriptions at a high level, without worrying about pinning
+   down details too early. It has been said that pinning down details too early
+   (/premature optimization/) is at the root of all that is evil in software
+   design.
+
+   Nondeterministic descriptions have another property: they tend to
+   /over-approximate/ the system being described. Over-approximation helps ignore
+   special cases in the behavior of a system (it is akin to packaging a
+   delicate, but odd-shaped, electronic gadget by inserting it between a pair of
+   molded Styrofoam carriers, thus smoothening the overall appearance). By
+   adding behaviors, over-approximation often helps /round/ things up, hence
+   simplifying the whole system.
+
+   To better understand the ramifications of over-approximation, consider a
+   building where all north side elevators are designed /not/ to be interrupted
+   during their upward journey during early mornings (perhaps to ensure the
+   speedy progression of the janitorial staff and their accouterments to top
+   floors). In other words, each elevator control algorithm has an /if-then-else/
+   in it that tests whether it is running inside a north side elevator, checks
+   what time of day it is, and prevents interruption if the tests confirm *north*
+   and *morning*. Now, if one were to hire formal verification specialists to
+   mathematically verify that all the elevator control algorithms are working
+   correctly, here is how they could employ nondeterminism to simplify their
+   activities. They could simply replace the /if-then-else/ with a
+   nondeterministic jump to both cases. Such a modified control algorithm has
+   more behaviors than the original, in which /every/ elevator could
+   nondeterministically decide whether to ignore the user's interrupt or to give
+   heed to it. Now, if a verification specialist is handed the property to
+   verify; /If I ring for a car, it will eventually come to my floor/, that
+   property would pass on the nondeterministically over-approximated system. The
+   specialist would end up having verified this property more easily, by
+   ignoring the /if-then-else/. On the other hand, if they are handed another
+   property, namely, /if the car/ /is below my floor, is headed to a floor above
+   my floor and I press the up button, it will stop for me/, the verification
+   will fail for the over-approximated model because every elevator can exercise
+   the *ignore interrupt* option. The verification specialist will realize that
+   this is a /false positive/ --- a false alarm --- and then add the missing
+   detail, which is the /if-then-else/ statement. During system design and
+   verification, one can then add just enough information to prove each property
+   of interest. The alternative approach of revealing all internal information
+   (popular with many legal departments, who do so in fine print) both taxes the
+   mind and adds to verification time. Computer science's essential mission is
+   complexity management, and nondeterminism plays an essential role in this
+   regard.
+** Offload Complexity Management?
+   In real life, /decision-making/ (AKA /decidering/) is a task all of us must
+   perform many times, every day of our lives. What if we could offload that
+   burden?
+
+   Recall that Ganesh made a comment about excess information in his first
+   paragraph above. In his book this comment had a footnote where he added:
+
+#+BEGIN_QUOTE
+   In the modern society that suffers from /information pollution/, nondeterminism
+   can be the breath of oxygen that saves us from asphyxiation!
+#+END_QUOTE
+
+   Put on your philosophy hat and your how-to-live-in-modern-society mindset,
+   and read these next (excerpted) thoughts by David Foster Wallace, who, when
+   talking about assimilating knowledge (at a *drinking from a firehose* rate),
+   described:
+#+BEGIN_QUOTE
+  [...] a rate of consumption which tends to level everything out into an
+  undifferentiated mass of high-quality description and trenchant reflection
+  that becomes both numbing and euphoric, a kind of Total Noise that\rsquo{}s also the
+  sound of our U.S. culture right now, a culture and volume of info and spin and
+  rhetoric and context that I know I\rsquo{}m not alone in finding too much to even
+  absorb, much less to try to make sense of or organize into any kind of triage
+  of saliency or value. Such basic absorption, organization, and triage used to
+  be what was required of an educated adult, a.k.a. an informed citizen --- at
+  least that\rsquo{}s what I got taught. Suffice it here to say that the requirements
+  now seem different.
+
+  A corollary to the above bad news is that I\rsquo{}m not really even all that
+  confident or concerned about the differences between nonfiction and fiction
+  [...] There are, as it happens, intergenre differences that I know and care
+  about as a writer, though these differences are hard to talk about in a way
+  that someone who doesn\rsquo{}t try to write both fiction and nonfiction will
+  understand. I\rsquo{}m worried that they\rsquo{}ll sound cheesy and melodramatic. Although
+  maybe they won\rsquo{}t. Maybe, given the ambient volume of your own life\rsquo{}s noise,
+  the main difference will make sense to you. Writing-wise, fiction is scarier,
+  but nonfiction is harder --- because nonfiction\rsquo{}s based in reality, and
+  today\rsquo{}s felt reality is overwhelmingly, circuit-blowingly huge and complex.
+  Whereas fiction comes out of nothing. Actually, so wait: the truth is that
+  both genres are scary; both feel like they\rsquo{}re executed on tightropes, over
+  abysses --- it\rsquo{}s the abysses that are different. Fiction\rsquo{}s abyss is silence,
+  *nada*. Whereas nonfiction\rsquo{}s abyss is Total Noise, the seething static of
+  every particular thing and experience, and one\rsquo{}s total freedom of infinite
+  choice about what to choose to attend to and represent and connect, and how,
+  and why, etc.
+
+  I am acting as a [Decider], an evaluative filter, winnowing a very large field
+  of possibilities down to a manageable, absorbable Best for your delectation.
+  Thinking about this kind of Decidering is interesting in all kinds of
+  different ways. For example, from the perspective of Information Theory, the
+  bulk of the Decider\rsquo{}s labor actually consists of *excluding* nominees from the
+  final prize collection, which puts the Decider in exactly the position of
+  Maxwell\rsquo{}s Demon or any other kind of entropy-reducing info processor, since
+  the really expensive, energy-intensive part of such processing is always
+  deleting/discarding/resetting. But the general point is that professional
+  filtering/winnowing is a type of service that we citizens and consumers now
+  depend on more and more, and in ever-increasing ways, as the quantity of
+  available information and products and art and opinions and choices and all
+  the complications and ramifications thereof expands at roughly the rate of
+  Moore\rsquo{}s Law.
+
+  I suspect that part of why \lsquo{}bias\rsquo{} is so loaded and dicey a word just now ---
+  and why it\rsquo{}s so much-invoked and potent in cultural disputes --- is that we
+  are starting to become more aware of just how much subcontracting and
+  outsourcing and submitting to other Deciders we\rsquo{}re all now forced to do, which
+  is threatening (the inchoate awareness is) to our sense of ourselves as
+  intelligent free agents. And yet there is no clear alternative to this
+  outsourcing and submission. It may possibly be that acuity and taste in
+  choosing which Deciders one submits to is now the real measure of informed
+  adulthood.
+
+  [...] many of [the virtues of good writing] have to do with the ways in which
+  the pieces handle and respond to the tsunami of available fact, context, and
+  perspective that constitutes Total Noise. [Those that are most valuable] serve
+  as models and guides for how large of complex sets of facts can be sifted,
+  culled, and arranged in meaningful ways --- ways that yield and illuminate
+  truth instead of just adding more noise to the overall roar.
+#+END_QUOTE
