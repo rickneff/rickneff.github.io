@@ -1,0 +1,31 @@
+-*- mode: org -*-
+#+title: Divide Pair Conquer 07
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* TODO Four Mini-Tasks
+** TODO 1
+   Which step in the inductive proof of FLT best connects with a basic pattern
+   found in *some* but *NOT all* rows of Pascal\rsquo{}s Triangle?
+** TODO 2
+   Show that the positive integers less than 11, except 1 and 10, can be split
+   into pairs of integers such that each pair consists of integers that are
+   (Modular Multiplicative) inverses of each other modulo 11.
+** TODO 3
+   Use what you just showed to show that 10! \equiv_{11} -1.
+
+   (Note that for any N and m, N \equiv_m -1 is saying the same thing as N \equiv_m m - 1.)
+** TODO 4
+   In file:presentation-07.txt::*Equivalently, why does the last suggested way
+   *not work* for calculating the MMI of the encryption exponent to get the
+   decryption exponent for RSA?
