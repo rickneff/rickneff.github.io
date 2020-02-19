@@ -1,0 +1,496 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 07
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the link below, or with your cursor somewhere in it,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+:END:
+* TODO Answer a Question Involving Multiple Ideas
+  The Pythagoreans may have been the first to notice that the most beautiful
+  harmonies produced by lyres or flutes corresponded to the simplest fractional
+  ratios between the lengths of vibrating strings or pipes. The *Pythagorean
+  Scale* gives the numerical ratios of frequencies determining the principal
+  intervals on which Western music is essentially based. Also known as the pure
+  *diatonic scale*, these frequencies (in inverse proportion to the lengths of
+  the vibrating elements) are in the ratios 24:27:30:32:36:40:45:48, giving many
+  instances of simple ratios which underlie harmonies that are pleasing to the
+  ear.
+
+  Demonstrate an understanding of what meaning the 2-digit numbers (the 8
+  numbers separated by colons) have by matching the interval on the scale in the
+  first column with the corresponding *simple ratio* in the second column. (You
+  don\rsquo{}t need to know music theory to answer this --- logical thinking will
+  suffice.)
+
+  | Scale Interval   | Simple Ratio |
+  |------------------+--------------|
+  | a perfect unison |         15:8 |
+  | a major second   |          2:1 |
+  | a major third    |          1:1 |
+  | a perfect fourth |          5:3 |
+  | a perfect fifth  |          9:8 |
+  | a major sixth    |          5:4 |
+  | a major seventh  |          3:2 |
+  | a perfect octave |          4:3 |
+
+  Which goes with which? Reproduce the table above with the correct matching.
+
+* Going Deeper into the Math-Music Connection
+  You have mapped the names of musical intervals to the ratios of frequencies
+  from the Pythagorean (pure diatonic) scale, reproduced for your convenience by
+  evaluating the following code block:
+#+begin_src elisp
+  (require 'calc-frac)
+
+  (defun fracp (a)
+    (eq (car-safe a) 'frac))
+
+  (append '(("Scale Interval" "Ratio" "Simple Ratio") hline)
+          (loop with ratios = "24:27:30:32:36:40:45:48"
+                with ratios-as-number-list = (mapcar 'string-to-number (split-string ratios ":"))
+                with lowest = (car ratios-as-number-list)
+                for interval in '("perfect unison"
+                                  "major second"
+                                  "major third"
+                                  "perfect fourth"
+                                  "perfect fifth"
+                                  "major sixth"
+                                  "major seventh"
+                                  "perfect octave")
+                for next in ratios-as-number-list
+                for reduced = (math-make-frac next lowest)
+                collect (list interval
+                              (format "%d:%d" next lowest)
+                              (if (fracp reduced)
+                                  (apply 'format "%d:%d" (cdr reduced))
+                                (format "%d:1" reduced)))))
+#+end_src
+
+* Deeper Still
+** Introducing a Very Mathy and Musical Man
+   [[https://www.math.wustl.edu/~wright/new_mathmusic_class.html][David Wright]]
+** Another Very Mathy Man
+   Connects Music to Math:
+   [[https://www.youtube.com/watch?v=cyW5z-M2yzw][Grant Sanderson]]
+** More Math via Computer Programming
+   Now have a look at:
+   [[http://chuck.cs.princeton.edu][ChucK : Strongly-timed, Concurrent, and On-the-fly Music Programming Language]]
+*** Intervals
+    Evaluate the code block below or type C-c C-v C-t to tangle the scripts in this file first:
+#+begin_src elisp :results silent
+  (org-babel-tangle)
+#+end_src
+**** Perfect Unison
+  #+begin_src sh :results silent
+    chuck Cjust.ck Cjust.ck
+  #+end_src
+**** Imperfect Unison
+  #+begin_src sh :results silent
+    chuck Cjust.ck Ceven.ck
+  #+end_src
+**** Major Second
+  #+begin_src sh :results silent
+    chuck Cjust.ck Djust.ck
+  #+end_src
+**** Major Third
+  #+begin_src sh :results silent
+    chuck A4.ck CsharpJust.ck
+  #+end_src
+**** Perfect Fourth
+  #+begin_src sh :results silent
+    chuck A4.ck Djust.ck
+  #+end_src
+**** Perfect Fifth
+  #+begin_src sh :results silent
+    chuck A4.ck Ejust.ck
+  #+end_src
+**** Major Sixth
+  #+begin_src sh :results silent
+    chuck Cjust.ck A6.ck
+  #+end_src
+**** Major Seventh
+  #+begin_src sh :results silent
+     chuck Cjust.ck B.ck
+  #+end_src
+**** Perfect Octave
+  #+begin_src sh :results silent
+     chuck A4.ck A5.ck
+  #+end_src
+*** Chuck Scripts
+  #+begin_src chuck :tangle 440.ck
+  SinOsc s => dac;
+  440 => s.freq;
+  .2::second => now;
+  495 => s.freq;
+  .2::second => now;
+  556.875 => s.freq;
+  .2::second => now;
+  626.484375 => s.freq;
+  .2::second => now;
+  660 => s.freq;
+  .2::second => now;
+  742.5 => s.freq;
+  .2::second => now;
+  835.3125 => s.freq;
+  .2::second => now;
+  880 => s.freq;
+  .2::second => now;
+  #+end_src
+
+  #+begin_src chuck :tangle 7th.ck
+  SinOsc s => dac;
+  1044 => s.freq;
+  3000::ms => now;
+  #+end_src
+
+  #+begin_src chuck :tangle A4.ck
+  SinOsc s => dac;
+  440 => s.freq;
+  3000::ms => now;
+  #+end_src
+
+  #+begin_src chuck :tangle A5.ck
+  SinOsc s => dac;
+  880 => s.freq;
+  3000::ms => now;
+  #+end_src
+
+  #+begin_src chuck :tangle A6.ck
+  SinOsc s => dac;
+  928 => s.freq;
+  3000::ms => now;
+  #+end_src
+
+  #+begin_src chuck :tangle B.ck
+  SinOsc s => dac;
+  990 => s.freq;
+  3000::ms => now;
+  #+end_src
+
+  #+begin_src chuck :tangle Ceven.ck
+  SinOsc s => dac;
+  523.251131 => s.freq;
+  3000::ms => now;
+  #+end_src
+
+  #+begin_src chuck :tangle Cjust.ck
+  SinOsc s => dac;
+  556.875 => s.freq;
+  3000::ms => now;
+  #+end_src
+
+  #+begin_src chuck :tangle CsharpEven.ck
+  SinOsc s => dac;
+  554.365262 => s.freq;
+  3000::ms => now;
+  #+end_src
+
+  #+begin_src chuck :tangle CsharpJust.ck
+  SinOsc s => dac;
+  550 => s.freq;
+  3000::ms => now;
+  #+end_src
+
+  #+begin_src chuck :tangle Deven.ck
+  SinOsc s => dac;
+  587.329536 => s.freq;
+  3000::ms => now;
+  #+end_src
+
+  #+begin_src chuck :tangle Djust.ck
+  SinOsc s => dac;
+  587.329536 => s.freq;
+  3000::ms => now;
+  #+end_src
+
+  #+begin_src chuck :tangle Eeven.ck
+  SinOsc s => dac;
+  659.255114 => s.freq;
+  3000::ms => now;
+  #+end_src
+
+  #+begin_src chuck :tangle Ejust.ck
+  SinOsc s => dac;
+  660 => s.freq;
+  3000::ms => now;
+  #+end_src
+
+  #+begin_src chuck :tangle brass.ck
+  // patch
+  Brass brass => JCRev r => dac;
+  .75 => r.gain;
+  .05 => r.mix;
+
+
+  // our notes
+  [ 61, 63, 65, 66, 68 ] @=> int notes[];
+
+  // infinite time-loop
+  while( true )
+  {
+      // set
+      Math.random2f( 0, 1 ) => brass.lip;
+      Math.random2f( 0, 1 ) => brass.slide;
+      Math.random2f( 0, 12 ) => brass.vibratoFreq;
+      Math.random2f( 0, 1 ) => brass.vibratoGain;
+      Math.random2f( 0, 1 ) => brass.volume;
+
+      // print
+      <<< "---", "" >>>;
+      <<< "lip tension:", brass.lip() >>>;
+      <<< "slide length:", brass.slide() >>>;
+      <<< "vibrato freq:", brass.vibratoFreq() >>>;
+      <<< "vibrato gain:", brass.vibratoGain() >>>;
+      <<< "volume:", brass.volume() >>>;
+
+      for( int i; i < notes.cap(); i++ )
+      {
+          play( 12 + notes[i], Math.random2f( .6, .9 ) );
+          300::ms => now;
+      }
+  }
+
+  // basic play function (add more arguments as needed)
+  fun void play( float note, float velocity )
+  {
+      // start the note
+      Std.mtof( note ) => brass.freq;
+      velocity => brass.noteOn;
+  }#+end_src
+
+  #+begin_src chuck :tangle disen.ck
+  SinOsc s => dac;
+  while (true)
+  {
+     220 => s.freq;
+     .5::second => now;
+     440 => s.freq;
+     .5::second => now;
+     880 => s.freq;
+     1::second => now;
+  }
+  #+end_src
+
+  #+begin_src chuck :tangle dtmf.ck
+  // name: dtmf.ck
+  // desc: dual tone multiple frequency
+  //       (play this into analog phones to call random people)
+  // author: Perry Cook
+
+  SinOsc row => dac;
+  SinOsc col => dac;
+
+  // frequencies
+  [1209.0, 1336.0, 1477.0] @=> float cols[];
+  [697.0, 770.0, 852.0, 941.0] @=> float rows[];
+
+  // if you want to look up by number ( 0 - 9, *, # )
+  fun int key2col( int key )
+  { if( !key ) return 1; return (key - 1) % 3; }
+  fun int key2row( int key )
+  { if( !key ) return 3; return (key - 1) / 3; }
+
+  0 => int i;
+  int r,c,n;
+
+  // go!
+  while (i < 7) {
+      .5 => row.gain;
+      .5 => col.gain;
+      Math.random2(0,3) => r;
+      Math.random2(0,2) => c;
+      1 + r * 3 + c => n;
+
+      if (n==11) 0 => n;
+      if (n==10) {
+          <<< r , c, "*" >>>;
+      }
+      else if (n==12) {
+          <<< r , c, "#" >>>;
+      }
+      else
+          <<< r , c, n >>>;
+
+      rows[r] => row.freq;
+      cols[c] => col.freq;
+
+      0.1 :: second => now;
+      0.0 => row.gain;
+      0.0 => col.gain;
+      0.05 :: second => now;
+      i + 1 => i;
+  }
+  #+end_src
+
+  #+begin_src chuck :tangle echo.ck
+  // feedforward
+  adc => Gain g => dac;
+  // feedback
+  g => Gain feedback => DelayL delay => g;
+
+  // set delay parameters
+  .75::second => delay.max => delay.delay;
+  // set feedback
+  .5 => feedback.gain;
+  // set effects mix
+  .75 => delay.gain;
+
+  // infinite time loop
+  while( true ) 1::second => now;
+  #+end_src
+
+  #+begin_src chuck :tangle even.ck
+  SinOsc s => dac;
+  440.000000 => s.freq;
+  .2::second => now;
+  466.163762 => s.freq;
+  .2::second => now;
+  493.883301 => s.freq;
+  .2::second => now;
+  523.251131 => s.freq;
+  .2::second => now;
+  554.365262 => s.freq;
+  .2::second => now;
+  587.329536 => s.freq;
+  .2::second => now;
+  622.253967 => s.freq;
+  .2::second => now;
+  659.255114 => s.freq;
+  .2::second => now;
+  698.456463 => s.freq;
+  .2::second => now;
+  739.988845 => s.freq;
+  .2::second => now;
+  783.990872 => s.freq;
+  .2::second => now;
+  830.609395 => s.freq;
+  .2::second => now;
+  880.000000 => s.freq;
+  .2::second => now;
+  #+end_src
+
+  #+begin_src sh
+    chuck freqslider.ck
+  #+end_src
+
+  #+begin_src chuck :tangle freqslider.ck
+  SinOsc sine => dac;
+
+  MAUI_Slider slider;
+
+  slider.range(200, 2000);
+  slider.name("frequency");
+  slider.display();
+
+  while (true)
+  {
+     slider.value() => sine.freq;
+     slider => now;
+  }
+  #+end_src
+
+  #+begin_src chuck :tangle just.ck
+  SinOsc s => dac;
+  440 => s.freq;
+  .2::second => now;
+  495 => s.freq;
+  .2::second => now;
+  556.875 => s.freq;
+  .2::second => now;
+  626.484375 => s.freq;
+  .2::second => now;
+  660 => s.freq;
+  .2::second => now;
+  742.5 => s.freq;
+  .2::second => now;
+  835.3125 => s.freq;
+  .2::second => now;
+  880 => s.freq;
+  .2::second => now;
+  #+end_src
+
+  #+begin_src chuck :tangle random.ck
+  SinOsc s => dac;
+  while (true)
+  {
+     Math.random2f(300, 1000) => s.freq;
+     200::ms => now;
+  }
+  #+end_src
+
+  #+begin_src chuck :tangle randomFaster.ck
+  SinOsc s => dac;
+  while (true)
+  {
+     Math.random2f(300, 1000) => s.freq;
+     100::ms => now;
+  }
+  #+end_src
+
+  #+begin_src chuck :tangle slide02.ck
+  // instantiate slider
+  MAUI_Slider freq;
+  "frequency" => freq.name;
+  freq.display();
+  freq.irange(1, 127);
+
+  // instantiate second slider
+  MAUI_Slider harm;
+  "harmonics" => harm.name;
+  harm.display();
+  harm.irange(1, 40);
+
+  // our patch
+  Blit s => dac;
+  int last;
+
+  // infinite time loop
+  while (true)
+  {
+     freq.value() => Std.mtof => s.freq;
+     if (harm.value() != last)
+     {
+        harm.value() $ int => last => s.harmonics;
+     }
+     10::ms => now;
+  }
+
+  #+end_src
+
+  #+begin_src chuck :tangle whole.ck
+  // another candidate for lamest demo
+
+  // patch
+  SinOsc s => JCRev r => dac;
+  .5 => r.gain;
+  .075 => r.mix;
+
+  // note number
+  20 => float note;
+
+  // go up to 127
+  while( note < 128 )
+  {
+      // convert MIDI note to hz
+      Std.mtof( note ) => s.freq;
+      // turn down the volume gradually
+      .5 - (note/256.0) => s.gain;
+
+      // move up by whole step
+      note + 2 => note;
+
+      // advance time
+      .125::second => now;
+  }
+
+  // turn off s
+  0 => s.gain;
+  // wait a bit
+  2::second => now;
+  #+end_src
