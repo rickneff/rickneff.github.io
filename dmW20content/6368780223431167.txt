@@ -1,3 +1,188 @@
 -*- mode: org -*-
-[[elisp:(progn (get-dm-file "assignment-08.txt" 6368780223431167) (revert-buffer t t t))][Replace this stub file with real one when it is available.]]
-Content not yet available.
+#+title: Assignment 08
+#+subtitle: PQR Number Theory III
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
+:END:
+* Exercises
+  Exercise, to be precise.
+** TODO GYN
+#+begin_note
+  Help Abu and Ila out. This version of =mod-expt= gets a /little/ better
+  mileage than their simplistic one. It keeps the numbers smaller by reducing
+  each partial exponentiation by modding it once every iteration instead of once,
+  period. What fact or facts of modular arithmetic justify this?
+
+#+begin_src elisp :results silent
+  (defun a-better-mod-expt (base power modulus)
+    (loop with result = 1
+          for n from 1 to power
+          do (setq result (mod (* result base) modulus))
+          finally return result))
+#+end_src
+:HINT:
+  - Hint :: Reread the interchange between Til, Abu and Ila in PQS.
+:END:
+#+end_note
+#+begin_info
+  Your answer goes here.
+#+end_info
+* Problems
+  Problem, to be precise.
+** TODO XGG
+#+begin_note
+  Experiment with RSA using the following code. You will need a better modular
+  exponentiation function than =mod-expt= or perhaps even =a-better-mod-expt=.
+  Implement the =pow-mod= function to be this better version. Note the
+  difference between /encoding/ and /encryption/, and between /decryption/ and
+  /decoding/.
+
+  How \ldquo{}big\rdquo a message can you successfully round-trip?
+
+#+begin_src elisp :results silent
+  (defun rsa-encrypt (message n e &optional encoder)
+    (let* ((message-encoded (funcall (or encoder 'identity) message))
+           (encrypted (pow-mod message-encoded e n)))
+      encrypted))
+
+  (defun rsa-decrypt (encrypted n d &optional decoder)
+    (let* ((decrypted (pow-mod encrypted d n))
+           (message-decoded (funcall (or decoder 'identity) decrypted)))
+      message-decoded))
+
+  (defun round-trip (message n e d &optional encoder decoder)
+    (equal message
+           (rsa-decrypt (rsa-encrypt message n e encoder)
+                        n d decoder)))
+#+end_src
+
+  You will need working =from-base-27= and =to-base-27= functions, as well as a
+  working knowledge of /symbol property lists/ to play with /this/ test code:
+
+#+begin_src elisp
+  (defun test-rsa (message-with-spaces)
+    (let* ((message (mapconcat 'identity
+                               (split-string message-with-spaces " ") "@"))
+            (n (get 'rsa-players :n))
+            (e (get 'rsa-players :e))
+            (d (get 'rsa-players :d))
+            (encrypted (rsa-encrypt message n e 'from-base-27))
+            (decrypted (rsa-decrypt encrypted n d 'to-base-27))
+            (decrypted-message-with-spaces
+             (mapconcat 'identity (split-string decrypted "@") " "))
+            (success (string= message-with-spaces
+                              decrypted-message-with-spaces)))
+       (princ (format (concat "\"%s\"\nwas encoded and encrypted as\n%s\n"
+                              "then decrypted and decoded as\n\"%s\"\n")
+                      message-with-spaces
+                      encrypted
+                      decrypted-message-with-spaces))
+       (princ (if success "" "un"))
+       (princ "successfully.\n")
+       success))
+#+end_src
+:HINT:
+  - Hint :: This will be discussed in class.
+:END:
+#+end_note
+#+begin_info
+Your answer goes here.
+#+end_info
+* Puzzles
+  These not-from-the-book puzzles are really GPAOs.
+** TODO STT
+   Space-Time Tradeoff
+
+   The vector named first-ten-million-primes is created when loading the
+   \ldquo{}first-ten-million-primes\rdquo package. That consists of 10,000,000 primes
+   hardwired into an 89 Mbyte file! (It is problematic to load this source
+   file into emacs, but loading the package does not require this.)
+
+#+name: ftmp-package-filename
+#+begin_src elisp
+  (expand-file-name "~/.emacs.d/elpa/first-ten-million-primes-1.0/first-ten-million-primes.el")
+#+end_src
+
+#+begin_src sh :results output :var filename=ftmp-package-filename
+  head -20 $filename
+#+end_src
+
+#+begin_src sh :results output :var filename=ftmp-package-filename
+  tail -20 $filename
+#+end_src
+
+   The question to explore: Would it be faster to use an efficient Sieve of
+   Eratosthenes and just create this vector on the fly?
+
+#+begin_src elisp :results silent
+  (defun sieve (limit)
+    "Sieve of Eratothenes."
+    (let ((prime-vec (make-bool-vector limit t)))
+      (aset prime-vec 0 nil) ;; zero is not prime
+      (aset prime-vec 1 nil) ;; nor is one
+      (loop for p from 2 to (floor (sqrt limit))
+            when (aref prime-vec p) ;; when p is prime
+            do (loop for i from (* p p) below limit by p
+                     do (aset prime-vec i nil)))
+      prime-vec))
+
+; (setq prime-vector (sieve 100000000))
+
+  (defun is-prime (n)
+    (aref prime-vector n))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defmacro measure-time (&rest body)
+    "Measure and return the running time of the code in body."
+    (declare (indent defun))
+    (let ((start (make-symbol "start")))
+      `(let ((,start (float-time)))
+         ,@body
+         (- (float-time) ,start))))
+#+end_src
+
+#+begin_src elisp
+  (require 'calc-math)
+
+  (vector (measure-time
+            (setq results
+                  (math-read-number
+                   (mapconcat 'number-to-string
+                              (number-sequence 1 100) ""))))
+          results)
+#+end_src
+
+#+begin_src elisp
+  (measure-time (setq prime-vector (sieve 10000000)))
+#+end_src
+
+#+begin_src elisp
+  (measure-time (require 'first-ten-million-primes))
+#+end_src
+
+#+begin_src elisp
+  (measure-time (unload-feature 'first-ten-million-primes))
+#+end_src
+
+#+begin_src elisp
+  (measure-time (require 'first-ten-million-primes))
+#+end_src
+** TODO IPR
+   Implement in elisp Pollard\rsquo{}s Rho method of factorization (see bigal.jar
+   (generated by the "bigal" package)). Compare it with the simplistic
+   trial-division =factorize= function in the =ment= package.
