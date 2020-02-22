@@ -1,0 +1,3 @@
+-*- mode: org -*-
+[[elisp:(progn (get-dm-file "assignment-08.txt" 6368780223431167) (revert-buffer t t t))][Replace this stub file with real one when it is available.]]
+Content not yet available.
