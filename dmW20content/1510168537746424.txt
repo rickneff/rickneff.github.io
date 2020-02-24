@@ -1,0 +1,237 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 08
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Based on what you learned from file:presentation-08.txt and your reading of
+  Chapter 13:
+
+* TODO Investigate a Turing Machine Written in Java
+
+#+begin_src java :tangle TuringMachine.java
+import java.util.*;
+
+enum State
+{
+   A, B, C, D, E, F, G, H;
+}
+
+public class TuringMachine
+   implements Runnable
+{
+   private static final int L = -1;
+   private static final int R = +1;
+
+   static Map<SC, SCD> cNextStateMap;
+   static Set<State> cFinalStates;
+
+   static
+   {
+      cNextStateMap = new HashMap<SC, SCD>();
+      cNextStateMap.put(new SC(State.A, '0'), new SCD(State.B, '1',  L));
+      cNextStateMap.put(new SC(State.A, '1'), new SCD(State.A, '1',  L));
+      cNextStateMap.put(new SC(State.B, '0'), new SCD(State.C, '1',  R));
+      cNextStateMap.put(new SC(State.B, '1'), new SCD(State.B, '1',  R));
+      cNextStateMap.put(new SC(State.C, '0'), new SCD(State.A, '1',  L));
+      cNextStateMap.put(new SC(State.C, '1'), new SCD(State.D, '1',  R));
+      cNextStateMap.put(new SC(State.D, '0'), new SCD(State.A, '1',  L));
+      cNextStateMap.put(new SC(State.D, '1'), new SCD(State.E, '1',  R));
+      cNextStateMap.put(new SC(State.E, '0'), new SCD(State.H, '1',  R));
+      cNextStateMap.put(new SC(State.E, '1'), new SCD(State.C, '0',  R));
+
+      cFinalStates = new HashSet<State>();
+      cFinalStates.add(State.H);
+   }
+
+   public static void main(String[] args)
+   {
+      new TuringMachine().run();
+   }
+
+   Map<Integer, Character> mTape;
+   int mTapeIndex;
+   State mCurrentState;
+   Set<State> mFinalStates;
+   Map<SC, SCD> mNextStateMap;
+
+   TuringMachine()
+   {
+      this("", 0, State.A, cFinalStates, cNextStateMap);
+   }
+
+   TuringMachine(String input, int nextTapeIndex,
+                 State currentState, Set<State> finalStates,
+                 Map<SC, SCD> nextStateMap)
+   {
+      mTape = new TreeMap<Integer, Character>();
+      for (int i = 0; i < input.length(); i++) {
+         writeTape(input.charAt(i), i);
+      }
+      mTapeIndex = nextTapeIndex;
+      mCurrentState = currentState;
+      mFinalStates = finalStates;
+      mNextStateMap = nextStateMap;
+   }
+
+   public void run()
+   {
+      int steps = 0;
+      while (keepRunning()) {
+         executeProgram();
+      	 steps++;
+      }
+      returnAndReport();
+      System.out.println("Steps: " + steps);
+   }
+
+   private boolean keepRunning()
+   {
+      return (! mFinalStates.contains(mCurrentState));
+   }
+
+   private void executeProgram()
+   {
+      char nextChar = readTape(mTapeIndex);
+      SCD nextStateCharDir =
+         mNextStateMap.get(new SC(mCurrentState, nextChar));
+
+      if (nextStateCharDir != null) {
+         State nextState = nextStateCharDir.mState;
+         char ch = nextStateCharDir.mChar;
+         int dir = nextStateCharDir.mDirection;
+
+         mCurrentState = nextState;
+         writeTape(ch, mTapeIndex);
+         mTapeIndex += dir;
+      }
+   }
+
+   public char readTape(int index)
+   {
+      Character rtnval = mTape.get(index);
+      return ((rtnval == null) ? '0' :  rtnval);
+   }
+
+   public void writeTape(char ch, int index)
+   {
+      mTape.put(new Integer(index), new Character(ch));
+   }
+
+   private void returnAndReport()
+   {
+      System.out.println(tapeToString());
+      if (mFinalStates.contains(mCurrentState)) {
+         System.out.println("Reached a final state, so ACCEPT.\n");
+      }
+      else {
+         System.out.println("Did not reach a final state, so REJECT.\n");
+      }
+   }
+
+   private String tapeToString()
+   {
+      int numZeros = 0;
+      int numOnes  = 0;
+      StringBuffer buf = new StringBuffer();
+      for (Character ch : mTape.values()) {
+         buf.append(ch);
+         if (ch == '0') numZeros++;
+         else if (ch == '1') numOnes++;
+      }
+      buf.append(" has ");
+      buf.append(numZeros);
+      buf.append(" zeros and ");
+      buf.append(numOnes);
+      buf.append(" ones.");
+      return buf.toString();
+   }
+}
+#+end_src
+* TODO Create a Turing Machine to Delete a Character
+  This task is to delete a character from the tape string. Deleting the current
+  symbol means transforming the tape from x\sigma{}y to xy where \sigma is any symbol,
+  including a blank, and y is a string of nonblank symbols. Assume the input
+  alphabet is {a, b}.
+
+  HINT: You\rsquo{}ll need a couple of states (labeled q_a and q_b, say) for your TM to
+  remember a symbol between the time it is erased and the time it is copied in
+  the next square to the left. (The complete TM requires about 6 states total,
+  with 12 transitions.)
+
+* TODO Create a Turing Machine to Insert a Character
+  This task is the opposite of the first one, namely, to insert a character into
+  the tape string. Inserting the symbol \sigma is done virtually the same way as
+  deleting, except that the single pass goes from left to right, symbols are
+  moved to the right instead of to the left, and the move that starts things off
+  writes \sigma instead of a blank.
+
+* TODO Create a Turing Machine to Copy a String
+  Let \diamond represent the blank symbol. A /Copy/ TM starts with tape \diamond{}x where x is a
+  string of nonblank symbols, and ends up with \diamond{}x\diamond{}x. Again, assume the input
+  alphabet is {a, b}.
+
+  Hint: This TM requires about 10 states, and not quite double that many transitions.
+
+* TODO Refresh Your Knowledge of the 3x+1 Conjecture
+#+begin_src elisp :results silent
+  (defun 3x+1 (x)
+    (if (evenp x)
+        (/ x 2)
+      (1+ (* 3 x))))
+
+  (defun try-one (x)
+    (while (> x 1)
+      (setq x (3x+1 x)))
+    (= x 1))
+
+  (defun try-many (max &optional start)
+    (loop for x from (or start 1) to max
+          always (try-one x)))
+#+end_src
+
+#+begin_src elisp :results raw
+  (try-many 100000)
+#+end_src
+* TODO Compare With Python
+  The code on page 200 does the 3x+1 Conjecture testing recursively:
+#+begin_src python :results output
+  def tep1(x):
+      if (x==1):
+          return 1
+      elif (x%2 == 0):
+          return tep1(x/2)
+      else:
+          return tep1(3*x+1)
+
+  print(tep1(3))
+  print(tep1(191))
+  print(tep1(19192949297080))
+  print(tep1(191929492970809272397923472398492839482))
+  print(tep1(191929492970809272397923472398492839482938492))
+#+end_src
+  Modify this code to check all numbers up to a given max, like the elisp code does,
+  and compare their execution speeds.
+
+* TODO Modify a *Non-Trivial* Turing Machine Program
+  The Turing machine program on page 202 performs the continuing 3x+1
+  transformation on an input that is a binary number. So for example if the
+  initial tape has
+
+  =11=
+
+  which is the binary representation of the decimal number three, the final tape
+  will have
+
+  =1=
+
+  on it.
+
+  Modify the program so that a trace of all intermediate results appears on the
+  output tape, e.g.:
+
+  =11*1010*101*10000*1000*100*10*1=
+
+  which separates with a star the binary representations of the numbers in the
+  continuing 3x+1 transformation from 3 to 10 to 5 to 16 to 8 to 4 to 2 to 1.
