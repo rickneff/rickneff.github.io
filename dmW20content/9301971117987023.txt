@@ -1,0 +1,101 @@
+-*- mode: org -*-
+#+title: Presentation 08
+#+subtitle: Designing Turing Machines
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* Look at Turing Machines
+   [[~/goo/oldcopy/cs480/x/TuringMachines.pdf][An Overview and Review]]
+** Jove Alternatives?
+   There are resources available other than Jove that you might find helpful,
+   like [[http://morphett.info/turing/turing.html][this Turing Machine simulator]], or the Java-based program called [[http://www.jflap.org/][JFLAP]].
+* Look at a Couple More TMs
+** TM 1
+  #+name: tm1-desc
+  | Current | Symbol | Next  |  Symbol | Move      |
+  | State   |   Read | State | Written | Direction |
+  |---------+--------+-------+---------+-----------|
+  | I0      |      x | S1    |       x | R         |
+  | S1      |      0 | S1    |       0 | R         |
+  | S1      |      1 | S1    |       1 | R         |
+  | S1      |      x | S2    |       x | L         |
+  | S2      |      1 | S2    |       0 | L         |
+  | S2      |      x | Fhalt |       1 | S         |
+  | S2      |      0 | S3    |       1 | L         |
+  | S3      |      x | Fhalt |       x | S         |
+  | S3      |      0 | S3    |       0 | L         |
+  | S3      |      1 | S3    |       1 | L         |
+
+#+name: tm1-description
+#+begin_src elisp :results output :var table=tm1-desc
+  (princ "TM\n")
+  (loop for (cs sr ns sw md) in (cddr table)
+        do (princ (format "%s : %s ; %s , %s -> %s\n" cs sr sw md ns)))
+#+end_src
+
+#+begin_src python :results file :var md=tm1-description
+  from jove.Def_md2mc import md2mc
+  from jove.DotBashers import dotObj_tm
+
+  return dotObj_tm(md2mc(md), FuseEdges=True).render(filename = 'tm1', format = 'png')
+#+end_src
+
+#+results:
+[[file:tm1.png]]
+
+** TM 2
+    file:wpoundw.txt
+  #+name: tm4wpoundw-desc
+  | Current | Symbol | Next  | Symbol  | Move      |
+  | State   | Read   | State | Written | Direction |
+  |---------+--------+-------+---------+-----------|
+  | I0      | 0      | S1    | X       | R         |
+  | I0      | #      | S5    | #       | R         |
+  | I0      | 1      | S7    | Y       | R         |
+  | S1      | #      | S2    | #       | R         |
+  | S1      | 0      | S1    | 0       | R         |
+  | S1      | 1      | S1    | 1       | R         |
+  | S2      | 0      | S3    | X       | L         |
+  | S2      | X      | S2    | X       | R         |
+  | S2      | Y      | S2    | Y       | R         |
+  | S3      | #      | S4    | #       | L         |
+  | S3      | Y      | S3    | Y       | L         |
+  | S3      | X      | S3    | X       | L         |
+  | S4      | Y      | S0    | Y       | R         |
+  | S4      | X      | S0    | X       | R         |
+  | S4      | 1      | S4    | 1       | L         |
+  | S4      | 0      | S4    | 0       | L         |
+  | S5      | B      | F6    | B       | R         |
+  | S5      | Y      | S5    | Y       | R         |
+  | S5      | X      | S5    | X       | R         |
+  | S7      | #      | S8    | #       | R         |
+  | S7      | 1      | S7    | 1       | R         |
+  | S7      | 0      | S7    | 0       | R         |
+  | S8      | 1      | S9    | Y       | L         |
+  | S8      | Y      | S8    | Y       | R         |
+  | S8      | X      | S8    | X       | R         |
+  | S9      | #      | SA    | #       | L         |
+  | S9      | X      | S9    | X       | L         |
+  | S9      | Y      | S9    | Y       | L         |
+  | SA      | X      | S0    | X       | R         |
+  | SA      | Y      | S0    | Y       | R         |
+  | SA      | 1      | SA    | 1       | L         |
+  | SA      | 0      | SA    | 0       | L         |
+#+name: tm4wpoundw-description
+#+begin_src elisp :results output :var table=tm4wpoundw-desc
+  (princ "TM\n")
+  (loop for (cs sr ns sw md) in (cddr table)
+        do (princ (format "%s : %s ; %s , %s -> %s\n" cs sr sw md ns)))
+#+end_src
+
+#+begin_src python :results file :var md=tm4wpoundw-description
+  from jove.Def_md2mc import md2mc
+  from jove.DotBashers import dotObj_tm
+
+  return dotObj_tm(md2mc(md), FuseEdges=True).render(filename = 'tm4wpoundw', format = 'png')
+#+end_src
+
+#+results:
+[[file:tm4wpoundw.png]]
