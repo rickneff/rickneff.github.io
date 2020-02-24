@@ -1,0 +1,176 @@
+-*- mode: org -*-
+#+title: Presentation 08
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not \ldquo{}HINT\rdquo)
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup.hide
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* Review of RSA
+  Let us review how RSA encryption shuffles/scrambles numbers with some (very)
+  small primes, say 2 and 11:
+
+#+begin_src elisp :results raw
+  (mod (expt 19 7) 22)
+#+end_src
+
+#+results:
+13
+19
+
+** Alternatively
+  What about 3 and 11?
+#+begin_src elisp :results raw
+  (mod (expt 32 3) 33)
+#+end_src
+
+** Save Typing
+#+begin_src elisp
+  (loop for m from 0 below 22
+        collect (list m (mod (expt m 3) 22)))
+#+end_src
+
+#+begin_src elisp
+  (loop for m from 0 below 33
+        collect (list m (mod (expt m 3) 33)))
+#+end_src
+
+#+begin_src elisp
+  (setq x (* 17 19)
+        y (+ (* x x x x)
+             (* -5 x x x)
+             (* 10 x x)
+             (* -10 x)
+             4))
+#+end_src
+
+#+results:
+: 10717088970
+
+#+begin_src elisp
+  (+ (* x y) (1- x))
+#+end_src
+
+#+begin_src elisp
+  (mod (expt 322 5) 323)
+#+end_src
+
+#+results:
+: 322
+
+** Tabulate
+   counts of how many scramblings are *not* derangements:
+#+begin_src elisp
+  (append '(("p" "q" "n" "t" "e" "#" "#/n" " " "%") hline)
+          (loop with primes-less-than-20 = '(2 3 5 7 11 13 17 19)
+                for p in primes-less-than-20
+                append (loop for q in (cdr (member p primes-less-than-20))
+                             for n = (* p q)
+                             for tee = (* (1- p) (1- q))
+                             for e = (loop for i from 3 below n
+                                           when (= 1 (gcd i tee))
+                                           return i)
+                             for num = (loop for m from 0 below n
+                                             count (= m (mod (expt m e) n)))
+                             collect (list p q n tee e num (format "%d/%d" num n) '=
+                                           (format "%2.2f%%" (/ num (float n) .01))))))
+#+end_src
+
+#+results:
+|  p |  q |   n |   t | e |  # | #/n    |   |       % |
+|----+----+-----+-----+---+----+--------+---+---------|
+|  2 |  3 |   6 |   2 | 3 |  6 | 6/6    | = | 100.00% |
+|  2 |  5 |  10 |   4 | 3 |  6 | 6/10   | = |  60.00% |
+|  2 |  7 |  14 |   6 | 5 |  6 | 6/14   | = |  42.86% |
+|  2 | 11 |  22 |  10 | 3 |  6 | 6/22   | = |  27.27% |
+|  2 | 13 |  26 |  12 | 5 | 10 | 10/26  | = |  38.46% |
+|  2 | 17 |  34 |  16 | 3 |  6 | 6/34   | = |  17.65% |
+|  2 | 19 |  38 |  18 | 5 |  6 | 6/38   | = |  15.79% |
+|  3 |  5 |  15 |   8 | 3 |  9 | 9/15   | = |  60.00% |
+|  3 |  7 |  21 |  12 | 5 |  9 | 9/21   | = |  42.86% |
+|  3 | 11 |  33 |  20 | 3 |  9 | 9/33   | = |  27.27% |
+|  3 | 13 |  39 |  24 | 5 | 15 | 15/39  | = |  38.46% |
+|  3 | 17 |  51 |  32 | 3 |  9 | 9/51   | = |  17.65% |
+|  3 | 19 |  57 |  36 | 5 |  9 | 9/57   | = |  15.79% |
+|  5 |  7 |  35 |  24 | 5 | 15 | 15/35  | = |  42.86% |
+|  5 | 11 |  55 |  40 | 3 |  9 | 9/55   | = |  16.36% |
+|  5 | 13 |  65 |  48 | 5 | 25 | 25/65  | = |  38.46% |
+|  5 | 17 |  85 |  64 | 3 |  9 | 9/85   | = |  10.59% |
+|  5 | 19 |  95 |  72 | 5 | 15 | 15/95  | = |  15.79% |
+|  7 | 11 |  77 |  60 | 7 | 21 | 21/77  | = |  27.27% |
+|  7 | 13 |  91 |  72 | 5 | 15 | 15/91  | = |  16.48% |
+|  7 | 17 | 119 |  96 | 5 | 15 | 15/119 | = |  12.61% |
+|  7 | 19 | 133 | 108 | 5 |  9 | 9/133  | = |   6.77% |
+| 11 | 13 | 143 | 120 | 7 | 21 | 21/143 | = |  14.69% |
+| 11 | 17 | 187 | 160 | 3 |  9 | 9/187  | = |   4.81% |
+| 11 | 19 | 209 | 180 | 7 | 21 | 21/209 | = |  10.05% |
+| 13 | 17 | 221 | 192 | 5 | 25 | 25/221 | = |  11.31% |
+| 13 | 19 | 247 | 216 | 5 | 15 | 15/247 | = |   6.07% |
+| 17 | 19 | 323 | 288 | 5 | 15 | 15/323 | = |   4.64% |
+
+** Moving Up
+  For bigger primes we will need the =egcd= function and a working modular
+  exponentiation function:
+#+name: egcd-pow-mod
+#+begin_src elisp :results silent
+  (require 'cl) ;; for destructuring-bind
+
+  (require 'calc-math) ;; for math-pow-mod
+
+  (defun egcd (a b)
+    "Computes the greatest common divisor of a and b recursively.
+     This extended version returns a list of d, x and y, where
+     d = ax + by = gcd(a, b)."
+    (if (zerop b)
+        (list a 1 0)
+      (let ((q (/ a b))
+            (r (% a b)))
+        (destructuring-bind (d x y) (egcd b r)
+          (list d y (- x (* q y)))))))
+
+  (defun pow-mod (base exponent modulus)
+     (let ((calc-display-working-message nil))
+        (math-pow-mod base exponent modulus)))
+#+end_src
+
+  Let us review how RSA works with another toy example:
+#+begin_src elisp
+  (setq p 31
+        q 53
+        n (* p q)
+        tee (* (1- p) (1- q))
+        e 17
+        check (= (gcd e tee) 1)
+        extended (egcd e tee)
+        d (mod (second extended) tee)
+        m (- n 2)
+        c  (pow-mod m e n)
+        m-again (pow-mod c d n)
+        show (list n m m-again))
+#+end_src
+
+#+results:
+| 1643 | 1641 | 1641 |
+
+#+begin_src elisp :results raw
+  (list
+    (= (first extended) (+ (* (second extended) e) (* (third extended) tee)))
+    (= (mod (second extended) tee) d))
+#+end_src
+
+#+results:
+(t t)
+
+** Discuss Week 08\rsquo{}s Assignment
+   file:assignment-08.txt
+
+#+begin_src elisp
+  (round-trip "12345" n e d 'string-to-number 'number-to-string)
+#+end_src
