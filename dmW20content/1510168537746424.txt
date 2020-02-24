@@ -9,7 +9,77 @@
   Chapter 13:
 
 * TODO Investigate a Turing Machine Written in Java
+#+begin_src java :tangle SC.java
+  class SC
+  {
+     State mState;
+     char mChar;
 
+     SC(State state, char ch)
+     {
+        mState = state;
+        mChar = ch;
+     }
+
+     public int hashCode()
+     {
+        return (100 * mState.ordinal() + mChar);
+     }
+
+     public boolean equals(Object object)
+     {
+        if (object instanceof SC)
+        {
+           SC sc = (SC) object;
+           return ((mState == sc.mState) && (mChar == sc.mChar));
+        }
+        return false;
+     }
+
+     public String toString()
+     {
+        return mState.name() + "," + mChar;
+     }
+  }
+#+end_src
+#+begin_src java :tangle SCD.java
+  class SCD
+  {
+     public State mState;
+     public char mChar;
+     public int mDirection;
+
+     SCD(State state, char ch, int dir)
+     {
+        mState = state;
+        mChar = ch;
+        mDirection = dir;
+     }
+
+     public int hashCode()
+     {
+        return (100 * mState.ordinal() * mDirection + mChar);
+     }
+
+     public boolean equals(Object object)
+     {
+        if (object instanceof SCD)
+        {
+           SCD scd = (SCD) object;
+           return ((mState == scd.mState) &&
+                   (mChar == scd.mChar) &&
+                   (mDirection == scd.mDirection));
+        }
+        return false;
+     }
+
+     public String toString()
+     {
+        return (mState.name() + "," + mChar + "," + mDirection);
+     }
+  }
+
+#+end_src
 #+begin_src java :tangle TuringMachine.java
 import java.util.*;
 
