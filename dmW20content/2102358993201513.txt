@@ -1,0 +1,40 @@
+-*- mode: org -*-
+#+title: Divide Pair Conquer 08
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* TODO Search for Smallest
+  What is the smallest pair of primes that results in a *near-total* derangement
+  of encrypted values (the count of the number of times m = m^e % n is at most 3)?
+
+  Why *near-total*? Because 0 to any power is still 0, and 1 to any power is
+  still 1, so those two will always stay fixed. Likewise, for (some? all?) n
+  and e, (n - 1)^e % n = n - 1.
+
+:HINT:
+  Use the smallest valid e for the given p and q.
+:END:
+
+#+begin_src elisp
+  (loop with primes-less-than-20 = '(2 3 5 7 11 13 17 19)
+        for p in primes-less-than-20
+        append (loop for q in (cdr (member p primes-less-than-20))
+                     for n = (* p q)
+                     append (loop for m from 2 below n
+                                  for tee = (* (1- p) (1- q))
+                                  for e = (or (loop for i from 3 below tee
+                                                    when (= 1 (gcd i tee))
+                                                    return i) 3)
+                                  when (and (= m (1- n)) (= (mod (expt m e) n) m))
+                                  collect (list p q n tee e m))))
+#+end_src
