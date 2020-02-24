@@ -1,0 +1,225 @@
+-*- mode: org -*-
+#+title: Assignment 08
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
+:END:
+* TODO Use the Designated RSA Players
+  First, reread (review) section TWO subsection PQR and recall the eight RSA
+  players and their roles/relationships (summarized below):
+
+  | Who | What                    | Roles/Relationships                                                 |
+  |-----+-------------------------+---------------------------------------------------------------------|
+  | m   | message (plaintext)     | decrypted c        m = c^d%n  (pow-mod c d n)                        |
+  | c   | ciphertext              | encrypted m        c = m^e%n  (pow-mod m e n)                        |
+  | p   | a large prime           | where "large" is relative                                           |
+  | q   | another large prime     | different than p, but with the same number of digits (more or less) |
+  | n   | the modulus             | the product of p and q: must be bigger than m                       |
+  | t   | the totient             | the product of p - 1 and q - 1: (* (1- p) (1- q))                   |
+  | e   | the encryption exponent | must be coprime to t: gcd(e, t) = 1, typically 65537 (2^16 + 1)      |
+  | d   | the decryption exponent | TUMMI of e (mod t)                                                  |
+
+  For modular exponentiation (pow-mod), see below. As for the totient, this
+  function counts the number of totatives of a given number. A totative of n is
+  a number smaller than n that is coprime to n. The totient is a multiplicative
+  function, meaning that the totient of a product is the product of the totients
+  of the factors: totient(pq) = totient(p) * totient(q). (This property does not
+  necessarily hold if the factors are not coprime.) The totient of any prime is
+  that prime minus one.
+
+  In the source block below are encoded private and public keys, and the
+  corresponding primes and exponents, all together dubbed \ldquo{}the designated RSA
+  players\rdquo. Your task is to figure out how to extract these numbers from that
+  file, produced by tangling, and use them for the following task.
+
+#+begin_src text :tangle rsa-private-key.txt
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEAzU6g/of54RvchTm5Qq0ec9Ve/BYikcYbsdvNk8/FFzhOicQ6
+BseSOuvgbnuLxcJVW5gWgpOWqlu/tMOESquIoPbdnI1joIaVnDRfzzj5ZABuncnM
+joU8FrD73q03LQILT6MgQBQKAY1BZnnfDikUe2cQXY/ZddVz2EexNejAd/qr1XlV
+IPOPvZt5Irj23a366Hz/J0tbPmzdEeYZGJCDW4qPqG73Z4CKv+AN4K5vMNI2uRnJ
+RXlvCGgNs2KM8WCDelzL0MNwEfIbxIjigA+zZ4AsHsfdGc4l9ukiytd463wscaPz
+l2/A1g7rBd2jSDoN+FqgNQTDQKwRLGz76cLsTwIDAQABAoIBAAon+5rbyyaxpCUL
+B/kea0U7puk9hxRDApe30eGgA5X0eR4jkONI+BjmFkIg5ncv990CFwr6lhdzVnZw
+vZicB7Q+whO+gtEsFzaU+LBdlyi1RMOVegMK4EAXHT6UvwgA8+JKpYvF8gDFphiV
+qs0ehx7bqFmYhh9oIcTvNvr9upe0vgN69jvTjrlnZRZ5LJazgtCPuShq0Y0cl3fi
+u3idx3NzqMRLz5LJo6Os8QI7b2IhG4UhAuDAZimSxNGtWPIPGpeMqGrVDof+Ss7J
+I4hS3V5gFIrIk+QuMa+r51kDVl+4EKqOCUDLEaG8kzttCRGampYZZs3D9bRnD51P
++Z7yJeECgYEA/XOnrI15kviSSyZRMxIU0B4f75nyiU+1Cch9ktF3ElIOMhz+FoGO
+rQcqq5OV2qJqzO4+ixII1MdDNI0k4rdFVX0caXB6WXGBMxHE2zBxQzP6ixUAaWcG
+JZA0QFUYMCtJ5NT/PxKW4LR9MaazgfZ6VEWw3+/DX5EXu7X/TNlkNskCgYEAz18O
+pBeFKB+tOighZ0KCdr9sj03csRbR/tZDdmDmlWvJaqf66szlg5lkoRBCTa5spwyr
+jGTFLesocxfbOiVBgSpR6rUiSd7B3MTGDnXOUISVCJH7W1FVW2C828Euq9h7hwy3
+WxEPpIdqe05nNXvIjeWEQEHg8A31nZsZl8ai3lcCgYBNTLzS78MohA96RBF31gfr
+AYUT+ovyPREmDrPd12zNdaFGv3jvPExbkVf+RGDr8aVJI1CH8dQnsS5aFMIvM14+
+GI5VyixGo0uYW88CWt/wcyXyzVD21KkXQ8fr5wgdiNZcqGnAvtatad7VCdatyJK+
+qRKs+d9IgmQOqA9ZTOQ3oQKBgB+PQfUrNzKyD3UIYn0KnDxiSa1NlkbFSFRWW5IK
+kU0wSEkZI5DUeiGbGLuCc/TKlPKfdQQ62d9xKIjLmquwu9VikXD8/Cjt4+crc1EE
+ENAkPWI+hViSekEb6eIv9mBk4/fbsZQEdrL9gPEfL4nuOsmNoqD85bTjCvxffHei
+3WqlAoGAPkZAcTwNY6Yo5XdTFzh355ekB6SX+MFAQOOU+evYcPBhxS5Zk3SqkbaW
+ENIxtkNfhpcb7H5ZGvegKyNrXj2cVg4B9q1KRakqt57Hl48dkntp/FsB8LHxXUm2
+JSh2OHzk62JR/F7mlFk99QaSgHpImS4+To4mzYnqdyk1cOneVic=
+-----END RSA PRIVATE KEY-----
+#+end_src
+
+* TODO Test The Limits of the Code Supplied in XGG
+  Specifically, answer the question: What is the longest message that is a
+  substring of the title page of the Book of Mormon (see below) that you can
+  successfully encrypt and then decrypt again with the designated RSA players
+  and the supplied code?
+
+#+begin_src elisp :results silent
+  (require 'calc-math)
+
+  (defun pow-mod (base exponent modulus)
+     (let ((calc-display-working-message nil))
+        (math-pow-mod base exponent modulus)))
+
+  (defun rsa-encrypt (message n e &optional encoder)
+    (let* ((message-encoded (funcall (or encoder 'identity) message))
+           (encrypted (pow-mod message-encoded e n)))
+      encrypted))
+
+  (defun rsa-decrypt (encrypted n d &optional decoder)
+    (let* ((decrypted (pow-mod encrypted d n))
+           (message-decoded (funcall (or decoder 'identity) decrypted)))
+      message-decoded))
+
+  (defun round-trip (message n e d &optional encoder decoder)
+    (equal message (rsa-decrypt (rsa-encrypt message n e encoder) n d decoder)))
+
+  (defun test-rsa (message-with-spaces)
+    (let* ((message (string-join (split-string message-with-spaces " ") "@"))
+           (n (get 'rsa-players :n))
+           (e (get 'rsa-players :e))
+           (d (get 'rsa-players :d))
+           (encrypted (rsa-encrypt message n e 'from-base-27))
+           (decrypted (rsa-decrypt encrypted n d 'to-base-27))
+           (decrypted-message-with-spaces (string-join (split-string decrypted "@") " "))
+           (success (string= message-with-spaces decrypted-message-with-spaces)))
+      (princ (format "\"%s\"\nwas encoded and encrypted as\n%s\nthen decrypted and decoded as\n\"%s\"\n"
+                     message-with-spaces (math-format-number encrypted) decrypted-message-with-spaces))
+      (princ (if success "" "un"))
+      (princ "successfully.\n")
+      success))
+#+end_src
+
+  In order to interface correctly with the above supplied code, you will of
+  course need to learn (or refresh your knowledge) about and appropriately use
+  *lisp symbol property lists*.
+
+  The below supplied code implements a base-27 encoder and decoder (question:
+  What does abr stand for?):
+
+#+begin_src elisp :results silent
+  (defalias 'calcFunc-append 'append)
+
+  (defmath abr (n b)
+    (let* ((n (if (stringp n) (read-number n) n))
+           (d (quotient n b))
+           (m (% n b)))
+      (if (zerop d)
+          (list m)
+        (append (abr d b) (list m)))))
+
+  (defmath reconstruct-number-from-abr (list-of-coefficients base)
+    (if (null list-of-coefficients)
+        0
+      (+ (car list-of-coefficients)
+         (* base (reconstruct-number-from-abr (cdr list-of-coefficients) base)))))
+
+  (defun to-base-27 (number-string)
+    (mapconcat (lambda (n) (char-to-string (+ ?@ n))) (calcFunc-abr number-string 27) ""))
+
+  (defun from-base-27 (message)
+    (calcFunc-reconstruct-number-from-abr (reverse (mapcar (lambda (n) (- n ?@)) message)) 27))
+#+end_src
+
+  Replace with their correct values the 0 and 100 in the :var bindings for the
+  start and end indices:
+
+#+name: main
+#+begin_src elisp :results output :var start=0 end=1000
+  (let* ((max-specpdl-size most-positive-fixnum)
+         (max-lisp-eval-depth most-positive-fixnum)
+         (title-page "THE BOOK OF MORMON AN ACCOUNT WRITTEN BY THE HAND OF MORMON UPON PLATES TAKEN FROM THE PLATES OF NEPHI WHEREFORE IT IS AN ABRIDGMENT OF THE RECORD OF THE PEOPLE OF NEPHI AND ALSO OF THE LAMANITES WRITTEN TO THE LAMANITES WHO ARE A REMNANT OF THE HOUSE OF ISRAEL AND ALSO TO JEW AND GENTILE WRITTEN BY WAY OF COMMANDMENT AND ALSO BY THE SPIRIT OF PROPHECY AND OF REVELATION WRITTEN AND SEALED UP AND HID UP UNTO THE LORD THAT THEY MIGHT NOT BE DESTROYED TO COME FORTH BY THE GIFT AND POWER OF GOD UNTO THE INTERPRETATION THEREOF SEALED BY THE HAND OF MORONI AND HID UP UNTO THE LORD TO COME FORTH IN DUE TIME BY WAY OF THE GENTILE THE INTERPRETATION THEREOF BY THE GIFT OF GOD AN ABRIDGMENT TAKEN FROM THE BOOK OF ETHER ALSO WHICH IS A RECORD OF THE PEOPLE OF JARED WHO WERE SCATTERED AT THE TIME THE LORD CONFOUNDED THE LANGUAGE OF THE PEOPLE WHEN THEY WERE BUILDING A TOWER TO GET TO HEAVEN WHICH IS TO SHOW UNTO THE REMNANT OF THE HOUSE OF ISRAEL WHAT GREAT THINGS THE LORD HATH DONE FOR THEIR FATHERS AND THAT THEY MAY KNOW THE COVENANTS OF THE LORD THAT THEY ARE NOT CAST OFF FOREVER AND ALSO TO THE CONVINCING OF THE JEW AND GENTILE THAT JESUS IS THE CHRIST THE ETERNAL GOD MANIFESTING HIMSELF UNTO ALL NATIONS AND NOW IF THERE ARE FAULTS THEY ARE THE MISTAKES OF MEN WHEREFORE CONDEMN NOT THE THINGS OF GOD THAT YE MAY BE FOUND SPOTLESS AT THE JUDGMENT SEAT OF CHRIST")
+         (message (subseq title-page start end)))
+    (test-rsa message))
+#+end_src
+
+#+results: main
+: "THE BOOK OF MORMON AN ACCOUNT WRITTEN BY THE HAND OF MORMON UPON PLATES TAKEN FROM THE PLATES OF NEP"
+: was encoded and encrypted as
+: 16110514644203574148690139452317502148440224416142401229680581166365247533573825897500631649085584124102329306615066942191381461548920453496881015797511698582544202442555738369929890540110309170432799814304934280581063617202067821261603560725972595422880897897278293065633603809031972067766574736446600773989117304503089940323449501615396095518707537203585977624666787515695725703470968826180723888474504965806891959994423152320976242342003584716238949747117908951104899205316946068966206229287586417905768461461355859961983156384860395849639443886269589292938652169212315700752485998849212336075295281501199521255171
+: then decrypted and decoded as
+: "THE BOOK OF MORMON AN ACCOUNT WRITTEN BY THE HAND OF MORMON UPON PLATES TAKEN FROM THE PLATES OF NEP"
+: successfully.
+
+* TODO My Report on What I Learned
+** How I had fun
+** How I collaborated
+** What new I learned
+** What meaningful I achieved
+** Etc.
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+   What is true of my experience in general?
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I collaborated with one or more classmates.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I reported what I thought about while doing the problems.
+  - [ ] I reported on any connections I found between these problems and
+        something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
+  - [ ] I reported on how many bits are in the private key extracted from the rsa-private-key data.
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+#+name: assertions-about-answers
+  - [ ] I correctly extracted from the rsa-private-key data the modulus.
+  - [ ] I correctly extracted from the rsa-private-key data the public exponent.
+  - [ ] I correctly extracted from the rsa-private-key data the private exponent.
+  - [ ] I correctly extracted from the rsa-private-key data the prime1 value.
+  - [ ] I correctly extracted from the rsa-private-key data the prime2 value.
+  - [ ] I correctly extracted from the rsa-private-key data the exponent1 value.
+  - [ ] I correctly extracted from the rsa-private-key data the exponent2 value.
+  - [ ] I wrote an elisp function to convert hex to decimal.
+  - [ ] I wrote an elisp function to correctly populate the rsa-players symbol property list.
+  - [ ] I got the right index for *start* in the code block named \ldquo{}main\rdquo.
+  - [ ] I got the right index for *end* in the code block named \ldquo{}main\rdquo.
+
+#+begin_src elisp
+  (calculate-score
+   (quote
+    ((in-general 3 3 3 3)
+     (about-report 5 5 5 5 5)
+     (about-MIs 2 2 2 2)
+     (about-answers 5 5 5 5 5 5 5 5 5 5 5))))
+#+end_src
