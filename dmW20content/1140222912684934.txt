@@ -1,0 +1,148 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 08
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the link below, or with your cursor somewhere in it,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+:END:
+* TODO Finish What You Started
+  yesterday with file:divide-pair-conquer-08.txt.
+
+* TODO Note the Constraints
+  This week\rsquo{}s assignment in file:assignment-08.txt gives you another chance to
+  solve problems using limited or constrained resources. Python is a language
+  that in some ways has fewer constraints than elisp. For example, see some RSA
+  calculations much more easily done:
+
+#+begin_src python
+  p = 5179195214309
+  q = 5179195214311
+  n = p * q
+  t = (p - 1) * (q - 1)
+  e = 65537
+  d = 17826498662743824930707633
+  m = 5179195214304
+  c = pow(m, e, n)
+  m_again = pow(c, d, n)
+  return (c, m_again, m == m_again)
+#+end_src
+
+  Compare with:
+#+begin_src elisp :results raw
+  (require 'calc-math)
+
+  (setq max-specpdl-size most-positive-fixnum
+        max-lisp-eval-depth most-positive-fixnum
+        p 5179195214309
+        q 5179195214311
+        n (math-mul p q)
+        tee (math-mul (1- p) (1- q))
+        e 65537
+        d (math-read-number "17826498662743824930707633")
+        m 5179195214304
+        c (pow-mod m e n)
+        m-again (pow-mod c d n)
+        results (list (math-format-number c) m-again (= m m-again)))
+#+end_src
+
+#+name: tummi
+#+begin_src python
+  def egcd(b, n):
+      '''
+      Given two integers (b, n), returns (gcd(b, n), a, m) such that
+      a*b + n*m = gcd(b, n).
+      '''
+      (x0, x1, y0, y1) = (1, 0, 0, 1)
+      while n != 0:
+          (q, b, n) = (b // n, n, b % n)
+          (x0, x1) = (x1, x0 - q * x1)
+          (y0, y1) = (y1, y0 - q * y1)
+      return (b, x0, y0)
+
+  def find_tummi(e, t):
+      (d, x, y) = egcd(e, t)
+      return x % t
+#+end_src
+
+#+begin_src python :noweb eval :results output
+  <<tummi>>
+  p = 5179195214309
+  q = 5179195214311
+  n = p * q
+  t = (p - 1) * (q - 1)
+  e = 65537
+  d = find_tummi(e, t)
+  m = 5179195214304
+  c = pow(m, e, n)
+  m_again = pow(c, d, n)
+  print(c, m_again, m == m_again)
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun format-rsa-for-python (p q e m)
+    (insert (format
+  "#+begin_src python :noweb eval :results output
+    <<tummi>>
+    p = %d
+    q = %d
+    n = p * q
+    t = (p - 1) * (q - 1)
+    e = %d
+    d = find_tummi(e, t)
+    m = %d
+    c = pow(m, e, n)
+    m_again = pow(c, d, n)
+    print(c, m_again, m == m_again)
+  ,#+end_src"
+    p q e m)))
+#+end_src
+
+#+begin_src elisp :results silent
+  (format-rsa-for-python 5179195214309 5179195214311 65537 5179195214304)
+#+end_src
+
+* TODO Convince Yourself of Some Properties of Numbers
+   by \ldquo{}getting your hands dirty\rdquo (AKA \ldquo{}concretizing the abstract\rdquo):
+
+   If mn | a then m | a and n | a for any integers m, n.
+
+   This is true. But is the converse true?
+
+   If m | a and n | a then does mn | a for any integers m, n?
+
+   No! Can you find some simple counterexamples?
+
+   What if m and n are both prime?
+
+   If p_1 | a and p_2 | a, then does p_{1}p_{2} | a? Yes!
+
+   So, restating: For p_1 and p_2 both prime, p_{1}p_{2} | a iff p_1 | a and p_2 | a.
+
+** If You Need Help Visualizing How Simultaneous Congruences Work
+#+begin_src elisp :results silent
+  (defun format-congruence (x m r)
+    (let ((d (- x r)))
+      (list x [=] r (list 'mod m) '-> m '| x '- r (list '= d) '-> d '= m '* 'k 'where 'k '= (/ d m))))
+#+end_src
+
+#+begin_src elisp :results output
+  (setq x-list '(8 8 8)
+        m-list '(3 4 5)
+        r-list '(2 0 3)
+        formatted (mapcar* 'format-congruence x-list m-list r-list))
+  (mapc 'print formatted)
+#+end_src
+
+#+begin_src elisp :results output
+  (setq x-list '(16 16)
+        m-list '(3 11)
+        r-list '(1 5)
+        formatted (mapcar* 'format-congruence x-list m-list r-list))
+  (mapc 'print formatted)
+#+end_src
