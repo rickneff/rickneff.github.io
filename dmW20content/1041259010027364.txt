@@ -1,0 +1,299 @@
+-*- mode: org -*-
+#+title: Presentation 08
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* Recap
+** Solution to Week 07 CDL
+   Write elisp code that takes two same-sized vectors of one-character symbols
+   and \ldquo{}shuffles\rdquo them together into one vector.
+
+   The challenge was to do it without loops:
+#+begin_src elisp :results silent
+  (defun shuffle (vector1 vector2)
+    (apply 'vconcat (mapcar* 'vector vector1 vector2)))
+#+end_src
+
+#+name: functions-to-use
+  | Functions to Use (IN THIS ORDER!) |
+  |-----------------------------------|
+  | apply                             |
+  | vconcat                           |
+  | mapcar*                           |
+  | vector                            |
+
+#+begin_src elisp :results raw :var funcs=functions-to-use
+  (mapcar 'documentation (mapcar 'intern (mapcar 'car funcs)))
+#+end_src
+
+*** Aside on Apply
+#+begin_src elisp
+  (apply '+ '(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100))
+#+end_src
+
+#+begin_src elisp
+  (apply '+ (number-sequence 1 100))
+#+end_src
+
+#+begin_src elisp
+  (/ (* 100 101) 2)
+#+end_src
+
+#+begin_src elisp :results value
+  (list
+     (number-sequence 1 10)
+     (number-sequence 10 1 -1)
+     'hline
+     (make-list 10 11))
+#+end_src
+*** Back to shuffle
+   The further challenge was to make it polyadic:
+
+#+begin_src elisp :results silent
+  (defun shuffle (&rest vectors)
+    (if (null vectors)
+        []
+      (if (= 1 (length vectors))
+          (let* ((vector (first vectors))
+                 (half-length (/ (length vector) 2))
+                 (first-half (subseq vector 0 half-length))
+                 (second-half (subseq vector half-length)))
+            (setq vectors (list first-half second-half))))
+      (apply 'vconcat (apply 'mapcar* 'vector vectors))))
+#+end_src
+
+#+begin_src elisp
+  (shuffle)
+#+end_src
+
+#+begin_src elisp
+  (shuffle [1 2 3 4 5 6 7 8 9 10])
+#+end_src
+
+#+begin_src elisp :results raw
+  (shuffle [a b c d] [1 2 3 4])
+#+end_src
+
+#+begin_src elisp :results raw
+  (shuffle [a b c d] [1 2 3 4] [w x y z])
+#+end_src
+
+* RSA
+  Specifically, hints and helps for file:assignment-08.txt::*XGG.
+** Encryption = Scrambling
+*** Shuffling = Scrambling
+#+begin_src elisp
+  (shuffle [a b c d e f g h i j k l m n o p q r s t u v w x y z])
+#+end_src
+*** Perfect Shuffling
+#+begin_src elisp :results raw
+  (setq deck0 [As 2s 3s 4s 5s 6s 7s 8s 9s 10s Js Qs Ks
+               Ah 2h 3h 4h 5h 6h 7h 8h 9h 10h Jh Qh Kh
+               Ac 2c 3c 4c 5c 6c 7c 8c 9c 10c Jc Qc Kc
+               Ad 2d 3d 4d 5d 6d 7d 8d 9d 10d Jd Qd Kd]
+        deck1 (shuffle deck0)
+        deck2 (shuffle deck1)
+        deck3 (shuffle deck2)
+        deck4 (shuffle deck3)
+        deck5 (shuffle deck4)
+        deck6 (shuffle deck5)
+        deck7 (shuffle deck6)
+        deck8 (shuffle deck7)
+        show deck5)
+#+end_src
+
+#+begin_src elisp
+  (list (list deck0)
+        (list deck8)
+        (list (format "(equal deck0 deck8) => %s" (equal deck0 deck8))))
+#+end_src
+
+** How Does RSA Shuffle/Scramble?
+    Let us look at how RSA encryption shuffles/scrambles numbers with some (very)
+    small primes, say 2 and 11:
+
+#+begin_src elisp :results raw
+  (mod (expt 21 3) 22)
+#+end_src
+** Alternatively
+   What about 3 and 11?
+#+begin_src elisp :results raw
+  (mod (expt 32 3) 33)
+#+end_src
+** Save Typing
+#+begin_src elisp
+  (loop for m from 0 below 22
+        collect (list m (mod (expt m 3) 22)))
+#+end_src
+
+#+results:
+|  0 |  0 |
+|  1 |  1 |
+|  2 |  8 |
+|  3 |  5 |
+|  4 | 20 |
+|  5 | 15 |
+|  6 | 18 |
+|  7 | 13 |
+|  8 |  6 |
+|  9 |  3 |
+| 10 | 10 |
+| 11 | 11 |
+| 12 | 12 |
+| 13 | 19 |
+| 14 | 16 |
+| 15 |  9 |
+| 16 |  4 |
+| 17 |  7 |
+| 18 |  2 |
+| 19 | 17 |
+| 20 | 14 |
+| 21 | 21 |
+
+#+begin_src elisp
+  (loop for m from 0 below 33
+        collect (list m (mod (expt m 3) 33)))
+#+end_src
+
+#+results:
+|  0 |  0 |
+|  1 |  1 |
+|  2 |  8 |
+|  3 | 27 |
+|  4 | 31 |
+|  5 | 26 |
+|  6 | 18 |
+|  7 | 13 |
+|  8 | 17 |
+|  9 |  3 |
+| 10 | 10 |
+| 11 | 11 |
+| 12 | 12 |
+| 13 | 19 |
+| 14 |  5 |
+| 15 |  9 |
+| 16 |  4 |
+| 17 | 29 |
+| 18 | 24 |
+| 19 | 28 |
+| 20 | 14 |
+| 21 | 21 |
+| 22 | 22 |
+| 23 | 23 |
+| 24 | 30 |
+| 25 | 16 |
+| 26 | 20 |
+| 27 | 15 |
+| 28 |  7 |
+| 29 |  2 |
+| 30 |  6 |
+| 31 | 25 |
+| 32 | 32 |
+
+** Tabulate
+    counts of how many scramblings are *not* derangements:
+:DEFINED:
+    A derangement is a permutation where no element is left in its original position.
+:END:
+#+begin_src elisp
+  (append '(("p" "q" "n" "t" "e" "#" "#/n" " " "%") hline)
+          (loop with primes-less-than-20 = '(2 3 5 7 11 13 17 19 23 29)
+                for p in primes-less-than-20
+                append (loop for q in (cdr (member p primes-less-than-20))
+                             for n = (* p q)
+                             for tee = (* (1- p) (1- q))
+                             for e = (loop for i from 3 below n
+                                           when (= 1 (gcd i tee))
+                                           return i)
+                             for num = (loop for m from 0 below n
+                                             count (= m (mod (expt m e) n)))
+                             collect (list p q n tee e num (format "%d/%d" num n) '=
+                                           (format "%2.2f%%" (/ num (float n) .01))))))
+#+end_src
+
+*** Sample Code
+    Suppose we want to do modular exponentiation for base 8, exponent (power)
+    65537 and modulus 33:
+#+begin_src python
+  return 8 ** 65537 % 33
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun mod-expt (base power modulus)
+    (mod (expt base power) modulus))
+
+  (defun a-better-mod-expt (base power modulus)
+    (loop with result = 1
+          for n from 1 to power
+          do (setq result (mod (* result base) modulus))
+          finally return result))
+#+end_src
+
+#+begin_src elisp
+  (mod-expt 8 65537 33)
+#+end_src
+
+#+begin_src elisp
+  (a-better-mod-expt 8 65537 33)
+#+end_src
+
+   Even bigger values are possible with =calc-eval=:
+#+begin_src elisp :results raw
+  (let ((calc-display-working-message nil)
+        (max-specpdl-size most-positive-fixnum)
+        (max-lisp-eval-depth most-positive-fixnum))
+    (calc-eval "8^65537%33"))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun a-better-mod-expt-? (base power modulus)
+    (let ((calc-display-working-message nil)
+          (max-specpdl-size most-positive-fixnum)
+          (max-lisp-eval-depth most-positive-fixnum))
+      (string-to-number (calc-eval (format "%d^%d%%%d" base power modulus)))))
+#+end_src
+
+#+begin_src elisp
+  (a-better-mod-expt-? 8 65537 33)
+#+end_src
+
+#+begin_src elisp :results silent
+  (require 'cl) ; for destructuring-bind
+
+  (defun egcd (a b)
+    "Computes the greatest common divisor of a and b recursively.
+     This extended version returns a list of d, x and y, where
+     d = ax + by = gcd(a, b)."
+    (if (zerop b)
+        (list a 1 0)
+      (destructuring-bind (d x y) (egcd b (% a b))
+        (list d y (- x (* (/ a b) y))))))
+
+  (defun find-TUMMI (o m)
+    (destructuring-bind (d x y) (egcd o m)
+      (if (/= 1 d)
+          (error "TUMMI of %d mod %d does not exist" o m)
+        (mod x m))))
+#+end_src
+
+#+begin_src elisp
+  (setq m 50
+        p 3
+        q 17
+        n (* p q)
+        tee (* (- p 1) (- q 1))
+        e 65537
+        d (find-TUMMI e tee)
+        encrypted (a-better-mod-expt m e n)
+        decrypted (a-better-mod-expt encrypted d n))
+#+end_src
