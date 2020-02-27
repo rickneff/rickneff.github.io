@@ -1,0 +1,34 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 08
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+:END:
+* TODO Explore and Wonder
+  With only whiteboard and markers, explore a (very insecure --- why?) cast of
+  RSA players. Brother Neff will compute hard exponentiations for you on
+  request. You must do all other calculations by hand. (For TUMMIs, find what
+  multiple of e is one more than a multiple of t.)
+
+  Using p = 3 and q = 13, compute all values of c when m = 10 and e ranges from
+  smallest to largest. In other words, encrypt m several different ways, each
+  way using a different e, for all possible e values less than the totient of p
+  and q.
+
+  Find the corresponding d for each e and verify that 10 is the value you get
+  when you decrypt each c with that d.
+
+  Notice something interesting about the e's and the d's?!
+
+  Is this a feature or a bug in RSA?
+
+#+begin_src elisp
+  (mod (1- (* 223 223)) 24)
+#+end_src
+
+#+results:
+: 0
