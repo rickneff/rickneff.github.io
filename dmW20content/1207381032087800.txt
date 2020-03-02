@@ -26,9 +26,10 @@
 
   (defun show-results-table (message table)
     (let* ((total-characters (length message))
+           (total-unique-characters (length table))
            (total-bits (loop for (char count code) in table sum (* count (length code))))
            (average-bits-per-character (/ total-bits (float total-characters)))
-           (fixed-bits-per-character (ceiling (log total-characters 2)))
+           (fixed-bits-per-character (ceiling (log total-unique-characters 2)))
            (total-fixed-bits (* total-characters fixed-bits-per-character))
            (compression-ratio (/ (- total-fixed-bits total-bits) (float total-fixed-bits))))
       (list (list-sym-value 'total-characters)
@@ -135,7 +136,7 @@
 | s | 1 |
 | t | 3 |
 
-  The ever-shrinking-queue:
+  The ever-shrinking queue:
   | a1 h1 i1 n1 s1 e2 o2 r2 t3 |
   | i1 n1 s1 e2 o2 r2 ah2 t3   |
   | s1 e2 o2 r2 ah2 in2 t3     |
