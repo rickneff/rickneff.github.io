@@ -1,0 +1,182 @@
+-*- mode: org -*-
+#+title: Presentation 09
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not \ldquo{}HINT\rdquo)
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup.hide
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* Presentation
+#+begin_src elisp :results silent
+  (defun count-occurrences (str)
+    (loop with occurrences = nil
+          for letter across str
+          do (incf (alist-get letter occurrences 0))
+          finally return occurrences))
+
+  (defun list-sym-value (symbol)
+    (list symbol (symbol-value symbol)))
+
+  (defun show-results-table (message table)
+    (let* ((total-characters (length message))
+           (total-bits (loop for (char count code) in table sum (* count (length code))))
+           (average-bits-per-character (/ total-bits (float total-characters)))
+           (fixed-bits-per-character (ceiling (log total-characters 2)))
+           (total-fixed-bits (* total-characters fixed-bits-per-character))
+           (compression-ratio (/ (- total-fixed-bits total-bits) (float total-fixed-bits))))
+      (list (list-sym-value 'total-characters)
+            (list-sym-value 'total-bits)
+            (list-sym-value 'average-bits-per-character)
+            (list-sym-value 'fixed-bits-per-character)
+            (list-sym-value 'total-fixed-bits)
+            (list-sym-value 'compression-ratio))))
+#+end_src
+** Message 1
+#+begin_src elisp :results silent
+  (setq message1 "thebookofmormon")
+#+end_src
+
+  This shows all the steps, like the examples in the book:
+#+name: huffman-table-for-message1
+#+begin_src elisp
+  (cl-sort (mapcar (lambda (pair) (list (string (car pair)) (cdr pair)))
+                   (count-occurrences message1))
+           'string< :key 'car)
+#+end_src
+
+#+results: huffman-table-for-message1
+| b | 1 |
+| e | 1 |
+| f | 1 |
+| h | 1 |
+| k | 1 |
+| m | 2 |
+| n | 1 |
+| o | 5 |
+| r | 1 |
+| t | 1 |
+
+  The ever-shrinking queue:
+  | b1 e1 f1 h1 k1 n1 r1 t1 m2 o5 |
+  | f1 h1 k1 n1 r1 t1 m2 be2 o5   |
+  | k1 n1 r1 t1 m2 be2 fh2 o5     |
+  | r1 t1 m2 be2 fh2 kn2 o5       |
+  | m2 be2 fh2 kn2 rt2 o5         |
+  | fh2 kn2 rt2 mbe4 o5           |
+  | rt2 meb4 fhkn4 o5             |
+  | fhkn4 o5 rtmeb6               |
+  | rtmbe6 fhkno9                 |
+  | rtmbefhkno15                  |
+
+  The Huffman tree:
+:             rtmbefhkno15
+:               /        \
+:           rtmbe6      fhkno9
+:           /   \        /    \
+:        rt2   mbe4   fhkn4   o5
+:        /\    / \     /   \
+:      r1 t1 m2 be2  fh2   kn2
+:               / \  / \   / \
+:             b1 e1 f1 h1 k1 n1
+
+  Read the codes from the tree:
+#+name: full-huffman-table-for-message1
+| b | 1 | "0110" |
+| e | 1 | "0111" |
+| f | 1 | "1000" |
+| h | 1 | "1001" |
+| k | 1 | "1010" |
+| m | 2 | "010"  |
+| n | 1 | "1011" |
+| o | 5 | "11"   |
+| r | 1 | "000"  |
+| t | 1 | "001"  |
+
+#+begin_src elisp :var table=full-huffman-table-for-message1
+  (show-results-table message1 table)
+#+end_src
+
+#+results:
+| total-characters           |                  15 |
+| total-bits                 |                  46 |
+| average-bits-per-character |   3.066666666666667 |
+| fixed-bits-per-character   |                   4 |
+| total-fixed-bits           |                  60 |
+| compression-ratio          | 0.23333333333333334 |
+
+** Message 2
+#+begin_src elisp :results silent
+  (setq message2 "therestoration")
+#+end_src
+
+  This shows all the steps, like the examples in the book:
+#+name: huffman-table-for-message2
+#+begin_src elisp
+  (cl-sort (mapcar (lambda (pair) (list (string (car pair)) (cdr pair)))
+                   (count-occurrences message2))
+           'string< :key 'car)
+#+end_src
+
+#+results: huffman-table-for-message2
+| a | 1 |
+| e | 2 |
+| h | 1 |
+| i | 1 |
+| n | 1 |
+| o | 2 |
+| r | 2 |
+| s | 1 |
+| t | 3 |
+
+  The ever-shrinking-queue:
+  | a1 h1 i1 n1 s1 e2 o2 r2 t3 |
+  | i1 n1 s1 e2 o2 r2 ah2 t3   |
+  | s1 e2 o2 r2 ah2 in2 t3     |
+  | o2 r2 ah2 in2 t3 se3       |
+  | ah2 in2 t3 se3 or4         |
+  | t3 se3 or4 ahin4           |
+  | or4 ahin4 tse6             |
+  | tse6 orahin8               |
+  | tseorahin14                |
+
+  The Huffman tree:
+:           tseorahin14
+:           /        \
+:        tse6     orahin8
+:         / \      /    \
+:       t3 se3   or4   ahin4
+:          / \   / \    /   \
+:         s1 e2 o2 r2 ah2   in2
+:                     / \   / \
+:                    a1 h1 i1 n1
+
+  Read the codes from the tree:
+  #+name: full-huffman-table-for-message2
+  | a | 1 | "1100" |
+  | e | 2 | "011"  |
+  | h | 1 | "1101" |
+  | i | 1 | "1110" |
+  | n | 1 | "1111" |
+  | o | 2 | "100"  |
+  | r | 2 | "101"  |
+  | s | 1 | "010"  |
+  | t | 3 | "00"   |
+
+#+begin_src elisp :var table=full-huffman-table-for-message2
+  (show-results-table message2 table)
+#+end_src
+
+#+results:
+| total-characters           |                  14 |
+| total-bits                 |                  43 |
+| average-bits-per-character |  3.0714285714285716 |
+| fixed-bits-per-character   |                   4 |
+| total-fixed-bits           |                  56 |
+| compression-ratio          | 0.23214285714285715 |
