@@ -1,0 +1,327 @@
+-*- mode: org -*-
+#+title: Assignment 09
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
+:END:
+* TODO Explore Huffman Trees and Huffman Codes
+  Your task is to compress a /special piece of information/ as compactly as
+  possible, *give its encoding* and *calculate its compression ratio*.
+
+  Recall that the *compression ratio* of an encoding is the percentage
+  \(\frac{(f - v)}{f} \times 100\), where /f/ is the number of bits per symbol of the
+  smallest *fixed*-length encoding, and /v/ is the average number of bits per
+  symbol with the Huffman encoding.
+
+  For example, if there were 9 different symbols in a message, \(f=4\) is the
+  number of bits of the smallest fixed-length encoding, because 2^3 = 8 (not
+  enough for 9) and 2^4 = 16 (enough and to spare). If the Huffman encoding of
+  the message had \(v=3.12\), the compression ratio would be
+
+  \(\frac{4 - 3.12}{4} \times 100\ \approx 22\%.\)
+
+  The /special piece of information/ you are tasked to compress is a list of the
+  first ten million primes. This is a list that starts
+
+  |  2 |
+  |  3 |
+  |  5 |
+  |  7 |
+  | 11 |
+  | 13 |
+  | 17 |
+  | 19 |
+  | 23 |
+  | 29 |
+
+  and ends
+
+  | 179424551 |
+  | 179424571 |
+  | 179424577 |
+  | 179424601 |
+  | 179424611 |
+  | 179424617 |
+  | 179424629 |
+  | 179424667 |
+  | 179424671 |
+  | 179424673 |
+
+  As ASCII text stored in a file with one prime per line, the size of this data
+  file is slightly over 89 megabytes. The goal is to compress this down to just
+  over 5 megabytes (5589056 bytes, to be exact). That\rsquo{}s a 94% compression ratio!
+
+  Standard compression tools can only get about a 73% compression ratio for this
+  ASCII data. A more clever approach is needed. Instead of compressing the list
+  of prime numbers, compress a list of the /gaps/ between them!
+
+  It doesn\rsquo{}t save much, just the unique (occurring only once) gap size of 1
+  between 2 and 3, but in the spirit of de Polignac\rsquo{}s conjecture that every
+  /even/ number appears infinitely often as a gap between consecutive primes,
+  just consider the even-sized gaps. The result will be a list that starts with
+  2 (the difference between 5 and 3), 2 (the difference between 7 and 5), 4 (the
+  difference between 11 and 7), 2 (the difference between 13 and 11), 4 (the
+  difference between 17 and 13), 2 (the difference between 19 and 17), 4 (the
+  difference between 23 and 19), and 6 (the difference between 29 and 23).
+
+  Generating this data is the first task. The algorithm for doing so is very
+  straightforward:
+
+  1. Find the gaps between consecutive odd primes.
+  2. Store these gaps as a list of even numbers.
+
+  Tabulating the results, the first ten gaps are as follows, where the last
+  column is the list to keep:
+
+  |  5 | - |  3 | = | 2 |
+  |  7 | - |  5 | = | 2 |
+  | 11 | - |  7 | = | 4 |
+  | 13 | - | 11 | = | 2 |
+  | 17 | - | 13 | = | 4 |
+  | 19 | - | 17 | = | 2 |
+  | 23 | - | 19 | = | 4 |
+  | 29 | - | 23 | = | 6 |
+  | 31 | - | 29 | = | 2 |
+  | 37 | - | 31 | = | 6 |
+
+  And the last ten:
+
+  | 179424551 | - | 179424533 | = | 18 |
+  | 179424571 | - | 179424551 | = | 20 |
+  | 179424577 | - | 179424571 | = |  6 |
+  | 179424601 | - | 179424577 | = | 24 |
+  | 179424611 | - | 179424601 | = | 10 |
+  | 179424617 | - | 179424611 | = |  6 |
+  | 179424629 | - | 179424617 | = | 12 |
+  | 179424667 | - | 179424629 | = | 38 |
+  | 179424671 | - | 179424667 | = |  4 |
+  | 179424673 | - | 179424671 | = |  2 |
+
+  As a check, see if the generated list of gaps has length 9999998.
+
+  The next step is to count how many times each gap size occurs, so that for the
+  Huffman encoding scheme, the larger the frequency of occurrence, the smaller
+  the number of bits encoding that gap size.
+
+  As a correctness check, here are the first ten gap counts:
+
+  | Gap |   Count |
+  |-----+---------|
+  |   2 |  738597 |
+  |   4 |  738717 |
+  |   6 | 1297540 |
+  |   8 |  566151 |
+  |  10 |  729808 |
+  |  12 |  920661 |
+  |  14 |  503524 |
+  |  16 |  371677 |
+  |  18 |  667734 |
+  |  20 |  354267 |
+
+  And the last ten:
+
+  | Gap | Count |
+  |-----+-------|
+  | 190 |     1 |
+  | 192 |     3 |
+  | 194 |     1 |
+  | 196 |     1 |
+  | 198 |     6 |
+  | 202 |     2 |
+  | 204 |     3 |
+  | 210 |     4 |
+  | 220 |     1 |
+  | 222 |     1 |
+
+  Note two things from these partial gap counts:
+
+  1. Small even numbers (< 100) are well represented, larger ones (< 1000) less
+     so.
+  2. Ten million primes aren\rsquo{}t enough to have /every/ even number represented;
+     for example, 200, 206, 208, 212, 214, 216 and 218 do not appear even once.
+
+* TODO Calculate Size of File
+  Imagine evaluating the following two code blocks:
+#+begin_src elisp :results silent
+  (require 'first-ten-million-primes)
+
+  (defun create-ascii-file-of-first-ten-million-primes ()
+    (with-temp-buffer
+      (mapc (lambda (n) (insert (format "%d\n" n))) first-ten-million-primes)
+      (write-region nil 0 "first-ten-million-primes.txt")))
+#+end_src
+
+#+begin_src elisp :results silent
+  (create-ascii-file-of-first-ten-million-primes)
+#+end_src
+
+  Strictly speaking, it is not necessary to create this file in order to
+  calculate its size. How? What would its size be? (Knowing this size is useful
+  for compression ratio comparison.)
+
+* TODO Study and Extend Some Sample Code
+  As you are required to build an elisp-structured Huffman tree that can
+  compress the list of primes, use the following code block as a guide and a
+  starting point. You are given code for creating a list of gaps between the
+  first ten million primes, and for restoring a list (not a vector) of the first
+  ten million primes from that list of gaps.
+
+  This code also shows a possible implementation of a tree node as a symbol. The
+  symbol\rsquo{}s value is the node\rsquo{}s value. The symbol\rsquo{}s plist (property list) is used
+  for storing \ldquo{}pointers\rdquo to left and right children, and parent.
+
+#+begin_src elisp :results silent
+  (require 'cl)
+
+  (require 'first-ten-million-primes)
+
+  (defun list-the-gaps ()
+    "Create a list of the gaps between the first ten million primes.
+     Depends on the first-ten-million-primes vector."
+    (loop with curr = 0
+          with prev = 3
+          with gap = 0
+          for i from 2 upto (1- (length first-ten-million-primes))
+          do (setq curr (elt first-ten-million-primes i)
+                   gap (- curr prev)
+                   prev curr)
+          collect gap))
+
+  (defun restore-primes (list-of-gaps)
+    "Given the list of gaps starting at the gap between 3 and 5
+       return a list of the first ten million primes."
+    (cons 2 (cons 3 (loop for gap in list-of-gaps with prime = 3
+                          collect (incf prime gap)))))
+
+  (setq node-counter 0)
+
+  (defun make-node ()
+    (let ((symbol (make-symbol (concat "n" (number-to-string node-counter)))))
+      (set symbol node-counter)
+      (incf node-counter)
+      symbol))
+
+  (defun get-value (node)
+    (and (symbolp node) (symbol-value node)))
+
+  (defun set-value (node new-value)
+    (and (symbolp node) (set node new-value)))
+
+  (defun get-parent (node)
+    (and (symbolp node) (get node :parent)))
+
+  (defun set-parent (node parent)
+    (and (symbolp node) (symbolp parent) (put node :parent parent)))
+
+  (defun get-left (node)
+    (and (symbolp node) (get node :left)))
+
+  (defun set-left (node left)
+    (and (symbolp node) (symbolp left) (put node :left left)))
+
+  (defun get-right (node)
+    (and (symbolp node) (get node :right)))
+
+  (defun set-right (node right)
+    (and (symbolp node) (symbolp right) (put node :right right)))
+
+  (defun build-tree (height)
+    (let ((root (make-node)))
+      (if (> height 0)
+          (let ((left (build-tree (1- height)))
+                (right (build-tree (1- height))))
+            (set-left root left)
+            (set-right root right)
+            (set-parent left root)
+            (set-parent right root)))
+      root))
+#+end_src
+
+* TODO My Report on What I Learned
+** How I had fun
+** How I collaborated
+** What new I learned
+** What meaningful I achieved
+** Etc.
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+   What is true of my experience in general?
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I collaborated with one or more classmates.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a
+    later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I reported what I thought about while doing the problems.
+  - [ ] I reported on any connections I found between these problems and
+    something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
+  - [ ] I reported on *three different* compression ratios (see assertions about
+    answers).
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+#+name: assertions-about-answers
+  - [ ] I wrote an elisp function to make-frequency-table that takes a
+    list-of-gaps and populates the data structure created by
+    =(make-hash-table)=.
+  - [ ] I wrote an elisp function to make-node-list-from-table that takes the
+    table-of-frequencies and returns a list of nodes.
+  - [ ] I wrote an elisp function to make-huffman-tree that takes the
+    list-of-nodes and returns a Huffman tree.
+  - [ ] I wrote an elisp function to get-a-gap-code-table that takes a Huffman
+    tree (or a list-of-nodes) and returns a code-list as a list of (gap . code)
+    cons cells.
+  - [ ] I wrote an elisp function to encode the data given the list-of-gaps and
+    the code-list.
+  - [ ] I wrote an elisp function to encapsulate the above-mentioned elisp
+    functions (in order) in one encode-first-ten-million-primes function that
+    takes no parameters.
+  - [ ] I correctly calculated the number of keys in the hashtable of gap sizes.
+  - [ ] I correctly calculated the number of bits per key with a fixed encoding.
+  - [ ] I correctly calculated the total number of bits encoded with the Huffman
+    encoding.
+  - [ ] I correctly calculated the total number of bits encoded with the fixed
+    encoding.
+  - [ ] I correctly calculated the compression ratio from this fixed encoding.
+  - [ ] I correctly calculated the size of the first ten million primes encoded
+    as 32-bit integer binary data.
+  - [ ] I correctly calculated the compression ratio from the binary size.
+  - [ ] I correctly calculated the size of the first ten million primes encoded
+    as ASCII data.
+  - [ ] I correctly calculated the compression ratio from the ASCII size (just
+    the primes, nothing else).
+
+#+begin_src elisp
+  (calculate-score
+   (quote
+    ((in-general 1 1 2 2)
+     (about-report 5 5 5 5 6)
+     (about-MIs 2 2 2 2)
+     (about-answers 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4))))
+#+end_src
