@@ -1,0 +1,33 @@
+-*- mode: org -*-
+#+title: Divide Pair Conquer 09
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* TODO Create Tree and Codes
+  This is a warmup for your main assignment this week.
+
+  Create a Huffman Tree and codes for the gaps between the first 100 primes
+  (except for the gap of size 1 between 2 and 3).
+
+#+begin_src elisp
+  (require 'first-ten-million-primes)
+
+  (setq the-data (subseq first-ten-million-primes 2 100)
+        list-of-gaps (loop with prev = 3
+                           with gap = 0
+                           for prime across the-data
+                           do (setq gap (- prime prev)
+                                    prev prime)
+                           collect gap)
+        table (mapcar 'list list-of-gaps))
+#+end_src
