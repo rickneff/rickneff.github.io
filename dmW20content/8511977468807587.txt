@@ -1,0 +1,70 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 09
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+:END:
+* TODO Explore and Wonder
+  The goal of today\rsquo{}s CDL is to answer the question:
+
+  How many valid BSTs are there with 4 keys?
+
+#+begin_src elisp :results value
+  (require 'ment) ; for generate-permutations
+
+  (mapconcat (lambda (perm-string)
+               (concat "  - [ ] " perm-string))
+             (mapcar (lambda (perm)
+                       (mapconcat 'symbol-name perm ""))
+                     (generate-permutations'(A B C D)))
+             "\n")
+#+end_src
+
+  - [ ] ABCD
+  - [ ] ABDC
+  - [ ] ACBD
+  - [ ] ACDB
+  - [ ] ADBC
+  - [ ] ADCB
+  - [ ] BACD
+  - [ ] BADC
+  - [ ] BCAD
+  - [ ] BCDA
+  - [ ] BDAC
+  - [ ] BDCA
+  - [ ] CABD
+  - [ ] CADB
+  - [ ] CBAD
+  - [ ] CBDA
+  - [ ] CDAB
+  - [ ] CDBA
+  - [ ] DABC
+  - [ ] DACB
+  - [ ] DBAC
+  - [ ] DBCA
+  - [ ] DCAB
+  - [ ] DCBA
+
+:PICTURE:
+: ABCD
+: A
+:  \
+:   B
+:    \
+:     C
+:      \
+:       D
+
+: DCBA
+:       D
+:      /
+:     C
+:    /
+:   B
+:  /
+: A
+:END:
