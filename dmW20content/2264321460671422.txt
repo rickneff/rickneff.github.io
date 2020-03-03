@@ -1,0 +1,28 @@
+-*- mode: org -*-
+#+title: Presentation 09
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* Trees are Gnarly
+#+ATTR_HTML: :alt Gnarly :title Big Gnarly Tree
+  [[https://rickneff.github.io/dmW20content/gnarlyoldtree.jpg]]
+** Simple?
+   [[https://rickneff.github.io/dmW20content/binary-search-trees.pdf][Satisfying!]]
+** Tree Traversal Types
+   How many are there?
+   1. Preorder  (VLR)
+   2. Inorder   (LVR)
+   3. Postorder (LRV)
+   4. Level Order
+** Permutation Tree
+   See https://rickneff.github.io/metaphors-be-with-you.html ST@
