@@ -1,0 +1,197 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 09
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the link below, or with your cursor somewhere in it,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+:END:
+* TODO Answer Some Huffman Tree Creation Questions
+  How would you:
+  - [ ] write an elisp function to make-frequency-table that takes a
+    list-of-gaps and populates the data structure created by
+    =(make-hash-table)=?
+  - [ ] write an elisp function to make-node-list-from-table that takes the
+    table-of-frequencies and returns a list of nodes?
+  - [ ] write an elisp function to make-huffman-tree that takes the
+    list-of-nodes and returns a Huffman tree?
+  - [ ] write an elisp function to get-a-gap-code-table that takes a Huffman
+    tree (or a list-of-nodes) and returns a code-list as a list of (gap . code)
+    cons cells?
+  - [ ] write an elisp function to encode the data given the list-of-gaps and
+    the code-list?
+
+:HOWTO:
+  How Brother Neff would do it:
+#+begin_src elisp :results silent
+  (setq list-of-gaps (list-the-gaps)
+        length-of-list-of-gaps (length list-of-gaps))
+#+end_src
+
+  - [ ] I wrote an elisp function to make-frequency-table that takes a
+    list-of-gaps and populates the data structure created by
+    =(make-hash-table)=.
+#+begin_src elisp :results silent
+  (defun make-frequency-table (gap-list)
+    (loop with freq-table = (make-hash-table)
+          for gap in gap-list
+          do (incf (gethash gap freq-table 0))
+          finally return freq-table))
+#+end_src
+
+#+begin_src elisp :results raw
+  (setq table-of-frequencies (make-frequency-table list-of-gaps))
+#+end_src
+
+  - [ ] I wrote an elisp function to make-node-list-from-table that takes the
+    table-of-frequencies and returns a list of nodes (sorted as it is built).
+#+begin_src elisp :results silent
+  (defun make-node (gap-size frequency)
+    (let ((symbol (make-symbol (concat "gn" (number-to-string node-counter)))))
+      (incf node-counter)
+      (set symbol frequency)
+      (when gap-size
+        (put symbol :gap gap-size))
+      symbol))
+
+  (defun compare-nodes (node1 node2)
+    (<= (symbol-value node1) (symbol-value node2)))
+
+  (defun insert-into-sorted (node node-list)
+    (let ((node1 (car node-list))
+          (new-front nil)
+          (new-back node-list))
+      (while (and node1 (compare-nodes node1 node))
+        (setq new-front (append new-front (list node1))
+              new-back (cdr new-back)
+              node1 (car new-back)))
+      (append new-front (list node) new-back)))
+
+  (defun make-node-list-from-table (frequency-table)
+    (let ((node-list nil))
+      (maphash (lambda (key val)
+                 (setq node-list
+                       (insert-into-sorted (make-node key val) node-list)))
+               frequency-table)
+      node-list))
+#+end_src
+
+#+begin_src elisp :results silent
+  (setq node-counter 0
+        list-of-nodes (make-node-list-from-table table-of-frequencies)
+        number-of-nodes (length list-of-nodes))
+#+end_src
+
+#+begin_src elisp :results raw
+  (setq l (copy-sequence list-of-nodes)
+        n1 (make-node 228 1)
+        l1 (insert-into-sorted n1 l))
+#+end_src
+
+  - [ ] I wrote an elisp function to make-huffman-tree that takes the
+    list-of-nodes and returns a Huffman tree.
+#+begin_src elisp :results silent
+  (defun make-internal-node (left-subtree right-subtree)
+     (let* ((new-node (make-node nil (+ (symbol-value left-subtree) (symbol-value right-subtree)))))
+       (set-parent left-subtree new-node)
+       (set-parent right-subtree new-node)
+       (set-left new-node left-subtree)
+       (set-right new-node right-subtree)
+       new-node))
+
+  (defun make-huffman-tree (Q)
+    (let (Tl Tr)
+      (while (> (length Q) 1)
+        (setq Tl (first Q)
+              Q (rest Q)
+              Tr (first Q)
+              Q (rest Q)
+              Q (insert-into-sorted (make-internal-node Tl Tr) Q)))
+      (first Q)))
+#+end_src
+
+  Why =copy-sequence=?
+#+begin_src elisp :results raw
+  (setq huffman-tree (make-huffman-tree (copy-sequence list-of-nodes)))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun get-ancestry (node)
+    (if (null (get-parent node))
+        (cons node nil)
+      (cons node (get-ancestry (get-parent node)))))
+#+end_src
+
+#+begin_src elisp :results raw
+  (setq a1 (get-ancestry (car list-of-nodes))
+        a2 (get-ancestry (first (last list-of-nodes))))
+#+end_src
+
+#+begin_src elisp
+  (mapcar (lambda (node) (cons node (cons (symbol-value node) (symbol-plist node)))) a1)
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun put-code (leaf-node)
+    (loop with ancestry = (reverse (get-ancestry leaf-node))
+          with code = ""
+          for node in ancestry
+          for next-node in (cdr ancestry)
+          do (setq code (concat code (if (eq next-node (get-left node)) "0" "1")))
+          finally return (put leaf-node :code code)))
+#+end_src
+
+#+begin_src elisp :results silent
+  (setq n1 (car list-of-nodes))
+#+end_src
+
+#+begin_src elisp :results code
+  (get-ancestry n1)
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun show-node (node)
+    (princ (format "%s\n" (cons node (cons (symbol-value node) (symbol-plist node))))))
+
+  (defun show-tree (root)
+    (show-node root)
+    (when (get-left root)
+       (show-tree (get-left root)))
+    (when (get-right root)
+       (show-tree (get-right root))))
+#+end_src
+
+  Show the tree:
+#+begin_src elisp :results output
+  (show-tree huffman-tree)
+#+end_src
+
+#+begin_src elisp :results output
+  (mapc 'show-node list-of-nodes)
+#+end_src
+
+  - [ ] I wrote an elisp function to get-a-gap-code-table that takes a Huffman
+    tree (or a list-of-nodes) and returns a code-list as a list of (gap . code)
+    cons cells?
+#+begin_src elisp :results silent
+  (defun get-a-gap-code-table (node-list)
+    (cl-sort (mapcar (lambda (node)
+                       (cons (get node :gap) (put-code node)))
+                     node-list) '< :key 'car))
+#+end_src
+
+#+begin_src elisp :results code
+  (setq code-list (get-a-gap-code-table list-of-nodes))
+#+end_src
+
+  Compression Ratio Values to Strive to Get:
+
+  | compression-ratio-from-fixed  | 36.125168653605158 |
+  | compression-ratio-from-binary |              86.03 |
+  | compression-ratio-from-ascii  |              94.02 |
+:END:
