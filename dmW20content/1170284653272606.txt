@@ -1,0 +1,42 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 09
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Based on what you learned from file:presentation-09.txt and your reading of
+  Chapter 14:
+
+* TODO Explain Three Ways
+  of doing the same computation:
+  1.
+: >>> simulateTM(rf(’containsGAGA.tm’), ’TTGAGATT’)
+  2.
+: >>> containsGAGA(’TTGAGATT’)
+  3.
+: >>> universal(rf(’containsGAGA.py’), ’TTGAGATT’)
+
+  Explain what you think each does.
+
+  What is the difference between the above three methods of doing
+  the same computation?
+
+* TODO Explain Your Understanding
+  What do the following produce, and why?
+#+begin_src python
+  from utils import rf, ESS
+  from alter import alterGAGAtoTATA
+
+  return alterGAGAtoTATA(ESS(rf('repeatCAorGA.py'), 'CA'))
+#+end_src
+
+#+begin_src python
+  from utils import rf, ESS
+  from alter import alterGAGAtoTATA
+
+  return alterGAGAtoTATA(ESS(rf('repeatCAorGA.py'), 'GA'))
+#+end_src
+
+* TODO Explain Further
+  Why does the =recYesOnString= program not also *decide* =YesOnString=?
