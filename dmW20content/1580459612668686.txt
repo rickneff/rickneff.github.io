@@ -1,0 +1,26 @@
+-*- mode: org -*-
+#+title: Presentation 10
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not \ldquo{}HINT\rdquo)
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup.hide
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* Trees as Graphs
+  Start looking at trees in a graph context:
+** General Properties
+    Trees are graphs with constraints:
+    1. No cycles
+    2. Connected
+** Spanning Tree
+   [[https://rickneff.github.io/spanning-tree.png][Spanning Tree]]
+** Ladder Graph
+   AKA a 2xN Grid
+   [[https://rickneff.github.io/images/ladder-graph.png][Ladder Graph]]
