@@ -1,0 +1,37 @@
+-*- mode: org -*-
+#+title: Divide Pair Conquer 10
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* TODO Answer Two Questions
+** Question 1
+   How many spanning trees does an n-rung ladder graph have?
+   | n | NST(n) |
+   |---+--------|
+   | 1 |        |
+   | 2 |        |
+   | 3 |        |
+   | 4 |        |
+
+   What is the formula for computing NST(n) in general?
+
+** Question 2
+   How many of these spanning trees include the bottom rung?
+   | n | NSTIBR(n) |
+   |---+-----------|
+   | 1 |           |
+   | 2 |           |
+   | 3 |           |
+   | 4 |           |
+
+   What is the formula for computing NSTIBR(n) in general?
