@@ -1,0 +1,71 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 10
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the link below, or with your cursor somewhere in it,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+:END:
+* Patterns and Probabilities
+  Of spanning trees of ladder graphs.
+* Calculations
+  What is the probability (lim_{n \rarr \infty} P(n)) that a randomly-selected spanning tree
+  of an n-rung ladder graph contains the bottom rung?
+
+  | n | P(n)    |
+  |---+---------|
+  | 1 | 1/1     |
+  | 2 | 3/4     |
+  | 3 | 11/15   |
+  | 4 | 41/56   |
+  | 5 | 153/209 |
+
+** Recurrence Relations
+   Let f(n) = NSTIBR(n):
+
+   f(n) = 4*f(n-1) - f(n-2) for n > 1;
+   f(0) = 1;
+   f(1) = 1.
+
+   Let g(n) = NST(n):
+
+   g(n) = 4*f(n-1) - f(n-2) for n > 1;
+   g(0) = 0;
+   g(1) = 1.
+
+*** Check Recurrences
+     | n | f(n) | f(n-1) | 4*f(n-1) | f(n - 2) | diff |
+     |---+------+--------+----------+----------+------|
+     | 0 |    1 |    N/A |      N/A |      N/A |  N/A |
+     | 1 |    1 |      1 |        4 |      N/A |  N/A |
+     | 2 |    3 |      1 |        4 |        1 |    3 |
+     | 3 |   11 |      3 |       12 |        1 |   11 |
+     | 4 |   41 |     11 |       44 |        3 |   41 |
+     | 5 |  153 |     41 |      164 |       11 |  153 |
+
+     | n | g(n) | g(n-1) | 4*g(n-1) | g(n - 2) | diff |
+     |---+------+--------+----------+----------+------|
+     | 0 |    0 |    N/A |      N/A |      N/A |  N/A |
+     | 1 |    1 |      0 |        0 |      N/A |  N/A |
+     | 2 |    4 |      1 |        4 |        0 |    4 |
+     | 3 |   15 |      4 |       16 |        1 |   15 |
+     | 4 |   56 |     15 |       60 |        4 |   56 |
+     | 5 |  209 |     56 |      224 |       15 |  209 |
+
+     Can you solve for closed-form formulas for f(n) and g(n)?
+
+#+begin_src elisp :results raw
+  (org-sbe class-directed-learning-04.txt:main)
+
+  (setq value (- (sqrt 3) 1)
+        value-as-cf (continued-fraction-of-float-with-iterations value 19))
+#+end_src
+
+#+begin_src elisp :results raw
+  (eval (cf-expression (butlast value-as-cf 19))))
+#+end_src
