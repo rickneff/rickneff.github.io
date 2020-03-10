@@ -1,0 +1,122 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 10
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+:END:
+* TODO Explore and Wonder
+  The goal of today\rsquo{}s CDL is to answer the question:
+
+  When Huffman encoded, which message consisting of a city/state concatenation
+  (e.g., "KINGSPORTTENNESSEE") achieves the best compression ratio?
+
+** Possibly Useful Information
+   [[https://rickneff.github.io/list-of-cities-and-towns-in-usa.org][A List of Some Cities and Towns in the USA]]
+*** And to avoid excessive manual labor
+     Presenting Huffman Trees Simplified Using Cons Cells and Lists:
+#+name: code
+#+begin_src elisp :results silent
+  (defun get-value (node)
+    (and (stringp node) node))
+
+  (defun get-left (node)
+    (and (listp node) (first node)))
+
+  (defun get-right (node)
+    (and (listp node) (second node)))
+
+  (defun find-leaf (encoded tree)
+    (if (get-value tree)
+        (cons tree encoded)
+      (let ((first-char (elt encoded 0))
+            (rest-of-encoded (substring encoded 1)))
+        (case first-char
+          (?0 (find-leaf rest-of-encoded (get-left tree)))
+          (?1 (find-leaf rest-of-encoded (get-right tree)))
+          (t "")))))
+
+  (defun do-decode (encoded tree)
+    (destructuring-bind (leaf . encoded)
+        (find-leaf encoded tree)
+      (if (zerop (length encoded))
+          leaf
+        (concat leaf (do-decode encoded tree)))))
+
+  (defun make-frequency-table (message)
+    (let ((freq-table nil))
+      (mapcar (lambda (character)
+                (incf (alist-get character freq-table 0)))
+              message)
+      (mapcar (lambda (a)
+                (cons (cdr a) (string (car a))))
+              (sort freq-table
+                    (lambda (a b)
+                      (if (= (cdr a) (cdr b))
+                          (< (car a) (car b))
+                        (< (cdr a) (cdr b))))))))
+
+  (defun merge-trees (a b)
+    (cons (+ (car a) (car b)) (cons a b)))
+
+  (defun insert-into-queue (queue tree)
+    (if (null queue)
+        (cons tree nil)
+      (if (< (car tree) (car (car queue)))
+          (cons tree queue)
+        (cons (car queue) (insert-into-queue (cdr queue) tree)))))
+
+  (defun make-huffman-tree (message)
+    (let ((queue (make-frequency-table message)))
+      (while (cdr queue)
+        (setq queue
+              (insert-into-queue
+               (cdr (cdr queue))
+               (merge-trees (car queue) (car (cdr queue))))))
+      (car queue)))
+
+  (defun huffman-encode (message codes)
+    (mapconcat (lambda (chr) (second (assoc (string chr) codes))) message ""))
+
+  (defun listify-tree (huffman-tree)
+    (if (consp (cdr huffman-tree))
+        (mapcar 'listify-tree (list (car (cdr huffman-tree)) (cdr (cdr huffman-tree))))
+      (cdr huffman-tree)))
+
+  (defun huffman-decode (tree encoded)
+    (do-decode encoded (listify-tree tree)))
+
+  (defun get-codes (huffman-tree &optional prefix)
+    (or prefix (setq prefix ""))
+    (if (consp (cdr huffman-tree))
+        (append (get-codes (car (cdr huffman-tree)) (concat prefix "0"))
+                (get-codes (cdr (cdr huffman-tree)) (concat prefix "1")))
+      (list (list (cdr huffman-tree) prefix (car huffman-tree)))))
+
+  (defun fixed-bits-per-character (codes)
+    (ceiling (log (length codes) 2)))
+
+  (defun bits-per-character (encoded message)
+    (/ (float (length encoded)) (length message)))
+
+  (defun compression-ratio (f v)
+    (* 100 (/ (- f v) (float f))))
+
+  (defun huffman-encode-decode (message)
+    (let* ((tree (make-huffman-tree message))
+           (codes (get-codes tree))
+           (encoded (huffman-encode message codes))
+           (decoded (huffman-decode tree encoded))
+           (fixed-bits-per-character (fixed-bits-per-character codes))
+           (bits-per-character (bits-per-character encoded message))
+           (compression-ratio (compression-ratio fixed-bits-per-character bits-per-character))
+           (compression-ratio-formatted (format "%2.4f%%" compression-ratio)))
+      (list (list 'Tree tree)
+            (list 'Encoded encoded)
+            (list 'Decoded decoded)
+            (list "Bits Per Character" bits-per-character)
+            (list "Compression Ratio" compression-ratio-formatted))))
+#+end_src
