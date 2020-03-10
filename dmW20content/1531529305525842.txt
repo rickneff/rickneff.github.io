@@ -1,0 +1,25 @@
+-*- mode: org -*-
+#+title: Presentation 10
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* Huffman Trees are Scary Cool
+** Data Compression
+   Let\rsquo{}s talk about compressing data and how to do it with Huffman Trees and
+   Huffman encoding and decoding.
+** Tasks
+  - [ ] Build a Huffman tree for a simple message.
+  - [ ] Encode it.
+  - [ ] Compute the average number of bits per character with this encoding.
+  - [ ] Compute the compression ratio.
+  - [ ] Decode an encoded message with the same tree.
