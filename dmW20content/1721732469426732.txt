@@ -1,0 +1,19 @@
+-*- mode: org -*-
+#+title: Assignment 10
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Please do the following Chapter 15 exercises (comments from Ganesh):
+
+* Exercise 15.2.3.1
+  is a warmup and encourages the use of the tool.
+* Exercise 15.2.3.4
+  is good, as it shows that 0's and 1's matter -- not just 0's (i.e. a zebra and not a donkey).
+* Exercise 15.2.3.5
+  is great to show one use of PCP (it is medium-hard).
+* Exercise 15.5.1.3
+  is good, as it builds on something already done, and it shows how \ldquo{}label surgery\rdquo on a TM is done.
+* Exercise 15.5.1.5
+  is good and not that hard (resembles Fig 15.10) as it does cause some mental pushups to be exercised.
