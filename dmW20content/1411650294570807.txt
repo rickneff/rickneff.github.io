@@ -1,0 +1,207 @@
+-*- mode: org -*-
+#+title: Presentation 10
+#+subtitle: The Post Correspondence Problem and other Undecidability Proofs
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* Another PCP Example
+  file:pcp.png
+* Alternative to Jove
+  #+name: Figure-15.3-example
+  | Tile # | Top    | Bottom |
+  |--------+--------+--------|
+  |      1 | "1000" | "0"    |
+  |      2 | "01"   | "0"    |
+  |      3 | "1"    | "101"  |
+  |      4 | "00"   | "001"  |
+
+#+name: Figure-15.3-example-transposed
+#+begin_src elisp :var table=Figure-15.3-example
+  (apply 'mapcar* 'list table)
+#+end_src
+
+#+results: Figure-15.3-example-transposed
+|    1 |  2 |   3 |   4 |
+| 1000 | 01 |   1 |  00 |
+|    0 |  0 | 101 | 001 |
+
+#+begin_src sh :results output
+  pcp -h
+#+end_src
+
+#+results:
+#+begin_example
+PCPSolver Ver 0.0.3 by Ling Zhao (zhao@cs.ualberta.ca) Nov 16, 2003
+
+pcp  : Solving tool for instances of Post's correspondence problem
+
+Usage: 1. Solve PCP instances in a file:
+          pcp -d depth -di inc -r run -i inputfile -o outputfile -ni
+
+       2. Scan a PCP subclass:
+          pcp -scan -s size -w width -d depth
+
+       3. Randomly generate difficult solvable instances:
+          pcp -ran -s size -w width -d depth -t times -l sol_lim
+              -o ofilename
+
+          run     - number of runs
+          ni      - no iterative search
+          di      - depth increment
+          depth   - search depth
+          times   - number of instances to be tried
+          sol_lim - min optimal solution length (only instances satisfying
+                    it will be recorded)
+
+#+end_example
+
+#+begin_src elisp :results silent :var table=Figure-15.3-example-transposed
+  (let* ((table (rest table))
+         (size (length (first table)))
+         (width (loop for tiles in table
+                      maximize (loop for tile in tiles
+                                     maximize (length tile))))
+         (top-row (string-join (first table) " "))
+         (bottom-row (string-join (second table) " ")))
+    (with-temp-file "pcp.in"
+      (insert (format "%d %d 206 1\n%s\n%s\n"
+                      size width
+                      top-row
+                      bottom-row))))
+#+end_src
+
+file:pcp.in
+
+#+begin_src sh :results silent
+  cat << EOF > pcp.in
+Instance 1:
+3 3 75 2
+110   1     0
+1     0     110
+
+Instance 2:
+3 4 252 1
+1101  0110  1
+1     11    110
+EOF
+#+end_src
+
+
+#+begin_src sh :results output :var depth=207 di=500
+  /Users/rneff/Jove/notebooks/driver/pcpbinaries/pcp_mac \
+  -i pcp.in -o pcp.out
+# pcp -d $depth -di $di -r 1 -i pcp.in -o pcp.out -ni
+  cat pcp.out
+#+end_src
+
+#+results:
+#+begin_example
+PCPSolver Ver 0.0.3 by Ling Zhao (zhao@cs.ualberta.ca) Nov 16, 2003
+
+Solve instances in file pcp.in
+(solvable => pcp.out, unsolvable => nosol.txt, unsolved => unsol.txt):
+
+Parameters:
+  Clock per second: 1000000
+  Cache size      : 8192
+  Hash table size : 262144
+  Iterative depth : 20
+  Maximum depth   : 320
+
+
+Solve instances:
+1
+Search to depth: 20
+node 30 1
+Search to depth: 40
+node 63 1
+Search to depth: 60
+node 120 1
+Search to depth: 80
+node 241 1
+Search to depth: 100
+node 444 1
+Search to depth: 120
+node 915 1
+Search to depth: 140
+node 1998 2
+Search to depth: 160
+node 3769 14
+Search to depth: 180
+node 5776 31
+Search to depth: 200
+node 8984 57
+Search to depth: 220
+node 14413 77
+
+Total nodes searched: 36753
+1 instances:
+  1 solvable.
+  0 unsolvable.
+  0 unsolved.
+time: 0.017037
+
+Total time spent: 0 seconds.
+ Instance 1:
+4 4 206 1 0.016080
+1000  01    1     00
+0     0     101   001
+
+Solvable!
+
+ 0 0 1 1
+ 1 0 0 0
+Gcd: 1
+Original Direction: upmask
+Reverse Direction: downmask
+Visited node in original direction: 63
+Visited node in reverse direction: 27430
+Choose the original direction:
+Find the solution in depth: 216 (depth threshold: 220)
+  4  3  3  2  3  2  2  2  4  4  2  4  3  4  2  3  2  4  3  2
+  2  4  2  3  2  4  4  3  2  2  4  2  4  3  3  2  4  4  1  3
+  3  2  3  2  4  2  4  3  2  2  3  2  2  2  4  2  4  2  3  2
+  4  3  2  4  4  2  4  2  2  2  4  2  3  2  4  2  4  3  4  2
+  4  4  2  2  2  4  2  4  2  3  2  4  1  3  4  1  4  3  4  2
+  2  2  4  2  2  2  4  1  3  3  2  4  1  4  1  4  3  2  2  3
+  2  4  2  4  2  4  2  3  2  4  3  2  4  2  4  2  4  2  2  2
+  4  2  3  2  4  2  4  2  4  2  4  4  2  2  2  4  2  4  2  4
+  2  4  2  4  1  4  1  3  4  2  4  2  4  2  4  2  2  2  4  1
+  1  1  3  4  4  2  4  2  2  4  3  4  1  1  2  3  2  4  1  3
+  2  4  2  2  2  4  2  4  4  2  4  2  4  1  1  1
+Find the solution in depth: 210 (depth threshold: 216)
+  4  3  3  2  3  2  2  2  4  4  2  4  3  4  2  3  2  4  3  2
+  2  4  2  3  2  4  4  3  2  2  4  2  4  3  3  2  4  4  1  3
+  3  2  3  2  4  2  4  3  2  2  3  2  2  2  4  2  4  2  3  2
+  4  3  2  4  4  2  4  2  2  2  4  2  3  2  4  2  4  3  4  2
+  4  4  2  2  2  4  2  4  2  3  2  4  1  3  4  1  4  3  4  2
+  2  2  4  2  2  2  4  1  3  3  2  4  1  4  1  4  3  2  2  3
+  2  4  2  4  2  4  2  3  2  4  3  2  4  2  4  2  4  2  2  2
+  4  2  3  2  4  2  4  2  4  2  4  4  2  2  2  4  2  4  2  4
+  2  4  2  4  1  4  3  4  2  4  2  4  2  4  2  4  2  3  2  4
+  1  1  1  3  4  2  2  2  4  2  4  2  2  4  1  4  1  1  2  4
+  2  4  4  2  4  2  4  1  1  1
+Find the solution in depth: 206 (depth threshold: 210)
+  4  3  3  2  3  2  2  2  4  4  2  4  3  4  2  3  2  4  3  2
+  2  4  2  3  2  4  4  3  2  2  4  2  4  3  3  2  4  4  1  3
+  3  2  3  2  4  2  4  3  2  2  3  2  2  2  4  2  4  2  3  2
+  4  3  2  4  4  2  4  2  2  2  4  2  3  2  4  2  4  3  4  2
+  4  4  2  2  2  4  2  4  2  3  2  4  1  3  4  1  4  3  4  2
+  2  2  4  2  2  2  4  1  3  3  2  4  1  4  1  4  3  2  2  3
+  2  4  2  4  2  4  2  3  2  4  3  2  4  2  4  2  4  2  2  2
+  4  2  3  2  4  2  4  2  4  2  4  4  2  2  2  4  2  4  2  4
+  2  4  2  4  1  4  3  4  2  4  2  4  2  4  2  4  2  3  2  4
+  1  3  4  2  4  2  4  2  2  2  4  2  2  2  4  1  1  1  4  1
+  4  1  4  1  1  1
+Time spent: 0.016080 seconds.
+
+
+visited node: 36753, last iteration: 14413
+cutoff node : 187, last iteration: 77
+time: 0.016080, last iteration: 0.002660
+Search speed: 2.286M/s, laster iteration: 5.418M/s
+
+Total nodes searched: 36753
+#+end_example
