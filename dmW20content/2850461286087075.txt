@@ -1,0 +1,14 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 10
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Based on what you learned from file:presentation-10.txt and your reading of
+  Chapter 15:
+
+* TODO Solve a PCP Instance
+  Work on 15.2.3.4 as teams, and see why unary versus binary matters:
+
+  [(000, 00), (0, 0000), (0000, 000), (0, 0000), (000000, 0)]
