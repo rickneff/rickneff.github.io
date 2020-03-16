@@ -1,0 +1,152 @@
+-*- mode: org -*-
+#+title: Assignment 11
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
+:END:
+* TODO Investigate Something Fascinating
+  You are invited to explore some of the ramifications of the /Pigeonhole
+  Principle/, a fascinating counting principle belonging to combinatorics.
+
+** Requirements
+   Read Brother Kent Bessey's essay entitled /Pigeons and Pigeonholes/, think
+   about and explore the topics therein, and write your response thereto.
+
+   Include in your response a description of a discussion about this essay that
+   you will have had with someone /not in the class/ (nor in any of the STEM
+   majors). This person can be a spouse, friend, roommate, or relative. The
+   point is to find someone who is not mathematically strong, and has probably
+   never heard of the Pigeonhole Principle, or combinatorics (or discrete
+   mathematics) in general.
+
+** Copyright Note
+   Brother Kent A. Bessey, Professor of Mathematics at BYU-Idaho,
+   holds the copyright to this essay, which means:
+
+   /All rights reserved (by him). Reproduced by permission (from/
+   /him). Read-only. Please do not copy, print, transmit or save a copy/
+   /of this work./
+
+   He has authorized your temporary use of [[https://firstthreeodds.org/17657741833134731255/pigeons-and-pigeonholes.pdf][his work]].
+
+* TODO Concretize the Abstract by Writing Some Code
+  Specifically, write some elisp code to help you figure out the problem on
+  page 40, which Brother Bessey prefaces by saying:
+
+#+BEGIN_QUOTE
+   I leave it to the reader to verify the calculations
+   for a final (albeit challenging) exercise ...!
+#+END_QUOTE
+
+  Include the results of your grappling with this problem, and note the two
+  stubbed functions below that you must flesh out in order to verify the
+  calculations and explain the hows and whys.
+
+** Stub Code
+#+begin_src elisp
+  (defun calculate-number-of-possible-initials-including-middle-initial-if-any
+      (number-of-letters-in-the-English-alphabet)
+    ;;... your code goes here
+  )
+
+  (defun pigeonhole-from-pigeon (pigeon-represented-as-a-person-with-traits)
+    ;;... your code goes here
+  )
+#+end_src
+
+* TODO My Report on What I Learned
+  A large part of learning is to reflect and report on what you learned.
+
+  Something should be in your report addressing each of the
+  =assertions-about-report= below.
+
+  Evidence should also be there that you took steps (which ones?) to eliminate
+  MIs (see =assertions-about-MIs= below).
+
+** How I had fun
+** What new I learned
+** What meaningful I achieved
+** Etc.
+* TODO What Is True?
+  This is a tool that allows you to assess yourself on how you did
+  with this assignment. Check a box (using , ,) if warranted.
+
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I responded with a sufficient number of well-written sentences to
+        Brother Bessey\rsquo{}s essay.
+  - [ ] I reported what I thought about the essay in general.
+  - [ ] I reported what I thought about the certainty-not-chance feature of the
+        pigeonhole principle.
+  - [ ] I reported what I thought about the philosophical aspect of the
+        pigeonhole principle per page 41.
+  - [ ] I reported on how my discussion with a non-STEM non-classmate went.
+  - [ ] I reported on how I grappled with the problem at the bottom of page 40.
+  - [ ] I reported on the connection I found between the pigeonhole principle
+        and graphs.
+  - [ ] I reported on the connection I found between the pigeonhole principle
+        and lossless data compression.
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+   How well did I implement the function
+   =calculate-number-of-possible-initials-including-middle-initial-if-any=?
+#+name: assertions-about-easy-function
+  - [ ] I implemented the function in 3 or fewer lines of code.
+  - [ ] I used either the sum rule and product rule together or else just the
+        product rule.
+  - [ ] The function calculates and returns the correct value (see Problem QFK).
+
+   How well did I implement the =pigeonhole-from-pigeon= function?
+#+name: assertions-about-harder-function
+  - [ ] The function reads from this buffer the list named "John Doe" and
+        returns the string "J D:111001".
+  - [ ] The function has an assert that the length of the string being returned
+        is 10.
+  - [ ] The function calls
+        (calculate-number-of-possible-initials-including-middle-initial-if-any 26)
+        and uses the result.
+  - [ ] The function has an assert that the cardinality of its codomain (set of
+        possible return values) is over a million.
+
+#+name: John Doe
+  - [X] LDS
+  - [X] Likes Cats
+  - [X] Born Before
+  - [ ] Wears Contacts
+  - [ ] Bites Fingernails
+  - [X] Lives Close
+
+#+begin_src elisp
+  (calculate-score
+   (quote
+    ((in-general 2 2 3)
+     (about-report 3 4 5 6 7 8 8 8)
+     (about-MIs 3 3 3 3)
+     (about-easy-function 4 4 4)
+     (about-harder-function 5 5 5 5))))
+#+end_src
