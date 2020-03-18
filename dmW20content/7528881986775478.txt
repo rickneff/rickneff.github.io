@@ -1,0 +1,154 @@
+-*- mode: org -*-
+#+title: Presentation 11
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not \ldquo{}HINT\rdquo)
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup.hide
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* Discuss Another Graph Representation
+   First we need a two-dimensional matrix (vector of vectors) of bools (t or
+   nil):
+#+begin_src elisp :results silent
+  (defun make-bool-matrix (size)
+    (make-vector size (make-bool-vector size nil)))
+
+  (defun get-entry (bool-matrix i j)
+    (elt (elt bool-matrix i) j))
+
+  (defun set-entry (bool-matrix i j new-val)
+    (setf (elt (elt bool-matrix i) j) new-val))
+
+  (defun show-bool-matrix (bool-matrix)
+    (loop for i from 0 below (length bool-matrix)
+          collect (loop for j from 0 below (length (elt bool-matrix 0))
+                        collect (get-entry bool-matrix i j))))
+#+end_src
+
+#+begin_src elisp :results raw
+  (setq bm1 (make-bool-matrix 5))
+#+end_src
+
+#+begin_src elisp
+  (loop for i from 0 below 5
+        always (loop for j from 0 below 5
+                    never (get-entry bm1 i j)))
+#+end_src
+
+#+begin_src elisp
+  (show-bool-matrix bm1)
+#+end_src
+
+#+begin_src elisp :results raw
+  (set-entry bm1 0 1 t)
+#+end_src
+
+#+begin_src elisp :results raw
+  bm1
+#+end_src
+
+#+begin_src elisp
+  (show-bool-matrix bm1)
+#+end_src
+
+:HINT:
+#+begin_src elisp :results silent
+  (defun make-bool-matrix (size)
+    (loop with bool-matrix = (make-vector size nil)
+          for i from 0 below size
+          do (setf (elt bool-matrix i) (make-bool-vector size nil))
+          finally return bool-matrix))
+#+end_src
+:END:
+
+  Now let\rsquo{}s use a boolean matrix to implement an adjacency matrix for a graph
+  given its node-list and links-list:
+#+begin_src elisp :results silent
+  (defun make-adjacency-matrix (node-list links-list)
+    (loop with bool-matrix = (make-bool-matrix (length node-list))
+          for (n1 . n2) in links-list
+          do (set-entry bool-matrix (1- n1) (1- n2) t)
+             (set-entry bool-matrix (1- n2) (1- n1) t)
+          finally return bool-matrix))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun is-connected (adjacency-matrix n1 n2)
+    (get-entry adjacency-matrix (1- n1) (1- n2)))
+#+end_src
+
+#+begin_src elisp :results silent
+  (defun make-links-for-ladder-graph (n)
+    "Create the list of links for a ladder graph with n rungs."
+    (setq n (* 2 n))
+    (append
+     ;; append the list of rungs
+     (mapcar* 'cons
+              (number-sequence 1 (- n 1) 2)
+              (number-sequence 2 (+ n 1) 2))
+     ;; to the list of n - 1 left supports (rails)
+     (mapcar* 'cons
+              (number-sequence 1 (- n 1) 2)
+              (number-sequence 3 (+ n 0) 2))
+     ;; to the list of n - 1 right supports (rails)
+     (mapcar* 'cons
+              (number-sequence 2 (- n 0) 2)
+              (number-sequence 4 (+ n 1) 2))))
+
+  (defun get-graph-nodes-from-links (list-of-links)
+    "Gets a list of graph nodes by scanning the graph links
+  and pushing both first and second nodes onto
+  a node list (if not already there).
+  The list of nodes is reversed and returned."
+    (loop with nodes = nil
+          for link in list-of-links do
+          (pushnew (car link) nodes)
+          (pushnew (cdr link) nodes)
+          finally return (nreverse nodes)))
+#+end_src
+
+#+begin_src elisp :results silent
+  (setq lg5l (make-links-for-ladder-graph 5)
+        lg5n (get-graph-nodes-from-links lg5l)
+        lg5am (make-adjacency-matrix lg5n lg5l))
+#+end_src
+
+#+begin_src elisp :results value
+  (loop for i from 1 to 10
+        collect (loop for j from 1 to 10
+                      collect (is-connected lg5am i j)))
+#+end_src
+
+#+begin_src elisp :results value
+  (loop for i from 1 to 10
+        collect (loop for j from 1 to 10
+                      collect (if (is-connected lg5am i j) 1 0)))
+#+end_src
+
+** What Are the Chances?
+   Many probability problems can be viewed in terms of graphs. For example,
+   this problem from the book:
+
+*** KSQ
+   Construct a graph using the following list of eight words as node labels:
+
+: dine done gone tine tone wind wine wins
+
+   Link two nodes if they differ in only one letter /in the same position/ (e.g.,
+   =wind= and =wins= differ in the fourth letter only, so that defines a link.
+   But =dine= and =tone= differ in the first /and/ second letters, so no link
+   there).
+
+   Randomly select two nodes of this graph. What is the probability that there
+   is a link between those two nodes?
+*** Probably or Certainly?
+    With some bearing on [[file:assignment-11.txt][Assignment 11]], fascinating questions arise from the
+    intersection of probability theory and graph theory, described here:
+    https://en.wikipedia.org/wiki/Probabilistic_method
