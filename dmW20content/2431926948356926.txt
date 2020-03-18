@@ -1,0 +1,118 @@
+-*- mode: org -*-
+#+title: Divide Pair Conquer 11
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* TODO Explore and Learn
+  As its name implies, Divide Pair Conquer (DPC) requires working in pairs.
+
+  For better or worse, pairing is a part of learning to work well with others.
+  Some people find working in small groups easier when n > 2 than when n = 2, so
+  the challenge is to make it work with just two.
+
+  The real pairing in life is, of course, marriage, which in our culture is
+  usually preceded by dating. Defying logic and reason sometimes, dating in
+  reality is scary for many because of its messiness as a process with
+  ill-defined outcomes. Interestingly, dating in the abstract has a history of
+  analysis in computer science.
+** For Example
+   Suppose N boys and N girls join a dating service.
+
+   We write down an N-by-N matrix, where the (i, j) entry equals 1 if boy i
+   and girl j are willing to date each other, and 0 if they aren’t.
+
+   Is it possible to pair off every boy and girl with a willing partner?
+
+   Here’s a simple way to find out:
+
+   First rescale every row of the matrix to sum to 1.
+
+   Then rescale every column to sum to 1.
+
+   Then rescale every row, then rescale every column, and so on N^5 times.
+
+   If at the end of this scaling process, every row sum and every column sum is
+   between (inclusive) 1 - 1/N and 1 + 1/N, then it’s possible to pair off the
+   boys and girls; otherwise it isn’t.
+
+   How does this work? Can you explain it?!
+
+   The following code may help:
+#+begin_src elisp :results silent
+  (defun scale-list (lst)
+    (let ((sum (float (apply '+ lst))))
+      (if (zerop sum)
+          (error "no can do")
+        (mapcar (lambda (x) (/ x sum)) lst))))
+
+  (defun scale-rows (matrix)
+    (mapcar 'scale-list matrix))
+
+  (defun scale-columns (matrix)
+    (let ((transpose (apply 'mapcar* 'list matrix)))
+      (apply 'mapcar* 'list (scale-rows transpose))))
+
+  (defun scale-matrix (n matrix)
+    (or (and (= n (length matrix))
+             (every (lambda (row) (= n (length row))) matrix))
+        (error "bad parameters"))
+    (loop repeat (expt n 5)
+            do (setq matrix (scale-rows matrix)
+                     matrix (scale-columns matrix)))
+    matrix)
+
+  (defun verify-matrix (n matrix)
+    (let* ((one-over-n (/ 1 (float n)))
+           (lo (- 1 one-over-n))
+           (hi (+ 1 one-over-n))
+           (transpose (apply 'mapcar* 'list matrix)))
+      (and (every (lambda (row)
+                    (let ((sum (apply '+ row)))
+                      (and (<= lo sum)
+                           (<= sum hi))))
+                  matrix)
+           (every (lambda (col)
+                    (let ((sum (apply '+ col)))
+                      (and (<= lo sum)
+                           (<= sum hi))))
+                  transpose))))
+#+end_src
+
+   Sample use of the above code:
+
+   #+name: five-by-five
+   | 0 | 1 | 0 | 1 | 0 |
+   | 1 | 0 | 1 | 0 | 1 |
+   | 0 | 1 | 1 | 0 | 0 |
+   | 0 | 1 | 0 | 0 | 1 |
+   | 0 | 0 | 1 | 1 | 1 |
+
+#+name: five-by-five-scaled
+#+begin_src elisp :var matrix=five-by-five
+  (scale-matrix 5 matrix)
+#+end_src
+
+#+begin_src elisp :var matrix=five-by-five-scaled
+  (loop for row in matrix
+        collect (loop for col in row
+                      collect (format "%0.2f" col)))
+#+end_src
+
+#+begin_src elisp :var matrix=five-by-five-scaled
+  (verify-matrix 5 matrix)
+#+end_src
+
+** For Your Main Task
+  Think about and discuss this problem in the abstract and in reality. Focus
+  particularly on the intersection of the dating service problem with
+  probability theory and graph theory.
