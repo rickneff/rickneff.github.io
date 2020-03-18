@@ -1,0 +1,20 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 11
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+:END:
+* TODO Explore and Wonder
+  The goal of today\rsquo{}s CDL is to complete four tasks:
+
+  - [ ] Install graphviz.
+  - [ ] Explore the dot language and elisp/org-mode/dot interaction.
+  - [ ] Decode the message in the graph (picture 3). Be sure to trace the link
+        arrows correctly (some of which overlap and partially coincide on the
+        bottom row).
+  - [ ] Figure out how to draw the link arrows without overlapping each other or
+        crossing through the node circles.
