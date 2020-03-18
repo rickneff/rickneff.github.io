@@ -1,0 +1,234 @@
+-*- mode: org -*-
+#+title: Presentation 11
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* Graphs and Graph Models
+  Discuss various kinds.
+** What should you know about these?
+   Know the terminology and the applications.
+
+   Node = Vertex (NOT Vertexes)
+   Nodes = Vertices (NOT Vertice)
+   Link = Edge
+   Links = Edges
+* Graph Representations
+** Easiest Representation for a Node
+   - A positive integer (or a nonnegative integer).
+   - A collection of nodes can be an array indexed by the integer identifier.
+** Most Versatile Representation for a Node
+*** C++
+    class Node : public object
+*** Java
+    class Node extends Object
+*** Python
+    class Node(object)
+*** Lisp
+    Symbol
+    - Value
+    - Name
+    - Function
+    - Properties
+** Graph Visualization
+*** Some Inline Images Config Options
+    C-c C-x C-v
+#+begin_src elisp
+  (org-toggle-inline-images t)
+#+end_src
+
+   Or, display/update images in the buffer after evaluating code blocks:
+#+begin_src elisp :results silent
+  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+#+end_src
+
+#+begin_src elisp
+  (caddr org-babel-after-execute-hook)
+#+end_src
+
+*** Some Powerful Tools
+    The package/library named =graphviz= includes =dot= and its submodules:
+#+begin_src dot :file who-calls-what.png
+  digraph G {
+    main -> parse -> execute
+    main -> init
+    main -> cleanup
+    execute -> make_string
+    execute -> printf
+    init -> make_string
+    main -> printf
+    execute -> compare
+  }
+#+end_src
+
+#+begin_src dot :cmd circo :file fig-11-node-27-link-graph.png
+  graph {
+    node [shape=circle fontname=Monospace fontsize=12]
+    1 -- 2; 1 -- 9; 1 -- 10; 1 -- 11; 2 -- 3; 2 -- 4; 2 -- 5; 2 -- 9; 2 -- 10;
+    2 -- 11; 3 -- 4; 3 -- 10; 3 -- 11; 4 -- 5; 4 -- 10; 4 -- 11; 5 -- 6; 5 -- 7;
+    5 -- 9; 6 -- 7; 6-- 9; 7 -- 8; 7 -- 9; 8 -- 10; 8 -- 9; 9 -- 10; 10 -- 11;
+  }
+#+end_src
+
+#+begin_src dot :file fig-digraph-of-binary-relation.png
+  digraph {
+    size="4,2"
+    bgcolor=transparent
+    node [shape=circle fontname=Monospace]
+    1 -> 1
+    1 -> 2
+    2 -> 2
+    3 -> 3
+    {rank=same 1 3}
+  }
+#+end_src
+
+:HTC:
+#+name: tournament-table
+| From | To |
+|------+----|
+| A    | B  |
+| A    | C  |
+| A    | D  |
+| A    | E  |
+| A    | F  |
+| A    | G  |
+| B    | C  |
+| B    | D  |
+| B    | E  |
+| B    | F  |
+| B    | G  |
+| C    | D  |
+| C    | E  |
+| C    | F  |
+| C    | G  |
+| D    | E  |
+| D    | F  |
+| D    | G  |
+| E    | F  |
+| E    | G  |
+| F    | G  |
+#+name: make-dot-tournament
+#+begin_src elisp :var table=tournament-table :results output :exports none :eval no-export
+  (mapc (lambda (entry) (princ (format "%s -> %s\n" (first entry) (second entry)))) table)
+#+end_src
+
+#+begin_src dot :cmd twopi :file fig-tournament-graph.png :var body=make-dot-tournament :export :eval no-export
+  digraph {
+     size="4,4"
+     bgcolor=transparent
+     node [shape=circle width="0.275" height="0.275" fixedsize=true fontname="Monospace"]
+     edge [penwidth=1 arrowhead=open]
+     center [shape=box label="" style=invis]
+     root=center;
+     center -> A [style=invis]; center -> B [style=invis]; center -> C [style=invis];
+     center -> D [style=invis]; center -> E [style=invis]; center -> F [style=invis]; center -> G [style=invis];
+     $body
+  }
+#+end_src
+:END:
+** TODO Discuss the Double Thrice Three Graph
+:DISCLAIMER:
+  But wait --- isn\rsquo{}t 27 /Thrice Thrice Three/?! Three times Threee times Three?
+  Yes, but to avoid repeating the word \ldquo{}thrice\rdquo twice, prefer \ldquo{}double thrice
+  three\rdquo --- and besides, it has a nicer ring to it than \ldquo{}Three Cubed\rdquo!
+:END:
+#+begin_src elisp :results raw
+  (setq graph-name "DOUBLE THRICE THREE"
+        nodes (number-sequence 0 26)
+        links [(0 . 18) (1 . 13) (2 . 5) (3 . 11) (5 . 14) (9 . 14) (10 . 1) (11 . 19) (13 . 9) (14 . 0) (14 . 10) (15 . 3) (18 . 15)]
+        num-nodes-and-links (list (length nodes) (length links)))
+#+end_src
+*** 1
+     Let us picture this graph. Picture number 1 is 27 circles arranged in a
+     triangle, 9 on a side.
+#+name: nodes-with-x-y-positions
+#+begin_src elisp :results value
+  (let ((sqrt-3-halved (/ (sqrt 3) 2)))
+    (append
+      (apply 'list (mapcar (lambda (n) (list n (+ 4.5 (/ n 2.0)) (* (- 9 n) sqrt-3-halved))) (number-sequence 0 9)))
+      (apply 'list (mapcar (lambda (n) (list n (- 18 n) 0)) (number-sequence 10 18)))
+      (apply 'list (mapcar (lambda (n) (list n (+ 0.0 (/ (- n 18) 2.0)) (* (- n 18) sqrt-3-halved))) (number-sequence 19 26)))
+    ))
+#+end_src
+
+#+results: nodes-with-x-y-positions
+|  0 | 4.5 |  7.794228634059947 |
+|  1 | 5.0 |  6.928203230275509 |
+|  2 | 5.5 |   6.06217782649107 |
+|  3 | 6.0 |  5.196152422706632 |
+|  4 | 6.5 |  4.330127018922193 |
+|  5 | 7.0 | 3.4641016151377544 |
+|  6 | 7.5 |  2.598076211353316 |
+|  7 | 8.0 | 1.7320508075688772 |
+|  8 | 8.5 | 0.8660254037844386 |
+|  9 | 9.0 |                0.0 |
+| 10 |   8 |                  0 |
+| 11 |   7 |                  0 |
+| 12 |   6 |                  0 |
+| 13 |   5 |                  0 |
+| 14 |   4 |                  0 |
+| 15 |   3 |                  0 |
+| 16 |   2 |                  0 |
+| 17 |   1 |                  0 |
+| 18 |   0 |                  0 |
+| 19 | 0.5 | 0.8660254037844386 |
+| 20 | 1.0 | 1.7320508075688772 |
+| 21 | 1.5 |  2.598076211353316 |
+| 22 | 2.0 | 3.4641016151377544 |
+| 23 | 2.5 |  4.330127018922193 |
+| 24 | 3.0 |  5.196152422706632 |
+| 25 | 3.5 |   6.06217782649107 |
+| 26 | 4.0 |  6.928203230275509 |
+
+#+name: make-nodes-1
+#+begin_src elisp :results output :var nodes=nodes-with-x-y-positions
+  (mapc (lambda (node-x-y)
+          (destructuring-bind (node x y) node-x-y
+            (princ (format "%s [pos=\"%5.3f,%5.3f!\"]\n"
+                           node x y))))
+        nodes)
+#+end_src
+
+#+begin_src dot :cmd neato :file picture1.png :var nodes=make-nodes-1
+  digraph {
+    node [shape=circle][label=" "]
+    $nodes
+  }
+#+end_src
+*** 2
+     In picture number 2, for ease of reference, number each node circle.
+#+begin_src dot :cmd neato :file picture2.png :var nodes=make-nodes-1
+  digraph {
+    node [shape=circle]
+    $nodes
+  }
+#+end_src
+*** 3
+  In picture number 3 add the links, so that in this graph picture there is a
+  message to decode.
+
+#+name: make-links-1
+#+begin_src elisp :results output
+  (mapc (lambda (fr-to)
+          (destructuring-bind (fr . to) fr-to
+            (princ (format "%d -> %d\n" fr to))))
+        links)
+#+end_src
+
+#+begin_src dot :cmd neato :file picture3.png :var nodes=make-nodes-1 links=make-links-1
+  digraph {
+    node [shape=circle]
+    $nodes
+    $links
+  }
+#+end_src
