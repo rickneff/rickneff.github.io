@@ -1,0 +1,335 @@
+-*- mode: org -*-
+#+title: Presentation 11
+#+subtitle: NP-Completeness
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* Use Logic for Solving Puzzles
+  file:logic.org
+* Use Logic for Proving NP-Completeness
+  How do we use propositional logic to do NP-Completeness proofs?
+* TODO First Understand An Elisp Implementation of Boolean Formulas
+  A literal is a symbol with a value of 1 or 0.
+
+  A clause is a list of literals.
+
+  A formula a list of clauses. For now, assume a formula is in Conjunctive
+  Normal Form (CNF --- aka Product of Sums).
+
+  So '((a b c) (a (b) c) ((a) (b) c)) represents three clauses containing three
+  literals each where the literals are or\rsquo{}ed together (added) while the clauses
+  are and\rsquo{}ed together (multiplied).
+
+  An assignment is a setting of 1 (true) or 0 (false) to each literal in the
+  formula. Using an association-list for assignments, the car of each pair is
+  the symbol, the cdr its value, e.g., '((a . 1) (b . 0) (c . 1)) will be used
+  as the assignment (equivalent to =(setq a 1 b 0 c 1)=) to give the literal
+  \lsquo{}a\rsquo{} the value 1, \lsquo{}b\rsquo{} the value 0, and \lsquo{}c\rsquo{} the value 1. But first the symbols
+  \lsquo{}a\rsquo{}, \lsquo{}b\rsquo{} and \lsquo{}c\rsquo{} must be made into literals, with the ability to be negated.
+
+  A negated literal is a function with that literal\rsquo{}s name returning the
+  literal\rsquo{}s symbol\rsquo{}s negated value (arithmetized, so treating 0 and 1 as
+  numbers standing in for false and true):
+
+#+begin_src emacs-lisp :results silent
+  (defun make-literal (symbol)
+    (unless (fboundp symbol)
+      (fset symbol `(lambda nil (- 1 (symbol-value (quote ,symbol))))))
+    (unless (boundp symbol)
+      (set symbol 0)) ; default value
+    symbol)
+#+end_src
+
+  Create the above sample formula to experiment with:
+#+begin_src emacs-lisp :results raw
+  (setq formula1 '((a b c) (a (b) c) ((a) (b) c)))
+#+end_src
+
+#+results:
+((a b c) (a (b) c) ((a) (b) c))
+
+  Make a list of literals given the formula they appear in:
+#+begin_src emacs-lisp :results silent
+  (defun literals (formula)
+    (mapcar 'make-literal
+            (remove-duplicates
+             (mapcar
+              (lambda (x)
+                (if (consp x)
+                    (car x)
+                  x))
+              (apply 'append formula)))))
+#+end_src
+
+#+begin_src emacs-lisp :results raw
+  (literals formula1)
+#+end_src
+
+#+results:
+(a b c)
+#+begin_src elisp :results raw
+  a
+#+end_src
+
+#+results:
+1
+
+  Flip (invert) the value of a literal (symbol), to turn a 0 into a 1 and a 1
+  into a 0. Might come in handy!
+#+begin_src emacs-lisp :results silent
+  (defun flip (sym)
+    (set sym (if (zerop (symbol-value sym)) 1 0)))
+#+end_src
+
+#+begin_src emacs-lisp :results raw
+  (flip 'a)
+#+end_src
+
+#+results:
+0
+
+  A formula is evaluated with the current values of the literals, or else the
+  literals are set first from the optional assignment association list. The
+  evaluation gives 1 for true, or 0 for false.
+#+begin_src emacs-lisp :results silent
+  (defun eval-cnf-formula (formula &optional assignment)
+    (mapc (lambda (pair) (set (car pair) (cdr pair))) assignment)
+    (if (zerop (apply '*
+                      (mapcar
+                       (lambda (clause)
+                         (apply '+ (mapcar 'eval clause)))
+                       formula)))
+        0
+     (prog1 1 (put 'get-assignment :satisfied assignment))))
+#+end_src
+
+#+begin_src emacs-lisp :results raw
+  (eval-cnf-formula formula1)
+#+end_src
+
+#+results:
+1
+
+#+begin_src emacs-lisp :results raw
+  (eval-cnf-formula '((a b (c)) ((a) (b) c) ((a) b (c))) '((a . 1) (b . 0) (c . 1)))
+#+end_src
+
+#+results:
+0
+
+  With no change in syntax, the formula can also be evaluated as if it were in
+  Disjunctive Normal Form (DNF --- aka Sum of Products):
+#+begin_src emacs-lisp :results silent
+  (defun eval-dnf-formula (formula &optional assignment)
+    (mapc (lambda (pair) (set (car pair) (cdr pair))) assignment)
+    (if (zerop (apply '+
+                      (mapcar
+                       (lambda (clause)
+                         (apply '* (mapcar 'eval clause)))
+                       formula)))
+        0
+     1))
+#+end_src
+
+#+begin_src emacs-lisp :results raw
+  (eval-dnf-formula formula1)
+#+end_src
+
+#+results:
+1
+
+#+begin_src emacs-lisp :results raw
+  (eval-dnf-formula '((a b (c)) ((a) (b) c) ((a) b (c))) '((a . 0) (b . 0) (c . 1)))
+#+end_src
+
+#+results:
+1
+
+  We will make CNF the default way to view a formula:
+#+begin_src emacs-lisp :results silent
+  (defalias 'eval-formula 'eval-cnf-formula)
+#+end_src
+
+  We need a way to get an assignment from a number rendered in binary:
+#+begin_src emacs-lisp :results silent
+  (defun to-binary (n)
+    (let ((d (/ n 2))
+          (m (% n 2)))
+      (if (= d 0)
+          (list m)
+        (append (to-binary d) (list m)))))
+#+end_src
+
+#+begin_src emacs-lisp :results raw
+  (to-binary 5)
+#+end_src
+
+#+results:
+(1 0 1)
+
+  But we need to pad the bits with 0s to give as many bits as there are literals:
+#+begin_src emacs-lisp :results silent
+  (defun pad (list-of-bits n)
+    (append (make-list (- n (length list-of-bits)) 0) list-of-bits))
+#+end_src
+
+#+begin_src emacs-lisp :results raw
+  (pad (to-binary 5) 8)
+#+end_src
+
+#+results:
+(0 0 0 0 0 1 0 1)
+
+#+begin_src emacs-lisp :results silent
+  (defun get-assignment (list-of-literals n)
+    (let* ((len (length list-of-literals))
+           (bits-of-n (pad (to-binary n) len))
+           (shared-assignment (get 'get-assignment :shared)))
+      (unless shared-assignment
+        (setq shared-assignment
+              (put 'get-assignment :shared
+                   (pairlis list-of-literals bits-of-n))))
+      (loop for pair in shared-assignment
+            for val in bits-of-n
+            do (setcdr pair val))
+      shared-assignment))
+#+end_src
+
+#+begin_src elisp
+  (setf (symbol-plist 'get-assignment) nil)
+#+end_src
+
+#+begin_src emacs-lisp :results raw
+  (get-assignment '(a b c) 6)
+#+end_src
+
+#+results:
+((a . 1) (b . 1) (c . 0))
+
+#+begin_src emacs-lisp :results raw
+  (get 'get-assignment :shared)
+#+end_src
+
+#+results:
+((a . 1) (b . 1) (c . 0))
+
+#+begin_src emacs-lisp :results silent
+  (defun get-all-possible-assignments (list-of-literals)
+    (loop with n = (length list-of-literals)
+          for i from 0 below (expt 2 n)
+          collect (pairlis list-of-literals (pad (to-binary i) n))))
+#+end_src
+
+#+begin_src emacs-lisp :results value
+  (get-all-possible-assignments '(a b c))
+#+end_src
+
+#+results:
+| (a . 0) | (b . 0) | (c . 0) |
+| (a . 0) | (b . 0) | (c . 1) |
+| (a . 0) | (b . 1) | (c . 0) |
+| (a . 0) | (b . 1) | (c . 1) |
+| (a . 1) | (b . 0) | (c . 0) |
+| (a . 1) | (b . 0) | (c . 1) |
+| (a . 1) | (b . 1) | (c . 0) |
+| (a . 1) | (b . 1) | (c . 1) |
+
+  We are interested in knowing if there is an assignment that will \ldquo{}satisfy\rdquo
+  (make true) a given formula:
+#+begin_src emacs-lisp :results silent
+  (defun is-satisfiable (formula)
+    (some (lambda (assignment)
+            (= 1 (eval-formula formula assignment)))
+          (get-all-possible-assignments (literals formula))))
+#+end_src
+
+#+begin_src emacs-lisp :results raw
+  (is-satisfiable formula1)
+#+end_src
+
+#+results:
+t
+
+#+begin_src emacs-lisp :results raw
+  (get 'get-assignment :satisfied)
+#+end_src
+
+#+results:
+((a . 0) (b . 0) (c . 1))
+
+  Save time and memory by using the \ldquo{}shared\rdquo feature of =get-assignment=:
+#+begin_src emacs-lisp :results silent
+  (defun is-satisfiable-faster (formula)
+    (let ((ll (literals formula)))
+      (loop for i from 0 below (expt 2 (length ll))
+            thereis (= 1 (eval-formula formula (get-assignment ll i))))))
+#+end_src
+
+  We also may want to know all satisfying assignments for a given formula.
+#+begin_src emacs-lisp :results silent
+  (defun get-all-satisfying-assignments (formula)
+    (loop for assignment in (get-all-possible-assignments (literals formula))
+          when (= 1 (eval-formula formula assignment))
+          collect assignment))
+#+end_src
+
+  But more likely we will be satisfied with one:
+#+begin_src emacs-lisp :results silent
+  (defun get-one-satisfying-assignment (formula)
+    (or (get 'get-assignment :satisfied)
+        (loop for assignment in (get-all-possible-assignments (literals formula))
+              when (= 1 (eval-formula formula assignment))
+              return assignment)))
+#+end_src
+
+#+begin_src emacs-lisp :results value
+  (get-all-satisfying-assignments formula1)
+#+end_src
+
+#+results:
+| (a . 0) | (b . 0) | (c . 1) |
+| (a . 0) | (b . 1) | (c . 1) |
+| (a . 1) | (b . 0) | (c . 0) |
+| (a . 1) | (b . 0) | (c . 1) |
+| (a . 1) | (b . 1) | (c . 1) |
+
+  What about DNF?
+#+begin_src emacs-lisp :results value
+  (defalias 'eval-formula 'eval-dnf-formula)
+  (get-all-satisfying-assignments formula1)
+#+end_src
+
+* TODO Explore the Soos SAT Solver
+  We can feed these elisp Boolean formulas to [[https://msoos.github.io/cryptominisat_web/][CryptoMiniSat by Mate Soos]] by
+  converting them to the [[https://en.wikipedia.org/wiki/DIMACS][DIMACS]] format (and perhaps writing this to a file):
+#+begin_src emacs-lisp :results silent
+  (defun to-dimacs (formula)
+    (let* ((num-clauses (length formula))
+           (ll (literals formula))
+           (num-literals (length ll))
+           (literals-as-numbers nil))
+      (loop for literal in ll
+            for n from 1
+            do (setf (alist-get literal literals-as-numbers) n))
+      (concat (format "p cnf %d %d\n" num-literals num-clauses)
+              (mapconcat (lambda (clause)
+                           (mapconcat (lambda (literal)
+                                        (let ((negated ""))
+                                          (when (consp literal)
+                                            (setq literal (car literal)
+                                                  negated "-"))
+                                          (format "%s%d" negated
+                                                  (alist-get literal literals-as-numbers))))
+                                      clause " "))
+                         formula " 0\n")
+              " 0 \n")))
+
+  (defun write-dimacs-file (formula filename)
+    (write-region (to-dimacs formula) 0 filename))
+#+end_src
+
+#+begin_src emacs-lisp :results silent
+  (kill-new (to-dimacs formula1))
+#+end_src
