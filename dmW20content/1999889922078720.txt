@@ -1,0 +1,273 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 11
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Based on what you learned from file:presentation-11.txt and your reading of
+  Chapter 16:
+
+* TODO Investigate a 3-Color Instance and Non-Instance Using Logic
+  We will focus on simple connected graphs of [[https://commons.wikimedia.org/wiki/Category:Graph_coloring;_vertex][Chromaticity]] 3 (maybe?).
+
+  Transform any such graph G with nodes n_1, n_2, \dots n_m into a CNF Boolean formula
+  by setting the variables:
+#+begin_src elisp :results silent
+  (setq r_i (if (is-red n_i) 1 0)
+        g_i (if (is-green n_i) 1 0)
+        b_i (if (is-blue n_i) 1 0))
+#+end_src
+
+  Note: the above code block is just for an example --- it won't actually
+  evaluate because the =is-red=, =is-green=, and =is-blue= predicates are not defined.
+
+  Then for each node generate the clause =(r_i g_i b_i)=, and for each link
+  =(n_i . n_j)= generate the three clauses =((r_i) (r_j))=, =((g_i) (g_j))= and
+  =((b_i) (b_j))=.
+
+  A graph with m nodes can be thus transformed in no more than m^2 steps.
+
+  The trick: a graph is three-colorable (has chromaticity 3) *if and only if*
+  the generated-by-this-transformation Boolean formula is *satisfiable*.
+
+[[elisp:(org-babel-load-file%20"presentation-11.txt")][Load the Code]]
+
+#+begin_src elisp :results silent
+  (byte-compile-disable-warning 'cl-functions)
+#+end_src
+
+[[elisp:(org-babel-load-file "presentation-11.txt" t)][Compile and Load the Code]]
+
+  Reset to evaluating CNF:
+#+begin_src emacs-lisp :results silent
+  (defalias 'eval-formula 'eval-cnf-formula)
+  (setf (symbol-plist 'get-assignment) nil)
+#+end_src
+
+  Play with some simple graphs with no more than 5 nodes. Then see what you can
+  determine about the chromaticity of the two below graphs with formulas
+  =graph1-formula= and =graph2-formula=:
+
+#+begin_src elisp :results silent
+  (setq graph1-formula (quote (
+    (r1 g1 b1)
+    (r2 g2 b2)
+    (r3 g3 b3)
+    (r4 g4 b4)
+    (r5 g5 b5)
+    (r6 g6 b6)
+    (r7 g7 b7)
+
+    ((r1) (r2))
+    ((g1) (g2))
+    ((b1) (b2))
+
+    ((r1) (r5))
+    ((g1) (g5))
+    ((b1) (b5))
+
+    ((r1) (r6))
+    ((g1) (g6))
+    ((b1) (b6))
+
+    ((r2) (r3))
+    ((g2) (g3))
+    ((b2) (b3))
+
+    ((r2) (r6))
+    ((g2) (g6))
+    ((b2) (b6))
+
+    ((r2) (r7))
+    ((g2) (g7))
+    ((b2) (b7))
+
+    ((r3) (r4))
+    ((g3) (g4))
+    ((b3) (b4))
+
+    ((r3) (r7))
+    ((g3) (g7))
+    ((b3) (b7))
+
+    ((r4) (r5))
+    ((g4) (g5))
+    ((b4) (b5))
+
+    ((r4) (r6))
+    ((g4) (g6))
+    ((b4) (b6))
+
+    ((r5) (r7))
+    ((g5) (g7))
+    ((b5) (b7))
+    )))
+#+end_src
+
+#+begin_src elisp :results raw
+  (literals graph1-formula)
+#+end_src
+
+#+results:
+(r1 g1 b1 r2 g2 b2 r3 g3 b3 r4 r6 g4 g6 b4 b6 r5 r7 g5 g7 b5 b7)
+
+#+begin_src elisp
+  (expt 2 21)
+#+end_src
+
+#+results:
+: 2097152
+
+#+begin_src elisp :results code
+  (and (is-satisfiable-faster graph1-formula)
+       (get-one-satisfying-assignment graph1-formula))
+#+end_src
+
+#+results:
+#+BEGIN_SRC elisp
+((r1 . 0)
+ (g1 . 0)
+ (b1 . 1)
+ (r2 . 0)
+ (g2 . 1)
+ (b2 . 0)
+ (r3 . 1)
+ (g3 . 0)
+ (b3 . 0)
+ (r4 . 0)
+ (r6 . 1)
+ (g4 . 0)
+ (g6 . 0)
+ (b4 . 1)
+ (b6 . 0)
+ (r5 . 0)
+ (r7 . 0)
+ (g5 . 1)
+ (g7 . 0)
+ (b5 . 0)
+ (b7 . 1))
+#+END_SRC
+
+#+begin_src elisp :results silent
+  (kill-new (to-dimacs graph1-formula))
+#+end_src
+
+#+begin_src elisp :results silent
+  (setq graph2-formula (quote (
+    (r1 g1 b1)
+    (r2 g2 b2)
+    (r3 g3 b3)
+    (r4 g4 b4)
+    (r5 g5 b5)
+    (r6 g6 b6)
+    (r7 g7 b7)
+
+    ((r1) (r2))
+    ((g1) (g2))
+    ((b1) (b2))
+
+    ((r1) (r5))
+    ((g1) (g5))
+    ((b1) (b5))
+
+    ((r1) (r6))
+    ((g1) (g6))
+    ((b1) (b6))
+
+    ((r2) (r3))
+    ((g2) (g3))
+    ((b2) (b3))
+
+    ((r2) (r6))
+    ((g2) (g6))
+    ((b2) (b6))
+
+    ((r2) (r7))
+    ((g2) (g7))
+    ((b2) (b7))
+
+    ((r3) (r4))
+    ((g3) (g4))
+    ((b3) (b4))
+
+    ((r3) (r7))
+    ((g3) (g7))
+    ((b3) (b7))
+
+    ((r4) (r5))
+    ((g4) (g5))
+    ((b4) (b5))
+
+    ((r4) (r7))
+    ((g4) (g7))
+    ((b4) (b7))
+
+    ((r5) (r6))
+    ((g5) (g6))
+    ((b5) (b6))
+    )))
+#+end_src
+
+#+begin_src elisp :results raw
+  (and (is-satisfiable-faster graph2-formula)
+       (get-all-satisfying-assignments graph2-formula))
+#+end_src
+
+#+begin_src elisp :results silent
+  (kill-new (to-dimacs graph2-formula))
+#+end_src
+
+  Relate these two graph formulas to the two graphs below. Which goes with which?
+
+#+begin_src dot :cmd circo :file graph-A.png :eval no-export
+  graph {
+     bgcolor=transparent
+     node [shape=circle]
+     n1 [label=1]
+     n2 [label=2]
+     n3 [label=3]
+     n4 [label=4]
+     n5 [label=5]
+     n6 [label=6]
+     n7 [label=7]
+     n1 -- n2
+     n1 -- n5
+     n1 -- n7
+     n2 -- n3
+     n2 -- n6
+     n2 -- n7
+     n3 -- n6
+     n3 -- n4
+     n4 -- n5
+     n4 -- n6
+     n5 -- n7
+}
+#+end_src
+
+#+begin_src dot :cmd circo :file graph-B.png :eval no-export
+  graph {
+     bgcolor=transparent
+     node [shape=circle]
+     n1 [label=1]
+     n2 [label=2]
+     n3 [label=3]
+     n4 [label=4]
+     n5 [label=5]
+     n6 [label=6]
+     n7 [label=7]
+     n1 -- n2
+     n1 -- n5
+     n1 -- n7
+     n2 -- n3
+     n2 -- n6
+     n2 -- n7
+     n3 -- n6
+     n3 -- n4
+     n4 -- n5
+     n4 -- n7
+     n5 -- n6
+}
+#+end_src
+
+  Which graph (A or B) is 3-colorable? Which is not?
