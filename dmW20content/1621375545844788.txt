@@ -1,0 +1,40 @@
+-*- mode: org -*-
+#+title: Divide Pair Conquer 12
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* TODO Explore and Learn
+#+begin_src elisp
+  1101121
+#+end_src
+
+** This Number has a Name
+   one million, one hundred one thousand, one hundred twenty-one
+:   1     2      3     4     5     6       7    8       9    10
+** It Also has This Name
+   /the smallest number not nameable in under ten words/
+:   1     2       3     4     5     6   7     8    9
+** Paradox?!
+   The second name appears to name *in nine words* the smallest number *not
+   nameable* in under ten words!
+** Take That!
+   Called the Russell-Berry Paradox, or just the Berry Paradox, this
+   is one of the easier language-referential paradoxes to grasp.
+*** TODO Task 1
+   Grapple with this (and related) paradoxes with your partner. Discuss
+   various types of paradoxes you have encountered in your travels.
+*** TODO Task 2
+    Look up and read the Edgar Allan Poe \ldquo{}prose poem\rdquo /The Power of Words/, and
+    discuss it with your partner. You might even take turns reading out loud,
+    one of you taking the role of Oinos and the other of Agathos. (Be prepared
+    to have to look up some words!)
