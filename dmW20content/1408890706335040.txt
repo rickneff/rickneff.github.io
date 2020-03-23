@@ -1,0 +1,92 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 12
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Based on what you learned from file:presentation-12.txt and your reading of
+  Chapter 17:
+
+* TODO CNF and DNF
+  Argue that e_1 and e_2 are equal if and only if e_1 \leftrightarrow e_2 is a tautology.
+
+  Is it possible to say whether e is satisfiable from the fact that \not{}e is a
+  tautology? (It is possible, and you know e is *not* satisfiable.)
+
+  Now argue that *any* Boolean expression is equal to an expression in CNF and
+  an expression in DNF.
+
+* Now Consider
+  The Cook-Levin theorem holds that when restricted to expressions in CNF,
+  Satisfiability (SAT) is NP-Complete.
+
+  However, satisfiability is decidable in polynomial time for DNFs, but their
+  tautology check is hard (co-NP-complete).
+
+** TODO Convince yourselves of these assertions
+   Describe polynomial-time algorithms for determining whether a
+   DNF is satisfiable and for determining whether a CNF is a tautology.
+
+* Continuing
+  Although satisfiability is easy for DNFs and the tautology check easy for
+  CNFs, we are not sitting pretty. Why? Because the conversion between CNFs
+  and DNFs is hard (exponential)!
+
+  For example, the following CNF over the variables u, t, w, x, y, z
+
+  (u \lor x) \land (t \lor y) \land (w \lor z)
+
+  has 3 conjuncts. Its corresponding DNF has 2^3 = 8 disjuncts:
+
+  (u \land t \land w) \lor
+  (u \land t \land z) \lor
+  (u \land y \land w) \lor
+  (u \land y \land z) \lor
+  (x \land t \land w) \lor
+  (x \land t \land z) \lor
+  (x \land y \land w) \lor
+  (x \land y \land z)
+
+** TODO Follow the Process
+   Show how the CNF-to-DNF conversion works for
+   (u \lor x) \land (t \lor y) \land (w \lor z)
+* Generalizing
+  The DNF over the 2n variables
+
+  x^1_0, \dots, x^n_0, x^1_1, \dots, x^n_1
+
+ (x^1_0 \lor x^1_1) \land (x^2_0 \lor x^2_1) \land \dots \land (x^n_0 \lor x^n_1)
+
+ has n conjuncts. Its corresponding DNF has 2^n disjuncts, one for each of the
+ n-digit binary numbers 000\dots{}000 to 111\dots{}111 --- the i^{th} digit
+ representing a choice of either x^i_0 (for 0) or x^i_1 (for 1).
+
+ (x^1_0 \land x^2_0 \land \dots \land x^{n - 1}_0 \land x^n_0) \lor
+ (x^1_0 \land x^2_0 \land \dots \land x^{n - 1}_0 \land x^n_1) \lor
+ \dots
+ (x^1_1 \land x^2_1 \land \dots \land x^{n - 1}_1 \land x^n_0) \lor
+ (x^1_1 \land x^2_1 \land \dots \land x^{n - 1}_1 \land x^n_1)
+
+ Whereas the original expression has size proportional to n the DNF has size
+ proportional to n2^n.
+
+ Now explain how the Cook-Levin Theorem implies that checking in-equivalence
+ between Boolean expressions is NP-Hard.
+
+ Next, explain how the question of tautology and satisfiability can be decided
+ if we are given an algorithm for checking equivalence between Boolean
+ expressions.
+
+ In a nutshell, what Binary Decision Diagrams (BDDs) give us is a way to
+ describe Boolean expressions with *another normal form* that has more
+ desirable properties than DNFs and CNFs. In particular, there are efficient
+ algorithms for determining the satisfiability and tautology questions.
+* TODO Have Fun with DEK and BDDs
+  From a giant of Computer Science (mostly watchable at double-speed, painful at normal):
+
+  https://www.youtube.com/watch?v=SQE21efsf7Y
+
+  Pay particular attention at the 25-minute mark. This is Professor Knuth
+  explaining clearly why it is that for most practical problems, the associated
+  BDD will be relatively small.
