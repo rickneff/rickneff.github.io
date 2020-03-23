@@ -1,0 +1,14 @@
+-*- mode: org -*-
+#+title: Assignment 12
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  Please do all of the Chapter 17 exercises:
+
+* Exercise 17.5, BDDs
+** TODO 1
+** TODO 2
+** TODO 3
+** TODO 4
