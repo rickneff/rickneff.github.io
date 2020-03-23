@@ -1,0 +1,193 @@
+-*- mode: org -*-
+#+title: Presentation 12
+#+subtitle: Binary Decision Diagrams
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* Understand Boolean Expressions Better
+  Two Boolean expressions are said to be equal if they evaluate to the same
+  truth value for all truth assignments.
+
+  A Boolean expression is a *tautology* if it evaluates to true for *all*
+  truth assignments.
+
+  A Boolean expression is *satisfiable* if it evaluates to true for *at least
+  one* truth assignment.
+** Recall De Morgan\rsquo{}s Laws
+
+   \not(P \lor Q) \leftrightarrow \not{}P \land \not{}Q
+
+   \not(P \land Q) \leftrightarrow \not{}P \lor \not{}Q
+
+** Recall the Double-Negation Elimination Rule
+
+   \not{}\not{}P \leftrightarrow P
+
+** Recall the Distributive Properties
+
+   (P \land (Q \lor R)) \leftrightarrow ((P \land Q) \lor (P \land R))
+
+| ( | P | ∧ | ( | Q | ∨ | R | ) | ) | ↔ | ( | ( | P | ∧ | Q | ) | ∨ | ( | P | ∧ | R | ) | ) |
+|---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---|
+|   | 0 | 0 |   | 0 | 0 | 0 |   |   | 1 |   |   | 0 | 0 | 0 |   | 0 |   | 0 | 0 | 0 |   |   |
+|   | 0 | 0 |   | 0 | 1 | 1 |   |   | 1 |   |   | 0 | 0 | 0 |   | 0 |   | 0 | 0 | 1 |   |   |
+|   | 0 | 0 |   | 1 | 1 | 0 |   |   | 1 |   |   | 0 | 0 | 1 |   | 0 |   | 0 | 0 | 0 |   |   |
+|   | 0 | 0 |   | 1 | 1 | 1 |   |   | 1 |   |   | 0 | 0 | 1 |   | 0 |   | 0 | 0 | 1 |   |   |
+|   | 1 | 0 |   | 0 | 0 | 0 |   |   | 1 |   |   | 1 | 0 | 0 |   | 0 |   | 1 | 0 | 0 |   |   |
+|   | 1 | 1 |   | 0 | 1 | 1 |   |   | 1 |   |   | 1 | 0 | 0 |   | 1 |   | 1 | 1 | 1 |   |   |
+|   | 1 | 1 |   | 1 | 1 | 0 |   |   | 1 |   |   | 1 | 1 | 1 |   | 1 |   | 1 | 0 | 0 |   |   |
+|   | 1 | 1 |   | 1 | 1 | 1 |   |   | 1 |   |   | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   |   |
+
+    (P \lor (Q \land R)) \leftrightarrow ((P \lor Q) \land (P \lor R))
+
+| ( | P | ∨ | ( | Q | ∧ | R | ) | ) | ↔ | ( | ( | P | ∨ | Q | ) | ∧ | ( | P | ∨ | R | ) | ) |
+|---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---|
+|   | 0 | 0 |   | 0 | 0 | 0 |   |   | 1 |   |   | 0 | 0 | 0 |   | 0 |   | 0 | 0 | 0 |   |   |
+|   | 0 | 0 |   | 0 | 0 | 1 |   |   | 1 |   |   | 0 | 0 | 0 |   | 0 |   | 0 | 1 | 1 |   |   |
+|   | 0 | 0 |   | 1 | 0 | 0 |   |   | 1 |   |   | 0 | 1 | 1 |   | 1 |   | 0 | 0 | 0 |   |   |
+|   | 0 | 1 |   | 1 | 1 | 1 |   |   | 1 |   |   | 0 | 1 | 1 |   | 1 |   | 0 | 1 | 1 |   |   |
+|   | 1 | 1 |   | 0 | 0 | 0 |   |   | 1 |   |   | 1 | 1 | 0 |   | 1 |   | 1 | 1 | 0 |   |   |
+|   | 1 | 1 |   | 0 | 0 | 1 |   |   | 1 |   |   | 1 | 1 | 0 |   | 1 |   | 1 | 1 | 1 |   |   |
+|   | 1 | 1 |   | 1 | 0 | 0 |   |   | 1 |   |   | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 0 |   |   |
+|   | 1 | 1 |   | 1 | 1 | 1 |   |   | 1 |   |   | 1 | 1 | 1 |   | 1 |   | 1 | 1 | 1 |   |   |
+
+* Convert DNF to CNF
+#+begin_src elisp :results silent
+  (byte-compile-disable-warning 'cl-functions)
+#+end_src
+
+[[elisp:(org-babel-load-file "presentation-11.txt" t)][Compile and Load the Code]]
+
+#+begin_src elisp :results silent
+  (defun truth-table-for (list-of-variables)
+    (let ((list-of-named-variables (mapcar 'symbol-name list-of-variables)))
+      (append (list (append list-of-named-variables
+                    (list (format "f(%s)"
+                                  (string-join list-of-named-variables ", ")))) 'hline)
+              (loop with n = (length list-of-variables)
+                    for i from 0 below (expt 2 n)
+                    collect (pad (to-binary i) n)))))
+#+end_src
+
+#+begin_src elisp :results value
+  (truth-table-for '(P Q R))
+#+end_src
+
+#+results:
+| P | Q | R | f(P, Q, R) |
+|---+---+---+------------|
+| 0 | 0 | 0 |            |
+| 0 | 0 | 1 |            |
+| 0 | 1 | 0 |            |
+| 0 | 1 | 1 |            |
+| 1 | 0 | 0 |            |
+| 1 | 0 | 1 |            |
+| 1 | 1 | 0 |            |
+| 1 | 1 | 1 |            |
+
+** Flesh Out Personality
+| P | Q | R | f(P, Q, R) |
+|---+---+---+------------|
+| 0 | 0 | 0 |          0 |
+| 0 | 0 | 1 |          1 |
+| 0 | 1 | 0 |          0 |
+| 0 | 1 | 1 |          0 |
+| 1 | 0 | 0 |          0 |
+| 1 | 0 | 1 |          1 |
+| 1 | 1 | 0 |          1 |
+| 1 | 1 | 1 |          0 |
+
+** Flesh Out DNF
+| P | Q | R | f(P, Q, R) | DNF             |
+|---+---+---+------------+-----------------|
+| 0 | 0 | 0 |          0 |                 |
+| 0 | 0 | 1 |          1 | (\not{}P * \not{}Q * R) + |
+| 0 | 1 | 0 |          0 |                 |
+| 0 | 1 | 1 |          0 |                 |
+| 1 | 0 | 0 |          0 |                 |
+| 1 | 0 | 1 |          1 | (P * \not{}Q * R) +  |
+| 1 | 1 | 0 |          1 | (P * Q * \not{}R)    |
+| 1 | 1 | 1 |          0 |                 |
+
+** Flesh Out Negated DNF Personality
+| P | Q | R | f(P, Q, R) | DNF             | \not DNF |
+|---+---+---+------------+-----------------+-------|
+| 0 | 0 | 0 |          0 |                 |     1 |
+| 0 | 0 | 1 |          1 | (\not{}P * \not{}Q * R) + |     0 |
+| 0 | 1 | 0 |          0 |                 |     1 |
+| 0 | 1 | 1 |          0 |                 |     1 |
+| 1 | 0 | 0 |          0 |                 |     1 |
+| 1 | 0 | 1 |          1 | (P * \not{}Q * R) +  |     0 |
+| 1 | 1 | 0 |          1 | (P * Q * \not{}R)    |     0 |
+| 1 | 1 | 1 |          0 |                 |     1 |
+
+** Flesh Out CNF Target
+| P | Q | R | f(P, Q, R) | DNF             | \not DNF | CNF     |
+|---+---+---+------------+-----------------+-------+---------|
+| 0 | 0 | 0 |          0 |                 |     1 | ( ? ) * |
+| 0 | 0 | 1 |          1 | (\not{}P * \not{}Q * R) + |     0 |         |
+| 0 | 1 | 0 |          0 |                 |     1 | ( ? ) * |
+| 0 | 1 | 1 |          0 |                 |     1 | ( ? ) * |
+| 1 | 0 | 0 |          0 |                 |     1 | ( ? ) * |
+| 1 | 0 | 1 |          1 | (P * \not{}Q * R) +  |     0 |         |
+| 1 | 1 | 0 |          1 | (P * Q * \not{}R)    |     0 |         |
+| 1 | 1 | 1 |          0 |                 |     1 | ( ? )   |
+
+** Fleshed Out (Almost) Full Process
+| P | Q | R | f(P, Q, R) | DNF             | \not f(P, Q, R) | \not DNF            | \not \not DNF           | CNF             |
+|---+---+---+------------+-----------------+--------------+------------------+-------------------+-----------------|
+| 0 | 0 | 0 |          0 |                 |            1 | (\not{}P * \not{}Q * \not{}R) + | \not(\not{}P * \not{}Q * \not{}R) * | (P + Q + R) *   |
+| 0 | 0 | 1 |          1 | (\not{}P * \not{}Q * R) + |            0 |                  |                   |                 |
+| 0 | 1 | 0 |          0 |                 |            1 | (\not{}P * Q * \not{}R) +  | \not(\not{}P * Q * \not{}R) *  | (P + \not{}Q + R) *  |
+| 0 | 1 | 1 |          0 |                 |            1 | (\not{}P * Q * R) +   | \not(\not{}P * Q * R) *   | (P + \not{}Q + \not{}R) * |
+| 1 | 0 | 0 |          0 |                 |            1 | (P * \not{}Q * \not{}R) +  | \not(P * \not{}Q * \not{}R) *  | (\not{}P + Q + R) *  |
+| 1 | 0 | 1 |          1 | (P * \not{}Q * R) +  |            0 |                  |                   |                 |
+| 1 | 1 | 0 |          1 | (P * Q * \not{}R)    |            0 |                  |                   |                 |
+| 1 | 1 | 1 |          0 |                 |            1 | (P * Q * R)      | \not(P * Q * R)      | (\not{}P + \not{}Q + \not{}R)  |
+
+** Verify
+#+begin_src elisp :results silent
+  (setq formula-in-dnf '(((P) (Q) R) (P (Q) R) (P Q (R)))
+        formula-in-cnf '((P Q R) (P (Q) R) (P (Q) (R)) ((P) Q R) ((P) (Q) (R))))
+#+end_src
+
+  Reset to evaluating CNF:
+#+begin_src emacs-lisp :results silent
+  (defalias 'eval-formula 'eval-cnf-formula)
+  (setf (symbol-plist 'get-assignment) nil)
+#+end_src
+
+#+begin_src elisp
+  (setq all-cnf-satisfying-assignments
+       (get-all-satisfying-assignments formula-in-cnf))
+#+end_src
+
+#+results:
+| (P . 0) | (Q . 0) | (R . 1) |
+| (P . 1) | (Q . 0) | (R . 1) |
+| (P . 1) | (Q . 1) | (R . 0) |
+
+  Now evaluate DNF:
+#+begin_src emacs-lisp :results silent
+  (defalias 'eval-formula 'eval-dnf-formula)
+  (setf (symbol-plist 'get-assignment) nil)
+#+end_src
+
+#+begin_src elisp
+  (setq all-dnf-satisfying-assignments
+        (get-all-satisfying-assignments formula-in-dnf))
+#+end_src
+
+#+results:
+| (P . 0) | (Q . 0) | (R . 1) |
+| (P . 1) | (Q . 0) | (R . 1) |
+| (P . 1) | (Q . 1) | (R . 0) |
+
+#+begin_src elisp
+  (equal all-cnf-satisfying-assignments all-dnf-satisfying-assignments)
+#+end_src
+
+#+results:
+: t
