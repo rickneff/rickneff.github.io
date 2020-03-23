@@ -1,0 +1,40 @@
+-*- mode: org -*-
+#+title: Assignment 12
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
+:END:
+* TODO Read and Reflect
+  Here are three papers to read and ponder about this week:
+
+  1. [[http://matt.might.net/papers/liang2014godel.pdf][Fast Flow Analysis with G\ouml{}del Hashes]] (finish reading if you haven\rsquo{}t already)
+  2. [[https://rickneff.github.io/the-perfect-language.pdf][The Perfect Language]] (transcript of a talk by Gregory Chaitin)
+  3. [[https://rickneff.github.io/the-limits-of-reason.pdf][The Limits of Reason]] (this talk surveys the key developments before and
+     after Kurt G\ouml{}del\rsquo{}s Incompleteness Theorem)
+
+* TODO What Is True?
+   This is a tool that allows you to assess yourself on how you did
+   with this assignment. Check a box (using , ,) if warranted.
+
+#+name: assertions-in-general
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
+
+#+begin_src elisp
+  (calculate-score
+   (quote
+    ((in-general 50 50))))
+#+end_src
