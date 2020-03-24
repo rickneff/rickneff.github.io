@@ -1,0 +1,121 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 12
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+:END:
+* TODO Supply and Test
+  The only function definition missing from the code block in
+  file:presentation-12.txt is =distance=.
+
+  Supply this missing function so that you can evaluate the following block to
+  test this =TSP-solver=:
+
+#+begin_src elisp :results raw
+  (setq cities-coords-20 (build-cities-coords 20 900 600 "twentysomething")
+        cities-coords (subseq cities-coords-20 0 9) ;; change 9 to a smaller integer (> 3) to save time
+        start (float-time)
+        results (TSP-solver (build-distance-matrix cities-coords))
+        timed-results (cons (- (float-time) start) results))
+#+end_src
+
+* TODO Heed Hint
+  You may find this python code helpful:
+
+#+begin_src python :results output
+  from math import sqrt
+
+  class City:
+    def __init__(self, x, y):
+      self.x = x
+      self.y = y
+
+  def distance(c1, c2):
+    return sqrt((c1.x - c2.x)**2 + (c1.y - c2.y)**2)
+
+  print distance(City(300, 270), City(450, 109))
+#+end_src
+
+  This code, borrowed from Norvig\rsquo{}s pytude, may also come in handy:
+#+begin_src python :results file
+  import matplotlib.pyplot as plt
+
+  def plot_tour(tour):
+      "Plot the cities as circles and the tour as lines between them."
+      plot_lines(list(tour) + [tour[0]])
+
+  def plot_lines(points, style='bo-'):
+      "Plot lines to connect a series of points."
+      plt.plot([p.real for p in points], [p.imag for p in points], style)
+      plt.axis('scaled')
+      plt.axis('off')
+
+  plot_tour(((6+546j),
+   (199+147j),
+   (350+65j),
+   (737+26j),
+   (847+187j),
+   (891+465j),
+   (554+374j),
+   (505+548j)))
+
+  plt.savefig('pyplot-tour.png')
+  return 'pyplot-tour.png'
+#+end_src
+
+#+results:
+[[file:pyplot-tour.png]]
+
+** TODO Enjoy a Bonus!
+   Graphics are always good for helping us visualize problem results. The bonus
+   is found in the interaction between org-mode-enabled elisp code and python
+   code!
+
+#+name: points-to-plot
+#+begin_src elisp :results value
+  (setq winning-tour (cdr results)
+        coords (mapcar (lambda (i)
+                         (let ((city (nth (1- i) cities-coords)))
+                           (list (car city) (cdr city))))
+                        winning-tour))
+#+end_src
+
+  In the table produced by evaluating the above code block, notice that
+  \ldquo{}#+results\rdquo is followed by the name \ldquo{}points-to-plot\rdquo --- which being so named
+  means that evaluating the following code block will work.
+
+#+begin_src python :var pts=points-to-plot :results file
+  import matplotlib.pyplot as plt
+
+  def plot_tour(tour):
+      "Plot the cities as circles and the tour as lines between them."
+      plot_lines(tour + [tour[0]])
+
+  def plot_lines(points, style='bo-'):
+      "Plot lines to connect a series of points."
+      plt.plot([p[0] for p in points], [p[1] for p in points], style)
+
+  plot_tour(pts)
+  plt.savefig('pyplot-tour.png')
+  return 'pyplot-tour.png'
+#+end_src
+
+** TODO Go above and beyond
+  To show you *really understand* this brute-force algorithm, write four new
+  functions corresponding to the four steps outlined in
+  file:presentation-12.txt, such that the following code block will evaluate:
+
+#+begin_src elisp :results raw
+  (setq distance-matrix (build-distance-matrix cities-coords)
+        step-1-results (produce-every-permutation-of-cities distance-matrix)
+        step-2-results (create-circuit-for-each-permutation step-1-results)
+        step-3-results (calculate-circuit-distances step-2-results step-1-results)
+        step-4-results (find-circuit-with-shortest-distance step-3-results))
+#+end_src
+
+  All the code you need is found in the =TSP-solver= function. You only need to
+  reorganize it!
