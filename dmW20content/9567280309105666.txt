@@ -1,0 +1,82 @@
+-*- mode: org -*-
+#+title: Presentation 12
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* The TSP and Python
+  It has become popular for python to be used in an org-mode type way, but see
+  [[https://news.ycombinator.com/item?id=16841909][here]] for a rebuttal to the notion that this is a superior approach! For
+  example, here is [[https://github.com/norvig/pytudes/blob/master/ipynb/TSP.ipynb][a \ldquo{}pytude\rdquo]] by Peter Norvig, Director of Research
+  for Google.
+
+** Here is the gist
+   Given a list of cities and the distances between them, what tour through all
+   the cities that returns to the starting city is the shortest?
+
+*** Simple to State, Hard to Solve
+  The simplicity of the statement of the TSP masks its complexity. But its
+  complexity must be dealt with, as the TSP is useful in many real world
+  applications:
+   - Route Optimization
+   - Manufacturing
+   - Astronomy
+   - And more...
+
+* An Approach
+  The brute force approach is both simple and straightforward:
+
+  1. produce every permutation of cities
+  2. for each permutation, create a circuit by joining the last node to the first node
+  3. calculate each circuit\rsquo{}s distance
+  4. return the circuit with the shortest distance
+
+  The problem with this approach is \ldquo{}combinatorial explosion\rdquo --- how quickly
+  the number of permutations grows!
+
+#+begin_src elisp :results silent
+  (require 'cl)
+
+  (require 'ment) ; for generate-permutations
+
+  (defun TSP-solver (distance-matrix)
+     (let* ((num-cities (length distance-matrix))
+            (cities (number-sequence 1 num-cities))
+            (permutations (generate-permutations cities))
+            (results (mapcar
+                      (lambda (perm)
+                        (cons
+                         (apply '+ (mapcar (lambda (city)
+                                             (dist (nth (1- city) perm)
+                                                   (nth (mod city num-cities) perm)
+                                                   distance-matrix))
+                                           cities))
+                         perm))
+                      permutations)))
+       (assoc (apply 'min (mapcar 'car results)) results)))
+
+  (defun dist (i j d-matrix)
+    (elt (elt d-matrix (1- i)) (1- j)))
+
+  (defun build-cities-coords (n width height seed)
+     (random seed)
+     (loop repeat n collect (cons (random width) (random height))))
+
+   (defun build-distance-matrix (cities-coords)
+     (apply 'vector
+            (mapcar (lambda (c1)
+                      (apply 'vector
+                             (mapcar (lambda (c2)
+                                       (distance c1 c2))
+                                     cities-coords)))
+                    cities-coords)))
+#+end_src
