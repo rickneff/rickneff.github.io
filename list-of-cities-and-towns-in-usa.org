@@ -2024,3 +2024,14 @@ Worland
                                 (org-element-property :contents-end x))
                                "\n" t))))))
 #+end_src
+
+#+begin_src elisp :results code
+(org-element-map (org-element-parse-buffer) 'paragraph
+  (lambda (paragraph)
+    (let ((parent (org-element-property :parent paragraph)))
+      (and (eq (org-element-type parent) 'section)
+           (let ((first-child (car (org-element-contents parent))))
+             (eq first-child paragraph))
+           ;; Return value.
+           paragraph))))
+#+end_src
