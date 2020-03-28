@@ -1,0 +1,178 @@
+#+ignore: -*- mode: org -*-
+#+title: How to Prepare for Your Third Grade Claim Meeting
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+options: html-postamble:nil
+#+startup: entitiespretty showeverything
+#+setupfile: ~/firstthreeodds/theme-bigblow.setup
+
+* Read and Heed
+  As in your first and second grade claims, the most important advice I can give
+  you is to pray to know what grade you should claim for this third and final
+  grade claim. I realize that given the unusual circumstances we find ourselves
+  in, there are many more prayers being offered right now that are much more
+  fervent than ones about grades. That being said \dots
+
+  To refresh your memory, please reread the syllabus where it talks about grading.
+  Then
+
+  1. Triple check that your Course Tracker table is complete, with the grade you
+     will claim decided beforehand. If you have not yet merged my Pull Request
+     into your git repository, please do so first and foremost! I plan to use
+     [[file:syllabus-portfolio.txt::*Course%20Tracker%20Table][Course Tracker Table]] as the link to take me to your commpleted table.
+  2. As our meeting will be via Zoom, you will not need to bring anything to it.
+     You do not need to print a Readiness Certification just to show it to me by
+     holding it up to your camera. Many of you don\rsquo{}t have a camera, or at least,
+     you choose not to use it during our Zoom class meetings. (Which is
+     perfectly fine --- and saves network bandwidth too.) *But see number 4*.
+  3. Even though you will not need to bring anything, you must still come
+     prepared with all the evidences you will present to justify your claim
+     clearly identified and, *most importantly*, pushed up to your repo so that I
+     can look at them on my computer *before we have our meeting*.
+  4. There is a .txt version of this document [[https://rickneff.github.io/how-to-prepare-for-your-third-grade-claim-meeting.txt][available at this link]]. Please
+     download it, fill out the questionnaire at the bottom of it, and make this
+     file (the .txt, not the .html version) part of your repo. (And don\rsquo{}t forget
+     to add, commit and push!)
+  5. It is still critical to be right on time! Please use a reliable clock and
+     reminder mechanism to ensure punctuality.
+
+** Still Important For A-Grade Claimers
+   Read the document whose link in the syllabus is in the explanation of the ABC
+   acronym, and which [[https://rickneff.github.io/abc-journal-guidelines.html][is reproduced here]].
+
+* Questionnaire
+** Consider some Words
+*** From a former student
+    I thoroughly enjoyed this class and to be honest I am a little sad that it is
+    ending. Before this class I had never seen programming in the light that it
+    should be seen in. It should be able to be applied to any situation in order
+    to make work more efficient. Now I will admit sometimes I would spend three
+    hours writing code for a problem that would have only taken me an hour or so
+    to do by hand, but the important part is that I can say without a doubt for
+    every one of those problems not only do I understand the problem but all the
+    mechanics that make up that problem. I have an understanding that I can break
+    down the problem into its individual pieces and write functions to represent
+    those pieces.
+
+    The second thing I learned from this class is the relationship between
+    discrete math and programming. There are so many applications. From learning
+    how to write things logically, to graph theory, and number theory. They are
+    all just another perspective that if understood will help us understand what
+    we are working with. Unfortunately if there is anything to say about discrete
+    math is that I realize that I am just barely touching the surface. There is so
+    much depth and while I won\rsquo{}t be taking the other Discrete Math classes due to
+    my credit limits I am glad I will be able to continue learning more about it
+    throughout college and throughout the coming years as a developer.
+
+    The last and most important thing I learned, and probably the most valuable is
+    that anything can be learned if you want to learn it. This semester I learned
+    (and fell in love with) lisp, spacemacs, and discrete math. I learned all
+    three simultaneously. Why? Because I wanted to! Discrete Math was the class I
+    most enjoyed working on, and it was like I was missing something while working
+    with other programming languages and in other classes. I spent my free time
+    reading ANSI Common Lisp, and applying my skills to the homework and side
+    projects. I hope to continue to learn both and find future application for
+    them that will allow me to program not just great code but beautiful code.
+    There is something so special about writing something that not only works but
+    does things in a way that just feels right. I have always tried to find this
+    medium in all my other courses, but with lisp and this application I finally
+    found a place where the two maxims could coexist. I hope to hold my work as a
+    representation of my first steps into building and creating beautiful,
+    efficient, and effective code. There is so much more to learn, but this class
+    has given me the confidence that I have the ability to do so.
+
+*** From another former student
+    (Where X != elisp, but was new to this student.)
+
+    Cat\rsquo{}s out of the bag! I wrote my program in X!
+
+    I felt that if I learned lisp I would not be able to learn discrete
+    mathematics this semester. I personally believe I would fail. Lisp is
+    different enough from the way I think that I would need to study it for at
+    least a semester before attempting to use it to practice discrete math
+    concepts. All my time for this class would be spent desperately trying to
+    learn lisp and I think I would fail to learn both.
+
+    In class you said that we should not do hard things, but to do things that
+    are just beyond our abilities. Lisp is too far from me. However, X is within
+    my power to learn. It is a new language --- a new language I can learn in a
+    couple of weeks while also learning discrete math.
+
+    I am determined to succeed in learning the essence of discrete math. My goal
+    in this class is to learn discrete math, not lisp. I recognise that you may
+    reduce my grade for not using lisp, but I am committed to learning discrete
+    math at any cost.
+
+    I am going to succeed where I failed before.
+*** From yet another former student
+    I really don\rsquo{}t have five hours to try to figure this out right now. I have
+    struggled a lot to try to understand the lisp language. I find examples
+    online which I often can\rsquo{}t get to work, if they even give enough information
+    close to what I am trying to do. What would help is to see some actual code
+    that does some of what we are trying to do, then I would get it. The mini
+    primer goes into it a bit, and I have found a lot of good information in
+    there, but I am struggling with it.
+
+    That makes no sense. I don\rsquo{}t truly understand how <some lisp function>
+    works. Space h d f doesn\rsquo{}t explain it either.
+
+    I don\rsquo{}t understand the question. Am I supposed to relate it to a real life
+    problem? Am I supposed to compare how <something> acts compared to how
+    <something else> acts?
+
+    I  have no idea if this is right. I don\rsquo{}t understand what I am doing.
+
+    I do not understand the question. Why would there <such-and-such>? What is
+    meant by "the so-and-so"?
+
+    Seriously, I have no clue what this is even asking. How would anything be
+    <some description>? This makes no sense whatsoever. I guess I just do not
+    understand at all what this question is asking.
+
+    What am I supposed to do when I try and try to understand what it is saying
+    and I can\rsquo{}t make any sense out of it?
+
+    I do not understand what it means by a function. What is the definition of a
+    function? I can\rsquo{}t find it in the book. It is code or an algorithm that
+    returns a value (or even multiple values, as I learned in multivariable
+    calculus)?
+
+    Oh - I found the definition. A function is an object that takes objects and
+    gives other objects.
+
+** Then answer --- which student is more like you?
+    (It might interest you to know that the third student turned his attitude
+    around and in the end enjoyed the class. The second student did pass on his
+    second try, but I don\rsquo{}t remember whether or not I docked him for not writing
+    lisp code for that assignment, nor what his final grade was.)
+
+*** And which language do you think X was?
+    (It wasn\rsquo{}t python. Nor was it C++, nor Java, which the student already
+    knew.)
+
+    - [ ] Perl
+    - [ ] Ruby
+    - [ ] Go
+    - [ ] Rust
+
+* Justification
+  Here is where you can write your justification for the grade you are claiming,
+  which is up to you. Yes, you have the option of making your claim in writing
+  instead of Zooming a final grade claim meeting. *Unless you are claiming an A*,
+  in which case the final face-to-face (virtual) meeting is required, and you
+  don\rsquo{}t need to put your justification in writing.
+
+** Here is my justification for my claim of a B or lower grade
+
+* Publish                                                          :noexport:
+#+begin_src elisp :results raw
+  (org-sbe "~/goo/byui/generic-dashboard.org:main-code")
+
+  (publish-file "Publish how-to-prepare guidelines." ".txt")
+#+end_src
+   See number 4.
+#+begin_src elisp :results raw
+  (org-sbe "~/goo/byui/generic-dashboard.org:main-code")
+
+  (publish-file "Publish how-to-prepare guidelines." ".html")
+#+end_src
