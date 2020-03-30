@@ -1,0 +1,56 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 13
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+* Resources
+  - [ ] TLC = The Lambda Calculus.
+  - [ ] [[https://www.youtube.com/watch?v=eis11j_iGMs][Computerphile on YouTube]] provides a 12:40 gentle
+        introduction/walk-through of TLC.
+  - [ ] [[http://www.inf.fu-berlin.de/inst/ag-ki/rojas_home/documents/tutorials/lambda.pdf][This document]] gives a brief written introduction to TLC.
+  - [ ] and describes its connection to [[https://firstthreeodds.org/17657741833134731255/an-introduction-to-functional-programming.pdf][functional programming]].
+  - [ ] [[http://projectultimatum.org/cgi-bin/lambda][Hai (Paul) Liu’s step-by-step Lambda Viewer]] --- try it on the examples
+        in Raul Rojas\rsquo{}s Lambda Calculus tutorial linked-to above.
+  - [ ] [[https://pandoc.org][pandoc]] is a universal document converter (written in Haskell!).
+        I used this to convert Jove\rsquo{}s Lambda Calculus Jupyter notebook
+        to my preferred format --- org-mode! Since =Jupyter nbconvert=
+        does not have a direct .org output format, I used pandoc to
+        convert the Markdown file it /could/ create to Org format.
+
+        How I did it --- modify to suit your python/shell environment:
+#+begin_src sh
+  pipenv shell
+  cd ~/Jove/notebooks/driver
+  jupyter nbconvert Drive_LambdaCalc.ipynb --to markdown # creates Drive_LambdaCalc.md
+  pandoc -i Drive_LambdaCalc.md -o Drive_LambdaCalc.org
+  mv Drive_LambdaCalc.org ~/goo/byui/dm4W20
+#+end_src
+    [[file:Drive_LambdaCalc.org]]
+
+* Tasks
+** TODO Get Your Hands Dirty
+   Work through the Jupyter notebook =Drive_LambdaCalc= or its .org equivalent.
+** TODO Exponentiate by Multiplying
+   Refer to [[file:presentation-13.txt::*Recursing%20with%20Primitives]]
+   and go the next step up:
+
+   Define exp(x, y) in terms of repeated multiplication, and supply the
+   equations for exponentiation. (5^4 = 5 \times 5 \times 5 \times 5, exemplifying reducing
+   exponentiation to the calculation of products.)
+
+#+begin_src python :results output
+  # what goes here to get the results below?
+
+  print("exp(5, 3) -->")
+  print(exp(5, 3))
+#+end_src
+
+#+results:
+: exp(5, 3) -->
+: 125
+
+** TODO Convert python to elisp
+  Find a way to define the S (Successor) function in elisp, then define
+  addition, multiplication and exponentiation to behave like the python code.
