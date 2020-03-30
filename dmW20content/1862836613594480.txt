@@ -1,0 +1,180 @@
+-*- mode: org -*-
+#+title: Presentation 13
+#+subtitle: The Lambda Calculus
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+  The topic of the week, the lambda calculus, is nothing like the calculus that
+  deals with derivatives and integrals!
+:HOW:
+  For one, it\rsquo{}s much simpler --- for example, the grammar describing a lambda
+  calculus expression has a total of four productions!
+:END:
+* Concretize the Abstract by Writing Some Code
+  Still, it\rsquo{}s pretty abstract.
+
+  Expressions in the lambda calculus are primitive, so we would prefer to
+  reformulate them in terms of less primitive operations, for learning purposes.
+
+  For example, the initialization and binding of local variables using =let= is
+  \ldquo{}syntactic sugar\rdquo for a lambda expression applied to other expressions.
+
+  First, a lambda example:
+
+#+begin_src elisp :results raw
+  ((lambda (x y z) (list '= x (+ y z))) 5 2 3)
+#+end_src
+
+#+results:
+(= 5 5)
+
+  The same construct using =let=:
+#+begin_src elisp :results raw
+  (let ((x 5)
+        (y 2)
+        (z 3))
+    (list '= x (+ y z)))
+#+end_src
+
+  The bodies are the same, only the \ldquo{}appendages\rdquo differ.
+
+  The Identity lambda in elisp:
+#+begin_src elisp :results silent
+  (fset 'I (set 'I (lambda (x) x)))
+#+end_src
+
+#+begin_src elisp :results raw
+  (I '(1 2 3))
+#+end_src
+
+#+results:
+(1 2 3)
+
+#+begin_src elisp :results raw
+  (I (I (I I)))
+#+end_src
+
+#+results:
+(lambda (x) x)
+
+  The Zero lambda:
+#+begin_src elisp :results silent
+  (fset 'Z (set 'Z (lambda (x) (lambda (y) y))))
+#+end_src
+
+  The Successor lambda:
+#+begin_src elisp :results silent
+ (fset 'S (set 'S (lambda (a) (lambda (b) (lambda (c) (funcall b (funcall (funcall a b) c)))))))
+#+end_src
+
+  Compare the elisp versions with the python in the book:
+#+begin_src python :results output
+  I = lambda c: c                                # Identity
+  Z = lambda b: lambda c: c                      # Number 0 (Zero)
+  S = lambda a: lambda b: lambda c: b(a(b)(c))   # Successor
+
+  print("S(Z) -->")
+  print(S(Z))
+  print("S(S(Z)) -->")
+  print(S(S(Z)))
+
+  def increment(n):
+      return n+1
+
+  print("increment(1) -->")
+  print(increment(1))
+
+  def ChurchToNat(c):
+      return c(increment)(0)
+
+  print("ChurchToNat(Z) -->")
+  print(ChurchToNat(Z))
+
+  print("ChurchToNat(S(Z)) -->")
+  print(ChurchToNat(S(Z)))
+
+  print("ChurchToNat(S(S(Z))) -->")
+  print(ChurchToNat(S(S(Z))))
+
+  def NatToChurch(n):
+      if n == 0:
+          return Z
+      else:
+          return S(NatToChurch(n-1))
+
+  print("ChurchToNat(NatToChurch(3)) -->")
+  print(ChurchToNat(NatToChurch(3)))
+#+end_src
+
+#+results:
+#+begin_example
+S(Z) -->
+<function <lambda>.<locals>.<lambda> at 0x103919510>
+S(S(Z)) -->
+<function <lambda>.<locals>.<lambda> at 0x103919598>
+increment(1) -->
+2
+ChurchToNat(Z) -->
+0
+ChurchToNat(S(Z)) -->
+1
+ChurchToNat(S(S(Z))) -->
+2
+ChurchToNat(NatToChurch(3)) -->
+3
+#+end_example
+
+** Recursing with Primitives
+  Recursion manifests itself in functions that call themselves, or /simpler/
+  versions of themselves. Primitives once wrapped in recursive calls become less
+  primitive with each additional wrapping layer.
+*** Addition
+  For example, the recursive rules for addition are just the following two
+  equations:
+
+  x + 0 = x
+
+  x + s(y) = s(x + y)
+
+  Thus, the successor function (s) allows us to define addition as what it
+  fundamentally is: repeated (recursive) counting.
+*** Multiplication
+  Two more equations define the recursive rules for multiplication in terms of
+  repeated addition (5 * 4 = 5 + 5 + 5 + 5), reducing the calculation of a
+  product to the calculation of sums:
+
+  x * 0 = 0
+
+  x * s(y) = x + (x * y)
+
+  Here are these functions in python:
+#+begin_src python :results output
+  def s(x):
+    return x + 1
+
+  def add(x, y):
+    if (y == 0):
+      return x
+    else:
+      return s(add(x, y - 1))
+
+  def mul(x, y):
+    if (y == 0):
+      return 0
+    else:
+      return add(x, mul(x, y - 1))
+
+  print("add(5, 3) -->")
+  print(add(5, 3))
+
+  print("mul(5, 3) -->")
+  print(mul(5, 3))
+#+end_src
+
+#+results:
+: add(5, 3) -->
+: 8
+: mul(5, 3) -->
+: 15
