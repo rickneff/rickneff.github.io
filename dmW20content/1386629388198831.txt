@@ -1,0 +1,216 @@
+-*- mode: org -*-
+#+title: Assignment 13
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(find-file-other-window "generic-instructions.txt")][Read Instructions]]
+
+[[elisp:(browse-url-of-file (org-html-export-to-html))][Export to HTML and Browse]]
+
+[[elisp:(org-clock-report 1)][Insert/Update Clock Summary Report]]
+:END:
+* TODO Investigate Word Problems
+** Excerpt from Roger Penrose\rsquo{}s /The Emperor\rsquo{}s New Mind/
+  Let us consider a different type of problem, called the word problem.
+
+  Suppose that we have some alphabet of symbols, and we consider various strings
+  of these symbols, referred to as words. The words need not in themselves have
+  any meaning, but we shall be given a certain (finite) list of \lsquo{}equivalences\rsquo
+  between them which we are allowed to use in order to derive further such
+  \lsquo{}equivalences\rsquo. This is done by making substitutions of words from the initial
+  list into other (normally longer) words which contain them as portions. Each
+  such portion may be replaced by another portion which is deemed to be
+  equivalent to it according to the list. The problem is then to decide, for
+  some given pair of words, whether or not they are \lsquo{}equivalent\rsquo according to
+  these rules.
+
+  As an example, we might have, for our initial list:
+
+  1. EAT \equiv AT
+  2. ATE \equiv A
+  3. LATER \equiv LOW
+  4. PAN \equiv PILLOW
+  5. CARP \equiv ME.
+
+  From these we can derive, for example, LAP \equiv LEAP by use of successive
+  substitutions from the second (going right-to-left), the first (going
+  right-to-left), and again the second (this time going left-to-right) of the
+  relations from the initial list:
+
+  LAP \equiv LATEP \equiv LEATEP \equiv LEAP.
+
+  The problem now is, given some pair of words, can we get from one to the other
+  simply using such substitutions? Can we, for example, get from CATERPILLAR to
+  MAN, or, say, from CARPET to MEAT? [What do you think?]
+
+  When the answer is \lsquo{}yes\rsquo, the normal way to show this would be simply to
+  exhibit a string of equivalences where each word is obtained from the
+  preceding one by use of an allowed relation. Thus:
+
+  CATERPILLAR \equiv CARPILLAR \equiv CARPILLATER \equiv CARPILLOW \equiv CARPAN \equiv MEAN \equiv MEATEN \equiv
+  MATEN \equiv MAN.
+
+  How can we tell whether or not it is impossible to get from CARPET to MEAT by
+  means of the allowed rules? For this, we need to think a little more, but it
+  is not hard to see, in a variety of different ways. The simplest appears to be
+  the following: in every \lsquo{}equivalence\rsquo in our initial list, the number of As
+  plus the number of Ws plus the number of Ms is the same on each side. Thus the
+  total number of As, Ws, and Ms cannot change throughout any succession of
+  allowed substitutions.
+
+  However, for CARPET this number is 1 whereas for MEAT it is 2.
+
+  Consequently, there is no way of getting from CARPET to MEAT by allowed
+  substitutions.
+
+  Notice that when the two words are \lsquo{}equivalent\rsquo we can show this simply by
+  exhibiting an allowed formal string of symbols, using the rules that we had been
+  given; whereas in the case where they are \lsquo{}inequivalent\rsquo, we had to resort to
+  arguments about the rules that we had been given. There is a clear algorithm
+  that we can use to establish \lsquo{}equivalence\rsquo between words whenever the words are
+  in fact \lsquo{}equivalent\rsquo. All we need do is to make a lexicographical listing of all
+  the possible sequences of words, and then strike from this list any such string
+  for which there is a pair of consecutive words where the second does not follow
+  from the first by an allowed rule. The remaining sequences will provide all the
+  sought-for \lsquo{}equivalences\rsquo between words. However, there is no such obvious
+  algorithm, in general, for deciding when two words are not \lsquo{}equivalent\rsquo, and we
+  may have to resort to \lsquo{}intelligence\rsquo in order to establish that fact. [...]
+
+  Intelligence, incidentally, is useful although not necessary also for
+  establishing the existence of an \lsquo{}equivalence\rsquo. In fact, for the particular list
+  of five \lsquo{}equivalences\rsquo that constitute the initial list in the above case, it is
+  not unduly difficult to provide an algorithm for ascertaining that two words are
+  \lsquo{}inequivalent\rsquo when they are indeed \lsquo{}inequivalent\rsquo. However, in order to find
+  the algorithm that works in this case we need to exercise a certain amount of
+  intelligence! Indeed, it turns out that there is no single algorithm which can
+  be used universally for all possible choices of initial list. In this sense
+  there is no algorithmic solution to the word problem [in the general case].
+
+  The general word problem belongs to non-recursive mathematics!
+
+  There are even certain particular selections of initial list for which there is
+  no algorithm for deciding when two words are \lsquo{}inequivalent\rsquo. One such is given
+  by
+
+  1. AH \equiv HA
+  2. OH \equiv HO
+  3. AT \equiv TA
+  4. OF \equiv TO
+  5. TAI \equiv IT
+  6. HOI \equiv IH
+  7. THAT \equiv ITHT
+
+  (This list is adapted from one given in 1955 by G. S. Tseitin and Dana Scott;
+  see Gardner 1958, p. 144.) Thus this particular word problem by itself is an
+  example of non-recursive mathematics, in the sense that using this particular
+  initial list we cannot algorithmically decide whether or not two given words are
+  \lsquo{}equivalent\rsquo.
+
+  The general word problem arose from considerations of formalized mathematical
+  logic (\lsquo{}formal systems\rsquo etc., as we considered earlier).
+
+  The initial list plays the role of an axiom system and the substitution rule for
+  words, the role of the formal rules of procedure. The proof of non-recursiveness
+  for the word problem arises from such considerations.
+
+** TODO Try It on This Instance
+   (This is the same as above.)
+
+   1. EAT \equiv AT
+   2. ATE \equiv A
+   3. LATER \equiv LOW
+   4. PAN \equiv PILLOW
+   5. CARP \equiv ME
+
+*** An Easy One
+    Is LAP \equiv LEAP?
+**** Answer
+     Yes, shown by the following:
+
+   | Equivalence    | By Which Rule? | Applied in Which Direction? |
+   |----------------+----------------+-----------------------------|
+   | LAP \equiv LATEP    |              2 | right-to-left               |
+   | LATEP \equiv LEATEP |              1 | right-to-left               |
+   | LEATEP \equiv LEAP  |              2 | left-to-right               |
+
+*** What About?
+    Is CATERPILLAR \equiv MAN?
+
+    You do this one, using a table as shown above.
+*** And What About?
+    Is CARPET \equiv MEAT?
+
+    You do this one too.
+** TODO Be Creative
+   Come up with your own instance of a word problem, with at least five (5)
+   equivalences. Find at least one pair of words that you can show are
+   equivalent, as in the examples shown. Find at least one pair of words that
+   you can reason are *NOT* equivalent.
+* TODO My Report on What I Learned
+  A large part of learning is to reflect and report on what you learned.
+
+  Something should be in your report addressing each of the
+  =assertions-about-report= below.
+
+  Evidence should also be there that you took steps (which ones?) to eliminate
+  MIs (see =assertions-about-MIs= below).
+
+** How I had fun
+** What new I learned
+** What meaningful I achieved
+** Who Were and What Contributions My Collaborators Made
+** Etc.
+* TODO What Is True?
+  This is a tool that allows you to assess yourself on how you did
+  with this assignment. Check a box (using , ,) if warranted.
+
+#+name: assertions-in-general
+  - [ ] I had fun.
+  - [ ] I learned something new.
+  - [ ] I achieved something meaningful, or something I can build upon at a later time.
+
+   What is true of my report on what I learned?
+#+name: assertions-about-report
+  - [ ] I wrote a sufficient number of well-written sentences.
+  - [ ] I reported what I thought about while doing the problems.
+  - [ ] I reported on any connections I found between these problems and
+        something I already know.
+  - [ ] I reported who were and what contribution each of my collaborators made.
+
+   What is true of the \ldquo{}mechanical infelicities\rdquo (misspelled words, grammatical
+   errors, punctuation errors) in my report of what I learned?
+#+name: assertions-about-MIs
+  - [ ] There are fewer than four.
+  - [ ] There are fewer than three.
+  - [ ] There are fewer than two.
+  - [ ] There are none.
+
+   What is true about the answers I gave?
+#+name: assertions-about-answers
+  - [ ] I got the right answer for CATERPILLAR \equiv MAN.
+  - [ ] I got the right answer for CARPET \equiv MEAT.
+
+#+name: assertions-about-my-creativity
+  - [ ] My word problem has at least 4 equivalences (rules).
+  - [ ] My word problem has at least 5 equivalences (rules).
+  - [ ] I found at least one pair of words that I showed are equivalent.
+  - [ ] I found at least one pair of words that I gave good logical reasons for
+        being inequivalent.
+
+#+begin_src elisp
+  (calculate-score
+   (quote
+    ((in-general 2 3 3)
+     (about-report 4 4 4 4)
+     (about-MIs 3 3 3 3)
+     (about-answers 5 5)
+     (about-my-creativity 12 13 14 15))))
+#+end_src
