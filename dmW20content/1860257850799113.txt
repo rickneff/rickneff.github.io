@@ -1,0 +1,118 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 13
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the link below, or with your cursor somewhere in it,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+:END:
+
+* RATs, More Quizzing?!
+   Note that CFL stands for Context-Free Language, and
+             CSL stands for Context-Sensitive Language.
+** True or False?
+    The union of a CFL and a regular language is a CFL.
+*** Answer
+     True.
+
+     Since regular languages are also CFLs, we can
+     write the top-level production of the new CFL as
+
+     S \rarr A | B
+
+     where A generates the given CFL
+
+     and B generates the given regular language.
+** True or False?
+    The intersection of any two CFLs is always a CFL.
+*** Answer
+     False. Consider {a^{m}b^{m}c^{n} | m, n \ge 0} \cap {a^{m}b^{n}c^{n} | m, n \ge 0}
+***** Which Is?
+      {a^{n}b^{n}c^{n} | n \ge 0}, which is *not* a CFL.
+** True or False?
+    The complement of a CSL is always a CSL.
+*** Answer
+     False.
+
+     The language that is the *complement* of L_{ww} (a CSL) is a CFL.
+** Regular or Not?
+   L_A = {01, 011, 0111}
+*** Answer
+    Regular. (All finite languages are regular.)
+** Regular or Not?
+   L_B = {0^{n}1^n | n \ge 0}
+*** Answer
+    Not. It is Context Free.
+** Regular or Not?
+   L_C = {w | w has the same number of 0's and 1's}
+*** Answer
+    Not. Counting is not regular when the number of things to be counted is
+    potentially infinite.
+** Regular or Not?
+   L_D = {w | w has an equal number of occurrences
+             of 01 and 10 as substrings}
+*** Answer
+    Surprise! Regular it is.
+    L_D = 0\Sigma^{\star}0 \cup 1\Sigma^{\star}1
+** Multiple Choice
+   Where \Sigma = {0, 1},
+
+   a language recognizer for the language {x0z | x \in \Sigma^{\star}, z \in \Sigma} has
+
+   1. one state.
+   2. two states.
+   3. three states.
+   4. four states.
+*** Answer
+   4. four states.
+      Accept strings that end in 00 or 01.
+      Reject strings that end in 10 or 11.
+#+begin_src dot :file second-to-last-bit-zero.png
+  digraph {
+    node [shape=circle]
+    empty [shape=none label=""]
+    S11
+    S10
+    S00 [shape=doublecircle]
+    S01 [shape=doublecircle]
+
+    empty -> S11 [label="" headport=w]
+    S11 -> S10 [label=0]
+    S11 -> S11 [label=1 headport=ne tailport=nw]
+    S10 -> S00 [label=0]
+    S10 -> S01 [label=1]
+    S00 -> S00 [label=0 tailport=w]
+    S00 -> S01 [label=1]
+    S01 -> S10 [label=0]
+    S01 -> S11 [label=1]
+    {rank=same empty S11 S10}
+    {rank=same S01 S00}
+  }
+#+end_src
+
+#+results:
+[[file:second-to-last-bit-zero.png]]
+
+* Language Recognizers
+   Language Recognition is an area of discrete math that leads us into territory
+   abounding in rich structures and powerful ideas.
+
+   The notion of a finite-state machine *with* output generalizes to the notion of
+   a finite-state machine (aka a finite automaton) with *no* output, but with
+   important computational abilities.
+
+   Referring to the example above, where \Sigma = {0, 1} also below, build a language
+   recognizer for as many of these three languages as you can in the allotted
+   time:
+
+** TODO Task 1
+   {x0z | x \in \Sigma^{\star}, z \in \Sigma^2^{}}
+** TODO Task 2
+   {x0z | x \in \Sigma^{\star}, z \in \Sigma^3}
+** TODO Task 3
+   {x0z | x \in \Sigma^{\star}, z \in \Sigma^4}
