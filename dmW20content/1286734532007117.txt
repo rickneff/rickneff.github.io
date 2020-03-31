@@ -1,0 +1,33 @@
+-*- mode: org -*-
+#+title: Class Directed Learning 13
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+:END:
+* Language Tasks
+** TODO Task 1
+  Describe the language illustrated below by giving some additional members and
+  some nonmembers of it:
+*** Sample Members
+    ILINKYWV
+    MSARMOOK
+    CANVAZUT
+    NYNJDEPA
+**** My Sample Members
+
+*** Sample Nonmembers
+    MNILVAFL
+    MTNEARAL
+    IDCOTXMI
+    OHOKMTRI
+**** My Sample Nonmembers
+
+** TODO Task 2
+   Do Exercise NTC in YZH.
+   file:~/mebewiyo/book/metaphors-be-with-you.org::*NTC
+** TODO Task 3
+   Which is the bigger language? The language of Task 1 or of Task 2?
