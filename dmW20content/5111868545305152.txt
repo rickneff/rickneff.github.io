@@ -1,0 +1,297 @@
+-*- mode: org -*-
+#+title: Presentation 13
+#+language: en
+#+options: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t d:(not "HINT")
+#+startup: entitiespretty showeverything
+#+setupfile: theme-bigblow.setup
+
+:HINT:
+ Click your mouse on the links below, or with your cursor somewhere in them,
+ press the Enter key.
+
+[[elisp:(relocate-file-to-work-folder)][Relocate File to Work Folder]]
+
+[[elisp:(browse-url-of-file%20(org-html-export-to-html))][Export to HTML and Browse]]
+:END:
+* Languages and Grammars Rock
+  As do [[https://rickneff.github.io/grammars-languages-and-lexical-analyzers.pdf][Lexical Analyzers and Parsers]]!
+
+* Book Presentation Summarized
+** The Burning Question
+
+   What is a language?
+
+*** The Obvious Answer
+
+    Something humans use to communicate, either by speaking or writing.
+
+*** Formal Definitions
+
+    In theoretical computer science, a language is no more and no less than some
+    subset of a set of all strings over some alphabet.
+
+**** Alphabet
+
+     Any non-empty, finite set (typically abbreviated \Sigma).
+
+**** Symbols
+
+     The members or elements of an *alphabet*.
+
+**** String over an Alphabet
+
+     A finite *sequence* of *symbols* from a given *alphabet*.
+
+     Usually written side-by-side without commas. E.g., abab rather than {a, b,
+     a, b}.
+
+**** Length
+
+     The number of *symbols* contained in a *string*.
+
+     \vert{}w\vert denotes the length of w.
+
+**** Empty String
+
+     A *string* that has a *length* of zero. (Abbreviated \lambda or \epsilon.)
+
+**** Concatenation
+
+     The process of appending the *symbols* of one string to the end of another
+     *string*, in the same order.
+#+begin_src elisp :results code
+   (concat "abc" "def")
+#+end_src
+
+**** Numeric (then Lexicographic) Ordering
+
+     A method of ordering *strings* that sorts them first by *length* (with
+     shorter *strings* coming first) and then by predefined order of the
+     *symbols* as given in association with a particular *alphabet*.
+
+** The Other Burning Question
+
+   What is a grammar?
+
+*** Formal Definition
+
+    A *Phrase-Structure Grammar* is a four-tuple:
+
+    G = (V, T, S, P) where
+
+    - V is a set of Variables (Non-Terminals)
+    - T is a set of Terminals (V \cap T = \emptyset)
+    - S is the Start variable (S \in V)
+    - P is a finite set of Productions (Rules), each one mapping a Variable to
+      a string of Variables and Terminals.
+
+*** A Familiar Example
+
+    Here's a Phrase-Structure Grammar for a (tiny) subset of the English
+    language:
+
+    V = [SENTENCE NOUN-PHRASE VERB-PHRASE ARTICLE ADJECTIVE NOUN VERB ADVERB]
+
+    T = [the sleepy happy tortoise hare passes runs quickly slowly]
+
+**** Rules for the Grammar
+
+     P = [
+     SENTENCE \rightarrow NOUN-PHRASE VERB-PHRASE NOUN-PHRASE
+     SENTENCE \rightarrow NOUN-PHRASE VERB-PHRASE
+     NOUN-PHRASE \rightarrow ARTICLE ADJECTIVE NOUN
+     NOUN-PHRASE \rightarrow ARTICLE NOUN
+     VERB-PHRASE \rightarrow VERB-PHRASE ADVERB
+     VERB-PHRASE \rightarrow VERB
+     ARTICLE \rightarrow the \vert \lambda
+     ADJECTIVE \rightarrow sleepy \vert happy
+     NOUN \rightarrow tortoise \vert hare
+     VERB \rightarrow passes \vert runs
+     ADVERB \rightarrow slowly \vert quickly
+     ]
+
+** Derivation
+
+   The process of producing a sequence of terminals from the Start Variable by
+   replacing variables one at a time by applying some Rule is called /Derivation/.
+
+*** Example
+
+    | SENTENCE | \rightarrow | NOUN-PHRASE VERB-PHRASE            |
+    |          | \rightarrow | ARTICLE ADJECTIVE NOUN VERB-PHRASE |
+    |          | \rightarrow | ARTICLE ADJECTIVE NOUN VERB        |
+    |          | \rightarrow | the ADJECTIVE NOUN VERB            |
+    |          | \rightarrow | the happy NOUN VERB                |
+    |          | \rightarrow | the happy hare VERB                |
+    |          | \rightarrow | the happy hare runs                |
+
+*** Exercises
+
+    Using the above example as a guide, produce derivations for each of the
+    following sentences:
+
+**** 1
+     the sleepy tortoise runs slowly
+:ANSWER:
+    | SENTENCE | \rightarrow | NOUN-PHRASE VERB-PHRASE                   |
+    |          | \rightarrow | ARTICLE ADJECTIVE NOUN VERB-PHRASE        |
+    |          | \rightarrow | ARTICLE ADJECTIVE NOUN VERB-PHRASE ADVERB |
+    |          | \rightarrow | ARTICLE ADJECTIVE NOUN VERB        ADVERB |
+    |          | \rightarrow | the     ADJECTIVE NOUN VERB        ADVERB |
+    |          | \rightarrow | the     sleepy    NOUN VERB        ADVERB |
+    |          | \rightarrow | the     sleepy    tortoise VERB    ADVERB |
+    |          | \rightarrow | the     sleepy    tortoise runs    ADVERB |
+    |          |   | the     sleepy    tortoise runs    slowly |
+:END:
+**** 2
+     the happy tortoise passes quickly
+:ANSWER:
+     | SENTENCE | \rightarrow | NOUN-PHRASE VERB-PHRASE                   |
+     |          | \rightarrow | ARTICLE ADJECTIVE NOUN VERB-PHRASE        |
+     |          | \rarr | ARTICLE ADJECTIVE NOUN VERB-PHRASE ADVERB |
+     |          | \rarr | ARTICLE ADJECTIVE NOUN VERB ADVERB        |
+     |          | \rarr | the ADJECTIVE NOUN VERB ADVERB            |
+     |          | \rarr | the happy NOUN VERB ADVERB                |
+     |          | \rarr | the happy tortoise VERB ADVERB            |
+     |          | \rarr | the happy tortoise passes ADVERB          |
+     |          | \rarr | the happy tortoise passes quickly         |
+:END:
+**** 3
+     the happy tortoise passes the sleepy hare
+:ANSWER:
+     Sometimes abbreviating ARTICLE as ART and ADJECTIVE as ADJ:
+
+     | SENTENCE | \rightarrow | NOUN-PHRASE            VERB-PHRASE NOUN-PHRASE     |
+     |          | \rightarrow | ARTICLE ADJECTIVE NOUN VERB-PHRASE NOUN-PHRASE     |
+     |          | \rightarrow | ARTICLE ADJECTIVE NOUN VERB        NOUN-PHRASE     |
+     |          | \rightarrow | ARTICLE ADJECTIVE NOUN VERB        ART ADJ NOUN    |
+     |          | \rightarrow | the     ADJECTIVE NOUN VERB        ART ADJ NOUN    |
+     |          | \rightarrow | the     happy     NOUN VERB        ART ADJ NOUN    |
+     |          | \rightarrow | the     happy     tortoise VERB    ART ADJ NOUN    |
+     |          | \rarr | the     happy     tortoise passes  ART ADJ NOUN    |
+     |          | \rarr | the     happy     tortoise passes  the sleepy NOUN |
+     |          | \rarr | the     happy     tortoise passes the sleepy hare  |
+:END:
+*** Sample Code
+#+begin_src elisp :results silent
+   (setq es ""
+         productions
+         '((SENTENCE NOUN-PHRASE VERB-PHRASE NOUN-PHRASE)
+           (SENTENCE NOUN-PHRASE VERB-PHRASE)
+           (NOUN-PHRASE ARTICLE ADJECTIVE NOUN)
+           (NOUN-PHRASE ARTICLE NOUN)
+           (VERB-PHRASE VERB-PHRASE ADVERB)
+           (VERB-PHRASE VERB)
+           (ARTICLE the es)
+           (ADJECTIVE sleepy happy)
+           (NOUN tortoise hare)
+           (VERB passes runs)
+           (ADVERB slowly quickly))
+         reverse-productions (reverse productions))
+
+   (defun non-terminals-remain (derivation)
+     (and (listp derivation)
+          (let* ((before (mapcar 'symbol-name derivation))
+                 (after (mapcar 'upcase before)))
+            (intersection before after :test 'string=))))
+
+   (defun derive (LHS)
+     (let* ((rules (if (zerop (random 2)) productions reverse-productions))
+            (RHS (cdr (assoc LHS rules))))
+       (if (null RHS)
+           (list LHS)
+         (if (non-terminals-remain RHS)
+             RHS
+           (list (nth (random (length RHS)) RHS))))))
+
+   (defun transform-terminal (terminal)
+     (or (and (boundp terminal) (symbol-value terminal))
+         (symbol-name terminal)))
+
+   (defun find-derivation (start-symbol)
+     (let ((derivation (list start-symbol)))
+       (while (non-terminals-remain derivation)
+         (setq derivation (apply 'append (mapcar 'derive derivation))))
+       (mapconcat 'transform-terminal derivation " ")))
+#+end_src
+
+#+begin_src elisp
+   (find-derivation 'SENTENCE)
+#+end_src
+
+*** Question
+    With these rules is there a derivation for this?
+
+    =the sleepy happy hare runs=
+:ANSWER:
+     No. To fix that, add a *loopy* rule!
+
+      ADJECTIVE \rightarrow ADJECTIVE ADJECTIVE \vert \lambda
+:END:
+** A Challenge
+   What rules would you need to change or add to generate this sentence?
+
+   =the quick brown fox jumps over the lazy dog=
+:ANSWER:
+    ADJECTIVE \rightarrow sleepy \vert happy \vert quick \vert brown \vert lazy
+
+    PREPOSITION \rightarrow of \vert from \vert by \vert on \vert in \vert over \vert \dots
+
+    PREPOSITIONAL-PHRASE \rightarrow PREPOSITION NOUN-PHRASE
+
+    VERB-PHRASE \rightarrow VERB PREPOSITIONAL-PHRASE
+
+#+begin_src elisp
+   (setq parsed [S [NP [ART the] [ADJ [ADJ quick] [ADJ brown]] [N
+         fox]] [VP [V jumps] [PP [P over] [NP [ART the] [ADJ lazy]
+         [N dog]]]]])
+   (kill-new (format "%s" parsed))
+#+end_src
+:END:
+
+**** Visualize Derivation
+     The derivation of a valid syntactic "sentence" can be visualized as the
+     process of building a *syntax tree* (AKA a *parse tree*).
+
+     See http://www.ironcreek.net/phpsyntaxtree/.
+
+** What is the Context?
+   The grammar for our tiny subset of English is \ldquo{}Context Free\rdquo. By way of
+   contrast, here's an example of productions in a NON-Context-Free grammar:
+
+   aAd \rightarrow aacd
+
+   aAe \rightarrow acae
+
+   Note that A\rsquo{}s expansion is different when it\rsquo{}s surrounded by a and d than when
+   it\rsquo{}s surrounded by a and e. We say A\rsquo{}s interpretation has context
+   \ldquo{}sensitivity\rdquo.
+
+** Regular Languages
+   A language is /regular/ *iff* some /regular expression/ describes it.
+
+   Regular expressions use the so-called regular operations (\cup, \circ, and \star) ---
+   (union, concatenation, and star) --- to build regular languages. Here is a
+   recursive definition:
+
+   R is a *regular expression* (an *re* for short) if R is any of
+
+   - \emptyset
+   - {\lambda}
+   - {a} for some a \in \Sigma
+   - R_1 \cup R_2, where R_1 and R_2 are *re*\rsquo{}s
+   - R_1 \circ R_2, where R_1 and R_2 are *re*\rsquo{}s
+   - R^{\star}, where R is an *re*
+
+:SHORTHAND:
+   - a \equiv {a}
+   - \lambda \equiv {\lambda}
+   - R^{\plus} \equiv R \circ R^{\star}
+   - R^{\star} \equiv R^{\plus} \cup \lambda
+   - R^k \equiv R \circ R \circ R \circ \dots \circ R (k times)
+:END:
+
+:NOTE:
+   R \circ R is usually written without the \circ, i.e., RR. In this way \circ is analogous
+   to the multiplication operator.
+:END:
