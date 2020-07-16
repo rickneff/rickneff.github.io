@@ -1,0 +1,194 @@
+#+TITLE:  DM4 Reading List
+#+AUTHOR: Rick Neff
+#+EMAIL:  rick.neff@gmail.com
+#+LANGUAGE: en
+#+OPTIONS:  H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+STARTUP:  showeverything entitiespretty
+
+* In No Particular Order
+** There\rsquo{}s Something About G\ouml{}del
+*** The Complete Guide to the Incompleteness Theorem
+**** Francesco Berto
+***** [[https://www.amazon.com/Theres-Something-About-Godel-Incompleteness/dp/1405197676][ISBN:978-1405197670]]
+** Logicomix
+*** An Epic Search For Truth
+**** Apostolos Doxiadis and Christos Papadimitriou
+***** [[https://www.amazon.com/Logicomix-search-truth-Apostolos-Doxiadis/dp/1596914521][ISBN:978-1596914520]]
+** Thinking About G\ouml{}del and Turing
+*** Essays on Complexity, 1970-2007
+**** Gregory J. Chaitin
+***** [[https://www.amazon.com/THINKING-ABOUT-DEL-TURING-Complexity/dp/B01FKUUO8M][ASIN:B01FKUUO8M]]
+** Quantum Computing Since Democritus
+*** No Subtitle
+**** Scott Aaronson
+***** [[https://www.amazon.com/Quantum-Computing-since-Democritus-Aaronson/dp/0521199565][ISBN:978-0521199568]]
+** One Eternal Round
+*** No subtitle, but note that the final groundbreaking chapter delves into geometry and mathematical relationships depicted on Facsimile 2.
+**** Hugh Nibley and Michael D. Rhodes
+***** [[https://www.amazon.com/One-Eternal-Round-Hugh-Nibley/dp/160641237X][ISBN:978-1606412374]]
+** The Organized Mind
+*** Thinking Straight in the Age of Information Overload
+**** Daniel J. Levitin
+***** [[https://www.amazon.com/Organized-Mind-Thinking-Straight-Information/dp/0147516315][ISBN:978-0147516312]]
+** The World in Six Songs
+*** How the Musical Brain Created Human Nature
+**** Daniel J. Levitin
+***** [[https://www.amazon.com/World-Six-Songs-Musical-Created/dp/0452295483][ISBN:978-0452295483]]
+** This Is Your Brain on Music
+*** The Science of a Human Obsession
+**** Daniel J. Levitin
+***** [[https://www.amazon.com/This-Your-Brain-Music-Obsession-dp-0525949690/dp/0525949690][ISBN:978-0525949695]]
+** Intuition Pumps
+*** and Other Tools for Thinking
+**** Daniel C. Dennett
+***** [[https://www.amazon.com/Intuition-Pumps-Other-Tools-Thinking/dp/0393348784][ISBN:978-0393348781]]
+** Everything and More
+*** A Compact History of Infinity
+**** David Foster Wallace
+***** [[https://www.amazon.com/Everything-More-Compact-Infinity-Discoveries/dp/0393003388][ISBN:978-0393003383]]
+** The Inexhaustible Gospel
+*** A Retrospective of Twenty-one Firesides and Devotionals
+**** Neal A. Maxwell
+***** [[https://www.amazon.com/INEXHAUSTIBLE-GOSPEL-RETROSPECTIVE-TWENTY-ONE-DEVOTIONALS/dp/0842525939][ISBN:978-0842525930]]
+** People of Paradox
+*** A History of Mormon Culture
+**** Terryl L. Givens
+***** [[https://www.amazon.com/People-Paradox-History-Mormon-Culture/dp/0199915989][ISBN:978-0199915989]]
+** The Language Instinct
+*** How the Mind Creates Language
+**** Steven Pinker
+***** [[https://www.amazon.com/Language-Instinct-How-Mind-Creates/dp/0688121411][ISBN:978-0688121419]]
+** The Stuff of Thought
+*** Language as a Window into Human Nature
+**** Steven Pinker
+***** [[https://www.amazon.com/Stuff-Thought-Language-Window-Nature/dp/0143114247][ISBN:978-0143114246]]
+** Words and Rules
+*** The Ingredients of Language
+**** Steven Pinker
+***** [[https://www.amazon.com/Words-Rules-Ingredients-Language-Science/dp/0465072690][ISBN:978-0465072699]]
+** How The Mind Works
+*** No Subtitle
+**** Steven Pinker
+***** [[https://www.amazon.com/How-Mind-Works-Steven-Pinker/dp/0393334775][ISBN:978-0393334777]] -- [[https://stevenpinker.com/publications/how-mind-works][See this website too]]
+** Make It Stick
+*** The Science of Successful Learning
+**** Peter C. Brown, Henry L. Roediger III, Mark A. McDaniel
+***** [[https://www.amazon.com/Make-It-Stick-Successful-Learning/dp/0674729013][ISBN:978-0674729018]] -- [[http://makeitstick.net/][See this website too]]
+** Why Information Grows
+*** The Evolution of Order, from Atoms to Economies
+**** C\eacute{}sar Hidalgo
+***** [[https://www.amazon.com/Why-Information-Grows-Evolution-Economies/dp/0465096840][ISBN:978-0465096848]] -- [[https://paulromer.net/why-information-grows/][Review by Paul Romer]]
+** An Introduction to the Theory of Numbers
+*** No Subtitle
+**** G. H. Hardy and E. M. Wright
+***** [[https://www.amazon.com/Introduction-Theory-Numbers-G-Hardy/dp/0199219869][ISBN:978-0199219865]]
+** Infinity and The Mind
+*** The Science and Philosophy of the Infinite
+**** Rudy Rucker
+***** [[https://www.amazon.com/Infinity-Mind-Rudy-Rucker/dp/3764330341][ISBN:978-0691001722]]
+** Mind Tools
+*** The Five Levels of Mathematical Reality
+**** Rudy Rucker
+***** [[https://www.amazon.com/gp/product/B00I17XVA0][ISBN:978-0486492285]]
+** The Lifebox, the Seashell, and the Soul
+*** What Gnarly Computation Taught Me About Ultimate Reality, The Meaning of Life, And How to Be Happy
+**** Rudy Rucker
+***** [[https://www.amazon.com/Lifebox-Seashell-Soul-Computation-Ultimate-ebook/dp/B01MXD8PQ8][ISBN:978-1940948256]]
+** How Mathematicians Think
+*** Using Ambiguity, Paradox and Contradiction to Create Mathematics
+**** William Byers
+***** [[http://www.amazon.com/How-Mathematicians-Think-Contradiction-Mathematics/dp/0691145997][ISBN:978-0691145990]]
+** G\ouml{}del\rsquo{}s Proof
+*** No Subtitle
+**** Ernest Nagel and James R. Newman
+***** [[https://www.amazon.com/G%25C3%25B6dels-Proof-Ernest-Nagel/dp/0814758371][ISBN:978-0814758373]]
+** The Emperor\rsquo{}s New Mind
+*** Concerning Computers, Minds, and the Laws of Physics
+**** Roger Penrose
+***** [[https://www.amazon.com/Emperors-New-Mind-Concerning-Computers/dp/0198784929][ISBN:978-0198784920]]
+** Shadows of the Mind
+*** A Search for the Missing Science of Consciousness
+**** Roger Penrose
+***** [[https://www.amazon.com/Shadows-Mind-Missing-Science-Consciousness/dp/0195106466][ISBN:978-0195106466]]
+** The Road to Reality
+*** A Complete Guide to the Laws of the Universe
+**** Roger Penrose
+***** [[https://www.amazon.com/Road-Reality-Complete-Guide-Universe/dp/0679776311][ISBN:978-0679776314]]
+** Fashion, Faith, and Fantasy
+*** in the New Physics of the Universe
+**** Roger Penrose
+***** [[https://www.amazon.com/Fashion-Faith-Fantasy-Physics-Universe/dp/0691178534][ISBN:978-0691178530]]
+** Prime Numbers
+*** The Most Mysterious Figures in Math
+**** David Wells
+***** [[http://www.amazon.com/Prime-Numbers-Most-Mysterious-Figures/dp/1620458241][ISBN:978-1620458242]]
+** The Mathematical Experience
+*** No Subtitle
+**** Philip J. Davis and Reuben Hersh
+***** [[https://www.amazon.com/Mathematical-Experience-Phillip-J-Davis/dp/0395929687][ISBN:978-0395929681]]
+** Incompleteness
+*** The Proof and Paradox of Kurt G\ouml{}del
+**** Rebecca Goldstein
+***** [[https://www.amazon.com/Incompleteness-Proof-Paradox-G%C3%B6del-Discoveries/dp/0393327604][ISBN:978-0393327601]]
+** Coincidences, Chaos, and All That Math Jazz
+*** Making Light of Weighty Ideas
+**** Edward B. Burger and Michael Starbird
+***** [[https://www.amazon.com/Coincidences-Chaos-That-Math-Jazz/dp/0393329313][ISBN:978-0393329315]]
+** The Infamous Boundary
+*** Seven Decades of Controversy in Quantum Physics
+**** David Wick
+***** [[https://www.amazon.com/Infamous-Boundary-Decades-Controversy-Quantum/dp/0817637850][ISBN:978-0817637859]]
+** Concrete Mathematics
+*** A Foundation for Computer Science
+**** Ron Graham, Donald Knuth, Oren Patashnik
+***** [[https://www.amazon.com/Concrete-Mathematics-Foundation-Computer-Science/dp/0201558025][ISBN:978-0201558029]]
+** Gödel, Escher, Bach
+*** An Eternal Golden Braid
+**** Douglas Hofstadter
+***** [[https://www.amazon.com/G%C3%B6del-Escher-Bach-Eternal-Golden/dp/0465026567][ISBN:978-0465026562]]
+** I Am a Strange Loop
+*** No Subtitle
+**** Douglas Hofstadter
+***** [[https://www.amazon.com/Am-Strange-Loop-Douglas-Hofstadter/dp/0465030793][ISBN:978-0465030798]]
+** Surfaces and Essences
+*** Analogy as the Fuel and Fire of Thinking
+**** Douglas Hofstadter
+***** [[https://www.amazon.com/Surfaces-Essences-Analogy-Fuel-Thinking/dp/0465018475][ISBN:978-0465018475]]
+** Love and Math
+*** The Heart of Hidden Reality
+**** Edward Frenkel
+***** [[https://www.amazon.com/Love-Math-Heart-Hidden-Reality/dp/0465050743][ISBN:978-0465050741]] -- [[https://www.edwardfrenkel.com/lovemath/][See this website too]]
+* Alphabetical by First Author
+  Evaluate the two code blocks below to create the table of book records:
+#+begin_src elisp :results silent
+  (require 'org)
+
+  (defun extract-first-author (authors)
+    (let* ((name-string (symbol-name authors))
+           (first-author-maybe (split-string name-string ","))
+           (first-author (split-string (first first-author-maybe) "and")))
+      (first first-author)))
+
+  (defun shorten-link (link-as-symbol)
+    (let* ((link-as-string (symbol-name link-as-symbol))
+           (link-string-list (split-string link-as-string "--")))
+      (first link-string-list)))
+
+  (defun gather-book-records ()
+    (let ((book-records nil))
+      (org-element-map (org-element-parse-buffer) 'headline
+        (lambda (x) (push (intern (org-element-property :raw-value x)) book-records)))
+      (loop with by4list = (cdr (nreverse (cdr book-records)))
+            for i from 0 below (length by4list) by 4
+            collect (list (extract-first-author (nth (+ i 2) by4list))
+                          (symbol-name (nth (+ i 0) by4list))
+                          (shorten-link (nth (+ i 3) by4list))))))
+#+end_src
+
+#+begin_src elisp
+  (setq book-records (gather-book-records)
+        author-first (append '(("Author" "Title" "Link") hline)
+                             (cl-sort book-records 'string<
+                                      :key (lambda (book-record)
+                                             (first (last (split-string (first book-record) " " t)))))))
+#+end_src
