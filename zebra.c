@@ -258,8 +258,7 @@ p cnf 155 1135
 
 
 /* The Englishman lives in exactly one house. */
-englishman_house0 englishman_house1 englishman_house2
-englishman_house3 englishman_house4 EOC
+englishman_house0 englishman_house1 englishman_house2 englishman_house3 englishman_house4 EOC
 -englishman_house0 -englishman_house1 EOC
 -englishman_house0 -englishman_house2 EOC
 -englishman_house0 -englishman_house3 EOC
@@ -272,8 +271,7 @@ englishman_house3 englishman_house4 EOC
 -englishman_house3 -englishman_house4 EOC
 
 /* The Japanese lives in exactly one house. */
-japanese_house0 japanese_house1 japanese_house2
-japanese_house3 japanese_house4 EOC
+japanese_house0 japanese_house1 japanese_house2 japanese_house3 japanese_house4 EOC
 -japanese_house0 -japanese_house1 EOC
 -japanese_house0 -japanese_house2 EOC
 -japanese_house0 -japanese_house3 EOC
@@ -286,8 +284,7 @@ japanese_house3 japanese_house4 EOC
 -japanese_house3 -japanese_house4 EOC
 
 /* The Norwegian lives in exactly one house. */
-norwegian_house0 norwegian_house1 norwegian_house2
-norwegian_house3 norwegian_house4 EOC
+norwegian_house0 norwegian_house1 norwegian_house2 norwegian_house3 norwegian_house4 EOC
 -norwegian_house0 -norwegian_house1 EOC
 -norwegian_house0 -norwegian_house2 EOC
 -norwegian_house0 -norwegian_house3 EOC
@@ -300,8 +297,7 @@ norwegian_house3 norwegian_house4 EOC
 -norwegian_house3 -norwegian_house4 EOC
 
 /* The Spaniard lives in exactly one house. */
-spaniard_house0 spaniard_house1 spaniard_house2
-spaniard_house3 spaniard_house4 EOC
+spaniard_house0 spaniard_house1 spaniard_house2 spaniard_house3 spaniard_house4 EOC
 -spaniard_house0 -spaniard_house1 EOC
 -spaniard_house0 -spaniard_house2 EOC
 -spaniard_house0 -spaniard_house3 EOC
@@ -314,8 +310,7 @@ spaniard_house3 spaniard_house4 EOC
 -spaniard_house3 -spaniard_house4 EOC
 
 /* The Ukranian lives in exactly one house. */
-ukranian_house0 ukranian_house1 ukranian_house2
-ukranian_house3 ukranian_house4 EOC
+ukranian_house0 ukranian_house1 ukranian_house2 ukranian_house3 ukranian_house4 EOC
 -ukranian_house0 -ukranian_house1 EOC
 -ukranian_house0 -ukranian_house2 EOC
 -ukranian_house0 -ukranian_house3 EOC
@@ -329,8 +324,7 @@ ukranian_house3 ukranian_house4 EOC
 
 
 /* The Englishman's house has exactly one color. */
-englishman_redHouse englishman_greenHouse englishman_ivoryHouse
-englishman_yellowHouse englishman_blueHouse EOC
+englishman_redHouse englishman_greenHouse englishman_ivoryHouse englishman_yellowHouse englishman_blueHouse EOC
 -englishman_redHouse -englishman_greenHouse EOC
 -englishman_redHouse -englishman_ivoryHouse EOC
 -englishman_redHouse -englishman_yellowHouse EOC
@@ -343,8 +337,7 @@ englishman_yellowHouse englishman_blueHouse EOC
 -englishman_yellowHouse -englishman_blueHouse EOC
 
 /* The Japanese's house has exactly one color. */
-japanese_redHouse japanese_greenHouse japanese_ivoryHouse
-japanese_yellowHouse japanese_blueHouse EOC
+japanese_redHouse japanese_greenHouse japanese_ivoryHouse japanese_yellowHouse japanese_blueHouse EOC
 -japanese_redHouse -japanese_greenHouse EOC
 -japanese_redHouse -japanese_ivoryHouse EOC
 -japanese_redHouse -japanese_yellowHouse EOC
@@ -357,8 +350,7 @@ japanese_yellowHouse japanese_blueHouse EOC
 -japanese_yellowHouse -japanese_blueHouse EOC
 
 /* The Norwegian's house has exactly one color. */
-norwegian_redHouse norwegian_greenHouse norwegian_ivoryHouse
-norwegian_yellowHouse norwegian_blueHouse EOC
+norwegian_redHouse norwegian_greenHouse norwegian_ivoryHouse norwegian_yellowHouse norwegian_blueHouse EOC
 -norwegian_redHouse -norwegian_greenHouse EOC
 -norwegian_redHouse -norwegian_ivoryHouse EOC
 -norwegian_redHouse -norwegian_yellowHouse EOC
@@ -371,8 +363,7 @@ norwegian_yellowHouse norwegian_blueHouse EOC
 -norwegian_yellowHouse -norwegian_blueHouse EOC
 
 /* The Spaniard's house has exactly one color. */
-spaniard_redHouse spaniard_greenHouse spaniard_ivoryHouse
-spaniard_yellowHouse spaniard_blueHouse EOC
+spaniard_redHouse spaniard_greenHouse spaniard_ivoryHouse spaniard_yellowHouse spaniard_blueHouse EOC
 -spaniard_redHouse -spaniard_greenHouse EOC
 -spaniard_redHouse -spaniard_ivoryHouse EOC
 -spaniard_redHouse -spaniard_yellowHouse EOC
@@ -385,8 +376,7 @@ spaniard_yellowHouse spaniard_blueHouse EOC
 -spaniard_yellowHouse -spaniard_blueHouse EOC
 
 /* The Ukranian's house has exactly one color. */
-ukranian_redHouse ukranian_greenHouse ukranian_ivoryHouse
-ukranian_yellowHouse ukranian_blueHouse EOC
+ukranian_redHouse ukranian_greenHouse ukranian_ivoryHouse ukranian_yellowHouse ukranian_blueHouse EOC
 -ukranian_redHouse -ukranian_greenHouse EOC
 -ukranian_redHouse -ukranian_ivoryHouse EOC
 -ukranian_redHouse -ukranian_yellowHouse EOC
@@ -400,8 +390,7 @@ ukranian_yellowHouse ukranian_blueHouse EOC
 
 
 /* The Englishman owns exactly one pet. */
-englishman_zebra englishman_dog englishman_horse
-englishman_fox englishman_snails EOC
+englishman_zebra englishman_dog englishman_horse englishman_fox englishman_snails EOC
 -englishman_zebra -englishman_dog EOC
 -englishman_zebra -englishman_horse EOC
 -englishman_zebra -englishman_fox EOC
@@ -414,8 +403,7 @@ englishman_fox englishman_snails EOC
 -englishman_fox -englishman_snails EOC
 
 /* The Japanese owns exactly one pet. */
-japanese_zebra japanese_dog japanese_horse
-japanese_fox japanese_snails EOC
+japanese_zebra japanese_dog japanese_horse japanese_fox japanese_snails EOC
 -japanese_zebra -japanese_dog EOC
 -japanese_zebra -japanese_horse EOC
 -japanese_zebra -japanese_fox EOC
@@ -428,8 +416,7 @@ japanese_fox japanese_snails EOC
 -japanese_fox -japanese_snails EOC
 
 /* The Norwegian owns exactly one pet. */
-norwegian_zebra norwegian_dog norwegian_horse
-norwegian_fox norwegian_snails EOC
+norwegian_zebra norwegian_dog norwegian_horse norwegian_fox norwegian_snails EOC
 -norwegian_zebra -norwegian_dog EOC
 -norwegian_zebra -norwegian_horse EOC
 -norwegian_zebra -norwegian_fox EOC
@@ -442,8 +429,7 @@ norwegian_fox norwegian_snails EOC
 -norwegian_fox -norwegian_snails EOC
 
 /* The Spaniard owns exactly one pet. */
-spaniard_zebra spaniard_dog spaniard_horse
-spaniard_fox spaniard_snails EOC
+spaniard_zebra spaniard_dog spaniard_horse spaniard_fox spaniard_snails EOC
 -spaniard_zebra -spaniard_dog EOC
 -spaniard_zebra -spaniard_horse EOC
 -spaniard_zebra -spaniard_fox EOC
@@ -456,8 +442,7 @@ spaniard_fox spaniard_snails EOC
 -spaniard_fox -spaniard_snails EOC
 
 /* The Ukranian owns exactly one pet. */
-ukranian_zebra ukranian_dog ukranian_horse
-ukranian_fox ukranian_snails EOC
+ukranian_zebra ukranian_dog ukranian_horse ukranian_fox ukranian_snails EOC
 -ukranian_zebra -ukranian_dog EOC
 -ukranian_zebra -ukranian_horse EOC
 -ukranian_zebra -ukranian_fox EOC
@@ -471,8 +456,7 @@ ukranian_fox ukranian_snails EOC
 
 
 /* The Englishman has exactly one favorite drink. */
-englishman_coffee englishman_tea englishman_orangeJuice
-englishman_water englishman_milk EOC
+englishman_coffee englishman_tea englishman_orangeJuice englishman_water englishman_milk EOC
 -englishman_coffee -englishman_tea EOC
 -englishman_coffee -englishman_orangeJuice EOC
 -englishman_coffee -englishman_water EOC
@@ -485,8 +469,7 @@ englishman_water englishman_milk EOC
 -englishman_water -englishman_milk EOC
 
 /* The Japanese has exactly one favorite drink. */
-japanese_coffee japanese_tea japanese_orangeJuice
-japanese_water japanese_milk EOC
+japanese_coffee japanese_tea japanese_orangeJuice japanese_water japanese_milk EOC
 -japanese_coffee -japanese_tea EOC
 -japanese_coffee -japanese_orangeJuice EOC
 -japanese_coffee -japanese_water EOC
@@ -499,8 +482,7 @@ japanese_water japanese_milk EOC
 -japanese_water -japanese_milk EOC
 
 /* The Norwegian has exactly one favorite drink. */
-norwegian_coffee norwegian_tea norwegian_orangeJuice
-norwegian_water norwegian_milk EOC
+norwegian_coffee norwegian_tea norwegian_orangeJuice norwegian_water norwegian_milk EOC
 -norwegian_coffee -norwegian_tea EOC
 -norwegian_coffee -norwegian_orangeJuice EOC
 -norwegian_coffee -norwegian_water EOC
@@ -513,8 +495,7 @@ norwegian_water norwegian_milk EOC
 -norwegian_water -norwegian_milk EOC
 
 /* The Spaniard has exactly one favorite drink. */
-spaniard_coffee spaniard_tea spaniard_orangeJuice
-spaniard_water spaniard_milk EOC
+spaniard_coffee spaniard_tea spaniard_orangeJuice spaniard_water spaniard_milk EOC
 -spaniard_coffee -spaniard_tea EOC
 -spaniard_coffee -spaniard_orangeJuice EOC
 -spaniard_coffee -spaniard_water EOC
@@ -527,8 +508,7 @@ spaniard_water spaniard_milk EOC
 -spaniard_water -spaniard_milk EOC
 
 /* The Ukranian has exactly one favorite drink. */
-ukranian_coffee ukranian_tea ukranian_orangeJuice
-ukranian_water ukranian_milk EOC
+ukranian_coffee ukranian_tea ukranian_orangeJuice ukranian_water ukranian_milk EOC
 -ukranian_coffee -ukranian_tea EOC
 -ukranian_coffee -ukranian_orangeJuice EOC
 -ukranian_coffee -ukranian_water EOC
@@ -542,8 +522,7 @@ ukranian_water ukranian_milk EOC
 
 
 /* The Englishman smokes exactly one brand of cigarette. */
-englishman_oldGold englishman_parliament englishman_kools
-englishman_lucky englishman_chesterfield EOC
+englishman_oldGold englishman_parliament englishman_kools englishman_lucky englishman_chesterfield EOC
 -englishman_oldGold -englishman_parliament EOC
 -englishman_oldGold -englishman_kools EOC
 -englishman_oldGold -englishman_lucky EOC
@@ -556,8 +535,7 @@ englishman_lucky englishman_chesterfield EOC
 -englishman_lucky -englishman_chesterfield EOC
 
 /* The Japanese smokes exactly one brand of cigarette. */
-japanese_oldGold japanese_parliament japanese_kools
-japanese_lucky japanese_chesterfield EOC
+japanese_oldGold japanese_parliament japanese_kools japanese_lucky japanese_chesterfield EOC
 -japanese_oldGold -japanese_parliament EOC
 -japanese_oldGold -japanese_kools EOC
 -japanese_oldGold -japanese_lucky EOC
@@ -570,8 +548,7 @@ japanese_lucky japanese_chesterfield EOC
 -japanese_lucky -japanese_chesterfield EOC
 
 /* The Norwegian smokes exactly one brand of cigarette. */
-norwegian_oldGold norwegian_parliament norwegian_kools
-norwegian_lucky norwegian_chesterfield EOC
+norwegian_oldGold norwegian_parliament norwegian_kools norwegian_lucky norwegian_chesterfield EOC
 -norwegian_oldGold -norwegian_parliament EOC
 -norwegian_oldGold -norwegian_kools EOC
 -norwegian_oldGold -norwegian_lucky EOC
@@ -584,8 +561,7 @@ norwegian_lucky norwegian_chesterfield EOC
 -norwegian_lucky -norwegian_chesterfield EOC
 
 /* The Spaniard smokes exactly one brand of cigarette. */
-spaniard_oldGold spaniard_parliament spaniard_kools
-spaniard_lucky spaniard_chesterfield EOC
+spaniard_oldGold spaniard_parliament spaniard_kools spaniard_lucky spaniard_chesterfield EOC
 -spaniard_oldGold -spaniard_parliament EOC
 -spaniard_oldGold -spaniard_kools EOC
 -spaniard_oldGold -spaniard_lucky EOC
@@ -598,8 +574,7 @@ spaniard_lucky spaniard_chesterfield EOC
 -spaniard_lucky -spaniard_chesterfield EOC
 
 /* The Ukranian smokes exactly one brand of cigarette. */
-ukranian_oldGold ukranian_parliament ukranian_kools
-ukranian_lucky ukranian_chesterfield EOC
+ukranian_oldGold ukranian_parliament ukranian_kools ukranian_lucky ukranian_chesterfield EOC
 -ukranian_oldGold -ukranian_parliament EOC
 -ukranian_oldGold -ukranian_kools EOC
 -ukranian_oldGold -ukranian_lucky EOC
