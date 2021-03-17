@@ -1,4 +1,3 @@
-int main() {
 /*
                           The Zebra Problem
 
@@ -27,13 +26,13 @@ int main() {
 /*
    Run this file through a C preprocessor to turn it into a CNF formula
    in the DIMACS suggested format.  For example:
-                % cc -E zebra.c | tail +2 > zebra.cnf
+                % cc -E zebra.c > zebra.cnf
    (gcc's preprocessor doesn't work, because it inserts spaces between
    minus signs and numbers, making negative numbers impossible to parse.)
 */
 
-c The zebra problem.  From Rina Dechter, "Enhancement Schemes for
-c Constraint Processing:  Backjumping, Learning, and Cutset Decomposition",
+c The zebra problem.  From Rina Dechter, Enhancement Schemes for
+c Constraint Processing:  Backjumping, Learning, and Cutset Decomposition,
 c AIJ 41:273-312.  Encoded in CNF by Jon Freeman, November 1994.  I have
 c found three solutions; there may be more.
 c
@@ -1622,6 +1621,3 @@ japanese_parliament EOC
 -ukranian_kools -japanese_horse   U_nextTo_J EOC
 -ukranian_kools -norwegian_horse  U_nextTo_N EOC
 -ukranian_kools -spaniard_horse   U_nextTo_S EOC
-
-return 0;
-}
