@@ -169,10 +169,17 @@
            (first-author (split-string (first first-author-maybe) "and")))
       (first first-author)))
 
+  (defun format-for-colab-markdown (link-string)
+    (let* ((link-parts (split-string link-string "\\]\\["))
+           (part1 (replace-regexp-in-string "\\[\\[" "" (first link-parts)))
+           (part2 (replace-regexp-in-string "\\]\\]" "" (second link-parts))))
+      (format "[%s](%s)" part2 part1)))
+
   (defun shorten-link (link-as-symbol)
     (let* ((link-as-string (symbol-name link-as-symbol))
            (link-string-list (split-string link-as-string "--")))
-      (first link-string-list)))
+      (format-for-colab-markdown (first link-string-list))))
+  ;    (first link-string-list)))
 
   (defun gather-book-records ()
     (let ((book-records nil))
