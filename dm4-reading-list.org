@@ -160,42 +160,146 @@
 ***** [[https://www.amazon.com/Love-Math-Heart-Hidden-Reality/dp/0465050743][ISBN:978-0465050741]] -- [[https://www.edwardfrenkel.com/lovemath/][See this website too]]
 * Alphabetical by First Author
   Evaluate the two code blocks below to create the table of book records:
+
 #+begin_src elisp :results silent
-  (require 'org)
+  (setq st "#scrollTo="
+        st-links [
+        "PqEtBHIr6Dtp"
+        "8vwO55LJ6NdT"
+        "F01wgGbD8Yr6"
+        "6Rg3_oLe9EIx"
+        "Pj3Gsbay9a9Q"
+        "-ejyS4Ln9joX"
+        "b6HLMGtf9lXI"
+        "ja5Ufy-Z9qrX"
+        "nY1x3hkX9v5t"
+        "OdLTmQpq91Eq"
+        "YZvR1Pun-OXp"
+        "MYQ2b9Cb-WMp"
+        "xB-ghw90-YqJ"
+        "aL47FejC-dPK"
+        "m79O71vW-fN4"
+        "eggjkD1I-jrl"
+        "CS1Z5F3X-k9g"
+        "SJlWnPe4-os5"
+        "18QGbtDL-p8h"
+        "250HSdbD-tPz"
+        "LvSX_7lk-u6I"
+        "0HAu_atB-0Qv"
+        "atpB6rXw-1vn"
+        "FXYBwHli-5XH"
+        "4Lc3FrmS-6pO"
+        "Qs_pOIbG--A5"
+        "6oT9tRg1_AUL"
+        "Pzel53qs_DS5"
+        "vi7jVv3y_FCK"
+        "OwMXTEKs_HxY"
+        "iw3vLC-c_Pmt"
+        "QMrg-aP3_TJS"
+        "Wlz0YHsO_Vs6"
+        "M1vQiwu1_ZEF"
+        "IRfRiwel_foL"
+        "pOu_uOMy_mB5"
+        "nCC5wzxA_pqa"
+        "XPubdtiE_s_d"
+        "w2RdMxYH_uEu"
+        "SXWKWC1N_xy5"
+        "3rNM-St4_zHm"
+        "9mmI0YiW_1n7"
+        "nGBkZY4J_5EK"
+        "o_O7gbPy_9sK"
+        "5EaiDmo-_-rG"
+        "RH4GznN5AHRn"
+        "iZKOzfhHAJkv"
+        "uPVuncUKANyW"
+        "0Ii1OAkyAOit"
+        "eM5ZNF4BARpc"
+        "zmCawcagAS1m"
+        "XWKoEewUAWZz"
+        "GDzfaKHXAXWl"
+        "U7DPGOMIAaFI"
+        "74CQzwgdAa8r"
+        "3ulqHOX8Advb"
+        "T7gizaYLAekC"
+        "snBxv9DbAjRm"
+        "Hps52YyzAkEv"
+        "ilS40h9eAm16"
+        "MA57Rg_nAnol"
+        "tOC0cHgVAq0c"
+        "Y8Rw7yeuAsuF"
+        "OIPn2vE2Av1E"
+        "DH0hUrDHAx0U"
+        "Brx0w3CtA0lg"
+        "ELHYAQGgA5v-"
+        "jqJTKhn0A8cN"
+        "M6tKVOckA9IW"
+        "DiCpzv0bBAaj"
+        "IwoGiRQJBBwK"
+        "Dc9NMGbIBFGP"
+        "Gc2QplStA2LG"
+        "AEflqRAhBM9f"
+        "535S1VTpBNs8"
+        "g4wgzgBZBQNz"])
+#+end_src
 
-  (defun extract-first-author (authors)
-    (let* ((name-string (symbol-name authors))
-           (first-author-maybe (split-string name-string ","))
-           (first-author (split-string (first first-author-maybe) "and")))
-      (first first-author)))
+#+begin_src elisp :results silent
+    (require 'org)
 
-  (defun format-for-colab-markdown (link-string)
-    (let* ((link-parts (split-string link-string "\\]\\["))
-           (part1 (replace-regexp-in-string "\\[\\[" "" (first link-parts)))
-           (part2 (replace-regexp-in-string "\\]\\]" "" (second link-parts))))
-      (format "[%s](%s)" part2 part1)))
+    (defun extract-first-author (authors)
+      (let* ((name-string (symbol-name authors))
+             (first-author-maybe (split-string name-string ","))
+             (first-author (split-string (first first-author-maybe) "and")))
+        (first first-author)))
 
-  (defun shorten-link (link-as-symbol)
-    (let* ((link-as-string (symbol-name link-as-symbol))
-           (link-string-list (split-string link-as-string "--")))
-      (format-for-colab-markdown (first link-string-list))))
-  ;    (first link-string-list)))
+    (defun format-for-colab-markdown (link-string)
+      (let* ((link-parts (split-string link-string "\\]\\["))
+             (part1 (replace-regexp-in-string "\\[\\[" "" (first link-parts)))
+             (part2 (replace-regexp-in-string "\\]\\]" "" (second link-parts))))
+        (format "[%s](%s)" part2 part1)))
 
-  (defun gather-book-records ()
-    (let ((book-records nil))
-      (org-element-map (org-element-parse-buffer) 'headline
-        (lambda (x) (push (intern (org-element-property :raw-value x)) book-records)))
-      (loop with by4list = (cdr (nreverse (cdr book-records)))
-            for i from 0 below (length by4list) by 4
-            collect (list (extract-first-author (nth (+ i 2) by4list))
-                          (symbol-name (nth (+ i 0) by4list))
-                          (shorten-link (nth (+ i 3) by4list))))))
+    (defun shorten-link (link-as-symbol)
+      (let* ((link-as-string (symbol-name link-as-symbol))
+             (link-string-list (split-string link-as-string "--")))
+        (format-for-colab-markdown (first link-string-list))))
+
+    (defun old-gather-book-records ()
+      (let ((book-records nil))
+        (org-element-map (org-element-parse-buffer) 'headline
+          (lambda (x) (push (intern (org-element-property :raw-value x)) book-records)))
+        (loop with by4list = (cdr (nreverse (cdr book-records)))
+              for i from 0 below (length by4list) by 4
+              collect (list (extract-first-author (nth (+ i 2) by4list))
+                            (symbol-name (nth (+ i 0) by4list))
+                            (shorten-link (nth (+ i 3) by4list))))))
+
+    (defun make-back-link (text link)
+      (format "[%s](%s%s)" text st link))
+
+    (defun gather-book-records ()
+      (let ((book-records nil))
+        (org-element-map (org-element-parse-buffer) 'headline
+          (lambda (x) (push (intern (org-element-property :raw-value x)) book-records)))
+        (loop with by4list = (cdr (nreverse (cdr book-records)))
+              for i from 0 below (length by4list) by 4
+              for j from 0 by 2
+              collect (list (extract-first-author (nth (+ i 2) by4list))
+                            (symbol-name (nth (+ i 0) by4list))
+                            j))))
 #+end_src
 
 #+begin_src elisp
   (setq book-records (gather-book-records)
-        author-first (append '(("Author" "Title" "Link") hline)
-                             (cl-sort book-records 'string<
-                                      :key (lambda (book-record)
-                                             (first (last (split-string (first book-record) " " t)))))))
+        author-first (cl-sort book-records 'string<
+                              :key (lambda (book-record)
+                                     (first (last (split-string (first book-record) " " t)))))
+        author-first-with-links (append '(("Author" "Title") hline)
+                                        (mapcar (lambda (book-record)
+                                                  (destructuring-bind (author title index) book-record
+                                                    (list (make-back-link author (elt st-links (1+ index)))
+                                                          (make-back-link title (elt st-links index)))))
+                                                author-first)))
+#+end_src
+
+#+begin_src elisp :results raw
+  author-first
 #+end_src
